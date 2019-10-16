@@ -1,7 +1,5 @@
+const request = require('request');
 module.exports = async (app, req, res) => {
-
-    const request = require('request')
-
       request.get(`https://gdleaderboards.com/incl/lbxml.php`, function (err, resp, topPlayers) {
       idArray = topPlayers.split(",")
 

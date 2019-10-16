@@ -1,6 +1,10 @@
-module.exports = async (app, req, res, level) => {
-
 const pako = require('pako')
+const properties = require('../misc/objectProperties.json');
+const init = require('../misc/initialProperties.json');
+const colorStuff = require('../misc/colorProperties.json');
+const ids = require('../misc/objects.json');
+const blocks = require('../misc/blocks.json');
+module.exports = async (app, req, res, level) => {
 
 let levelString = new Buffer(level.data, 'base64')
 let buffer;
@@ -10,13 +14,7 @@ try { buffer = pako.inflate(levelString, {to:"string"}) }
 catch(e) { return res.send("-1") }
 
 let rawData = buffer.toString('utf8')
-let data = rawData
-
-let properties = require('../misc/objectProperties.json')
-let init = require('../misc/initialProperties.json')
-let colorStuff = require('../misc/colorProperties.json')
-let ids = require('../misc/objects.json')
-let blocks = require('../misc/blocks.json')
+let data = rawData;
 
 let blockNames = Object.keys(blocks)
 let miscNames = Object.keys(ids.misc)

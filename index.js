@@ -1,16 +1,11 @@
-//  cd C:\Users\Craig\Desktop\Projects\Robotop
 const express = require('express');
 const path = require('path');
 const fs = require("fs")
 const timeout = require('connect-timeout')
-const fsExtra = require("fs-extra")
 
-fsExtra.emptyDirSync('./icons/cache')
-let local = __dirname.includes('Craig')
 let api = true;
 let gdicons = fs.readdirSync('./icons/iconkit')
 
-setInterval(function(){ fsExtra.emptyDirSync('./icons/cache') }, 600000);
 
 const app = express();
 app.use(express.json());
@@ -18,13 +13,13 @@ app.use(express.urlencoded({extended: true}));
 app.use(timeout('25s'));
 app.use(haltOnTimedout)
 app.use(require('cookie-parser')());
-app.set('json spaces', 2)
+if (process.env.NODE_ENV !== 'production') // Avoid extra bytes in production
+  app.set('json spaces', 2);
 
 const secrets = require("./misc/secretStuff.json")
-app.modules = { LOADMODULES: require("./misc/LOADMODULES.js") };
-app.modules = app.modules.LOADMODULES();
+app.modules = require("./misc/loadModules.js")();
 
-app.secret = 'Wmfd2893gb7'
+app.secret = require('./misc/boomlingsSecret.js');
 app.id = secrets.id
 app.gjp = secrets.gjp
 
@@ -37,13 +32,20 @@ app.parseResponse = function (responseBody, splitter) {
   let response = responseBody.split('#')[0].split(splitter || ':');
   let res = {};
   for (let i = 0; i < response.length; i += 2) {
-  res[response[i]] = response[i + 1]}
-  return res  }
+    res[response[i]] = response[i + 1];
+  }
+  return res;
+}
 
-app.clean = function(text) {if (typeof text != "string") return text; else return text.replace(/&/g, "&#38;").replace(/</g, "&#60;").replace(/>/g, "&#62;").replace(/=/g, "&#61;").replace(/"/g, "&#34;").replace(/'/g, "&#39;")}
+console.log("Site online!");
 
-console.log("Site online!")
-
+/*
+Using this middleware twice is small brain but it'll have to do until every file
+not in a nested directory is moved to a nested directory.
+*/
+const assetsMiddleware = express.static('./assets');
+app.use('/assets', assetsMiddleware);
+app.use(assetsMiddleware);
 app.get("/assets/:file", function (req, res) {
   fs.exists("./assets/" + req.params.file, function (exists) {
     if (exists) {res.status(200).sendFile(path.join(__dirname, "/assets/" + req.params.file));
