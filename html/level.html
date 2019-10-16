@@ -155,7 +155,7 @@ $('#difficultytext').html('[[DIFFICULTY]]'.replace(' ', "<br>"))
 
 $('#levelInfo').html($('#levelInfo').html()
 	.replace('[[ORIGINALINFO]]', [[COPIEDID]] ==  "0" ? "" : `<br>Original: <a class="youCanClickThis" href="/[[COPIEDID]]"><font color="aqua">[[COPIEDID]]</font></a>`)
-	.replace('[[OBJECTINFO]]', [[OBJECTS]] ==  "0" ? "" : `<br>Objects: <font color="yellow">[[OBJECTS]]</font>`)
+	.replace('[[OBJECTINFO]]', '[[OBJECTS]]' ==  "0" ? "" : `<br>Objects: <font color="yellow">[[OBJECTS]]</font>`)
 	.replace('[[REQUESTED]]', [[STARSREQUESTED]] ==  "0" ? "" : `<br>Stars Requested: <font color="yellow">[[STARSREQUESTED]]</font>`))
 
 if (!'[[UPLOADED]]'.startsWith('[')) {
