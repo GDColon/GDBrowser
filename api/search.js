@@ -1,5 +1,5 @@
+const request = require("request");
 module.exports = async (app, req, res) => {
-  const request = require("request");
   const orbs = [0, 0, 50, 75, 125, 175, 225, 275, 350, 425, 500];
   const difficulty = {
     0: "Unrated",

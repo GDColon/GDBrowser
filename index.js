@@ -3,8 +3,8 @@ const path = require('path');
 const fs = require("fs")
 const timeout = require('connect-timeout')
 let api = true;
-let gdicons = fs.readdirSync('./icons/iconkit')
-
+let gdicons = fs.readdirSync('./icons/iconkit');
+const mapPacks = require('./misc/mapPacks.json');
 
 const app = express();
 app.use(express.json());
@@ -38,6 +38,16 @@ app.parseResponse = function (responseBody, splitter) {
 }
 
 console.log("Site online!");
+
+app.use(express.static('./html', {extensions: ['html']}));
+/*
+Using this middleware twice is small brain but it'll have to do until every file
+not in a nested directory is moved to a nested directory.
+*/
+const assetsMiddleware = express.static('./assets');
+app.use('/assets', assetsMiddleware);
+app.use(assetsMiddleware);
+app.use('/gdicon', express.static('./icons/iconkit'));
 
 app.get("/icon/:text", function(req, res) {
   app.modules.icon(app, req, res)
@@ -77,7 +87,7 @@ app.get("/api/leaderboard", function(req, res, api) {
 })   
 
 app.get("/api/mappacks", async function(req, res) {
-  res.send(require('./misc/mapPacks.json'))
+  res.send(mapPacks)
 })
 
 app.get("/icon", function(req, res) {
@@ -88,7 +98,7 @@ app.get('/api/icons', function(req, res) {
   res.send(gdicons);
 });
 
-app.get("/api/:anythingelse", async function(req, res) {
+app.get("/api/:anythingelse", function(req, res) {
   res.send('-1')
 })    
 
@@ -96,17 +106,7 @@ app.get("/:id", function(req, res) {
   app.modules.level(app, req, res)
 })     
 
-/*
-Using this middleware twice is small brain but it'll have to do until every file
-not in a nested directory is moved to a nested directory.
-*/
-const assetsMiddleware = express.static('./assets');
-app.use('/assets', assetsMiddleware);
-app.use(assetsMiddleware);
-app.use('/gdicon', express.static('./icons/iconkit'));
-app.use(express.static('./html', {extensions: ['html']})); 
-
 app.get('*', function(req, res) {
-  res.redirect('/api/search/404');
+  res.redirect('/api/search/404'); // 101arrowz: I think I did this wrong
 });
 app.listen(2000);

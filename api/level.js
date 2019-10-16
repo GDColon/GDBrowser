@@ -1,7 +1,6 @@
+const request = require("request");
+const fs = require("fs");
 module.exports = async (app, req, res, api, analyze) => {
-  const request = require("request");
-  const fs = require("fs");
-
   let orbs = [0, 0, 50, 75, 125, 175, 225, 275, 350, 425, 500];
   let length = ["Tiny", "Short", "Medium", "Long", "XL"];
   let difficulty = {
