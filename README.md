@@ -38,6 +38,8 @@ objects.json - IDs for portals, orbs, triggers, and misc stuff
 colors.json - The colors for generating icons
 level.json - An array of the official GD tracks, and also difficulty face stuff for level searching
 mapPacks.json - The IDs for the levels in map packs. I can't believe I have to hardcode this. 
+XOR.js - Decrypts ciphered GD passwords. I stole the code from somewhere so uh if you wrote it, please don't hunt me down
+LOADMODULES.js - Allows the API to run the /api files in a cooler way
 
 ---
 
