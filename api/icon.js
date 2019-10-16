@@ -314,10 +314,6 @@ module.exports = async (app, req, res) => {
               return res.end(buff)
             }
 
-            //else if (ufoMode) {
-            //  return res.end(buff)
-            //}
-
             else {
 
               const Canvas = require('canvas')
