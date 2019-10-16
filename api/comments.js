@@ -19,7 +19,7 @@ module.exports = async (app, req, res) => {
     form : params}, async function(err, resp, body) { 
 
       if (body == '-1' || !body) return res.send("-1")
-      comments = body.split('|').map(x => "4" + x.replace(":", "~").replace(/~9~(\d+ \w+)/, "~69~$1").replace("~10~", "~420~"))
+      comments = body.split('|').map(x => "4" + x.replace(":", "~").replace(/~9~(\d+ \w+)/, "~69~$1").replace(/[^4~]~(10)~/, "$1~420~"))
       if (req.query.type == "commentHistory") comments = comments.map(x => x.replace("~1~", "~666~"))
       comments = comments.map(x => app.parseResponse(x, "~"))
       if (!(comments.filter(x => x[42]).length)) return res.send("-1")
