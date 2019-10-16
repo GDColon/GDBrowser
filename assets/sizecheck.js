@@ -1,4 +1,4 @@
-$("body").append(`
+$('body').append(`
 	<div id="tooSmall" class="brownbox center supercenter" style="display: none; width: 80%">
 	<h1>Yikes!</h1>
 	<p>Your <font color="#4CDA5B">screen</font> isn't <font color="aqua">wide</font> enough to <font color="yellow">display</font> this <font color="#4CDA5B">page</font>.<br>
@@ -10,11 +10,11 @@ $("body").append(`
 
 $(window).resize(function() {
   if (window.innerHeight > window.innerWidth - 75) {
-    $("#everything").hide();
-    $("#tooSmall").show();
+    $('#everything').hide();
+    $('#tooSmall').show();
   } else {
-    $("#everything").show();
-    $("#tooSmall").hide();
+    $('#everything').show();
+    $('#tooSmall').hide();
   }
 });
 
@@ -24,15 +24,15 @@ function backButton() {
     document.referrer.startsWith(window.location.origin)
   )
     window.history.back();
-  else window.location.href = "../../../../../";
+  else window.location.href = '../../../../../';
 }
 
 $(document).keydown(function(k) {
   if (k.keyCode == 27) {
     //esc
     k.preventDefault();
-    if ($(".popup").is(":visible")) $(".popup").hide();
-    else $("#backButton").trigger("click");
+    if ($('.popup').is(':visible')) $('.popup').hide();
+    else $('#backButton').trigger('click');
   }
 });
 
@@ -41,5 +41,5 @@ while ($(this).scrollTop() != 0) {
 }
 
 $(document).ready(function() {
-  $(window).trigger("resize");
+  $(window).trigger('resize');
 });

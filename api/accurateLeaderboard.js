@@ -1,25 +1,25 @@
-const request = require("request");
+const request = require('request');
 module.exports = async (app, req, res) => {
   request.get(`https://gdleaderboards.com/incl/lbxml.php`, function(
     err,
     resp,
     topPlayers
   ) {
-    idArray = topPlayers.split(",");
+    idArray = topPlayers.split(',');
 
     let leaderboard = [];
     let total = idArray.length;
 
     idArray.forEach((x, y) => {
       request.post(
-        "http://boomlings.com/database/getGJUserInfo20.php",
+        'http://boomlings.com/database/getGJUserInfo20.php',
         {
           form: { targetAccountID: x, secret: app.secret }
         },
         function(err, resp, body) {
           let account = app.parseResponse(body);
           let accObj = {
-            rank: "0",
+            rank: '0',
             username: app.clean(account[1]),
             playerID: account[2],
             accountID: account[16],

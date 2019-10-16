@@ -1,21 +1,21 @@
-const pako = require("pako");
-const properties = require("../misc/objectProperties.json");
-const init = require("../misc/initialProperties.json");
-const colorStuff = require("../misc/colorProperties.json");
-const ids = require("../misc/objects.json");
-const blocks = require("../misc/blocks.json");
+const pako = require('pako');
+const properties = require('../misc/objectProperties.json');
+const init = require('../misc/initialProperties.json');
+const colorStuff = require('../misc/colorProperties.json');
+const ids = require('../misc/objects.json');
+const blocks = require('../misc/blocks.json');
 module.exports = async (app, req, res, level) => {
-  let levelString = new Buffer(level.data, "base64");
+  let levelString = new Buffer(level.data, 'base64');
   let buffer;
   let response = {};
 
   try {
-    buffer = pako.inflate(levelString, { to: "string" });
+    buffer = pako.inflate(levelString, { to: 'string' });
   } catch (e) {
-    return res.send("-1");
+    return res.send('-1');
   }
 
-  let rawData = buffer.toString("utf8");
+  let rawData = buffer.toString('utf8');
   let data = rawData;
 
   let blockNames = Object.keys(blocks);
@@ -23,7 +23,7 @@ module.exports = async (app, req, res, level) => {
   let blockCounts = {};
   let miscCounts = {};
 
-  data = data.split(";");
+  data = data.split(';');
 
   function sortObj(obj, sortBy) {
     var sorted = {};
@@ -37,7 +37,7 @@ module.exports = async (app, req, res, level) => {
   }
 
   data.forEach((x, y) => {
-    obj = app.parseResponse(x, ",");
+    obj = app.parseResponse(x, ',');
 
     let keys = Object.keys(obj);
     keys.forEach((k, i) => {
@@ -85,7 +85,7 @@ module.exports = async (app, req, res, level) => {
       return parseInt(a.x) - parseInt(b.x);
     })
     .map(x => x.portal)
-    .join(", ");
+    .join(', ');
 
   response.orbs = {};
   orbArray = data
@@ -117,7 +117,7 @@ module.exports = async (app, req, res, level) => {
   response.triggers.total = data.filter(x => x.trigger).length;
 
   response.blocks = sortObj(blockCounts);
-  response.misc = sortObj(miscCounts, "0");
+  response.misc = sortObj(miscCounts, '0');
   response.settings = {};
   response.colors = [];
 
@@ -125,17 +125,17 @@ module.exports = async (app, req, res, level) => {
     let val = init.values[x];
     let name = val[0];
     let property = data[0][x];
-    if (val[1] == "list") val = init[val[0] + "s"][property];
-    else if (val[1] == "number") val = Number(property);
-    else if (val[1] == "bump") val = Number(property) + 1;
-    else if (val[1] == "bool") val = property != "0";
-    else if (val[1] == "colors") {
-      let colorList = property.split("|");
+    if (val[1] == 'list') val = init[val[0] + 's'][property];
+    else if (val[1] == 'number') val = Number(property);
+    else if (val[1] == 'bump') val = Number(property) + 1;
+    else if (val[1] == 'bool') val = property != '0';
+    else if (val[1] == 'colors') {
+      let colorList = property.split('|');
       colorList.forEach((x, y) => {
-        color = app.parseResponse(x, "_");
+        color = app.parseResponse(x, '_');
         let keys = Object.keys(color);
         let colorObj = {};
-        if (!color["6"])
+        if (!color['6'])
           return (colorList = colorList.filter((h, i) => y != i));
 
         keys.forEach(k => {
@@ -148,21 +148,21 @@ module.exports = async (app, req, res, level) => {
         if (colorStuff.channels[colorObj.copiedChannel])
           colorObj.copiedChannel = colorStuff.channels[colorObj.copiedChannel];
         if (colorObj.copiedChannel > 1000) delete colorObj.copiedChannel;
-        if (colorObj.pColor == "-1") delete colorObj.pColor;
+        if (colorObj.pColor == '-1') delete colorObj.pColor;
         if (colorObj.blending) colorObj.blending = true;
         colorList[y] = colorObj;
 
-        colorList = colorList.filter(x => typeof x == "object");
-        if (!colorList.find(x => x.channel == "Obj"))
+        colorList = colorList.filter(x => typeof x == 'object');
+        if (!colorList.find(x => x.channel == 'Obj'))
           colorList.push({
-            r: "255",
-            g: "255",
-            b: "255",
-            channel: "Obj",
-            opacity: "1"
+            r: '255',
+            g: '255',
+            b: '255',
+            channel: 'Obj',
+            opacity: '1'
           });
 
-        let specialSort = ["BG", "G", "G2", "Line", "Obj", "3DL"];
+        let specialSort = ['BG', 'G', 'G2', 'Line', 'Obj', '3DL'];
         let specialColors = colorList
           .filter(x => isNaN(x.channel))
           .sort(function(a, b) {
@@ -182,7 +182,7 @@ module.exports = async (app, req, res, level) => {
     response.settings[name] = val;
   });
 
-  delete response.settings["colors"];
+  delete response.settings['colors'];
   response.dataLength = rawData.length;
   response.data = rawData;
 

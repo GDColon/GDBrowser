@@ -1,4 +1,4 @@
-const request = require("request");
+const request = require('request');
 module.exports = async (app, req, res) => {
   let amount = 100;
   let count = req.query.count ? parseInt(req.query.count) : null;
@@ -11,24 +11,24 @@ module.exports = async (app, req, res) => {
     count: amount,
     secret: app.secret,
     type:
-      req.query.hasOwnProperty("creator") ||
-      req.query.hasOwnProperty("creators")
-        ? "creators"
-        : "top"
+      req.query.hasOwnProperty('creator') ||
+      req.query.hasOwnProperty('creators')
+        ? 'creators'
+        : 'top'
   };
 
   request.post(
-    "http://boomlings.com/database/getGJScores20.php",
+    'http://boomlings.com/database/getGJScores20.php',
     {
       form: params
     },
     async function(err, resp, body) {
-      if (body == "-1" || !body) return res.send("-1");
+      if (body == '-1' || !body) return res.send('-1');
       scores = body
-        .split("|")
+        .split('|')
         .map(x => app.parseResponse(x))
         .filter(x => x[1]);
-      if (!scores.length) return res.send("-1");
+      if (!scores.length) return res.send('-1');
 
       scores.forEach(x => {
         let keys = Object.keys(x);

@@ -1,8 +1,8 @@
-const request = require("request");
-const fs = require("fs");
+const request = require('request');
+const fs = require('fs');
 module.exports = async (app, req, res, api, getLevels) => {
   request.post(
-    "http://boomlings.com/database/getGJUsers20.php",
+    'http://boomlings.com/database/getGJUsers20.php',
     {
       form: {
         str: getLevels || req.params.id,
@@ -13,7 +13,7 @@ module.exports = async (app, req, res, api, getLevels) => {
       let gdSearchResult = app.parseResponse(b1);
 
       request.post(
-        "http://boomlings.com/database/getGJUserInfo20.php",
+        'http://boomlings.com/database/getGJUserInfo20.php',
         {
           form: {
             targetAccountID: gdSearchResult[16],
@@ -21,9 +21,9 @@ module.exports = async (app, req, res, api, getLevels) => {
           }
         },
         function(err2, res2, body) {
-          if (body == "-1") {
-            if (!api) return res.redirect("/search/" + req.params.id);
-            else return res.send("-1");
+          if (body == '-1') {
+            if (!api) return res.redirect('/search/' + req.params.id);
+            else return res.send('-1');
           }
 
           let account = app.parseResponse(body);
@@ -39,19 +39,19 @@ module.exports = async (app, req, res, api, getLevels) => {
             userCoins: account[17],
             demons: account[4],
             cp: account[8],
-            friendRequests: account[19] == "0",
+            friendRequests: account[19] == '0',
             messages:
-              account[18] == "0"
-                ? "all"
-                : account[18] == "1"
-                ? "friends"
-                : "off",
+              account[18] == '0'
+                ? 'all'
+                : account[18] == '1'
+                ? 'friends'
+                : 'off',
             commentHistory:
-              account[50] == "0"
-                ? "all"
-                : account[50] == "1"
-                ? "friends"
-                : "off",
+              account[50] == '0'
+                ? 'all'
+                : account[50] == '1'
+                ? 'friends'
+                : 'off',
             moderator: account[49],
             youtube: app.clean(account[20]) || null,
             twitter: app.clean(account[44]) || null,
@@ -66,7 +66,7 @@ module.exports = async (app, req, res, api, getLevels) => {
             col1: account[10],
             col2: account[11],
             deathEffect: account[48],
-            glow: account[28] == "1"
+            glow: account[28] == '1'
           };
 
           if (getLevels) {
@@ -74,14 +74,14 @@ module.exports = async (app, req, res, api, getLevels) => {
             return app.modules.search(app, req, res);
           } else if (api) return res.send(userData);
           else
-            return fs.readFile("./html/profile.html", "utf8", function(
+            return fs.readFile('./html/profile.html', 'utf8', function(
               err,
               data
             ) {
               let html = data;
               let variables = Object.keys(userData);
               variables.forEach(x => {
-                let regex = new RegExp(`\\[\\[${x.toUpperCase()}\\]\\]`, "g");
+                let regex = new RegExp(`\\[\\[${x.toUpperCase()}\\]\\]`, 'g');
                 html = html.replace(regex, app.clean(userData[x]));
               });
               return res.send(html);

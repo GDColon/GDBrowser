@@ -38,8 +38,19 @@ app.parseResponse = function (responseBody, splitter) {
 }
 
 console.log("Site online!");
+app.get("/comments/:id", function(req, res) {
+  res.sendFile(path.join(__dirname, "html/comments.html"));
+})  
 
+app.get("/search/:text", function(req, res) {
+  res.sendFile(path.join(__dirname, "html/search.html"));
+}) 
+
+app.get("/analyze/:id", async function(req, res) {
+  res.sendFile(path.join(__dirname, "html/analyze.html"));
+})
 app.use(express.static('./html', {extensions: ['html']}));
+
 /*
 Using this middleware twice is small brain but it'll have to do until every file
 not in a nested directory is moved to a nested directory.
@@ -56,7 +67,9 @@ app.get("/icon/:text", function(req, res) {
 app.get("/iconkit/:text", function(req, res) {
   app.modules.icon(app, req, res)
 })
-
+app.get("/profile/:id", function(req, res) {
+  app.modules.profile(app, req, res)
+})
 app.get("/api/level/:id", async function(req, res) {
   app.modules.level(app, req, res, api)
 })    
@@ -100,13 +113,13 @@ app.get('/api/icons', function(req, res) {
 
 app.get("/api/:anythingelse", function(req, res) {
   res.send('-1')
-})    
+})
 
 app.get("/:id", function(req, res) {
   app.modules.level(app, req, res)
 })     
 
 app.get('*', function(req, res) {
-  res.redirect('/api/search/404'); // 101arrowz: I think I did this wrong
+  res.redirect('/search/404'); // 101arrowz: I think I did this wrong
 });
 app.listen(2000);

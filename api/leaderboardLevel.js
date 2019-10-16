@@ -1,4 +1,4 @@
-const request = require("request");
+const request = require('request');
 module.exports = async (app, req, res) => {
   let amount = 100;
   let count = req.query.count ? parseInt(req.query.count) : null;
@@ -12,18 +12,18 @@ module.exports = async (app, req, res) => {
     secret: app.secret,
     accountID: app.id,
     gjp: app.gjp,
-    type: req.query.hasOwnProperty("week") ? "2" : "1"
+    type: req.query.hasOwnProperty('week') ? '2' : '1'
   };
 
   request.post(
-    "http://boomlings.com/database/getGJLevelScores211.php",
+    'http://boomlings.com/database/getGJLevelScores211.php',
     {
       form: params
     },
     async function(err, resp, body) {
-      if (body == "-1" || !body) return res.send("-1");
-      scores = body.split("|").map(x => app.parseResponse(x));
-      if (!scores.filter(x => x[1]).length) return res.send("-1");
+      if (body == '-1' || !body) return res.send('-1');
+      scores = body.split('|').map(x => app.parseResponse(x));
+      if (!scores.filter(x => x[1]).length) return res.send('-1');
 
       scores.forEach(x => {
         let keys = Object.keys(x);
@@ -32,7 +32,7 @@ module.exports = async (app, req, res) => {
         x.percent = x[3];
         x.coins = x[13];
         x.playerID = x[2];
-        x.date = x[42] + " ago";
+        x.date = x[42] + ' ago';
         keys.forEach(k => delete x[k]);
       });
 

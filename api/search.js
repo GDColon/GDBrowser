@@ -1,17 +1,17 @@
-const request = require("request");
+const request = require('request');
 module.exports = async (app, req, res) => {
   const orbs = [0, 0, 50, 75, 125, 175, 225, 275, 350, 425, 500];
   const difficulty = {
-    0: "Unrated",
-    10: "Easy",
-    20: "Normal",
-    30: "Hard",
-    40: "Harder",
-    50: "Insane"
+    0: 'Unrated',
+    10: 'Easy',
+    20: 'Normal',
+    30: 'Hard',
+    40: 'Harder',
+    50: 'Insane'
   };
-  const length = ["Tiny", "Short", "Medium", "Long", "XL"];
-  const mapPacks = require("../misc/mapPacks.json");
-  const levels = require("../misc/level.json").music;
+  const length = ['Tiny', 'Short', 'Medium', 'Long', 'XL'];
+  const mapPacks = require('../misc/mapPacks.json');
+  const levels = require('../misc/level.json').music;
 
   let amount = 10;
   let count = req.query.count ? parseInt(req.query.count) : null;
@@ -30,14 +30,14 @@ module.exports = async (app, req, res) => {
     len: req.query.length,
     song: req.query.songID,
 
-    featured: req.query.hasOwnProperty("featured") ? 1 : 0,
-    originalOnly: req.query.hasOwnProperty("original") ? 1 : 0,
-    twoPlayer: req.query.hasOwnProperty("twoPlayer") ? 1 : 0,
-    coins: req.query.hasOwnProperty("coins") ? 1 : 0,
-    epic: req.query.hasOwnProperty("epic") ? 1 : 0,
-    star: req.query.hasOwnProperty("starred") ? 1 : 0,
-    noStar: req.query.hasOwnProperty("noStar") ? 1 : 0,
-    customSong: req.query.hasOwnProperty("customSong") ? 1 : 0,
+    featured: req.query.hasOwnProperty('featured') ? 1 : 0,
+    originalOnly: req.query.hasOwnProperty('original') ? 1 : 0,
+    twoPlayer: req.query.hasOwnProperty('twoPlayer') ? 1 : 0,
+    coins: req.query.hasOwnProperty('coins') ? 1 : 0,
+    epic: req.query.hasOwnProperty('epic') ? 1 : 0,
+    star: req.query.hasOwnProperty('starred') ? 1 : 0,
+    noStar: req.query.hasOwnProperty('noStar') ? 1 : 0,
+    customSong: req.query.hasOwnProperty('customSong') ? 1 : 0,
 
     type: req.query.type || 0,
     secret: app.secret
@@ -49,8 +49,8 @@ module.exports = async (app, req, res) => {
 
   if (
     req.query.gauntlet ||
-    req.query.hasOwnProperty("mappack") ||
-    req.query.type == "saved"
+    req.query.hasOwnProperty('mappack') ||
+    req.query.type == 'saved'
   )
     filters.type = 10;
 
@@ -66,55 +66,55 @@ module.exports = async (app, req, res) => {
 
   if (req.query.type) {
     let filterCheck = req.query.type.toLowerCase();
-    if (filterCheck == "mostdownloaded") filters.type = 1;
-    if (filterCheck == "mostliked") filters.type = 2;
-    if (filterCheck == "trending") filters.type = 3;
-    if (filterCheck == "recent") filters.type = 4;
-    if (filterCheck == "featured") filters.type = 6;
-    if (filterCheck == "magic") filters.type = 7;
-    if (filterCheck == "awarded" || filterCheck == "starred") filters.type = 11;
-    if (filterCheck == "halloffame" || filterCheck == "hof") filters.type = 16;
+    if (filterCheck == 'mostdownloaded') filters.type = 1;
+    if (filterCheck == 'mostliked') filters.type = 2;
+    if (filterCheck == 'trending') filters.type = 3;
+    if (filterCheck == 'recent') filters.type = 4;
+    if (filterCheck == 'featured') filters.type = 6;
+    if (filterCheck == 'magic') filters.type = 7;
+    if (filterCheck == 'awarded' || filterCheck == 'starred') filters.type = 11;
+    if (filterCheck == 'halloffame' || filterCheck == 'hof') filters.type = 16;
 
-    if (filterCheck == "saved") {
-      if (!req.cookies.saved) return res.send("-1");
+    if (filterCheck == 'saved') {
+      if (!req.cookies.saved) return res.send('-1');
       filters.str = req.cookies.saved
-        .split(",")
+        .split(',')
         .slice(10 * filters.page)
         .slice(0, 10)
-        .join(",");
-      if (!filters.str.length) return res.send("-1");
+        .join(',');
+      if (!filters.str.length) return res.send('-1');
     }
   }
 
-  if (req.query.hasOwnProperty("user")) {
+  if (req.query.hasOwnProperty('user')) {
     filters.type = 5;
     if (!req.params.text.match(/^[0-9]*$/))
       return app.modules.profile(app, req, res, null, req.params.text);
   }
 
-  if (req.params.text == "*") delete filters.str;
+  if (req.params.text == '*') delete filters.str;
 
   request.post(
-    "http://boomlings.com/database/getGJLevels21.php",
+    'http://boomlings.com/database/getGJLevels21.php',
     {
       form: filters
     },
     async function(err, resp, body) {
-      if (!body || body == "-1") return res.send("-1");
-      let preRes = body.split("#")[0].split("|", 10);
+      if (!body || body == '-1') return res.send('-1');
+      let preRes = body.split('#')[0].split('|', 10);
       let authorList = {};
       let songList = {};
-      let authors = body.split("#")[1].split("|");
-      let songs = "~" + body.split("#")[2];
-      songs = songs.split(":").map(x => app.parseResponse(x, "~|~"));
+      let authors = body.split('#')[1].split('|');
+      let songs = '~' + body.split('#')[2];
+      songs = songs.split(':').map(x => app.parseResponse(x, '~|~'));
       songs.forEach(x => {
-        songList[x["~1"]] = x["2"];
+        songList[x['~1']] = x['2'];
       });
 
       authors.splice(10, 999);
       authors.forEach(x => {
-        if (x.startsWith("~")) return;
-        let arr = x.split(":");
+        if (x.startsWith('~')) return;
+        let arr = x.split(':');
         authorList[arr[0]] = [arr[1], arr[2]];
       });
 
@@ -125,11 +125,11 @@ module.exports = async (app, req, res) => {
         x.name = x[2];
         x.id = x[1];
         (x.description =
-          Buffer.from(x[3], "base64").toString() ||
-          "(No description provided)"),
-          (x.author = authorList[x[6]] ? authorList[x[6]][0] : "-");
+          Buffer.from(x[3], 'base64').toString() ||
+          '(No description provided)'),
+          (x.author = authorList[x[6]] ? authorList[x[6]][0] : '-');
         x.authorID = x[6];
-        x.accountID = authorList[x[6]] ? authorList[x[6]][1] : "0";
+        x.accountID = authorList[x[6]] ? authorList[x[6]][1] : '0';
         x.difficulty = difficulty[x[9]];
         x.downloads = x[10];
         x.likes = x[14];
@@ -151,32 +151,32 @@ module.exports = async (app, req, res) => {
         x.large = x[45] > 40000;
         x.cp = (x.stars > 0) + x.featured + x.epic;
 
-        if (x[17] == 1) x.difficulty += " Demon";
-        if (x.difficulty == "Insane Demon") x.difficulty = "Extreme Demon";
-        else if (x.difficulty == "Harder Demon") x.difficulty = "Insane Demon";
-        else if (x.difficulty == "Normal Demon") x.difficulty = "Medium Demon";
-        else if (x[25] == 1) x.difficulty = "Auto";
+        if (x[17] == 1) x.difficulty += ' Demon';
+        if (x.difficulty == 'Insane Demon') x.difficulty = 'Extreme Demon';
+        else if (x.difficulty == 'Harder Demon') x.difficulty = 'Insane Demon';
+        else if (x.difficulty == 'Normal Demon') x.difficulty = 'Medium Demon';
+        else if (x[25] == 1) x.difficulty = 'Auto';
         x.difficultyFace = `${
           x[17] != 1
             ? x.difficulty.toLowerCase()
-            : `demon-${x.difficulty.toLowerCase().split(" ")[0]}`
-        }${x.epic ? "-epic" : `${x.featured ? "-featured" : ""}`}`;
+            : `demon-${x.difficulty.toLowerCase().split(' ')[0]}`
+        }${x.epic ? '-epic' : `${x.featured ? '-featured' : ''}`}`;
 
-        let songSearch = songs.find(y => y["~1"] == x[35]);
+        let songSearch = songs.find(y => y['~1'] == x[35]);
 
         if (songSearch) {
-          x.songName = songSearch[2] || "Unknown";
-          x.songAuthor = songSearch[4] || "Unknown";
-          x.songSize = (songSearch[5] || "0") + "MB";
+          x.songName = songSearch[2] || 'Unknown';
+          x.songAuthor = songSearch[4] || 'Unknown';
+          x.songSize = (songSearch[5] || '0') + 'MB';
           x.songID = songSearch[1] || x.customSong;
         } else {
-          let foundSong = require("../misc/level.json").music[
+          let foundSong = require('../misc/level.json').music[
             parseInt(x[12]) + 1
           ] || { null: true };
-          x.songName = foundSong[0] || "Unknown";
-          x.songAuthor = foundSong[1] || "Unknown";
-          x.songSize = "0MB";
-          x.songID = "Level " + [parseInt(x[12]) + 1];
+          x.songName = foundSong[0] || 'Unknown';
+          x.songAuthor = foundSong[1] || 'Unknown';
+          x.songSize = '0MB';
+          x.songID = 'Level ' + [parseInt(x[12]) + 1];
         }
 
         keys.forEach(k => delete x[k]);

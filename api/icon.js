@@ -1,19 +1,19 @@
-const request = require("request");
-const Jimp = require("jimp");
-const plist = require("plist");
-const fs = require("fs");
-const path = require("path");
-const secret = require("../misc/boomlingsSecret.js");
-const colors = require("../misc/colors.json");
+const request = require('request');
+const Jimp = require('jimp');
+const plist = require('plist');
+const fs = require('fs');
+const path = require('path');
+const secret = require('../misc/boomlingsSecret.js');
+const colors = require('../misc/colors.json');
 module.exports = async (app, req, res) => {
   let icons = plist.parse(
-    fs.readFileSync("./icons/GJ_GameSheet02-uhd.plist", "utf8")
+    fs.readFileSync('./icons/GJ_GameSheet02-uhd.plist', 'utf8')
   ).frames;
   let username = req.params.text;
-  let form = "player";
+  let form = 'player';
 
   request.post(
-    "http://boomlings.com/database/getGJUsers20.php",
+    'http://boomlings.com/database/getGJUsers20.php',
     {
       form: {
         str: username,
@@ -21,14 +21,14 @@ module.exports = async (app, req, res) => {
       }
     },
     function(err1, res1, body1) {
-      let response = body1.split("#")[0].split(":");
+      let response = body1.split('#')[0].split(':');
       let result = {};
       for (let i = 0; i < response.length; i += 2) {
         result[response[i]] = response[i + 1];
       }
 
       request.post(
-        "http://boomlings.com/database/getGJUserInfo20.php",
+        'http://boomlings.com/database/getGJUserInfo20.php',
         {
           form: {
             targetAccountID: result[16],
@@ -36,7 +36,7 @@ module.exports = async (app, req, res) => {
           }
         },
         function(err2, res2, body2) {
-          let response2 = body2.split("#")[0].split(":");
+          let response2 = body2.split('#')[0].split(':');
           let account = {};
           for (let i = 0; i < response2.length; i += 2) {
             account[response2[i]] = response2[i + 1];
@@ -47,35 +47,35 @@ module.exports = async (app, req, res) => {
           let col2 = account[11];
           let outline = account[28];
 
-          if (body2 == "-1") {
-            iconID = "1";
-            col1 = "1";
-            col2 = "3";
-            outline = "0";
+          if (body2 == '-1') {
+            iconID = '1';
+            col1 = '1';
+            col2 = '3';
+            outline = '0';
           }
 
-          if (req.query.form == "ship") {
-            form = "ship";
+          if (req.query.form == 'ship') {
+            form = 'ship';
             iconID = account[22];
           }
-          if (req.query.form == "ball") {
-            form = "player_ball";
+          if (req.query.form == 'ball') {
+            form = 'player_ball';
             iconID = account[23];
           }
-          if (req.query.form == "ufo") {
-            form = "bird";
+          if (req.query.form == 'ufo') {
+            form = 'bird';
             iconID = account[24];
           }
-          if (req.query.form == "wave") {
-            form = "dart";
+          if (req.query.form == 'wave') {
+            form = 'dart';
             iconID = account[25];
           }
-          if (req.query.form == "robot") {
-            form = "robot";
+          if (req.query.form == 'robot') {
+            form = 'robot';
             iconID = account[26];
           }
-          if (req.query.form == "spider" || req.query.form == "cursed") {
-            form = "spider";
+          if (req.query.form == 'spider' || req.query.form == 'cursed') {
+            form = 'spider';
             iconID = account[43];
           }
 
@@ -86,20 +86,20 @@ module.exports = async (app, req, res) => {
 
           if (!iconID) iconID = 1;
 
-          if (outline == "0") outline = false;
+          if (outline == '0') outline = false;
 
-          if (iconID && iconID.toString().length == 1) iconID = "0" + iconID;
+          if (iconID && iconID.toString().length == 1) iconID = '0' + iconID;
 
           if (col1 == 15) outline = true;
 
-          let robotHead = "";
+          let robotHead = '';
           let robotMode = false;
           let spiderMode = false;
-          if (form == "robot" || req.query.form == "cursed") {
-            robotHead = "01_";
+          if (form == 'robot' || req.query.form == 'cursed') {
+            robotHead = '01_';
             robotMode = true;
-          } else if (form == "spider") {
-            robotHead = "01_";
+          } else if (form == 'spider') {
+            robotHead = '01_';
             spiderMode = true;
           }
 
@@ -107,7 +107,7 @@ module.exports = async (app, req, res) => {
             (robotMode || spiderMode) &&
             !fs.existsSync(`./icons/${form}_${iconID}_02_001.png`)
           )
-            iconID = "01";
+            iconID = '01';
 
           let robotLeg1 = `${form}_${iconID}_02_001.png`;
           let robotOffset1;
@@ -128,14 +128,14 @@ module.exports = async (app, req, res) => {
           let extra = `./icons/${form}_${iconID}_${robotHead}extra_001.png`;
 
           if (!fs.existsSync(icon)) {
-            iconID = "01";
+            iconID = '01';
             icon = `./icons/${form}_01_${robotHead}001.png`;
             glow = `./icons/${form}_01_${robotHead}2_001.png`;
           }
 
           if (!fs.existsSync(icon))
             return res.sendFile(
-              path.join(__dirname, "../assets/unknownIcon.png")
+              path.join(__dirname, '../assets/unknownIcon.png')
             );
 
           if (!colors[col1]) col1 = 1;
@@ -155,13 +155,13 @@ module.exports = async (app, req, res) => {
             `${form}_${iconID}_${robotHead}001.png`
           ].spriteOffset
             .slice(1, -1)
-            .split(",")
+            .split(',')
             .map(x => parseInt(x.trim()));
           let offset = icons[
             `${form}_${iconID}_${robotHead}2_001.png`
           ].spriteOffset
             .slice(1, -1)
-            .split(",")
+            .split(',')
             .map(x => parseInt(x.trim()))
             .map(function(x, y) {
               return x - originalOffset[y];
@@ -170,7 +170,7 @@ module.exports = async (app, req, res) => {
           if (robotMode || spiderMode) {
             robotOffset1 = icons[robotLeg1].spriteOffset
               .slice(1, -1)
-              .split(",")
+              .split(',')
               .map(x => parseInt(x.trim()))
               .map(function(x, y) {
                 return x - originalOffset[y];
@@ -178,12 +178,12 @@ module.exports = async (app, req, res) => {
               .concat(
                 icons[robotLeg1].spriteSize
                   .slice(1, -1)
-                  .split(",")
+                  .split(',')
                   .map(x => parseInt(x.trim()))
               );
             robotOffset2 = icons[robotLeg2].spriteOffset
               .slice(1, -1)
-              .split(",")
+              .split(',')
               .map(x => parseInt(x.trim()))
               .map(function(x, y) {
                 return x - originalOffset[y];
@@ -191,12 +191,12 @@ module.exports = async (app, req, res) => {
               .concat(
                 icons[robotLeg2].spriteSize
                   .slice(1, -1)
-                  .split(",")
+                  .split(',')
                   .map(x => parseInt(x.trim()))
               );
             robotOffset3 = icons[robotLeg3].spriteOffset
               .slice(1, -1)
-              .split(",")
+              .split(',')
               .map(x => parseInt(x.trim()))
               .map(function(x, y) {
                 return x - originalOffset[y];
@@ -204,13 +204,13 @@ module.exports = async (app, req, res) => {
               .concat(
                 icons[robotLeg3].spriteSize
                   .slice(1, -1)
-                  .split(",")
+                  .split(',')
                   .map(x => parseInt(x.trim()))
               );
 
             robotOffset1b = icons[robotGlow1].spriteOffset
               .slice(1, -1)
-              .split(",")
+              .split(',')
               .map(x => parseInt(x.trim()))
               .map(function(x, y) {
                 return x - originalOffset[y];
@@ -218,12 +218,12 @@ module.exports = async (app, req, res) => {
               .concat(
                 icons[robotGlow1].spriteSize
                   .slice(1, -1)
-                  .split(",")
+                  .split(',')
                   .map(x => parseInt(x.trim()))
               );
             robotOffset2b = icons[robotGlow2].spriteOffset
               .slice(1, -1)
-              .split(",")
+              .split(',')
               .map(x => parseInt(x.trim()))
               .map(function(x, y) {
                 return x - originalOffset[y];
@@ -231,12 +231,12 @@ module.exports = async (app, req, res) => {
               .concat(
                 icons[robotGlow2].spriteSize
                   .slice(1, -1)
-                  .split(",")
+                  .split(',')
                   .map(x => parseInt(x.trim()))
               );
             robotOffset3b = icons[robotGlow3].spriteOffset
               .slice(1, -1)
-              .split(",")
+              .split(',')
               .map(x => parseInt(x.trim()))
               .map(function(x, y) {
                 return x - originalOffset[y];
@@ -244,7 +244,7 @@ module.exports = async (app, req, res) => {
               .concat(
                 icons[robotGlow3].spriteSize
                   .slice(1, -1)
-                  .split(",")
+                  .split(',')
                   .map(x => parseInt(x.trim()))
               );
 
@@ -256,7 +256,7 @@ module.exports = async (app, req, res) => {
             robotGlow3 = new Jimp(`./icons/${robotGlow3}`);
           }
 
-          res.contentType("image/png");
+          res.contentType('image/png');
 
           function recolor(img, col) {
             return img.scan(0, 0, img.bitmap.width, img.bitmap.height, function(
@@ -286,21 +286,21 @@ module.exports = async (app, req, res) => {
             var extrabit = icons[`${form}_${iconID}_${robotHead}extra_001.png`];
             var offset2 = extrabit.spriteOffset
               .slice(1, -1)
-              .split(",")
+              .split(',')
               .map(x => parseInt(x.trim()))
               .map(function(x, y) {
                 return x - originalOffset[y];
               });
             var size2 = extrabit.spriteSize
               .slice(1, -1)
-              .split(",")
+              .split(',')
               .map(x => parseInt(x.trim()));
 
             extra = new Jimp(extra);
             useExtra = true;
           }
 
-          if (form == "bird") {
+          if (form == 'bird') {
             //   var ufoName = `bird_${iconID}_3_001.png`
             //   var ufoTop = new Jimp(`./icons/${ufoName}`);
             //   var topOffset = icons[ufoName].spriteOffset.slice(1, -1).split(",").map(x => parseInt(x.trim())).map(function(x, y) {return x - originalOffset[y]}).concat(icons[ufoName].spriteSize.slice(1, -1).split(",").map(x => parseInt(x.trim())))
@@ -386,7 +386,7 @@ module.exports = async (app, req, res) => {
 
                 await Jimp.read(new Jimp(robotLeg2)).then(rob => {
                   robotLeg2b = rob
-                    .color([{ apply: "darken", params: [20] }])
+                    .color([{ apply: 'darken', params: [20] }])
                     .rotate(-5);
                 });
 
@@ -402,7 +402,7 @@ module.exports = async (app, req, res) => {
                 });
 
                 await Jimp.read(new Jimp(robotLeg3)).then(rob => {
-                  robotLeg3b = rob.color([{ apply: "darken", params: [10] }]);
+                  robotLeg3b = rob.color([{ apply: 'darken', params: [10] }]);
                 });
 
                 ic.composite(
@@ -465,7 +465,7 @@ module.exports = async (app, req, res) => {
                   Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_TOP
                 );
 
-                if (iconID == "07") {
+                if (iconID == '07') {
                   robotOffset2[2] -= 10;
                   robotOffset2[1] += 12;
                   robotOffset1b[3] -= 105;
@@ -473,7 +473,7 @@ module.exports = async (app, req, res) => {
                   robotOffset2b[2] -= 60;
                 }
 
-                if (iconID == "16") {
+                if (iconID == '16') {
                   robotOffset1b[3] -= 100;
                   robotOffset2b[3] -= 200;
                   robotOffset2b[2] -= 30;
@@ -516,7 +516,7 @@ module.exports = async (app, req, res) => {
                 });
 
                 await Jimp.read(new Jimp(robotLeg1)).then(rob => {
-                  robotLeg1b = rob.color([{ apply: "darken", params: [20] }]);
+                  robotLeg1b = rob.color([{ apply: 'darken', params: [20] }]);
                 });
 
                 await Jimp.read(new Jimp(robotLeg1b)).then(rob => {
@@ -588,7 +588,7 @@ module.exports = async (app, req, res) => {
                   iconSize[1] / 2 - size2[1] / 2 - offset2[1]
                 );
               if (!ufoMode) ic.autocrop(0.01, false);
-              else if (ic.bitmap.height == "300") ic.autocrop(1, false);
+              else if (ic.bitmap.height == '300') ic.autocrop(1, false);
 
               let finalSize = [ic.bitmap.width, ic.bitmap.height];
 
@@ -602,13 +602,13 @@ module.exports = async (app, req, res) => {
                 //  return res.end(buff)
                 //}
                 else {
-                  const Canvas = require("canvas"),
+                  const Canvas = require('canvas'),
                     Image = Canvas.Image,
                     canvas = Canvas.createCanvas(
                       finalSize[0] + 10,
                       finalSize[1] + 10
                     ),
-                    ctx = canvas.getContext("2d");
+                    ctx = canvas.getContext('2d');
 
                   if (col2 == 15) col2 = col1;
                   if (col1 == 15 && col2 == 15) col2 = 12;
@@ -641,10 +641,10 @@ module.exports = async (app, req, res) => {
                     for (; i < dArr.length; i += 2)
                       ctx.drawImage(img, x + dArr[i] * s, y + dArr[i + 1] * s);
 
-                    ctx.globalCompositeOperation = "source-in";
+                    ctx.globalCompositeOperation = 'source-in';
                     ctx.fillStyle = `rgba(${colors[col2].r}, ${colors[col2].g}, ${colors[col2].b}, 1})`;
                     ctx.fillRect(0, 0, canvas.width, canvas.height);
-                    ctx.globalCompositeOperation = "source-over";
+                    ctx.globalCompositeOperation = 'source-over';
                     ctx.imageSmoothingEnabled = false;
                     ctx.drawImage(img, x, y);
                   };
@@ -657,7 +657,7 @@ module.exports = async (app, req, res) => {
                     `./icons/cache/${iconCode}.png`,
                     new Buffer(canvas.toBuffer())
                   );
-                  return res.end(new Buffer(canvas.toBuffer(), "base64"));
+                  return res.end(new Buffer(canvas.toBuffer(), 'base64'));
                 }
               });
             });
