@@ -1,0 +1,245 @@
+<head>
+	<title>Level Search</title>
+	<meta charset="utf-8">
+	<link href="../assets/level.css" type="text/css" rel="stylesheet">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
+	<link rel="icon" href="../assets/coin.png">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script async type="text/javascript" src="../assets/sizecheck.js"></script>
+	<script type="text/javascript" src="https://asvd.github.io/dragscroll/dragscroll.js"></script>
+	<meta id="meta-title" property="og:title" content="Level Search">
+	<meta id="meta-desc" property="og:description" content="Search for Geometry Dash levels, and filter by length, difficulty, song + more!">
+	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/assets/coin.png">
+</head>
+
+<body class="levelBG">
+
+<div id="everything" style="overflow: auto;">
+
+	<div class="popup" id="pageDiv">
+		<div class="brownbox center supercenter" style="width: 60vh; height: 34%">
+			<h2 class="smaller center" style="font-size: 5.5vh; margin-top: 1%">Jump to Page</h2>
+			<input type="number" id="pageSelect" placeholder="1"><br>
+			<img src="../assets/ok.png" height=20%; id="pageJump" class="gdButton center closeWindow">
+			<img class="closeWindow gdButton" src="../assets/close.png" height="25%" style="position: absolute; top: -13.5%; left: -6vh">
+
+			<div class="supercenter" style="left: 25%; top: 43%; height: 10%;">
+				<img class="gdButton" src="../assets/whitearrow-left.png" height="160%" onclick="$('#pageSelect').val(parseInt($('#pageSelect').val() || 0) - 1); $('#pageSelect').trigger('input');">
+			</div>
+		
+			<div class="supercenter" style="left: 75%; top: 43%; height: 10%;">
+				<img class="gdButton" src="../assets/whitearrow-right.png" height="160%" onclick="$('#pageSelect').val(parseInt($('#pageSelect').val() || 0) + 1); $('#pageSelect').trigger('input');">
+			</div>
+		</div>
+	</div>
+
+	<div class="popup" id="purgeDiv">
+		<div class="fancybox center supercenter" style="width: 35%; height: 28%">
+			<h2 class="smaller center" style="font-size: 5.5vh">Delete All</h2>
+			<p class="bigger center" style="line-height: 5vh; margin-top: 1.5vh;">
+				Delete all saved online levels?<br><font color="yellow">Levels will be cleared from your cookies.</font>
+			</p>
+			<img src="../assets/btn-cancel.png" height=25%; class="gdButton center closeWindow">
+			<img src="../assets/btn-delete.png" height=25%; id="purgeSaved" class="gdButton center sideSpaceB">
+		</div>
+	</div>
+
+	<div style="position:absolute; bottom: 0%; left: 0%; width: 100%">
+		<img class="gs" src="../assets/corner.png" width=7%;>
+	</div>
+
+	<div style="position:absolute; bottom: 0%; right: 0%; width: 100%; text-align: right;">
+		<img class="gs" src="../assets/corner.png" width=7%; style="transform: scaleX(-1)">
+	</div>
+
+	<div id="searchBox" class="supercenter dragscroll">
+		<div style="height: 4.5%"></div>
+	</div>
+	
+	<div class="epicbox supercenter gs" style="width: 120vh; height: 80%; pointer-events: none;"></div>
+
+	<div class="center" style="position:absolute; top: 8%; left: 0%; right: 0%">
+		<h1 id="header"></h1>
+	</div>
+
+	<div style="text-align: right; position:absolute; top: 1.5%; right: 2%">
+		<h2 class="smaller" id="pagenum"></h2>
+	</div>
+
+	<div style="text-align: right; position:absolute; top: 7.5%; right: 2%; height: 12%;">
+		<img src="../assets/magnify.png" height="55%" class="gdButton" style="margin-top: 5%" onclick="$('#pageDiv').show(); $('#pageSelect').focus().select()">
+	</div>
+
+	<div style="position:absolute; top: 2%; left: 1.5%; width: 10%; height: 25%; pointer-events: none">
+		<img class="gdButton yesClick" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()">
+	</div>
+
+	<div id="purge" style="position:absolute; bottom: 1%; right: -3%; width: 10%; display:none;">
+		<img class="gdButton" src="../assets/delete.png" width="60%" onclick="$('#purgeDiv').show()">
+	</div>
+
+	<div style="position: absolute; left: 7%; top: 45%; height: 10%;">
+		<img class="gdButton" id="pageDown" src="../assets/arrow-left.png" height="90%">
+	</div>
+
+	<div style="position: absolute; right: 7%; top: 45%; height: 10%;">
+		<img class="gdButton" id="pageUp" src="../assets/arrow-right.png" height="90%">
+	</div>
+
+	<div class="supercenter" id="loading" style="height: 10%; top: 47%; display: none;">
+		<img class="spin noSelect" src="../assets/loading.png" height="105%">
+	</div>
+
+</div>
+
+</body>
+
+<script>
+
+$('#pageDown').hide()
+$('#pageUp').hide()
+
+let accID;
+let path = location.pathname.replace('/search/', "")
+let url = new URL(window.location.href)
+let gauntlet = url.searchParams.get('gauntlet')
+let mappack = url.searchParams.get('mappack')
+let userMode = url.searchParams.get('user')
+let type = url.searchParams.get('type')
+let page = 0
+let loading = false;
+let gauntlets = ["Fire", "Ice", "Poison", "Shadow", "Lava", "Bonus", "Chaos", "Demon", "Time", "Crystal", "Magic", "Spike", "Monster", "Doom", "Death"]
+
+function Append() {
+
+	loading = true;
+	$('#searchBox').html('<div style="height: 4.5%"></div>')
+	$('#pagenum').text('Page ' + (page + 1))
+	$('#pageSelect').val(page + 1)
+	$('#loading').show()
+
+	fetch(`../api/search/${accID || path}?page=${page}${window.location.search.replace("?", "&").replace("page", "nope")}`).then(res => res.json()).then(res => {
+
+	if (page == 0) $('#pageDown').hide()
+	else $('#pageDown').show()
+
+	if (res == '-1' || (res.length < 9 && type != "recent")) $('#pageUp').hide()
+	else $('#pageUp').show()
+
+	if (res == '-1') { $('#loading').hide(); return loading = false }
+
+	res.forEach((x, y) => {
+		let hasAuthor = (x.accountID != "0")
+		if (y == 0 && (type == 5 || typeof userMode == 'string')) {
+			$('#header').text(x.author + (x.author.toLowerCase().endsWith('s') ? "'" : "'s") + " levels")
+			document.title = $('#header').text()
+			accID = x.authorID
+		}
+
+		$('#searchBox').append(`<div class="searchresult">
+			<h1 class="lessspaced">${x.name}</h1>
+			<h2 class="lessSpaced smaller inline ${hasAuthor ? "gdButton" : "green"}">${hasAuthor ? `<a href="../profile/${x.author}">By ${x.author}</a>` : `By ${x.author}`}</h2><h2 class="inline" style="margin-left: 1.5%; transform:translateY(30%)"> ${x.copiedID == '0' ? "" : '<img class="valign sideSpace" src="../assets/copied.png" height="12%">'}${x.large ? '<img class="valign sideSpaceD" src="../assets/large.png" height="12%">' : ''}</h2>
+			<h3 class="lessSpaced ${x.customSong == 0 ? "blue" : "whatIfItWasPurple"}" style="overflow: hidden;">${x.songName}</h3>
+			<h3 class="lessSpaced">
+				<img class="valign" src="../assets/time.png" height="14%"> ${x.length}
+				<img class="valign" src="../assets/download.png" height="14%"> ${x.downloads}
+				<img class="valign" src="../assets/${x.disliked ? 'dis' : ''}like.png" height="14%"> ${x.likes}
+				${x.orbs != 0 ? `<img class="valign" src="../assets/orbs.png" height="14%"> ${x.orbs}` : ""}
+			</h3>
+		
+			<div class="center" style="position:absolute; top: ${6.5 + (y * 33.5) + (x.coins == 0 ? 2.5 : 0)}%; left: 4.4%; transform:scale(0.82); height: 10%; width: 12.5%;">
+				<img class="spaced" id="dFace" src="../difficulty/${x.difficultyFace}.png" height="150%" style="margin-bottom: 0%; ${x.epic ? 'transform:scale(1.2)' : x.featured ? 'transform:scale(1.1)' : ''}">
+				<h3>${x.difficulty.includes('Demon') ? "Demon" : x.difficulty}</h3>
+				${x.stars != 0 ? `<h3>${x.stars}<img class="valign sideSpaceB" src="../assets/star.png" height="35%" style="transform:translateY(-8%)"></h3>` : ""}
+				<div id="coins" style="margin-top: 3%">
+					${x.coins > 0 ? `<img src="../assets/${x.verifiedCoins ? 'silver' : 'brown'}coin.png" height="50%">` : ""}
+					${x.coins > 1 ? `<img src="../assets/${x.verifiedCoins ? 'silver' : 'brown'}coin.png" height="50%" class="squeezeB">` : ""}
+					${x.coins > 2 ? `<img src="../assets/${x.verifiedCoins ? 'silver' : 'brown'}coin.png" height="50%" class="squeezeB">` : ""}
+				</div>
+			</div>
+			<div class="center" style="position:absolute; top: ${15 + (y * 33.5)}%; right: 7%; height: 10%">
+				<a href="../${x.id}""><img class="valign gdButton" src="../assets/view.png" height="105%"></a>
+			</div>
+		</div>`)
+	})
+
+	$('#searchBox').append('<div style="height: 4.5%"></div>')
+	$('#loading').hide()
+	loading = false;
+})
+}
+
+Append()
+
+$('#pageUp').click(function() {page += 1; if (!loading) Append()})
+$('#pageDown').click(function() {page -= 1; if (!loading) Append()})
+$('#pageJump').click(function() {if (loading) return; page = parseInt(($('#pageSelect').val() || 1) - 1); Append()})
+
+if (type == 1 || type == 'mostdownloaded') $('#header').text("Most Downloaded")
+if (type == 2 || type == 'mostliked') $('#header').text("Most Liked")
+if (type == 3 || type == 'trending') $('#header').text("Trending Levels")
+if (type == 4 || type == 'recent') $('#header').text("Recent Levels")
+if (type == 6 || type == 'featured') $('#header').text("Featured")
+if (type == 7 || type == 'magic') $('#header').text("Magic Levels")
+if (type == 11 || type == 'awarded' || type == 'starred') $('#header').text("Awarded Levels")
+if (type == 16 || type == 'halloffame' || type == 'hof') $('#header').text("Hall of Fame")
+document.title = $('#header').text() || "Level Search"
+$('#meta-title').attr('content', $('#header').text() || "Level Search")
+if ($('#header').text()) $('#meta-desc').attr('content',  `View Geometry Dash's ${$('#header').text()}${$('#header').text() == "Hall of Fame" ? "" : "list"}!`)
+
+if (type == 'saved') {
+	$('#header').text("Saved Levels")
+	$('#purge').show()
+	document.title = "Saved Levels"
+	$('#meta-title').attr('content', `Saved Levels`)
+	$('#meta-desc').attr('content',  `View your collection of saved Geometry Dash levels!`)
+}
+
+if (gauntlet) {
+	$('body').addClass('darkBG')
+	$('.gs').addClass('grayscale')
+	$('#header').text((gauntlets[parseInt(gauntlet) - 1] || "Unknown") + " Gauntlet")
+	$('#meta-title').attr('content', (gauntlets[parseInt(gauntlet) - 1] || "Unknown") + " Gauntlet")
+	$('#meta-desc').attr('content',  `View the 5 levels in the ${(gauntlets[parseInt(gauntlet) - 1] || "Unknown") + " Gauntlet"}!`)
+}
+
+if (!$('#header').text() && typeof userMode != "string") $('#header').text(path == "*" ? "Online Levels" : decodeURIComponent(path))
+
+$('.closeWindow').click(function() {$(".popup").attr('style', 'display: none;')})
+
+$('#purgeSaved').click(function() {
+	document.cookie = "saved=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
+	location.reload()
+})
+
+var max = 9999
+var min = 1
+
+$('#pageSelect').on('input', function () {
+    var x = $(this).val();
+    if ($(this).val() != "") $(this).val(Math.max(Math.min(Math.floor(x), max), min));
+});
+
+$('#pageSelect').on('blur', function () {
+    var x = $(this).val();
+    if ($(this).val() != "") $(this).val(Math.max(Math.min(Math.floor(x), max), min));
+});
+
+$(document).keydown(function(k) {
+	if (loading) return;
+
+	if ($('#pageDiv').is(':visible')) {
+		if (k.which == 13) $('#pageJump').trigger('click') //enter 
+		else return;
+	}
+
+    if (k.which == 37 && $('#pageDown').is(":visible")) { //left
+		$('#pageDown').trigger('click')
+	}
+	
+	if (k.which == 39 && $('#pageUp').is(":visible")) { //right
+		$('#pageUp').trigger('click')
+    }
+});
+
+</script>

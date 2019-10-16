@@ -1,0 +1,232 @@
+<head>
+	<title>[[NAME]] ([[ID]])</title>
+	<meta charset="utf-8">
+	<link href="../assets/level.css" type="text/css" rel="stylesheet">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
+	<link rel="icon" href="../difficulty/[[DIFFICULTYFACE]].png">
+	<meta id="meta-title" property="og:title" content="[[NAME]] by [[AUTHOR]]">
+	<meta id="meta-desc" property="og:description" content="ID: [[ID]] | Stars: [[STARS]] | Difficulty: [[DIFFICULTY]] | Downloads: [[DOWNLOADS]] | Likes: [[LIKES]] | Length: [[LENGTH]] | Song: [[SONGNAME]] ([[SONGID]])">
+	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/difficulty/[[DIFFICULTYFACE]].png">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script async type="text/javascript" src="../assets/sizecheck.js"></script>
+</head>
+
+<body class="levelBG">
+
+<div id="everything">
+
+	<div class="popup" id="infoDiv">
+		<div class="fancybox center supercenter">
+			<h2 class="smaller center" style="font-size: 5.5vh">Level Info</h2>
+			<p class="bigger center" id="levelInfo" style="line-height: 5vh; margin-top: 1.5vh;">
+				<font color="lime">[[NAME]]</font><br>
+				ID: <font color="yellow">[[ID]]</font>[[ORIGINALINFO]][[LOWDETAIL]][[PASS]][[UPLOAD]][[UPDATE]]
+				<br>Version:  <font color="yellow">[[VERSION]]</font>
+				[[OBJECTINFO]][[REQUESTED]]
+			</p>
+			<img src="../assets/ok.png" width=20%; class="gdButton center closeWindow">
+		</div>
+	</div>
+
+	<div class="popup" id="scoreDiv">
+		<div class="fancybox center supercenter">
+			<h2 class="smaller center" style="font-size: 5.5vh">Leaderboards</h2>
+			<p class="bigger center" style="line-height: 5vh; margin-top: 1.5vh;">
+				<font color="yellow">Leaderboards</font> are coming soon™
+			</p>
+			<img src="../assets/ok.png" width=20%; class="gdButton center closeWindow">
+		</div>
+	</div>
+
+	<div class="popup" id="saveDiv">
+		<div class="fancybox center supercenter">
+			<h2 class="smaller center" style="font-size: 5.5vh">Saved!</h2>
+			<p class="bigger center" style="line-height: 5vh; margin-top: 1.5vh;">
+				<font color="yellow">[[NAME]]</font> has been added to your <a class="youCanClickThis2" style="color:lime" href="../search/levels?type=saved">saved levels</a> list.
+			</p>
+			<img src="../assets/ok.png" width=20%; class="gdButton center" onclick="location.reload()">
+		</div>
+	</div>
+
+	<div class="popup" id="deleteDiv">
+		<div class="fancybox center supercenter" style="width: 60vh; height: 28%">
+			<h2 class="smaller center" style="font-size: 5.5vh">Delete Level</h2>
+			<p class="bigger center" style="line-height: 5vh; margin-top: 1.5vh;">
+				Are you sure you want to <font color="#C67A7E">delete</font> this level from your <a class="youCanClickThis2"style="color:lime" href="../search/levels?type=saved">saved levels </a>list?
+			</p>
+			<img src="../assets/btn-no.png" height=25%; class="gdButton center closeWindow">
+			<img src="../assets/btn-yes.png" height=25%; class="gdButton center sideSpaceB" onclick="deleteLevel()">
+		</div>
+	</div>
+
+	<div style="position:absolute; bottom: 0%; left: 0%; width: 100%">
+		<img src="../assets/corner.png" width=7%;>
+	</div>
+
+	<div style="position:absolute; bottom: 0%; right: 0%; width: 100%; text-align: right;">
+		<img src="../assets/corner.png" width=7%; style="transform: scaleX(-1)">
+	</div>
+
+	<div class="center" style="width: 70%; margin: 1% auto">
+		<h1 style="transform: scale(1.2)">[[NAME]]</h1>
+	</div>
+
+	<div class="center" style="position:absolute; top: 9%; left: 0%; right: 0%; height: 5%;">
+		<h2 class="inline slightlySmaller normalCursor gdButton" id="authorName"><a class="linkButton" id="authorLink" href="../profile/[[AUTHOR]]">By [[AUTHOR]]</a></h2>
+		<h2 class="inline slightlySmaller normalCursor sideSpaceC">
+			<img class="inline valign" id="copiedBadge" style="height: 60%; cursor:help" src="../assets/copied.png" title="Level is a copy or a collaboration">
+			<img class="inline valign" id="largeBadge" style="height: 60%; margin-left: -7%; cursor:help" src="../assets/large.png" title="Contains more than 40,000 objects"></h2>
+	</div>
+
+	<div class="transparentBox center" style="position:absolute; bottom: 32%; left: 0; right: 0; width: 75vh; margin-left: auto; margin-right: auto">
+		<p style="padding: 0 5%; white-space:normal">[[DESCRIPTION]]</p>
+	</div>
+
+	<div class="center valign" style="position:absolute; top: 10.5%; left: 27%; transform:scale(0.8); height: 100%; width: 20%">
+		<img class="spaced" src="../difficulty/[[DIFFICULTYFACE]].png" height="15%" style="margin-bottom: 0%">
+		<h1 class="smaller" id="difficultytext" style="transform:scale(0.9);">[[DIFFICULTY]]</h1>
+		<h1 class="smaller inline stars" style="transform:scale(0.9)">[[STARS]]</h1> <img class="inline stars" src="../assets/star.png" height=4%; style="transform:translateY(-12%)"><br class="stars">
+		<h1 class="smaller inline diamonds" style="transform:scale(0.9)">[[DIAMONDS]]</h1> <img class="inline diamonds" src="../assets/diamond.png" height=4%; style="transform:translateY(-12%)">
+		<div id="coins" style="margin-top: 3%"></div>
+	</div>
+
+	<div style="position:absolute; top: 20%; right: 0%; height: 38%; width: 40%;">
+		<img class="inline spaced" src="../assets/download.png" height=15% style="margin-right: 2%">
+		<h1 class="inline smaller spaced">[[DOWNLOADS]]</h1><br>
+		<img id="likeImg" class="inline spaced" src="../assets/like.png" height=15% style="margin-right: 2%">
+		<h1 class="inline smaller spaced">[[LIKES]]</h1><br>
+		<img class="inline spaced" src="../assets/time.png" height=15% style="margin-right: 2%">
+		<h1 class="inline smaller spaced">[[LENGTH]]</h1><br>
+		<img class="inline spaced orbs" src="../assets/orbs.png" height=15% style="margin-right: 2%">
+		<h1 class="inline smaller spaced orbs">[[ORBS]]</h1>
+	</div>
+
+	<div class="brownBox" id="songBox" style="position:absolute; bottom: 4%; left: 0; right: 0; width: 85vh; height: 20%; margin-left: auto; margin-right: auto;">
+		<div style="margin-left: 0.5%">
+			<h1 class="slightlySmaller" id="songname">[[SONGNAME]]</h1>
+			<h2 class="smaller">By: [[SONGAUTHOR]] <a class="songLink" href="https://[[SONGAUTHOR]].newgrounds.com" target="_blank"><img class="gdButton valign" src="../assets/more.png" width="12%"></a></h2>
+		</div>
+		<a class="songLink" href="https://www.newgrounds.com/audio/listen/[[SONGID]]" target="_blank"><img class="gdButton sideButton" src="../assets/playsong.png" style="position:absolute; right: 1%; top: 50%; width: 11%; height: auto;"></a>
+	</div>
+
+	<div class="center" style="position:absolute; bottom: 5%; left: 0; right: 0">
+		<h1 id="songInfo" style="transform: scale(0.5);">SongID: [[SONGID]] &nbsp;&nbsp; Size: [[SONGSIZE]]</h1>
+	</div>
+
+	<div class="center noClick" style="position:absolute; top: 24%; right: 0%; min-width: 100%">
+		<img class="gdButton yesClick" id="playButton" src="../assets/play.png" width="11%">
+	</div>
+
+	<div class="levelButtons" style="position:absolute; top: 46%; right: 3.5%; transform: translateY(-50%); height: 75%;">
+		<img class="gdButton sideButton" id="saveButton" src="../assets/plus.png" onclick="$('#saveDiv').show(); saveLevel()"><br>
+		<img class="gdButton sideButton" id="infoButton"  src="../assets/info.png" onclick="$('#infoDiv').show()"><br>
+		<a href="./comments/[[ID]]"><img class="gdButton sideButton" src="../assets/comment.png"></a><br>
+		<a href="./analyze/[[ID]]"><img class="gdButton sideButton" src="../assets/edit.png"></a><br>
+		<img class="gdButton sideButton outOfOrder" id="scoreButton" src="../assets/leaderboard.png" onclick="$('#scoreDiv').show()"><br>
+	</div>
+
+	<div style="position:absolute; top: 2%; left: 1.5%; width: 10%; height: 25%; pointer-events: none">
+		<img class="gdButton yesClick" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()">
+	</div>
+	<div id="copied" style="display: none;">
+		<div class="copied center noClick" style="position:absolute; top: 36%; left: 50%; transform: translate(-50%,-50%); width: 80vh">
+			<h1 class="smaller noSelect">ID copied to clipboard</h1>
+		</div>
+	</div>
+
+</div>
+
+</body>
+
+<script>
+
+if (window.location.href.endsWith('?download')) $('#infoDiv').show()
+
+	let freeze = false;
+	$('#playButton').click(function() {
+	if (!($('#copied').is(':animated'))) $('#copied').stop().fadeIn(200).delay(500).fadeOut(500)
+	var temp = $("<input>");
+    $("body").append(temp);
+    temp.val('[[ID]]').select();
+    document.execCommand("copy"); temp.remove()})
+$('.closeWindow').click(function() {if (!freeze) $(".popup").attr('style', 'display: none;')})
+
+$('#difficultytext').html('[[DIFFICULTY]]'.replace(' ', "<br>"))
+
+$('#levelInfo').html($('#levelInfo').html()
+	.replace('[[ORIGINALINFO]]', [[COPIEDID]] ==  "0" ? "" : `<br>Original: <a class="youCanClickThis" href="/[[COPIEDID]]"><font color="aqua">[[COPIEDID]]</font></a>`)
+	.replace('[[OBJECTINFO]]', [[OBJECTS]] ==  "0" ? "" : `<br>Objects: <font color="yellow">[[OBJECTS]]</font>`)
+	.replace('[[REQUESTED]]', [[STARSREQUESTED]] ==  "0" ? "" : `<br>Stars Requested: <font color="yellow">[[STARSREQUESTED]]</font>`))
+
+if (!'[[UPLOADED]]'.startsWith('[')) {
+	$('#levelInfo').html($('#levelInfo').html()
+	.replace('[[PASS]]', `<br>Password: <font color="orange">${[[PASSWORD]] == 0 ? "No copy" : [[PASSWORD]] == 1 ? "Free copy" : [[PASSWORD]]}</font>`)
+	.replace('[[LOWDETAIL]]', `<br>Low Detail: <font color="orange">${[[LDM]] ? "Yes" : "No"}</font>`)
+	.replace('[[UPLOAD]]', '[[UPLOADED]]' == "0" ? "" : `<br>Uploaded: <font color="orange">[[UPLOADED]]</font>`)
+	.replace('[[UPDATE]]', '[[UPDATED]]' == "0" ? "" : `<br>Updated: <font color="orange">[[UPDATED]]</font>`))}
+
+else {
+	$('#levelInfo').html($('#levelInfo').html()
+	.replace('[[PASS]]', "")
+	.replace('[[LOWDETAIL]]', "")
+	.replace('[[UPLOAD]]', "")
+	.replace('[[UPDATE]]', "") + 
+	`<br><a class="youCanClickThis" href="/[[ID]]?download"><font color="aqua">Download additional info</font></a>`
+	)}
+
+if ([[COPIEDID]] == 0) $('#copiedBadge').hide()
+if (![[LARGE]]) $('#largeBadge').hide()
+if ([[ORBS]] == 0) $('.orbs').hide()
+if ([[STARS]] == 0) $('.stars').hide()
+if ([[DIAMONDS]] == 0) $('.diamonds').hide()
+
+if ("[[SONGID]]".startsWith("Level")) {
+	$('#songInfo').text('[[SONGID]]')
+	$('.songLink').hide()}
+
+if ("[[INVALIDSONG]]" == "true") $('.songLink').hide()
+if ("[[DISLIKED]]" == "true") $('#likeImg').attr('src', '../assets/dislike.png').css('transform', 'translateY(20%)')
+
+let coinColor = [[VERIFIEDCOINS]] ? "silvercoin" : "browncoin"
+if ([[COINS]] > 0) $("#coins").append(`<img src="../assets/${coinColor}.png" height="5%">`)
+if ([[COINS]] > 1) $("#coins").append(`<img class="squeeze" src="../assets/${coinColor}.png" height="5%">`)
+if ([[COINS]] > 2) $("#coins").append(`<img class="squeeze" src="../assets/${coinColor}.png" height="5%">`)
+
+if ("[[ACCOUNTID]]" == "0") {
+		$("#authorName").addClass("green").removeClass('gdButton')
+		$("#authorLink").removeAttr('href')
+	}
+
+if (window.location.pathname == "/weekly") $('body').addClass('darkBG')
+
+
+$(window).on('load', function() {
+
+	if ($('#songname')[0].scrollWidth > $('#songBox')[0].scrollWidth) {
+		let overflow = ($('#songname')[0].scrollWidth - $('#songBox')[0].scrollWidth) * 0.007
+		if (overflow > 6) overflow = 3
+		$('#songname').addClass('smaller').css('font-size', (6 - (overflow)) + 'vh')
+		}
+});
+
+
+let savedLevels = document.cookie.split('; ').find(x => x.startsWith('saved'))
+let levelList = []
+let deleteMode = false;
+if (savedLevels) {
+	levelList = savedLevels.slice(6).split(',')
+	if (levelList.includes('[[ID]]')) $('#saveButton').attr('src', '../assets/delete.png').attr('onclick', '$("#deleteDiv").show()')
+}
+
+function saveLevel() {
+	let newCookie = savedLevels ? `${savedLevels.slice(6)},[[ID]]` : '[[ID]]'
+	document.cookie = `saved=${newCookie}; expires=Fri, 31 Dec 9999 23:59:59 GMT`
+}
+
+function deleteLevel() {
+	document.cookie = `saved=${levelList.filter(x => x != "[[ID]]")}; expires=Fri, 31 Dec 9999 23:59:59 GMT`;
+	location.reload()
+	freeze = true;
+}
+
+</script>

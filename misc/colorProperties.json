@@ -1,0 +1,21 @@
+{
+    "properties": {
+        "1": "r",
+        "2": "g",
+        "3": "b",
+        "4": "pColor",
+        "5": "blending",
+        "6": "channel",
+        "7": "opacity",
+        "9": "copiedChannel"
+    },
+    
+    "channels": {
+        "1000": "BG",
+        "1001": "G",
+        "1002": "Line",
+        "1003": "Obj",
+        "1004": "3DL",
+        "1009": "G2"
+    }
+}

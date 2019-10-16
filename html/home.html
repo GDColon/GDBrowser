@@ -1,0 +1,197 @@
+<head>
+	<title>Geometry Dash Browser!</title>
+	<meta charset="utf-8">
+	<link href="../assets/level.css" type="text/css" rel="stylesheet">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
+	<link rel="icon" href="../assets/coin.png">
+	<meta id="meta-title" property="og:title" content="Geometry Dash Browser!">
+	<meta id="meta-desc" property="og:description" content="Browse all of Geometry Dash's online features, right this handy little website! Levels, profiles, leaderboards, comments, and more!">
+	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/assets/coin.png">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script async type="text/javascript" src="../assets/sizecheck.js"></script>
+</head>
+
+<body class="levelBG">
+
+<div id="everything">
+
+	<div class="popup" id="credits">
+
+		<div id="credits1" class="subCredits" style="display: none;">
+			<div class="brownBox center supercenter" style="width: 80vh; height: 43%; padding-top: 1.5%; padding-bottom: 3.5%;">
+				<h1>Programming/Website</h1><br>
+				<h2 style="margin-bottom: 1.5%" class="gdButton"><a href="./profile/colon">Colon</h2></a>
+				<img src="./icon/colon" height=30%; style="margin-bottom: 7%"><br>
+				<a target=_blank href="https://www.youtube.com/channel/UCFDsxSlQXpLLpVScy2NmbcQ"><img src="../assets/youtube.png" width="11%" class="gdButton"></a>
+				<a target=_blank href="https://twitter.com/TheRealGDColon"><img src="../assets/twitter.png" width="11%" class="sideSpace gdButton"></a>
+				<a target=_blank href="https://gdcolon.com/tools"><img src="../assets/tools.png" width="11%" class="sideSpace gdButton"></a>
+				<br>
+			</div>
+			<img class="gdButton" id="creditPageUp" src="../assets/arrow-right.png" width="60vh" style="position: absolute; top: 45%; left: 75%" onclick="page += 1; loadCredits()">
+		</div>
+
+		<div id="credits2" class="subCredits" style="display: none;">
+			<div class="brownBox center supercenter" style="width: 80vh; height: 43%; padding-top: 1.5%; padding-bottom: 3.5%;">
+				<h1>Accurate Leaderboard</h1><br>
+				<h2 style="margin-bottom: 1.5%" class="gdButton"><a href="./profile/SMJSGaming">SMJSGaming</h2></a>
+				<img src="./icon/SMJSGaming" height=30%; style="margin-bottom: 7%"><br>
+				<a target=_blank href="https://www.youtube.com/channel/UCwEsWDs9kGN2vvoiNTJKdaQ"><img src="../assets/youtube.png" width="11%" class="gdButton"></a>
+				<a target=_blank href="https://www.instagram.com/smjs_gaming"><img src="../assets/instagram.png" width="11%" class="sideSpace gdButton"></a>
+				<a target=_blank href="https://github.com/SMJSGaming"><img src="../assets/github.png" width="11%" class="sideSpace gdButton"></a>
+				<br>
+			</div>
+			<img class="gdButton" id="creditPageUp" src="../assets/arrow-right.png" width="60vh" style="position: absolute; top: 45%; left: 75%" onclick="page += 1; loadCredits()">
+			<img class="gdButton" id="creditPageUp" src="../assets/arrow-left.png" width="60vh" style="position: absolute; top: 45%; right: 75%" onclick="page -= 1; loadCredits()">
+		</div>
+
+		<div id="credits3" class="subCredits" style="display: none;">
+			<div class="brownBox center supercenter" style="width: 80vh; height: 43%; padding-top: 1.5%; padding-bottom: 3.5%;">
+				<h1>Level Analyzing Help</h1><br>
+				<h2 style="margin-bottom: 1.5%" class="gdButton"><a href="./profile/alten">Alten</h2></a>
+				<img src="./icon/alten" height=30%; style="margin-bottom: 7%"><br>
+				<a target=_blank href="https://youtube.com/channel/UC9M8hLqh2yZIPSDvpyL7o8g"><img src="../assets/youtube.png" width="11%" class="gdButton"></a>
+				<a target=_blank href="https://twitter.com/gd_alten"><img src="../assets/twitter.png" width="11%" class="sideSpace gdButton"></a>
+				<a target=_blank href="https://github.com/Altenhh"><img src="../assets/github.png" width="11%" class="sideSpace gdButton"></a>
+				<br>
+			</div>
+			<img class="gdButton" id="creditPageUp" src="../assets/arrow-right.png" width="60vh" style="position: absolute; top: 45%; left: 75%" onclick="page += 1; loadCredits()">
+			<img class="gdButton" id="creditPageUp" src="../assets/arrow-left.png" width="60vh" style="position: absolute; top: 45%; right: 75%" onclick="page -= 1; loadCredits()">
+		</div>
+
+		<div id="credits4" class="subCredits" style="display: none;">
+			<div class="brownBox center supercenter" style="width: 80vh; height: 43%; padding-top: 1.5%; padding-bottom: 3.5%;">
+				<h1>Level Analyzing Help</h1><br>
+				<h2 style="margin-bottom: 1.5%" class="gdButton"><a href="./profile/AlFas">AlFas</h2></a>
+				<img src="./icon/AlFas" height=30%; style="margin-bottom: 7%"><br>
+				<a target=_blank href="https://youtube.com/user/Alex100077"><img src="../assets/youtube.png" width="11%" class="gdButton"></a>
+				<a target=_blank href="https://twitter.com/AlFas6237"><img src="../assets/twitter.png" width="11%" class="sideSpace gdButton"></a>
+				<a target=_blank href="https://github.com/AlFasGD"><img src="../assets/github.png" width="11%" class="sideSpace gdButton"></a>
+				<br>
+			</div>
+			<img class="gdButton" id="creditPageUp" src="../assets/arrow-right.png" width="60vh" style="position: absolute; top: 45%; left: 75%" onclick="page += 1; loadCredits()">
+			<img class="gdButton" id="creditPageUp" src="../assets/arrow-left.png" width="60vh" style="position: absolute; top: 45%; right: 75%" onclick="page -= 1; loadCredits()">
+		</div>
+
+		<div id="credits5" class="subCredits" style="display: none;">
+			<div class="brownBox center supercenter" style="width: 80vh; height: 43%; padding-top: 1.5%; padding-bottom: 3.5%;">
+				<h1>API Help</h1><br>
+				<h2 style="margin-bottom: 1.5%" class="gdButton"><a href="./profile/alex1304">Alex1304</h2></a>
+				<img src="./icon/alex1304" height=30%; style="margin-bottom: 7%"><br>
+				<a target=_blank href="https://youtube.com/channel/UC0hFAVN-GAbZYuf_Hfk1Iog"><img src="../assets/youtube.png" width="11%" class="gdButton"></a>
+				<a target=_blank href="https://twitter.com/gd_alex1304"><img src="../assets/twitter.png" width="11%" class="sideSpace gdButton"></a>
+				<a target=_blank href="https://github.com/Alex1304"><img src="../assets/github.png" width="11%" class="sideSpace gdButton"></a>
+				<br>
+			</div>
+			<img class="gdButton" id="creditPageUp" src="../assets/arrow-right.png" width="60vh" style="position: absolute; top: 45%; left: 75%" onclick="page += 1; loadCredits()">
+			<img class="gdButton" id="creditPageUp" src="../assets/arrow-left.png" width="60vh" style="position: absolute; top: 45%; right: 75%" onclick="page -= 1; loadCredits()">
+		</div>
+
+		<div id="credits6" class="subCredits" style="display: none;">
+			<div class="brownBox center supercenter" style="width: 80vh; height: 43%; padding-top: 1.5%; padding-bottom: 3.5%;">
+				<h1>Web Design Help</h1><br>
+				<h2 style="margin-bottom: 1.5%" class="gdButton"><a href="./profile/ucrash">Ucrash</h2></a>
+				<img src="./icon/Ucrash" height=30%; style="margin-bottom: 7%"><br>
+				<a target=_blank href="https://www.youtube.com/channel/UCfPgDZBhCodHIFo6OOVcH2A"><img src="../assets/youtube.png" width="11%" class="gdButton"></a>
+				<a target=_blank href="https://twitter.com/GDUcrash"><img src="../assets/twitter.png" width="11%" class="sideSpace gdButton"></a>
+				<a target=_blank href="https://github.com/GDUcrash"><img src="../assets/github.png" width="11%" class="sideSpace gdButton"></a>
+				<br>
+			</div>
+			<img class="gdButton" id="creditPageUp" src="../assets/arrow-right.png" width="60vh" style="position: absolute; top: 45%; left: 75%" onclick="page += 1; loadCredits()">
+			<img class="gdButton" id="creditPageUp" src="../assets/arrow-left.png" width="60vh" style="position: absolute; top: 45%; right: 75%" onclick="page -= 1; loadCredits()">
+		</div>
+
+		<div id="credits7" class="subCredits" style="display: none;">
+			<div class="brownBox center supercenter" style="width: 80vh; height: 43%; padding-top: 1.5%; padding-bottom: 3.5%;">
+				<h1>Everything Else</h1><br>
+				<h2 style="margin-bottom: 1.5%" class="gdButton"><a href="./profile/robtop">RobTop</h2></a>
+				<img src="./icon/robtop" height=30%; style="margin-bottom: 7%"><br>
+				<a target=_blank href="https://www.youtube.com/channel/UCz_yk8mDSAnxJq0ar66L4sw"><img src="../assets/youtube.png" width="11%" class="gdButton"></a>
+				<a target=_blank href="https://twitter.com/RobTopGames"><img src="../assets/twitter.png" width="11%" class="sideSpace gdButton"></a>
+				<a target=_blank href="https://www.facebook.com/geometrydash/"><img src="../assets/facebook.png" width="11%" class="sideSpace gdButton"></a>
+				<br>
+			</div>
+			<img class="gdButton" id="creditPageUp" src="../assets/arrow-left.png" width="60vh" style="position: absolute; top: 45%; right: 75%" onclick="page -= 1; loadCredits()">
+		</div>
+
+		<div class="center supercenter" style="width: 80vh; height: 43%; pointer-events: none;">
+			<img class="closeWindow gdButton" src="../assets/close.png" height="25%" style="position: absolute; top: -24%; left: -7vh; pointer-events: all;" onclick="$('#credits').hide(); page = 1;">
+		</div>
+
+	</div>
+
+	<div style="position:absolute; bottom: 0%; left: 0%; width: 100%; pointer-events: none">
+		<img src="../assets/corner.png" width=7%;>
+	</div>
+
+	<div style="position:absolute; top: 0%; left: 0%; width: 100%; pointer-events: none">
+		<img src="../assets/corner.png" width=7%; style="transform: scaleY(-1)">
+	</div>
+
+	<div style="position:absolute; top: 1.7%; right: 2%; text-align: right; width: 10%;">
+		<img id="creditsButton" class="gdButton" src="../assets/credits.png" width="60%" onclick="loadCredits()">
+	</div>
+
+	<div style="position:absolute; top: -1.5%; right: 10%; text-align: right; width: 10%;">
+		<a href="../iconkit"><img class="iconRope" src="../assets/iconrope.png" width="40%"></a>
+	</div>
+	
+	<div class="supercenter center" id="menuButtons" style="bottom: 5%;">
+			<table>
+					<tr>
+						<td><a href="./search/levels?type=saved"><img class="menubutton" src="../assets/category-saved.png"></a></td>
+						<td><a href="./daily"><img class="menubutton" src="../assets/category-daily.png"></a></td>
+						<td><a href="./weekly"><img class="menubutton" src="../assets/category-weekly.png"></a></td>
+						<td><a href="./gauntlets"><img class="menubutton" src="../assets/category-gauntlets.png"></a></td>
+					</tr>
+					<tr>
+						<td><a href="./leaderboard"><img class="menubutton" src="../assets/category-scores.png"></a></td>
+						<td><a href="./search/levels?type=hof"><img class="menubutton" src="../assets/category-hof.png"></a></td>
+						<td><a href="./mappacks"><img class="menubutton" src="../assets/category-packs.png"></a></td>
+						<td><a href="./search"><img class="menubutton" src="../assets/category-search.png"></a></td>
+					</tr>
+			</table>
+
+			<p>Website created by GD Colon.<br>Pretty much everything other than that belongs to RobTopGames.</p>
+			<p style="margin-top: -0.5%"><a class="menuLink" href="https://gdcolon.com/tools">GD Tools</a>
+				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+				<a class="menuLink" href="./api">API</a>
+				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+				<a class="menuLink" href="https://store.steampowered.com/app/322170/Geometry_Dash/">Buy Geometry Dash!</a>
+	</div>
+
+	<div class="center" width="100%" style="margin-top: 2%">
+		<img src="../assets/gdlogo.png" height="11.5%"><br>
+		<img id="browserlogo" src="../assets/browser.png" height="7%" style="margin: 0.5% 0% 0% 30%">
+	</div>
+
+
+	
+</div>
+
+</body>
+
+<script>
+
+let page = 1
+$('#browserlogo').css('filter', `hue-rotate(${Math.floor(Math.random() * (330 - 60)) + 60}deg) saturate(${Math.floor(Math.random() * (150 - 100)) + 100}%)`)
+
+function loadCredits() {
+	$('.subCredits').hide()
+	$('#credits' + page).show()
+	$('#credits').show()
+}
+
+$(document).keydown(function(k) {
+
+	if ($('#credits').is(':hidden')) return
+
+    if (k.which == 37 && page > 1) { //left
+		page -= 1; loadCredits();
+	}
+	
+	if (k.which == 39 && page < 5) { //right
+		page += 1; loadCredits();
+    }
+});
+
+</script>

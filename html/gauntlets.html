@@ -1,0 +1,50 @@
+<head>
+	<title>Gauntlets</title>
+	<meta charset="utf-8">
+	<link href="../assets/level.css" type="text/css" rel="stylesheet">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
+	<link rel="icon" href="../assets/gauntlet.png">
+	<meta id="meta-title" property="og:title" content="Gauntlets">
+	<meta id="meta-desc" property="og:description" content="Because RobTop wanted to leave behind the monstrosity that is Map Packs.">
+	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/assets/gauntlet.png">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script async type="text/javascript" src="../assets/sizecheck.js"></script>
+</head>
+
+<body class="levelBG darkBG" style="overflow-y:auto;">
+
+<div id="everything" class="center" style="width: 100%; height: 100%;">
+
+	<div style="position:absolute; top: 2%; left: -1.95%; width: 10%; height: 25%; pointer-events: none">
+		<img class="gdButton yesClick" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()">
+	</div>
+
+	<div class="center" width="100%" style="margin-top: 2.5%; margin-bottom: 1%;">
+		<img src="../assets/gauntlets.png" width="50%">
+	</div>
+
+	<div id="gauntletList">
+		<br>
+	</div>
+
+	<br>
+	
+</div>
+</body>
+
+<script>
+
+let gauntlets = ["Fire", "Ice", "Poison", "Shadow", "Lava", "Bonus", "Chaos", "Demon", "Time", "Crystal", "Magic", "Spike", "Monster", "Doom", "Death"]
+
+gauntlets.forEach((x, y) => {
+
+$('#gauntletList').append(`
+			<div class="gauntlet">
+			<a href="../search/level?gauntlet=${y + 1}">
+			<img src="../gauntlets/${x.toLowerCase()}.png" height="300%"><br>
+			<h3 class="gauntletText"">${x}<br>Gauntlet</h3></div></a>`)
+})
+
+
+
+</script>

@@ -1,0 +1,194 @@
+<head>
+	<title>Level Search</title>
+	<meta charset="utf-8">
+	<link href="../assets/level.css" type="text/css" rel="stylesheet">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
+	<link rel="icon" href="../assets/coin.png">
+	<meta id="meta-title" property="og:title" content="Level Search">
+	<meta id="meta-desc" property="og:description" content="Search for Geometry Dash levels, and filter by length, difficulty, song + more!">
+	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/assets/coin.png">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script async type="text/javascript" src="../assets/sizecheck.js"></script>
+</head>
+
+<body class="levelBG">
+
+<div id="everything">
+
+	<div id="filters" class="popup">
+		<div id="filterStuff" class="brownBox center supercenter" style="width: 101vh; height: 50%; padding-top: 0.3%; padding-bottom: 3.5%; padding-left: 1%">
+			<img class="gdButton" src="../assets/close.png" width="9%" style="position: absolute; top: -8.5%; left: -5.5vh" onclick="$('#filters').hide()">
+			<h1 style="margin-bottom: 4%">Advanced Options</h1><br>
+			<div><h1><input type="checkbox" id="box1" url="&featured"><label for="box1" class="gdcheckbox gdButton"></label>Featured</h1></div>
+			<div><h1><input type="checkbox" id="box2" url="&epic"><label for="box2" class="gdcheckbox gdButton"></label>Epic</h1></div>
+			<div style="margin-bottom: 6%"><h1><input type="checkbox" id="box3" url="&noStar"><label for="box3" class="gdcheckbox gdButton"></label>No Star</h1></div>
+			<div><h1><input type="checkbox" id="box4" url="&original"><label for="box4" class="gdcheckbox gdButton"></label>Original</h1></div>
+			<div><h1><input type="checkbox" id="box5" url="&twoPlayer"><label for="box5" class="gdcheckbox gdButton"></label>2-Player</h1></div>
+			<div style="margin-bottom: 9%"><h1><input type="checkbox" id="box6" url="&coins"><label for="box6" class="gdcheckbox gdButton"></label>Coins</h1></div>
+			<h1 class="smallerer lessSpaced">Song</h1>
+			<input id="songID" type="text" placeholder="Song ID or Level Name" style="height: 15%; width: 70%; text-align: center;" maxlength="22">
+		</div>
+	</div>
+
+	<div style="position:absolute; bottom: 0%; left: 0%; width: 100%">
+		<img class="gs" src="../assets/corner.png" width=7%;>
+	</div>
+
+	<div style="position:absolute; bottom: 0%; right: 0%; width: 100%; text-align: right;">
+		<img class="gs" src="../assets/corner.png" width=7%; style="transform: scaleX(-1)">
+	</div>
+
+	<div class="transparentBox center" style="width: 115vh; height: 9%; margin: 1.5% auto 3% auto; padding-bottom: 0.2%">
+		<div>
+		<input type="text" id="levelName" placeholder="Enter a level, user, or ID" maxlength=19>
+		<img search="0" src="../assets/search.png" id="searchBtn" width="20%" class="valign gdButton levelSearch" style="margin-left: 1%; margin-bottom: 2.2%">
+		<img id="userSearch" src="../assets/search-user.png" width="9.6%" class="valign gdButton" style="margin-left: 1%; margin-bottom: 2.2%">
+		</div>
+	</div>
+
+	<div class="center">
+		<h1 class="smaller">Quick Search</h1>
+	</div>
+
+	<div class="transparentBox center" style="width: 115vh; height: 23%; margin: 0.5% auto 3% auto; padding-top: 1%">
+		<img src="../assets/search-top.png" height="40%" class="valign gdButton spaced levelSearch" search="mostdownloaded">
+		<span style="margin-right: 3%"></span>
+		<img src="../assets/search-liked.png" height="40%" class="valign gdButton spaced levelSearch" search="mostliked">
+		<br>
+		<img src="../assets/search-trending.png" height="40%" class="valign gdButton levelSearch" search="trending">
+		<img src="../assets/search-recent.png" height="40%" class="valign gdButton levelSearch" search="recent" style="margin: 0% 1.2%">
+		<img src="../assets/search-magic.png" height="40%" class="valign gdButton levelSearch" search="magic">
+	</div>
+
+	<div class="center">
+		<h1 class="smaller">Filters</h1>
+	</div>
+
+	<div id="difficulties" class="transparentBox center" style="width: 115vh; height: 12%; margin: 0.5% auto 1% auto; padding-top: 1%; padding-bottom: 1%;">
+		<div class="diffDiv gdButton" diff="-1"><img src="../difficulty/unrated.png"><h3 class="mini">N/A</h3></div>
+		<div class="diffDiv gdButton" diff=1><img src="../difficulty/easy.png"><h3 class="mini">Easy</h3></div>
+		<div class="diffDiv gdButton" diff=2><img src="../difficulty/normal.png"><h3 class="mini">Normal</h3></div>
+		<div class="diffDiv gdButton" diff=3><img src="../difficulty/hard.png"><h3 class="mini">Hard</h3></div>
+		<div class="diffDiv gdButton" diff=4><img src="../difficulty/harder.png"><h3 class="mini">Harder</h3></div>
+		<div class="diffDiv gdButton" diff=5><img src="../difficulty/insane.png"><h3 class="mini">Insane</h3></div>
+		<div class="diffDiv gdButton" id="demonBtn" diff=-2><img src="../difficulty/demon.png" style="width: 85%"><h3 class="mini">Demon</h3></div>
+		<div class="diffDiv gdButton" diff=-3><img src="../difficulty/auto.png"><h3 class="mini">Auto</h3></div>
+	</div>
+
+	<div id="demons" class="transparentBox" style="display: none; width: 115vh; height: 12%; margin: 0.5% auto 1% auto; padding-top: 0.7%; padding-bottom: 1.3%;">
+		<div class="diffDiv gdButton demonDiff" diff=1 style="margin-left: 3.5%"><img src="../difficulty/demon-easy.png" style="width: 90%"><h3 class="mini center">Easy</h3></div>
+		<div class="diffDiv gdButton demonDiff" diff=2><img src="../difficulty/demon-medium.png" style="width: 90%"><h3 class="mini center smallTextWoo">Medium</h3></div>
+		<div class="diffDiv gdButton demonDiff" diff=3><img src="../difficulty/demon-hard.png" style="width: 90%"><h3 class="mini center">Hard</h3></div>
+		<div class="diffDiv gdButton demonDiff" diff=4><img src="../difficulty/demon-insane.png" style="width: 95%"><h3 class="mini center smallTextWoo">Insane</h3></div>
+		<div class="diffDiv gdButton demonDiff" diff=5><img src="../difficulty/demon-extreme.png" style="width: 100%"><h3 class="mini center smallTextWoo">Extreme</h3></div>
+		<div class="diffDiv gdButton goBack" diff=-2 style="margin-left: 2.3%; filter: none"><img src="../difficulty/demon.png" style="width: 85%"><h3 class="mini">Demon</h3></div>
+	</div>
+
+	<div class="transparentBox center" style="width: 115vh; height: 6%; margin: 0.5% auto 1% auto; padding-top: 1%; padding-bottom: 0.5%;">
+		<div class="lengthDiv" len=0><h1 class="gdButton smaller">Tiny</h1></div>
+		<div class="lengthDiv" len=1><h1 class="gdButton smaller">Short</h1></div>
+		<div class="lengthDiv" len=2><h1 class="gdButton smaller">Medium</h1></div>
+		<div class="lengthDiv" len=3><h1 class="gdButton smaller">Long</h1></div>
+		<div class="lengthDiv" len=4><h1 class="gdButton smaller">XL</h1></div>
+		<div class="lengthDiv" id="starCheck"><img src="../assets/star.png" class="gdButton" height="90%"></div>
+	</div>
+
+	<div style="position:absolute; top: 2%; left: 1.5%; width: 10%; height: 25%; pointer-events: none">
+		<img class="gdButton yesClick" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()">
+	</div>
+
+	<div style="position:absolute; top: 2%; right: 1.5%; width: 10%; text-align: right">
+		<img class="gdButton" src="../assets/plus.png" width="60%" onclick="$('#filters').show()">
+	</div>
+
+</div>
+
+</body>
+
+<script>
+
+let filters = []
+let minusCheck = []
+let demons = []
+let demonMode = false;
+
+$('#userSearch').click(function() {
+	let query = encodeURIComponent($('#levelName').val())
+	if (query) window.location.href = "./profile/" + query
+})
+
+$('.levelSearch').click(function() {
+
+	let url = "./search/" + (encodeURIComponent($('#levelName').val()) || "*") + "?type=" + $(this).attr('search')
+
+	// === DIFFICULTY === //
+	let difficulties = []
+	$('.diffDiv').each(function() {if ($(this).hasClass('selectedFilter')) difficulties.push($(this).attr('diff'))})
+	demonFilter = demonMode && difficulties[0] > 0
+	
+	if (!difficulties.length) url += ""
+	else if (!demonFilter) url += "&diff=" + difficulties.join(",")
+	else url += "&diff=-2&demonFilter=" + difficulties[0]
+
+	// === LENGTH === //
+	let lengths = []
+	$('.lengthDiv').each(function() {if ($(this).hasClass('selectedFilter') && $(this).attr('len')) lengths.push($(this).attr('len'))})
+	if (lengths.length) url += "&length=" + lengths.join(",")
+	if ($('#starCheck').hasClass('selectedFilter')) url += "&starred"
+
+	// === CHECKBOXES === //
+    $("input:checked").each(function () {
+	url += $(this).attr('url')})
+
+	// === SONG === //
+
+	if ($('#songID').val()) {
+
+	url += "&songID=" + $('#songID').val()
+	if (/^\d+$/.test($('#songID').val())) url += "&customSong"
+	}
+
+	window.location.href = url
+
+})
+
+$('.diffDiv').click(function() {
+
+	if ($(this).hasClass('goBack')) {
+		demonMode = false;
+		$('#difficulties').show();
+		$('#demonBtn').removeClass('selectedFilter')
+		$('.demonDiff').removeClass('selectedFilter')
+		return $('#demons').hide();
+	}
+
+	minusCheck = []
+	filters = []
+	$(this).toggleClass('selectedFilter')
+
+	$('.diffDiv').each(function() {
+	if ($(this).hasClass('selectedFilter')) filters.push($(this).attr('diff'))})
+
+	minusCheck = filters.filter(x => x < 0)
+	if (minusCheck.length || $(this).hasClass('demonDiff')) {
+		filters = minusCheck
+		$('.diffDiv').removeClass('selectedFilter')
+		$(this).addClass('selectedFilter')
+	}
+
+	if ($(this).attr('diff') == -2) {
+		$('#difficulties').hide();
+		$('#demons').show();
+		demonMode = true;
+	}
+})
+
+$('.lengthDiv').click(function() {
+	$(this).toggleClass('selectedFilter')
+})
+
+$(document).keydown(function(k) {
+	if (k.which == 13 && $('#filters').is(':hidden')) $('#searchBtn').trigger('click') //enter
+})
+
+</script>

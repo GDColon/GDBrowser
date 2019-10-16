@@ -1,0 +1,176 @@
+<head>
+	<title>Leaderboard</title>
+	<meta charset="utf-8">
+	<link href="../assets/level.css" type="text/css" rel="stylesheet">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
+	<link rel="icon" href="../assets/trophy.png">
+	<meta id="meta-title" property="og:title" content="Leaderboards">
+	<meta id="meta-desc" property="og:description" content="View Geometry Dash's leaderboards, plus an accurate and updated list of the top 100 players.">
+	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/assets/trophy.png">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script async type="text/javascript" src="../assets/sizecheck.js"></script>
+	<script type="text/javascript" src="https://asvd.github.io/dragscroll/dragscroll.js"></script>
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.plugins.min.js"></script>
+</head>
+
+<body class="levelBG">
+
+<div id="everything" style="overflow: auto;">
+
+	<div id="scoreTabs">
+		<img src="../assets/tab-top-on.png" class="leaderboardTab" id="topTabOn" style="display: none">
+		<img src="../assets/tab-top-off.png" class="leaderboardTab leaderboardClick" id="topTabOff">
+
+		<img src="../assets/tab-accurate-on.png" class="sideSpaceC leaderboardTab" id="accurateTabOn">
+		<img src="../assets/tab-accurate-off.png" class="sideSpaceC leaderboardTab leaderboardClick" id="accurateTabOff" style="display: none">
+
+		<img src="../assets/tab-creators-on.png" class="sideSpaceC leaderboardTab" id="creatorTabOn" style="display: none">
+		<img src="../assets/tab-creators-off.png" class="sideSpaceC leaderboardTab leaderboardClick" id="creatorTabOff">
+	</div>
+
+	<div class="popup" id="infoDiv">
+		<div class="fancybox center supercenter">
+			<h2 class="smaller center" style="font-size: 5.5vh">Leaderboard Info</h2>
+			<p class="bigger center" id="infoText" style="line-height: 5vh; margin-top: 1.5vh"></p>
+			<img src="../assets/ok.png" width=20%; class="gdButton center" onclick="$('.popup').hide()">
+		</div>
+	</div>
+
+	<div style="position:absolute; bottom: 0%; left: 0%; width: 100%">
+		<img class="gs" src="../assets/corner.png" width=7%;>
+	</div>
+
+	<div style="position:absolute; bottom: 0%; right: 0%; width: 100%; text-align: right;">
+		<img class="gs" src="../assets/corner.png" width=7%; style="transform: scaleX(-1)">
+	</div>
+
+	<div id="searchBox" class="supercenter dragscroll">
+		<div style="height: 4.5%"></div>
+	</div>
+	
+	<div class="leaderboardBox supercenter gs" style="width: 120vh; height: 80%; pointer-events: none"></div>
+
+	<div style="position:absolute; top: 2%; left: 1.5%; width: 10%; height: 25%; pointer-events: none">
+		<img class="gdButton yesClick" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()">
+	</div>
+
+	<div style="position:absolute; top: 2.5%; right: 2%; width: 10%; text-align: right;">
+		<img class="gdButton" src="../assets/smallinfo.png" width="32%" onclick="$('#infoDiv').show()">
+	</div>
+
+	<div class="supercenter" id="loading" style="height: 10%; top: 47%; display: none;">
+		<img class="spin noSelect" src="../assets/loading.png" height="105%">
+	</div>
+
+</div>
+
+</body>
+
+<script>
+
+let loading = false;
+
+let top250Text = 
+`The <g>Top 250<> leaderboard contains the <g>top 250 players<>, sorted by <y>star<> value. However, due to <o>hackers<> flooding the leaderboard, this leaderboard has been <b>frozen<> for well over 2 years and displays <o>very outdated information<>.`
+
+let accurateText =
+`The <g>Accurate Leaderboard<> is a highly accurate, hacker-proof leaderboard with <y>proper stats and positioning<> (unlike the regular one). It is managed by <b>SMJSGaming, XShadowWizardX, Pepper360, Octeract<>, and many many other helpers. You can check out their interactive <a target="_blank" href="https://docs.google.com/spreadsheets/d/10lbPnDYJXhbtlA0ls0cGjjX_osFSG559IDrTbhgPHvc"><font color="aqua" style="text-decoration: underline">leaderboard spreadsheet here<></a>.`
+
+let creatorText = 
+`The <g>Creators Leaderboard<> is sorted by <g>creator points<>, rather than stars. A player's <g>creator points<> (CP) is calculated by counting their number of <y>star rated<> levels, plus an extra point for every level that has been <b>featured<>, plus an additional point for <o>epic rated<> levels.`
+
+function infoText(text) {
+	let tweaked = text
+	.replace(/<g>/g, '<font color="#4CDA5B">')
+	.replace(/<b>/g, '<font color="#60ABEF">')
+	.replace(/<y>/g, '<font color="yellow">')
+	.replace(/<o>/g, '<font color="orange">')
+	.replace(/<>/g, '</font>')
+	$('#infoText').html(tweaked)
+}
+
+infoText(accurateText)
+
+
+function leaderboard() {
+
+	if (loading == true) return;
+
+	$('#searchBox').html(`<div style="height: 4.5%"></div>`)
+	loading = true;
+	$('#loading').show()
+
+	fetch(`../api/leaderboard?count=250&${type}`).then(res => res.json()).then(res => {
+
+		res.forEach((x, y) => {
+
+		$('#searchBox').append(`<div class="searchresult leaderboardSlot">
+			<h2 class="small inline gdButton" style="margin-top: 1.5%"><a href="../profile/${x.username}">${x.username}</a></h2>
+			<h3 class="inline sideSpace" style="font-size: 4.5vh">${x.stars} <img class="valign" src="../assets/star.png"
+					style="cursor: help; height: 19%; transform: translate(-25%, -10%);" title="Stars"></h3>
+		
+			<h3 class="lessSpaced leaderboardStats">
+				${x.diamonds} <img class="valign" src="../assets/diamond.png" style="cursor: help" title="Diamonds">
+				${x.coins} <img class="valign" src="../assets/coin.png" style="cursor: help" title="Secret Coins">
+				${x.usercoins} <img class="valign" src="../assets/silvercoin.png" style="cursor: help" title="User Coins">
+				${x.demons} <img class="valign" src="../assets/demon.png" style="cursor: help" title="Demons">
+				${x.cp != 0 ? `${x.cp} <img class="valign" src="../assets/cp.png" style="cursor: help" title="Creator Points">` : ""}
+			</h3>
+		
+			<div class="center"
+				style="position:absolute; top: ${6.5 + (y * 26.58)}%; left: 3.5%; transform:scale(0.82); height: 10%; width: 12.5%;">
+				<img class="spaced lazyLoad" data-src="./icon/${x.username}" height="150%"
+					style="margin-bottom: 0%; transform:scale(1.1)">
+				<h2 class="small" style="margin-top: 2%">${x.rank}</h2>
+			</div>
+		</div>`)
+		})
+
+		$('#searchBox').append('<div style="height: 4.5%"></div>')
+		loading = false;
+		$('#loading').hide();
+		$('.lazyLoad').Lazy({
+			appendScroll: '#searchBox'
+		});
+	})
+
+}
+
+	let type = "accurate"
+	leaderboard()
+
+	$('#topTabOff').click(function() {
+		if (type == "top" || loading) return;
+		type = "top"
+		leaderboard()
+		$('.leaderboardTab').hide();
+		$('#topTabOn').show()
+		$('#accurateTabOff').show()
+		$('#creatorTabOff').show()
+		infoText(top250Text)
+	})
+
+	$('#accurateTabOff').click(function() {
+		if (type == "accurate" || loading) return;
+		type = "accurate"
+		leaderboard()
+		$('.leaderboardTab').hide();
+		$('#topTabOff').show()
+		$('#accurateTabOn').show()
+		$('#creatorTabOff').show()
+		infoText(accurateText)
+	})
+
+	$('#creatorTabOff').click(function() {
+		if (type == "creator" || loading) return;
+		type = "creator"
+		leaderboard()
+		$('.leaderboardTab').hide();
+		$('#topTabOff').show()
+		$('#accurateTabOff').show()
+		$('#creatorTabOn').show()
+		infoText(creatorText)
+	})
+
+</script>

@@ -1,0 +1,498 @@
+<html>
+
+<head>
+	<title>GD Level Browser API</title>
+	<meta charset="utf-8">
+	<link rel="icon" href="../difficulty/auto.png">
+	<link href="../assets/api.css" type="text/css" rel="stylesheet">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,600,700,800&display=swap" rel="stylesheet">
+	
+	<meta id="meta-title" property="og:title" content="GDBrowser API">
+    <meta id="meta-desc" property="og:description" content="It's basically the Geometry Dash API, but not terrible!">
+	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/difficulty/auto.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+	<div class="main-header-wrap">
+		<div class="main-header">
+			<div class="header-links">
+				<a class="header-link" href="#intro">Introduction</a>
+				<a class="header-link" href="#level">Levels</a>
+				<a class="header-link" href="#profile">Profiles</a>
+				<a class="header-link" href="#search">Searching</a>
+				<a class="header-link" href="#leaderboard">Leaderboards</a>
+				<a class="header-link" href="#levelleaderboard">Level Leaderboards</a>
+				<a class="header-link" href="#comments">Comments & Posts</a> 
+				<a class="header-link" href="#analyze">Level Analysis</a> 
+			</div>
+		</div>
+	</div>
+	<div id="intro""></div>
+	<main class="grey">
+		<div class="main-block">
+			<h1>Hi there!</h1>
+			<p>This is the documentation for the
+				<sb>Geometry Dash Level Browser API</sb>! <br><br> The
+				<sb>API</sb> (application programming interface) is how the website is able to get all the neat stuff from the Geometry Dash servers. In the off chance that you actually know what any of this means, this page contains everything you need to know about grabbing information on GD levels/accounts/etc without going through the trouble of using the actual GD API on boomlings.com
+				<br><br>
+				Geometry Dash's API isn't meant to be publicly used, and is a <a href="https://i.imgur.com/PZ2AsZB.png" target="_blank">total nightmare</a> to fetch stuff from. That's why I made this API to send you whatever you need in a nice, clean JSON. You're welcome.<br><br>Everything on the API can be accessed
+				<sb>without any authorization</sb>, and with little to no required parameters.</p>
+		</div>
+
+		<div class="main-block"; style="margin-top: 20px">
+			<p>Here are the different things you can use the API for. Click one to skip to it's documentation.</p>
+
+			<quote>
+				<p><a href="#level"><u>Levels</u></a> <i>/api/level/levelID</i></p>
+				<p><a href="#profile"><u>Profiles</u></a> <i>/api/profile/username-or-id</i></p>
+				<p><a href="#search"><u>Searching</u></a> <i>/api/search/search-query</i></p>
+				<p><a href="#leaderboard"><u>Leaderboards</u></a> <i>/api/leaderboard</i></p>
+				<p><a href="#levelleaderboard"><u>Level Leaderboards</u></a> <i>/api/leaderboardLevel/levelID</i></p>
+				<p><a href="#comments"><u>Comments & Posts</u></a> <i>/api/comments/level-or-user-ID</i></p>
+				<p><a href="#analyze"><u>Level Analysis</u></a> <i>/api/analyze/levelID</i></p>
+			</quote>
+			<br>
+			<p>In the event that something goes horribly wrong and the server doesn't like your request (or you tried to search for a level/profile/etc that doesn't exist), the API will return
+				<sb>"-1"</sb>. It doesn't actually mean anything, I was just referencing the Geometry Dash servers. But yeah, if it responds that just double check the documentation or make sure what you're looking for actually exists.</p>
+			<p><b>If by any chance you use this API for other projects, credit is greatly appreciated! <smile1></smile1> </b></p>
+		</div>
+
+		<div class="seperator"></div>
+	</main>
+	<main class="alt">
+		<div id="level""></div>
+		<div class="main-block">
+			<h1>Levels</h1>
+			<p>/api/level/levelID</p>
+			<br>
+			<p>LevelID should be the ID of a level (whoa)</p>
+			<p>Using "daily" or "weekly" as the level ID will return the current daily/weekly level (always downloaded)</p>
+
+			<br>
+			<p class="reveal" onclick="$('#params-level').slideToggle(100);"><b>Parameters (1)</b></p>
+			<div class="subdiv" id="params-level">
+				<p>download: Whether or not to actually download the level (much slower)</p>
+				<p>*By default it performs a search for the level ID and returns as much information as possible without downloading</p>
+			</div>
+
+			<br>
+			<p class="reveal" onclick="$('#response-level').slideToggle(100);"><b>Response (35)</b></p>
+			<div class="subdiv" id="response-level">
+				<p class="br">*Values that require a download are in
+					<font color=red>red</font>
+				</p>
+				<p>name: The name of the level</p>
+				<p>id: The ID of the level</p>
+				<p>description: The description</p>
+				<p>author: The name of the level's author (appears lower down in response)</p>
+				<p>authorID: The ID of the level's author</p>
+				<p>accountID: The account ID of the level's author. An ID of 0 indicates a green (unregistered) user</p>
+				<p>difficulty: The difficulty of the level (as a string). Includes demon rating</p>
+				<p>downloads: Number of downloads</p>
+				<p>likes: Number of likes</p>
+				<p>disliked: If the level has a negative number of likes (true/false)</p>
+				<p>length: The length of the level (Tiny/Short/Medium/Long/XL)</p>
+				<p>stars: Amount of stars received for beating the level</p>
+				<p>orbs: Amount of mana orbs received for beating the level</p>
+				<p>diamonds: Amount of diamonds received for beating the level (stars + 2)</p>
+				<p>featured: Whether the level is featured or not</p>
+				<p>epic: Whether the level has an "epic" rating or not</p>
+				<p>version: Number of times the level was updated</p>
+				<p>copiedID: The original level ID, if the level was copied. Otherwise returns 0</p>
+				<p>officialSong: The level number of the song, if no custom song is used. Otherwise returns 0</p>
+				<p>customSong: The ID of the song, if a custom song was used. Otherwise returns 0</p>
+				<p>coins: Number of user coins placed in the level</p>
+				<p>verifiedCoins: Whether these coins are verified or not</p>
+				<p>starsRequested: How many stars the author requested the level to be rated. 0 if no request was given</p>
+				<p>objects: The number of objects in the level. This was added in a recent version of GD, so older levels will simply return 0</p>
+				<p>large: Whether the level is considered "large" (more than 40k objects)</p>
+				<p>cp: How many creator points the level is worth (1 for star rating, 1 for feature, and 1 for epic rating)</p>
+				<p>difficultyFace: The URL of the difficulty face image for this level. Plug it into gdbrowser.com/difficulty/{difficultyFace}.png</p>
+				<p>songName: The name of the song used for the level</p>
+				<p>songAuthor: The name of the author of said song</p>
+				<p>songSize: The size of the song in megabytes, if a custom song was used</p>
+				<p>songID: The ID of the song (again). If a non-custom song was used, this will return a string with the level number of the song</p>
+				<p class="red">uploaded: Time since the level was uploaded (sent as "x days/weeks/months" ago, since it's all the API sends)</p>
+				<p class="red">updated: Time since the level was last updated</p>
+				<p class="red">password: The password to copy the level. 0 means the level isn't copyable and 1 means it's free to copy</p>
+				<p class="red">ldm: If the level contains a checkbox for Low Detail Mode</p>
+				<p class="red">data: The actual data of the level. Don't ask how to use it, because I have no idea</p>
+			</div>
+
+			<br>
+			<p class="reveal" onclick="$('#request-level').slideToggle(100)"><b>Example</b></p>
+			<div class="subdiv" id="request-level">
+				<p><b>Example Request</b></p>
+				<p>/api/level/4284013 </p>
+				<p>(the ID for Nine Circles by Zobros)</p>
+
+				<br>
+				<p><b>Example Response</b></p>
+				<pre><p class="fetch" link="/api/level/4284013">...</p></pre>
+			</div>
+			<br>
+		</div>
+		<div class="seperator"></div>
+
+
+	</main>
+	<main class="grey">
+
+		<div id="profile""></div>
+		
+		<div class="main-block">
+			<h1>Profiles</h1>
+			<p>/api/profile/username-or-id</p>
+			<br>
+			<p>Unlike the Geometry Dash API, both username and ID can be used to fetch a user profile.</p>
+
+			<br>
+			<p class="reveal" onclick="$('#params-profile').slideToggle(100)"><b>Parameters (0)</b></p>
+			<div class="subdiv" id="params-profile">
+				<p>No parameters for this one!</p>
+			</div>
+
+			<br>
+			<p class="reveal" onclick="$('#response-profile').slideToggle(100)"><b>Response (28)</b></p>
+			<div class="subdiv" id="response-profile">
+				<p>username: The name of the player</p>
+				<p>playerID: The unique ID for all accounts</p>
+				<p>accountID: An additional ID for registered accounts</p>
+				<p>rank: The global rank of the player. Returns 0 if banned or star count is too low</p>
+				<p>stars: Number of stars the player has</p>
+				<p>diamonds: Number of diamonds</p>
+				<p>coins: Number of secret coins</p>
+				<p>userCoins: Number of user coins</p>
+				<p>demons: Number of completed demons</p>
+				<p>cp: Number of creator points</p>
+				<p>friendRequests: If the player has friend requests enabled</p>
+				<p>messages: If the player has messages enabled. Returns "all", "friends", or "off"</p>
+				<p>commentHistory: If the player has a visible comment history. Returns "all", "friends", or "off"</p>
+				<p>moderator: If the player is a moderator. Returns 0 (none), 1 (mod) or 2 (elder)</p>
+				<p>youtube: The URL of the player's YouTube channel, if linked. Plug it into https://youtube.com/channel/{youtube}</p>
+				<p>twitter: The URL of the player's Twitter account, if linked. Plug it into https://twitter.com/{twitter}</p>
+				<p>twitch: The URL of the player's Twitch account, if linked. Plug it into https://twitch.tv/{twitch}</p>
+				<p>glow: If the player's icon has a glow or not</p>
+				<p>icon, ship, ball, ufo, wave, robot, spider, col1, col2, deathEffect: The number of the icon/color used for each form. The actual icon needs to be manually constructed. My <a href="https://gdcolon.com/tools/iconkit" target="_blank">Online Icon Kit</a> could be of assistance.</p>
+			</div>
+
+			<br>
+			<p class="reveal" onclick="$('#request-profile').slideToggle(100)"><b>Example</b></p>
+			<div class="subdiv" id="request-profile">
+				<p><b>Example Request</b></p>
+				<p>/api/profile/robtop</p>
+				<p>(fetches the user named RobTop)</p>
+
+				<br>
+				<p><b>Example Response</b></p>
+				<pre><p class="fetch" link="/api/profile/robtop">...</p></pre>
+			</div>
+			<br>
+		</div>
+		<div class="seperator"></div>
+
+
+	</main>
+	<main class="alt">
+
+		<div id="search""></div>
+		
+		<div class="main-block">
+			<h1>Searching</h1>
+			<p>/api/search/search-query</p>
+			<br>
+			<p>Use an asterisk (*) as your search query if you do not wish to search by level name (if you intend on using filters)</p>
+
+			<br>
+			<p class="reveal" onclick="$('#params-search').slideToggle(100)"><b>Parameters (17)</b></p>
+			<div class="subdiv" id="params-search">
+				<p>Buckle up... there's a lot</p>
+
+				<br>
+				<p><b>Params that require a number</b> (e.g. ?page=1)</p>
+				<p>count: The amount of levels to list (default and max is 10)</p>
+				<p>diff: The number of the difficulty to search for, see <u>difficulty IDs</u> below</p>
+				<p>demonFilter: If searching for demon levels, what difficulty to search for (1 is easy, 5 is extreme)</p>
+				<p>page: The page of the search</p>
+				<p>gauntlet: The number of the gauntlet to view (will return the 5 levels)</p>
+				<p>length: Only return levels with this length (0-4, 0 is tiny and 4 is XL)</p>
+				<p>songID: Only return levels that use this official song number (2-21, unless you want hacked levels with songs from meltdown/subzero/etc. Also, Stereo Madness and Back on Track don't seem to work). Add the 'customSong' parameter to read the number as a custom song ID.</p>
+
+
+				<br>
+				<p><b>Params that require a string</b> (e.g. ?type=trending)</p>
+				<p>type: The type of search to perform, see <u>search types</u> below</p>
+
+				<br>
+				<p><b>Params that require anything</b> (e.g. ?mappack=yes or ?mappack)</p>
+				<p>featured: Only return featured levels</p>
+				<p>original: Only return non-copied levels</p>
+				<p>twoPlayer: Only return two player mode levels</p>
+				<p>coins: Only return levels with verified coins</p>
+				<p>epic: Only return levels with an epic rating</p>
+				<p>starred: Only return levels with a star rating</p>
+				<p>noStar: Only return levels without a star rating</p>
+				<p>customSong: Reads the 'song' parameter as a custom song ID instead of an official one</p>
+				<p>mappack: Reads the search query as the name of a map pack and returns the 3 levels if pack exists</p>
+				<p>user: Reads the search query as a player's ID and returns their levels</p>
+
+				<br>
+				<p><b>Search Types</b></p>
+				<p>All types ignore your search query and will return levels with any name.
+					<p>Filters allowed: mostdownloaded, mostliked, trending, recent, awarded</p>
+					<p>Filters ignored: featured, magic, halloffame</p>
+
+					<br>
+					<p><b>Difficulty IDs</b></p>
+					<p>1-5: Easy to insane, multiple can be selected (separate with commas)</p>
+					<p>-2: Demon (use demonFilter for a specific difficulty)</p>
+					<p>-3: Auto</p>
+					<p>-1: N/A</p>
+			</div>
+
+			<br>
+			<p class="reveal" onclick="$('#response-search').slideToggle(100)"><b>Response*</b></p>
+			<div class="subdiv" id="response-search">
+				<p>The response for searching is an array of up to 10 <a href="#level">level objects</a></p>
+			</div>
+			<br>
+			<p class="reveal" onclick="$('#request-search').slideToggle(100)"><b>Examples</b></p>
+			<div class="subdiv" id="request-search">
+				<p><b>Example Requests</b></p>
+				<p>/api/search/abc (Searches for a level named "abc")</p>
+				<p>/api/search/zodiac?diff=-2&demonFilter=5 (Searches for an extreme demon named "Zodiac"</p>
+				<p>/api/search/*?diff=-3 (Searches for any auto levels, regardless of name)</p>
+				<p>/api/search/*?type=trending&noStar (Searches for trending levels without a star rating)</p>
+				<p>/api/search/demon pack 1?mappack (Fetches Demon Pack 1)</p>
+				<p>/api/search/*?gauntlet=3 (Fetches the Poison Gauntlet)</p>
+
+				<br>
+				<p><b>Example Response</b></p>
+				<p>(first example used)</p>
+				<pre><p class="fetch" link="/api/search/abc?count=3">...</p></pre>
+			</div>
+		</div>
+		<div class="seperator"></div>
+
+
+	</main>
+	<main class="grey">
+		<div class="main-block">
+			<div id="leaderboard""></div>
+			<h1>Leaderboards</h1>
+			<p>/api/leaderboard</p>
+
+			<p>Simply returns the top player leaderboard</p>
+
+			<br>
+			<p class="reveal" onclick="$('#params-leaderboard').slideToggle(100)"><b>Parameters (3)</b></p>
+			<div class="subdiv" id="params-leaderboard">
+				<p>count: The amount of players to list (default is 100, max is 2500, does not work with accurate leaderboard)</p>
+				<p>creator: Fetches the creator leaderboard</p>
+				<p>accurate: Fetches the accurate leaderboard</p>
+			</div>
+
+			<br>
+			<p class="reveal" onclick="$('#response-leaderboard').slideToggle(100)"><b>Response (9)</b></p>
+			<div class="subdiv" id="response-leaderboard">
+				<p>The API will return an array of each player with the following information:</p>
+				<p>rank: Position on the leaderboard</p>
+				<p>username: The player's username</p>
+				<p>playerID: The player's ID</p>
+				<p>stars: Number of stars the player has</p>
+				<p>demons: Number of completed demons</p>
+				<p>cp: Number of creator points</p>
+				<p>coins: Number of secret coins</p>
+				<p>userCoins: Number of user coins</p>
+				<p>diamonds: Number of diamonds</p>
+			</div>
+
+			<br>
+			<p class="reveal" onclick="$('#request-leaderboard').slideToggle(100)"><b>Examples</b></p>
+			<div class="subdiv" id="request-leaderboard">
+				<p><b>Example Requests</b></p>
+				<p>/api/leaderboard?count=10 (Fetches the top 10 players)</p>
+				<p>/api/leaderboard (Fetches the top 100 players)</p>
+				<p>/api/leaderboard?creator&count=250 (Fetches the top 250 creators)</p>
+
+				<br>
+				<p><b>Example Response</b></p>
+				<p>(first example used)</p>
+				<pre><p class="fetch" link="/api/leaderboard?count=10">...</p></pre>
+			</div>
+
+			<br>
+		</div>
+
+		<div class="seperator"></div>
+
+	</main>
+	<main class="alt">
+		<div class="main-block">
+			<div id="levelleaderboard""></div>
+			<h1>Level Leaderboards</h1>
+			<p>/api/leaderboardLevel/levelID</p>
+
+			<p>Returns the leaderboard for a level</p>
+
+			<br>
+			<p class="reveal" onclick="$('#params-levelleaderboard').slideToggle(100)"><b>Parameters (2)</b></p>
+			<div class="subdiv" id="params-levelleaderboard">
+				<p>count: The amount of players to list (default is 100, max is 200)</p>
+				<p>week: Whether or not to fetch the weekly leaderboard instead of the regular one</p>
+			</div>
+
+			<br>
+			<p class="reveal" onclick="$('#response-levelleaderboard').slideToggle(100)"><b>Response (6)</b></p>
+			<div class="subdiv" id="response-levelleaderboard">
+				<p>The API will return an array of each player with the following information:</p>
+				<p>rank: Position on the leaderboard</p>
+				<p>username: The player's username</p>
+				<p>playerID: The player's ID</p>
+				<p>accountID: The player's account ID</p>
+				<p>percent: Percent on the level</p>
+				<p>coins: Number of coins obtained (0-3)</p>
+				<p>date: Time since score was submitted (sent as "x days/weeks/months" ago, since it's all the API sends)</p>
+			</div>
+
+			<br>
+			<p class="reveal" onclick="$('#request-levelleaderboard').slideToggle(100)"><b>Example</b></p>
+			<div class="subdiv" id="request-levelleaderboard">
+				<p><b>Example Request</b></p>
+				<p>/api/leaderboardLevel/1063115 (Fetches the leaderboard for Dynamic on Track)</p>
+
+				<br>
+				<p><b>Example Response</b></p>
+				<pre><p class="fetch" link="/api/leaderboardLevel/1063115?count=10">...</p></pre>
+			</div>
+
+			<br>
+		</div>
+
+		<div class="seperator"></div>
+
+	</main>
+	<main class="grey">
+		<div class="main-block">
+			<div id="comments""></div>
+			<h1>Comments and Profile Posts</h1>
+			<p>/api/comments/level-or-user-ID</p>
+
+			<p>Returns up to 10 comments or profile posts</p>
+
+			<br>
+			<p class="reveal" onclick="$('#params-comment').slideToggle(100)"><b>Parameters (3)</b></p>
+			<div class="subdiv" id="params-comment">
+				<p>top: Whether or not to sort by most liked (comments only)</p>
+				<p>page: The page of the search</p>
+				<p>type: The type of comments to fetch. Instead of a level ID, they require a player and account ID, respectively.</p>
+				<p class="indent">• commentHistory - All the comments from a player, if public on their profile</p>
+				<p class="indent">• profile - A player's profile posts</p>
+			</div>
+
+			<br>
+			<p class="reveal" onclick="$('#response-comment').slideToggle(100)"><b>Response (10)</b></p>
+			<div class="subdiv" id="response-comment">
+				<p>The API will return an array of each comment with the following information.<br>Values that don't work for profile posts are in <font color=red>red</font></p>
+				<p>content: The comment text</p>
+				<p>likes: The number of likes the comment has</p>
+				<p>date: Time since the comment was posted (sent as "x days/weeks/months" ago, since it's all the API sends)</p>
+				<p class="red">levelID: The ID of the level [COMMENT HISTORY ONLY]</p>
+				<p class="red">username: The commenter's username</p>
+				<p class="red">playerID: The commenter's ID</p>
+				<p class="red">accountID: The commenter's account ID</p>
+				<p class="red">form: The form of the commenter's icon</p>
+				<p class="red">percent: The commenter's percent on the level, if provided</p>
+				<p class="red">modColor: If the commenter is an elder mod and gets fancy green text</p>
+			</div>
+
+			<br>
+			<p class="reveal" onclick="$('#request-comment').slideToggle(100)"><b>Examples</b></p>
+			<div class="subdiv" id="request-comment">
+				<p><b>Example Requests</b></p>
+				<p>/api/comments/26681070?top (Fetches Sonic Wave's most liked comments)</p>
+				<p>/api/comments/16?type=commentHistory (Fetches RobTop's comment history)</p>
+				<p>/api/comments/4170784?type=profile (Fetches Serponge's profile posts)</p>
+
+				<br>
+				<p><b>Example Response</b></p>
+				<p>(first example used)</p>
+				<pre><p class="fetch" link="/api/comments/26681070?top">...</p></pre>
+			</div>
+
+		</div>
+		<div class="seperator"></div>
+	</main>
+	<main class="alt">
+		<div class="main-block">
+			<div id="analyze""></div>
+			<h1>Level Analysis (WIP)</h1>
+			<p>/api/leaderboardLevel/levelID</p>
+
+			<p>Analyzes a level's data</p>
+			<p><b>Level analyzing is still a big WIP so there may be changes in the future</b></p>
+
+			<br>
+			<p class="reveal" onclick="$('#params-analyze').slideToggle(100)"><b>Parameters (0)</b></p>
+			<div class="subdiv" id="params-analyze">
+				<p>No parameters for this one!</p>
+			</div>
+
+			<br>
+			<p class="reveal" onclick="$('#response-analyze').slideToggle(100)"><b>Response (?)</b></p>
+			<div class="subdiv" id="response-analyze">
+				<p><b>Response is subject to change in the future</b></p>
+				<p>The API will return an array of each player with the following information:</p>
+				<p>level: Basic level info (name, ID, author, etc)</p>
+				<p>portals: A string listing the order of all the portals in the level. Does not include starting form/speed</p>
+				<p>orbs: How many of each jump ring is in the level</p>
+				<p>triggers: How many of each trigger is in the level</p>
+				<p>blocks: How many of each block type is in the level</p>
+				<p>misc: Amount of objects that aren't categorized above (glow, arrows, clouds, pickups, etc)</p>
+				<p>settings: The level's settings (song offset, starting form/speed, two player mode, font, etc)</p>
+				<p>colors: The level's initial color channels. Contains channel, R, G, B, opacity, player color, blending, and copied channel</p>
+				<p>dataLength: How long the level data is (spoilers - very)</p>
+				<p>data: The decrypted data of the level. And it's freakin' huge</p>
+			</div>
+
+			<br>
+		</div>
+
+		<div class="seperator"></div>
+
+	</main>
+
+	<footer>
+		<p>API made by <a href="https://twitter.com/TheRealGDColon">GD Colon</a>. Webpage design by <a href="http://gducrash.tk">GD Ucrash</a><br><br>
+		Good job man, this looks really nice -Colon</p>
+	</footer>
+</body>
+
+</html>
+
+<script>
+	$('.subdiv').each(function() {
+		$(this).html($(this).html().replace(/(<p.*>)(.*:) /g, '$1<font class="param">$2</font> '))
+	})
+
+	$('.fetch').each(function() {
+		fetch(`..${$(this).attr('link')}`).then(res => res.json()).then(res => {
+			$(this).html(JSON.stringify(res, null, 2))
+		})
+	});
+
+
+	//smooth scrolling through anchors
+	document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+		anchor.addEventListener('click', function(e) {
+			e.preventDefault();
+
+			document.querySelector(this.getAttribute('href')).scrollIntoView({
+				behavior: 'smooth'
+			});
+		});
+	});
+
+</script>

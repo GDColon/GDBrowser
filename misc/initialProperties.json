@@ -1,0 +1,22 @@
+{
+    "values": {
+        "kA2": ["gamemode", "list"],
+        "kA4": ["speed", "list"],
+
+        "kA6": ["background", "bump"],
+        "kA7": ["ground", "bump"],
+        "kA18": ["font", "bump"],
+        "kA13": ["songOffset", "number"],
+
+        "kA3": ["startMini", "bool"],
+        "kA10": ["twoPlayer", "bool"],
+        "kA15": ["fadeIn", "bool"],
+        "kA16": ["fadeOut", "bool"],
+        "kA17": ["alternateLine", "bool"],
+
+        "kS38": ["colors", "colors"]
+    },
+
+    "gamemodes": ["cube", "ship", "ball", "ufo", "wave", "robot", "spider"],
+    "speeds": ["1x", "-1x", "2x", "3x", "4x"]
+}

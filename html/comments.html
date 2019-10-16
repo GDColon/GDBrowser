@@ -1,0 +1,191 @@
+<head>
+	<title>Comments</title>
+	<meta charset="utf-8">
+	<link href="../assets/level.css" type="text/css" rel="stylesheet">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
+	<link rel="icon" href="../assets/like.png">
+	<meta id="meta-title" property="og:title" content="Level Comments">
+    <meta id="meta-desc" property="og:description" content="View the comments of a Geometry Dash level!">
+	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/assets/like.png">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+	<script async type="text/javascript" src="../assets/sizecheck.js"></script>
+	<script type="text/javascript" src="https://asvd.github.io/dragscroll/dragscroll.js"></script>
+</head>
+
+<body class="levelBG">
+
+<div id="everything">
+	
+	<div style="position:absolute; bottom: 0%; left: 0%; width: 100%">
+		<img class="gs" src="../assets/corner.png" width=7%;>
+	</div>
+
+	<div style="position:absolute; bottom: 0%; right: 0%; width: 100%; text-align: right;">
+		<img class="gs" src="../assets/corner.png" width=7%; style="transform: scaleX(-1)">
+	</div>
+
+	<div class="brownBox center supercenter" style="width: 135vh; height: 82%; margin-top: -0.7%">
+
+		<div class="lightBox center dragscroll" id="commentBox" style="margin: 4.5% auto; width: 115vh; height: 86%; background-color: #934E27"></div>
+
+		<div class="supercenter" style="left: 97%; top: 25%; height: 10%">
+			<img class="gdButton" id="refresh"  src="../assets/refresh.png" height="90%">
+		</div>
+
+		<div class="supercenter" style="left: 3%; top: 20%; height: 10%">
+			<img class="gdButton" id="topSort" src="../assets/sort-likes.png" height="90%">
+		</div>
+
+		<div class="supercenter" style="left: 3%; top: 30.5%; height: 10%">
+			<img class="gdButton" id="timeSort"  src="../assets/sort-time-on.png" height="90%">
+		</div>
+	
+		<div class="supercenter" id="pageDown" style="left: 3%; top: 50%; height: 10%; display: none;">
+			<img class="gdButton" src="../assets/arrow-left.png" height="95%">
+		</div>
+	
+		<div class="supercenter" id="pageUp" style="left: 97%; top: 50%; height: 10%;">
+			<img class="gdButton" src="../assets/arrow-right.png" height="95%">
+		</div>
+
+		<div class="supercenter" id="pageUp" style="top: 4.8%; height: 10%; width: 100%;">
+			<h1 class="smaller inline" id="levelName"></h1>
+			<h2 class="smallGold inline" id="levelAuthor" style="margin: 0.8vh 0 0 3vh"></h2>
+		</div>
+
+		<div class="supercenter" id="pageUp" style="top: 100%; height: 10%; width: 100%;">
+			<h2 class="smallGold inline" id="levelVersion"></h2>
+			<h2 class="smallGold inline" id="levelID" style="margin-left: 6vh"></h2>
+		</div>
+
+	</div>
+
+	<div style="position:absolute; top: 2%; left: 1.5%; width: 10%; height: 25%; pointer-events: none">
+		<img class="gdButton yesClick" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()">
+	</div>
+
+</div>
+
+</body>
+
+<script>
+
+let lvlID = window.location.pathname.split('/')[2]
+let history = false;
+let target = `../api/level/${lvlID}`
+
+if (lvlID > 99999999 || lvlID < -99999999) window.location.href = window.location.href.replace("comments", "search")
+if (!Number(lvlID)) {history = true; target = `../api/profile/${lvlID}`}
+
+fetch(target).then(res => res.json()).then(lvl => {
+
+	if (history) {
+		$('#levelName').text(lvl.username + "'s comments")
+		document.title = lvl.username + "'s comments"
+
+		$('#meta-title').attr('content', lvl.username + "'s comment history")
+		$('#meta-desc').attr('content',  `View all of ${lvl.username}'s Geometry Dash comments!`)
+	}
+
+	else {
+		if (lvl.accountID == "0") $('#levelAuthor').addClass("green")
+		$('#levelName').text(lvl.name || ("Nonexistent level " + lvlID))
+		$('#levelAuthor').text("By " + (lvl.author || "-"))
+		$('#levelID').text("ID: " + lvlID)
+		$('#levelVersion').text("Version: " + (lvl.version || 0))
+		document.title = "Comments for " + (lvl.name || lvlID)
+
+		if (lvl.name) {
+			$('#meta-title').attr('content', `Comments for ${lvl.name}`)
+			$('#meta-desc').attr('content',  `View all the comments for ${lvl.name} by ${lvl.author || "Unknown"}!`)
+		}
+	}
+
+function appendComments() {
+
+if (loadingComments) return;
+else loadingComments = true;
+
+$('#commentBox').html(`<div class="supercenter" id="loading" style="height: 12%;"><img class="spin noSelect" src="../assets/loading.png" height="105%"></div>`)
+
+if (page == 0) $('#pageDown').hide()
+else $('#pageDown').show()
+
+fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID}?page=${page}${history ? "&type=commentHistory" : ""}${mode == "top" ? "&top" : ""}`).then(res => res.json()).then(res => {
+	
+	if (res.length != 10 || (history && lvl.commentHistory == "off")) $('#pageUp').hide()
+	else $('#pageUp').show()
+
+	if (res == -1 || (history && lvl.commentHistory == "off")) {
+		return $('#loading').hide()
+	}
+
+	res.forEach(x => {
+		$('#commentBox').append(`
+			<div class="commentBG">
+				<div class="comment">
+					<img class="inline" src="../icon/${!history ? x.username : lvl.username}?form=${x.form}" height=21% style="margin-right: 0.8%">
+					<a ${x.username == "Unknown" || x.accountID == "0" ? "" : "href"}="../profile/${!history ? x.username : lvl.username}"><h2 class="inline ${x.username == "Unknown" || x.accountID == "0" ? "green" : "gdButton"}">${!history ? x.username : lvl.username}</h2></a>
+					${x.modColor || lvl.moderator == "2" ? `<img class="inline" src="../assets/mod-elder.png" height=18% style="margin-left: 0.6%;">` : ""}
+					<p class="commentPercent inline">${x.percent ? x.percent + "%" : ""}</p>
+
+					<div class="commentAlign">
+						<p class="commentText" style="color: ${!history && x.playerID == lvl.authorID ? "rgb(255, 255, 75)" : x.username == "RobTop" ? "rgb(50, 255, 255)" : x.modColor || lvl.moderator == "2" ? `rgb(75, 255, 75)` : "white"}">${x.content}</p>
+					</div>
+				</div>
+				<p class="commentDate">${x.date}</p>
+				<div class="commentLikes">
+					${history ? `<h3 style="margin-right: 1.5vh; pointer-events: all;" class="gold inline"><a href="../${x.levelID}">(${x.levelID})</a></h3>` : ""}
+					<img id="likeImg" class="inline" ${x.likes < 0 ? "style='transform: translateY(25%)'" : ""} src="../assets/${x.likes < 0 ? "dis" : ""}like.png" height=20% style="margin-right: 0.4%">
+					<h3 class="inline">${x.likes}</h3>
+				</div>
+			</div>`)
+	})
+
+	$('.commentText').each(function() {
+	if ($(this).text().length > 100) {
+	let overflow = ($(this).text().length - 100) * 0.01
+	$(this).css('font-size', (3.5 - (overflow)) + 'vh')
+	}
+});
+$('#loading').hide()
+})
+loadingComments = false;
+}
+
+let mode = "time"
+let page = 0
+let loadingComments = false
+appendComments()
+
+$('#pageUp').click(function() {page += 1; appendComments()})
+$('#pageDown').click(function() {page -= 1; appendComments()})
+
+$('#topSort').click(function() {
+	if (mode == "top") return;
+	mode = "top";
+	page = 0;
+	$('#timeSort').attr('src', "../assets/sort-time.png")
+	$('#topSort').attr('src', "../assets/sort-likes-on.png")
+	appendComments()
+})
+
+$('#timeSort').click(function() {
+	if (mode == "time") return;
+	mode = "time";
+	page = 0;
+	$('#timeSort').attr('src', "../assets/sort-time-on.png")
+	$('#topSort').attr('src', "../assets/sort-likes.png")
+	appendComments()
+})
+
+$('#refresh').click(function() {
+	page = 0;
+	appendComments()
+})
+
+})
+
+
+</script>
+
