@@ -23,13 +23,18 @@
 
 	<div id="analysisDiv" style="margin-top: 2%; display:none">
 		<h2 id="levelName"></h2>
+		<h3 id="objectCount"></h3>
 		<h1 class="topMargin">Portal order</h1>
 		<div class="transparentBox analysis" id="portals"></div>
 		<div>
 			<div class="portalSetting"><h3><input checked type="checkbox" class="portalToggle" id="box1" portal="form"> <label for="box1" class="gdcheckbox gdButton portalButton"></label>Form Portals</h3></div>
 			<div class="portalSetting"><h3><input checked type="checkbox" class="portalToggle" id="box2" portal="size"> <label for="box2" class="gdcheckbox gdButton portalButton"></label>Size Portals</h3></div>
 			<div class="portalSetting"><h3><input checked type="checkbox" class="portalToggle" id="box3" portal="speed"><label for="box3" class="gdcheckbox gdButton portalButton"></label>Speed Portals</h3></div>
-			<div class="portalSetting"><h3><input checked type="checkbox" class="portalToggle" id="box4" portal="misc"> <label for="box4" class="gdcheckbox gdButton portalButton"></label>Misc Portals</h3></div>
+			<br><div style="height: 1.5%"></div>
+			<div class="portalSetting"><h3><input checked type="checkbox" class="portalToggle" id="box4" portal="mirror"><label for="box4" class="gdcheckbox gdButton portalButton"></label>Mirror Portals</h3></div>
+			<div class="portalSetting"><h3><input checked type="checkbox" class="portalToggle" id="box5" portal="dual"> <label for="box5" class="gdcheckbox gdButton portalButton"></label>Dual Portals</h3></div>
+			<div class="portalSetting"><h3><input checked type="checkbox" class="portalToggle" id="box6" portal="dupe"> <label for="box6" class="gdcheckbox gdButton portalButton"></label>Duplicates</h3></div>
+
 		</div>
 
 		<h1 class="topMargin2" id="triggerText">Triggers</h1>
@@ -70,24 +75,25 @@ let disabledPortals = []
 let formPortals = ['cube', 'ship', 'ball', 'ufo', 'wave', 'robot', 'spider']
 let speedPortals = ['-1x', '1x', '2x', '3x', '4x']
 let sizePortals = ['mini', 'big']
-let miscPortals = ['dual', 'single', 'mirrorOn', 'mirrorOff']
+let dualPortals = ['dual', 'single']
+let mirrorPortals = ['mirrorOn', 'mirrorOff']
 
 fetch(`../api${window.location.pathname}`).then(res => res.json()).then(res => {
 	if (!res.level) return window.location.href = window.location.href.replace("analyze", "search")
 	$('#levelName').text(res.level.name)
+	$('#objectCount').text(res.objects + " objects")
 	document.title = "Analysis of " + res.level.name
 
 	$('#meta-title').attr('content',  "Analysis of " + res.level.name)
 	$('#meta-desc').attr('content',  `${res.portals.split(",").length}x portals, ${res.orbs.total || 0}x orbs, ${res.triggers.total || 0}x triggers, ${res.misc.glow || 0}x glow...`)
-
-let portalList = res.portals.split(", ")
-let portals = portalList
 
 let triggerList = Object.keys(res.triggers)
 let orbList = Object.keys(res.orbs)
 let miscList = Object.keys(res.misc)
 let blockList = Object.keys(res.blocks)
 let colorList = Object.keys(res.colors)
+
+let portals = res.portals.split(", ")
 
 function appendPortals() {
 	$('#portals').html("")
@@ -140,11 +146,17 @@ appendPortals()
 		if ($(this).prop('checked')) disabledPortals = disabledPortals.filter(x => x != $(this).attr('portal'))
 		else disabledPortals.push($(this).attr('portal'))
 		
-		portals = portalList
+		portals = res.portals.split(", ")
 		if (disabledPortals.includes('form')) portals = portals.filter(x => !formPortals.includes(x))
 		if (disabledPortals.includes('speed')) portals = portals.filter(x => !speedPortals.includes(x))
 		if (disabledPortals.includes('size')) portals = portals.filter(x => !sizePortals.includes(x))
-		if (disabledPortals.includes('misc')) portals = portals.filter(x => !miscPortals.includes(x))
+		if (disabledPortals.includes('dual')) portals = portals.filter(x => !dualPortals.includes(x))
+		if (disabledPortals.includes('mirror')) portals = portals.filter(x => !mirrorPortals.includes(x))
+
+		if (disabledPortals.includes('dupe')) {
+			portals.forEach((x, y) => {if (portals[y+1] && portals[y+1] == x) portals[y] = null;})
+			portals = portals.filter(x => x != null)
+		}
 
 		appendPortals()
 	})
@@ -158,7 +170,6 @@ appendPortals()
 		$('#levelCode').html(`<p class="codeFont">${res.data}</p>`)}, 50);
 		$('#levelCode').focus().select()
 	})
-
 
 	$('#loadingDiv').hide()
 	$('#analysisDiv').show()

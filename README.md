@@ -59,8 +59,6 @@ mapPacks.json - The IDs for the levels in map packs. I can't believe I have to h
 
 XOR.js - Decrypts ciphered GD passwords. I stole the code from somewhere so uh if you wrote it, please don't hunt me down
 
-LOADMODULES.js - Allows the API to run the /api files in a cooler way
-
 ---
 
 happy painting and god bless.

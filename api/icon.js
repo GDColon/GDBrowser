@@ -1,14 +1,13 @@
+const request = require('request')
+const Jimp = require('jimp');
+const plist = require('plist');
+const fs = require('fs');
+const path = require('path');
+const icons = plist.parse(fs.readFileSync("./icons/GJ_GameSheet02-uhd.plist", 'utf8')).frames
+const colors = require('../misc/colors.json')
+
 module.exports = async (app, req, res) => {
 
-  const request = require('request')
-  const Jimp = require('jimp');
-  const plist = require('plist');
-  const fs = require('fs');
-  const fsExtra = require('fs-extra')
-  const path = require('path');
-
-  let icons = plist.parse(fs.readFileSync("./icons/GJ_GameSheet02-uhd.plist", 'utf8')).frames
-  let colors = require('../misc/colors.json')
   let username = req.params.text
   let form = 'player'
 

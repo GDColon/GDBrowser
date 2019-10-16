@@ -1,6 +1,7 @@
-module.exports = async (app, req, res) => {
 
-    const request = require('request')
+const request = require('request')
+
+module.exports = async (app, req, res) => {
 
     let amount = 100;
     let count = req.query.count ? parseInt(req.query.count) : null

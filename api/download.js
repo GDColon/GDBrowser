@@ -1,7 +1,7 @@
-module.exports = async (app, req, res, api, ID, analyze) => {
+const request = require('request')
+const fs = require('fs')
 
-    const request = require('request')
-    const fs = require('fs')
+module.exports = async (app, req, res, api, ID, analyze) => {
 
     let orbs =  [0, 0, 50, 75, 125, 175, 225, 275, 350, 425, 500]
     let length = ['Tiny', 'Short', 'Medium', 'Long', 'XL']

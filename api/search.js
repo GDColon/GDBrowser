@@ -1,11 +1,11 @@
-module.exports = async (app, req, res) => {
+const request = require('request')
+const orbs =  [0, 0, 50, 75, 125, 175, 225, 275, 350, 425, 500]
+const difficulty = {0: 'Unrated', 10: 'Easy', 20: 'Normal', 30: 'Hard', 40: 'Harder', 50: 'Insane'}
+const length = ['Tiny', 'Short', 'Medium', 'Long', 'XL']
+const mapPacks = require('../misc/mapPacks.json')
+const levels = require('../misc/level.json').music
 
-    const request = require('request')
-    const orbs =  [0, 0, 50, 75, 125, 175, 225, 275, 350, 425, 500]
-    const difficulty = {0: 'Unrated', 10: 'Easy', 20: 'Normal', 30: 'Hard', 40: 'Harder', 50: 'Insane'}
-    const length = ['Tiny', 'Short', 'Medium', 'Long', 'XL']
-    const mapPacks = require('../misc/mapPacks.json')
-    const levels = require('../misc/level.json').music
+module.exports = async (app, req, res) => {
 
     let amount = 10;
     let count = req.query.count ? parseInt(req.query.count) : null
@@ -102,23 +102,23 @@ module.exports = async (app, req, res) => {
         x.difficulty = difficulty[x[9]];
         x.downloads = x[10];
         x.likes = x[14];
-        x.disliked = x[14] < 0
-        x.length = length[x[15]];
+        x.disliked = x[14] < 0;
+        x.length = length[x[15]] || "?";
         x.stars = x[18];
-        x.orbs = orbs[x[18]],
+        x.orbs = orbs[x[18]];
         x.diamonds = x[18] < 2 ? 0 : parseInt(x[18]) + 2,
         x.featured = x[19] > 0;
         x.epic = x[42] == 1;
         x.version = x[5];
         x.copiedID = x[30];
-        x.officialSong = x[12] != 0 ? parseInt(x[12]) + 1 : 0,
-        x.customSong = x[35],
+        x.officialSong = x[12] != 0 ? parseInt(x[12]) + 1 : 0;
+        x.customSong = x[35];
         x.coins = x[37];
         x.verifiedCoins = x[38] == 1;
         x.starsRequested = x[39];
         x.objects = x[45];
         x.large = x[45] > 40000;
-        x.cp = (x.stars > 0) + x.featured + x.epic
+        x.cp = (x.stars > 0) + x.featured + x.epic;
 
         if (x[17] == 1) x.difficulty += ' Demon'
         if (x.difficulty == "Insane Demon") x.difficulty = "Extreme Demon"

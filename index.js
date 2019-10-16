@@ -1,4 +1,3 @@
-//  cd C:\Users\Craig\Desktop\Projects\Robotop
 const express = require('express');
 const path = require('path');
 const fs = require("fs")
@@ -6,10 +5,10 @@ const timeout = require('connect-timeout')
 const fsExtra = require("fs-extra")
 
 fsExtra.emptyDirSync('./icons/cache')
-let local = __dirname.includes('Craig')
 let api = true;
 let gdicons = fs.readdirSync('./icons/iconkit')
 
+//clear icon cache every ten minutes
 setInterval(function(){ fsExtra.emptyDirSync('./icons/cache') }, 600000);
 
 const app = express();
@@ -20,13 +19,17 @@ app.use(haltOnTimedout)
 app.use(require('cookie-parser')());
 app.set('json spaces', 2)
 
-const secrets = require("./misc/secretStuff.json")
-app.modules = { LOADMODULES: require("./misc/LOADMODULES.js") };
-app.modules = app.modules.LOADMODULES();
+app.modules = {}
+fs.readdirSync('./api').forEach(x => {
+  app.modules[x.split('.')[0]] = require('./api/' + x)
+})
 
 app.secret = 'Wmfd2893gb7'
+
+const secrets = require("./misc/secretStuff.json")
 app.id = secrets.id
 app.gjp = secrets.gjp
+//these are the only two things in secretStuff.json, both are only used for level leaderboards
 
 function haltOnTimedout (req, res, next) {
   if (!req.timedout) next()
@@ -40,6 +43,7 @@ app.parseResponse = function (responseBody, splitter) {
   res[response[i]] = response[i + 1]}
   return res  }
 
+//xss bad
 app.clean = function(text) {if (typeof text != "string") return text; else return text.replace(/&/g, "&#38;").replace(/</g, "&#60;").replace(/>/g, "&#62;").replace(/=/g, "&#61;").replace(/"/g, "&#34;").replace(/'/g, "&#39;")}
 
 console.log("Site online!")
@@ -191,4 +195,4 @@ app.get('*', function(req, res) {
   res.redirect('/search/404%20')
 });
 
-app.listen(2000); 
+app.listen(2000);

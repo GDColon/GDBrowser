@@ -1,7 +1,7 @@
-module.exports = async (app, req, res, api, analyze) => {
+const request = require('request')
+const fs = require('fs')
 
-  const request = require('request')
-  const fs = require('fs')
+module.exports = async (app, req, res, api, analyze) => {
 
   let orbs =  [0, 0, 50, 75, 125, 175, 225, 275, 350, 425, 500]
   let length = ['Tiny', 'Short', 'Medium', 'Long', 'XL']
@@ -47,7 +47,7 @@ module.exports = async (app, req, res, api, analyze) => {
               downloads: levelInfo[10],
               likes: levelInfo[14],
               disliked : levelInfo[14] < 0,
-              length: length[levelInfo[15]],
+              length: length[levelInfo[15]] || "?",
               stars: levelInfo[18],
               orbs: orbs[levelInfo[18]],
               diamonds: levelInfo[18] < 2 ? 0 : parseInt(levelInfo[18]) + 2,

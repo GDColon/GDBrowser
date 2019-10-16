@@ -1,6 +1,6 @@
-module.exports = async (app, req, res) => {
+const request = require('request')
 
-    const request = require('request')
+module.exports = async (app, req, res) => {
 
     let params = {
         userID : req.params.id, 

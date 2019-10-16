@@ -1,7 +1,7 @@
-module.exports = async (app, req, res, api, getLevels) => {
+const request = require('request')
+const fs = require('fs')
 
-    const request = require('request')
-    const fs = require('fs')
+module.exports = async (app, req, res, api, getLevels) => {
 
   request.post('http://boomlings.com/database/getGJUsers20.php', {
     form: {
