@@ -1,4 +1,3 @@
-//  cd C:\Users\Craig\Desktop\Projects\Robotop
 const express = require('express');
 const path = require('path');
 const fs = require("fs")
@@ -6,7 +5,6 @@ const timeout = require('connect-timeout')
 const fsExtra = require("fs-extra")
 
 fsExtra.emptyDirSync('./icons/cache')
-let local = __dirname.includes('Craig')
 let api = true;
 let gdicons = fs.readdirSync('./icons/iconkit')
 
@@ -25,8 +23,10 @@ app.modules = { LOADMODULES: require("./misc/LOADMODULES.js") };
 app.modules = app.modules.LOADMODULES();
 
 app.secret = 'Wmfd2893gb7'
+
 app.id = secrets.id
 app.gjp = secrets.gjp
+//these are the only two things in secretStuff.json, both are only used for level leaderboards
 
 function haltOnTimedout (req, res, next) {
   if (!req.timedout) next()
