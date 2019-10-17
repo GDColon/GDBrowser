@@ -5,7 +5,6 @@ const timeout = require('connect-timeout')
 let api = true;
 let gdicons = fs.readdirSync('./icons/iconkit')
 
-//clear icon cache every ten minutes
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
