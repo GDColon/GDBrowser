@@ -87,6 +87,7 @@
 		<h1 class="smaller" id="difficultytext" style="transform:scale(0.9);">[[DIFFICULTY]]</h1>
 		<h1 class="smaller inline stars" style="transform:scale(0.9)">[[STARS]]</h1> <img class="inline stars" src="../assets/star.png" height=4%; style="transform:translateY(-12%)"><br class="stars">
 		<h1 class="smaller inline diamonds" style="transform:scale(0.9)">[[DIAMONDS]]</h1> <img class="inline diamonds" src="../assets/diamond.png" height=4%; style="transform:translateY(-12%)">
+		<h1 class="smaller inline demonList" style="transform:scale(0.9); display: none;">#[[DEMONLIST]]</h1> <img class="inline demonList" src="../assets/demon.png" height=4.5%; style="transform:translateY(-7%); display: none; margin-left: 1.5%">
 		<div id="coins" style="margin-top: 3%"></div>
 	</div>
 
@@ -178,7 +179,11 @@ if ([[COPIEDID]] == 0) $('#copiedBadge').hide()
 if (![[LARGE]]) $('#largeBadge').hide()
 if ([[ORBS]] == 0) $('.orbs').hide()
 if ([[STARS]] == 0) $('.stars').hide()
-if ([[DIAMONDS]] == 0) $('.diamonds').hide()
+if ([[DIAMONDS]] == 0 || !'[[DEMONLIST]]'.startsWith("[")) $('.diamonds').hide()
+
+if (!'[[DEMONLIST]]'.startsWith("[")) $('.demonList').show()
+else $('.demonList').remove()
+
 
 if ("[[SONGID]]".startsWith("Level")) {
 	$('#songInfo').text('[[SONGID]]')
