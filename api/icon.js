@@ -314,6 +314,10 @@ module.exports = async (app, req, res) => {
 
             if (!outline) { 
               ic.write(`./icons/cache/${iconCode}.png`)
+              cache[iconCode] = {
+                value: buff,
+                timeoutID: setTimeout(function() {delete cache[iconCode]}, 600000)
+              }
               return res.end(buff)
             }
 
