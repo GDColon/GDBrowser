@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const icons = plist.parse(fs.readFileSync("./icons/GJ_GameSheet02-uhd.plist", 'utf8')).frames
 const colors = require('../misc/colors.json')
-
+let cache = {};
 module.exports = async (app, req, res) => {
 
   let username = req.params.text
@@ -97,7 +97,11 @@ module.exports = async (app, req, res) => {
 
       let iconCode = `${form}-${iconID}-${col1}-${col2}-${outline ? 1 : 0}` 
       
-      if (fs.existsSync(`./icons/cache/${iconCode}.png`)) res.sendFile(path.join(__dirname, `../icons/cache/${iconCode}.png`))
+      if (cache[iconCode]) {
+        clearTimeout(cache[iconCode].timeoutID);
+        cache[iconCode].timeoutID = setTimeout(() => delete cache[iconCode], 600000);
+        return res.end(cache[iconCode].value);
+      }
 
       let ufoMode = false
       let useExtra = false
@@ -125,7 +129,7 @@ module.exports = async (app, req, res) => {
       function recolor(img, col) {
 
         return img.scan(0, 0, img.bitmap.width, img.bitmap.height, function (x, y, idx) {
-          if ((this.bitmap.data[idx] >= 20 && this.bitmap.data[idx] <= 255) && (this.bitmap.data[idx + 1] >= 20 && this.bitmap.data[idx + 1] <= 255) && (this.bitmap.data[idx + 2] >= 20 && this.bitmap.data[idx + 2] <= 255)) {
+          if (img.bitmap.data.slice(idx, idx+3).every(val => valval => val >= 20 && val <= 255)) { // If it's not "black, i.e. we want to recolor it"
             this.bitmap.data[idx] = colors[col].r / (255 / this.bitmap.data[idx]);
             this.bitmap.data[idx + 1] = colors[col].g / (255 / this.bitmap.data[idx + 1]);
             this.bitmap.data[idx + 2] = colors[col].b / (255 / this.bitmap.data[idx + 2]);
@@ -344,9 +348,13 @@ module.exports = async (app, req, res) => {
               }
 
               img.onerror = err => { throw err }
-              img.src = buff
-              fs.writeFileSync(`./icons/cache/${iconCode}.png`, new Buffer(canvas.toBuffer()))
-              return res.end(new Buffer(canvas.toBuffer(), 'base64'))
+              img.src = buff;
+              const buffer = canvas.toBuffer();
+              cache[iconCode] = {
+                value: buffer,
+                timeoutID: setTimeout(() => delete cache[iconCode], 600000)
+              }
+              return res.end(buffer, 'base64');
 
             }
           })

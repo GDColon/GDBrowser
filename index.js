@@ -2,15 +2,10 @@ const express = require('express');
 const path = require('path');
 const fs = require("fs")
 const timeout = require('connect-timeout')
-const fsExtra = require("fs-extra")
-
-fsExtra.emptyDirSync('./icons/cache')
 let api = true;
 let gdicons = fs.readdirSync('./icons/iconkit')
 
 //clear icon cache every ten minutes
-setInterval(function(){ fsExtra.emptyDirSync('./icons/cache') }, 600000);
-
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));

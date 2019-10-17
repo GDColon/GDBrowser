@@ -15,7 +15,6 @@
     "directory-tree": "^2.2.4",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
-    "fs-extra": "^8.1.0",
     "jimp": "^0.8.4",
     "path": "^0.12.7",
     "plist": "^3.0.1",
