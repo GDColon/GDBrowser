@@ -313,7 +313,6 @@ module.exports = async (app, req, res) => {
           ic.getBuffer(Jimp.AUTO, function (err, buff) {
 
             if (!outline) { 
-              ic.write(`./icons/cache/${iconCode}.png`)
               cache[iconCode] = {
                 value: buff,
                 timeoutID: setTimeout(function() {delete cache[iconCode]}, 600000)
