@@ -99,7 +99,7 @@ module.exports = async (app, req, res) => {
       
       if (cache[iconCode]) {
         clearTimeout(cache[iconCode].timeoutID);
-        cache[iconCode].timeoutID = setTimeout(() => delete cache[iconCode], 600000);
+        cache[iconCode].timeoutID = setTimeout(function() {delete cache[iconCode]}, 600000);
         return res.end(cache[iconCode].value);
       }
 
@@ -129,7 +129,7 @@ module.exports = async (app, req, res) => {
       function recolor(img, col) {
 
         return img.scan(0, 0, img.bitmap.width, img.bitmap.height, function (x, y, idx) {
-          if (img.bitmap.data.slice(idx, idx+3).every(val => valval => val >= 20 && val <= 255)) { // If it's not "black, i.e. we want to recolor it"
+          if (img.bitmap.data.slice(idx, idx+3).every(function(val) {return val >= 20 && val <= 255})) { // If it's not "black, i.e. we want to recolor it"
             this.bitmap.data[idx] = colors[col].r / (255 / this.bitmap.data[idx]);
             this.bitmap.data[idx + 1] = colors[col].g / (255 / this.bitmap.data[idx + 1]);
             this.bitmap.data[idx + 2] = colors[col].b / (255 / this.bitmap.data[idx + 2]);
@@ -352,7 +352,7 @@ module.exports = async (app, req, res) => {
               const buffer = canvas.toBuffer();
               cache[iconCode] = {
                 value: buffer,
-                timeoutID: setTimeout(() => delete cache[iconCode], 600000)
+                timeoutID: setTimeout(function() {delete cache[iconCode]}, 600000)
               }
               return res.end(buffer, 'base64');
 
