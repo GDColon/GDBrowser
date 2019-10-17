@@ -187,7 +187,7 @@ fetch('./api/icons').then(res => {
         let user = prompt(`Enter a player's username to get their ${currentForm == "ufo" ? "UFO" : currentForm}!\n(Form will depend on selected tab)\n`)
         if (!user) return;
 
-        let iconURL = `${dir}/gdicon/img/${user}?form=${currentForm}`
+        let iconURL = `../icon/${user}?form=${currentForm}`
         $("#loading").show()
         $("#result").hide()
         $("#result").attr('src', iconURL)
