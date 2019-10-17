@@ -116,7 +116,9 @@ module.exports = async (app, req, res, api, ID, analyze) => {
       level.data = levelInfo[4]
 
       if (analyze) return app.modules.analyze(app, req, res, level)
-      else if (api) return res.send(level)
+
+      function sendLevel() {
+      if (api) return res.send(level)
 
       else return fs.readFile('./html/level.html', 'utf8', function(err, data) {
         let html = data;
@@ -127,6 +129,19 @@ module.exports = async (app, req, res, api, ID, analyze) => {
         })
         return res.send(html)
       })
+    }
+
+    //demon list stuff
+    if (level.difficulty == "Extreme Demon") {
+      request.get('https://www.pointercrate.com/api/v1/demons/', async function(err, resp, demonList) {
+        let demons = JSON.parse(demonList)
+        let foundDemon = demons.find(x => x.name.trim().toLowerCase() == level.name.trim().toLowerCase())
+        if (foundDemon) level.demonList = foundDemon.position
+        return sendLevel()
+    })
+  }
+
+  else return sendLevel()
 
       })
     })
