@@ -92,7 +92,7 @@ quote{
 	width: 25px;
 	height: 25px;
 	margin-bottom: -8px;
-	background-image: url('media/showmore-ic.svg');
+	background-image: url('showmore-ic.svg');
 	background-size: cover;
 	transition: transform 0.25s ease;
 }
