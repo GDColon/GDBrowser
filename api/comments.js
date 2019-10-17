@@ -19,30 +19,38 @@ module.exports = async (app, req, res) => {
     form : params}, async function(err, resp, body) { 
 
       if (body == '-1' || !body) return res.send("-1")
-      comments = body.split('|').map(x => "4" + x.replace(":", "~").replace(/~9~(\d+ \w+)/, "~69~$1").replace(/[^4~]~(10)~/, "$1~420~"))
-      if (req.query.type == "commentHistory") comments = comments.map(x => x.replace("~1~", "~666~"))
-      comments = comments.map(x => app.parseResponse(x, "~"))
-      if (!(comments.filter(x => x[42]).length)) return res.send("-1")
 
-      comments.forEach(x => {
+      comments = body.split('|')
+      comments = comments.map(x => x.split(':'))
+      comments = comments.map(x => x.map(x => app.parseResponse(x, "~")))
+      if (req.query.type == "profile") comments.filter(x => x[0][2])
+      else comments = comments.filter(x => x[1][1])
+      if (!comments.length) return res.send("-1")
 
-        let keys = Object.keys(x)
-        x.content = Buffer.from(x[42], 'base64').toString();
-        x.likes = x[4]
-        x.date = (x[69] || "?") + " ago"
-        if (req.query.type == "commentHistory") x.levelID = x[666]
+      let commentArray = []
+
+      comments.forEach(c => {
+
+        var x = c[0] //comment info
+        var y = c[1] //account info
+
+        let comment = {}
+        comment.content = Buffer.from(x[2], 'base64').toString();
+        comment.likes = x[4]
+        comment.date = (x[9] || "?") + " ago"
+        if (req.query.type == "commentHistory") comment.levelID = x[1]
         if (req.query.type != "profile") {
-          x.username = x[1] || "Unknown"
-          x.playerID = x[3]
-          x.accountID = x[16]
-          x.form = ['icon', 'ship', 'ball', 'ufo', 'wave', 'robot', 'spider'][Number(x[14])]
-          if (x[420] > 0) x.percent = x[420]
-          if (x[12] && x[12].includes(',')) x.modColor = true
+          comment.username = y[1] || "Unknown"
+          comment.playerID = x[3]
+          comment.accountID = y[16]
+          comment.form = ['icon', 'ship', 'ball', 'ufo', 'wave', 'robot', 'spider'][Number(y[14])]
+          if (x[10] > 0) comment.percent = x[10]
+          if (x[12] && x[12].includes(',')) comment.modColor = true
         }
-        keys.forEach(k => delete x[k])
+        commentArray.push(comment)
       }) 
 
-      return res.send(comments)
+      return res.send(commentArray)
 
       })
 }
