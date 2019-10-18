@@ -42,47 +42,13 @@ app.clean = function(text) {if (typeof text != "string") return text; else retur
 
 console.log("Site online!")
 
-app.get("/assets/:file", function (req, res) {
-  fs.exists("./assets/" + req.params.file, function (exists) {
-    if (exists) {res.status(200).sendFile(path.join(__dirname, "/assets/" + req.params.file));
-    }})
-})
-
-app.get("/objects/:file", function (req, res) {
-  fs.exists("./assets/objects/" + req.params.file, function (exists) {
-    if (exists) {res.status(200).sendFile(path.join(__dirname, "/assets/objects/" + req.params.file));
-    }})
-})
-
-app.get("/blocks/:file", function (req, res) {
-  fs.exists("./assets/blocks/" + req.params.file, function (exists) {
-    if (exists) {res.status(200).sendFile(path.join(__dirname, "/assets/blocks/" + req.params.file));
-    }})
-})
-
-app.get("/gauntlets/:file", function (req, res) {
-  fs.exists("./assets/gauntlets/" + req.params.file, function (exists) {
-    if (exists) {res.status(200).sendFile(path.join(__dirname, "/assets/gauntlets/" + req.params.file));
-    }})
-})
-
-app.get("/difficulty/:file", function (req, res) {
-  fs.exists("./assets/gdfaces/" + req.params.file, function (exists) {
-    if (exists) {res.status(200).sendFile(path.join(__dirname, "/assets/gdfaces/" + req.params.file));
-    }})
-})
-
-app.get("/iconkitbuttons/:file", function (req, res) {
-  fs.exists("./assets/iconkitbuttons/" + req.params.file, function (exists) {
-    if (exists) {res.status(200).sendFile(path.join(__dirname, "/assets/iconkitbuttons/" + req.params.file));
-    }})
-})
-
-app.get("/gdicon/:file", function (req, res) {
-  fs.exists("./icons/iconkit/" + req.params.file, function (exists) {
-    if (exists) {res.status(200).sendFile(path.join(__dirname, "/icons/iconkit/" + req.params.file));
-    }})
-})
+app.use('/assets', express.static(__dirname + '/assets', {maxAge: "7d"}));
+app.use('/objects', express.static(__dirname + '/assets/objects', {maxAge: "7d"}));
+app.use('/blocks', express.static(__dirname + '/assets/blocks', {maxAge: "7d"}));
+app.use('/gauntlets', express.static(__dirname + '/assets/gauntlets', {maxAge: "7d"}));
+app.use('/difficulty', express.static(__dirname + '/assets/gdfaces', {maxAge: "7d"}));
+app.use('/iconkitbuttons', express.static(__dirname + '/assets/iconkitbuttons', {maxAge: "7d"}));
+app.use('/gdicon', express.static(__dirname + '/icons/iconkit', {maxAge: "7d"}));
 
 app.get("/api", function(req, res) {
   res.sendFile(__dirname + "/html/api.html")
