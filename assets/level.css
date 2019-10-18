@@ -120,6 +120,7 @@ p {
     font-family: aller, helvetica;
     color: white;
     font-size: 2.9vh;
+    word-break: break-all;
 }
 
 h1 {

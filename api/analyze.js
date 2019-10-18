@@ -63,8 +63,6 @@ data.forEach((x, y) => {
     data[y] = obj;
 })
 
-//return res.send(data)
-
 response.level = {
     name: level.name, id: level.id, author: level.author, authorID: level.authorID, accountID: level.accountID, large: level.large
 }
