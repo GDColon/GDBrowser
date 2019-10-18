@@ -45,11 +45,11 @@
 	</div>
 
 	<div style="position:absolute; bottom: 0%; left: 0%; width: 100%">
-		<img class="cornerPiece" src="../assets/corner.png" width=7%;>
+		<img class="gs" src="../assets/corner.png" width=7%;>
 	</div>
 
 	<div style="position:absolute; bottom: 0%; right: 0%; width: 100%; text-align: right;">
-		<img class="cornerPiece" src="../assets/corner.png" width=7%; style="transform: scaleX(-1)">
+		<img class="gs" src="../assets/corner.png" width=7%; style="transform: scaleX(-1)">
 	</div>
 
 	<div id="searchBox" class="supercenter dragscroll">
@@ -197,7 +197,7 @@ if (type == 'saved') {
 
 if (gauntlet) {
 	$('body').addClass('darkBG')
-	$('.cornerPiece').addClass('grayscale')
+	$('.gs').addClass('grayscale')
 	$('#header').text((gauntlets[parseInt(gauntlet) - 1] || "Unknown") + " Gauntlet")
 	$('#meta-title').attr('content', (gauntlets[parseInt(gauntlet) - 1] || "Unknown") + " Gauntlet")
 	$('#meta-desc').attr('content',  `View the 5 levels in the ${(gauntlets[parseInt(gauntlet) - 1] || "Unknown") + " Gauntlet"}!`)

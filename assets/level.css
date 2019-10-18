@@ -1,7 +1,5 @@
 @font-face {font-family: Pusab; src: url('./../assets/Pusab.ttf')}
 
-* { outline: none !important; }
-
 body {
     margin: 0;
     height: 100vh;
@@ -32,10 +30,6 @@ img, .noSelect {
 
 .yesClick {
     pointer-events: all;
-}
-
-.cornerPiece {
-    position: sticky;
 }
 
 .center {
@@ -126,7 +120,7 @@ p {
     font-family: aller, helvetica;
     color: white;
     font-size: 2.9vh;
-    word-break: break-word;
+    word-break: break-all;
 }
 
 h1 {
