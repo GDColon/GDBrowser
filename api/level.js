@@ -108,7 +108,7 @@ module.exports = async (app, req, res, api, analyze) => {
 
       //demon list stuff
       if (level.difficulty == "Extreme Demon") {
-        request.get('https://www.pointercrate.com/api/v1/demons/?name=' + x.trim(), async function(err, resp, demonList) {
+        request.get('https://www.pointercrate.com/api/v1/demons/?name=' + level.name.trim(), async function(err, resp, demonList) {
           let demons = JSON.parse(demonList)
           if (demons && demons[0].position <= 150) level.demonList = demons[0].position
           return sendLevel()
