@@ -148,6 +148,8 @@ $('.levelSearch').click(function() {
 	if (/^\d+$/.test($('#songID').val())) url += "&customSong"
 	}
 
+	if (url.endsWith('?type=0')) url = url.slice(0, -7)
+
 	window.location.href = url
 
 })
