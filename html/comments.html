@@ -113,7 +113,7 @@ else $('#pageDown').show()
 
 fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID}?page=${page}${history ? "&type=commentHistory" : ""}${mode == "top" ? "&top" : ""}`).then(res => res.json()).then(res => {
 	
-	if (res.length != 10 || (history && lvl.commentHistory == "off")) $('#pageUp').hide()
+	if (res.length < 9 || (history && lvl.commentHistory == "off")) $('#pageUp').hide()
 	else $('#pageUp').show()
 
 	if (res == -1 || (history && lvl.commentHistory == "off")) {
