@@ -4,7 +4,7 @@
 	<title>GD Level Browser API</title>
 	<meta charset="utf-8">
 	<link rel="icon" href="../difficulty/auto.png">
-	<link href="../assets/api.css" type="text/css" rel="stylesheet">
+	<link href="../css/api.css" type="text/css" rel="stylesheet">
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,600,700,800&display=swap" rel="stylesheet">
 	
@@ -78,7 +78,7 @@
 			</div>
 
 			<br>
-			<p class="reveal" onclick="$('#response-level').slideToggle(100);"><b>Response (35)</b></p>
+			<p class="reveal" onclick="$('#response-level').slideToggle(100);"><b>Response (36)</b></p>
 			<div class="subdiv" id="response-level">
 				<p class="br">*Values that require a download are in
 					<font color=red>red</font>
@@ -447,7 +447,7 @@
 				<p><b>Response is subject to change in the future</b></p>
 				<p>The API will return an array of each player with the following information:</p>
 				<p>level: Basic level info (name, ID, author, etc)</p>
-				<p>portals: A string listing the order of all the portals in the level. Does not include starting form/speed</p>
+				<p>portals: A string listing the order of all the portals in the level + their percent. Does not include starting form/speed</p>
 				<p>orbs: How many of each jump ring is in the level</p>
 				<p>triggers: How many of each trigger is in the level</p>
 				<p>blocks: How many of each block type is in the level</p>

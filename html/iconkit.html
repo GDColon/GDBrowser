@@ -1,7 +1,7 @@
 <head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
     <title>Online Icon Kit</title>
-    <link href="../assets/generate.css" type="text/css" rel="stylesheet">
+    <link href="../css/generate.css" type="text/css" rel="stylesheet">
     <meta name="viewport" content="width=1024">
     <meta property="og:description" content="Build and save your very own Geometry Dash icons, right from the internet!">
     <meta property="og:title" content="Geometry Dash Online Icon Kit">
@@ -16,7 +16,7 @@
 <script type="text/javascript" src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 <body class="iconscroll" style="background-image: linear-gradient(rgb(139, 139, 139), rgb(100, 100, 100));">
 <div class="center hidden"><br>
-    <img id="iconkitlogo" src="../assets/iconkit.png" height=50px; style="margin-bottom: 7px;"><br><br>
+    <img id="iconkitlogo" src="../assets/iconkit.png" height=50px; style="margin: 7px 0;"><br><br>
     <img id="loading" src="../assets/loading.png" class="spin" height=95px; style="margin: auto auto 25px auto">
     <img id="result" src="../icon/icon" download="icon.png">
     <hr id="gdfloor">
@@ -195,12 +195,12 @@ fetch('./api/icons').then(res => {
         $('#glow').attr('src', '../iconkitbuttons/streak_off.png')
         enableGlow = 0
 
-        fetch(iconURL + '&iconid').then(res => res.json())
+        fetch('../api/profile/' + user).then(res => res.json())
         .then(info => {
-            $(`#${currentForm}-${info.id}`).trigger('click')
+            $(`#${currentForm}-${info.icon}`).trigger('click')
             $(`#col1-${info.col1}`).trigger('click')
             $(`#col2-${info.col2}`).trigger('click')
-            if (info.glow == "1")$('#glowbtn').trigger('click')
+            if (info.glow)$('#glowbtn').trigger('click')
         })
 })
 

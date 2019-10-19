@@ -5,7 +5,7 @@
 	<meta id="meta-title" property="og:title" content="Level Analysis">
     <meta id="meta-desc" property="og:description" content="Analyze a Geometry Dash level and view it's objects, portals, color channels, code, and more!">
 	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/assets/cp.png">
-	<link href="../assets/level.css" type="text/css" rel="stylesheet">
+	<link href="../css/level.css" type="text/css" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
 	<link rel="icon" href="../assets/cp.png">
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
@@ -25,7 +25,7 @@
 		<h2 id="levelName"></h2>
 		<h3 id="objectCount"></h3>
 		<h1 class="topMargin">Portal order</h1>
-		<div class="transparentBox analysis" id="portals"></div>
+		<div class="transparentBox analysis" id="portals" style="height: 23%"></div>
 		<div>
 			<div class="portalSetting"><h3><input checked type="checkbox" class="portalToggle" id="box1" portal="form"> <label for="box1" class="gdcheckbox gdButton portalButton"></label>Form Portals</h3></div>
 			<div class="portalSetting"><h3><input checked type="checkbox" class="portalToggle" id="box2" portal="size"> <label for="box2" class="gdcheckbox gdButton portalButton"></label>Size Portals</h3></div>
@@ -93,13 +93,21 @@ let miscList = Object.keys(res.misc)
 let blockList = Object.keys(res.blocks)
 let colorList = Object.keys(res.colors)
 
-let portals = res.portals.split(", ")
+let portals = res.portals.split(", ").map(x => x.split(" "))
 
 function appendPortals() {
 	$('#portals').html("")
-	if (res.settings.gamemode && res.settings.gamemode != "cube" && !disabledPortals.includes('form')) $('#portals').append(`<img class="portalImage" src="../objects/portal-${res.settings.gamemode}.png" style="margin: 1.3% 0.8%"><img class="divider portalImage" src="../assets/divider.png" style="margin: 1.3% 0.8%">`)
-	if (res.settings.speed && res.settings.speed != "1x" && !disabledPortals.includes('speed')) $('#portals').append(`<img class="portalImage speedPortal" src="../objects/portal-${res.settings.speed}.png" style="margin: 2% 0.8%"><img class="divider portalImage" src="../assets/divider.png" style="margin: 1.3% 0.8%">`)
+	if (res.settings.gamemode && res.settings.gamemode != "cube" && !disabledPortals.includes('form')) $('#portals').append(`<div class="inline portalDiv"><img class="portalImage" src='../objects/portal-${res.settings.gamemode}.png'><h3>Start</h3></div><img class="divider portalImage" src="../assets/divider.png" style="margin: 1.3% 0.8%">`)
+	if (res.settings.speed && res.settings.speed != "1x" && !disabledPortals.includes('speed')) $('#portals').append(`<div class="inline portalDiv"><img class="portalImage speedPortal" src='../objects/portal-${res.settings.speed}.png'><h3>Start</h3></div><img class="divider portalImage" src="../assets/divider.png" style="margin: 1.3% 0.8%">`)
 	
+
+	//$('#portals').append(`<img class="portalImage" src="../objects/portal-${res.settings.gamemode}.png" style="margin: 1.3% 0.8%"><img class="divider portalImage" src="../assets/divider.png" style="margin: 1.3% 0.8%">`)
+	//$('#portals').append(`<img class="portalImage speedPortal" src="../objects/portal-${res.settings.speed}.png" style="margin: 2% 0.8%"><img class="divider portalImage" src="../assets/divider.png" style="margin: 1.3% 0.8%">`)
+
+	//$('#portals').append(`<div class="inline portalDiv"><img class="portalImage speedPortal" src='../objects/portal-${res.settings.speed}.png'><h3>0%</h3></div><img class="divider portalImage" src="../assets/divider.png" style="margin: 1.3% 0.8%">`)
+
+	//
+
 	let dividerCount = $('.divider').length - 1
 
 	$('.divider').each(function(y) {
@@ -107,8 +115,10 @@ function appendPortals() {
 	})
 
 	portals.forEach(x => {
-		if (!x || x == "") return;
-		$('#portals').append(`<img class="portalImage ${x.match(/[0-9]x/) ? "speedPortal" : ""}" src='../objects/portal-${x}.png'>`)}
+		if (!x || x[0] == "") return;
+		$('#portals').append(`<div class="inline portalDiv"><img class="portalImage ${x[0].match(/[0-9]x/) ? "speedPortal" : ""}" src='../objects/portal-${x[0]}.png'><h3>${x[1]}</h3></div>`)
+	}
+
 	)}
 
 appendPortals()
@@ -146,16 +156,16 @@ appendPortals()
 		if ($(this).prop('checked')) disabledPortals = disabledPortals.filter(x => x != $(this).attr('portal'))
 		else disabledPortals.push($(this).attr('portal'))
 		
-		portals = res.portals.split(", ")
-		if (disabledPortals.includes('form')) portals = portals.filter(x => !formPortals.includes(x))
-		if (disabledPortals.includes('speed')) portals = portals.filter(x => !speedPortals.includes(x))
-		if (disabledPortals.includes('size')) portals = portals.filter(x => !sizePortals.includes(x))
-		if (disabledPortals.includes('dual')) portals = portals.filter(x => !dualPortals.includes(x))
-		if (disabledPortals.includes('mirror')) portals = portals.filter(x => !mirrorPortals.includes(x))
+		portals = res.portals.split(", ").map(x => x.split(" "))
+		if (disabledPortals.includes('form')) portals = portals.filter(x => !formPortals.includes(x[0]))
+		if (disabledPortals.includes('speed')) portals = portals.filter(x => !speedPortals.includes(x[0]))
+		if (disabledPortals.includes('size')) portals = portals.filter(x => !sizePortals.includes(x[0]))
+		if (disabledPortals.includes('dual')) portals = portals.filter(x => !dualPortals.includes(x[0]))
+		if (disabledPortals.includes('mirror')) portals = portals.filter(x => !mirrorPortals.includes(x[0]))
 
 		if (disabledPortals.includes('dupe')) {
-			portals.forEach((x, y) => {if (portals[y+1] && portals[y+1] == x) portals[y] = null;})
-			portals = portals.filter(x => x != null)
+			portals.forEach((x, y) => {if (portals[y+1][0] && portals[y+1][0] == x[0]) portals[y][0] = null;})
+			portals = portals.filter(x => x[0] != null)
 		}
 
 		appendPortals()

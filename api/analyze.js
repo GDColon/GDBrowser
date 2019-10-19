@@ -63,13 +63,18 @@ data.forEach((x, y) => {
     data[y] = obj;
 })
 
+let last = 0;
+let xArr = data.map(x => Number(x.x))
+let dl = data.length
+while (dl--) {last = xArr[dl] > last ? xArr[dl] : last}
+
 response.level = {
     name: level.name, id: level.id, author: level.author, authorID: level.authorID, accountID: level.accountID, large: level.large
 }
 
 response.objects = data.length - 2
 
-response.portals = data.filter(x => x.portal).sort(function (a, b) {return parseInt(a.x) - parseInt(b.x)}).map(x => x.portal).join(", ")
+response.portals = data.filter(x => x.portal).sort(function (a, b) {return parseInt(a.x) - parseInt(b.x)}).map(x => x.portal + " " + Math.round(x.x / last * 99) + "%").join(", ")
 
 response.orbs = {}
 orbArray = data.filter(x => x.orb).reduce( (a,b) => { //stolen from https://stackoverflow.com/questions/45064107/how-do-i-group-duplicate-objects-in-an-array
