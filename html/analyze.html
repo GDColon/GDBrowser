@@ -164,8 +164,8 @@ appendPortals()
 		if (disabledPortals.includes('mirror')) portals = portals.filter(x => !mirrorPortals.includes(x[0]))
 
 		if (disabledPortals.includes('dupe')) {
-			portals.forEach((x, y) => {if (portals[y+1][0] && portals[y+1][0] == x[0]) portals[y][0] = null;})
-			portals = portals.filter(x => x[0] != null)
+			portals.reverse().forEach((x, y) => {if (portals[y+1] && portals[y+1][0] == x[0]) portals[y][0] = null;})
+			portals = portals.reverse().filter(x => x[0] != null)
 		}
 
 		appendPortals()
