@@ -138,7 +138,6 @@ module.exports = async (app, req, res) => {
       if (isSpecial) {
         const legs = [1,2,3].map(function(val) {return genImageName(`0${val+1}`)});
         const glows = [1,2,3].map(function(val) {return genImageName(`0${val+1}`, '2')});
-        console.log(glows, legs);
         robotOffset1 = icons[legs[0]].spriteOffset.map(minusOrigOffset).concat(icons[legs[0]].spriteSize);
         robotOffset2 = icons[legs[1]].spriteOffset.map(minusOrigOffset).concat(icons[legs[1]].spriteSize);
         robotOffset3 = icons[legs[2]].spriteOffset.map(minusOrigOffset).concat(icons[legs[2]].spriteSize);
