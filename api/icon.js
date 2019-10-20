@@ -1,10 +1,9 @@
 const request = require('request')
 const Jimp = require('jimp');
-const plist = require('plist');
 const fs = require('fs');
 const path = require('path');
-const icons = plist.parse(fs.readFileSync("./icons/GJ_GameSheet02-uhd.plist", 'utf8')).frames
-const colors = require('../misc/colors.json')
+const icons = require('../icons/gameSheet.json');
+const colors = require('../misc/colors.json');
 const queryMapper = {
   ship: {
     form: 'ship',
@@ -35,6 +34,25 @@ const queryMapper = {
     ind: 43
   }
 }
+function recolor(img, col) {
+  return img.scan(0, 0, img.bitmap.width, img.bitmap.height, function (x, y, idx) {
+    if (img.bitmap.data.slice(idx, idx+3).every(function(val) {return val >= 20 && val <= 255})) { // If it's not "black, i.e. we want to recolor it"
+      this.bitmap.data[idx] = colors[col].r / (255 / this.bitmap.data[idx]);
+      this.bitmap.data[idx + 1] = colors[col].g / (255 / this.bitmap.data[idx + 1]);
+      this.bitmap.data[idx + 2] = colors[col].b / (255 / this.bitmap.data[idx + 2]);
+    }
+  })
+}
+/*
+Caveat of genFileName is that if there are any falsey values in the arguments they are ignored. 
+This is usually a good thing though - avoid issues by not putting something like 0 instead of '0'
+*/
+function genFileName(...args) {
+  return args.filter(function(val) {return val}).join('_')+'_001.png';
+}
+function fromIcons(filename) {
+  return `./icons/${filename}`;
+}
 let cache = {};
 module.exports = async (app, req, res) => {
 
@@ -46,7 +64,6 @@ module.exports = async (app, req, res) => {
       secret: 'Wmfd2893gb7'
     }
   }, function (err1, res1, body1) {
-
     let response = body1.split('#')[0].split(':');
     let result = {};
     for (let i = 0; i < response.length; i += 2) {
@@ -68,8 +85,9 @@ module.exports = async (app, req, res) => {
 
       let { form, ind } = queryMapper[req.query.form] || {};
       form = form || 'player';
+      ind = ind || 21;
 
-      let iconID = req.query.icon || account[ind || 21] || 1;
+      let iconID = req.query.icon || account[ind] || 1;
       let col1 = req.query.col1 || account[10] || 1;
       let col2 = req.query.col2 || account[11] || 3;
       let outline = req.query.glow || account[28] || "0";
@@ -79,29 +97,24 @@ module.exports = async (app, req, res) => {
       if (iconID && iconID.toString().length == 1) iconID = "0" + iconID;
 
       if (col1 == 15) outline = true;
-
-      let robotHead = ""; let robotMode = false; let spiderMode = false; 
-      if (form == "robot" || req.query.form == "cursed") { robotHead = "01_"; robotMode = true }
-      else if (form == "spider") { robotHead = "01_"; spiderMode = true }
-
-      if ((robotMode || spiderMode) && !fs.existsSync(`./icons/${form}_${iconID}_02_001.png`)) iconID = "01"
-
-      let robotLeg1 = `${form}_${iconID}_02_001.png`; let robotOffset1; let robotGlow1 = `${form}_${iconID}_02_2_001.png`;
-      let robotLeg2 = `${form}_${iconID}_03_001.png`; let robotOffset2; let robotGlow2 = `${form}_${iconID}_03_2_001.png`;
-      let robotLeg3 = `${form}_${iconID}_04_001.png`; let robotOffset3; let robotGlow3 = `${form}_${iconID}_04_2_001.png`;
-      let robotLeg3b; let robotLeg2b; let robotLeg1b; let robotLeg1c;
-
-      let icon = `./icons/${form}_${iconID}_${robotHead}001.png`
-      let glow = `./icons/${form}_${iconID}_${robotHead}2_001.png`
-      let extra = `./icons/${form}_${iconID}_${robotHead}extra_001.png`
-
-      if (!fs.existsSync(icon)) {
-        iconID = '01'
-        icon = `./icons/${form}_01_${robotHead}001.png`;
-        glow = `./icons/${form}_01_${robotHead}2_001.png`;
+      function genImageName(...args) {
+        return genFileName(form, iconID, ...args);
       }
+      let icon, glow, extra;
+      function setBaseIcons() {
+        icon = genImageName(isSpecial && '01');
+        glow = genImageName(isSpecial && '01', '2');
+        extra = genImageName(isSpecial && '01', 'extra');
+      }
+      const isSpecial = ['robot', 'spider'].includes(form);
+      setBaseIcons();
 
-      if (!fs.existsSync(icon)) return res.sendFile(path.join(__dirname, '../assets/unknownIcon.png'))
+      if (!fs.existsSync(fromIcons(icon)) || (isSpecial && !fs.existsSync(fromIcons(genImageName('02'))))) {
+        iconID = '01';
+        setBaseIcons();
+        // Condition on next line should never be satisfied but you never know!
+        if (!fs.existsSync(fromIcons(icon))) return res.sendFile(path.join(__dirname, '../assets/unknownIcon.png'))
+      }
 
       if (!colors[col1]) col1 = 1
       if (!colors[col2]) col2 = 3
@@ -114,77 +127,61 @@ module.exports = async (app, req, res) => {
         return res.end(cache[iconCode].value);
       }
 
-      let ufoMode = false
       let useExtra = false
 
-      let originalOffset = icons[`${form}_${iconID}_${robotHead}001.png`].spriteOffset.slice(1, -1).split(",").map(x => parseInt(x.trim()))
-      let offset = icons[`${form}_${iconID}_${robotHead}2_001.png`].spriteOffset.slice(1, -1).split(",").map(x => parseInt(x.trim())).map(function (x, y) { return x - originalOffset[y] })
+      let originalOffset = icons[icon].spriteOffset;
+      const minusOrigOffset = function(x, y) { return x - originalOffset[y] }
+      let offset = icons[glow].spriteOffset.map(minusOrigOffset);
+      let robotLeg1, robotLeg2, robotLeg3, robotLeg3b, robotLeg2b, robotLeg1b, robotLeg1c;
+      let robotOffset1, robotOffset2, robotOffset3, robotOffset1b, robotOffset2b, robotOffset3b;
+      let robotGlow1, robotGlow2, robotGlow3;
+      if (isSpecial) {
+        const legs = [1,2,3].map(function(val) {return genImageName(`0${val+1}`)});
+        const glows = [1,2,3].map(function(val) {return genImageName(`0${val+1}`, '2')});
+        console.log(glows, legs);
+        robotOffset1 = icons[legs[0]].spriteOffset.map(minusOrigOffset).concat(icons[legs[0]].spriteSize);
+        robotOffset2 = icons[legs[1]].spriteOffset.map(minusOrigOffset).concat(icons[legs[1]].spriteSize);
+        robotOffset3 = icons[legs[2]].spriteOffset.map(minusOrigOffset).concat(icons[legs[2]].spriteSize);
 
-      if (robotMode || spiderMode) {
+        robotOffset1b = icons[glows[0]].spriteOffset.map(minusOrigOffset).concat(icons[glows[0]].spriteSize);
+        robotOffset2b = icons[glows[1]].spriteOffset.map(minusOrigOffset).concat(icons[glows[1]].spriteSize);
+        robotOffset3b = icons[glows[2]].spriteOffset.map(minusOrigOffset).concat(icons[glows[2]].spriteSize);
 
-        robotOffset1 = icons[robotLeg1].spriteOffset.slice(1, -1).split(",").map(x => parseInt(x.trim())).map(function (x, y) { return x - originalOffset[y] }).concat(icons[robotLeg1].spriteSize.slice(1, -1).split(",").map(x => parseInt(x.trim())))
-        robotOffset2 = icons[robotLeg2].spriteOffset.slice(1, -1).split(",").map(x => parseInt(x.trim())).map(function (x, y) { return x - originalOffset[y] }).concat(icons[robotLeg2].spriteSize.slice(1, -1).split(",").map(x => parseInt(x.trim())))
-        robotOffset3 = icons[robotLeg3].spriteOffset.slice(1, -1).split(",").map(x => parseInt(x.trim())).map(function (x, y) { return x - originalOffset[y] }).concat(icons[robotLeg3].spriteSize.slice(1, -1).split(",").map(x => parseInt(x.trim())))
-
-        robotOffset1b = icons[robotGlow1].spriteOffset.slice(1, -1).split(",").map(x => parseInt(x.trim())).map(function (x, y) { return x - originalOffset[y] }).concat(icons[robotGlow1].spriteSize.slice(1, -1).split(",").map(x => parseInt(x.trim())))
-        robotOffset2b = icons[robotGlow2].spriteOffset.slice(1, -1).split(",").map(x => parseInt(x.trim())).map(function (x, y) { return x - originalOffset[y] }).concat(icons[robotGlow2].spriteSize.slice(1, -1).split(",").map(x => parseInt(x.trim())))
-        robotOffset3b = icons[robotGlow3].spriteOffset.slice(1, -1).split(",").map(x => parseInt(x.trim())).map(function (x, y) { return x - originalOffset[y] }).concat(icons[robotGlow3].spriteSize.slice(1, -1).split(",").map(x => parseInt(x.trim())))
-
-        robotLeg1 = new Jimp(`./icons/${robotLeg1}`); robotGlow1 = new Jimp(`./icons/${robotGlow1}`)
-        robotLeg2 = new Jimp(`./icons/${robotLeg2}`); robotGlow2 = new Jimp(`./icons/${robotGlow2}`)
-        robotLeg3 = new Jimp(`./icons/${robotLeg3}`); robotGlow3 = new Jimp(`./icons/${robotGlow3}`)
+        robotLeg1 = new Jimp(fromIcons(legs[0])); robotGlow1 = new Jimp(fromIcons(glows[0]))
+        robotLeg2 = new Jimp(fromIcons(legs[1])); robotGlow2 = new Jimp(fromIcons(glows[1]))
+        robotLeg3 = new Jimp(fromIcons(legs[2])); robotGlow3 = new Jimp(fromIcons(glows[2]))
       }
 
       res.contentType('image/png');
-
-      function recolor(img, col) {
-
-        return img.scan(0, 0, img.bitmap.width, img.bitmap.height, function (x, y, idx) {
-          if (img.bitmap.data.slice(idx, idx+3).every(function(val) {return val >= 20 && val <= 255})) { // If it's not "black, i.e. we want to recolor it"
-            this.bitmap.data[idx] = colors[col].r / (255 / this.bitmap.data[idx]);
-            this.bitmap.data[idx + 1] = colors[col].g / (255 / this.bitmap.data[idx + 1]);
-            this.bitmap.data[idx + 2] = colors[col].b / (255 / this.bitmap.data[idx + 2]);
-          }
-        })
-      }
-
+      let extrabit, offset2, size2;
       if (fs.existsSync(extra)) {
-        var extrabit = icons[`${form}_${iconID}_${robotHead}extra_001.png`]
-        var offset2 = extrabit.spriteOffset.slice(1, -1).split(",").map(x => parseInt(x.trim())).map(function (x, y) { return x - originalOffset[y] })
-        var size2 = extrabit.spriteSize.slice(1, -1).split(",").map(x => parseInt(x.trim()))
+        extrabit = icons[extra]
+        offset2 = extrabit.spriteOffset.map(minusOrigOffset);
+        size2 = extrabit.spriteSize;
 
         extra = new Jimp(extra);
         useExtra = true
       }
 
-      if (form == "bird") {
-        //   var ufoName = `bird_${iconID}_3_001.png`
-        //   var ufoTop = new Jimp(`./icons/${ufoName}`);
-        //   var topOffset = icons[ufoName].spriteOffset.slice(1, -1).split(",").map(x => parseInt(x.trim())).map(function(x, y) {return x - originalOffset[y]}).concat(icons[ufoName].spriteSize.slice(1, -1).split(",").map(x => parseInt(x.trim())))
-        //   var ufGlow = new Jimp(`./icons/bird_${iconID}_glow_001.png`);
-        //   console.log(topOffset)
-        ufoMode = true;
-      }
-
-      Jimp.read(glow).then(async function (image) {
+      Jimp.read(fromIcons(glow)).then(async function (image) {
 
         let size = [image.bitmap.width, image.bitmap.height]
         let glow = recolor(image, col2)
-        let imgOff = (robotMode || spiderMode) ? 100 : 0
+        let imgOff = isSpecial ? 100 : 0
 
-        Jimp.read(icon).then(async function (ic) {
+        Jimp.read(fromIcons(icon)).then(async function (ic) {
 
           let iconSize = [ic.bitmap.width, ic.bitmap.height]
           recolor(ic, col1)
           ic.composite(glow, (iconSize[0] / 2) - (size[0] / 2) + offset[0], (iconSize[1] / 2) - (size[1] / 2) - offset[1], { mode: Jimp.BLEND_DESTINATION_OVER })
 
-          if (ufoMode) {
+          if (form == "ufo") {
             ic.contain(iconSize[0], iconSize[1] * 1.1, Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_CENTER)
             //ic.contain(iconSize[0], 300, Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_BOTTOM)
             //ic.composite(ufoTop, (iconSize[0] / 2) - (size[0] / 2) + 7, iconSize[1] + topOffset[3] + 30, {mode: Jimp.BLEND_DESTINATION_OVER})
           }
 
-          if (robotMode) {
+          if (form == "robot") {
 
             ic.contain(iconSize[0], 300, Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_TOP)
             ic.contain(iconSize[0] + 200, 300, Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_TOP)
@@ -240,7 +237,7 @@ module.exports = async (app, req, res) => {
           }
 
 
-          if (spiderMode) {
+          if (form == "spider") {
 
             let spiderBody;
             ic.contain(iconSize[0], 300, Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_TOP)
@@ -316,7 +313,7 @@ module.exports = async (app, req, res) => {
           }
 
           if (useExtra) ic.composite(extra, imgOff + (iconSize[0] / 2) - (size2[0] / 2) + offset2[0], (iconSize[1] / 2) - (size2[1] / 2) - offset2[1])
-          if (!ufoMode) ic.autocrop(0.01, false)
+          if (form != "ufo") ic.autocrop(0.01, false)
           else if (ic.bitmap.height == '300') ic.autocrop(1, false)
 
           let finalSize = [ic.bitmap.width, ic.bitmap.height]
