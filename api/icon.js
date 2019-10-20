@@ -153,12 +153,12 @@ module.exports = async (app, req, res) => {
 
       res.contentType('image/png');
       let extrabit, offset2, size2;
-      if (fs.existsSync(extra)) {
+      if (fs.existsSync(fromIcons(extra))) {
         extrabit = icons[extra]
         offset2 = extrabit.spriteOffset.map(minusOrigOffset);
         size2 = extrabit.spriteSize;
 
-        extra = new Jimp(extra);
+        extra = new Jimp(fromIcons(extra));
         useExtra = true
       }
 
