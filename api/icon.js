@@ -5,11 +5,40 @@ const fs = require('fs');
 const path = require('path');
 const icons = plist.parse(fs.readFileSync("./icons/GJ_GameSheet02-uhd.plist", 'utf8')).frames
 const colors = require('../misc/colors.json')
+const queryMapper = {
+  ship: {
+    form: 'ship',
+    ind: 22
+  },
+  ball: {
+    form: 'player_ball',
+    ind: 23
+  },
+  ufo: {
+    form: 'bird',
+    ind: 24
+  },
+  wave: {
+    form: 'dart',
+    ind: 25
+  },
+  robot: {
+    form: 'robot',
+    ind: 26
+  },
+  spider: {
+    form: 'spider',
+    ind: 43
+  },
+  cursed: {
+    form: 'spider',
+    ind: 43
+  }
+}
 let cache = {};
 module.exports = async (app, req, res) => {
 
   let username = req.params.text
-  let form = 'player'
 
   request.post('http://boomlings.com/database/getGJUsers20.php', {
     form: {
@@ -31,43 +60,25 @@ module.exports = async (app, req, res) => {
       }
     }, function (err2, res2, body2) {
 
-      let response2 = body2.split('#')[0].split(':');
+      let response2 = body2 == "-1" ? '' : body2.split('#')[0].split(':');
       let account = {};
       for (let i = 0; i < response2.length; i += 2) {
         account[response2[i]] = response2[i + 1]
       }
 
-      let iconID = account[21]
-      let col1 = account[10]
-      let col2 = account[11]
-      let outline = account[28]
+      let { form, ind } = queryMapper[req.query.form] || {};
+      form = form || 'player';
 
-      if (body2 == "-1") {
-        iconID = "1"
-        col1 = "1"
-        col2 = "3"
-        outline = "0"
-      }
-
-      if (req.query.form == 'ship') { form = 'ship'; iconID = account[22] }
-      if (req.query.form == 'ball') { form = 'player_ball'; iconID = account[23] }
-      if (req.query.form == 'ufo') { form = 'bird'; iconID = account[24] }
-      if (req.query.form == 'wave') { form = 'dart'; iconID = account[25] }
-      if (req.query.form == 'robot') { form = 'robot'; iconID = account[26] }
-      if (req.query.form == 'spider' || req.query.form == 'cursed') { form = 'spider'; iconID = account[43] }
-
-      if (req.query.icon) iconID = req.query.icon
-      if (req.query.col1) col1 = req.query.col1
-      if (req.query.col2) col2 = req.query.col2
-      if (req.query.glow) outline = req.query.glow
-
-      if (!iconID) iconID = 1;
+      let iconID = req.query.icon || account[ind || 21] || 1;
+      let col1 = req.query.col1 || account[10] || 1;
+      let col2 = req.query.col2 || account[11] || 3;
+      let outline = req.query.glow || account[28] || "0";
 
       if (outline == "0") outline = false;
 
-      if (iconID && iconID.toString().length == 1) iconID = "0" + iconID
+      if (iconID && iconID.toString().length == 1) iconID = "0" + iconID;
 
-      if (col1 == 15) outline = true
+      if (col1 == 15) outline = true;
 
       let robotHead = ""; let robotMode = false; let spiderMode = false; 
       if (form == "robot" || req.query.form == "cursed") { robotHead = "01_"; robotMode = true }
