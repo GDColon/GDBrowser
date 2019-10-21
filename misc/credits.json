@@ -1,0 +1,72 @@
+{
+    "credits": [
+        {
+            "header": "Programming/Website",
+            "name": "Colon",
+            "youtube": ["https://youtube.com/channel/UCFDsxSlQXpLLpVScy2NmbcQ", "youtube"],
+            "twitter": ["https://twitter.com/TheRealGDColon", "twitter"],
+            "github": ["https://github.com/GDColon", "github"]
+        },
+
+
+        {
+            "header": "Level Analyzing Help",
+            "name": "Alten",
+            "youtube": ["https://youtube.com/channel/UC9M8hLqh2yZIPSDvpyL7o8g", "youtube"],
+            "twitter": ["https://twitter.com/gd_alten", "twitter"],
+            "github": ["https://github.com/Altenhh", "github"]
+        },
+
+        {
+            "header": "Level Analyzing Help",
+            "name": "AlFas",
+            "youtube": ["https://youtube.com/user/Alex100077", "youtube"],
+            "twitter": ["https://twitter.com/AlFas6237", "twitter"],
+            "github": ["https://github.com/AlFasGD", "github"]
+        },
+
+        {
+            "header": "Accurate Leaderboard",
+            "name": "SMJSGaming",
+            "youtube": ["https://youtube.com/channel/UCwEsWDs9kGN2vvoiNTJKdaQ", "youtube"],
+            "twitter": ["https://instagram.com/smjs_gaming", "twitter"],
+            "github": ["https://github.com/SMJSGaming", "github"]
+        },
+
+        {
+            "header": "API Help",
+            "name": "Alex1304",
+            "youtube": ["https://youtube.com/channel/UC0hFAVN-GAbZYuf_Hfk1Iog", "youtube"],
+            "twitter": ["https://twitter.com/gd_alex1304", "twitter"],
+            "github": ["https://github.com/Alex1304", "github"]
+        },
+
+        {
+            "header": "Web Design Help",
+            "name": "Ucrash",
+            "youtube": ["https://youtube.com/channel/UCfPgDZBhCodHIFo6OOVcH2A", "youtube"],
+            "twitter": ["https://twitter.com/GDUcrash", "twitter"],
+            "github": ["https://github.com/GDUcrash", "github"]
+        },
+
+        {
+            "header": "Demon List API",
+            "name": "stardust1971",
+            "youtube": ["https://youtube.com/user/stardust19710", "youtube"],
+            "twitter": ["https://twitter.com/stadust1971", "twitter"],
+            "github": ["https://pointercrate.com", "demonButton"]
+        },
+        {
+            "header": "Everything Else",
+            "name": "RobTop",
+            "youtube": ["https://youtube.com/channel/UCz_yk8mDSAnxJq0ar66L4sw", "youtube"],
+            "twitter": ["https://twitter.com/RobTopGames", "twitter"],
+            "github": ["https://www.facebook.com/geometrydash", "facebook"]
+        }
+    ],
+
+    "contributors": [
+        ["101arrowz", "genius991"],
+        ["Qufyy", "qufy"]
+    ]
+}

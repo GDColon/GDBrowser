@@ -4,36 +4,8 @@ const fs = require('fs');
 const path = require('path');
 const icons = require('../icons/gameSheet.json');
 const colors = require('../misc/colors.json');
-const queryMapper = {
-  ship: {
-    form: 'ship',
-    ind: 22
-  },
-  ball: {
-    form: 'player_ball',
-    ind: 23
-  },
-  ufo: {
-    form: 'bird',
-    ind: 24
-  },
-  wave: {
-    form: 'dart',
-    ind: 25
-  },
-  robot: {
-    form: 'robot',
-    ind: 26
-  },
-  spider: {
-    form: 'spider',
-    ind: 43
-  },
-  cursed: {
-    form: 'spider',
-    ind: 43
-  }
-}
+const forms = require('../icons/forms.json')
+
 function recolor(img, col) {
   return img.scan(0, 0, img.bitmap.width, img.bitmap.height, function (x, y, idx) {
     if (img.bitmap.data.slice(idx, idx+3).every(function(val) {return val >= 20 && val <= 255})) { // If it's not "black, i.e. we want to recolor it"
@@ -54,6 +26,7 @@ function fromIcons(filename) {
   return `./icons/${filename}`;
 }
 let cache = {};
+
 module.exports = async (app, req, res) => {
 
   let username = req.params.text
@@ -83,7 +56,7 @@ module.exports = async (app, req, res) => {
         account[response2[i]] = response2[i + 1]
       }
 
-      let { form, ind } = queryMapper[req.query.form] || {};
+      let { form, ind } = forms[req.query.form] || {};
       form = form || 'player';
       ind = ind || 21;
 
