@@ -260,6 +260,21 @@ input::-webkit-inner-spin-button {
     border-image: url('./../assets/brownbox.png') 10% round;
 }
 
+@keyframes boxAnimator{ /*trasnform properties other than scale are there because otherwise CSS moves the box down to the right*/
+    0% {
+        transform: scale(0) translate(-50%, -50%);
+        transform-origin:left top
+    }
+    70% {
+        transform: scale(1.2) translate(-50%, -50%);
+        transform-origin:left top
+    }
+    100% {
+        transform: scale(1) translate(-50%, -50%);
+	transform-origin:left top
+    }
+}
+
 .fancybox {
     width: 69vh;
     padding: 1vh 3vh;
@@ -268,6 +283,7 @@ input::-webkit-inner-spin-button {
     background-color: #001931;
     border-image: url('./../assets/fancybox.png') 10% stretch;
     border-image-slice: 65;
+    animation: boxAnimator 0.3s;
 }
 
 .epicbox {
