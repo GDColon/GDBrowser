@@ -129,6 +129,10 @@ app.get("/api/mappacks", async function(req, res) {
   res.send(require('./misc/mapPacks.json'))
 })
 
+app.get("/api/credits", function(req, res) {
+  res.send(require('./misc/credits.json'))
+})    
+
 app.get("/iconkit", function(req, res) {
   res.sendFile(__dirname + "/html/iconkit.html")
 })

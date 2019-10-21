@@ -619,6 +619,18 @@ input::-webkit-inner-spin-button {
     height: 5.5%;
 }
 
+.githubChad {
+    display: inline-block;
+    width: 30%;
+    height: 20%;
+    margin: 1% 0%;
+}
+
+.githubChad h2 {
+    margin-bottom: 3%;
+    font-size: 4vh;
+}
+
 .analysis {
     height: 20%;
     width: 90%;

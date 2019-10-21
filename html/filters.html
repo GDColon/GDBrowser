@@ -149,7 +149,7 @@ $('.levelSearch').click(function() {
 
 	if (url.endsWith('?type=0')) url = url.slice(0, -7)
 
-	window.location.href = url
+	window.location.href = url.replace(/\?type=0&/, "?")
 
 })
 
