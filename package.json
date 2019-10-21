@@ -6,6 +6,7 @@
   "private": true,
   "dependencies": {
     "canvas": "^2.6.0",
+    "compression": "^1.7.4",
     "connect-timeout": "^1.9.0",
     "cookie-parser": "^1.4.4",
     "directory-tree": "^2.2.4",
