@@ -8,6 +8,14 @@
             "github": ["https://github.com/GDColon", "github"]
         },
 
+        {
+            "header": "Additional Help",
+            "name": "101arrowz",
+            "ign": "genius991",
+            "youtube": ["https://www.youtube.com/channel/UCuloR4qLkF3QGw8WUHjcNuQ", "youtube"],
+            "twitter": ["https://twitter.com/arjunbarrett", "twitter"],
+            "github": ["https://github.com/101arrowz", "github"]
+        },
 
         {
             "header": "Level Analyzing Help",
@@ -56,6 +64,7 @@
             "twitter": ["https://twitter.com/stadust1971", "twitter"],
             "github": ["https://pointercrate.com", "demonButton"]
         },
+
         {
             "header": "Everything Else",
             "name": "RobTop",
@@ -66,7 +75,6 @@
     ],
 
     "contributors": [
-        ["101arrowz", "genius991"],
         ["Qufyy", "qufy"]
     ]
 }
