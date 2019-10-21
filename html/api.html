@@ -4,9 +4,7 @@
 	<title>GD Level Browser API</title>
 	<meta charset="utf-8">
 	<link rel="icon" href="../difficulty/auto.png">
-	<link href="../css/api.css" type="text/css" rel="stylesheet">
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,600,700,800&display=swap" rel="stylesheet">
+	<link href="../css/api.css" type="text/css" rel="stylesheet">	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,600,700,800&display=swap" rel="stylesheet">
 	
 	<meta id="meta-title" property="og:title" content="GDBrowser API">
     <meta id="meta-desc" property="og:description" content="It's basically the Geometry Dash API, but not terrible!">
@@ -81,7 +79,7 @@
 			<p class="reveal" onclick="$('#response-level').slideToggle(100);"><b>Response (36)</b></p>
 			<div class="subdiv" id="response-level">
 				<p class="br">*Values that require a download are in
-					<font color=red>red</font>
+					<span style="color:red">red</span>
 				</p>
 				<p>name: The name of the level</p>
 				<p>id: The ID of the level</p>
@@ -472,7 +470,8 @@
 </body>
 
 </html>
-
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script async type="text/javascript" src="../assets/sizecheck.js"></script>
 <script>
 	$('.subdiv').each(function() {
 		$(this).html($(this).html().replace(/(<p.*>)(.*:) /g, '$1<font class="param">$2</font> '))

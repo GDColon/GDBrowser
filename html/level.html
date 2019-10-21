@@ -7,8 +7,6 @@
 	<meta id="meta-title" property="og:title" content="[[NAME]] by [[AUTHOR]]">
 	<meta id="meta-desc" property="og:description" content="ID: [[ID]] | Stars: [[STARS]] | Difficulty: [[DIFFICULTY]] | Downloads: [[DOWNLOADS]] | Likes: [[LIKES]] | Length: [[LENGTH]] | Song: [[SONGNAME]] ([[SONGID]])">
 	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/difficulty/[[DIFFICULTYFACE]].png">
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-    <script async type="text/javascript" src="../assets/sizecheck.js"></script>
 </head>
 
 <body class="levelBG">
@@ -19,9 +17,9 @@
 		<div class="fancybox center supercenter">
 			<h2 class="smaller center" style="font-size: 5.5vh">Level Info</h2>
 			<p class="bigger center" id="levelInfo" style="line-height: 5vh; margin-top: 1.5vh;">
-				<font color="lime">[[NAME]]</font><br>
-				ID: <font color="yellow">[[ID]]</font>[[ORIGINALINFO]][[LOWDETAIL]][[PASS]][[UPLOAD]][[UPDATE]]
-				<br>Version:  <font color="yellow">[[VERSION]]</font>
+				<span style="color:lime">[[NAME]]</span><br>
+				ID: <span style="color:yellow">[[ID]]</span>[[ORIGINALINFO]][[LOWDETAIL]][[PASS]][[UPLOAD]][[UPDATE]]
+				<br>Version:  <span style="color:yellow">[[VERSION]]</span>
 				[[OBJECTINFO]][[REQUESTED]]
 			</p>
 			<img src="../assets/ok.png" width=20%; class="gdButton center closeWindow">
@@ -32,7 +30,7 @@
 		<div class="fancybox center supercenter">
 			<h2 class="smaller center" style="font-size: 5.5vh">Leaderboards</h2>
 			<p class="bigger center" style="line-height: 5vh; margin-top: 1.5vh;">
-				<font color="yellow">Leaderboards</font> are coming soon™
+				<span style="color:yellow">Leaderboards</span> are coming soon™
 			</p>
 			<img src="../assets/ok.png" width=20%; class="gdButton center closeWindow">
 		</div>
@@ -42,7 +40,7 @@
 		<div class="fancybox center supercenter">
 			<h2 class="smaller center" style="font-size: 5.5vh">Saved!</h2>
 			<p class="bigger center" style="line-height: 5vh; margin-top: 1.5vh;">
-				<font color="yellow">[[NAME]]</font> has been added to your <a class="youCanClickThis2" style="color:lime" href="../search/levels?type=saved">saved levels</a> list.
+				<span style="color:yellow">[[NAME]]</span> has been added to your <a class="youCanClickThis2" style="color:lime" href="../search/levels?type=saved">saved levels</a> list.
 			</p>
 			<img src="../assets/ok.png" width=20%; class="gdButton center" onclick="location.reload()">
 		</div>
@@ -52,7 +50,7 @@
 		<div class="fancybox center supercenter" style="width: 60vh; height: 28%">
 			<h2 class="smaller center" style="font-size: 5.5vh">Delete Level</h2>
 			<p class="bigger center" style="line-height: 5vh; margin-top: 1.5vh;">
-				Are you sure you want to <font color="#C67A7E">delete</font> this level from your <a class="youCanClickThis2"style="color:lime" href="../search/levels?type=saved">saved levels </a>list?
+				Are you sure you want to <span style="color:#C67A7E">delete</span> this level from your <a class="youCanClickThis2"style="color:lime" href="../search/levels?type=saved">saved levels </a>list?
 			</p>
 			<img src="../assets/btn-no.png" height=25%; class="gdButton center closeWindow">
 			<img src="../assets/btn-yes.png" height=25%; class="gdButton center sideSpaceB" onclick="deleteLevel()">
@@ -138,7 +136,8 @@
 </div>
 
 </body>
-
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script async type="text/javascript" src="../assets/sizecheck.js"></script>
 <script>
 
 if (window.location.href.endsWith('?download')) $('#infoDiv').show()

@@ -4,8 +4,9 @@ const fs = require("fs")
 const timeout = require('connect-timeout')
 let api = true;
 let gdicons = fs.readdirSync('./icons/iconkit')
-
+const compression = require('compression');
 const app = express();
+app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(timeout('25s'));
