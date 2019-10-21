@@ -87,8 +87,8 @@ fetch(`./api/credits`).then(res => res.json()).then(res => {
 		$('#credits').append(`<div id="credits${y+1}" class="subCredits" style="display: none;">
 			<div class="brownBox center supercenter" style="width: 80vh; height: 43%; padding-top: 1.5%; padding-bottom: 3.5%;">
 				<h1>${x.header}</h1><br>
-				<h2 style="margin-bottom: 1.5%" class="gdButton"><a href="./profile/${x.name}">${x.name}</h2></a>
-				<img src="./icon/${x.name}" height=30%; style="margin-bottom: 7%"><br>
+				<h2 style="margin-bottom: 1.5%" class="gdButton"><a href="./profile/${x.ign || x.name}">${x.name}</h2></a>
+				<img src="./icon/${x.ign || x.name}" height=30%; style="margin-bottom: 7%"><br>
 				<a target=_blank href="${x.youtube[0]}"><img src="../assets/${x.youtube[1]}.png" width="11%" class="gdButton"></a>
 				<a target=_blank href="${x.twitter[0]}"><img src="../assets/${x.twitter[1]}.png" width="11%" class="sideSpace gdButton"></a>
 				<a target=_blank href="${x.github[0]}"><img src="../assets/${x.github[1]}.png" width="11%" class="sideSpace gdButton"></a>
@@ -117,9 +117,7 @@ fetch(`./api/credits`).then(res => res.json()).then(res => {
 	$('#credits').append(`<div class="center supercenter" style="width: 80vh; height: 43%; pointer-events: none;">
 	<img class="closeWindow gdButton" src="../assets/close.png" height="25%" style="position: absolute; top: -24%; left: -7vh; pointer-events: all;" onclick="$('#credits').hide(); page = 1;"></div>`)
 
-})
-
-$(document).keydown(function(k) {
+	$(document).keydown(function(k) {
 
 	if ($('#credits').is(':hidden')) return
 
@@ -127,9 +125,11 @@ $(document).keydown(function(k) {
 		page -= 1; loadCredits();
 	}
 	
-	if (k.which == 39 && page < 5) { //right
+	if (k.which == 39 && page < res.credits.length + 1) { //right
 		page += 1; loadCredits();
-    }
+	}
+	
 });
+})
 
 </script>
