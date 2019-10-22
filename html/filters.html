@@ -158,7 +158,7 @@ for (let el of document.querySelectorAll('.diffDiv')) {
 	el.addEventListener('click', function() {
 		if (el.classList.contains('goBack')) {
 			demonMode = false;
-			document.querySelector('#difficulties').style.display = "block";
+			document.querySelector('#difficulties').style.display = 'block';
 			document.querySelector('#demonBtn').classList.remove('selectedFilter')
 			for (let el of document.querySelectorAll('.demonDiff')) el.classList.remove('selectedFilter');
 			document.querySelector('#demons').style.display = "none";
@@ -181,7 +181,7 @@ for (let el of document.querySelectorAll('.diffDiv')) {
 
 		if (el.getAttribute('diff') == -2) {
 			document.querySelector('#difficulties').style.display = "none";
-			document.querySelector('#demons').style.display = "block";
+			document.querySelector('#demons').style.display = 'block';
 			demonMode = true;
 		}
 	}, {passive: true})

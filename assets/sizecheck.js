@@ -11,9 +11,9 @@ document.body.insertAdjacentHTML('beforeEnd', `
 const onResize = function () {
 	if (window.innerHeight > window.innerWidth * 0.8) { 
 		document.querySelector('#everything').style.display = "none"; 
-		document.querySelector('#tooSmall').style.display = "block"; 
+		document.querySelector('#tooSmall').style.display = 'block'; 
 	}	else { 
-		document.querySelector('#everything').style.display = "block"; 
+		document.querySelector('#everything').style.display = 'block'; 
 		document.querySelector('#tooSmall').style.display = "none"; 
 	}
 };

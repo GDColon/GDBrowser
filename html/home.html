@@ -79,9 +79,9 @@ function loadCredits() {
 	for (let el of document.querySelectorAll('.subCredits')) {
 		el.style.display = "none";
 		if (el.id == "credits"+page)
-			el.style.display = "block";
+			el.style.display = 'block';
 	}
-	document.querySelector('#credits').style.display = "block";
+	document.querySelector('#credits').style.display = 'block';
 }
 
 fetch(`./api/credits`).then(res => res.json()).then(res => {

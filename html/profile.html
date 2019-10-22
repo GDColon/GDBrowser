@@ -149,7 +149,7 @@ function appendComments() {
   document.querySelector('#statusDiv').innerHTML = `<div class="supercenter" id="loading" style="height: 12%; top: 62%;"><img class="spin noSelect" src="../assets/loading.png" height="105%"></div>`;
 
   if (page == 0) document.querySelector('#pageDown').style.display = 'none'
-  else document.querySelector('#pageDown').style.display = "block";
+  else document.querySelector('#pageDown').style.display.display = 'block';
 
   fetch(`../api/comments/[[ACCOUNTID]]?type=profile&page=${page}`).then(res => res.json()).then(res => {
 

@@ -12,7 +12,7 @@
     </link>
 </head>
 <body class="iconscroll" style="background-image: linear-gradient(rgb(139, 139, 139), rgb(100, 100, 100));">
-<div class="center hidden"><br>
+<div class="center"><br>
     <img id="iconkitlogo" src="../assets/iconkit.png" height=50px; style="margin: 7px 0;"><br><br>
     <img id="loading" src="../assets/loading.png" class="spin" height=95px; style="margin: auto auto 25px auto">
     <img id="result" src="../icon/icon" download="icon.png">
@@ -40,13 +40,10 @@
     
 </div>
 </body>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script type="text/javascript" src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 <script type="text/javascript">
 
-$('#loading').hide();
-$('.hidden').show();
+document.querySelector('#loading').style.display = 'none';
+for (let el of document.querySelectorAll('.hidden')) el.style.display = 'block';
 
 let mobile =  /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)
 let forms = ['cube', 'ship', 'ball', 'ufo', 'wave', 'robot', 'spider']
@@ -58,159 +55,147 @@ let selectedCol1 = 0
 let selectedCol2 = 3
 let enableGlow = 0
 
-let imagesLoaded = 0
-let totalLoaded = 0
-
 function capitalize(str) {return str[0].toUpperCase() + str.substr(1)}
 
 if (mobile) {
-    $('#logo').attr('width', '80%');
+  document.querySelector('#logo').setAttribute('width', '80%');
 }
 
-forms.forEach(form => {$("#iconTabs").append(`<button form="${form}" class="blankButton iconTabButton"><img src="../iconkitbuttons/${form}_off.png" width=50px></button>`)})
-$("#iconTabs").append(`<button class="blankButton glowToggle" id="glowbtn"><img id="glow" src="../iconkitbuttons/streak_off.png" width=50px></button>`)
+document.querySelector("#iconTabs").insertAdjacentHTML('beforeEnd', forms.map(form => `<button form="${form}" class="blankButton iconTabButton"><img src="../iconkitbuttons/${form}_off.png" width=50px></button>`).join(''))
+document.querySelector("#iconTabs").insertAdjacentHTML('beforeEnd', `<button class="blankButton glowToggle" id="glowbtn"><img id="glow" src="../iconkitbuttons/streak_off.png" width=50px></button>`)
 
-forms.forEach(form => {$("#iconKitParent").append(`<div id="${form}s"></div>`)})
+forms.forEach(form => {document.querySelector("#iconKitParent").insertAdjacentHTML('beforeEnd', `<div id="${form}s"></div>`)})
 
 fetch('./api/icons').then(res => {
     return (res.json())})
     .then(iconArray => {
 
-        function filterIcon(name) { return iconArray.filter(x => x.startsWith(name)).sort(function (a,b) {return a.replace(/[^0-9]/g, "") - b.replace(/[^0-9]/g, "");})}
+      function filterIcon(name) { return iconArray.filter(x => x.startsWith(name)).sort(function (a,b) {return a.replace(/[^0-9]/g, "") - b.replace(/[^0-9]/g, "");})}
 
-        function appendIcon(form, formName) {
+      function appendIcon(form, formName) {
 
-        imagesLoaded = 0; totalLoaded = 0
-        $('#' + formName + 's').append('<br>')
+        document.querySelector('#' + formName + 's').insertAdjacentHTML('beforeEnd', '<br>')
 
         form.forEach(function (i, p) {
-        if (p != 0 && p % 12 == 0) $('#' + formName + 's').append('<br>')
-        $('#' + formName + 's').append(`<button num="${p + 1}" form="${formName}" class="blankButton iconButton" id="${formName}-${p + 1}"><img src="../gdicon/${i}" width="50px" title="${capitalize(formName)} ${p + 1}"></button>`)})
-        $('#' + formName + 's').imagesLoaded(function() {
-        }).progress(function() {
-        imagesLoaded += 1;
-        totalLoaded = imagesLoaded / $('#' + formName + 's').find('img').length * 100
-        $('#iconloading').css('width', `${totalLoaded}%`)
-        })}
+        if (p != 0 && p % 12 == 0) document.querySelector('#' + formName + 's').insertAdjacentHTML('beforeEnd', '<br>')
+        document.querySelector('#' + formName + 's').insertAdjacentHTML('beforeEnd', `<button num="${p+1}" form="${formName}" class="blankButton iconButton" id="${formName}-${p + 1}"><img src="../gdicon/${i}" width="50px" title="${capitalize(formName)} ${p + 1}"></button>`)})
+      }
 
-        let cubes = filterIcon('cube'); 
-        cubes.push(cubes.shift())
+      let cubes = filterIcon('cube'); 
+      cubes.push(cubes.shift());
+      appendIcon(cubes, 'cube');
 
-        $('body').imagesLoaded(function () {
-            appendIcon(cubes, "cube")
-            $('[num="1"][form="cube"]').addClass('iconSelected');
-        })
+      filterIcon('color').forEach(function (i, p) {
+        document.querySelector('#col1').insertAdjacentHTML('beforeEnd', `<button col=${p} class="blankButton color1" title="Color ${p}" id="col1-${p}"><img src="../gdicon/color_${p}.png" width=50px></button>`)
+        document.querySelector('#col2').insertAdjacentHTML('beforeEnd', `<button col=${p} class="blankButton color2" title="Color ${p}" id="col2-${p}"><img src="../gdicon/color_${p}.png" width=50px></button>`)
+      })
 
-        filterIcon('color').forEach(function (i, p) {
-           $('#col1').append(`<button col=${p} class="blankButton color1" title="Color ${p}" id="col1-${p}"><img src="../gdicon/color_${p}.png" width=50px></button>`)
-           $('#col2').append(`<button col=${p} class="blankButton color2" title="Color ${p}" id="col2-${p}"><img src="../gdicon/color_${p}.png" width=50px></button>`)})
+      document.querySelector('#col1').insertAdjacentHTML('beforeEnd', "<span style='min-width: 10px'></span>")
+      document.querySelector('#col2').insertAdjacentHTML('beforeEnd', "<span style='min-width: 10px'></span>")
+      document.querySelector('.color1[col="0"]').classList.add('iconSelected');
+      document.querySelector('.color2[col="3"]').classList.add('iconSelected');
 
-       $('#col1').append("<span style='min-width: 10px'></span>")
-       $('#col2').append("<span style='min-width: 10px'></span>")
+      for (let el of document.querySelectorAll('.iconTabButton')) el.addEventListener('click', function () {
 
-        $('.color1[col="0"]').addClass('iconSelected');
-        $('.color2[col="3"]').addClass('iconSelected');
-
-        $(document).on('click', '.iconTabButton', function () {
-
-        var form = $(this).attr('form')
+        var form = el.getAttribute('form')
         var forms = '#' + form + 's'
 
         currentForm = form
 
-        $('.iconTabButton').each(function(x, y) {
-        $(this).children().first().attr('src', $(this).children().first().attr('src').replace('_on', '_off'))})
+        for (let el of document.querySelectorAll('.iconTabButton')) {
+          el.firstChild.setAttribute('src', el.firstChild.getAttribute('src').replace('_on', '_off'));
+        }
+        var img = el.firstChild;
+        img.setAttribute('src', img.getAttribute('src').replace('_off', '_on'));
 
-        var img = $(this).children().first()
-        img.attr('src', img.attr('src').replace('_off', '_on'));
+        for (let el of document.querySelector('#iconKitParent').children) {
+          if (el.id != 'iconprogressbar') el.style.display = 'none';
+        }
+        if (!document.querySelector(forms) || document.querySelector(forms).innerHTML == "") appendIcon(filterIcon(form), form)
+        document.querySelector(forms).style.display = 'block';
+      })
 
-        $('#iconKitParent').each(function(x, y) {
-        $(this).children().not('#iconprogressbar').hide()})
-
-        if ($(forms).html() == "") appendIcon(filterIcon(form), form)
-        $(forms).show()
-        })
-
-        $('#iconTabs').find('.iconTabButton').first().children().first().attr('src', $('.iconTabButton').first().children().first().attr('src').replace('_off', '_on'))
+    for (let el of document.querySelectorAll('.color1')) el.addEventListener('click', function () {
+      for (let el of document.querySelectorAll(".color1")) el.classList.remove("iconSelected");
+      el.classList.add('iconSelected');
+      selectedCol1 = el.getAttribute('col');
+    })
+    for (let el of document.querySelectorAll('.color2')) el.addEventListener('click', function () {
+      for (let el of document.querySelectorAll(".color2")) el.classList.remove("iconSelected");
+      el.classList.add('iconSelected');
+      selectedCol2 = el.getAttribute('col');
     })
 
-    $(document).on('click', '.glowToggle', function () {
-
-    if (enableGlow) {
-        $("#glow").attr('src', $("#glow").attr('src').replace('_on', '_off'))
-        enableGlow = 0;
-    }
-
-    else {
-        $("#glow").attr('src', $("#glow").attr('src').replace('_off', '_on'))
-        enableGlow = 1;
-    }
-
+    document.querySelector("#generateIcon").addEventListener('click', function () {
+      document.querySelector("#loading").style.display = 'block';
+      document.querySelector("#result").style.display = 'none';
+      document.querySelector("#result").setAttribute('src', `../icon/icon?icon=${selectedIcon}&form=${selectedForm}&col1=${selectedCol1}&col2=${selectedCol2}&glow=${enableGlow}`)
+      document.querySelector("#downloadLink").setAttribute('href', `../icon/icon?icon=${selectedIcon}&form=${selectedForm}&col1=${selectedCol1}&col2=${selectedCol2}&glow=${enableGlow}`)
     })
 
-    $(document).on('click', '.iconButton', function () {
-    $(".iconButton").removeClass("iconSelected");
-    $(this).addClass('iconSelected');
-    selectedIcon = $(this).attr('num');
-    selectedForm = $(this).attr('form');
-    if (selectedIcon == 143) selectedIcon = 0;
+    document.querySelector('#result').addEventListener('load', function() {
+      document.querySelector("#loading").style.display = 'none';
+      document.querySelector('#result').style.removeProperty('display');
+        if (enableGlow == 1) document.querySelector("#gdfloor").style.marginTop = '-3px'
+        else document.querySelector("#gdfloor").style.marginTop = '0px';
     })
 
-    $(document).on('click', '.color1', function () {
-    $(".color1").removeClass("iconSelected");
-    $(this).addClass('iconSelected');
-    selectedCol1 = $(this).attr('col');
-    })
-
-    $(document).on('click', '.color2', function () {
-    $(".color2").removeClass("iconSelected");
-    $(this).addClass('iconSelected');
-    selectedCol2 = $(this).attr('col');
-    })
-
-    $("#generateIcon").click(function () {
-        $("#loading").show()
-        $("#result").hide()
-        $("#result").attr('src', `../icon/icon?icon=${selectedIcon}&form=${selectedForm}&col1=${selectedCol1}&col2=${selectedCol2}&glow=${enableGlow}`)
-        $("#downloadLink").attr('href', `../icon/icon?icon=${selectedIcon}&form=${selectedForm}&col1=${selectedCol1}&col2=${selectedCol2}&glow=${enableGlow}`)
-    })
-
-    $('#result').on('load', function() {
-        $("#loading").hide()
-        $("#result").show()
-        if (enableGlow == 1) $("#gdfloor").css('margin-top', '-3px')
-        else $("#gdfloor").css('margin-top', '0px')
-    })
-
-    $("#fetchUser").click(function () {
+    document.querySelector("#fetchUser").addEventListener('click', function () {
         
         let user = prompt(`Enter a player's username to get their ${currentForm == "ufo" ? "UFO" : currentForm}!\n(Form will depend on selected tab)\n`)
         if (!user) return;
 
         let iconURL = `../icon/${user}?form=${currentForm}`
-        $("#loading").show()
-        $("#result").hide()
-        $("#result").attr('src', iconURL)
-        $("#downloadLink").attr('href', iconURL)
-        $('#glow').attr('src', '../iconkitbuttons/streak_off.png')
+        document.querySelector("#loading").style.display = 'block'
+        document.querySelector("#result").style.display = 'hidden';
+        document.querySelector("#result").setAttribute('src', iconURL)
+        document.querySelector("#downloadLink").setAttribute('href', iconURL)
+        document.querySelector('#glow').setAttribute('src', '../iconkitbuttons/streak_off.png')
         enableGlow = 0
 
         fetch('../api/profile/' + user).then(res => res.json())
         .then(info => {
-            $(`#${currentForm}-${info.icon}`).trigger('click')
-            $(`#col1-${info.col1}`).trigger('click')
-            $(`#col2-${info.col2}`).trigger('click')
-            if (info.glow)$('#glowbtn').trigger('click')
+          document.querySelector(`#${currentForm}-${info.icon}`).click()
+          document.querySelector(`#col1-${info.col1}`).click()
+          document.querySelector(`#col2-${info.col2}`).click()
+            if (info.glow) document.querySelector('#glowbtn').click()
         })
-})
+      })
+      for (let el of document.querySelectorAll('.glowToggle')) el.addEventListener('click', function () {
+        if (enableGlow) {
+            document.querySelector("#glow").setAttribute('src', document.querySelector("#glow").getAttribute('src').replace('_on', '_off'))
+            enableGlow = 0;
+        }
 
+        else {
+            document.querySelector("#glow").setAttribute('src', document.querySelector("#glow").getAttribute('src').replace('_off', '_on'))
+            enableGlow = 1;
+        }
+
+        })
+        document.addEventListener('click', function (e) {
+          let el = e.target.closest('.iconButton');
+          if (!el) return;
+          for (let el of document.querySelectorAll(".iconButton")) el.classList.remove("iconSelected");
+          el.classList.add('iconSelected');
+          selectedIcon = el.getAttribute('num');
+          selectedForm = el.getAttribute('form');
+          if (selectedIcon == 143) selectedIcon = 0;
+        })
+    })
 document.getElementById("downloadIcon").onmousedown = function(event) {
-    if (event.which == 3) {
+    if (event.button == 2) {
         alert("URL copied to clipboard!");
-        var temp = $("<input>");
-          $("body").append(temp);
-          temp.val('https://gdbrowser.com' + $('#result').attr('src').slice(2)).select();
-          document.execCommand("copy"); temp.remove();
+        var temp = document.createElement("<div>"),
+          sel = window.getSelection(),
+          r = document.createRange();
+        temp.textContent = 'https://gdbrowser.com' + document.querySelector('#result').getAttribute('src').slice(2)
+        document.body.append(temp);
+        r.selectNodeContents(temp);
+        sel.removeAllRanges();
+        sel.addRange(r);
+        document.execCommand("copy");
+        temp.parentNode.removeChild(temp);
     }
 }
 
@@ -219,11 +204,10 @@ function backButton() {
 	window.location.href = "../../../../../"
 }
 
-$(document).keydown(function(k) {
-	if (k.keyCode == 27) { //esc
+document.addEventListener('keydown', function(k) {
+	if (k.code == 'Escape') { //esc
 		k.preventDefault()
-		$('#backButton').trigger('click')
+		document.querySelector('#backButton').click()
 	}
-});
-    
+}, {passive: true});
 </script>

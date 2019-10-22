@@ -64,7 +64,6 @@
 </div>
 
 </body>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script async type="text/javascript" src="../assets/sizecheck.js"></script>
 <script type="text/javascript" src="https://asvd.github.io/dragscroll/dragscroll.js"></script>
 <script>
@@ -108,12 +107,12 @@ fetch(target).then(res => res.json()).then(lvl => {
 		document.querySelector('#commentBox').insertAdjacentHTML('beforeEnd', `<div class="supercenter" id="loading" style="height: 12%;"><img class="spin noSelect" src="../assets/loading.png" height="105%"></div>`);
 
 		if (page == 0) document.querySelector('#pageDown').style.display = "none";
-		else document.querySelector('#pageDown').style.display = "block";
+		else document.querySelector('#pageDown').style.display = 'block';
 
 		fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID}?page=${page}${history ? "&type=commentHistory" : ""}${mode == "top" ? "&top" : ""}`).then(res => res.json()).then(res => {
 			
 			if (res.length < 9 || (history && lvl.commentHistory == "off")) document.querySelector('#pageUp').style.display = "none"
-			else document.querySelector('#pageUp').style.display = "block"
+			else document.querySelector('#pageUp').style.display = 'block'
 
 			if (res == -1 || (history && lvl.commentHistory == "off")) {
 				return document.querySelector('#loading').style.display = "none";

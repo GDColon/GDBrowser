@@ -243,15 +243,17 @@ let deleteMode = false;
 if (savedLevels) {
 	levelList = savedLevels.slice(6).split(',')
 	if (levelList.includes('[[ID]]')) {
-    const sB = document.querySelector('#saveButton');
-    sb.setAttribute('src', '../assets/delete.png');
-    sb.setAttribute('onclick', 'document.querySelector("#deleteDiv").style.display = "block"');
+    let sB = document.querySelector('#saveButton');
+    sB.setAttribute('src', '../assets/delete.png');
+    sB.setAttribute('onclick', 'document.querySelector("#deleteDiv").style.display = "block"');
   }
 }
 
 function saveLevel() {
 	let newCookie = savedLevels ? `${savedLevels.slice(6)},[[ID]]` : '[[ID]]'
-	document.cookie = `saved=${newCookie}; expires=Fri, 31 Dec 9999 23:59:59 GMT`
+  document.cookie = `saved=${newCookie}; expires=Fri, 31 Dec 9999 23:59:59 GMT`
+  location.reload();
+  freeze = true;
 }
 
 function deleteLevel() {
