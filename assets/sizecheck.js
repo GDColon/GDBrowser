@@ -19,7 +19,11 @@ $(window).resize(function () {
 		$('#everything').show(); 
 		$('#tooSmall').hide() 
 	}
-}); 
+});
+
+function saveUrl() {
+	sessionStorage.setItem('prevUrl', window.location.href);
+}
 
 function backButton() {
 	if (window.history.length > 1 && document.referrer.startsWith(window.location.origin)){
