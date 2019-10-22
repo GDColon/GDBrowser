@@ -17,7 +17,10 @@
 <body>
 	<div class="main-header-wrap">
 		<div class="main-header">
-			<div class="header-links">
+			<div class="header-drawer" id="menu-btn">
+				<img src="../assets/menu-ic.svg" alt="Menu" id="menu-btn-img">
+			</div>
+			<div class="header-links hid">
 				<a class="header-link" href="#intro">Introduction</a>
 				<a class="header-link" href="#level">Levels</a>
 				<a class="header-link" href="#profile">Profiles</a>
@@ -29,7 +32,7 @@
 			</div>
 		</div>
 	</div>
-	<div id="intro""></div>
+	<div id="intro" class="anchor"></div>
 	<main class="grey">
 		<div class="main-block">
 			<h1>Hi there!</h1>
@@ -62,7 +65,7 @@
 		<div class="seperator"></div>
 	</main>
 	<main class="alt">
-		<div id="level""></div>
+		<div id="level" class="anchor"></div>
 		<div class="main-block">
 			<h1>Levels</h1>
 			<p>/api/level/levelID</p>
@@ -141,7 +144,7 @@
 	</main>
 	<main class="grey">
 
-		<div id="profile""></div>
+		<div id="profile" class="anchor"></div>
 		
 		<div class="main-block">
 			<h1>Profiles</h1>
@@ -198,7 +201,7 @@
 	</main>
 	<main class="alt">
 
-		<div id="search""></div>
+		<div id="search" class="anchor"></div>
 		
 		<div class="main-block">
 			<h1>Searching</h1>
@@ -280,8 +283,8 @@
 
 	</main>
 	<main class="grey">
+		<div id="leaderboard" class="anchor"></div>
 		<div class="main-block">
-			<div id="leaderboard""></div>
 			<h1>Leaderboards</h1>
 			<p>/api/leaderboard</p>
 
@@ -331,8 +334,8 @@
 
 	</main>
 	<main class="alt">
+		<div id="levelleaderboard" class="anchor"></div>
 		<div class="main-block">
-			<div id="levelleaderboard""></div>
 			<h1>Level Leaderboards</h1>
 			<p>/api/leaderboardLevel/levelID</p>
 
@@ -376,8 +379,8 @@
 
 	</main>
 	<main class="grey">
+		<div id="comments" class="anchor"></div>
 		<div class="main-block">
-			<div id="comments""></div>
 			<h1>Comments and Profile Posts</h1>
 			<p>/api/comments/level-or-user-ID</p>
 
@@ -427,13 +430,13 @@
 		<div class="seperator"></div>
 	</main>
 	<main class="alt">
+		<div id="analyze" class="anchor"></div>
 		<div class="main-block">
-			<div id="analyze""></div>
 			<h1>Level Analysis (WIP)</h1>
 			<p>/api/leaderboardLevel/levelID</p>
 
 			<p>Analyzes a level's data</p>
-			<p><b>Level analyzing is still a big WIP so there may be changes in the future</b></p>
+			<p><sb>Level analyzing is still a big WIP so there may be changes in the future</sb></p>
 
 			<br>
 			<p class="reveal" onclick="$('#params-analyze').slideToggle(100)"><b>Parameters (0)</b></p>
@@ -495,5 +498,18 @@
 			});
 		});
 	});
+	
+	//menu button
+	document.getElementById('menu-btn').onclick = function(){
+		document.getElementsByClassName('header-links')[0].classList.toggle('hid');
+		document.getElementById('menu-btn').classList.toggle('active');
+	}
+	
+	for(let i = 0; i < document.getElementsByClassName('header-link').length; i++){
+		document.getElementsByClassName('header-link')[i].onclick = function(){
+			document.getElementsByClassName('header-links')[0].classList.toggle('hid');
+			document.getElementById('menu-btn').classList.toggle('active');
+		}
+	}
 
 </script>
