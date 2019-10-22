@@ -31,6 +31,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
                 description: Buffer.from(levelInfo[3], 'base64').toString() || "(No description provided)",
                 author: "-",
                 authorID: levelInfo[6],
+                accountID: 0,
                 difficulty: difficulty[levelInfo[9]],
                 downloads: levelInfo[10],
                 likes: levelInfo[14],
@@ -52,7 +53,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
                 verifiedCoins: levelInfo[38] == 1,
                 starsRequested: levelInfo[39],
                 ldm: levelInfo[40] == 1, //not given in search
-                objects: levelInfo[45],
+                objects: levelInfo[45] == "65535" ? "65000+" : levelInfo[45],
                 large: levelInfo[45] > 40000,
           }
    
@@ -85,9 +86,15 @@ module.exports = async (app, req, res, api, ID, analyze) => {
           request.post('http://boomlings.com/database/getGJUserInfo20.php', {
             form: {targetAccountID: gdSearchResult[16], secret: app.secret}
           }, function (err2, res2, b2) {
-              if (body != '-1') {
+              if (b2 != '-1') {
                 let account = app.parseResponse(b2)
                 level.author = app.clean(account[1])
+                level.accountID = app.clean(gdSearchResult[16])
+              }
+
+              else {
+                level.author = "-"
+                level.accountID = "0"
               }
 
         request.post('http://boomlings.com/database/getGJSongInfo.php', {
