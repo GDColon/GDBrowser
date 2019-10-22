@@ -22,6 +22,7 @@ $(window).resize(function () {
 });
 
 function saveUrl() {
+        if (window.location.href.endsWith('?download')) return;
 	sessionStorage.setItem('prevUrl', window.location.href);
 }
 
