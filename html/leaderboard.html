@@ -28,7 +28,7 @@
 		<div class="fancybox bounce center supercenter">
 			<h2 class="smaller center" style="font-size: 5.5vh">Leaderboard Info</h2>
 			<p class="bigger center" id="infoText" style="line-height: 5vh; margin-top: 1.5vh"></p>
-			<img src="../assets/ok.png" width=20%; class="gdButton center" onclick="$('.popup').hide()">
+			<img src="../assets/ok.png" width=20%; class="gdButton center" onclick="for (let el of document.querSelectorAll('.popup')) el.style.display = 'none'">
 		</div>
 	</div>
 
@@ -51,7 +51,7 @@
 	</div>
 
 	<div style="position:absolute; top: 2.5%; right: 2%; width: 10%; text-align: right;">
-		<img class="gdButton" src="../assets/smallinfo.png" width="32%" onclick="$('#infoDiv').show()">
+		<img class="gdButton" src="../assets/smallinfo.png" width="32%" onclick="document.querySelector('#infoDiv').style.display = 'block'">
 	</div>
 
 	<div class="supercenter" id="loading" style="height: 10%; top: 47%; display: none;">
@@ -61,9 +61,6 @@
 </div>
 
 </body>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.plugins.min.js"></script>
 <script async type="text/javascript" src="../assets/sizecheck.js"></script>
 <script type="text/javascript" src="https://asvd.github.io/dragscroll/dragscroll.js"></script>
 <script>
@@ -74,19 +71,19 @@ let top250Text =
 `The <g>Top 250<> leaderboard contains the <g>top 250 players<>, sorted by <y>star<> value. However, due to <o>hackers<> flooding the leaderboard, this leaderboard has been <b>frozen<> for well over 2 years and displays <o>very outdated information<>.`
 
 let accurateText =
-`The <g>Accurate Leaderboard<> is a highly accurate, hacker-proof leaderboard with <y>proper stats and positioning<> (unlike the regular one). It is managed by <b>SMJSGaming, XShadowWizardX, Pepper360, Octeract<>, and many many other helpers. You can check out their interactive <a target="_blank" href="https://docs.google.com/spreadsheets/d/10lbPnDYJXhbtlA0ls0cGjjX_osFSG559IDrTbhgPHvc"><font color="aqua" style="text-decoration: underline">leaderboard spreadsheet here<></a>.`
+`The <g>Accurate Leaderboard<> is a highly accurate, hacker-proof leaderboard with <y>proper stats and positioning<> (unlike the regular one). It is managed by <b>SMJSGaming, XShadowWizardX, Pepper360, Octeract<>, and many many other helpers. You can check out their interactive <a target="_blank" href="https://docs.google.com/spreadsheets/d/10lbPnDYJXhbtlA0ls0cGjjX_osFSG559IDrTbhgPHvc"><span style="text-decoration: underline;color:aqua">leaderboard spreadsheet here<></a>.`
 
 let creatorText = 
 `The <g>Creators Leaderboard<> is sorted by <g>creator points<>, rather than stars. A player's <g>creator points<> (CP) is calculated by counting their number of <y>star rated<> levels, plus an extra point for every level that has been <b>featured<>, plus an additional point for <o>epic rated<> levels.`
 
 function infoText(text) {
 	let tweaked = text
-	.replace(/<g>/g, '<font color="#4CDA5B">')
-	.replace(/<b>/g, '<font color="#60ABEF">')
-	.replace(/<y>/g, '<font color="yellow">')
-	.replace(/<o>/g, '<font color="orange">')
-	.replace(/<>/g, '</font>')
-	$('#infoText').html(tweaked)
+	.replace(/<g>/g, '<span style="color:#4CDA5B">')
+	.replace(/<b>/g, '<span style="color:#60ABEF">')
+	.replace(/<y>/g, '<span style="color:yellow">')
+	.replace(/<o>/g, '<span style="color:orange">')
+	.replace(/<>/g, '</span>')
+	document.querySelector('#infoText').innerHTML = tweaked;
 }
 
 infoText(accurateText)
@@ -96,15 +93,12 @@ function leaderboard() {
 
 	if (loading == true) return;
 
-	$('#searchBox').html(`<div style="height: 4.5%"></div>`)
+	document.querySelector('#searchBox').innerHTML = `<div style="height: 4.5%"></div>`
 	loading = true;
-	$('#loading').show()
+	document.querySelector('#loading').style.display = 'block';
 
 	fetch(`../api/leaderboard?count=250&${type}`).then(res => res.json()).then(res => {
-
-		res.forEach((x, y) => {
-
-		$('#searchBox').append(`<div class="searchresult leaderboardSlot">
+    document.querySelector('#searchBox').insertAdjacentHTML('beforeEnd', res.map((x, y) => `<div class="searchresult leaderboardSlot">
 			<h2 class="small inline gdButton" style="margin-top: 1.5%"><a href="../profile/${x.username}">${x.username}</a></h2>
 			<h3 class="inline sideSpace" style="font-size: 4.5vh">${x.stars} <img class="valign" src="../assets/star.png"
 					style="cursor: help; height: 19%; transform: translate(-25%, -10%);" title="Stars"></h3>
@@ -123,15 +117,20 @@ function leaderboard() {
 					style="margin-bottom: 0%; transform:scale(1.1)">
 				<h2 class="small" style="margin-top: 2%">${x.rank}</h2>
 			</div>
-		</div>`)
-		})
+		</div>`).join(''))
 
-		$('#searchBox').append('<div style="height: 4.5%"></div>')
+		document.querySelector('#searchBox').insertAdjacentHTML('beforeEnd', '<div style="height: 4.5%"></div>')
 		loading = false;
-		$('#loading').hide();
-		$('.lazyLoad').Lazy({
-			appendScroll: '#searchBox'
-		});
+		document.querySelector('#loading').style.display = 'none';
+	  for (let el of document.querySelectorAll('.lazyLoad')) {
+      let onUpdateDim = function() {
+        if (!el.src && el.offsetTop < window.innerHeight + window.pageYOffset + 300)
+          el.src = el.getAttribute('data-src');
+      }
+      window.addEventListener('resize', onUpdateDim, {passive: true});
+      window.addEventListener('scroll', onUpdateDim, {passive: true});
+      onUpdateDim();
+    }
 	})
 
 }
@@ -139,37 +138,37 @@ function leaderboard() {
 	let type = "accurate"
 	leaderboard()
 
-	$('#topTabOff').click(function() {
+	document.querySelector('#topTabOff').addEventListener('click', function() {
 		if (type == "top" || loading) return;
 		type = "top"
 		leaderboard()
-		$('.leaderboardTab').hide();
-		$('#topTabOn').show()
-		$('#accurateTabOff').show()
-		$('#creatorTabOff').show()
+		for (let el of document.querySelectorAll('.leaderboardTab')) el.style.display = 'none';
+		document.querySelector('#topTabOff').style.display = 'block';
+		document.querySelector('#accurateTabOff').style.display = 'block';
+		document.querySelector('#creatorTabOn').style.display = 'block';
 		infoText(top250Text)
-	})
+	}, {passive: true})
 
-	$('#accurateTabOff').click(function() {
+	document.querySelector('#accurateTabOff').addEventListener('click', function() {
 		if (type == "accurate" || loading) return;
 		type = "accurate"
 		leaderboard()
-		$('.leaderboardTab').hide();
-		$('#topTabOff').show()
-		$('#accurateTabOn').show()
-		$('#creatorTabOff').show()
+		for (let el of document.querySelectorAll('.leaderboardTab')) el.style.display = 'none';
+		document.querySelector('#topTabOff').style.display = 'block';
+		document.querySelector('#accurateTabOff').style.display = 'block';
+		document.querySelector('#creatorTabOn').style.display = 'block';
 		infoText(accurateText)
-	})
+	}, {passive: true})
 
-	$('#creatorTabOff').click(function() {
+	document.querySelector('#creatorTabOff').addEventListener('click', function() {
 		if (type == "creator" || loading) return;
 		type = "creator"
 		leaderboard()
-		$('.leaderboardTab').hide();
-		$('#topTabOff').show()
-		$('#accurateTabOff').show()
-		$('#creatorTabOn').show()
+		for (let el of document.querySelector('.leaderboardTab')) el.style.display = 'none';
+		document.querySelector('#topTabOff').style.display = 'block';
+		document.querySelector('#accurateTabOff').style.display = 'block';
+		document.querySelector('#creatorTabOn').style.display = 'block';
 		infoText(creatorText)
-	})
+	}, {passive: true})
 
 </script>

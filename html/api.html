@@ -394,7 +394,7 @@
 			<br>
 			<p class="reveal" onclick="slideToggle('response-comment')"><b>Response (10)</b></p>
 			<div class="subdiv" id="response-comment">
-				<p>The API will return an array of each comment with the following information.<br>Values that don't work for profile posts are in <font color=red>red</font></p>
+				<p>The API will return an array of each comment with the following information.<br>Values that don't work for profile posts are in <span style="color:red">red</span></p>
 				<p>content: The comment text</p>
 				<p>likes: The number of likes the comment has</p>
 				<p>date: Time since the comment was posted (sent as "x days/weeks/months" ago, since it's all the API sends)</p>
@@ -474,7 +474,7 @@
 	let transitionHeights = [];
 	for (let el of document.querySelectorAll('.subdiv')) {
 		el.style.visibility = 'hidden'; // Dumb but needed to work with polyfilled slideToggle
-		el.innerHTML = el.innerHTML.replace(/(<p.*>)(.*:) /g, '$1<font class="param">$2</font> ');
+		el.innerHTML = el.innerHTML.replace(/(<p.*>)(.*:) /g, '$1<span class="param">$2</span> ');
 	}
 
 	for (let el of document.querySelectorAll('.fetch')) {

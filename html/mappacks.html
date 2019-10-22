@@ -29,21 +29,15 @@
 	
 </div>
 </body>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script async type="text/javascript" src="../assets/sizecheck.js"></script>
 <script>
 
 fetch('../api/mappacks').then(res => res.json()).then(packs => {
-	keys = Object.keys(packs)
-	keys.forEach(x => {
-		$('#packList').append(`
+  keys = Object.keys(packs);
+  document.querySelector('#packList').insertAdjacentHTML('beforeEnd', keys.map(x => `
 			<div class="mappack">
 			<a href="../search/${x}?mappack=1">
 			<img src="../difficulty/${packs[x][3]}.png" height="220%"><br>
-			<h3 class="gauntletText"">${x.replace("Pack", "<br>Pack")}</h3></div></a>`)
-	})
+			<h3 class="gauntletText"">${x.replace("Pack", "<br>Pack")}</h3></div></a>`).join(''));
 })
-
-
-
 </script>

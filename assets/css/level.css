@@ -406,6 +406,17 @@ input::-webkit-inner-spin-button {
     cursor: pointer;
 }
 
+#copied {
+  transition: opacity 500ms ease-in-out;
+  opacity: 0;
+  visibility: hidden;
+}
+#copied.transitioning {
+  transition: opacity 200ms ease-in-out;
+  opacity: 1;
+  visibility: visible;
+}
+
 .menuButton:active {
     transition-duration: 0.05s;
     transition-timing-function: ease-in-out;

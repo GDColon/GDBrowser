@@ -117,17 +117,17 @@
 	</div>
 
 	<div class="levelButtons" style="position:absolute; top: 46%; right: 3.5%; transform: translateY(-50%); height: 75%;">
-		<img class="gdButton sideButton" id="saveButton" src="../assets/plus.png" onclick="$('#saveDiv').show(); saveLevel()"><br>
-		<img class="gdButton sideButton" id="infoButton"  src="../assets/info.png" onclick="$('#infoDiv').show()"><br>
+		<img class="gdButton sideButton" id="saveButton" src="../assets/plus.png" onclick="document.querySelector('#saveDiv').style.display = 'block'; saveLevel()"><br>
+		<img class="gdButton sideButton" id="infoButton"  src="../assets/info.png" onclick="document.querySelector('#infoDiv').style.display = 'block'"><br>
 		<a href="./comments/[[ID]]"><img class="gdButton sideButton" src="../assets/comment.png"></a><br>
 		<a href="./analyze/[[ID]]"><img class="gdButton sideButton" src="../assets/edit.png"></a><br>
-		<img class="gdButton sideButton outOfOrder" id="scoreButton" src="../assets/leaderboard.png" onclick="$('#scoreDiv').show()"><br>
+		<img class="gdButton sideButton outOfOrder" id="scoreButton" src="../assets/leaderboard.png" onclick="document.querySelector('#scoreDiv').style.display = 'block'"><br>
 	</div>
 
 	<div style="position:absolute; top: 2%; left: 1.5%; width: 10%; height: 25%; pointer-events: none">
 		<img class="gdButton yesClick" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()">
 	</div>
-	<div id="copied" style="display: none;">
+	<div id="copied">
 		<div class="copied center noClick" style="position:absolute; top: 36%; left: 50%; transform: translate(-50%,-50%); width: 80vh">
 			<h1 class="smaller noSelect">ID copied to clipboard</h1>
 		</div>
@@ -136,82 +136,105 @@
 </div>
 
 </body>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script async type="text/javascript" src="../assets/sizecheck.js"></script>
 <script>
-
-if (window.location.href.endsWith('?download')) $('#infoDiv').show()
+if (window.location.href.endsWith('?download')) document.querySelector('#infoDiv').style.display = 'block';
 
 	let freeze = false;
-	$('#playButton').click(function() {
-	if (!($('#copied').is(':animated'))) $('#copied').stop().fadeIn(200).delay(500).fadeOut(500)
-	var temp = $("<input>");
-    $("body").append(temp);
-    temp.val('[[ID]]').select();
-    document.execCommand("copy"); temp.remove()})
-$('.closeWindow').click(function() {if (!freeze) $(".popup").attr('style', 'display: none;')})
+	document.querySelector('#playButton').addEventListener('click', function() {
+    let copied = document.querySelector('#copied');
+    if (!copied.classList.contains('transitioning')) {
+      copied.classList.add('transitioning');
+      setTimeout(() => copied.classList.remove('transitioning'), 700);
+    }
+    var temp = document.createElement('div');
+    temp.textContent = '[[ID]]';
+    document.body.appendChild(temp);
+    let selectionRange = document.createRange();
+    selectionRange.selectNodeContents(temp);
+    let selection = getSelection();
+    selection.removeAllRanges();
+    selection.addRange(selectionRange);
+    document.execCommand("copy");
+    document.body.removeChild(temp);
+  }, {passive: true})
+for (let el of document.querySelectorAll('.closeWindow'))
+  el.addEventListener('click', function() {
+    if (!freeze) {
+      for (let el of document.querySelectorAll(".popup"))
+        el.style.display = 'none';
+    }
+  }, {passive: true})
 
-$('#difficultytext').html('[[DIFFICULTY]]'.replace(' ', "<br>"))
+document.querySelector('#difficultytext').innerHTML = '[[DIFFICULTY]]'.replace(' ', "<br>");
 
-$('#levelInfo').html($('#levelInfo').html()
-	.replace('[[ORIGINALINFO]]', [[COPIEDID]] ==  "0" ? "" : `<br>Original: <a class="youCanClickThis" href="/[[COPIEDID]]"><font color="aqua">[[COPIEDID]]</font></a>`)
-	.replace('[[OBJECTINFO]]', '[[OBJECTS]]' ==  "0" ? "" : `<br>Objects: <font color="yellow">[[OBJECTS]]</font>`)
-	.replace('[[REQUESTED]]', [[STARSREQUESTED]] ==  "0" ? "" : `<br>Stars Requested: <font color="yellow">[[STARSREQUESTED]]</font>`))
+document.querySelector('#levelInfo').innerHTML = document.querySelector('#levelInfo').innerHTML
+	.replace('[[ORIGINALINFO]]', [[COPIEDID]] ==  "0" ? "" : `<br>Original: <a class="youCanClickThis" href="/[[COPIEDID]]"><span style="color:aqua">[[COPIEDID]]</span></a>`)
+	.replace('[[OBJECTINFO]]', '[[OBJECTS]]' ==  "0" ? "" : `<br>Objects: <span style="color:yellow">[[OBJECTS]]</span>`)
+	.replace('[[REQUESTED]]', [[STARSREQUESTED]] ==  "0" ? "" : `<br>Stars Requested: <span style="color:yellow">[[STARSREQUESTED]]</span>`);
 
 if (!'[[UPLOADED]]'.startsWith('[')) {
-	$('#levelInfo').html($('#levelInfo').html()
-	.replace('[[PASS]]', `<br>Password: <font color="orange">${[[PASSWORD]] == 0 ? "No copy" : [[PASSWORD]] == 1 ? "Free copy" : [[PASSWORD]]}</font>`)
-	.replace('[[LOWDETAIL]]', `<br>Low Detail: <font color="orange">${[[LDM]] ? "Yes" : "No"}</font>`)
-	.replace('[[UPLOAD]]', '[[UPLOADED]]' == "0" ? "" : `<br>Uploaded: <font color="orange">[[UPLOADED]]</font>`)
-	.replace('[[UPDATE]]', '[[UPDATED]]' == "0" ? "" : `<br>Updated: <font color="orange">[[UPDATED]]</font>`))}
-
+	document.querySelector('#levelInfo').innerHTML = document.querySelector('#levelInfo').innerHTML
+	.replace('[[PASS]]', `<br>Password: <span style="color:orange">${[[PASSWORD]] == 0 ? "No copy" : [[PASSWORD]] == 1 ? "Free copy" : [[PASSWORD]]}</span>`)
+	.replace('[[LOWDETAIL]]', `<br>Low Detail: <span style="color:orange">${[[LDM]] ? "Yes" : "No"}</span>`)
+	.replace('[[UPLOAD]]', '[[UPLOADED]]' == "0" ? "" : `<br>Uploaded: <span style="color:orange">[[UPLOADED]]</span>`)
+  .replace('[[UPDATE]]', '[[UPDATED]]' == "0" ? "" : `<br>Updated: <span style="color:orange">[[UPDATED]]</span>`)
+}
 else {
-	$('#levelInfo').html($('#levelInfo').html()
+	document.querySelector('#levelInfo').innerHTML = document.querySelector('#levelInfo').innerHTML
 	.replace('[[PASS]]', "")
 	.replace('[[LOWDETAIL]]', "")
 	.replace('[[UPLOAD]]', "")
 	.replace('[[UPDATE]]', "") + 
-	`<br><a class="youCanClickThis" href="/[[ID]]?download"><font color="aqua">Download additional info</font></a>`
-	)}
+	`<br><a class="youCanClickThis" href="/[[ID]]?download"><span style="color:aqua">Download additional info</span></a>`  
+}
 
-if ([[COPIEDID]] == 0) $('#copiedBadge').hide()
-if (![[LARGE]]) $('#largeBadge').hide()
-if ([[ORBS]] == 0) $('.orbs').hide()
-if ([[STARS]] == 0) $('.stars').hide()
-if ([[DIAMONDS]] == 0 || !'[[DEMONLIST]]'.startsWith("[")) $('.diamonds').hide()
-
-if (!'[[DEMONLIST]]'.startsWith("[")) $('.demonList').show()
-else $('.demonList').remove()
+if ([[COPIEDID]] == 0) document.querySelector('#copiedBadge').style.display = 'none';
+if (![[LARGE]]) document.querySelector('#largeBadge').style.display = 'none';
+if ([[ORBS]] == 0) for (let el of document.querySelectorAll('.orbs')) el.style.display = 'none';
+if ([[STARS]] == 0) for (let el of document.querySelectorAll('.stars')) el.style.display = 'none';
+if ([[DIAMONDS]] == 0 || !'[[DEMONLIST]]'.startsWith("[")) for (let el of document.querySelectorAll('.diamonds')) el.style.display = 'none';
+const demonList = document.querySelectorAll('.demonList');
+if (!'[[DEMONLIST]]'.startsWith("[")) {for (let el of demonList) el.style.display = 'block';}
+else {for (let el of demonList) el.parentNode.removeChild(el)}
 
 
 if ("[[SONGID]]".startsWith("Level")) {
-	$('#songInfo').text('[[SONGID]]')
-	$('.songLink').hide()}
-
-if ("[[INVALIDSONG]]" == "true") $('.songLink').hide()
-if ("[[DISLIKED]]" == "true") $('#likeImg').attr('src', '../assets/dislike.png').css('transform', 'translateY(20%)')
+	document.querySelector('#songInfo').textContent = '[[SONGID]]';
+  for (let el of document.querySelectorAll('.songLink')) el.style.display = 'none'
+}
+if ("[[INVALIDSONG]]" == "true") for (let el of document.querySelectorAll('.songLink')) el.style.display = 'none'
+if ("[[DISLIKED]]" == "true") {
+  let likeImg = document.querySelector('#likeImg');
+  likeImg.setAttribute('src', '../assets/dislike.png');
+  likeImg.style.transform =' translateY(20%)';
+}
 
 let coinColor = [[VERIFIEDCOINS]] ? "silvercoin" : "browncoin"
-if ([[COINS]] > 0) $("#coins").append(`<img src="../assets/${coinColor}.png" height="5%">`)
-if ([[COINS]] > 1) $("#coins").append(`<img class="squeeze" src="../assets/${coinColor}.png" height="5%">`)
-if ([[COINS]] > 2) $("#coins").append(`<img class="squeeze" src="../assets/${coinColor}.png" height="5%">`)
+if ([[COINS]] > 0) document.querySelector("#coins").insertAdjacentHTML('beforeEnd', `<img src="../assets/${coinColor}.png" height="5%">`)
+if ([[COINS]] > 1) document.querySelector("#coins").insertAdjacentHTML('beforeEnd', `<img class="squeeze" src="../assets/${coinColor}.png" height="5%">`)
+if ([[COINS]] > 2) document.querySelector("#coins").insertAdjacentHTML('beforeEnd', `<img class="squeeze" src="../assets/${coinColor}.png" height="5%">`)
 
 if ("[[ACCOUNTID]]" == "0") {
-		$("#authorName").addClass("green").removeClass('gdButton')
-		$("#authorLink").removeAttr('href')
+    let cL = document.querySelector("#authorName").classList;
+    cL.add("green")
+    cL.remove('gdButton')
+		document.querySelector("#authorLink").removeAttribute('href')
 	}
 
-if (window.location.pathname == "/weekly") $('body').addClass('darkBG')
+if (window.location.pathname == "/weekly") document.querySelector('body').classList.add('darkBG')
 
 
-$(window).on('load', function() {
-
-	if ($('#songname')[0].scrollWidth > $('#songBox')[0].scrollWidth) {
-		let overflow = ($('#songname')[0].scrollWidth - $('#songBox')[0].scrollWidth) * 0.007
+window.onload = function() {
+  const songname = document.querySelector('#songname');
+  const songbox = document.querySelector('#songBox')
+	if (songname.scrollWidth > songbox.scrollWidth) {
+		let overflow = (songname.scrollWidth - songbox.scrollWidth) * 0.007
 		if (overflow > 6) overflow = 3
-		$('#songname').addClass('smaller').css('font-size', (6 - (overflow)) + 'vh')
-		}
-});
+    songname.classList.toggle('smaller');
+    songname.style.fontSize = (6 - (overflow)) + 'vh';
+	}
+};
 
 
 let savedLevels = document.cookie.split('; ').find(x => x.startsWith('saved'))
@@ -219,7 +242,11 @@ let levelList = []
 let deleteMode = false;
 if (savedLevels) {
 	levelList = savedLevels.slice(6).split(',')
-	if (levelList.includes('[[ID]]')) $('#saveButton').attr('src', '../assets/delete.png').attr('onclick', '$("#deleteDiv").show()')
+	if (levelList.includes('[[ID]]')) {
+    const sB = document.querySelector('#saveButton');
+    sb.setAttribute('src', '../assets/delete.png');
+    sb.setAttribute('onclick', 'document.querySelector("#deleteDiv").style.display = "block"');
+  }
 }
 
 function saveLevel() {
@@ -232,5 +259,6 @@ function deleteLevel() {
 	location.reload()
 	freeze = true;
 }
+
 
 </script>
