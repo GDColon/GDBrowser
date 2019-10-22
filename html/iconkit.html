@@ -11,7 +11,7 @@
     <link rel="icon" href="../assets/icon.png">
     </link>
 </head>
-<body class="iconscroll" style="background-image: linear-gradient(rgb(139, 139, 139), rgb(100, 100, 100));">
+<body class="iconscroll" style="background-image: linear-gradient(rgb(139, 139, 139), rgb(100, 100, 100));" onbeforeunload="saveUrl()">
 <div class="center hidden"><br>
     <img id="iconkitlogo" src="../assets/iconkit.png" height=50px; style="margin: 7px 0;"><br><br>
     <img id="loading" src="../assets/loading.png" class="spin" height=95px; style="margin: auto auto 25px auto">
@@ -225,5 +225,9 @@ $(document).keydown(function(k) {
 		$('#backButton').trigger('click')
 	}
 });
+
+function saveUrl() {
+    sessionStorage.setItem('prevUrl', window.location.href);
+}
     
 </script>

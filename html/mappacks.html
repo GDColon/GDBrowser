@@ -9,7 +9,7 @@
 	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/assets/folder.png">
 </head>
 
-<body class="levelBG" style="overflow-y:auto;">
+<body class="levelBG" style="overflow-y:auto;" onbeforeunload="saveUrl()">
 
 <div id="everything" class="center">
 
@@ -42,8 +42,6 @@ fetch('../api/mappacks').then(res => res.json()).then(packs => {
 			<img src="../difficulty/${packs[x][3]}.png" height="220%"><br>
 			<h3 class="gauntletText"">${x.replace("Pack", "<br>Pack")}</h3></div></a>`)
 	})
-})
-
-
+});
 
 </script>

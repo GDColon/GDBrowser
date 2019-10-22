@@ -19,10 +19,18 @@ $(window).resize(function () {
 		$('#everything').show(); 
 		$('#tooSmall').hide() 
 	}
-}); 
+});
+
+function saveUrl() {
+        if (window.location.href.endsWith('?download')) return;
+	sessionStorage.setItem('prevUrl', window.location.href);
+}
 
 function backButton() {
-	if (window.history.length > 1 && document.referrer.startsWith(window.location.origin)) window.history.back()
+	if (window.history.length > 1 && document.referrer.startsWith(window.location.origin)){
+            if (window.location.href.endsWith('?download') && sessionStorage.getItem('prevUrl') === window.location.href.replace('?download', '')) window.history.go(-2);
+            else window.history.back()
+        }
 	else window.location.href = "../../../../../"
 }
 

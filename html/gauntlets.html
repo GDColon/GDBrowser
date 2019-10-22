@@ -9,7 +9,7 @@
 	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/assets/gauntlet.png">
 </head>
 
-<body class="levelBG darkBG" style="overflow-y:auto;">
+<body class="levelBG darkBG" style="overflow-y:auto;" onbeforeunload="saveUrl()">
 
 <div id="everything" class="center" style="width: 100%; height: 100%;">
 
@@ -43,7 +43,6 @@ $('#gauntletList').append(`
 			<img src="../gauntlets/${x.toLowerCase()}.png" height="300%"><br>
 			<h3 class="gauntletText"">${x}<br>Gauntlet</h3></div></a>`)
 })
-
 
 
 </script>

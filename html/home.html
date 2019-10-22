@@ -9,7 +9,7 @@
 	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/assets/coin.png">
 </head>
 
-<body class="levelBG">
+<body class="levelBG" onbeforeunload="saveUrl()">
 
 <div id="everything">
 
@@ -130,6 +130,6 @@ fetch(`./api/credits`).then(res => res.json()).then(res => {
 	}
 	
 });
-})
+});
 
 </script>
