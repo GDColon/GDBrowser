@@ -1,4 +1,4 @@
-$('body').append(`
+document.body.insertAdjacentHTML('beforeEnd', `
 	<div id="tooSmall" class="brownbox center supercenter" style="display: none; width: 80%">
 	<h1>Yikes!</h1>
 	<p>Your <font color="#4CDA5B">screen</font> isn't <font color="aqua">wide</font> enough to <font color="yellow">display</font> this <font color="#4CDA5B">page</font>.<br>
@@ -8,36 +8,36 @@ $('body').append(`
 	</div>
 `)
 
-
-$(window).resize(function () {
-	if (window.innerHeight > window.innerWidth - 75) { 
-		$('#everything').hide(); 
-		$('#tooSmall').show();
+const onResize = function () {
+	if (window.innerHeight > window.innerWidth) { 
+		document.querySelector('#everything').style.display = "none"; 
+		document.querySelector('#tooSmall').style.display = "block"; 
+	}	else { 
+		document.querySelector('#everything').style.display = "block"; 
+		document.querySelector('#tooSmall').style.display = "none"; 
 	}
-
-	else { 
-		$('#everything').show(); 
-		$('#tooSmall').hide() 
-	}
-}); 
+};
+window.addEventListener('resize', onResize, {passive: true});
+onResize();
 
 function backButton() {
 	if (window.history.length > 1 && document.referrer.startsWith(window.location.origin)) window.history.back()
 	else window.location.href = "../../../../../"
 }
 
-$(document).keydown(function(k) {
-	if (k.keyCode == 27) { //esc
-		k.preventDefault()
-		if ($('.popup').is(":visible")) $('.popup').hide();   
-		else $('#backButton').trigger('click')
+document.addEventListener('keydown', function(k) {
+	if (k.code == "Escape") { //esc
+		k.preventDefault();
+		let found = false;
+		for (let el of document.querySelectorAll('.popup')) {
+			if (el.style.display != "none") {
+				el.style.display = "none";
+				found = true;
+				break;
+			};
+		}   
+		if (!found) document.querySelector('#backButton').click();
 	}
 });
 
-while ($(this).scrollTop() != 0) {
-	$(this).scrollTop(0);
-} 
-
-$(document).ready(function() {
-	$(window).trigger('resize');
-});
+document.body.scrollTop = 0;

@@ -400,7 +400,8 @@ input::-webkit-inner-spin-button {
 }
 
 .menuButton {
-    width: 24vh;
+    width: 20vw;
+    max-width: 24vh;
     margin: 1.2vh 2vh;
     cursor: pointer;
 }

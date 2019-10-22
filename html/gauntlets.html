@@ -29,21 +29,13 @@
 	
 </div>
 </body>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script async type="text/javascript" src="../assets/sizecheck.js"></script>
 <script>
 
 let gauntlets = ["Fire", "Ice", "Poison", "Shadow", "Lava", "Bonus", "Chaos", "Demon", "Time", "Crystal", "Magic", "Spike", "Monster", "Doom", "Death"]
-
-gauntlets.forEach((x, y) => {
-
-$('#gauntletList').append(`
+document.querySelector('#gauntletList').insertAdjacentHTML('beforeEnd', gauntlets.map((x, y) => `
 			<div class="gauntlet">
 			<a href="../search/level?gauntlet=${y + 1}">
 			<img src="../gauntlets/${x.toLowerCase()}.png" height="300%"><br>
-			<h3 class="gauntletText"">${x}<br>Gauntlet</h3></div></a>`)
-})
-
-
-
+			<h3 class="gauntletText"">${x}<br>Gauntlet</h3></div></a>`).join(''))
 </script>

@@ -66,7 +66,6 @@
 
 </div>
 </body>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script async type="text/javascript" src="../assets/sizecheck.js"></script>
 <script>
 
@@ -79,12 +78,12 @@ let mirrorPortals = ['mirrorOn', 'mirrorOff']
 
 fetch(`../api${window.location.pathname}`).then(res => res.json()).then(res => {
 	if (!res.level) return window.location.href = window.location.href.replace("analyze", "search")
-	$('#levelName').text(res.level.name)
-	$('#objectCount').text(res.objects + " objects")
+	document.querySelector('#levelName').textContent = res.level.name;
+	document.querySelector('#objectCount').textContent = res.objects + " objects";
 	document.title = "Analysis of " + res.level.name
 
-	$('#meta-title').attr('content',  "Analysis of " + res.level.name)
-	$('#meta-desc').attr('content',  `${res.portals.split(",").length}x portals, ${res.orbs.total || 0}x orbs, ${res.triggers.total || 0}x triggers, ${res.misc.glow || 0}x glow...`)
+	document.querySelector('#meta-title').setAttribute('content', "Analysis of " + res.level.name);
+	document.querySelector('#meta-desc').setAttribute('content', `${res.portals.split(",").length}x portals, ${res.orbs.total || 0}x orbs, ${res.triggers.total || 0}x triggers, ${res.misc.glow || 0}x glow...`)
 
 let triggerList = Object.keys(res.triggers)
 let orbList = Object.keys(res.orbs)
@@ -95,27 +94,19 @@ let colorList = Object.keys(res.colors)
 let portals = res.portals.split(", ").map(x => x.split(" "))
 
 function appendPortals() {
-	$('#portals').html("")
-	if (res.settings.gamemode && res.settings.gamemode != "cube" && !disabledPortals.includes('form')) $('#portals').append(`<div class="inline portalDiv"><img class="portalImage" src='../objects/portal-${res.settings.gamemode}.png'><h3>Start</h3></div><img class="divider portalImage" src="../assets/divider.png" style="margin: 1.3% 0.8%">`)
-	if (res.settings.speed && res.settings.speed != "1x" && !disabledPortals.includes('speed')) $('#portals').append(`<div class="inline portalDiv"><img class="portalImage speedPortal" src='../objects/portal-${res.settings.speed}.png'><h3>Start</h3></div><img class="divider portalImage" src="../assets/divider.png" style="margin: 1.3% 0.8%">`)
-	
+	document.querySelector('#portals').innerHTML = "";
+	if (res.settings.gamemode && res.settings.gamemode != "cube" && !disabledPortals.includes('form')) document.querySelector('#portals').insertAdjacentHTML('beforeEnd', `<div class="inline portalDiv"><img class="portalImage" src='../objects/portal-${res.settings.gamemode}.png'><h3>Start</h3></div><img class="divider portalImage" src="../assets/divider.png" style="margin: 1.3% 0.8%">`)
+	if (res.settings.speed && res.settings.speed != "1x" && !disabledPortals.includes('speed')) document.querySelector('#portals').insertAdjacentHTML('beforeEnd', `<div class="inline portalDiv"><img class="portalImage speedPortal" src='../objects/portal-${res.settings.speed}.png'><h3>Start</h3></div><img class="divider portalImage" src="../assets/divider.png" style="margin: 1.3% 0.8%">`)
 
-	//$('#portals').append(`<img class="portalImage" src="../objects/portal-${res.settings.gamemode}.png" style="margin: 1.3% 0.8%"><img class="divider portalImage" src="../assets/divider.png" style="margin: 1.3% 0.8%">`)
-	//$('#portals').append(`<img class="portalImage speedPortal" src="../objects/portal-${res.settings.speed}.png" style="margin: 2% 0.8%"><img class="divider portalImage" src="../assets/divider.png" style="margin: 1.3% 0.8%">`)
+	let dividerCount = document.querySelectorAll('.divider').length - 1
 
-	//$('#portals').append(`<div class="inline portalDiv"><img class="portalImage speedPortal" src='../objects/portal-${res.settings.speed}.png'><h3>0%</h3></div><img class="divider portalImage" src="../assets/divider.png" style="margin: 1.3% 0.8%">`)
-
-	//
-
-	let dividerCount = $('.divider').length - 1
-
-	$('.divider').each(function(y) {
-		if (y != dividerCount) $(this).remove()
-	})
+	for (let y of document.querySelectorAll('.divider')) {
+		if (y != dividerCount) y.parentNode.removeChild(y);
+	}
 
 	portals.forEach(x => {
 		if (!x || x[0] == "") return;
-		$('#portals').append(`<div class="inline portalDiv"><img class="portalImage ${x[0].match(/[0-9]x/) ? "speedPortal" : ""}" src='../objects/portal-${x[0]}.png'><h3>${x[1]}</h3></div>`)
+		document.querySelector('#portals').insertAdjacentHTML('beforeEnd', `<div class="inline portalDiv"><img class="portalImage ${x[0].match(/[0-9]x/) ? "speedPortal" : ""}" src='../objects/portal-${x[0]}.png'><h3>${x[1]}</h3></div>`)
 	}
 
 	)}
@@ -123,65 +114,74 @@ function appendPortals() {
 appendPortals()
 
 	triggerList.forEach(x => {
-		if (x == "total") $('#triggerText').text(`Triggers (${res.triggers[x]})`)
-		else $('#triggers').append(`<div class="inline triggerDiv"><img height="50%" src='../objects/trigger-${x}.png'><h3 style="padding-top: 7%">x${res.triggers[x]}</h3></div>`)
+		if (x == "total") document.querySelector('#triggerText').textContent = `Triggers (${res.triggers[x]})`
+		else document.querySelector('#triggers').insertAdjacentHTML('beforeEnd', `<div class="inline triggerDiv"><img height="50%" src='../objects/trigger-${x}.png'><h3 style="padding-top: 7%">x${res.triggers[x]}</h3></div>`);
 	})
 	
 	orbList.forEach(x => {
-		if (x == "total") $('#orbText').text(`Jump Rings (${res.orbs[x]})`)
-		else $('#orbs').append(`<div class="inline orbDiv"><img height="50%" src='../objects/orb-${x}.png'><h3 style="padding-top: 7%">x${res.orbs[x]}</h3></div>`)
+		if (x == "total") document.querySelector('#orbText').textContent = `Jump Rings (${res.orbs[x]})`
+		else document.querySelector('#orbs').insertAdjacentHTML('beforeEnd', `<div class="inline orbDiv"><img height="50%" src='../objects/orb-${x}.png'><h3 style="padding-top: 7%">x${res.orbs[x]}</h3></div>`);
 	})
 
 	blockList.forEach(x => {
-		$('#blocks').append(`<div class="inline blockDiv"><img height="45%" src='../blocks/${x}.png'><h3 style="padding-top: 15%">x${res.blocks[x]}</h3></div>`)
+		document.querySelector('#blocks').insertAdjacentHTML('beforeEnd', `<div class="inline blockDiv"><img height="45%" src='../blocks/${x}.png'><h3 style="padding-top: 15%">x${res.blocks[x]}</h3></div>`)
 	})
 
 	miscList.forEach(x => {
 		if (x == "objects") return;
-		else $('#misc').append(`<div class="inline miscDiv"><img height="40%" src='../objects/obj-${x.slice(0, -1)}.png'><h3 style="padding-top: 15%">x${res.misc[x][0]}<br>${res.misc[x][1]}</h3></div>`)
+		else document.querySelector('#misc').insertAdjacentHTML('beforeEnd', `<div class="inline miscDiv"><img height="40%" src='../objects/obj-${x.slice(0, -1)}.png'><h3 style="padding-top: 15%">x${res.misc[x][0]}<br>${res.misc[x][1]}</h3></div>`)
 	})
 
 	colorList.forEach((x, y) => {
 		let c = res.colors[x]
-		$('#colorDiv').append(`${y % 8 == 0 ? "<brr>" : ""}<div class="inline aColor"><div style="background-color: rgba(${c.r}, ${c.g}, ${c.b}, ${c.opacity}); border: 0.4vh solid rgb(${c.r}, ${c.g}, ${c.b})">
+		document.querySelector('#colorDiv').insertAdjacentHTML('beforeEnd', `${y % 8 == 0 ? "<brr>" : ""}<div class="inline aColor"><div style="background-color: rgba(${c.r}, ${c.g}, ${c.b}, ${c.opacity}); border: 0.4vh solid rgb(${c.r}, ${c.g}, ${c.b})">
 		${c.copiedChannel ? `<h3 class='copiedColor'>C:${c.copiedChannel}</h3>` : c.pColor ? `<h3 class='copiedColor'>P${c.pColor}</h3>` : c.blending ? "<h3 class='blendingDot'>•</h3>" : ""}	
 		${c.opacity != "1" ? `<h3 class='copiedColor'>${c.opacity}%</h3>` : ""}
 		</div><h3 style="padding-top: 7%">${c.channel > 0 ? "Col " + c.channel : c.channel}</h3></div>`)
 	})
 
-	if (colorList.length == 0) $('#colorDiv').append('<h3 style="margin-top: 7vh">Level is too old to get color info!</h3>')
+	if (colorList.length == 0) document.querySelector('#colorDiv').insertAdjacentHTML('beforeEnd', '<h3 style="margin-top: 7vh">Level is too old to get color info!</h3>')
 
-	$(".portalToggle").click(function() {
-		if ($(this).prop('checked')) disabledPortals = disabledPortals.filter(x => x != $(this).attr('portal'))
-		else disabledPortals.push($(this).attr('portal'))
-		
-		portals = res.portals.split(", ").map(x => x.split(" "))
-		if (disabledPortals.includes('form')) portals = portals.filter(x => !formPortals.includes(x[0]))
-		if (disabledPortals.includes('speed')) portals = portals.filter(x => !speedPortals.includes(x[0]))
-		if (disabledPortals.includes('size')) portals = portals.filter(x => !sizePortals.includes(x[0]))
-		if (disabledPortals.includes('dual')) portals = portals.filter(x => !dualPortals.includes(x[0]))
-		if (disabledPortals.includes('mirror')) portals = portals.filter(x => !mirrorPortals.includes(x[0]))
+	for (let el of document.querySelectorAll(".portalToggle")) {
+		el.addEventListener('click', function() {
+			if (el.getAttribute('checked')) disabledPortals = disabledPortals.filter(x => x != el.getAttribute('portal'))
+			else disabledPortals.push(el.getAttribute('portal'))
+			
+			portals = res.portals.split(", ").map(x => x.split(" "))
+			if (disabledPortals.includes('form')) portals = portals.filter(x => !formPortals.includes(x[0]))
+			if (disabledPortals.includes('speed')) portals = portals.filter(x => !speedPortals.includes(x[0]))
+			if (disabledPortals.includes('size')) portals = portals.filter(x => !sizePortals.includes(x[0]))
+			if (disabledPortals.includes('dual')) portals = portals.filter(x => !dualPortals.includes(x[0]))
+			if (disabledPortals.includes('mirror')) portals = portals.filter(x => !mirrorPortals.includes(x[0]))
 
-		if (disabledPortals.includes('dupe')) {
-			portals.reverse().forEach((x, y) => {if (portals[y+1] && portals[y+1][0] == x[0]) portals[y][0] = null;})
-			portals = portals.reverse().filter(x => x[0] != null)
-		}
+			if (disabledPortals.includes('dupe')) {
+				portals.reverse().forEach((x, y) => {if (portals[y+1] && portals[y+1][0] == x[0]) portals[y][0] = null;})
+				portals = portals.reverse().filter(x => x[0] != null)
+			}
 
-		appendPortals()
-	})
+			appendPortals()
+		}, {passive: true})
+	}
 
-	$('#codeLength').html(`(${res.dataLength} characters)`)
+	document.querySelector('#codeLength').innerHTML = `(${res.dataLength} characters)`;
 
-	$('#revealCode').click(function() {
-		$('#levelCode').html('<p>Loading...</p>')
+	document.querySelector('#revealCode').addEventListener('click', function() {
+		let levelCode = document.querySelector('#levelCode');
+		levelCode.innerHTML = '<p>Loading...</p>';
 
-	window.setTimeout(function () { //small delay so "loading" message appears
-		$('#levelCode').html(`<p class="codeFont">${res.data}</p>`)}, 50);
-		$('#levelCode').focus().select()
-	})
+		window.setTimeout(function () { //small delay so "loading" message appears
+			levelCode.innerHTML = `<p class="codeFont">${res.data}</p>`
+			levelCode.focus();
+			let selectionRange = document.createRange();
+			selectionRange.selectNode(levelCode);
+			let selection = getSelection();
+			selection.removeAllRanges();
+			selection.addRange(selectionRange);
+		}, 50);
+	}, {passive: true})
 
-	$('#loadingDiv').hide()
-	$('#analysisDiv').show()
+	document.querySelector('#loadingDiv').style.display = "none";
+	document.querySelector('#analysisDiv').style.display = "block";
 
 })
 

@@ -68,23 +68,24 @@
 </div>
 
 </body>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script async type="text/javascript" src="../assets/sizecheck.js"></script>
 <script>
 
 let page = 1
-$('#browserlogo').css('filter', `hue-rotate(${Math.floor(Math.random() * (330 - 60)) + 60}deg) saturate(${Math.floor(Math.random() * (150 - 100)) + 100}%)`)
+let creditsNode = document.querySelector('#credits');
+document.querySelector('#browserlogo').style.filter = `hue-rotate(${Math.floor(Math.random() * (330 - 60)) + 60}deg) saturate(${Math.floor(Math.random() * (150 - 100)) + 100}%)`;
 
 function loadCredits() {
-	$('.subCredits').hide()
-	$('#credits' + page).show()
-	$('#credits').show()
+	for (let el of document.querySelectorAll('.subCredits')) {
+		el.style.display = "none";
+		if (el.id == "credits"+page)
+			el.style.display = "block";
+	}
+	document.querySelector('#credits').style.display = "block";
 }
 
 fetch(`./api/credits`).then(res => res.json()).then(res => {
-
-	res.credits.forEach((x, y) => {
-		$('#credits').append(`<div id="credits${y+1}" class="subCredits" style="display: none;">
+	creditsNode.insertAdjacentHTML('beforeEnd', res.credits.map((x, y) => `<div id="credits${y+1}" class="subCredits" style="display: none;">
 			<div class="brownBox center supercenter" style="width: 80vh; height: 43%; padding-top: 1.5%; padding-bottom: 3.5%;">
 				<h1>${x.header}</h1><br>
 				<h2 style="margin-bottom: 1.5%" class="gdButton"><a href="./profile/${x.ign || x.name}">${x.name}</h2></a>
@@ -96,40 +97,30 @@ fetch(`./api/credits`).then(res => res.json()).then(res => {
 			</div>
 			<img class="gdButton" src="../assets/arrow-right.png" width="60vh" style="position: absolute; top: 45%; left: 75%" onclick="page += 1; loadCredits()">
 			<img class="gdButton" src="../assets/arrow-left.png" width="60vh" style="${y == 0 ? "display: none; " : ""}position: absolute; top: 45%; right: 75%" onclick="page -= 1; loadCredits()">
-		</div>`)
-	})
-
-	$('#credits').append(`<div id="credits${res.credits.length + 1}" class="subCredits" style="display: none;">
+		</div>`).join(''));
+	creditsNode.insertAdjacentHTML('beforeEnd', `<div id="credits${res.credits.length + 1}" class="subCredits" style="display: none;">
 			<div id="githubbers" class="brownBox center supercenter" style="width: 80vh; height: 43%; padding-top: 1.5%; padding-bottom: 3.5%;">
 				<h1>GitHub Contributors</h1><br>
+				${res.contributors.map((x, y) => `<div class="githubChad">
+				<h2 class="gdButton smaller"><a href="./profile/${x[1]}">${x[0]}</h2></a>
+				<img src="./icon/${x[1]}" height=85%><br>
+				</div>`)}
 			</div>
 			<div class="supercenter" style="top: 71.5%"><h2 class="smaller gdButton"><a href="https://github.com/GDColon/GDBrowser">View on GitHub!</a></h2></div>
 			<img class="gdButton" src="../assets/arrow-left.png" width="60vh" style="position: absolute; top: 45%; right: 75%" onclick="page -= 1; loadCredits()">
-		</div>`)
+		</div>`);
+	creditsNode.insertAdjacentHTML('beforeEnd', `<div class="center supercenter" style="width: 80vh; height: 43%; pointer-events: none;">
+	<img class="closeWindow gdButton" src="../assets/close.png" height="25%" style="position: absolute; top: -24%; left: -7vh; pointer-events: all;" onclick="creditsNode.style.display = 'none'; page = 1;"></div>`);
+	document.addEventListener('keydown', function(k) {
+		if (creditsNode.style.display == "none") return;
+		if (k.code == "ArrowLeft" && page > 1) { //left
+			page -= 1; loadCredits();
+		}
 
-	res.contributors.forEach((x, y) => {
-		$('#githubbers').append(`<div class="githubChad">
-				<h2 class="gdButton smaller"><a href="./profile/${x[1]}">${x[0]}</h2></a>
-				<img src="./icon/${x[1]}" height=85%><br>
-				</div>`)
-	})
-
-	$('#credits').append(`<div class="center supercenter" style="width: 80vh; height: 43%; pointer-events: none;">
-	<img class="closeWindow gdButton" src="../assets/close.png" height="25%" style="position: absolute; top: -24%; left: -7vh; pointer-events: all;" onclick="$('#credits').hide(); page = 1;"></div>`)
-
-	$(document).keydown(function(k) {
-
-	if ($('#credits').is(':hidden')) return
-
-    if (k.which == 37 && page > 1) { //left
-		page -= 1; loadCredits();
-	}
-	
-	if (k.which == 39 && page < res.credits.length + 1) { //right
-		page += 1; loadCredits();
-	}
-	
+		if (k.code == "ArrowRight" && page < res.credits.length + 1) { //right
+			page += 1; loadCredits();
+		}
+	}, {passive: true})
 });
-})
 
 </script>

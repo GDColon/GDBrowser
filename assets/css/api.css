@@ -81,11 +81,11 @@ quote{
 }
 
 .reveal {
-    color: #3994db;
+  color: #3994db;
 	cursor: pointer;
 	margin: 5px 0;
+	transition: height 100ms ease-in-out;
 }
-
 .reveal::after{
 	content: '';
 	display: inline-block;
@@ -101,15 +101,16 @@ quote{
 }
 
 .subdiv {
-    display: none;
-    padding: 5px 15px;
+	padding: 5px 15px;
 	background: rgba(166, 216, 255, 0.2);
 	border: 2px solid #3994db;
 	border-radius: 2px;
-    margin: 10px 0px 4px 0px;
-    line-height: 24px;
+	margin: 10px 0px 4px 0px;
+	line-height: 24px;
+	visibility: hidden;
+	transform: scaleY(0);
+	height: 0;
 }
-
 .indent {
     margin-left: 20px;
 }

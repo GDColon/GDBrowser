@@ -79,110 +79,107 @@ if (!Number(lvlID)) {history = true; target = `../api/profile/${lvlID}`}
 fetch(target).then(res => res.json()).then(lvl => {
 
 	if (history) {
-		$('#levelName').text(lvl.username + "'s comments")
+		document.querySelector('#levelName').textContent = lvl.username + "'s comments";
 		document.title = lvl.username + "'s comments"
 
-		$('#meta-title').attr('content', lvl.username + "'s comment history")
-		$('#meta-desc').attr('content',  `View all of ${lvl.username}'s Geometry Dash comments!`)
+		document.querySelector('#meta-title').setAttribute('content', lvl.username + "'s comment history")
+		document.querySelector('#meta-desc').setAttribute('content',  `View all of ${lvl.username}'s Geometry Dash comments!`)
 	}
 
 	else {
-		if (lvl.accountID == "0") $('#levelAuthor').addClass("green")
-		$('#levelName').text(lvl.name || ("Nonexistent level " + lvlID))
-		$('#levelAuthor').text("By " + (lvl.author || "-"))
-		$('#levelID').text("ID: " + lvlID)
-		$('#levelVersion').text("Version: " + (lvl.version || 0))
+		if (lvl.accountID == "0") document.querySelector('#levelAuthor').classList.add("green")
+		document.querySelector('#levelName').textContent = lvl.name || ("Nonexistent level " + lvlID);
+		document.querySelector('#levelAuthor').textContent = "By " + (lvl.author || "-");
+		document.querySelector('#levelID').textContent = "ID: " + lvlID;
+		document.querySelector('#levelVersion').textContent = "Version: " + (lvl.version || 0);
 		document.title = "Comments for " + (lvl.name || lvlID)
 
 		if (lvl.name) {
-			$('#meta-title').attr('content', `Comments for ${lvl.name}`)
-			$('#meta-desc').attr('content',  `View all the comments for ${lvl.name} by ${lvl.author || "Unknown"}!`)
+			document.querySelector('#meta-title').setAttribute('content', `Comments for ${lvl.name}`)
+			document.querySelector('#meta-desc').setAttribute('content',  `View all the comments for ${lvl.name} by ${lvl.author || "Unknown"}!`)
 		}
 	}
 
-function appendComments() {
+	function appendComments() {
 
-if (loadingComments) return;
-else loadingComments = true;
+		if (loadingComments) return;
+		else loadingComments = true;
 
-$('#commentBox').html(`<div class="supercenter" id="loading" style="height: 12%;"><img class="spin noSelect" src="../assets/loading.png" height="105%"></div>`)
+		document.querySelector('#commentBox').insertAdjacentHTML('beforeEnd', `<div class="supercenter" id="loading" style="height: 12%;"><img class="spin noSelect" src="../assets/loading.png" height="105%"></div>`);
 
-if (page == 0) $('#pageDown').hide()
-else $('#pageDown').show()
+		if (page == 0) document.querySelector('#pageDown').style.display = "none";
+		else document.querySelector('#pageDown').style.display = "block";
 
-fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID}?page=${page}${history ? "&type=commentHistory" : ""}${mode == "top" ? "&top" : ""}`).then(res => res.json()).then(res => {
-	
-	if (res.length < 9 || (history && lvl.commentHistory == "off")) $('#pageUp').hide()
-	else $('#pageUp').show()
+		fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID}?page=${page}${history ? "&type=commentHistory" : ""}${mode == "top" ? "&top" : ""}`).then(res => res.json()).then(res => {
+			
+			if (res.length < 9 || (history && lvl.commentHistory == "off")) document.querySelector('#pageUp').style.display = "none"
+			else document.querySelector('#pageUp').style.display = "block"
 
-	if (res == -1 || (history && lvl.commentHistory == "off")) {
-		return $('#loading').hide()
-	}
+			if (res == -1 || (history && lvl.commentHistory == "off")) {
+				return document.querySelector('#loading').style.display = "none";
+			}
+			let commentBox = document.querySelector('#commentBox');
+			commentBox.innerHTML = res.map(x => `
+				<div class="commentBG">
+					<div class="comment">
+						<img class="inline" src="../icon/${!history ? x.username : lvl.username}?form=${x.form}" height=21% style="margin-right: 0.8%">
+						<a ${x.username == "Unknown" || x.accountID == "0" ? "" : "href"}="../profile/${!history ? x.username : lvl.username}"><h2 class="inline ${x.username == "Unknown" || x.accountID == "0" ? "green" : "gdButton"}">${!history ? x.username : lvl.username}</h2></a>
+						${x.modColor || lvl.moderator == "2" ? `<img class="inline" src="../assets/mod-elder.png" height=18% style="margin-left: 0.6%;">` : ""}
+						<p class="commentPercent inline">${x.percent ? x.percent + "%" : ""}</p>
 
-	res.forEach(x => {
-		$('#commentBox').append(`
-			<div class="commentBG">
-				<div class="comment">
-					<img class="inline" src="../icon/${!history ? x.username : lvl.username}?form=${x.form}" height=21% style="margin-right: 0.8%">
-					<a ${x.username == "Unknown" || x.accountID == "0" ? "" : "href"}="../profile/${!history ? x.username : lvl.username}"><h2 class="inline ${x.username == "Unknown" || x.accountID == "0" ? "green" : "gdButton"}">${!history ? x.username : lvl.username}</h2></a>
-					${x.modColor || lvl.moderator == "2" ? `<img class="inline" src="../assets/mod-elder.png" height=18% style="margin-left: 0.6%;">` : ""}
-					<p class="commentPercent inline">${x.percent ? x.percent + "%" : ""}</p>
-
-					<div class="commentAlign">
-						<p class="commentText" style="color: ${!history && x.playerID == lvl.authorID ? "rgb(255, 255, 75)" : x.username == "RobTop" ? "rgb(50, 255, 255)" : x.modColor || lvl.moderator == "2" ? `rgb(75, 255, 75)` : "white"}">${x.content}</p>
+						<div class="commentAlign">
+							<p class="commentText" style="color: ${!history && x.playerID == lvl.authorID ? "rgb(255, 255, 75)" : x.username == "RobTop" ? "rgb(50, 255, 255)" : x.modColor || lvl.moderator == "2" ? `rgb(75, 255, 75)` : "white"}">${x.content}</p>
+						</div>
 					</div>
-				</div>
-				<p class="commentDate">${x.date}</p>
-				<div class="commentLikes">
-					${history ? `<h3 style="margin-right: 1.5vh; pointer-events: all;" class="gold inline"><a href="../${x.levelID}">(${x.levelID})</a></h3>` : ""}
-					<img id="likeImg" class="inline" ${x.likes < 0 ? "style='transform: translateY(25%)'" : ""} src="../assets/${x.likes < 0 ? "dis" : ""}like.png" height=20% style="margin-right: 0.4%">
-					<h3 class="inline">${x.likes}</h3>
-				</div>
-			</div>`)
-	})
+					<p class="commentDate">${x.date}</p>
+					<div class="commentLikes">
+						${history ? `<h3 style="margin-right: 1.5vh; pointer-events: all;" class="gold inline"><a href="../${x.levelID}">(${x.levelID})</a></h3>` : ""}
+						<img id="likeImg" class="inline" ${x.likes < 0 ? "style='transform: translateY(25%)'" : ""} src="../assets/${x.likes < 0 ? "dis" : ""}like.png" height=20% style="margin-right: 0.4%">
+						<h3 class="inline">${x.likes}</h3>
+					</div>
+				</div>`).join('');
 
-	$('.commentText').each(function() {
-	if ($(this).text().length > 100) {
-	let overflow = ($(this).text().length - 100) * 0.01
-	$(this).css('font-size', (3.5 - (overflow)) + 'vh')
+			for (let el of document.querySelectorAll('.commentText')) {
+				if (el.textContent.length > 100) {
+					let overflow = (el.textContent.length - 100) * 0.01
+					el.style.fontSize = (3.5 - (overflow)) + 'vh'
+				}
+			};
+			commentBox.scrollTop = 0;
+		})
+		loadingComments = false;
 	}
-});
-$('#loading').hide()
-})
-loadingComments = false;
-}
 
-let mode = "time"
-let page = 0
-let loadingComments = false
-appendComments()
-
-$('#pageUp').click(function() {page += 1; appendComments()})
-$('#pageDown').click(function() {page -= 1; appendComments()})
-
-$('#topSort').click(function() {
-	if (mode == "top") return;
-	mode = "top";
-	page = 0;
-	$('#timeSort').attr('src', "../assets/sort-time.png")
-	$('#topSort').attr('src', "../assets/sort-likes-on.png")
+	let mode = "time"
+	let page = 0
+	let loadingComments = false
 	appendComments()
-})
 
-$('#timeSort').click(function() {
-	if (mode == "time") return;
-	mode = "time";
-	page = 0;
-	$('#timeSort').attr('src', "../assets/sort-time-on.png")
-	$('#topSort').attr('src', "../assets/sort-likes.png")
-	appendComments()
-})
+	document.querySelector('#pageUp').addEventListener('click', function() {page += 1; appendComments()}, {passive: true})
+	document.querySelector('#pageDown').addEventListener('click', function() {page -= 1; appendComments()}, {passive: true})
 
-$('#refresh').click(function() {
-	page = 0;
-	appendComments()
-})
+	document.querySelector('#topSort').addEventListener('click', function() {
+		if (mode == "top") return;
+		mode = "top";
+		page = 0;
+		document.querySelector('#timeSort').setAttribute('src', "../assets/sort-time.png")
+		document.querySelector('#topSort').setAttribute('src', "../assets/sort-likes-on.png")
+		appendComments()
+	}, {passive: true})
 
+	document.querySelector('#timeSort').addEventListener('click', function() {
+		if (mode == "time") return;
+		mode = "time";
+		page = 0;
+		document.querySelector('#timeSort').setAttribute('src', "../assets/sort-time-on.png")
+		document.querySelector('#topSort').document.querySelector('src', "../assets/sort-likes.png")
+		appendComments()
+	}, {passive: true})
+
+	document.querySelector('#refresh').addEventListener('click', function() {
+		page = 0;
+		appendComments()
+	}, {passive: true})
 })
 
 

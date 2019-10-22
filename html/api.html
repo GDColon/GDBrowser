@@ -69,14 +69,14 @@
 			<p>Using "daily" or "weekly" as the level ID will return the current daily/weekly level (always downloaded)</p>
 
 			<br>
-			<p class="reveal" onclick="$('#params-level').slideToggle(100);"><b>Parameters (1)</b></p>
+			<p class="reveal" onclick="slideToggle('params-level')"><b>Parameters (1)</b></p>
 			<div class="subdiv" id="params-level">
 				<p>download: Whether or not to actually download the level (much slower)</p>
 				<p>*By default it performs a search for the level ID and returns as much information as possible without downloading</p>
 			</div>
 
 			<br>
-			<p class="reveal" onclick="$('#response-level').slideToggle(100);"><b>Response (36)</b></p>
+			<p class="reveal" onclick="slideToggle('response-level')"><b>Response (36)</b></p>
 			<div class="subdiv" id="response-level">
 				<p class="br">*Values that require a download are in
 					<span style="color:red">red</span>
@@ -121,7 +121,7 @@
 			</div>
 
 			<br>
-			<p class="reveal" onclick="$('#request-level').slideToggle(100)"><b>Example</b></p>
+			<p class="reveal" onclick="slideToggle('request-level')"><b>Example</b></p>
 			<div class="subdiv" id="request-level">
 				<p><b>Example Request</b></p>
 				<p>/api/level/4284013 </p>
@@ -148,13 +148,13 @@
 			<p>Unlike the Geometry Dash API, both username and ID can be used to fetch a user profile.</p>
 
 			<br>
-			<p class="reveal" onclick="$('#params-profile').slideToggle(100)"><b>Parameters (0)</b></p>
+			<p class="reveal" onclick="slideToggle('params-profile')"><b>Parameters (0)</b></p>
 			<div class="subdiv" id="params-profile">
 				<p>No parameters for this one!</p>
 			</div>
 
 			<br>
-			<p class="reveal" onclick="$('#response-profile').slideToggle(100)"><b>Response (28)</b></p>
+			<p class="reveal" onclick="slideToggle('response-profile')"><b>Response (28)</b></p>
 			<div class="subdiv" id="response-profile">
 				<p>username: The name of the player</p>
 				<p>playerID: The unique ID for all accounts</p>
@@ -178,7 +178,7 @@
 			</div>
 
 			<br>
-			<p class="reveal" onclick="$('#request-profile').slideToggle(100)"><b>Example</b></p>
+			<p class="reveal" onclick="slideToggle('request-profile')"><b>Example</b></p>
 			<div class="subdiv" id="request-profile">
 				<p><b>Example Request</b></p>
 				<p>/api/profile/robtop</p>
@@ -205,7 +205,7 @@
 			<p>Use an asterisk (*) as your search query if you do not wish to search by level name (if you intend on using filters)</p>
 
 			<br>
-			<p class="reveal" onclick="$('#params-search').slideToggle(100)"><b>Parameters (17)</b></p>
+			<p class="reveal" onclick="slideToggle('params-search')"><b>Parameters (17)</b></p>
 			<div class="subdiv" id="params-search">
 				<p>Buckle up... there's a lot</p>
 
@@ -252,12 +252,12 @@
 			</div>
 
 			<br>
-			<p class="reveal" onclick="$('#response-search').slideToggle(100)"><b>Response*</b></p>
+			<p class="reveal" onclick="slideToggle('response-search')"><b>Response*</b></p>
 			<div class="subdiv" id="response-search">
 				<p>The response for searching is an array of up to 10 <a href="#level">level objects</a></p>
 			</div>
 			<br>
-			<p class="reveal" onclick="$('#request-search').slideToggle(100)"><b>Examples</b></p>
+			<p class="reveal" onclick="slideToggle('request-search')"><b>Examples</b></p>
 			<div class="subdiv" id="request-search">
 				<p><b>Example Requests</b></p>
 				<p>/api/search/abc (Searches for a level named "abc")</p>
@@ -286,7 +286,7 @@
 			<p>Simply returns the top player leaderboard</p>
 
 			<br>
-			<p class="reveal" onclick="$('#params-leaderboard').slideToggle(100)"><b>Parameters (3)</b></p>
+			<p class="reveal" onclick="slideToggle('params-leaderboard')"><b>Parameters (3)</b></p>
 			<div class="subdiv" id="params-leaderboard">
 				<p>count: The amount of players to list (default is 100, max is 2500, does not work with accurate leaderboard)</p>
 				<p>creator: Fetches the creator leaderboard</p>
@@ -294,7 +294,7 @@
 			</div>
 
 			<br>
-			<p class="reveal" onclick="$('#response-leaderboard').slideToggle(100)"><b>Response (9)</b></p>
+			<p class="reveal" onclick="slideToggle('response-leaderboard')"><b>Response (9)</b></p>
 			<div class="subdiv" id="response-leaderboard">
 				<p>The API will return an array of each player with the following information:</p>
 				<p>rank: Position on the leaderboard</p>
@@ -309,7 +309,7 @@
 			</div>
 
 			<br>
-			<p class="reveal" onclick="$('#request-leaderboard').slideToggle(100)"><b>Examples</b></p>
+			<p class="reveal" onclick="slideToggle('request-leaderboard')"><b>Examples</b></p>
 			<div class="subdiv" id="request-leaderboard">
 				<p><b>Example Requests</b></p>
 				<p>/api/leaderboard?count=10 (Fetches the top 10 players)</p>
@@ -337,14 +337,14 @@
 			<p>Returns the leaderboard for a level</p>
 
 			<br>
-			<p class="reveal" onclick="$('#params-levelleaderboard').slideToggle(100)"><b>Parameters (2)</b></p>
+			<p class="reveal" onclick="slideToggle('params-levelleaderboard')"><b>Parameters (2)</b></p>
 			<div class="subdiv" id="params-levelleaderboard">
 				<p>count: The amount of players to list (default is 100, max is 200)</p>
 				<p>week: Whether or not to fetch the weekly leaderboard instead of the regular one</p>
 			</div>
 
 			<br>
-			<p class="reveal" onclick="$('#response-levelleaderboard').slideToggle(100)"><b>Response (6)</b></p>
+			<p class="reveal" onclick="slideToggle('response-levelleaderboard')"><b>Response (6)</b></p>
 			<div class="subdiv" id="response-levelleaderboard">
 				<p>The API will return an array of each player with the following information:</p>
 				<p>rank: Position on the leaderboard</p>
@@ -357,7 +357,7 @@
 			</div>
 
 			<br>
-			<p class="reveal" onclick="$('#request-levelleaderboard').slideToggle(100)"><b>Example</b></p>
+			<p class="reveal" onclick="slideToggle('request-levelleaderboard')"><b>Example</b></p>
 			<div class="subdiv" id="request-levelleaderboard">
 				<p><b>Example Request</b></p>
 				<p>/api/leaderboardLevel/1063115 (Fetches the leaderboard for Dynamic on Track)</p>
@@ -382,7 +382,7 @@
 			<p>Returns up to 10 comments or profile posts</p>
 
 			<br>
-			<p class="reveal" onclick="$('#params-comment').slideToggle(100)"><b>Parameters (3)</b></p>
+			<p class="reveal" onclick="slideToggle('params-comment')"><b>Parameters (3)</b></p>
 			<div class="subdiv" id="params-comment">
 				<p>top: Whether or not to sort by most liked (comments only)</p>
 				<p>page: The page of the search</p>
@@ -392,7 +392,7 @@
 			</div>
 
 			<br>
-			<p class="reveal" onclick="$('#response-comment').slideToggle(100)"><b>Response (10)</b></p>
+			<p class="reveal" onclick="slideToggle('response-comment')"><b>Response (10)</b></p>
 			<div class="subdiv" id="response-comment">
 				<p>The API will return an array of each comment with the following information.<br>Values that don't work for profile posts are in <font color=red>red</font></p>
 				<p>content: The comment text</p>
@@ -408,7 +408,7 @@
 			</div>
 
 			<br>
-			<p class="reveal" onclick="$('#request-comment').slideToggle(100)"><b>Examples</b></p>
+			<p class="reveal" onclick="slideToggle('request-comment')"><b>Examples</b></p>
 			<div class="subdiv" id="request-comment">
 				<p><b>Example Requests</b></p>
 				<p>/api/comments/26681070?top (Fetches Sonic Wave's most liked comments)</p>
@@ -426,7 +426,7 @@
 	</main>
 	<main class="alt">
 		<div class="main-block">
-			<div id="analyze""></div>
+			<div id="analyze"></div>
 			<h1>Level Analysis (WIP)</h1>
 			<p>/api/analyze/levelID</p>
 
@@ -434,13 +434,13 @@
 			<p><b>Level analyzing is still a big WIP so there may be changes in the future</b></p>
 
 			<br>
-			<p class="reveal" onclick="$('#params-analyze').slideToggle(100)"><b>Parameters (0)</b></p>
+			<p class="reveal" onclick="slideToggle('params-analyze')"><b>Parameters (0)</b></p>
 			<div class="subdiv" id="params-analyze">
 				<p>No parameters for this one!</p>
 			</div>
 
 			<br>
-			<p class="reveal" onclick="$('#response-analyze').slideToggle(100)"><b>Response (?)</b></p>
+			<p class="reveal" onclick="slideToggle('response-analyze')"><b>Response (?)</b></p>
 			<div class="subdiv" id="response-analyze">
 				<p><b>Response is subject to change in the future</b></p>
 				<p>The API will return an array of each player with the following information:</p>
@@ -470,19 +470,36 @@
 </body>
 
 </html>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script async type="text/javascript" src="../assets/sizecheck.js"></script>
 <script>
-	$('.subdiv').each(function() {
-		$(this).html($(this).html().replace(/(<p.*>)(.*:) /g, '$1<font class="param">$2</font> '))
-	})
+	let transitionHeights = [];
+	for (let el of document.querySelectorAll('.subdiv')) {
+		el.style.visibility = 'hidden'; // Dumb but needed to work with polyfilled slideToggle
+		el.innerHTML = el.innerHTML.replace(/(<p.*>)(.*:) /g, '$1<font class="param">$2</font> ');
+	}
 
-	$('.fetch').each(function() {
-		fetch(`..${$(this).attr('link')}`).then(res => res.json()).then(res => {
-			$(this).html(JSON.stringify(res, null, 2))
+	for (let el of document.querySelectorAll('.fetch')) {
+		fetch(`..${el.getAttribute('link')}`).then(res => res.json()).then(res => {
+			el.innerHTML = JSON.stringify(res, null, 2)
 		})
-	});
-
+	}
+	function slideToggle(id) {
+		let el = document.getElementById(id);
+		let style = el.style
+		if (style.visibility == 'hidden') {
+			style.height = 'auto';
+			let transitionTo = el.clientHeight - 10; // Account for padding
+			style.height = 0;
+			style.transition = 'all 100ms ease-in-out';
+			style.visibility = 'visible';
+			style.height = transitionTo+'px';
+			style.transform = 'scaleY(1)';
+		} else {
+			style.visibility = 'hidden';
+			style.transform = 'scaleY(0)';
+			style.height = 0;
+			delete style.transition;
+		}
+	}
 
 	//smooth scrolling through anchors
 	document.querySelectorAll('a[href^="#"]').forEach(anchor => {
