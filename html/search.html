@@ -9,7 +9,7 @@
 	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/assets/coin.png">
 </head>
 
-<body class="levelBG">
+<body class="levelBG" onbeforeunload="saveUrl()">
 
 <div id="everything" style="overflow: auto;">
 
@@ -240,5 +240,9 @@ $(document).keydown(function(k) {
 		$('#pageUp').trigger('click')
     }
 });
+
+function saveUrl() {
+	sessionStorage.setItem('prevUrl', window.location.href);
+}
 
 </script>

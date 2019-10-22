@@ -10,7 +10,7 @@
 	<link rel="icon" href="../assets/cp.png">
 </head>
 
-<body class="levelBG" style="overflow-y:auto;">
+<body class="levelBG" style="overflow-y:auto;" onbeforeunload="saveUrl()">
 
 <div id="everything" class="center">
 
@@ -183,9 +183,10 @@ appendPortals()
 	$('#loadingDiv').hide()
 	$('#analysisDiv').show()
 
-})
+});
 
-
-
+function saveUrl() {
+	sessionStorage.setItem('prevUrl', window.location.href);
+}
 
 </script>

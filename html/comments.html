@@ -9,7 +9,7 @@
 	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/assets/like.png">
 </head>
 
-<body class="levelBG">
+<body class="levelBG" onbeforeunload="saveUrl()">
 
 <div id="everything">
 	
@@ -183,8 +183,10 @@ $('#refresh').click(function() {
 	appendComments()
 })
 
-})
+});
 
-
+function saveUrl() {
+	sessionStorage.setItem('prevUrl', window.location.href);
+}
 </script>
 

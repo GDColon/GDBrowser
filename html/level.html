@@ -9,7 +9,7 @@
 	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/difficulty/[[DIFFICULTYFACE]].png">
 </head>
 
-<body class="levelBG">
+<body class="levelBG" onbeforeunload="saveUrl()">
 
 <div id="everything">
 
@@ -231,6 +231,10 @@ function deleteLevel() {
 	document.cookie = `saved=${levelList.filter(x => x != "[[ID]]")}; expires=Fri, 31 Dec 9999 23:59:59 GMT`;
 	location.reload()
 	freeze = true;
+}
+
+function saveUrl() {
+	sessionStorage.setItem('prevUrl', window.location.href);
 }
 
 </script>

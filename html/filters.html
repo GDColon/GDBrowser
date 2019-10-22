@@ -9,7 +9,7 @@
 	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/assets/coin.png">
 </head>
 
-<body class="levelBG">
+<body class="levelBG" onbeforeunload="saveUrl()">
 
 <div id="everything">
 
@@ -190,6 +190,10 @@ $('.lengthDiv').click(function() {
 
 $(document).keydown(function(k) {
 	if (k.which == 13 && $('#filters').is(':hidden')) $('#searchBtn').trigger('click') //enter
-})
+});
+
+function saveUrl() {
+	sessionStorage.setItem('prevUrl', window.location.href);
+}
 
 </script>

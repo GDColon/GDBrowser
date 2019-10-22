@@ -9,7 +9,7 @@
 	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/icon/[[USERNAME]]">
 </head>
 
-<body class="levelBG">
+<body class="levelBG" onbeforeunload="saveUrl()">
 
 <div id="everything">
 	
@@ -186,6 +186,10 @@ loadingComments = false;
 let page = 0
 let loadingComments = false
 appendComments()
+
+function saveUrl() {
+	sessionStorage.setItem('prevUrl', window.location.href);
+}
 
 </script>
 
