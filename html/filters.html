@@ -192,6 +192,6 @@ for (let el of document.querySelectorAll('.lengthDiv'))
 		el.classList.toggle('selectedFilter')
 	}, {passive: true});
 document.addEventListener('keydown', function(k) {
-	if (k.code == "Enter" && document.querySelector('#filters').style.display == "none") document.querySelector('#searchBtn').click() //enter
+	if (k.code == "Enter" && document.querySelector('#filters').style.display != "block") document.querySelector('#searchBtn').click() //enter
 }, {passive: true})
 </script>

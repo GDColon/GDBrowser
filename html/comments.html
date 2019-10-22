@@ -119,22 +119,15 @@ fetch(target).then(res => res.json()).then(lvl => {
 			}
 			let commentBox = document.querySelector('#commentBox');
 			commentBox.innerHTML = res.map(x => `
-				<div class="commentBG">
-					<div class="comment">
-						<img class="inline" src="../icon/${!history ? x.username : lvl.username}?form=${x.form}" height=21% style="margin-right: 0.8%">
-						<a ${x.username == "Unknown" || x.accountID == "0" ? "" : "href"}="../profile/${!history ? x.username : lvl.username}"><h2 class="inline ${x.username == "Unknown" || x.accountID == "0" ? "green" : "gdButton"}">${!history ? x.username : lvl.username}</h2></a>
-						${x.modColor || lvl.moderator == "2" ? `<img class="inline" src="../assets/mod-elder.png" height=18% style="margin-left: 0.6%;">` : ""}
-						<p class="commentPercent inline">${x.percent ? x.percent + "%" : ""}</p>
+			<div class="commentBG">
+				<div class="comment">
+					<img class="inline" src="../icon/${!history ? x.username : lvl.username}?form=${x.form}" height=21% style="margin-right: 0.8%">
+					<a ${x.username == "Unknown" || x.accountID == "0" ? "" : "href"}="../profile/${!history ? x.username : lvl.username}"><h2 class="inline ${x.username == "Unknown" || x.accountID == "0" ? "green" : "gdButton"}">${!history ? x.username : lvl.username}</h2></a>
+					${x.modColor || lvl.moderator == "2" ? `<img class="inline" src="../assets/mod-elder.png" height=18% style="margin-left: 0.6%;">` : ""}
+					<p class="commentPercent inline">${x.percent ? x.percent + "%" : ""}</p>
 
-						<div class="commentAlign">
-							<p class="commentText" style="color: ${!history && x.playerID == lvl.authorID ? "rgb(255, 255, 75)" : x.username == "RobTop" ? "rgb(50, 255, 255)" : x.modColor || lvl.moderator == "2" ? `rgb(75, 255, 75)` : "white"}">${x.content}</p>
-						</div>
-					</div>
-					<p class="commentDate">${x.date}</p>
-					<div class="commentLikes">
-						${history ? `<h3 style="margin-right: 1.5vh; pointer-events: all;" class="gold inline"><a href="../${x.levelID}">(${x.levelID})</a></h3>` : ""}
-						<img id="likeImg" class="inline" ${x.likes < 0 ? "style='transform: translateY(25%)'" : ""} src="../assets/${x.likes < 0 ? "dis" : ""}like.png" height=20% style="margin-right: 0.4%">
-						<h3 class="inline">${x.likes}</h3>
+					<div class="commentAlign">
+						<p class="commentText" style="color: ${!history && x.playerID == lvl.authorID ? "rgb(255, 255, 75)" : x.playerID == "16" ? "rgb(50, 255, 255)" : x.modColor || lvl.moderator == "2" ? `rgb(75, 255, 75)` : "white"}">${x.content}</p>
 					</div>
 				</div>`).join('');
 
