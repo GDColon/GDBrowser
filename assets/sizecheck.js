@@ -23,8 +23,8 @@ $(window).resize(function () {
 
 function backButton() {
 	if (window.history.length > 1 && document.referrer.startsWith(window.location.origin)){
-            if (window.location.href.endsWith('?download')) return window.history.go(-2);
-            window.history.back()
+            if (window.location.href.endsWith('?download')) window.history.go(-2);
+            else window.history.back()
         }
 	else window.location.href = "../../../../../"
 }
