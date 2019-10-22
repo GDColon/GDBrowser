@@ -79,6 +79,9 @@ if (!Number(lvlID)) {history = true; target = `../api/profile/${lvlID}`}
 fetch(target).then(res => res.json()).then(lvl => {
 
 	if (history) {
+
+		if (!lvl.username) return window.location.href = window.location.href.replace("comments", "search")
+
 		$('#levelName').text(lvl.username + "'s comments")
 		document.title = lvl.username + "'s comments"
 
@@ -129,7 +132,7 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 					<p class="commentPercent inline">${x.percent ? x.percent + "%" : ""}</p>
 
 					<div class="commentAlign">
-						<p class="commentText" style="color: ${!history && x.playerID == lvl.authorID ? "rgb(255, 255, 75)" : x.username == "RobTop" ? "rgb(50, 255, 255)" : x.modColor || lvl.moderator == "2" ? `rgb(75, 255, 75)` : "white"}">${x.content}</p>
+						<p class="commentText" style="color: ${!history && x.playerID == lvl.authorID ? "rgb(255, 255, 75)" : x.playerID == "16" ? "rgb(50, 255, 255)" : x.modColor || lvl.moderator == "2" ? `rgb(75, 255, 75)` : "white"}">${x.content}</p>
 					</div>
 				</div>
 				<p class="commentDate">${x.date}</p>
