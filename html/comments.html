@@ -1,7 +1,7 @@
 <head>
 	<title>Comments</title>
 	<meta charset="utf-8">
-	<link href="../css/level.css" type="text/css" rel="stylesheet">
+	<link href="../css/browser.css" type="text/css" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
 	<link rel="icon" href="../assets/like.png">
 	<meta id="meta-title" property="og:title" content="Level Comments">
@@ -29,14 +29,18 @@
 			<img class="gdButton" id="refresh"  src="../assets/refresh.png" height="90%">
 		</div>
 
-		<div class="supercenter" style="left: 3%; top: 20%; height: 10%">
+		<div class="supercenter" style="left: 3%; top: 15%; height: 10%">
 			<img class="gdButton" id="topSort" src="../assets/sort-likes.png" height="90%">
 		</div>
 
-		<div class="supercenter" style="left: 3%; top: 30.5%; height: 10%">
+		<div class="supercenter" style="left: 3%; top: 25.5%; height: 10%">
 			<img class="gdButton" id="timeSort"  src="../assets/sort-time-on.png" height="90%">
 		</div>
 	
+		<div class="supercenter" style="left: 3%; top: 36%; height: 10%">
+			<img class="gdButton" id="compactMode" src="../assets/compact-off.png" height="90%">
+		</div>
+
 		<div class="supercenter" id="pageDown" style="left: 3%; top: 50%; height: 10%; display: none;">
 			<img class="gdButton" src="../assets/arrow-left.png" height="95%">
 		</div>
@@ -71,6 +75,8 @@
 
 let lvlID = window.location.pathname.split('/')[2]
 let history = false;
+let compact = false;
+
 let target = `../api/level/${lvlID}`
 
 if (lvlID > 99999999 || lvlID < -99999999) window.location.href = window.location.href.replace("comments", "search")
@@ -103,17 +109,19 @@ fetch(target).then(res => res.json()).then(lvl => {
 		}
 	}
 
-function appendComments() {
+function appendComments(dontClear, bump) {
+
+let p = compact ? ((page + 1) * 2) - 2 + (bump||0) : page
 
 if (loadingComments) return;
 else loadingComments = true;
 
-$('#commentBox').html(`<div class="supercenter" id="loading" style="height: 12%;"><img class="spin noSelect" src="../assets/loading.png" height="105%"></div>`)
+if (!dontClear) $('#commentBox').html(`<div class="supercenter" id="loading" style="height: 12%;"><img class="spin noSelect" src="../assets/loading.png" height="105%"></div>`)
 
 if (page == 0) $('#pageDown').hide()
 else $('#pageDown').show()
 
-fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID}?page=${page}${history ? "&type=commentHistory" : ""}${mode == "top" ? "&top" : ""}`).then(res => res.json()).then(res => {
+fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID}?page=${p}${history ? "&type=commentHistory" : ""}${mode == "top" ? "&top" : ""}`).then(res => res.json()).then(res => {
 	
 	if (res.length < 9 || (history && lvl.commentHistory == "off")) $('#pageUp').hide()
 	else $('#pageUp').show()
@@ -123,6 +131,10 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 	}
 
 	res.forEach(x => {
+		
+		if (!compact) {
+		////// NORMAL MODE //////
+
 		$('#commentBox').append(`
 			<div class="commentBG">
 				<div class="comment">
@@ -141,7 +153,31 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 					<img id="likeImg" class="inline" ${x.likes < 0 ? "style='transform: translateY(25%)'" : ""} src="../assets/${x.likes < 0 ? "dis" : ""}like.png" height=20% style="margin-right: 0.4%">
 					<h3 class="inline">${x.likes}</h3>
 				</div>
-			</div>`)
+			</div>`) }
+
+		else {
+		////// COMPACT MODE //////
+
+		$('#commentBox').append(`
+			<div class="commentBG compactBG">
+				<div class="comment compact">
+					<img class="inline" src="../icon/${!history ? x.username : lvl.username}?form=${x.form}" height=21% style="margin-right: 0.8%">
+					<a ${x.username == "Unknown" || x.accountID == "0" ? "" : "href"}="../profile/${!history ? x.username : lvl.username}"><h2 class="inline ${x.username == "Unknown" || x.accountID == "0" ? "green" : "gdButton"}">${!history ? x.username : lvl.username}</h2></a>
+					${x.modColor || lvl.moderator == "2" ? `<img class="inline" src="../assets/mod-elder.png" height=18% style="margin-left: 0.6%;">` : ""}
+					<p class="commentPercent inline">${x.percent ? x.percent + "%" : ""}</p>
+
+					<div class="commentAlign">
+						<p class="commentText" style="color: ${!history && x.playerID == lvl.authorID ? "rgb(255, 255, 75)" : x.playerID == "16" ? "rgb(50, 255, 255)" : x.modColor || lvl.moderator == "2" ? `rgb(75, 255, 75)` : "white"}">${x.content}</p>
+					</div>
+				</div>
+				<p class="commentDate compactDate">${x.date}</p>
+				<div class="commentLikes">
+					${history ? `<h3 style="margin-right: 0.5vh; pointer-events: all;" class="gold inline"><a href="../${x.levelID}">(${x.levelID})</a></h3>` : ""}
+					<img id="likeImg" class="inline" ${x.likes < 0 ? "style='transform: translateY(15%)'" : ""} src="../assets/${x.likes < 0 ? "dis" : ""}like.png" height=27% style="margin-right: 0.4%">
+					<h3 class="inline">${x.likes}</h3>
+				</div>
+			</div>`) }
+
 	})
 
 	$('.commentText').each(function() {
@@ -149,10 +185,18 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 	let overflow = ($(this).text().length - 100) * 0.01
 	$(this).css('font-size', (3.5 - (overflow)) + 'vh')
 	}
-});
-$('#loading').hide()
-})
-loadingComments = false;
+
+	});
+
+	if (compact && p % 2 == 0) {
+		return appendComments(true, 1)
+	}
+
+	$('#loading').hide()
+	})
+
+	return loadingComments = false;
+
 }
 
 let mode = "time"
@@ -178,6 +222,13 @@ $('#timeSort').click(function() {
 	page = 0;
 	$('#timeSort').attr('src', "../assets/sort-time-on.png")
 	$('#topSort').attr('src', "../assets/sort-likes.png")
+	appendComments()
+})
+
+$('#compactMode').click(function() {
+	compact = !compact
+	page = 0;
+	$('#compactMode').attr('src', `../assets/compact-${compact ? "on" : "off"}.png`)
 	appendComments()
 })
 
