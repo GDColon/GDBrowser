@@ -529,6 +529,10 @@ input::-webkit-inner-spin-button {
     border-bottom: 0.18vh rgba(0, 0, 0, 0.4) solid;
 }
 
+.compactBG {
+    height: 14vh;
+}
+
 .commentBG:nth-child(odd) {
     background-color: rgb(185, 108, 57);
 }
@@ -537,13 +541,20 @@ input::-webkit-inner-spin-button {
     margin: 1.5vh auto 0 auto;
     width: 96%;
     height: 18.5vh;
-    background-color: #934E27;
+    background-color: rgba(147, 79, 39, 0.8);
     border-radius: 1.5vh;
     text-align: left;
     padding-top: 1.5vh;
     padding-left: 1.5vh;
     overflow: hidden;
     user-select: none;
+}
+
+.compact {
+    background-color: transparent;
+    padding-left: 0vh;
+    margin-top: 0.5vh;
+    transform: scale(0.8) translate(-13%, -12.5%)
 }
 
 .comment h2, .smallGold {
@@ -572,6 +583,10 @@ input::-webkit-inner-spin-button {
     text-align: right;
     font-size: 1.8vh;
     color: rgba(0, 0, 0, 0.5)
+}
+
+.compactDate {
+    transform: translate(-3vh, -11.5vh);
 }
 
 .commentPercent {
@@ -816,16 +831,16 @@ input::-webkit-inner-spin-button {
     }
 }
 @keyframes bounceButton {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.2);
-  }
-  75% {
-    transform: scale(1.15);
-  }
-  100% {
-    transform: scale(1.2);
-  }
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    75% {
+        transform: scale(1.15);
+    }
+    100% {
+        transform: scale(1.2);
+    }
 }
