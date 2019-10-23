@@ -400,15 +400,13 @@ input::-webkit-inner-spin-button {
 }
 
 .menuButton {
-    width: 24vh;
-    margin: 1.2vh 2vh;
-    cursor: pointer;
+  width: 24vh;
+  margin: 1.2vh 2vh;
+  cursor: pointer;
 }
 
 .menuButton:active {
-    transition-duration: 0.05s;
-    transition-timing-function: ease-in-out;
-    transform: scale(1.1);
+  animation: bounceButton 0.25s ease-in-out forwards;
 }
 
 .menuLink {
@@ -816,4 +814,18 @@ input::-webkit-inner-spin-button {
         transform: scale(1) translate(-50%, -50%);
         transform-origin:left top
     }
+}
+@keyframes bounceButton {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  75% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1.2);
+  }
 }
