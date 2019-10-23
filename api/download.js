@@ -1,6 +1,7 @@
 const request = require('request')
 const fs = require('fs')
-
+const XOR = require('../misc/XOR.js');
+const xor = new XOR();
 module.exports = async (app, req, res, api, ID, analyze) => {
 
     let orbs =  [0, 0, 50, 75, 125, 175, 225, 275, 350, 425, 500]
@@ -56,16 +57,11 @@ module.exports = async (app, req, res, api, ID, analyze) => {
                 objects: levelInfo[45] == "65535" ? "65000+" : levelInfo[45],
                 large: levelInfo[45] > 40000,
           }
-   
           if (level.password != "0") {
-            const XOR = require('../misc/XOR.js');
-            const xor = new XOR();
 
             let pass = level.password
-            pass = +xor.decrypt(pass, 26364)
-            pass = pass.toString()
-           
-            if (pass.length > 1) level.password = Number(pass) - 1000000
+            pass = xor.decrypt(pass, 26364);
+            if (pass.length > 1) level.password = pass.slice(1).padStart(6, '0');
             else level.password = pass
           }
 
