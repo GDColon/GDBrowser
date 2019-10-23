@@ -58,6 +58,10 @@ quote{
 	display: block;
 }
 
+.anchor{                                 
+	transform: translateY(-50px);       
+}                                     
+
 .red .param, .redExample {
 	background-color: #fc3542;
     color: #fff;
@@ -152,15 +156,13 @@ quote{
 	align-items: stretch;
 }
 
+.header-drawer{
+	display: none;
+	align-items: center;
+}
+
 .logo{
-	background-image: url('media/logo.png');
-	height: 100%;
-	width: 50px;
-	background-size: 70%;
-	background-position: center;
-	background-repeat: no-repeat;	
-	transition: all 0.25s ease;
-	display: block;
+	margin-right: 10px;
 }
 .logo:hover{
 	background-size: 75%;
@@ -177,12 +179,13 @@ quote{
 	display: flex;
 	align-items: center;
 	color: #333;
-	padding: 0 20px;
+	padding: 0 25px;
 	user-select: none;
 	cursor: pointer;
 	font-weight: 400;
 	height: 100%;
 	text-decoration: none;	
+	font-size: 14px;
 }
 .header-link:hover{
 	background: #efefef;
@@ -216,8 +219,36 @@ footer a{
 @media screen and (max-width: 750px){
 	.main-header{
 		justify-content: space-around;
+		flex-direction: column;
+		align-items: center;
+		height: auto;
 	}
 	.header-links{
-		display: none;
+		/*display: none;*/
+		position: fixed;
+		top: 50px;
+		flex-direction: column;
+		width: 100%;
+		height: 100%;
+		align-items: center;
+		background: rgb(243, 243, 243);
+		transition: transform 0.25s ease;
+	}
+	.header-links.hid{
+		transform: translateY(-150vh);
+	}
+	.header-link{
+		width: 100%;
+		justify-content: center;
+	}
+	.header-drawer{
+		display: flex;
+	}
+	.header-drawer.active img{
+		transform: rotate(90deg) scaleX(0.7);
+	}
+	.header-drawer img{
+		transition: transform 0.25s ease;
+		z-index: 999;
 	}
 }

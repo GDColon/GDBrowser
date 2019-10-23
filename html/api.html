@@ -4,7 +4,9 @@
 	<title>GD Level Browser API</title>
 	<meta charset="utf-8">
 	<link rel="icon" href="../difficulty/auto.png">
-	<link href="../css/api.css" type="text/css" rel="stylesheet">	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,600,700,800&display=swap" rel="stylesheet">
+	<link href="../css/api.css" type="text/css" rel="stylesheet">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,600,700,800&display=swap" rel="stylesheet">
 	
 	<meta id="meta-title" property="og:title" content="GDBrowser API">
     <meta id="meta-desc" property="og:description" content="It's basically the Geometry Dash API, but not terrible!">
@@ -12,10 +14,13 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body onbeforeunload="saveUrl()">
+<body>
 	<div class="main-header-wrap">
 		<div class="main-header">
-			<div class="header-links">
+			<div class="header-drawer" id="menu-btn">
+				<img src="../assets/menu-ic.svg" alt="Menu" id="menu-btn-img">
+			</div>
+			<div class="header-links hid">
 				<a class="header-link" href="#intro">Introduction</a>
 				<a class="header-link" href="#level">Levels</a>
 				<a class="header-link" href="#profile">Profiles</a>
@@ -27,7 +32,7 @@
 			</div>
 		</div>
 	</div>
-	<div id="intro""></div>
+	<div id="intro" class="anchor"></div>
 	<main class="grey">
 		<div class="main-block">
 			<h1>Hi there!</h1>
@@ -60,7 +65,7 @@
 		<div class="seperator"></div>
 	</main>
 	<main class="alt">
-		<div id="level""></div>
+		<div id="level" class="anchor"></div>
 		<div class="main-block">
 			<h1>Levels</h1>
 			<p>/api/level/levelID</p>
@@ -139,7 +144,7 @@
 	</main>
 	<main class="grey">
 
-		<div id="profile""></div>
+		<div id="profile" class="anchor"></div>
 		
 		<div class="main-block">
 			<h1>Profiles</h1>
@@ -196,7 +201,7 @@
 	</main>
 	<main class="alt">
 
-		<div id="search""></div>
+		<div id="search" class="anchor"></div>
 		
 		<div class="main-block">
 			<h1>Searching</h1>
@@ -278,8 +283,8 @@
 
 	</main>
 	<main class="grey">
+		<div id="leaderboard" class="anchor"></div>
 		<div class="main-block">
-			<div id="leaderboard""></div>
 			<h1>Leaderboards</h1>
 			<p>/api/leaderboard</p>
 
@@ -329,8 +334,8 @@
 
 	</main>
 	<main class="alt">
+		<div id="levelleaderboard" class="anchor"></div>
 		<div class="main-block">
-			<div id="levelleaderboard""></div>
 			<h1>Level Leaderboards</h1>
 			<p>/api/leaderboardLevel/levelID</p>
 
@@ -374,8 +379,8 @@
 
 	</main>
 	<main class="grey">
+		<div id="comments" class="anchor"></div>
 		<div class="main-block">
-			<div id="comments""></div>
 			<h1>Comments and Profile Posts</h1>
 			<p>/api/comments/level-or-user-ID</p>
 
@@ -425,13 +430,13 @@
 		<div class="seperator"></div>
 	</main>
 	<main class="alt">
+		<div id="analyze" class="anchor"></div>
 		<div class="main-block">
-			<div id="analyze""></div>
-			<h1>Level Analysis (WIP)</h1>
-			<p>/api/analyze/levelID</p>
+			<h1>Level Analysis</h1>
+			<p>/api/anakyze/levelID</p>
 
 			<p>Analyzes a level's data</p>
-			<p><b>Level analyzing is still a big WIP so there may be changes in the future</b></p>
+			<p><sb>Level analyzing is still a big WIP so there may be changes in the future</sb></p>
 
 			<br>
 			<p class="reveal" onclick="$('#params-analyze').slideToggle(100)"><b>Parameters (0)</b></p>
@@ -470,28 +475,36 @@
 </body>
 
 </html>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <script>
 	$('.subdiv').each(function() {
 		$(this).html($(this).html().replace(/(<p.*>)(.*:) /g, '$1<font class="param">$2</font> '))
 	})
-
 	$('.fetch').each(function() {
 		fetch(`..${$(this).attr('link')}`).then(res => res.json()).then(res => {
 			$(this).html(JSON.stringify(res, null, 2))
 		})
 	});
-
-
 	//smooth scrolling through anchors
 	document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 		anchor.addEventListener('click', function(e) {
 			e.preventDefault();
-
 			document.querySelector(this.getAttribute('href')).scrollIntoView({
 				behavior: 'smooth'
 			});
 		});
 	});
-
+	
+	//menu button
+	document.getElementById('menu-btn').onclick = function(){
+		document.getElementsByClassName('header-links')[0].classList.toggle('hid');
+		document.getElementById('menu-btn').classList.toggle('active');
+	}
+	
+	for(let i = 0; i < document.getElementsByClassName('header-link').length; i++){
+		document.getElementsByClassName('header-link')[i].onclick = function(){
+			document.getElementsByClassName('header-links')[0].classList.toggle('hid');
+			document.getElementById('menu-btn').classList.toggle('active');
+		}
+	}
 </script>
