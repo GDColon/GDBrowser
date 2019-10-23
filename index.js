@@ -31,7 +31,7 @@ function haltOnTimedout (req, res, next) {
 }
 
 app.parseResponse = function (responseBody, splitter) {
-  if (!responseBody) return {};
+  if (!responseBody || responseBody == "-1") return {};
   let response = responseBody.split('#')[0].split(splitter || ':');
   let res = {};
   for (let i = 0; i < response.length; i += 2) {

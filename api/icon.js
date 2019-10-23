@@ -37,11 +37,7 @@ module.exports = async (app, req, res) => {
       secret: 'Wmfd2893gb7'
     }
   }, function (err1, res1, body1) {
-    let response = body1.split('#')[0].split(':');
-    let result = {};
-    for (let i = 0; i < response.length; i += 2) {
-      result[response[i]] = response[i + 1]
-    }
+    let result = app.parseResponse(body1);
 
     request.post('http://boomlings.com/database/getGJUserInfo20.php', {
       form: {
@@ -50,11 +46,7 @@ module.exports = async (app, req, res) => {
       }
     }, function (err2, res2, body2) {
 
-      let response2 = body2 == "-1" ? '' : body2.split('#')[0].split(':');
-      let account = {};
-      for (let i = 0; i < response2.length; i += 2) {
-        account[response2[i]] = response2[i + 1]
-      }
+      let account = app.parseResponse(body2);
 
       let { form, ind } = forms[req.query.form] || {};
       form = form || 'player';
