@@ -226,7 +226,7 @@ function saveLevel() {
 }
 
 function deleteLevel() {
-  savedLevels = savedLevels.filter(function(el) {return el != ['[[ID]]']})
+  savedLevels = savedLevels.filter(function(el) {return el != '[[ID]]'})
   localStorage.setItem('saved', JSON.stringify(savedLevels));
   location.reload()
 	freeze = true;
