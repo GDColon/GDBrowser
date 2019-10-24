@@ -7,7 +7,7 @@ const blocks = require('../misc/blocks.json')
 
 module.exports = async (app, req, res, level) => {
 
-let levelString = new Buffer(level.data, 'base64')
+let levelString = Buffer.from(level.data, 'base64')
 let buffer;
 let response = {};
 

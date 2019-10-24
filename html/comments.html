@@ -73,15 +73,11 @@
 <script type="text/javascript" src="https://asvd.github.io/dragscroll/dragscroll.js"></script>
 <script>
 
-let commentPreset = document.cookie.split('; ').find(x => x.startsWith('comments'))
-commentPreset = commentPreset ? commentPreset = commentPreset.slice(9) : "0"
+let {mode, compact} = JSON.parse(localStorage.getItem('commentPreset') || '{"mode": "top", "compact": true}')
 
 let lvlID = window.location.pathname.split('/')[2]
 let history = false;
 let page = 0
-
-let mode = commentPreset % 2 == 0 ? "time" : "top"
-let compact = commentPreset > 1;
 
 if (mode == "top") {
 	$('#timeSort').attr('src', "../assets/sort-time.png")
@@ -251,8 +247,10 @@ $('#refresh').click(function() {
 
 $(window).on('beforeunload ',function() {
 //0 - recent, 1 - top, 2 - recent/compact, 3 - top/compact
-let commentScore = (mode == "top") + compact + compact
-document.cookie = `comments=${commentScore}; expires=Fri, 31 Dec 9999 23:59:59 GMT`
+localStorage.setItem('commentPreset', JSON.stringify({
+  mode,
+  compact
+}))
 })
 
 });

@@ -11,7 +11,6 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(timeout('25s'));
 app.use(haltOnTimedout)
-app.use(require('cookie-parser')());
 app.set('json spaces', 2)
 
 app.modules = {}

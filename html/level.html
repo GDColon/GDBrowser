@@ -214,22 +214,21 @@ $(window).on('load', function() {
 });
 
 
-let savedLevels = document.cookie.split('; ').find(x => x.startsWith('saved'))
-let levelList = []
+let savedLevels = JSON.parse(localStorage.getItem('saved') || '[]');
 let deleteMode = false;
-if (savedLevels) {
-	levelList = savedLevels.slice(6).split(',')
-	if (levelList.includes('[[ID]]')) $('#saveButton').attr('src', '../assets/delete.png').attr('onclick', '$("#deleteDiv").show()')
+if (savedLevels.includes('[[ID]]')) {
+	$('#saveButton').attr('src', '../assets/delete.png').attr('onclick', '$("#deleteDiv").show()')
 }
 
 function saveLevel() {
-	let newCookie = savedLevels ? `${savedLevels.slice(6)},[[ID]]` : '[[ID]]'
-	document.cookie = `saved=${newCookie}; expires=Fri, 31 Dec 9999 23:59:59 GMT`
+  savedLevels.push('[[ID]]');
+  localStorage.setItem('saved', JSON.stringify(savedLevels));
 }
 
 function deleteLevel() {
-	document.cookie = `saved=${levelList.filter(x => x != "[[ID]]")}; expires=Fri, 31 Dec 9999 23:59:59 GMT`;
-	location.reload()
+  savedLevels = savedLevels.filter(function(el) {return el != ['[[ID]]']})
+  localStorage.setItem('saved', JSON.stringify(savedLevels));
+  location.reload()
 	freeze = true;
 }
 

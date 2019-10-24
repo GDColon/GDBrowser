@@ -56,12 +56,6 @@ module.exports = async (app, req, res) => {
         if (filterCheck == 'magic') filters.type = 7
         if (filterCheck == 'awarded' || filterCheck == 'starred') filters.type = 11
         if (filterCheck == 'halloffame' || filterCheck == 'hof') filters.type = 16
-
-        if (filterCheck == 'saved') {
-            if (!req.cookies.saved) return res.send("-1")
-            filters.str = req.cookies.saved.split(',').slice(10 * filters.page).slice(0, 10).join(",")
-            if (!filters.str.length) return res.send("-1")
-        }
     }
 
     if (req.query.hasOwnProperty("user")) {
