@@ -160,7 +160,7 @@ $('#levelInfo').html($('#levelInfo').html()
 
 if (!'[[UPLOADED]]'.startsWith('[')) {
 	$('#levelInfo').html($('#levelInfo').html()
-	.replace('[[PASS]]', `<br>Password: <font color="orange">${[[PASSWORD]] == 0 ? "No copy" : [[PASSWORD]] == 1 ? "Free copy" : [[PASSWORD]]}</font>`)
+	.replace('[[PASS]]', `<br>Password: <font color="orange">${'[[PASSWORD]]' == '0' ? "No copy" : '[[PASSWORD]]' == 1 ? "Free copy" : '[[PASSWORD]]'}</font>`)
 	.replace('[[LOWDETAIL]]', `<br>Low Detail: <font color="orange">${[[LDM]] ? "Yes" : "No"}</font>`)
 	.replace('[[UPLOAD]]', '[[UPLOADED]]' == "0" ? "" : `<br>Uploaded: <font color="orange">[[UPLOADED]]</font>`)
 	.replace('[[UPDATE]]', '[[UPDATED]]' == "0" ? "" : `<br>Updated: <font color="orange">[[UPDATED]]</font>`))}
