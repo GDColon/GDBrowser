@@ -73,9 +73,22 @@
 <script type="text/javascript" src="https://asvd.github.io/dragscroll/dragscroll.js"></script>
 <script>
 
+let commentPreset = document.cookie.split('; ').find(x => x.startsWith('comments'))
+commentPreset = commentPreset ? commentPreset = commentPreset.slice(9) : "0"
+
 let lvlID = window.location.pathname.split('/')[2]
 let history = false;
-let compact = false;
+let page = 0
+
+let mode = commentPreset % 2 == 0 ? "time" : "top"
+let compact = commentPreset > 1;
+
+if (mode == "top") {
+	$('#timeSort').attr('src', "../assets/sort-time.png")
+	$('#topSort').attr('src', "../assets/sort-likes-on.png")
+}
+
+$('#compactMode').attr('src', `../assets/compact-${compact ? "on" : "off"}.png`)
 
 let target = `../api/level/${lvlID}`
 
@@ -189,18 +202,17 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 	});
 
 	if (compact && p % 2 == 0) {
+		$('#loading').hide()
 		return appendComments(true, 1)
 	}
 
-	$('#loading').hide()
+	 $('#loading').hide()
 	})
 
 	return loadingComments = false;
 
 }
 
-let mode = "time"
-let page = 0
 let loadingComments = false
 appendComments()
 
@@ -235,6 +247,12 @@ $('#compactMode').click(function() {
 $('#refresh').click(function() {
 	page = 0;
 	appendComments()
+})
+
+$(window).on('beforeunload ',function() {
+//0 - recent, 1 - top, 2 - recent/compact, 3 - top/compact
+let commentScore = (mode == "top") + compact + compact
+document.cookie = `comments=${commentScore}; expires=Fri, 31 Dec 9999 23:59:59 GMT`
 })
 
 });
