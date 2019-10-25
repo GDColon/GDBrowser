@@ -38,7 +38,7 @@ app.parseResponse = function (responseBody, splitter) {
   return res  }
 
 //xss bad
-app.clean = function(text) {if (!text || typeof text != "string") return text || ""; else return text.replace(/&/g, "&#38;").replace(/</g, "&#60;").replace(/>/g, "&#62;").replace(/=/g, "&#61;").replace(/"/g, "&#34;").replace(/'/g, "&#39;")}
+app.clean = function(text) {if (!text || typeof text != "string") return text; else return text.replace(/&/g, "&#38;").replace(/</g, "&#60;").replace(/>/g, "&#62;").replace(/=/g, "&#61;").replace(/"/g, "&#34;").replace(/'/g, "&#39;")}
 
 console.log("Site online!")
 
