@@ -89,7 +89,7 @@ module.exports = async (app, req, res) => {
         let keys = Object.keys(x)
         x.name = x[2];
         x.id = x[1];
-        x.description = Buffer.from(x[3], 'base64').toString() || "(No description provided)",
+        x.description = app.clean(Buffer.from(x[3], 'base64').toString() || "(No description provided)"),
         x.author = authorList[x[6]] ? authorList[x[6]][0] : "-";
         x.authorID = x[6];
         x.accountID = authorList[x[6]] ? authorList[x[6]][1] : "0";
@@ -124,7 +124,7 @@ module.exports = async (app, req, res) => {
         let songSearch = songs.find(y => y['~1'] == x[35])
 
         if (songSearch) {
-            x.songName = songSearch[2] || "Unknown"
+            x.songName = app.clean(songSearch[2] || "Unknown")
             x.songAuthor = songSearch[4] || "Unknown"
             x.songSize = (songSearch[5] || "0") + "MB"
             x.songID = songSearch[1] || x.customSong

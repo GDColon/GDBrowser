@@ -174,8 +174,8 @@ else {
 	`<br><a class="youCanClickThis" href="/[[ID]]?download"><font color="aqua">Download additional info</font></a>`
 	)}
 
-if ([[COPIEDID]] == 0) $('#copiedBadge').hide()
 if (![[LARGE]]) $('#largeBadge').hide()
+if ([[COPIEDID]] == 0) $('#copiedBadge').hide()
 if ([[ORBS]] == 0) $('.orbs').hide()
 if ([[STARS]] == 0) $('.stars').hide()
 if ([[DIAMONDS]] == 0 || !'[[DEMONLIST]]'.startsWith("[")) $('.diamonds').hide()

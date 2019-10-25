@@ -39,7 +39,7 @@ module.exports = async (app, req, res, api, analyze) => {
         let level = {
               name: levelInfo[2],
               id: levelInfo[1],
-              description: Buffer.from(levelInfo[3], 'base64').toString() || "(No description provided)",
+              description: app.clean(Buffer.from(levelInfo[3], 'base64').toString() || "(No description provided)"),
               author: author[1] || "-",
               authorID: levelInfo[6],
               accountID: author[2] || 0,
@@ -64,7 +64,7 @@ module.exports = async (app, req, res, api, analyze) => {
               starsRequested: levelInfo[39],
               //ldm: levelInfo[40] == 1, //not given in search
               objects: levelInfo[45] == "65535" ? "65000+" : levelInfo[45],
-              large: levelInfo[45] > 40000,
+              large: levelInfo[45] > 40000
         }
 
         level.cp = (level.stars > 0) + level.featured + level.epic
