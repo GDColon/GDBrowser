@@ -15,7 +15,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
 
     request.post('http://boomlings.com/database/downloadGJLevel22.php', {
     form : { 
-        levelID : levelID, 
+        levelID, 
         secret : app.secret
     }}, async function(err, resp, body) { 
 

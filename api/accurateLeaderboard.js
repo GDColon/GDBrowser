@@ -3,7 +3,7 @@ const request = require('request')
 module.exports = async (app, req, res) => {
 
       request.get(`https://gdleaderboards.com/incl/lbxml.php`, function (err, resp, topPlayers) {
-      idArray = topPlayers.split(",")
+      let idArray = topPlayers.split(",")
 
       let leaderboard = []
       let total = idArray.length
