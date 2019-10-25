@@ -56,12 +56,6 @@ module.exports = async (app, req, res) => {
         if (filterCheck == 'magic') filters.type = 7
         if (filterCheck == 'awarded' || filterCheck == 'starred') filters.type = 11
         if (filterCheck == 'halloffame' || filterCheck == 'hof') filters.type = 16
-
-        if (filterCheck == 'saved') {
-            if (!req.cookies.saved) return res.send("-1")
-            filters.str = req.cookies.saved.split(',').slice(10 * filters.page).slice(0, 10).join(",")
-            if (!filters.str.length) return res.send("-1")
-        }
     }
 
     if (req.query.hasOwnProperty("user")) {
@@ -95,7 +89,7 @@ module.exports = async (app, req, res) => {
         let keys = Object.keys(x)
         x.name = x[2];
         x.id = x[1];
-        x.description = Buffer.from(x[3], 'base64').toString() || "(No description provided)",
+        x.description = app.clean(Buffer.from(x[3], 'base64').toString() || "(No description provided)"),
         x.author = authorList[x[6]] ? authorList[x[6]][0] : "-";
         x.authorID = x[6];
         x.accountID = authorList[x[6]] ? authorList[x[6]][1] : "0";
@@ -130,7 +124,7 @@ module.exports = async (app, req, res) => {
         let songSearch = songs.find(y => y['~1'] == x[35])
 
         if (songSearch) {
-            x.songName = songSearch[2] || "Unknown"
+            x.songName = app.clean(songSearch[2] || "Unknown")
             x.songAuthor = songSearch[4] || "Unknown"
             x.songSize = (songSearch[5] || "0") + "MB"
             x.songID = songSearch[1] || x.customSong

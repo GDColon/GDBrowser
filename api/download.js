@@ -15,7 +15,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
 
     request.post('http://boomlings.com/database/downloadGJLevel22.php', {
     form : { 
-        levelID : levelID, 
+        levelID, 
         secret : app.secret
     }}, async function(err, resp, body) { 
 
@@ -29,7 +29,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
           let level = {
                 name: levelInfo[2],
                 id: levelInfo[1],
-                description: Buffer.from(levelInfo[3], 'base64').toString() || "(No description provided)",
+                description: app.clean(Buffer.from(levelInfo[3], 'base64').toString() || "(No description provided)"),
                 author: "-",
                 authorID: levelInfo[6],
                 accountID: 0,
@@ -101,7 +101,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
 
       if (songRes != '-1') {
         let songData = app.parseResponse(songRes, '~|~')
-        level.songName = songData[2] || "Unknown"
+        level.songName = app.clean(songData[2] || "Unknown")
         level.songAuthor = songData[4] || "Unknown"
         level.songSize = (songData[5] || "0") + "MB"
         level.songID = songData[1] || level.customSong

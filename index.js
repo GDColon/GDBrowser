@@ -11,7 +11,6 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(timeout('25s'));
 app.use(haltOnTimedout)
-app.use(require('cookie-parser')());
 app.set('json spaces', 2)
 
 app.modules = {}
@@ -39,7 +38,7 @@ app.parseResponse = function (responseBody, splitter) {
   return res  }
 
 //xss bad
-app.clean = function(text) {if (typeof text != "string") return text; else return text.replace(/&/g, "&#38;").replace(/</g, "&#60;").replace(/>/g, "&#62;").replace(/=/g, "&#61;").replace(/"/g, "&#34;").replace(/'/g, "&#39;")}
+app.clean = function(text) {if (!text || typeof text != "string") return text || ""; else return text.replace(/&/g, "&#38;").replace(/</g, "&#60;").replace(/>/g, "&#62;").replace(/=/g, "&#61;").replace(/"/g, "&#34;").replace(/'/g, "&#39;")}
 
 console.log("Site online!")
 
@@ -138,7 +137,7 @@ app.get("/iconkit", function(req, res) {
 })
 
 app.get("/icon", function(req, res) {
-  res.sendFile(__dirname + "/html/iconkit.html")
+  res.redirect('/iconkit')
 })
 
 app.get('/api/icons', function(req, res) {
