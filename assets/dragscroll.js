@@ -3,18 +3,9 @@ function somethingSelected() {
 }
 const remover = / |\n|\t/g;
 $('.dragscroll').each(function(_, el) {
-  // Can't directly .mousemove() because need reference to el
-  let mouseDown = false;
-  let previouslyMouseDown = mouseDown;
-  el.addEventListener('mousedown', function() {
-    mouseDown = true;
-  });
-  el.addEventListener('mouseup', function(e) {
-    mouseDown = false;
-  })
-  el.addEventListener('mouseleave', function() {mouseDown=false});
+  let previouslyMouseDown = false;
   el.addEventListener('mousemove', function(e) {
-    if (!mouseDown) {
+    if (e.buttons != 1) {
       if (previouslyMouseDown) {
         el.style.removeProperty('user-select');
         el.style.removeProperty('-webkit-user-select');
