@@ -34,6 +34,8 @@ module.exports = async (app, req, res) => {
         var x = c[0] //comment info
         var y = c[1] //account info
 
+        if (!x[2]) return;
+
         let comment = {}
         comment.content = app.clean(Buffer.from(x[2], 'base64').toString());
         comment.likes = x[4]

@@ -64,7 +64,7 @@ module.exports = async (app, req, res, api, analyze) => {
               starsRequested: levelInfo[39],
               //ldm: levelInfo[40] == 1, //not given in search
               objects: levelInfo[45] == "65535" ? "65000+" : levelInfo[45],
-              large: levelInfo[45] > 40000,
+              large: levelInfo[45] > 40000
         }
 
         level.cp = (level.stars > 0) + level.featured + level.epic
