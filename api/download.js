@@ -61,7 +61,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
 
             let pass = level.password
             pass = xor.decrypt(pass, 26364);
-            if (pass.length > 1) level.password = pass.slice(1).padStart(6, '0');
+            if (pass.length > 1) level.password = pass.slice(1);
             else level.password = pass
           }
 

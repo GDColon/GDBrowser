@@ -154,16 +154,16 @@ $('.closeWindow').click(function() {if (!freeze) $(".popup").attr('style', 'disp
 $('#difficultytext').html('[[DIFFICULTY]]'.replace(' ', "<br>"))
 
 $('#levelInfo').html($('#levelInfo').html()
-	.replace('[[ORIGINALINFO]]', [[COPIEDID]] ==  "0" ? "" : `<br>Original: <a class="youCanClickThis" href="/[[COPIEDID]]"><font color="aqua">[[COPIEDID]]</font></a>`)
-	.replace('[[OBJECTINFO]]', '[[OBJECTS]]' ==  "0" ? "" : `<br>Objects: <font color="yellow">[[OBJECTS]]</font>`)
-	.replace('[[REQUESTED]]', [[STARSREQUESTED]] ==  "0" ? "" : `<br>Stars Requested: <font color="yellow">[[STARSREQUESTED]]</font>`))
+	.replace('[[ORIGINALINFO]]', [[COPIEDID]] ==  "0" ? "" : `<br>Original: <a class="youCanClickThis" href="/[[COPIEDID]]"><span style="color:aqua">[[COPIEDID]]</span></a>`)
+	.replace('[[OBJECTINFO]]', '[[OBJECTS]]' ==  "0" ? "" : `<br>Objects: <span style="color:yellow">[[OBJECTS]]</span>`)
+	.replace('[[REQUESTED]]', [[STARSREQUESTED]] ==  "0" ? "" : `<br>Stars Requested: <span style="color:yellow">[[STARSREQUESTED]]</span>`))
 
 if (!'[[UPLOADED]]'.startsWith('[')) {
 	$('#levelInfo').html($('#levelInfo').html()
-	.replace('[[PASS]]', `<br>Password: <font color="orange">${'[[PASSWORD]]' == '0' ? "No copy" : '[[PASSWORD]]' == 1 ? "Free copy" : '[[PASSWORD]]'}</font>`)
-	.replace('[[LOWDETAIL]]', `<br>Low Detail: <font color="orange">${[[LDM]] ? "Yes" : "No"}</font>`)
-	.replace('[[UPLOAD]]', '[[UPLOADED]]' == "0" ? "" : `<br>Uploaded: <font color="orange">[[UPLOADED]]</font>`)
-	.replace('[[UPDATE]]', '[[UPDATED]]' == "0" ? "" : `<br>Updated: <font color="orange">[[UPDATED]]</font>`))}
+	.replace('[[PASS]]', `<br>Password: <span style="color:orange">${'[[PASSWORD]]' == '0' ? "No copy" : '[[PASSWORD]]' == 1 ? "Free copy" : '[[PASSWORD]]'}</span>`)
+	.replace('[[LOWDETAIL]]', `<br>Low Detail: <span style="color:orange">${[[LDM]] ? "Yes" : "No"}</span>`)
+	.replace('[[UPLOAD]]', '[[UPLOADED]]' == "0" ? "" : `<br>Uploaded: <span style="color:orange">[[UPLOADED]]</span>`)
+	.replace('[[UPDATE]]', '[[UPDATED]]' == "0" ? "" : `<br>Updated: <span style="color:orange">[[UPDATED]]</span>`))}
 
 else {
 	$('#levelInfo').html($('#levelInfo').html()
@@ -171,7 +171,7 @@ else {
 	.replace('[[LOWDETAIL]]', "")
 	.replace('[[UPLOAD]]', "")
 	.replace('[[UPDATE]]', "") + 
-	`<br><a class="youCanClickThis" href="/[[ID]]?download"><font color="aqua">Download additional info</font></a>`
+	`<br><a class="youCanClickThis" href="/[[ID]]?download"><span style="color:aqua">Download additional info</span></a>`
 	)}
 
 if (![[LARGE]]) $('#largeBadge').hide()
