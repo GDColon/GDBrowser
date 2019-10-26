@@ -1,10 +1,10 @@
 $('body').append(`
 	<div id="tooSmall" class="brownbox center supercenter" style="display: none; width: 80%">
 	<h1>Yikes!</h1>
-	<p>Your <font color="#4CDA5B">screen</font> isn't <font color="aqua">wide</font> enough to <font color="yellow">display</font> this <font color="#4CDA5B">page</font>.<br>
-	Please <font color="yellow">rotate</font> your <font color="#4CDA5B">device</font> <font color="aqua">horizontally</font> or <font color="yellow">resize</font> your <font color="#4CDA5B">window</font> to be <font color="aqua">longer</font>.
+	<p>Your <span style="color:#4CDA5B">screen</span> isn't <span style="color:aqua">wide</span> enough to <span style="color:yellow">display</span> this <span style="color:#4CDA5B">page</span>.<br>
+	Please <span style="color:yellow">rotate</span> your <span style="color:#4CDA5B">device</span> <span style="color:aqua">horizontally</span> or <span style="color:yellow">resize</span> your <span style="color:#4CDA5B">window</span> to be <span style="color:aqua">longer</span>.
 	</p>
-	<p style="font-size: 1.8vh">Did I color too many words? I think I colored too many words.</p>
+	<p style="span-size: 1.8vh">Did I color too many words? I think I colored too many words.</p>
 	</div>
 `)
 
