@@ -561,6 +561,7 @@ input::-webkit-inner-spin-button {
 .searchResult {
     width: 80%;
     height: 32%;
+    display: flex;
     background-color: #A1582C;
     margin: auto;
     border-bottom: 0.18vh rgba(0, 0, 0, 0.4) solid;
