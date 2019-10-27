@@ -18,11 +18,10 @@
 	</div>
 
 	<div id="packList">
-		<br>
 	</div>
 
-	<div style="position:absolute; top: 2%; left: -1.95%; width: 10%; height: 25%; pointer-events: none">
-		<img class="gdButton yesClick" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()">
+	<div style="position:absolute; top: 0; left: 0; width: 10%; height: 25%; pointer-events: none">
+		<img class="gdButton yesClick" id="backButton" src="../assets/back.png" height="80px" onclick="backButton()">
 	</div>
 
 	<br>
@@ -39,8 +38,8 @@ fetch('../api/mappacks').then(res => res.json()).then(packs => {
 		$('#packList').append(`
 			<div class="mappack">
 			<a href="../search/${x}?mappack=1">
-			<img src="../difficulty/${packs[x][3]}.png" height="220%"><br>
-			<h3 class="gauntletText"">${x.replace("Pack", "<br>Pack")}</h3></div></a>`)
+			<img src="../difficulty/${packs[x][3]}.png" style="width: 60%; max-width: 60vw"><br>
+			<h3 class="gauntletText">${x.replace("Pack", "<br>Pack")}</h3></div></a>`)
 	})
 });
 

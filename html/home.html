@@ -11,7 +11,7 @@
 
 <body class="levelBG" onbeforeunload="saveUrl()">
 
-<div id="everything">
+<div id="everything" class="flex vertical spaceAround">
 
 	<div class="popup" id="credits">
 	</div>
@@ -28,39 +28,32 @@
 		<img id="creditsButton" class="gdButton" src="../assets/credits.png" width="60%" onclick="loadCredits()">
 	</div>
 
-	<div style="position:absolute; top: -1.5%; right: 10%; text-align: right; width: 10%;">
+	<div style="position:absolute; top: -10px; right: 10%; text-align: right; width: 10%;">
 		<a href="../iconkit"><img class="iconRope" src="../assets/iconrope.png" width="40%"></a>
 	</div>
 	
-	<div class="supercenter center" id="menuButtons" style="bottom: 5%;">
-			<table>
-					<tr>
-						<td><a href="./search/levels?type=saved"><img class="menubutton" src="../assets/category-saved.png"></a></td>
-						<td><a href="./daily"><img class="menubutton" src="../assets/category-daily.png"></a></td>
-						<td><a href="./weekly"><img class="menubutton" src="../assets/category-weekly.png"></a></td>
-						<td><a href="./gauntlets"><img class="menubutton" src="../assets/category-gauntlets.png"></a></td>
-					</tr>
-					<tr>
-						<td><a href="./leaderboard"><img class="menubutton" src="../assets/category-scores.png"></a></td>
-						<td><a href="./search/levels?type=hof"><img class="menubutton" src="../assets/category-hof.png"></a></td>
-						<td><a href="./mappacks"><img class="menubutton" src="../assets/category-packs.png"></a></td>
-						<td><a href="./search"><img class="menubutton" src="../assets/category-search.png"></a></td>
-					</tr>
-			</table>
-
-			<p>Website created by GD Colon.<br>Pretty much everything other than that belongs to RobTopGames.</p>
-			<p style="margin-top: -0.5%"><a class="menuLink" href="https://gdcolon.com/tools">GD Tools</a>
-				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-				<a class="menuLink" href="./api">API</a>
-				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-				<a class="menuLink" href="https://github.com/GDColon/GDBrowser">GitHub</a>
-				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-				<a class="menuLink" href="https://store.steampowered.com/app/322170/Geometry_Dash/">Buy Geometry Dash!</a>
-	</div>
-
 	<div class="center" width="100%" style="margin-top: 2%">
-		<img src="../assets/gdlogo.png" height="11.5%"><br>
-		<img id="browserlogo" src="../assets/browser.png" height="7%" style="margin: 0.5% 0% 0% 30%">
+		<img src="../assets/gdlogo.png" style="width: 80%; max-width: 1000px; height: auto"><br>
+		<img id="browserlogo" src="../assets/browser.png" style="margin: 0.5% 0% 0% 30%; width: 60%; max-width: 750px;">
+	</div>
+	<div class="flex wrap spaceAround" id="menuButtons" style="width: 90%; max-width: 1200px">					
+			<a href="./search/levels?type=saved"><img class="menubutton" src="../assets/category-saved.png"></a>
+			<a href="./daily"><img class="menubutton" src="../assets/category-daily.png"></a>
+			<a href="./weekly"><img class="menubutton" src="../assets/category-weekly.png"></a>
+			<a href="./gauntlets"><img class="menubutton" src="../assets/category-gauntlets.png"></a>
+			<a href="./leaderboard"><img class="menubutton" src="../assets/category-scores.png"></a>
+			<a href="./search/levels?type=hof"><img class="menubutton" src="../assets/category-hof.png"></a>
+			<a href="./mappacks"><img class="menubutton" src="../assets/category-packs.png"></a>
+			<a href="./search"><img class="menubutton" src="../assets/category-search.png"></a>
+	</div>
+	<div class="flex vertical spaceBetween" style="text-align: center;">
+			<p>Website created by GD Colon.<br>Pretty much everything other than that belongs to RobTopGames.</p>
+			<p class="flex spaceAround" style="width: 100%">
+					<a class="menuLink" href="https://gdcolon.com/tools">GD Tools</a>
+					<a class="menuLink" href="./api">API</a>
+					<a class="menuLink" href="https://github.com/GDColon/GDBrowser">GitHub</a>
+					<a class="menuLink" href="https://store.steampowered.com/app/322170/Geometry_Dash/">Buy Geometry Dash!</a>
+			</p>
 	</div>
 
 
@@ -69,7 +62,7 @@
 
 </body>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script async type="text/javascript" src="../assets/sizecheck.js"></script>
+<script type="text/javascript" src="assets/sizecheck.js"></script>
 <script>
 
 let page = 1
@@ -84,38 +77,37 @@ function loadCredits() {
 fetch(`./api/credits`).then(res => res.json()).then(res => {
 
 	res.credits.forEach((x, y) => {
-		$('#credits').append(`<div id="credits${y+1}" class="subCredits" style="display: none;">
-			<div class="brownBox center supercenter" style="width: 80vh; height: 43%; padding-top: 1.5%; padding-bottom: 3.5%;">
-				<h1>${x.header}</h1><br>
-				<h2 style="margin-bottom: 1.5%" class="gdButton"><a href="./profile/${x.ign || x.name}">${x.name}</h2></a>
-				<img src="./icon/${x.ign || x.name}" height=30%; style="margin-bottom: 7%"><br>
-				<a target=_blank href="${x.youtube[0]}"><img src="../assets/${x.youtube[1]}.png" width="11%" class="gdButton"></a>
-				<a target=_blank href="${x.twitter[0]}"><img src="../assets/${x.twitter[1]}.png" width="11%" class="sideSpace gdButton"></a>
-				<a target=_blank href="${x.github[0]}"><img src="../assets/${x.github[1]}.png" width="11%" class="sideSpace gdButton"></a>
-				<br>
+		$('#credits').append(`<div id="credits${y+1}" class="subCredits brownBox center supercenter modal flex spaceAround" style="display: none;">
+			<img class="gdButton arrow" src="../assets/arrow-left.png" style="${y == 0 ? "visibility: hidden;" : ""}" onclick="page -= 1; loadCredits()">
+			<div class="flex vertical spaceAround" style="width: 80%; height: 100%;">
+				<h1>${x.header}</h1>
+				<h2 class="gdButton"><a href="./profile/${x.ign || x.name}">${x.name}</h2></a>
+				<img src="./icon/${x.ign || x.name}" height=30%;>
+				<div class="flex spaceAround" style="width: 70%">
+					${x.socials.map(function(el) {return `<a target=_blank href="${el[0]}"><img src="../assets/${el[1]}.png" class="gdButton"></a>`}).join('')}
+				</div>
 			</div>
-			<img class="gdButton" src="../assets/arrow-right.png" width="60vh" style="position: absolute; top: 45%; left: 75%" onclick="page += 1; loadCredits()">
-			<img class="gdButton" src="../assets/arrow-left.png" width="60vh" style="${y == 0 ? "display: none; " : ""}position: absolute; top: 45%; right: 75%" onclick="page -= 1; loadCredits()">
+			<img class="gdButton arrow" src="../assets/arrow-right.png" onclick="page += 1; loadCredits()">
+			<img class="closeWindow gdButton" src="../assets/close.png" onclick="$('#credits').hide(); page = 1;">
 		</div>`)
 	})
 
-	$('#credits').append(`<div id="credits${res.credits.length + 1}" class="subCredits" style="display: none;">
-			<div id="githubbers" class="brownBox center supercenter" style="width: 80vh; height: 43%; padding-top: 1.5%; padding-bottom: 3.5%;">
-				<h1>GitHub Contributors</h1><br>
+	$('#credits').append(`<div id="credits${res.credits.length + 1}" class="subCredits brownBox center supercenter flex modal spaceAround" style="display: none;">
+			<img class="gdButton arrow" src="../assets/arrow-left.png" onclick="page -= 1; loadCredits()">
+			<div class="flex vertical spaceAround" style="height: 100%; width: 80%;">
+				<h1>GitHub Contributors</h1>
+				<div class="flex wrap spaceAround" style="width: 100%">
+					${res.contributors.map(x => `<div class="githubChad flex vertical">
+					<h2 class="gdButton smaller"><a href="./profile/${x[1]}">${x[0]}</h2></a>
+					<img src="./icon/${x[1]}">
+					</div>`).join('')}
+				</div>
+				<h2 class="smaller gdButton"><a href="https://github.com/GDColon/GDBrowser">View on GitHub!</a></h2>
 			</div>
-			<div class="supercenter" style="top: 71.5%"><h2 class="smaller gdButton"><a href="https://github.com/GDColon/GDBrowser">View on GitHub!</a></h2></div>
-			<img class="gdButton" src="../assets/arrow-left.png" width="60vh" style="position: absolute; top: 45%; right: 75%" onclick="page -= 1; loadCredits()">
+			<img class="gdButton arrow" src="../assets/arrow-right.png" style="visibility: hidden" onclick="page += 1; loadCredits()">
+			<img class="closeWindow gdButton" src="../assets/close.png" onclick="$('#credits').hide(); page = 1;">
 		</div>`)
 
-	res.contributors.forEach((x, y) => {
-		$('#githubbers').append(`<div class="githubChad">
-				<h2 class="gdButton smaller"><a href="./profile/${x[1]}">${x[0]}</h2></a>
-				<img src="./icon/${x[1]}" height=85%><br>
-				</div>`)
-	})
-
-	$('#credits').append(`<div class="center supercenter" style="width: 80vh; height: 43%; pointer-events: none;">
-	<img class="closeWindow gdButton" src="../assets/close.png" height="25%" style="position: absolute; top: -24%; left: -7vh; pointer-events: all;" onclick="$('#credits').hide(); page = 1;"></div>`)
 
 	$(document).keydown(function(k) {
 

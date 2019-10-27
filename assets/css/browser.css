@@ -2,14 +2,13 @@
 
 body {
     margin: 0;
-    height: 100vh;
-    overflow: hidden;
-	background: #000;
+    padding: 0;
+    background: #000;
+    overflow-x: hidden
 }
 
 .levelBG {
     background-image: linear-gradient(#0065FD, #002E73);
-    height: 100vh;
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -95,6 +94,50 @@ img, .noSelect {
     vertical-align: middle;
 }
 
+.flex {
+    display: flex;
+    align-items: center;
+}
+
+.vertical {
+    flex-direction: column;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+.spaceBetween {
+    justify-content: space-between;
+}
+
+.spaceAround {
+    justify-content: space-around;
+}
+
+.arrow {
+    width: 7%;
+    height: auto;
+}
+
+.modal {
+    height: 60vh;
+    width: 60vw;
+}
+
+.closeWindow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: all;
+    transform: translate(-50%, -50%);
+    height: 20%;
+    width: auto;
+}
+.closeWindow:active {
+    transform: translate(-50%, -50%) scale(1.08)!important;
+}
+
 .inline {
     display: inline-block;
 }
@@ -116,8 +159,10 @@ img, .noSelect {
 }
 
 #everything {
-    width: 100%;
-    height: 100%;
+    position: relative;
+    padding: 0;
+    margin: 0;
+    min-height: 100%;
 }
 
 p {
@@ -391,7 +436,7 @@ input::-webkit-inner-spin-button {
 }
 
 .iconRope:active {
-    transform: translateY(10%)
+    transform: translateY(10px)
 }
 
 .socialButton {
@@ -401,6 +446,7 @@ input::-webkit-inner-spin-button {
 
 .menuButton {
   width: 24vh;
+  max-width: 60vw;
   margin: 1.2vh 2vh;
   cursor: pointer;
 }
@@ -413,6 +459,7 @@ input::-webkit-inner-spin-button {
     color: aqua;
     text-decoration: underline;
     cursor: pointer;
+    height: 3vh;
 }
 
 .youCanClickThis:hover {
@@ -434,35 +481,46 @@ input::-webkit-inner-spin-button {
 }
 
 .gauntlet {
-    vertical-align: top;
-    width: 300px;
-    height: 50px;
-    margin: 0px 9px 250px 9px;
-    display: inline-block;
     cursor: pointer;
+    width: 150px;
+    margin: 100px;
+    max-width: 60vw;
+}
+
+.mappack {
+    cursor: pointer;
+    width: 150px;
+    height: 100px;
+    margin: 50px;
+    max-width: 60vw;
 }
 
 .gauntlet:hover, .mappack:hover {
     transition-duration: 0.06s;
     transition-timing-function: ease-in-out;
-    transform: translateY(-25%) scale(1.04)
+    transform: translateY(-20px) scale(1.04)
+}
+
+#gauntletList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .mappack h3, .gauntlet h3 {
-    font-size: 40px
+    font-size: 35px;
 }
 
-.mappack {
-    vertical-align: top;
-    width: 250px;
-    height: 50px;
-    margin: 0px 9px 210px 9px;
-    display: inline-block;
-    cursor: pointer;
+@media only screen and (max-width: 250px) {
+    .mappack h3, .gauntlet h3 {
+        overflow-wrap: break-word;
+    }
 }
 
-.gauntletText {
-    font-size: 4vh;
+#packList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .leaderboardTab {
@@ -636,10 +694,8 @@ input::-webkit-inner-spin-button {
 }
 
 .githubChad {
-    display: inline-block;
-    width: 30%;
-    height: 20%;
-    margin: 1% 0%;
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
 
 .githubChad h2 {

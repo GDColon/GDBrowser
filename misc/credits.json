@@ -3,75 +3,91 @@
         {
             "header": "Programming/Website",
             "name": "Colon",
-            "youtube": ["https://youtube.com/channel/UCFDsxSlQXpLLpVScy2NmbcQ", "youtube"],
-            "twitter": ["https://twitter.com/TheRealGDColon", "twitter"],
-            "github": ["https://github.com/GDColon", "github"]
+            "socials": [
+                ["https://youtube.com/channel/UCFDsxSlQXpLLpVScy2NmbcQ", "youtube"],
+                ["https://twitter.com/TheRealGDColon", "twitter"],
+                ["https://github.com/GDColon", "github"]
+            ]
         },
 
         {
             "header": "Additional Help",
             "name": "101arrowz",
             "ign": "genius991",
-            "youtube": ["https://www.youtube.com/channel/UCuloR4qLkF3QGw8WUHjcNuQ", "youtube"],
-            "twitter": ["https://twitter.com/arjunbarrett", "twitter"],
-            "github": ["https://github.com/101arrowz", "github"]
+            "socials": [
+                ["https://github.com/101arrowz", "github"]
+            ]
         },
 
         {
             "header": "Level Analyzing Help",
             "name": "Alten",
-            "youtube": ["https://youtube.com/channel/UC9M8hLqh2yZIPSDvpyL7o8g", "youtube"],
-            "twitter": ["https://twitter.com/gd_alten", "twitter"],
-            "github": ["https://github.com/Altenhh", "github"]
+            "socials": [
+                ["https://youtube.com/channel/UC9M8hLqh2yZIPSDvpyL7o8g", "youtube"],
+                ["https://twitter.com/gd_alten", "twitter"],
+                ["https://github.com/Altenhh", "github"]
+            ]
         },
 
         {
             "header": "Level Analyzing Help",
             "name": "AlFas",
-            "youtube": ["https://youtube.com/user/Alex100077", "youtube"],
-            "twitter": ["https://twitter.com/AlFas6237", "twitter"],
-            "github": ["https://github.com/AlFasGD", "github"]
+            "socials": [
+                ["https://youtube.com/user/Alex100077", "youtube"],
+                ["https://twitter.com/AlFas6237", "twitter"],
+                ["https://github.com/AlFasGD", "github"]
+            ]
         },
 
         {
             "header": "Accurate Leaderboard",
             "name": "SMJSGaming",
-            "youtube": ["https://youtube.com/channel/UCwEsWDs9kGN2vvoiNTJKdaQ", "youtube"],
-            "twitter": ["https://instagram.com/smjs_gaming", "instagram"],
-            "github": ["https://github.com/SMJSGaming", "github"]
+            "socials": [
+                ["https://youtube.com/channel/UCwEsWDs9kGN2vvoiNTJKdaQ", "youtube"],
+                ["https://instagram.com/smjs_gaming", "instagram"],
+                ["https://github.com/SMJSGaming", "github"]
+            ]
         },
 
         {
             "header": "API Help",
             "name": "Alex1304",
-            "youtube": ["https://youtube.com/channel/UC0hFAVN-GAbZYuf_Hfk1Iog", "youtube"],
-            "twitter": ["https://twitter.com/gd_alex1304", "twitter"],
-            "github": ["https://github.com/Alex1304", "github"]
+            "socials": [
+                ["https://youtube.com/channel/UC0hFAVN-GAbZYuf_Hfk1Iog", "youtube"],
+                ["https://twitter.com/gd_alex1304", "twitter"],
+                ["https://github.com/Alex1304", "github"]
+            ]
         },
 
         {
             "header": "Web Design Help",
             "name": "Ucrash",
-            "youtube": ["https://youtube.com/channel/UCfPgDZBhCodHIFo6OOVcH2A", "youtube"],
-            "twitter": ["https://twitter.com/GDUcrash", "twitter"],
-            "github": ["https://github.com/GDUcrash", "github"]
+            "socials": [
+                ["https://youtube.com/channel/UCfPgDZBhCodHIFo6OOVcH2A", "youtube"],
+                ["https://twitter.com/GDUcrash", "twitter"],
+                ["https://github.com/GDUcrash", "github"]
+            ]
         },
 
         {
             "header": "Demon List API",
             "name": "stadust1971",
             "ign": "stardust1971",
-            "youtube": ["https://youtube.com/user/stardust19710", "youtube"],
-            "twitter": ["https://twitter.com/stadust1971", "twitter"],
-            "github": ["https://pointercrate.com", "demonButton"]
+            "socials": [
+                ["https://youtube.com/user/stardust19710", "youtube"],
+                ["https://twitter.com/stadust1971", "twitter"],
+                ["https://pointercrate.com", "demonButton"]
+            ]
         },
 
         {
             "header": "Everything Else",
             "name": "RobTop",
-            "youtube": ["https://youtube.com/channel/UCz_yk8mDSAnxJq0ar66L4sw", "youtube"],
-            "twitter": ["https://twitter.com/RobTopGames", "twitter"],
-            "github": ["https://www.facebook.com/geometrydash", "facebook"]
+            "socials": [
+                ["https://youtube.com/channel/UCz_yk8mDSAnxJq0ar66L4sw", "youtube"],
+                ["https://twitter.com/RobTopGames", "twitter"],
+                ["https://www.facebook.com/geometrydash", "facebook"]
+            ]
         }
     ],
 
