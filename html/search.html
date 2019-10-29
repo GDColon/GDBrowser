@@ -14,11 +14,11 @@
 <div id="everything" class="flex spaceAround">
 
 	<div class="popup" id="pageDiv">
-		<div class="brownbox bounce center supercenter" style="width: 60vh; height: 34%">
-			<h2 class="smaller center" style="font-size: 5.5vh; margin-top: 1%">Jump to Page</h2>
+		<div class="brownbox bounce center supercenter" style="width: 60vmin; height: 34%">
+			<h2 class="smaller center" style="font-size: 5.5vmin; margin-top: 1%">Jump to Page</h2>
 			<input type="number" id="pageSelect" placeholder="1"><br>
 			<img src="../assets/ok.png" height=20%; id="pageJump" class="gdButton center closeWindow">
-			<img class="closeWindow gdButton" src="../assets/close.png" height="25%" style="position: absolute; top: -13.5%; left: -6vh">
+			<img class="closeWindow gdButton" src="../assets/close.png" height="25%" style="position: absolute; top: -13.5%; left: -6vmin">
 
 			<div class="supercenter" style="left: 25%; top: 43%; height: 10%;">
 				<img class="gdButton" src="../assets/whitearrow-left.png" height="160%" onclick="$('#pageSelect').val(parseInt($('#pageSelect').val() || 0) - 1); $('#pageSelect').trigger('input');">
@@ -32,8 +32,8 @@
 
 	<div class="popup" id="purgeDiv">
 		<div class="fancybox bounce center supercenter" style="width: 35%; height: 28%">
-			<h2 class="smaller center" style="font-size: 5.5vh">Delete All</h2>
-			<p class="bigger center" style="line-height: 5vh; margin-top: 1.5vh;">
+			<h2 class="smaller center" style="font-size: 5.5vmin">Delete All</h2>
+			<p class="bigger center" style="line-height: 5vmin; margin-top: 1.5vmin;">
 				Delete all saved online levels?<br><span style="color:yellow">Levels will be cleared from your browser.</span>
 			</p>
 			<img src="../assets/btn-cancel.png" height=25%; class="gdButton center closeWindow">
@@ -53,7 +53,7 @@
 		<div style="height: 4.5%"></div>
 	</div>
 	
-	<div class="epicbox supercenter gs" style="width: 120vh; height: 80%; pointer-events: none;"></div>
+	<div class="epicbox supercenter gs" style="width: 120vmin; height: 80%; pointer-events: none;"></div>
 
 	<div class="center" style="position:absolute; top: 8%; left: 0%; right: 0%">
 		<h1 id="header"></h1>

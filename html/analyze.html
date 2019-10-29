@@ -143,13 +143,13 @@ appendPortals()
 
 	colorList.forEach((x, y) => {
 		let c = res.colors[x]
-		$('#colorDiv').append(`${y % 8 == 0 ? "<brr>" : ""}<div class="inline aColor"><div style="background-color: rgba(${c.r}, ${c.g}, ${c.b}, ${c.opacity}); border: 0.4vh solid rgb(${c.r}, ${c.g}, ${c.b})">
+		$('#colorDiv').append(`${y % 8 == 0 ? "<brr>" : ""}<div class="inline aColor"><div style="background-color: rgba(${c.r}, ${c.g}, ${c.b}, ${c.opacity}); border: 0.4vmin solid rgb(${c.r}, ${c.g}, ${c.b})">
 		${c.copiedChannel ? `<h3 class='copiedColor'>C:${c.copiedChannel}</h3>` : c.pColor ? `<h3 class='copiedColor'>P${c.pColor}</h3>` : c.blending ? "<h3 class='blendingDot'>•</h3>" : ""}	
 		${c.opacity != "1" ? `<h3 class='copiedColor'>${c.opacity}%</h3>` : ""}
 		</div><h3 style="padding-top: 7%">${c.channel > 0 ? "Col " + c.channel : c.channel}</h3></div>`)
 	})
 
-	if (colorList.length == 0) $('#colorDiv').append('<h3 style="margin-top: 7vh">Level is too old to get color info!</h3>')
+	if (colorList.length == 0) $('#colorDiv').append('<h3 style="margin-top: 7vmin">Level is too old to get color info!</h3>')
 
 	$(".portalToggle").click(function() {
 		if ($(this).prop('checked')) disabledPortals = disabledPortals.filter(x => x != $(this).attr('portal'))

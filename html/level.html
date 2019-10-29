@@ -15,8 +15,8 @@
 
 	<div class="popup" id="infoDiv">
 		<div class="fancybox bounce center supercenter">
-			<h2 class="smaller center" style="font-size: 5.5vh">Level Info</h2>
-			<p class="bigger center" id="levelInfo" style="line-height: 5vh; margin-top: 1.5vh;">
+			<h2 class="smaller center" style="font-size: 5.5vmin">Level Info</h2>
+			<p class="bigger center" id="levelInfo" style="line-height: 5vmin; margin-top: 1.5vmin;">
 				<span style="color:lime">[[NAME]]</span><br>
 				ID: <span style="color:yellow">[[ID]]</span>[[ORIGINALINFO]][[LOWDETAIL]][[PASS]][[UPLOAD]][[UPDATE]]
 				<br>Version:  <span style="color:yellow">[[VERSION]]</span>
@@ -28,8 +28,8 @@
 
 	<div class="popup" id="scoreDiv">
 		<div class="fancybox bounce center supercenter">
-			<h2 class="smaller center" style="font-size: 5.5vh">Leaderboards</h2>
-			<p class="bigger center" style="line-height: 5vh; margin-top: 1.5vh;">
+			<h2 class="smaller center" style="font-size: 5.5vmin">Leaderboards</h2>
+			<p class="bigger center" style="line-height: 5vmin; margin-top: 1.5vmin;">
 				<span style="color:yellow">Leaderboards</span> are coming soon™
 			</p>
 			<img src="../assets/ok.png" width=20%; class="gdButton center closeWindow">
@@ -38,8 +38,8 @@
 
 	<div class="popup" id="saveDiv">
 		<div class="fancybox bounce center supercenter">
-			<h2 class="smaller center" style="font-size: 5.5vh">Saved!</h2>
-			<p class="bigger center" style="line-height: 5vh; margin-top: 1.5vh;">
+			<h2 class="smaller center" style="font-size: 5.5vmin">Saved!</h2>
+			<p class="bigger center" style="line-height: 5vmin; margin-top: 1.5vmin;">
 				<span style="color:yellow">[[NAME]]</span> has been added to your <a class="youCanClickThis2" style="color:lime" href="../search/levels?type=saved">saved levels</a> list.
 			</p>
 			<img src="../assets/ok.png" width=20%; class="gdButton center" onclick="location.reload()">
@@ -47,9 +47,9 @@
 	</div>
 
 	<div class="popup" id="deleteDiv">
-		<div class="fancybox bounce center supercenter" style="width: 60vh; height: 28%">
-			<h2 class="smaller center" style="font-size: 5.5vh">Delete Level</h2>
-			<p class="bigger center" style="line-height: 5vh; margin-top: 1.5vh;">
+		<div class="fancybox bounce center supercenter" style="width: 60vmin; height: 28%">
+			<h2 class="smaller center" style="font-size: 5.5vmin">Delete Level</h2>
+			<p class="bigger center" style="line-height: 5vmin; margin-top: 1.5vmin;">
 				Are you sure you want to <span style="color:#C67A7E">delete</span> this level from your <a class="youCanClickThis2"style="color:lime" href="../search/levels?type=saved">saved levels </a>list?
 			</p>
 			<img src="../assets/btn-no.png" height=25%; class="gdButton center closeWindow">
@@ -64,70 +64,69 @@
 	<div style="position:absolute; bottom: 0%; right: 0%; width: 100%; text-align: right;">
 		<img class="cornerPiece" src="../assets/corner.png" width=7%; style="transform: scaleX(-1)">
 	</div>
-	<div class="flex" style="align-items: flex-start;">
-    <div class="flex vertical spaceAround" style="width: 80%; height: 100%; justify-content: flex-start; margin-left: 8vw;">
-      <div class="center" style="width: 70%; margin: 1% auto">
-        <h1 style="transform: scale(1.2)">[[NAME]]</h1>
+  <div class="flex vertical spaceAround" style="height: 95%;">
+    <div class="center" style="width: 70%; margin: 1% auto">
+      <h1 style="font-size: 8vmin">[[NAME]]</h1>
+    </div>
+  
+    <div class="center flex vertical spaceBetween" style="height: 10%;">
+      <h2 class="slightlySmaller normalCursor gdButton" id="authorName"><a class="linkButton" id="authorLink" href="../profile/[[AUTHOR]]">By [[AUTHOR]]</a></h2>
+      <div class="normalCursor flex spaceAround" style="width: 50%; height: 100%;">
+        <img id="copiedBadge" style="height: 4vmin; cursor: help" src="../assets/copied.png" title="Level is a copy or a collaboration">
+        <img id="largeBadge" style="height: 4vmin; cursor: help" src="../assets/large.png" title="Contains more than 40,000 objects">
       </div>
-    
-      <div class="center flex vertical spaceBetween" style="height: 10%;">
-        <h2 class="slightlySmaller normalCursor gdButton" id="authorName"><a class="linkButton" id="authorLink" href="../profile/[[AUTHOR]]">By [[AUTHOR]]</a></h2>
-        <div class="normalCursor flex spaceBetween" style="width: 50%; height: 100%;">
-          <img id="copiedBadge" style="height: 4vh; cursor: help" src="../assets/copied.png" title="Level is a copy or a collaboration">
-          <img id="largeBadge" style="height: 4vh; cursor: help" src="../assets/large.png" title="Contains more than 40,000 objects">
-        </div>
-      </div>
+    </div>
 
-      <div class="flex" style="width: 80%; height: 50%; text-align: center; align-items: flex-start; justify-content: flex-end;">
-        <div class="flex vertical" style="height: 100%; width: 20%; justify-content: space-around;">
-          <div class="flex vertical">
-            <img src="../difficulty/[[DIFFICULTYFACE]].png" style="height: 20%">
-            <h1 class="smaller" id="difficultytext">[[DIFFICULTY]]</h1>
-          </div>
-          <div class="flex stars"><h1 style="width: 100%; font-size: 4vh">[[STARS]]</h1><img src="../assets/star.png" style="height: 3vh; padding-bottom: 0.5vh;"></div>
-          <div class="flex diamonds"><h1 style="width: 100%; font-size: 4vh">[[DIAMONDS]]</h1><img src="../assets/diamond.png" style="height: 3vh; padding-bottom: 0.5vh;"></div>
-          <div class="flex demonList" style="display: none;"><h1 style="width: 100%; font-size: 4vh">#[[DEMONLIST]]</h1><img src="../assets/demon.png" style="height: 3vh; padding-bottom: 0.5vh"></div>
-          <div id="coins" class="flex" style="width: 100%; justify-content: center;"></div>
+    <div class="flex" style="width: 60%; height: 75%; max-height: 75vmin; text-align: center; justify-content: space-between;">
+      <div class="flex vertical spaceAround" style="height: 80%; width: 30%;">
+        <div class="flex vertical">
+          <img src="../difficulty/[[DIFFICULTYFACE]].png" style="height: 15vmin">
+          <h1 class="smaller" id="difficultytext">[[DIFFICULTY]]</h1>
         </div>
-        <div class="center noClick">
-          <img class="gdButton yesClick" id="playButton" src="../assets/play.png" style="width: 50%;">
-        </div>
-        <div class="flex vertical spaceBetween" style="align-items: flex-start; height: 70%">
-          <div class="flex"><img src="../assets/download.png" style="height: 5.5vh; padding-bottom: 0.5vh; margin-right: 1vw;"><h1 style="width: 100%; font-size: 6vh">[[DOWNLOADS]]</h1></div>
-          <div class="flex"><img src="../assets/like.png" style="height: 5.5vh; padding-bottom: 0.5vh; margin-right: 1vw;"><h1 style="width: 100%; font-size: 6vh">[[LIKES]]</h1></div>
-          <div class="flex"><img src="../assets/time.png" style="height: 5.5vh; padding-bottom: 0.5vh; margin-right: 1vw;"><h1 style="width: 100%; font-size: 6vh">[[LENGTH]]</h1></div>
-          <div class="flex"><img src="../assets/orbs.png" style="height: 5.5vh; padding-bottom: 0.5vh; margin-right: 1vw;"><h1 style="width: 100%; font-size: 6vh">[[ORBS]]</h1></div>
-        </div>
+        <div class="flex stars"><h1 style="width: 100%; font-size: 4vmin">[[STARS]]</h1><img src="../assets/star.png" style="height: 3vmin; padding-bottom: 0.5vmin;"></div>
+        <div class="flex diamonds"><h1 style="width: 100%; font-size: 4vmin">[[DIAMONDS]]</h1><img src="../assets/diamond.png" style="height: 3vmin; padding-bottom: 0.5vmin;"></div>
+        <div class="flex demonList" style="display: none;"><h1 style="width: 100%; font-size: 4vmin">#[[DEMONLIST]]</h1><img src="../assets/demon.png" style="height: 3vmin; padding-bottom: 0.5vmin"></div>
+        <div id="coins" class="flex" style="width: 100%; justify-content: center;"></div>
       </div>
-      <div class="brownBox" id="songBox">
-        <div style="margin-left: 0.5%">
-          <h1 class="slightlySmaller" id="songname">[[SONGNAME]]</h1>
-          <h2 class="smaller">By: [[SONGAUTHOR]] <a class="songLink" href="https://[[SONGAUTHOR]].newgrounds.com" target="_blank"><img class="gdButton valign" src="../assets/more.png" width="12%"></a></h2>
-        </div>
-        <h3 id="songInfo">SongID: [[SONGID]] &nbsp;&nbsp; Size: [[SONGSIZE]]</h3>
+      <div class="noClick">
+        <img class="gdButton yesClick" id="playButton" src="../assets/play.png" style="width: 50%;">
+      </div>
+      <div class="flex vertical spaceAround" style="align-items: flex-start; height: 70%; width: 30%;">
+        <div class="flex"><img src="../assets/download.png" style="height: 5.5vmin; padding-bottom: 0.5vmin; margin-right: 1vmax;"><h1 style="width: 100%; font-size: 6vmin">[[DOWNLOADS]]</h1></div>
+        <div class="flex"><img src="../assets/like.png" style="height: 5.5vmin; padding-bottom: 0.5vmin; margin-right: 1vmax;"><h1 style="width: 100%; font-size: 6vmin">[[LIKES]]</h1></div>
+        <div class="flex"><img src="../assets/time.png" style="height: 5.5vmin; padding-bottom: 0.5vmin; margin-right: 1vmax;"><h1 style="width: 100%; font-size: 6vmin">[[LENGTH]]</h1></div>
+        <div class="flex"><img src="../assets/orbs.png" style="height: 5.5vmin; padding-bottom: 0.5vmin; margin-right: 1vmax;"><h1 style="width: 100%; font-size: 6vmin">[[ORBS]]</h1></div>
       </div>
     </div>
-    <div class="levelButtons" style="width: 20%">
-      <img class="gdButton sideButton" id="saveButton" src="../assets/plus.png" onclick="$('#saveDiv').show(); saveLevel()"><br>
-      <img class="gdButton sideButton" id="infoButton"  src="../assets/info.png" onclick="$('#infoDiv').show()"><br>
-      <a href="./comments/[[ID]]"><img class="gdButton sideButton" src="../assets/comment.png"></a><br>
-      <a class="songLink" href="https://www.newgrounds.com/audio/listen/[[SONGID]]" target="_blank"><img class="gdButton sideButton" src="../assets/playsong.png"></a>
-      <a href="./analyze/[[ID]]"><img class="gdButton sideButton" src="../assets/edit.png"></a><br>
-      <img class="gdButton sideButton outOfOrder" id="scoreButton" src="../assets/leaderboard.png" onclick="$('#scoreDiv').show()"><br>
+    <div class="transparentBox" style="width: 60%; overflow-wrap: break-word; text-align: center; margin-bottom: 2%;">
+      <p style="padding: 0 5%;">[[DESCRIPTION]]</p>
     </div>
-	</div>
+    <div class="brownBox flex spaceBetween" id="songBox" style="min-width: 40%; max-width: 60%;">
+      <div class="flex vertical spaceBetween" style="align-items: flex-start;">
+        <h1 class="slightlySmaller" id="songname" style="overflow-wrap:break-word">[[SONGNAME]]</h1>
+        <h2 class="smaller">By: [[SONGAUTHOR]] <a class="songLink" href="https://[[SONGAUTHOR]].newgrounds.com" target="_blank"><img class="gdButton valign" src="../assets/more.png" width="12%"></a></h2>
+        <div class="flex spaceBetween" style="width: 100%;"><h3 id="songID">SongID: [[SONGID]]</h3><h3 id="songSize" style="text-align: right;">Size: [[SONGSIZE]]</h3></div>
+      </div>
+      <a class="songLink" href="https://www.newgrounds.com/audio/listen/[[SONGID]]" target="_blank" style="display: inline-flex; align-self: flex-end"><img class="gdButton" src="../assets/playsong.png" style="height: 60%; max-height: 9vmin; padding-left: 2vmin;"></a>
+    </div>
+  </div>
+  <div class="levelButtons flex vertical spaceAround" style="height: 100%; position: absolute; top: 0; right: 0; z-index: -1">
+    <img class="gdButton sideButton" id="saveButton" src="../assets/plus.png" onclick="$('#saveDiv').show(); saveLevel()">
+    <img class="gdButton sideButton" id="infoButton"  src="../assets/info.png"  onclick="$('#infoDiv').show()">
+    <a href="./comments/[[ID]]"><img class="gdButton sideButton" src="../assets/comment.png"></a>
+    <a href="./analyze/[[ID]]"><img class="gdButton sideButton" src="../assets/edit.png"></a>
+    <img class="gdButton sideButton outOfOrder" id="scoreButton" src="../assets/leaderboard.png" onclick="$('#scoreDiv').show()">
+  </div>
 
 	<div style="position:absolute; top: 2%; left: 1.5%; width: 10%; height: 25%; pointer-events: none">
 		<img class="gdButton yesClick" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()">
 	</div>
 	<div id="copied" style="display: none;">
-		<div class="copied center noClick" style="position:absolute; top: 36%; left: 50%; transform: translate(-50%,-50%); width: 80vh">
+		<div class="copied center noClick" style="position:absolute; top: 36%; left: 50%; transform: translate(-50%,-50%); width: 80vmin">
 			<h1 class="smaller noSelect">ID copied to clipboard</h1>
 		</div>
-	</div>
-
+  </div>
 </div>
-
 </body>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script async type="text/javascript" src="../assets/sizecheck.js"></script>
@@ -178,16 +177,18 @@ else $('.demonList').remove()
 
 
 if ("[[SONGID]]".startsWith("Level")) {
-	$('#songInfo').text('[[SONGID]]')
-	$('.songLink').hide()}
+	$('#songID').text('[[SONGID]]')
+  $('.songLink').hide()
+  $('#songSize').hide();
+}
 
 if ("[[INVALIDSONG]]" == "true") $('.songLink').hide()
 if ("[[DISLIKED]]" == "true") $('#likeImg').attr('src', '../assets/dislike.png').css('transform', 'translateY(20%)')
 
 let coinColor = [[VERIFIEDCOINS]] ? "silvercoin" : "browncoin"
-if ([[COINS]] > 0) $("#coins").append(`<img src="../assets/${coinColor}.png" style="height: 3vh; padding-bottom: 0.5vh">`)
-if ([[COINS]] > 1) $("#coins").append(`<img src="../assets/${coinColor}.png" style="height: 3vh; padding-bottom: 0.5vh">`)
-if ([[COINS]] > 2) $("#coins").append(`<img src="../assets/${coinColor}.png" style="height: 3vh; padding-bottom: 0.5vh">`)
+if ([[COINS]] > 0) $("#coins").append(`<img src="../assets/${coinColor}.png" style="height: 3vmin; padding-bottom: 0.5vmin">`)
+if ([[COINS]] > 1) $("#coins").append(`<img src="../assets/${coinColor}.png" style="height: 3vmin; padding-bottom: 0.5vmin">`)
+if ([[COINS]] > 2) $("#coins").append(`<img src="../assets/${coinColor}.png" style="height: 3vmin; padding-bottom: 0.5vmin">`)
 
 if ("[[ACCOUNTID]]" == "0") {
 		$("#authorName").addClass("green").removeClass('gdButton')
@@ -196,15 +197,6 @@ if ("[[ACCOUNTID]]" == "0") {
 
 if (window.location.pathname == "/weekly") $('body').addClass('darkBG')
 
-
-$(window).on('load', function() {
-
-	if ($('#songname')[0].scrollWidth > $('#songBox')[0].scrollWidth) {
-		let overflow = ($('#songname')[0].scrollWidth - $('#songBox')[0].scrollWidth) * 0.007
-		if (overflow > 6) overflow = 3
-		$('#songname').addClass('smaller').css('font-size', (6 - (overflow)) + 'vh')
-		}
-});
 
 
 let savedLevels = JSON.parse(localStorage.getItem('saved') || '[]');

@@ -21,9 +21,9 @@
 		<img class="cornerPiece" src="../assets/corner.png" width=7%; style="transform: scaleX(-1)">
 	</div>
 
-	<div class="brownBox center supercenter" style="width: 135vh; height: 82%; margin-top: -0.7%">
+	<div class="brownBox center supercenter" style="width: 135vmin; height: 82%; margin-top: -0.7%">
 
-		<div class="lightBox center dragscroll" id="commentBox" style="margin: 4.5% auto; width: 115vh; height: 86%; background-color: #934E27"></div>
+		<div class="lightBox center dragscroll" id="commentBox" style="margin: 4.5% auto; width: 115vmin; height: 86%; background-color: #934E27"></div>
 
 		<div class="supercenter" style="left: 97%; top: 25%; height: 10%">
 			<img class="gdButton" id="refresh"  src="../assets/refresh.png" height="90%">
@@ -51,12 +51,12 @@
 
 		<div class="supercenter" id="pageUp" style="top: 4.8%; height: 10%; width: 100%;">
 			<h1 class="smaller inline" id="levelName"></h1>
-			<h2 class="smallGold inline" id="levelAuthor" style="margin: 0.8vh 0 0 3vh"></h2>
+			<h2 class="smallGold inline" id="levelAuthor" style="margin: 0.8vmin 0 0 3vmin"></h2>
 		</div>
 
 		<div class="supercenter" id="pageUp" style="top: 100%; height: 10%; width: 100%;">
 			<h2 class="smallGold inline" id="levelVersion"></h2>
-			<h2 class="smallGold inline" id="levelID" style="margin-left: 6vh"></h2>
+			<h2 class="smallGold inline" id="levelID" style="margin-left: 6vmin"></h2>
 		</div>
 
 	</div>
@@ -158,7 +158,7 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 				</div>
 				<p class="commentDate">${x.date}</p>
 				<div class="commentLikes">
-					${history ? `<h3 style="margin-right: 1.5vh; pointer-events: all;" class="gold inline"><a href="../${x.levelID}">(${x.levelID})</a></h3>` : ""}
+					${history ? `<h3 style="margin-right: 1.5vmin; pointer-events: all;" class="gold inline"><a href="../${x.levelID}">(${x.levelID})</a></h3>` : ""}
 					<img id="likeImg" class="inline" ${x.likes < 0 ? "style='transform: translateY(25%)'" : ""} src="../assets/${x.likes < 0 ? "dis" : ""}like.png" height=20% style="margin-right: 0.4%">
 					<h3 class="inline">${x.likes}</h3>
 				</div>
@@ -181,7 +181,7 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 				</div>
 				<p class="commentDate compactDate">${x.date}</p>
 				<div class="commentLikes">
-					${history ? `<h3 style="margin-right: 0.5vh; pointer-events: all;" class="gold inline"><a href="../${x.levelID}">(${x.levelID})</a></h3>` : ""}
+					${history ? `<h3 style="margin-right: 0.5vmin; pointer-events: all;" class="gold inline"><a href="../${x.levelID}">(${x.levelID})</a></h3>` : ""}
 					<img id="likeImg" class="inline" ${x.likes < 0 ? "style='transform: translateY(15%)'" : ""} src="../assets/${x.likes < 0 ? "dis" : ""}like.png" height=27% style="margin-right: 0.4%">
 					<h3 class="inline">${x.likes}</h3>
 				</div>
@@ -192,7 +192,7 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 	$('.commentText').each(function() {
 	if ($(this).text().length > 100) {
 	let overflow = ($(this).text().length - 100) * 0.01
-	$(this).css('font-size', (3.5 - (overflow)) + 'vh')
+	$(this).css('font-size', (3.5 - (overflow)) + 'vmin')
 	}
 
 	});

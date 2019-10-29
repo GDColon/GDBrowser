@@ -60,33 +60,33 @@ img, .noSelect {
 }
 
 .small {
-    font-size: 7vh;
+    font-size: 7vmin;
 }
 
 .smaller {
-    font-size: 5vh;
-    text-shadow: -0.2vh -0.2vh 0vh #000, 0.2vh -0.2vh 0vh #000, -0.2vh 0.2vh 0vh #000, 0.2vh 0.2vh 0vh #000, 0.3vh 0.4vh 0vh rgba(0,0,0,0.4);
+    font-size: 5vmin;
+    text-shadow: -0.2vmin -0.2vmin 0vmin #000, 0.2vmin -0.2vmin 0vmin #000, -0.2vmin 0.2vmin 0vmin #000, 0.2vmin 0.2vmin 0vmin #000, 0.3vmin 0.4vmin 0vmin rgba(0,0,0,0.4);
 }
 
 .slightlySmaller {
-    font-size: 6vh;
+    font-size: 6vmin;
 }
 
 .smaller {
-    font-size: 5vh;
-    text-shadow: -0.2vh -0.2vh 0vh #000, 0.2vh -0.2vh 0vh #000, -0.2vh 0.2vh 0vh #000, 0.2vh 0.2vh 0vh #000, 0.3vh 0.4vh 0vh rgba(0,0,0,0.4);
+    font-size: 5vmin;
+    text-shadow: -0.2vmin -0.2vmin 0vmin #000, 0.2vmin -0.2vmin 0vmin #000, -0.2vmin 0.2vmin 0vmin #000, 0.2vmin 0.2vmin 0vmin #000, 0.3vmin 0.4vmin 0vmin rgba(0,0,0,0.4);
 }
 
 .bigger {
-    font-size: 3.5vh;
+    font-size: 3.5vmin;
 }
 
 .veryBig {
-    font-size: 8vh;
+    font-size: 8vmin;
 }
 
 .mini {
-    font-size: 3vh;
+    font-size: 3vmin;
     margin-top: 0.5%;
 }
 
@@ -121,8 +121,8 @@ img, .noSelect {
 }
 
 .modal {
-    height: 60vh;
-    width: 60vw;
+    height: 60vmin;
+    width: 60vmax;
 }
 
 .closeWindow {
@@ -168,20 +168,19 @@ img, .noSelect {
 p {
     font-family: aller, helvetica;
     color: white;
-    font-size: 2.9vh;
+    font-size: 2.9vmin;
     word-break: break-word;
 }
 
 h1 {
     font-weight: normal;
     margin: 0% 0%;
-    font-size: 6vh;
+    font-size: 6vmin;
     font-family: Pusab;
     color: white;
     letter-spacing: 0.02em;
     overflow: hidden;
-    white-space: nowrap;
-    text-shadow: -0.275vh -0.275vh 0vh #000, 0.275vh -0.275vh 0vh #000, -0.275vh 0.275vh 0vh #000, 0.275vh 0.275vh 0vh #000, 0.5vh 0.6vh 0vh rgba(0,0,0,0.4);
+    text-shadow: -0.275vmin -0.275vmin 0vmin #000, 0.275vmin -0.275vmin 0vmin #000, -0.275vmin 0.275vmin 0vmin #000, 0.275vmin 0.275vmin 0vmin #000, 0.5vmin 0.6vmin 0vmin rgba(0,0,0,0.4);
     -webkit-text-size-adjust: 100%;
     line-height: 100%;
 }
@@ -189,21 +188,21 @@ h1 {
 h2 {
     font-weight: normal;
     margin: 0 0;
-    font-size: 8vh;
+    font-size: 8vmin;
     font-family: Pusab;
     color: rgb(255, 200, 0);
     letter-spacing: 0.02em;
-    text-shadow: -0.275vh -0.275vh 0vh #000, 0.275vh -0.275vh 0vh #000, -0.275vh 0.275vh 0vh #000, 0.275vh 0.275vh 0vh #000, 0.5vh 0.5vh 0vh rgba(0,0,0,0.4);
+    text-shadow: -0.275vmin -0.275vmin 0vmin #000, 0.275vmin -0.275vmin 0vmin #000, -0.275vmin 0.275vmin 0vmin #000, 0.275vmin 0.275vmin 0vmin #000, 0.5vmin 0.5vmin 0vmin rgba(0,0,0,0.4);
 }
 
 h3, input[type=text], input[type=number] {
     font-weight: normal;
     margin: 0 0;
-    font-size: 3.5vh;
+    font-size: 3.5vmin;
     font-family: Pusab;
     color: white;
     letter-spacing: 0.02em;
-    text-shadow: -0.15vh -0.15vh 0vh #000, 0.15vh -0.15vh 0vh #000, -0.15vh 0.15vh 0vh #000, 0.15vh 0.15vh 0vh #000;
+    text-shadow: -0.15vmin -0.15vmin 0vmin #000, 0.15vmin -0.15vmin 0vmin #000, -0.15vmin 0.15vmin 0vmin #000, 0.15vmin 0.15vmin 0vmin #000;
 }
 
 a {
@@ -220,11 +219,11 @@ hr {
 
 input[type=text], input[type=number] {
     padding-left: 1.2%;
-    border-radius: 1vh;
+    border-radius: 1vmin;
     height: 80%;
     margin-top: 1%;
     width: 65%;
-    font-size: 5vh;
+    font-size: 5vmin;
 }
 
 input[type=checkbox] {
@@ -247,7 +246,7 @@ input[type=checkbox]:checked + label.gdcheckbox {
 
 ::placeholder {
     color: #6F98D8;
-    font-size: 4vh;
+    font-size: 4vmin;
 }
 
 input:focus {
@@ -268,15 +267,17 @@ input:focus {
 
 .transparentBox, input[type=text], input[type=number] {
     border: 0 solid transparent;
-    border-radius: 2vh;
+    border-radius: 2vmin;
     background-color: rgba(0, 0, 0, 0.3);
     white-space: nowrap;
 }
 
+.transparentBox {white-space: normal;}
+
 #pageSelect {
     height: 25%;
-    font-size: 5.5vh;
-    width: 18vh;
+    font-size: 5.5vmin;
+    width: 18vmin;
     margin: 8% 0% 8% 0%;
     text-align: center;
     padding-left: 0;
@@ -292,24 +293,23 @@ input::-webkit-inner-spin-button {
 }
 
 .lightBox {
-    border: 0.2vh solid #803E1E;
-    border-radius: 2vh;
+    border: 0.2vmin solid #803E1E;
+    border-radius: 2vmin;
     background-color: #BE6F3F;
-    white-space: nowrap;
 }
 
 .brownBox {
-    border: 2.5vh solid transparent;
-    border-radius: 3vh;
+    border: 2.5vmin solid transparent;
+    border-radius: 3vmin;
     background-color: #995533;
     border-image: url('./../assets/brownbox.png') 10% round;
 }
 
 .fancybox {
-    width: 69vh;
-    padding: 1vh 3vh;
-    border: 3.5vh solid transparent;
-    border-radius: 3vh;
+    width: 69vmin;
+    padding: 1vmin 3vmin;
+    border: 3.5vmin solid transparent;
+    border-radius: 3vmin;
     background-color: #001931;
     border-image: url('./../assets/fancybox.png') 10% stretch;
     border-image-slice: 65;
@@ -320,23 +320,31 @@ input::-webkit-inner-spin-button {
 }
 
 .epicbox {
-    border: 3.5vh solid transparent;
+    border: 3.5vmin solid transparent;
     border-image: url('./../assets/epicbox.png') 20% stretch;
     border-image-slice: 85 77;
-    border-image-width: 9.5vh;
+    border-image-width: 9.5vmin;
 }
 
 .leaderboardBox {
-    border: 3.5vh solid transparent;
+    border: 3.5vmin solid transparent;
     border-image: url('./../assets/leaderboardbox.png') 20% stretch;
     border-image-slice: 85 77;
-    border-image-width: 9.5vh;
+    border-image-width: 9.5vmin;
 }
 
 .levelButtons img {
-    height: 16%;
+    width: auto;
+    height: 16vmin;
+    margin: 0;
+    padding: 0;
 }
 
+.levelButtons a {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
 .spaced {
     margin-bottom: 2%;
 }
@@ -381,7 +389,7 @@ input::-webkit-inner-spin-button {
 
 .demonDiff .smallTextWoo {
     margin-top: 3%;
-    font-size: 2.7vh;
+    font-size: 2.7vmin;
 }
 
 .lengthDiv {
@@ -392,7 +400,7 @@ input::-webkit-inner-spin-button {
 }
 
 .lengthDiv h3 {
-    font-size: 4vh;
+    font-size: 4vmin;
 }
 
 .selectedFilter {
@@ -406,8 +414,8 @@ input::-webkit-inner-spin-button {
 }
 
 #filterStuff div h1, .smallerer {
-    font-size: 4vh;
-    text-shadow: -0.2vh -0.2vh 0vh #000, 0.2vh -0.2vh 0vh #000, -0.2vh 0.2vh 0vh #000, 0.2vh 0.2vh 0vh #000, 0.3vh 0.4vh 0vh rgba(0,0,0,0.4);
+    font-size: 4vmin;
+    text-shadow: -0.2vmin -0.2vmin 0vmin #000, 0.2vmin -0.2vmin 0vmin #000, -0.2vmin 0.2vmin 0vmin #000, 0.2vmin 0.2vmin 0vmin #000, 0.3vmin 0.4vmin 0vmin rgba(0,0,0,0.4);
 }
 
 .sideButton {
@@ -447,7 +455,7 @@ input::-webkit-inner-spin-button {
 .menuButton {
   width: 24vh;
   max-width: 60vw;
-  margin: 1.2vh 2vh;
+  margin: 1.2vmin 2vmin;
   cursor: pointer;
 }
 
@@ -459,7 +467,7 @@ input::-webkit-inner-spin-button {
     color: aqua;
     text-decoration: underline;
     cursor: pointer;
-    height: 3vh;
+    height: 3vmin;
 }
 
 .youCanClickThis:hover {
@@ -484,7 +492,7 @@ input::-webkit-inner-spin-button {
     cursor: pointer;
     width: 150px;
     margin: 100px;
-    max-width: 60vw;
+    max-width: 60vmax;
 }
 
 .mappack {
@@ -492,7 +500,7 @@ input::-webkit-inner-spin-button {
     width: 150px;
     height: 100px;
     margin: 50px;
-    max-width: 60vw;
+    max-width: 60vmax;
 }
 
 .gauntlet:hover, .mappack:hover {
@@ -526,7 +534,7 @@ input::-webkit-inner-spin-button {
 .leaderboardTab {
     user-select: none;
     -webkit-user-drag: none;
-    height: 9vh;
+    height: 9vmin;
 }
 
 .leaderboardClick {
@@ -542,12 +550,12 @@ input::-webkit-inner-spin-button {
    text-align: center;
    top: 2.45%; 
    width: 100%;
-   margin-left: -13.5vh
+   margin-left: -13.5vmin
 }
 
 #searchBox {
     background-color: rgb(173, 115, 76);
-    width: 122vh;
+    width: 122vmin;
     height: 75%; 
     overflow-y: auto; 
     overflow-x: hidden;
@@ -564,9 +572,9 @@ input::-webkit-inner-spin-button {
     display: flex;
     background-color: #A1582C;
     margin: auto;
-    border-bottom: 0.18vh rgba(0, 0, 0, 0.4) solid;
-    padding-left: 18vh;
-    padding-top: 1vh;
+    border-bottom: 0.18vmin rgba(0, 0, 0, 0.4) solid;
+    padding-left: 18vmin;
+    padding-top: 1vmin;
     white-space: nowrap;
 }
 
@@ -581,15 +589,15 @@ input::-webkit-inner-spin-button {
 
 .commentBG {
     width: 100%;
-    height: 23vh;
+    height: 23vmin;
     background-color: #A1582C;
     overflow: hidden;
     margin: auto;
-    border-bottom: 0.18vh rgba(0, 0, 0, 0.4) solid;
+    border-bottom: 0.18vmin rgba(0, 0, 0, 0.4) solid;
 }
 
 .compactBG {
-    height: 14vh;
+    height: 14vmin;
 }
 
 .commentBG:nth-child(odd) {
@@ -597,68 +605,67 @@ input::-webkit-inner-spin-button {
 }
 
 .comment {
-    margin: 1.5vh auto 0 auto;
+    margin: 1.5vmin auto 0 auto;
     width: 96%;
-    height: 18.5vh;
+    height: 18.5vmin;
     background-color: rgba(147, 79, 39, 0.8);
-    border-radius: 1.5vh;
+    border-radius: 1.5vmin;
     text-align: left;
-    padding-top: 1.5vh;
-    padding-left: 1.5vh;
+    padding-top: 1.5vmin;
+    padding-left: 1.5vmin;
     overflow: hidden;
 }
 
 .compact {
     background-color: transparent;
-    padding-left: 0vh;
-    margin-top: 0.5vh;
+    padding-left: 0vmin;
+    margin-top: 0.5vmin;
     transform: scale(0.8) translate(-13%, -12.5%)
 }
 
 .comment h2, .smallGold {
     width: fit-content;
     vertical-align: top;
-    font-size: 3.7vh;
-    text-shadow: -0.15vh -0.15vh 0vh #000, 0.15vh -0.15vh 0vh #000, -0.15vh 0.15vh 0vh #000, 0.15vh 0.15vh 0vh #000, 0.3vh 0.3vh 0vh rgba(0,0,0,0.4);
+    font-size: 3.7vmin;
+    text-shadow: -0.15vmin -0.15vmin 0vmin #000, 0.15vmin -0.15vmin 0vmin #000, -0.15vmin 0.15vmin 0vmin #000, 0.15vmin 0.15vmin 0vmin #000, 0.3vmin 0.3vmin 0vmin rgba(0,0,0,0.4);
 }
 
 .commentText {
-    margin-top: 1.6vh;
-    font-size: 3.5vh;
-    white-space: normal;
+    margin-top: 1.6vmin;
+    font-size: 3.5vmin;
     overflow: hidden;
-    margin: 0 3vh 0 0;
+    margin: 0 3vmin 0 0;
 }
 
 .commentAlign {
-    height: 11vh;
+    height: 11vmin;
     display: table-cell;
     vertical-align: middle;
 }
 
 .commentDate {
-    transform: translate(-3vh, -4.8vh);
+    transform: translate(-3vmin, -4.8vmin);
     text-align: right;
-    font-size: 1.8vh;
+    font-size: 1.8vmin;
     color: rgba(0, 0, 0, 0.5)
 }
 
 .compactDate {
-    transform: translate(-3vh, -11.5vh);
+    transform: translate(-3vmin, -11.5vmin);
 }
 
 .commentPercent {
     vertical-align: top;
-    margin: 0 0 0 1vh;
-    font-size: 2vh;
+    margin: 0 0 0 1vmin;
+    font-size: 2vmin;
     color: rgba(0, 0, 0, 0.5);
     transform: translateY(40%);
 }
 
 .commentLikes {
-    transform: translate(-3vh, -24.8vh);
+    transform: translate(-3vmin, -24.8vmin);
     text-align: right;
-    font-size: 3.2vh;
+    font-size: 3.2vmin;
     pointer-events: none;
 }
 
@@ -671,8 +678,7 @@ input::-webkit-inner-spin-button {
 }
 
 #collectibles, .leaderboardStats {
-    font-size: 4.3vh;
-    white-space: nowrap;
+    font-size: 4.3vmin;
 }
 
 #collectibles img {
@@ -701,7 +707,7 @@ input::-webkit-inner-spin-button {
 
 .githubChad h2 {
     margin-bottom: 3%;
-    font-size: 4vh;
+    font-size: 4vmin;
 }
 
 .analysis {
@@ -732,10 +738,9 @@ input::-webkit-inner-spin-button {
     max-height: 60%;
     overflow-y: auto;
     overflow-x: auto;
-    border-bottom-left-radius: 2vh;
+    border-bottom-left-radius: 2vmin;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-    white-space: normal;
 }
 
 .levelCode {
@@ -744,7 +749,7 @@ input::-webkit-inner-spin-button {
     padding: 0% 2%;
     overflow-x: hidden;
     overflow-y: auto;
-    line-height: 1.5vh;
+    line-height: 1.5vmin;
     min-height: 12%;
     max-height: 200%;
     border-top-right-radius: 0;
@@ -753,25 +758,25 @@ input::-webkit-inner-spin-button {
 
 .aColor {
     margin: 1.3% 0.8%;
-    width: 15vh;
+    width: 15vmin;
 }
 
 .aColor div {
     width: 60%;
     height: 9%;
-    border-radius: 1vh;
+    border-radius: 1vmin;
     display: inherit;
 }
 
 .aColor h3 {
-    font-size: 3vh;
+    font-size: 3vmin;
 }
 
 .blendingDot {
     text-align: left;
     margin-left: 9%;
     margin-top: -6%;
-    font-size: 3.5vh !important;
+    font-size: 3.5vmin !important;
     user-select: none;
 }
 
@@ -779,18 +784,17 @@ input::-webkit-inner-spin-button {
     text-align: left;
     margin-left: 7%;
     margin-top: 3%;
-    font-size: 2.5vh !important;
+    font-size: 2.5vmin !important;
     user-select: none;
 }
 
 .codeFont {
-    font-size: 1.5vh;
-    white-space: normal;
+    font-size: 1.5vmin;
     word-break: break-all;
 }
 
 #codeLength {
-    font-size: 2.2vh;
+    font-size: 2.2vmin;
     margin-top: -0.3%;
 }
 
@@ -815,7 +819,7 @@ input::-webkit-inner-spin-button {
 
 .portalButton {
     margin-right: 0.7%;
-    padding-right: 5vh;
+    padding-right: 5vmin;
     height: 4%;
 }
 

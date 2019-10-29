@@ -2,7 +2,7 @@
 
 body {
     margin: 0;
-    height: 100vh;
+    height: 100vmin;
     background: #000;
 }
 
@@ -16,7 +16,7 @@ body {
 
 .levelBG {
     background-image: linear-gradient(#0065FD, #002E73);
-    height: 100vh;
+    height: 100vmin;
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -26,7 +26,7 @@ body {
 p {
     font-family: aller, helvetica;
     color: white;
-    font-size: 2.9vh;
+    font-size: 2.9vmin;
 }
 
 h1 {

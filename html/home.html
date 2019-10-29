@@ -84,7 +84,7 @@ fetch(`./api/credits`).then(res => res.json()).then(res => {
 				<h2 class="gdButton"><a href="./profile/${x.ign || x.name}">${x.name}</h2></a>
 				<img src="./icon/${x.ign || x.name}" height=30%;>
 				<div class="flex spaceAround" style="width: 70%">
-					${x.socials.map(function(el) {return `<a target=_blank href="${el[0]}"><img src="../assets/${el[1]}.png" class="gdButton"></a>`}).join('')}
+					${x.socials.map(function(el) {return `<a target=_blank href="${el[0]}"><img src="../assets/${el[1]}.png" class="gdButton" style="width: 10vmin"></a>`}).join('')}
 				</div>
 			</div>
 			<img class="gdButton arrow" src="../assets/arrow-right.png" onclick="page += 1; loadCredits()">
