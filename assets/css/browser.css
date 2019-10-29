@@ -125,7 +125,7 @@ img, .noSelect {
     width: 60vmax;
 }
 
-.closeWindow {
+.closeWindowX {
     position: absolute;
     top: 0;
     left: 0;
@@ -134,7 +134,7 @@ img, .noSelect {
     height: 20%;
     width: auto;
 }
-.closeWindow:active {
+.closeWindowX:active {
     transform: translate(-50%, -50%) scale(1.08)!important;
 }
 
@@ -306,13 +306,16 @@ input::-webkit-inner-spin-button {
 }
 
 .fancybox {
-    width: 69vmin;
+    width: 60vmin;
     padding: 1vmin 3vmin;
     border: 3.5vmin solid transparent;
     border-radius: 3vmin;
     background-color: #001931;
     border-image: url('./../assets/fancybox.png') 10% stretch;
     border-image-slice: 65;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .bounce {
@@ -569,7 +572,6 @@ input::-webkit-inner-spin-button {
 .searchResult {
     width: 80%;
     height: 32%;
-    display: flex;
     background-color: #A1582C;
     margin: auto;
     border-bottom: 0.18vmin rgba(0, 0, 0, 0.4) solid;

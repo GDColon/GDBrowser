@@ -14,15 +14,15 @@
 <div id="everything">
 
 	<div class="popup" id="infoDiv">
-		<div class="fancybox bounce center supercenter">
-			<h2 class="smaller center" style="font-size: 5.5vmin">Level Info</h2>
-			<p class="bigger center" id="levelInfo" style="line-height: 5vmin; margin-top: 1.5vmin;">
+		<div class="fancybox bounce supercenter">
+			<h2 class="smaller" style="font-size: 5.5vmin">Level Info</h2>
+			<p class="bigger" id="levelInfo" style="line-height: 5vmin; margin-top: 1.5vmin;">
 				<span style="color:lime">[[NAME]]</span><br>
 				ID: <span style="color:yellow">[[ID]]</span>[[ORIGINALINFO]][[LOWDETAIL]][[PASS]][[UPLOAD]][[UPDATE]]
 				<br>Version:  <span style="color:yellow">[[VERSION]]</span>
 				[[OBJECTINFO]][[REQUESTED]]
 			</p>
-			<img src="../assets/ok.png" width=20%; class="gdButton center closeWindow">
+			<img src="../assets/ok.png" style="height: 6vmin" class="gdButton closeWindow">
 		</div>
 	</div>
 
@@ -32,7 +32,7 @@
 			<p class="bigger center" style="line-height: 5vmin; margin-top: 1.5vmin;">
 				<span style="color:yellow">Leaderboards</span> are coming soon™
 			</p>
-			<img src="../assets/ok.png" width=20%; class="gdButton center closeWindow">
+			<img src="../assets/ok.png" style="height: 6vmin" class="gdButton center closeWindow">
 		</div>
 	</div>
 
@@ -42,18 +42,20 @@
 			<p class="bigger center" style="line-height: 5vmin; margin-top: 1.5vmin;">
 				<span style="color:yellow">[[NAME]]</span> has been added to your <a class="youCanClickThis2" style="color:lime" href="../search/levels?type=saved">saved levels</a> list.
 			</p>
-			<img src="../assets/ok.png" width=20%; class="gdButton center" onclick="location.reload()">
+			<img src="../assets/ok.png" style="height: 6vmin" class="gdButton center" onclick="location.reload()">
 		</div>
 	</div>
 
 	<div class="popup" id="deleteDiv">
-		<div class="fancybox bounce center supercenter" style="width: 60vmin; height: 28%">
+		<div class="fancybox bounce center supercenter">
 			<h2 class="smaller center" style="font-size: 5.5vmin">Delete Level</h2>
 			<p class="bigger center" style="line-height: 5vmin; margin-top: 1.5vmin;">
 				Are you sure you want to <span style="color:#C67A7E">delete</span> this level from your <a class="youCanClickThis2"style="color:lime" href="../search/levels?type=saved">saved levels </a>list?
-			</p>
-			<img src="../assets/btn-no.png" height=25%; class="gdButton center closeWindow">
-			<img src="../assets/btn-yes.png" height=25%; class="gdButton center sideSpaceB" onclick="deleteLevel()">
+      </p>
+      <div class="flex spaceAround" style="width: 50%;">
+        <img src="../assets/btn-no.png" style="height: 6vmin" class="gdButton closeWindow">
+        <img src="../assets/btn-yes.png" style="height: 6vmin" class="gdButton" onclick="deleteLevel()">
+      </div>
 		</div>
 	</div>
 
@@ -110,12 +112,12 @@
       <a class="songLink" href="https://www.newgrounds.com/audio/listen/[[SONGID]]" target="_blank" style="display: inline-flex; align-self: flex-end"><img class="gdButton" src="../assets/playsong.png" style="height: 60%; max-height: 9vmin; padding-left: 2vmin;"></a>
     </div>
   </div>
-  <div class="levelButtons flex vertical spaceAround" style="height: 100%; position: absolute; top: 0; right: 0; z-index: -1">
-    <img class="gdButton sideButton" id="saveButton" src="../assets/plus.png" onclick="$('#saveDiv').show(); saveLevel()">
-    <img class="gdButton sideButton" id="infoButton"  src="../assets/info.png"  onclick="$('#infoDiv').show()">
-    <a href="./comments/[[ID]]"><img class="gdButton sideButton" src="../assets/comment.png"></a>
-    <a href="./analyze/[[ID]]"><img class="gdButton sideButton" src="../assets/edit.png"></a>
-    <img class="gdButton sideButton outOfOrder" id="scoreButton" src="../assets/leaderboard.png" onclick="$('#scoreDiv').show()">
+  <div class="levelButtons flex vertical spaceAround" style="height: 100%; position: absolute; top: 0; right: 1vw;">
+    <img class="gdButton" id="saveButton" src="../assets/plus.png" onclick="$('#saveDiv').show(); saveLevel()">
+    <img class="gdButton" id="infoButton"  src="../assets/info.png"  onclick="$('#infoDiv').show()">
+    <a href="./comments/[[ID]]"><img class="gdButton" src="../assets/comment.png"></a>
+    <a href="./analyze/[[ID]]"><img class="gdButton" src="../assets/edit.png"></a>
+    <img class="gdButton outOfOrder" id="scoreButton" src="../assets/leaderboard.png" onclick="$('#scoreDiv').show()">
   </div>
 
 	<div style="position:absolute; top: 2%; left: 1.5%; width: 10%; height: 25%; pointer-events: none">

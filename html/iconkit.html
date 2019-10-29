@@ -34,7 +34,7 @@
     </div><br>
     <p style="color: rgb(20, 20, 20); margin-top: 3;">All sprites/assets belong to <a href="http://robtopgames.com">RobTop Games</a>.</p>
 
-    <div style="position:absolute; top: 2%; left: -1.95%; width: 10%; height: 25%; pointer-events: none">
+    <div style="position:absolute; top: 0; left: 0; width: 10%; height: 25%; pointer-events: none">
 		<img class="gdButton" style="pointer-events: all" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()">
 	</div>
     
@@ -80,11 +80,9 @@ fetch('./api/icons').then(res => {
 
         function appendIcon(form, formName) {
 
-        imagesLoaded = 0; totalLoaded = 0
         $('#' + formName + 's').append('<br>')
 
         form.forEach(function (i, p) {
-        if (p != 0 && p % 12 == 0) $('#' + formName + 's').append('<br>')
         $('#' + formName + 's').append(`<button num="${p + 1}" form="${formName}" class="blankButton iconButton" id="${formName}-${p + 1}"><img src="../gdicon/${i}" width="50px" title="${capitalize(formName)} ${p + 1}"></button>`)})
         $('#' + formName + 's').imagesLoaded(function() {
         }).progress(function() {

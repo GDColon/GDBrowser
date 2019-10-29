@@ -243,7 +243,7 @@ input:focus, select:focus, textarea:focus, button:focus {
 }
 
 .iconKit {
-  width: 800px;
+  width: 90vw;
   overflow-x: hidden;
   display: block;
   padding-bottom: 20px;
@@ -272,7 +272,6 @@ input:focus, select:focus, textarea:focus, button:focus {
 }
 
 #colors {
-  width: 1000px;
   overflow-x: auto;
   padding: 10 10 10 10;
   background-color: rgba(0, 0, 0, 0.7);
