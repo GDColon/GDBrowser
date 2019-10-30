@@ -235,7 +235,7 @@ footer a{
 		transition: transform 0.25s ease;
 	}
 	.header-links.hid{
-		transform: translateY(-150vmin);
+		transform: translateY(-150vh);
 	}
 	.header-link{
 		width: 100%;

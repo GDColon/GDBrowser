@@ -86,8 +86,7 @@ img, .noSelect {
 }
 
 .mini {
-    font-size: 3vmin;
-    margin-top: 0.5%;
+    font-size: 2.5vmin;
 }
 
 .valign {
@@ -136,6 +135,11 @@ img, .noSelect {
 }
 .closeWindowX:active {
     transform: translate(-50%, -50%) scale(1.08)!important;
+}
+
+.levelSearch {
+  padding: 1vmin;
+  height: 8vmin;
 }
 
 .inline {
@@ -221,7 +225,6 @@ input[type=text], input[type=number] {
     padding-left: 1.2%;
     border-radius: 1vmin;
     height: 80%;
-    margin-top: 1%;
     width: 65%;
     font-size: 5vmin;
 }
@@ -231,8 +234,6 @@ input[type=checkbox] {
 }
 
 .gdcheckbox {
-    vertical-align: middle;
-    display: inline-block;
     background-image: url(../assets/check-off.png);
     background-repeat: no-repeat;
     background-size: contain;
@@ -374,15 +375,16 @@ input::-webkit-inner-spin-button {
 }
 
 .diffDiv {
-    display: inline-block;
     width: 10%;
     margin-left: 0.8%;
     margin-right: 0.8%;
     filter: brightness(50%);
+    text-align: center
 }
 
 .diffDiv img {
-    width: 75%;
+  height: 8vmin;
+  width: auto;
 }
 
 .demonDiff {
@@ -718,7 +720,7 @@ input::-webkit-inner-spin-button {
     margin: 1% auto;
     padding: 0% 2%;
     overflow-x: auto;
-    overflow-y: hidden;
+    overflow-y: auto;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
