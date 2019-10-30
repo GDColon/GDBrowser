@@ -13,22 +13,11 @@
 
 <div id="everything" style="overflow: auto;">
 
-	<div id="scoreTabs">
-		<img src="../assets/tab-top-on.png" class="leaderboardTab" id="topTabOn" style="display: none">
-		<img src="../assets/tab-top-off.png" class="leaderboardTab leaderboardClick" id="topTabOff">
-
-		<img src="../assets/tab-accurate-on.png" class="sideSpaceC leaderboardTab" id="accurateTabOn">
-		<img src="../assets/tab-accurate-off.png" class="sideSpaceC leaderboardTab leaderboardClick" id="accurateTabOff" style="display: none">
-
-		<img src="../assets/tab-creators-on.png" class="sideSpaceC leaderboardTab" id="creatorTabOn" style="display: none">
-		<img src="../assets/tab-creators-off.png" class="sideSpaceC leaderboardTab leaderboardClick" id="creatorTabOff">
-	</div>
-
 	<div class="popup" id="infoDiv">
 		<div class="fancybox bounce center supercenter">
 			<h2 class="smaller center" style="font-size: 5.5vmin">Leaderboard Info</h2>
 			<p class="bigger center" id="infoText" style="line-height: 5vmin; margin-top: 1.5vmin"></p>
-			<img src="../assets/ok.png" width=20%; class="gdButton center" onclick="$('.popup').hide()">
+			<img src="../assets/ok.png" style="height: 6vmin" class="gdButton center" onclick="$('.popup').hide()">
 		</div>
 	</div>
 
@@ -40,11 +29,20 @@
 		<img class="cornerPiece" src="../assets/corner.png" width=7%; style="transform: scaleX(-1)">
 	</div>
 
-	<div id="searchBox" class="supercenter dragscroll">
-		<div style="height: 4.5%"></div>
-	</div>
-	
-	<div class="leaderboardBox supercenter gs" style="width: 120vmin; height: 80%; pointer-events: none"></div>
+	<div id="searchBox" class="supercenter dragscroll" style="width: 80vw; height: 75vh;"></div>
+  <div>
+    <div id="scoreTabs" class="flex spaceBetween">
+      <img src="../assets/tab-top-on.png" class="leaderboardTab" id="topTabOn" style="display: none; height: 8vmin;">
+      <img src="../assets/tab-top-off.png" class="leaderboardTab leaderboardClick" id="topTabOff" style="height: 8vmin;">
+  
+      <img src="../assets/tab-accurate-on.png" class="leaderboardTab" id="accurateTabOn" style="height: 8vmin;">
+      <img src="../assets/tab-accurate-off.png" class="leaderboardTab leaderboardClick" id="accurateTabOff" style="display: none; height: 8vmin;">
+  
+      <img src="../assets/tab-creators-on.png" class="leaderboardTab" id="creatorTabOn" style="display: none; height: 8vmin;">
+      <img src="../assets/tab-creators-off.png" class="leaderboardTab leaderboardClick" id="creatorTabOff" style="height: 8vmin;">
+    </div>
+    <div class="leaderboardBox supercenter gs" style="width: 83vw; height: 80vh; pointer-events: none"></div>
+  </div>
 
 	<div style="position:absolute; top: 2%; left: 1.5%; width: 10%; height: 25%; pointer-events: none">
 		<img class="gdButton yesClick" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()">
@@ -104,25 +102,24 @@ function leaderboard() {
 
 		res.forEach((x, y) => {
 
-		$('#searchBox').append(`<div class="searchresult leaderboardSlot">
-			<h2 class="small inline gdButton" style="margin-top: 1.5%"><a href="../profile/${x.username}">${x.username}</a></h2>
-			<h3 class="inline sideSpace" style="font-size: 4.5vmin">${x.stars} <img class="valign" src="../assets/star.png"
-					style="cursor: help; height: 19%; transform: translate(-25%, -10%);" title="Stars"></h3>
-		
-			<h3 class="lessSpaced leaderboardStats">
-				${x.diamonds} <img class="valign" src="../assets/diamond.png" style="cursor: help" title="Diamonds">
-				${x.coins} <img class="valign" src="../assets/coin.png" style="cursor: help" title="Secret Coins">
-				${x.usercoins} <img class="valign" src="../assets/silvercoin.png" style="cursor: help" title="User Coins">
-				${x.demons} <img class="valign" src="../assets/demon.png" style="cursor: help" title="Demons">
-				${x.cp != 0 ? `${x.cp} <img class="valign" src="../assets/cp.png" style="cursor: help" title="Creator Points">` : ""}
-			</h3>
-		
-			<div class="center"
-				style="position:absolute; top: ${6.5 + (y * 26.58)}%; left: 3.5%; transform:scale(0.82); height: 10%; width: 12.5%;">
-				<img class="spaced lazyLoad" data-src="./icon/${x.username}" height="150%"
-					style="margin-bottom: 0%; transform:scale(1.1)">
-				<h2 class="small" style="margin-top: 2%">${x.rank}</h2>
-			</div>
+		$('#searchBox').append(`<div class="searchresult leaderboardSlot" style="justify-content: flex-start;">
+      <div class="flex vertical spaceAround" style="height: 100%; margin-left: 6vmin">
+        <img class="spaced lazyLoad" data-src="./icon/${x.username}" style="height: 10vmin;">
+				<h2 class="small">${x.rank}</h2>
+      </div>
+      <div class="flex vertical spaceAround" style="width: 60vw; margin-left: 3vmin; margin-right: 6vmin">
+        <div class="flex wrap" style="width: 100%;">
+          <h2 class="small gdButton" style="margin-right: 2vmin;"><a href="../profile/${x.username}">${x.username}</a></h2>
+          <div class="flex"><h1 style="width: 100%; font-size: 4vmin">${x.stars}</h1><img src="../assets/star.png" style="height: 3vmin; padding-bottom: 0.5vmin; cursor: help" title="Stars"></div>
+        </div>
+			  <h3 class="leaderboardStats flex spaceBetween wrap" style="width: 100%;">
+          <div class="flex"><h1 style="width: 100%; font-size: 4vmin">${x.diamonds}</h1><img src="../assets/diamond.png" style="height: 4vmin; padding-top: 0.5vmin; padding-left: 1.2vmin; cursor: help" title="Diamonds"></div>
+          <div class="flex"><h1 style="width: 100%; font-size: 4vmin">${x.coins}</h1><img src="../assets/coin.png" style="height: 4vmin; padding-top: 0.5vmin; padding-left: 1.2vmin; cursor: help" title="Secret Coins"></div>
+          <div class="flex"><h1 style="width: 100%; font-size: 4vmin">${x.usercoins}</h1><img src="../assets/silvercoin.png" style="height: 4vmin; padding-top: 0.5vmin; padding-left: 1.2vmin; cursor: help" title="User Coins"></div>
+          <div class="flex"><h1 style="width: 100%; font-size: 4vmin">${x.demons}</h1><img src="../assets/demon.png" style="height: 4vmin; padding-top: 0.5vmin; padding-left: 1.2vmin; cursor: help" title="Demons"></div>
+				  ${x.cp != 0 ? `<div class="flex"><h1 style="width: 100%; font-size: 4vmin">${x.cp}</h1><img src="../assets/cp.png" style="height: 4vmin; padding-top: 0.5vmin; padding-left: 1.2vmin; cursor: help" title="Creator Points"></div>` : ""}
+			  </h3>
+      </div>
 		</div>`)
 		})
 

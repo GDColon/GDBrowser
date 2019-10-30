@@ -554,9 +554,9 @@ input::-webkit-inner-spin-button {
 #scoreTabs {
    position: absolute; 
    text-align: center;
-   top: 2.45%; 
-   width: 100%;
-   margin-left: -13.5vmin
+   top: calc(10.9vh - 7vmin); 
+   width: 80vmin;
+   margin-left: 10vw;
 }
 
 #searchBox {
@@ -675,10 +675,6 @@ input::-webkit-inner-spin-button {
 
 .commentLikes h3 {
     transform: translateY(-19%)
-}
-
-.leaderboardSlot {
-    height: 25%;
 }
 
 #collectibles, .leaderboardStats {

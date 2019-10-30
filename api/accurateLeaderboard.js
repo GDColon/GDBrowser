@@ -4,7 +4,6 @@ module.exports = async (app, req, res) => {
 
       request.get(`https://gdleaderboards.com/incl/lbxml.php`, function (err, resp, topPlayers) {
       let idArray = topPlayers.split(",")
-
       let leaderboard = []
       let total = idArray.length
 

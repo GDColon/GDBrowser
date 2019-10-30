@@ -134,8 +134,8 @@ function Append() {
 		}
 
 		$('#searchBox').append(`<div class="searchresult">
-      <div class="flex" style="height: 100%; width: calc(100% - 10vmin);">
-        <div class="flex vertical spaceAround" style="padding-left: 4vmin; width: 15%;">
+      <div class="flex" style="height: 100%; margin-left: 4vmin;">
+        <div class="flex vertical spaceAround" style="width: 10vw;">
           <img class="spaced" id="dFace" src="../difficulty/${x.difficultyFace}.png" style="height: ${x.epic ? 12 : x.featured ? 11 : 10}vmin;">
           <h3>${x.difficulty.includes('Demon') ? "Demon" : x.difficulty}</h3>
           ${x.stars != 0 ? `<div class="flex"><h3 style="padding-left: 0.7vmin">${x.stars}</h3><img src="../assets/star.png" style="height: 3vmin"></div>` : ""}
@@ -143,7 +143,7 @@ function Append() {
             ${`<img src="../assets/${x.verifiedCoins ? 'silver' : 'brown'}coin.png" style="height: 3vmin">`.repeat(x.coins)}
           </div>
         </div>
-        <div class="flex vertical spaceBetween" style="align-items: flex-start; width: 70%; padding-left: 3vmin">
+        <div class="flex vertical spaceBetween" style="align-items: flex-start; width: 47vw; padding-left: 3vmin">
           <h1 style="overflow: hidden; white-space: nowrap; width: 100%;">${x.name}</h1>
           <div class="flex" style="width: 100%;">
             <h2 class="smaller ${hasAuthor ? "gdButton" : "green"}" style="white-space: nowrap; overflow: hidden">
@@ -163,7 +163,7 @@ function Append() {
           </div>
         </div>
       </div>
-			<a href="../${x.id}"" class="flex"><img class="gdButton" src="../assets/view.png" style="width: 12vmin; height: auto; margin-right: 2vmin;"></a>
+			<a href="../${x.id}"" class="flex"><img class="gdButton" src="../assets/view.png" style="width: 12vmin; height: auto; margin-right: 4vmin;"></a>
 		</div>`)
 	})
 
