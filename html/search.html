@@ -134,11 +134,11 @@ function Append() {
 		}
 
 		$('#searchBox').append(`<div class="searchresult">
-      <div class="flex" style="height: 100%; width: calc(100% - 14vmin);">
-        <div class="flex vertical spaceAround" style="padding-left: 2vmin;">
+      <div class="flex" style="height: 100%; width: calc(100% - 10vmin);">
+        <div class="flex vertical spaceAround" style="padding-left: 4vmin; width: 15%;">
           <img class="spaced" id="dFace" src="../difficulty/${x.difficultyFace}.png" style="height: ${x.epic ? 12 : x.featured ? 11 : 10}vmin;">
           <h3>${x.difficulty.includes('Demon') ? "Demon" : x.difficulty}</h3>
-          ${x.stars ? `<div class="flex"><h3 style="padding-left: 0.7vmin">${x.stars}</h3><img src="../assets/star.png" style="height: 3vmin"></div>` : ""}
+          ${x.stars != 0 ? `<div class="flex"><h3 style="padding-left: 0.7vmin">${x.stars}</h3><img src="../assets/star.png" style="height: 3vmin"></div>` : ""}
           <div id="coins">
             ${`<img src="../assets/${x.verifiedCoins ? 'silver' : 'brown'}coin.png" style="height: 3vmin">`.repeat(x.coins)}
           </div>
