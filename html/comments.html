@@ -21,40 +21,31 @@
 		<img class="cornerPiece" src="../assets/corner.png" width=7%; style="transform: scaleX(-1)">
 	</div>
 
-	<div class="brownBox center supercenter" style="width: 135vmin; height: 82%; margin-top: -0.7%">
+	<div class="brownBox center supercenter flex" style="width: 90vw; height: 82%; justify-content: space-between;">
+    <div style="height: calc(70% + 12vmin); width: 12vmin;">
+      <div class="flex vertical spaceBetween" style="margin-bottom: 9vmin; height: 21vmin">
+          <img class="gdButton" id="topSort" src="../assets/sort-likes.png" style="height: 6vmin;">
+          <img class="gdButton" id="timeSort"  src="../assets/sort-time-on.png" style="height: 6vmin;">
+          <img class="gdButton" id="compactMode" src="../assets/compact-off.png" style="height: 6vmin;">
+      </div>
+      <img class="gdButton" src="../assets/arrow-left.png" id="pageDown" style="height: 7vmin;">
+    </div>
+    <div style="width: 85vw; height: 100%">
+      <div class="flex spaceAround" style="height: 7%;">
+        <h1 class="smaller" id="levelName"></h1>
+        <h2 class="smallGold" id="levelAuthor"></h2>
+      </div>
+      <div class="lightBox dragscroll" id="commentBox" style="width: 100%; height: 86%; background-color: #934E27"></div>
+    </div>
+    <div style="height: 70%; width: 12vmin">
+      <img class="gdButton" id="refresh" src="../assets/refresh.png" style="height: 6vmin; margin-bottom: 18vmin">
+      <img class="gdButton" id="pageUp" src="../assets/arrow-right.png" style="height: 7vmin;">
+    </div>
 
-		<div class="lightBox center dragscroll" id="commentBox" style="margin: 4.5% auto; width: 115vmin; height: 86%; background-color: #934E27"></div>
-
-		<div class="supercenter" style="left: 97%; top: 25%; height: 10%">
-			<img class="gdButton" id="refresh"  src="../assets/refresh.png" height="90%">
+		<div class="supercenter" style="top: 4.8%; height: 10%; width: 100%;">
 		</div>
 
-		<div class="supercenter" style="left: 3%; top: 15%; height: 10%">
-			<img class="gdButton" id="topSort" src="../assets/sort-likes.png" height="90%">
-		</div>
-
-		<div class="supercenter" style="left: 3%; top: 25.5%; height: 10%">
-			<img class="gdButton" id="timeSort"  src="../assets/sort-time-on.png" height="90%">
-		</div>
-	
-		<div class="supercenter" style="left: 3%; top: 36%; height: 10%">
-			<img class="gdButton" id="compactMode" src="../assets/compact-off.png" height="90%">
-		</div>
-
-		<div class="supercenter" id="pageDown" style="left: 3%; top: 50%; height: 10%; display: none;">
-			<img class="gdButton" src="../assets/arrow-left.png" height="95%">
-		</div>
-	
-		<div class="supercenter" id="pageUp" style="left: 97%; top: 50%; height: 10%;">
-			<img class="gdButton" src="../assets/arrow-right.png" height="95%">
-		</div>
-
-		<div class="supercenter" id="pageUp" style="top: 4.8%; height: 10%; width: 100%;">
-			<h1 class="smaller inline" id="levelName"></h1>
-			<h2 class="smallGold inline" id="levelAuthor" style="margin: 0.8vmin 0 0 3vmin"></h2>
-		</div>
-
-		<div class="supercenter" id="pageUp" style="top: 100%; height: 10%; width: 100%;">
+		<div class="supercenter" style="top: 100%; height: 10%; width: 100%;">
 			<h2 class="smallGold inline" id="levelVersion"></h2>
 			<h2 class="smallGold inline" id="levelID" style="margin-left: 6vmin"></h2>
 		</div>
@@ -127,13 +118,13 @@ else loadingComments = true;
 
 if (!dontClear) $('#commentBox').html(`<div class="supercenter" id="loading" style="height: 12%;"><img class="spin noSelect" src="../assets/loading.png" height="105%"></div>`)
 
-if (page == 0) $('#pageDown').hide()
-else $('#pageDown').show()
+if (page == 0) $('#pageDown').css('visibility', 'hidden')
+else $('#pageDown').css('visibility', 'visible')
 
 fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID}?page=${p}${history ? "&type=commentHistory" : ""}${mode == "top" ? "&top" : ""}`).then(res => res.json()).then(res => {
 	
-	if (res.length < 9 || (history && lvl.commentHistory == "off")) $('#pageUp').hide()
-	else $('#pageUp').show()
+	if (res.length < 9 || (history && lvl.commentHistory == "off")) $('#pageUp').css('visibility', 'hidden')
+	else $('#pageUp').css('visibility', 'visible')
 
 	if (res == -1 || (history && lvl.commentHistory == "off")) {
 		return $('#loading').hide()
