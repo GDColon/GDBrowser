@@ -31,13 +31,15 @@
 	</div>
 
 	<div class="popup" id="purgeDiv">
-		<div class="fancybox bounce center supercenter" style="width: 35%; height: 28%">
+		<div class="fancybox bounce center supercenter">
 			<h2 class="smaller center" style="font-size: 5.5vmin">Delete All</h2>
 			<p class="bigger center" style="line-height: 5vmin; margin-top: 1.5vmin;">
 				Delete all saved online levels?<br><span style="color:yellow">Levels will be cleared from your browser.</span>
 			</p>
-			<img src="../assets/btn-cancel.png" height=25%; class="gdButton center closeWindow">
-			<img src="../assets/btn-delete.png" height=25%; id="purgeSaved" class="gdButton center sideSpaceB">
+      <div class="flex spaceAround" style="width: 100%;">
+        <img src="../assets/btn-cancel.png" style="height: 6vmin" class="gdButton closeWindow">
+        <img src="../assets/btn-delete.png" style="height: 6vmin" class="gdButton" id="purgeSaved">
+      </div>
 		</div>
 	</div>
 
@@ -48,12 +50,16 @@
 	<div style="position:absolute; bottom: 0%; right: 0%; width: 100%; text-align: right;">
 		<img class="cornerPiece" src="../assets/corner.png" width=7%; style="transform: scaleX(-1)">
 	</div>
+  <div class="flex" style="justify-content: space-between; width: 100%;">
+    <img class="gdButton" id="pageDown" src="../assets/arrow-left.png" style="height: 8vmin; padding-left: 1vmin;">
+    <div id="searchBox" class="dragscroll" style="width: 80vw; height: 75vh;">
+      <div style="height: 4.5%"></div>
+    </div>
+    <img class="gdButton" id="pageUp" src="../assets/arrow-right.png" style="height: 8vmin; padding-right: 1vmin;">
+  </div>
 
-	<div id="searchBox" class="supercenter dragscroll">
-		<div style="height: 4.5%"></div>
-	</div>
 	
-	<div class="epicbox supercenter gs" style="width: 120vmin; height: 80%; pointer-events: none;"></div>
+	<div class="epicbox supercenter gs" style="width: 83vw; height: 80vh; pointer-events: none; z-index: 1000;"></div>
 
 	<div class="center" style="position:absolute; top: 8%; left: 0%; right: 0%">
 		<h1 id="header"></h1>
@@ -75,14 +81,6 @@
 		<img class="gdButton" src="../assets/delete.png" width="60%" onclick="$('#purgeDiv').show()">
 	</div>
 
-	<div style="position: absolute; left: 7%; top: 45%; height: 10%;">
-		<img class="gdButton" id="pageDown" src="../assets/arrow-left.png" height="90%">
-	</div>
-
-	<div style="position: absolute; right: 7%; top: 45%; height: 10%;">
-		<img class="gdButton" id="pageUp" src="../assets/arrow-right.png" height="90%">
-	</div>
-
 	<div class="supercenter" id="loading" style="height: 10%; top: 47%; display: none;">
 		<img class="spin noSelect" src="../assets/loading.png" height="105%">
 	</div>
@@ -95,8 +93,8 @@
 <script type="text/javascript" src="https://asvd.github.io/dragscroll/dragscroll.js"></script>
 <script>
 
-$('#pageDown').hide()
-$('#pageUp').hide()
+$('#pageDown').css('visibility', 'hidden')
+$('#pageUp').css('visibility', 'hidden')
 
 let accID;
 let path = location.pathname.replace('/search/', "")
@@ -119,11 +117,11 @@ function Append() {
 
 	fetch(`../api/search/${type == 'saved' ? JSON.parse(localStorage.getItem('saved') || '[]').toString() : accID || path}?page=${page}${window.location.search.replace("?", "&").replace("page", "nope")}`).then(res => res.json()).then(res => {
 
-	if (page == 0) $('#pageDown').hide()
-	else $('#pageDown').show()
+	if (page == 0) $('#pageDown').css('visibility', 'hidden')
+	else $('#pageDown').css('visibility', 'visible')
 
-	if (res == '-1' || (res.length < 9 && type != "recent")) $('#pageUp').hide()
-	else $('#pageUp').show()
+	if (res == '-1' || (res.length < 9 && type != "recent")) $('#pageUp').css('visibility', 'hidden')
+	else $('#pageUp').css('visibility', 'visible')
 
 	if (res == '-1') { $('#loading').hide(); return loading = false }
 
@@ -136,29 +134,36 @@ function Append() {
 		}
 
 		$('#searchBox').append(`<div class="searchresult">
-			<h1 class="lessspaced">${x.name}</h1>
-			<h2 class="lessSpaced smaller inline ${hasAuthor ? "gdButton" : "green"}">${hasAuthor ? `<a href="../profile/${x.author}">By ${x.author}</a>` : `By ${x.author}`}</h2><h2 class="inline" style="margin-left: 1.5%; transform:translateY(30%)"> ${x.copiedID == '0' ? "" : '<img class="valign sideSpace" src="../assets/copied.png" height="12%">'}${x.large ? '<img class="valign sideSpaceD" src="../assets/large.png" height="12%">' : ''}</h2>
-			<h3 class="lessSpaced ${x.customSong == 0 ? "blue" : "whatIfItWasPurple"}" style="overflow: hidden;">${x.songName}</h3>
-			<h3 class="lessSpaced">
-				<img class="valign" src="../assets/time.png" height="14%"> ${x.length}
-				<img class="valign" src="../assets/download.png" height="14%"> ${x.downloads}
-				<img class="valign" src="../assets/${x.disliked ? 'dis' : ''}like.png" height="14%"> ${x.likes}
-				${x.orbs != 0 ? `<img class="valign" src="../assets/orbs.png" height="14%"> ${x.orbs}` : ""}
-			</h3>
-		
-			<div class="center" style="position:absolute; top: ${6.5 + (y * 33.5) + (x.coins == 0 ? 2.5 : 0)}%; left: 4.4%; transform:scale(0.82); height: 10%; width: 12.5%;">
-				<img class="spaced" id="dFace" src="../difficulty/${x.difficultyFace}.png" height="150%" style="margin-bottom: 0%; ${x.epic ? 'transform:scale(1.2)' : x.featured ? 'transform:scale(1.1)' : ''}">
-				<h3>${x.difficulty.includes('Demon') ? "Demon" : x.difficulty}</h3>
-				${x.stars != 0 ? `<h3>${x.stars}<img class="valign sideSpaceB" src="../assets/star.png" height="35%" style="transform:translateY(-8%)"></h3>` : ""}
-				<div id="coins" style="margin-top: 3%">
-					${x.coins > 0 ? `<img src="../assets/${x.verifiedCoins ? 'silver' : 'brown'}coin.png" height="50%">` : ""}
-					${x.coins > 1 ? `<img src="../assets/${x.verifiedCoins ? 'silver' : 'brown'}coin.png" height="50%" class="squeezeB">` : ""}
-					${x.coins > 2 ? `<img src="../assets/${x.verifiedCoins ? 'silver' : 'brown'}coin.png" height="50%" class="squeezeB">` : ""}
-				</div>
-			</div>
-			<div class="center" style="position:absolute; top: ${15 + (y * 33.5)}%; right: 7%; height: 10%">
-				<a href="../${x.id}""><img class="valign gdButton" src="../assets/view.png" height="105%"></a>
-			</div>
+      <div class="flex" style="height: 100%; width: calc(100% - 14vmin);">
+        <div class="flex vertical spaceAround" style="padding-left: 2vmin;">
+          <img class="spaced" id="dFace" src="../difficulty/${x.difficultyFace}.png" style="height: ${x.epic ? 12 : x.featured ? 11 : 10}vmin;">
+          <h3>${x.difficulty.includes('Demon') ? "Demon" : x.difficulty}</h3>
+          ${x.stars ? `<div class="flex"><h3 style="padding-left: 0.7vmin">${x.stars}</h3><img src="../assets/star.png" style="height: 3vmin"></div>` : ""}
+          <div id="coins">
+            ${`<img src="../assets/${x.verifiedCoins ? 'silver' : 'brown'}coin.png" style="height: 3vmin">`.repeat(x.coins)}
+          </div>
+        </div>
+        <div class="flex vertical spaceBetween" style="align-items: flex-start; width: 70%; padding-left: 3vmin">
+          <h1 style="overflow: hidden; white-space: nowrap; width: 100%;">${x.name}</h1>
+          <div class="flex" style="width: 100%;">
+            <h2 class="smaller ${hasAuthor ? "gdButton" : "green"}" style="white-space: nowrap; overflow: hidden">
+              ${hasAuthor ? `<a href="../profile/${x.author}">By ${x.author}</a>` : `By ${x.author}`}
+            </h2>
+            <div class="flex spaceBetween" style="padding-left: 2vmin; width: 10vmin;">
+              ${x.copiedID == '0' ? "" : '<img style="height: 4vmin;" src="../assets/copied.png">'}
+              ${x.large ? '<img style="height: 4vmin" src="../assets/large.png">' : ''}
+            </div>
+          </div>
+          <h3 class="${x.customSong == 0 ? "blue" : "whatIfItWasPurple"}" style="overflow: hidden;">${x.songName}</h3>
+          <div class="flex spaceBetween" style="width: 100%;">
+            <div class="flex"><img src="../assets/time.png" style="height: 3vmin"><h3 style="padding: 0.7vmin;">${x.length}</h3></div>
+            <div class="flex"><img src="../assets/download.png" style="height: 3vmin"><h3 style="padding: 0.7vmin;">${x.downloads}</h3></div>
+            <div class="flex"><img src="../assets/${x.disliked ? "dis" : ""}like.png" style="height: 3vmin"><h3 style="padding: 0.7vmin;">${x.likes}</h3></div>
+            ${x.orbs ? `<div class="flex"><img src="../assets/orbs.png" style="height: 3vmin"><h3 style="padding: 0.7vmin;">${x.orbs}</h3></div>` : ""}
+          </div>
+        </div>
+      </div>
+			<a href="../${x.id}"" class="flex"><img class="gdButton" src="../assets/view.png" style="width: 12vmin; height: auto; margin-right: 2vmin;"></a>
 		</div>`)
 	})
 
