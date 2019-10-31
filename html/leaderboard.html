@@ -110,14 +110,14 @@ function leaderboard() {
       <div class="flex vertical spaceAround" style="width: 60vw; margin-left: 3vmin; margin-right: 6vmin">
         <div class="flex wrap" style="width: 100%;">
           <h2 class="small gdButton" style="margin-right: 2vmin;"><a href="../profile/${x.username}">${x.username}</a></h2>
-          <div class="flex"><h1 style="width: 100%; font-size: 4vmin">${x.stars}</h1><img src="../assets/star.png" style="height: 3vmin; padding-bottom: 0.5vmin; cursor: help" title="Stars"></div>
+          <div class="flex"><h3 style="width: 100%; font-size: 4vmin">${x.stars}</h3><img src="../assets/star.png" style="height: 3vmin; padding-bottom: 0.5vmin; cursor: help" title="Stars"></div>
         </div>
-			  <h3 class="leaderboardStats flex spaceBetween wrap" style="width: 100%;">
-          <div class="flex"><h1 style="width: 100%; font-size: 4vmin">${x.diamonds}</h1><img src="../assets/diamond.png" style="height: 4vmin; padding-top: 0.5vmin; padding-left: 1.2vmin; cursor: help" title="Diamonds"></div>
-          <div class="flex"><h1 style="width: 100%; font-size: 4vmin">${x.coins}</h1><img src="../assets/coin.png" style="height: 4vmin; padding-top: 0.5vmin; padding-left: 1.2vmin; cursor: help" title="Secret Coins"></div>
-          <div class="flex"><h1 style="width: 100%; font-size: 4vmin">${x.usercoins}</h1><img src="../assets/silvercoin.png" style="height: 4vmin; padding-top: 0.5vmin; padding-left: 1.2vmin; cursor: help" title="User Coins"></div>
-          <div class="flex"><h1 style="width: 100%; font-size: 4vmin">${x.demons}</h1><img src="../assets/demon.png" style="height: 4vmin; padding-top: 0.5vmin; padding-left: 1.2vmin; cursor: help" title="Demons"></div>
-				  ${x.cp != 0 ? `<div class="flex"><h1 style="width: 100%; font-size: 4vmin">${x.cp}</h1><img src="../assets/cp.png" style="height: 4vmin; padding-top: 0.5vmin; padding-left: 1.2vmin; cursor: help" title="Creator Points"></div>` : ""}
+			  <h3 class="leaderboardStats flex wrap" style="width: 100%;">
+          <div class="flex" style="padding-right: 1vmin;"><h3 style="width: 100%; font-size: 4vmin">${x.diamonds}</h3><img src="../assets/diamond.png" style="height: 4vmin; padding-top: 0.5vmin; padding-left: 1.2vmin; cursor: help" title="Diamonds"></div>
+          <div class="flex" style="padding-right: 1vmin;"><h3 style="width: 100%; font-size: 4vmin">${x.coins}</h3><img src="../assets/coin.png" style="height: 4vmin; padding-top: 0.5vmin; padding-left: 1.2vmin; cursor: help" title="Secret Coins"></div>
+          <div class="flex" style="padding-right: 1vmin;"><h3 style="width: 100%; font-size: 4vmin">${x.usercoins}</h3><img src="../assets/silvercoin.png" style="height: 4vmin; padding-top: 0.5vmin; padding-left: 1.2vmin; cursor: help" title="User Coins"></div>
+          <div class="flex" style="padding-right: 1vmin;"><h3 style="width: 100%; font-size: 4vmin">${x.demons}</h3><img src="../assets/demon.png" style="height: 4vmin; padding-top: 0.5vmin; padding-left: 1.2vmin; cursor: help" title="Demons"></div>
+				  ${x.cp != 0 ? `<div class="flex"><h3 style="width: 100%; font-size: 4vmin">${x.cp}</h3><img src="../assets/cp.png" style="height: 4vmin; padding-top: 0.5vmin; padding-left: 1.2vmin; cursor: help" title="Creator Points"></div>` : ""}
 			  </h3>
       </div>
 		</div>`)
