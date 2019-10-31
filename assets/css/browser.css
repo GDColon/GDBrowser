@@ -64,7 +64,7 @@ img, .noSelect {
 }
 
 .smaller {
-    font-size: 5vmin;
+    font-size: 4.5vmin;
     text-shadow: -0.2vmin -0.2vmin 0vmin #000, 0.2vmin -0.2vmin 0vmin #000, -0.2vmin 0.2vmin 0vmin #000, 0.2vmin 0.2vmin 0vmin #000, 0.3vmin 0.4vmin 0vmin rgba(0,0,0,0.4);
 }
 

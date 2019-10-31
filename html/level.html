@@ -79,28 +79,27 @@
       </div>
     </div>
 
-    <div class="flex" style="width: 60%; height: 75%; max-height: 75vmin; text-align: center; justify-content: space-between;">
-      <div class="flex vertical spaceAround" style="height: 80%; width: 30%;">
+    <div class="flex" style="width: 60vw; height: 75%; max-height: 75vmin; text-align: center; justify-content: center; padding-left: 10vw">
+      <div class="flex vertical" style="height: 80%; justify-content: center;">
         <div class="flex vertical">
-          <img src="../difficulty/[[DIFFICULTYFACE]].png" style="height: 15vmin">
-          <h1 class="smaller" id="difficultytext">[[DIFFICULTY]]</h1>
+          <img src="../difficulty/[[DIFFICULTYFACE]].png" style="height: 12vmin">
+          <h3 style="font-size: 4vmin" id="difficultytext">[[DIFFICULTY]]</h3>
         </div>
         <div class="flex stars"><h1 style="width: 100%; font-size: 4vmin">[[STARS]]</h1><img src="../assets/star.png" style="height: 3vmin; padding-bottom: 0.5vmin;"></div>
         <div class="flex diamonds"><h1 style="width: 100%; font-size: 4vmin">[[DIAMONDS]]</h1><img src="../assets/diamond.png" style="height: 3vmin; padding-bottom: 0.5vmin;"></div>
         <div class="flex demonList" style="display: none;"><h1 style="width: 100%; font-size: 4vmin">#[[DEMONLIST]]</h1><img src="../assets/demon.png" style="height: 3vmin; padding-bottom: 0.5vmin"></div>
-        <div id="coins" class="flex" style="width: 100%; justify-content: center;"></div>
+        <div id="coins" class="flex" style="width: 100%; justify-content: center; padding-right: 1vmin;"></div>
       </div>
       <div class="noClick">
         <img class="gdButton yesClick" id="playButton" src="../assets/play.png" style="width: 50%;">
       </div>
-      <div class="flex vertical spaceAround" style="align-items: flex-start; height: 70%; width: 30%;">
+      <div class="flex vertical spaceAround" id="extraData" style="align-items: flex-start; height: 70%; width: 30%;">
         <div class="flex"><img src="../assets/download.png" style="height: 5.5vmin; padding-bottom: 0.5vmin; margin-right: 1vmax;"><h1 style="width: 100%; font-size: 6vmin">[[DOWNLOADS]]</h1></div>
         <div class="flex"><img src="../assets/like.png" style="height: 5.5vmin; padding-bottom: 0.5vmin; margin-right: 1vmax;"><h1 style="width: 100%; font-size: 6vmin">[[LIKES]]</h1></div>
         <div class="flex"><img src="../assets/time.png" style="height: 5.5vmin; padding-bottom: 0.5vmin; margin-right: 1vmax;"><h1 style="width: 100%; font-size: 6vmin">[[LENGTH]]</h1></div>
-        <div class="flex"><img src="../assets/orbs.png" style="height: 5.5vmin; padding-bottom: 0.5vmin; margin-right: 1vmax;"><h1 style="width: 100%; font-size: 6vmin">[[ORBS]]</h1></div>
       </div>
     </div>
-    <div class="transparentBox" style="width: 60%; overflow-wrap: break-word; text-align: center; margin-bottom: 2%;">
+    <div class="transparentBox" style="width: 45vw; overflow-wrap: break-word; text-align: center; margin-bottom: 2%;">
       <p style="padding: 0 5%;">[[DESCRIPTION]]</p>
     </div>
     <div class="brownBox flex spaceBetween" id="songBox" style="min-width: 40%; max-width: 60%;">
@@ -151,7 +150,8 @@ $('#levelInfo').html($('#levelInfo').html()
 	.replace('[[ORIGINALINFO]]', [[COPIEDID]] ==  "0" ? "" : `<br>Original: <a class="youCanClickThis" href="/[[COPIEDID]]"><span style="color:aqua">[[COPIEDID]]</span></a>`)
 	.replace('[[OBJECTINFO]]', '[[OBJECTS]]' ==  "0" ? "" : `<br>Objects: <span style="color:yellow">[[OBJECTS]]</span>`)
 	.replace('[[REQUESTED]]', [[STARSREQUESTED]] ==  "0" ? "" : `<br>Stars Requested: <span style="color:yellow">[[STARSREQUESTED]]</span>`))
-
+if ([[ORBS]] != 0)
+    $('#extraData').append(`<div class="flex"><img src="../assets/orbs.png"  style="height: 5.5vmin; padding-bottom: 0.5vmin; margin-right: 1vmax;"><h1 style="width: 100%; font-size: 6vmin">[[ORBS]]</h1></div>`)
 if (!'[[UPLOADED]]'.startsWith('[')) {
 	$('#levelInfo').html($('#levelInfo').html()
 	.replace('[[PASS]]', `<br>Password: <span style="color:orange">${'[[PASSWORD]]' == '0' ? "No copy" : '[[PASSWORD]]' == 1 ? "Free copy" : '[[PASSWORD]]'}</span>`)
@@ -188,9 +188,7 @@ if ("[[INVALIDSONG]]" == "true") $('.songLink').hide()
 if ("[[DISLIKED]]" == "true") $('#likeImg').attr('src', '../assets/dislike.png').css('transform', 'translateY(20%)')
 
 let coinColor = [[VERIFIEDCOINS]] ? "silvercoin" : "browncoin"
-if ([[COINS]] > 0) $("#coins").append(`<img src="../assets/${coinColor}.png" style="height: 3vmin; padding-bottom: 0.5vmin">`)
-if ([[COINS]] > 1) $("#coins").append(`<img src="../assets/${coinColor}.png" style="height: 3vmin; padding-bottom: 0.5vmin">`)
-if ([[COINS]] > 2) $("#coins").append(`<img src="../assets/${coinColor}.png" style="height: 3vmin; padding-bottom: 0.5vmin">`)
+$("#coins").append(`<img src="../assets/${coinColor}.png" style="height: 5vmin; padding-bottom: 0.5vmin; margin-right: -1.5vmin;">`.repeat([[COINS]]));
 
 if ("[[ACCOUNTID]]" == "0") {
 		$("#authorName").addClass("green").removeClass('gdButton')

@@ -52,14 +52,14 @@
 	</div>
   <div class="flex" style="justify-content: space-between; width: 100%;">
     <img class="gdButton" id="pageDown" src="../assets/arrow-left.png" style="height: 8vmin; padding-left: 1vmin;">
-    <div id="searchBox" class="dragscroll" style="width: 80vw; height: 75vh;">
+    <div id="searchBox" class="dragscroll" style="width: 70vw; height: 75vh;">
       <div style="height: 4.5%"></div>
     </div>
     <img class="gdButton" id="pageUp" src="../assets/arrow-right.png" style="height: 8vmin; padding-right: 1vmin;">
   </div>
 
 	
-	<div class="epicbox supercenter gs" style="width: 83vw; height: 80vh; pointer-events: none; z-index: 1000;"></div>
+	<div class="epicbox supercenter gs" style="width: 73vw; height: 80vh; pointer-events: none; z-index: 1000;"></div>
 
 	<div class="center" style="position:absolute; top: 8%; left: 0%; right: 0%">
 		<h1 id="header"></h1>
@@ -134,13 +134,13 @@ function Append() {
 		}
 
 		$('#searchBox').append(`<div class="searchresult">
-      <div class="flex" style="height: 100%; margin-left: 4vmin;">
-        <div class="flex vertical spaceAround" style="width: 10vw;">
-          <img class="spaced" id="dFace" src="../difficulty/${x.difficultyFace}.png" style="height: ${x.epic ? 12 : x.featured ? 11 : 10}vmin;">
+      <div class="flex" style="height: 100%; width: 57vw; margin-left: calc(60px - 1vw)">
+        <div class="flex vertical spaceAround" style="width: 5vw;">
+          <img class="spaced" id="dFace" src="../difficulty/${x.difficultyFace}.png" style="width: 100%; transform: scale(${x.epic ? 1.2 : x.featured ? 1.1 : 1});">
           <h3>${x.difficulty.includes('Demon') ? "Demon" : x.difficulty}</h3>
           ${x.stars != 0 ? `<div class="flex"><h3 style="padding-left: 0.7vmin">${x.stars}</h3><img src="../assets/star.png" style="height: 3vmin"></div>` : ""}
           <div id="coins">
-            ${`<img src="../assets/${x.verifiedCoins ? 'silver' : 'brown'}coin.png" style="height: 3vmin">`.repeat(x.coins)}
+            ${`<img src="../assets/${x.verifiedCoins ? 'silver' : 'brown'}coin.png" style="height: 3vmin; margin-right: -0.5vmin">`.repeat(x.coins)}
           </div>
         </div>
         <div class="flex vertical spaceBetween" style="align-items: flex-start; width: 47vw; padding-left: 3vmin">
@@ -163,7 +163,7 @@ function Append() {
           </div>
         </div>
       </div>
-			<a href="../${x.id}"" class="flex"><img class="gdButton" src="../assets/view.png" style="width: 12vmin; height: auto; margin-right: 4vmin;"></a>
+			<a href="../${x.id}"" class="flex"><img class="gdButton" src="../assets/view.png" style="width: 10vw; height: auto; margin-right: 2vw"></a>
 		</div>`)
 	})
 
