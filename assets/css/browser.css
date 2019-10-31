@@ -552,7 +552,7 @@ input::-webkit-inner-spin-button {
    text-align: center;
    top: calc(10.9vh - 7vmin); 
    width: 80vmin;
-   margin-left: 10vw;
+   margin-left: 15vw;
 }
 
 #searchBox {
