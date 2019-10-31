@@ -500,7 +500,7 @@ input::-webkit-inner-spin-button {
 .mappack {
     cursor: pointer;
     width: 150px;
-    height: 100px;
+    height: 130px;
     margin: 50px;
     max-width: 60vmax;
 }
