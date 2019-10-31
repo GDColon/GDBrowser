@@ -21,7 +21,7 @@
 				Private Messages: [[DMS]]<br>
 				Comment History: [[COMMENTS]]<br>
 			</p>
-			<img src="../assets/ok.png" width=20%; class="gdButton center" onclick="$('#settingsDiv').hide()">
+			<img src="../assets/ok.png" style="height: 6vmin" class="gdButton center" onclick="$('.popup').hide()">
 		</div>
 	</div>
 
@@ -37,50 +37,46 @@
 		<img class="gdButton yesClick" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()">
 	</div>
 
-	<div class="brownBox center supercenter" style="width: 90vw; height: 82%; margin-top: -0.7%">
-
-		<h1 class="veryBig inline">
-			<img class="inline valign" id="modBadge1" style="display: none; height: 7%; margin-right: -6%; cursor:help" src="../assets/mod.png" title="[[USERNAME]] is a moderator!">	
-			<img class="inline valign" id="modBadge2" style="display: none; height: 7%; margin-right: -6%; cursor:help" src="../assets/mod-elder.png" title="[[USERNAME]] is an elder moderator!">	
-			[[USERNAME]]
-		</h1>
-		
-		<hr style="margin-bottom: 2%">
+<div class="brownBox center supercenter flex vertical spaceBetween" style="width: 90vw; height: 82%;">
+    <div class="flex" style="margin-bottom: 2vmin;">
+      <img src="../assets/mod.png" id="modBadge1" style="display: none; height: 7vmin; padding-top: 0.75vmin; cursor: help; padding-right: 1vmin" title="[[USERNAME]] is a moderator!">
+      <img src="../assets/mod-elder.png" id="modBadge2" style="display: none; height: 7vmin; padding-top: 0.75vmin; cursor: help; padding-right: 1vmin;" title="[[USERNAME]] is an elder moderator!">	
+      <h1 class="veryBig">[[USERNAME]]</h1>
+    </div>
 		<h3 id="collectibles">
-			[[STARS]] <img class="valign" src="../assets/star.png" style="cursor: help" title="Stars">
-			[[DIAMONDS]] <img class="valign" src="../assets/diamond.png" style="cursor: help" title="Diamonds">
-			[[COINS]] <img class="valign" src="../assets/coin.png" style="cursor: help" title="Secret Coins">
-			[[USERCOINS]] <img class="valign"src="../assets/silvercoin.png" style="cursor: help" title="User Coins">
-			[[DEMONS]] <img class="valign"src="../assets/demon.png" style="cursor: help" title="Demons">
-			[[CP]] <img class="valign" src="../assets/cp.png" style="cursor: help" title="Creator Points">
+      <div class="flex"><h1 style="width: 100%; font-size: 4vmin">[[STARS]]</h1><img src="../assets/star.png" style="height: 3vmin; padding-bottom: 0.5vmin; cursor: help" title="Stars"></div>
+      <div class="flex"><h1 style="width: 100%; font-size: 4vmin">[[COINS]]</h1><img src="../assets/coin.png" style="height: 4vmin; padding-top: 0.5vmin; padding-left: 1.2vmin; cursor: help" title="Secret Coins"></div>
+      <div class="flex"><h1 style="width: 100%; font-size: 4vmin">[[USERCOINS]]</h1><img src="../assets/silvercoin.png" style="height: 4vmin; padding-top: 0.5vmin; padding-left: 1.2vmin; cursor: help" title="User Coins"></div>
+      <div class="flex"><h1 style="width: 100%; font-size: 4vmin">[[DEMONS]]</h1><img src="../assets/demon.png" style="height: 4vmin; padding-top: 0.5vmin; padding-left: 1.2vmin; cursor: help" title="Demons"></div>
+      <div class="flex"><h1 style="width: 100%; font-size: 4vmin">[[CP]]</h1><img src="../assets/cp.png" style="height: 4vmin; padding-top: 0.5vmin; padding-left: 1.2vmin; cursor: help" title="Creator Points"></div>
 		</h3>
 
 		<div class="lightBox center" id="iconsDiv" style="margin: 2% auto; width: 70vw">
-			<img src="../icon/[[USERNAME]]?form=cube">
-			<img src="../icon/[[USERNAME]]?form=ship" style="height: 9%">
-			<img src="../icon/[[USERNAME]]?form=ball">
-			<img src="../icon/[[USERNAME]]?form=ufo" style="height: 7%">
-			<img src="../icon/[[USERNAME]]?form=wave">
-			<img src="../icon/[[USERNAME]]?form=robot">
-			<img src="../icon/[[USERNAME]]?form=spider">
+			<img src="../icon/[[USERNAME]]?form=cube" style="height: 8vmin">
+			<img src="../icon/[[USERNAME]]?form=ship" style="height: 7vmin">
+			<img src="../icon/[[USERNAME]]?form=ball" style="height: 8vmin">
+			<img src="../icon/[[USERNAME]]?form=ufo" style="height: 6.5vmin">
+			<img src="../icon/[[USERNAME]]?form=wave" style="height: 8vmin">
+			<img src="../icon/[[USERNAME]]?form=robot" style="height: 8vmin">
+			<img src="../icon/[[USERNAME]]?form=spider" style="height: 8vmin">
 		</div>
 
-		<div class="lightBox center dragscroll" id="statusDiv" style="margin: 2% auto; width: 105vmin; height: 35vmin; background-color: #BE6F3F">
+		<div class="lightBox center dragscroll" id="statusDiv" style="margin: 2% auto; width: 70vw; height: 100%; background-color: #BE6F3F">
 		</div>
 
-		<div class="center" style="margin: 2.5% auto;">
-			<img src="../assets/messages.png" height="10%" id="msgButton" class="sideSpace gdButton" onclick="$('#settingsDiv').show()">
-			<img src="../assets/friends.png" height="10%" id="friendButton" class="sideSpace gdButton" onclick="$('#settingsDiv').show()">
+		<div class="flex center">
+			<img src="../assets/messages.png" id="msgButton" class="sideSpace gdButton" style="height: 8vmin;" onclick="$('#settingsDiv').show()">
+			<img src="../assets/friends.png" id="friendButton" class="sideSpace gdButton" style="height: 8vmin;" onclick="$('#settingsDiv').show()">
 		</div>
 
 		<!-- <img src="../assets/follow-off.png" class="gdButton" style="position: absolute; left: 0.5%; bottom: 1%; width: 6%"> -->
-		<a href="../search/[[USERNAME]]?user"><img src="../assets/levels.png" class="gdButton" style="position: absolute; right: 0.5%; bottom: 1%; width: 6%"></a>
-		<a id="commentA"><img src="../assets/comments.png" class="gdButton" id="commentButton" style="position: absolute; right: 0.5%; bottom: 50%; width: 6%" onclick="$('#settingsDiv').show()"></a>
+		<a href="../search/[[USERNAME]]?user"><img src="../assets/levels.png" class="gdButton" style="position: absolute; right: 0.5%; bottom: 1%; height: 8vmin;"></a>
+		<a id="commentA"><img src="../assets/comments.png" class="gdButton" id="commentButton" style="position: absolute; right: 0.5%; bottom: 50%; height: 8vmin;" onclick="$('#settingsDiv').show()"></a>
 
-		<div style="position: absolute; right: 0.5%; top: 0%; width: 6%">
-			<a id="youtube" style="display: none" target="_blank" href="https://youtube.com/channel/[[YOUTUBE]]"><img src="../assets/youtube.png" class="gdButton socialButton"></a>
-			<a id="twitter" style="display: none" target="_blank" href="https://twitter.com/[[TWITTER]]"><img src="../assets/twitter.png" class="gdButton socialButton"></a>
-			<a id="twitch"  style="display: none" target="_blank" href="https://twitch.tv/[[TWITCH]]"><img src="../assets/twitch.png" class="gdButton socialButton"></a>
+		<div class="flex vertical" style="position: absolute; right: 0.5%; top: 0%; height: 20%;">
+			<a id="youtube" style="display: none;" target="_blank" href="https://youtube.com/channel/[[YOUTUBE]]"><img src="../assets/youtube.png" style="height: 8vmin; width: auto;" class="gdButton socialButton"></a>
+			<a id="twitter" style="display: none;" target="_blank" href="https://twitter.com/[[TWITTER]]"><img src="../assets/twitter.png" style="height: 8vmin; width: auto" class="gdButton socialButton"></a>
+			<a id="twitch"  style="display: none;" target="_blank" href="https://twitch.tv/[[TWITCH]]"><img src="../assets/twitch.png" style="height: 8vmin; width: auto" class="gdButton socialButton"></a>
 		</div>
 
 		<div id="globalrank0" style="position: absolute; left: 0.3%; top: 1.5%; width: 25%; text-align: left">
@@ -88,11 +84,11 @@
 		</div>
 
 		<div class="supercenter" id="pageDown" style="left: 5%; top: 65%; height: 10%; display: none;">
-			<img class="gdButton" src="../assets/arrow-left.png" height="95%" onclick="page -= 1; appendComments()">
+			<img class="gdButton" src="../assets/arrow-left.png" style="height: 8vmin;" onclick="page -= 1; appendComments()">
 		</div>
 	
 		<div class="supercenter" id="pageUp" style="left: 95%; top: 65%; height: 10%;">
-			<img class="gdButton" src="../assets/arrow-right.png" height="95%" onclick="page += 1; appendComments()">
+			<img class="gdButton" src="../assets/arrow-right.png" style="height: 8vmin;" onclick="page += 1; appendComments()">
 		</div>
 
 	</div>

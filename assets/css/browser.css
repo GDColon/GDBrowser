@@ -681,9 +681,12 @@ input::-webkit-inner-spin-button {
     font-size: 4.3vmin;
 }
 
-#collectibles img {
-    transform: translate(-20%, -7%);
-    height: 6.5%;
+#collectibles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .leaderboardStats {
@@ -693,11 +696,6 @@ input::-webkit-inner-spin-button {
 .leaderboardStats img {
     transform: translate(-20%, -7%);
     height: 22%;
-}
-
-#collectibles img:first-child, #collectibles img:last-child {
-    transform: translate(-20%, -10%);
-    height: 5.5%;
 }
 
 .githubChad {
