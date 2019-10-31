@@ -121,6 +121,7 @@ Object.keys(data[0]).forEach(x => {
             if (colorObj.copiedChannel > 1000) delete colorObj.copiedChannel;
             if (colorObj.pColor == "-1") delete colorObj.pColor
             if (colorObj.blending) colorObj.blending = true
+            colorObj.opacity = +Number(colorObj.opacity).toFixed(2)
             colorList[y] = colorObj
 
             colorList = colorList.filter(x => typeof x == "object")

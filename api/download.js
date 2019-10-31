@@ -29,7 +29,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
           let level = {
                 name: levelInfo[2],
                 id: levelInfo[1],
-                description: app.clean(Buffer.from(levelInfo[3], 'base64').toString() || "(No description provided)"),
+                description: Buffer.from(levelInfo[3], 'base64').toString() || "(No description provided)",
                 author: "-",
                 authorID: levelInfo[6],
                 accountID: 0,
