@@ -107,17 +107,17 @@
       <div class="flex vertical spaceBetween" style="align-items: flex-start;">
         <h1 class="slightlySmaller" id="songname" style="overflow-wrap:break-word">[[SONGNAME]]</h1>
         <h2 class="smaller">By: [[SONGAUTHOR]] <a class="songLink" href="https://[[SONGAUTHOR]].newgrounds.com" target="_blank"><img class="gdButton valign" src="../assets/more.png" width="12%"></a></h2>
-        <div class="flex spaceBetween" style="width: 100%;"><h3 id="songID">SongID: [[SONGID]]</h3><h3 id="songSize" style="text-align: right;">Size: [[SONGSIZE]]</h3></div>
+        <div class="flex spaceBetween" style="width: 80%; align-self: flex-end; margin-top: 5%;"><h3 id="songID">SongID: [[SONGID]]</h3><h3 id="songSize" style="text-align: right;">Size: [[SONGSIZE]]</h3></div>
       </div>
       <a class="songLink" href="https://www.newgrounds.com/audio/listen/[[SONGID]]" target="_blank" style="display: inline-flex; align-self: flex-end"><img class="gdButton" src="../assets/playsong.png" style="height: 60%; max-height: 9vmin; padding-left: 2vmin;"></a>
     </div>
   </div>
-  <div class="levelButtons flex vertical spaceAround" style="height: 100%; position: absolute; top: 0; right: 1vw;">
-    <img class="gdButton" id="saveButton" src="../assets/plus.png" onclick="$('#saveDiv').show(); saveLevel()">
-    <img class="gdButton" id="infoButton"  src="../assets/info.png"  onclick="$('#infoDiv').show()">
-    <a href="./comments/[[ID]]"><img class="gdButton" src="../assets/comment.png"></a>
-    <a href="./analyze/[[ID]]"><img class="gdButton" src="../assets/edit.png"></a>
-    <img class="gdButton outOfOrder" id="scoreButton" src="../assets/leaderboard.png" onclick="$('#scoreDiv').show()">
+  <div class="levelButtons flex vertical spaceAround" style="height: 80%; position: absolute; top: 10%; right: 1vw;">
+    <img class="gdButton" id="saveButton" src="../assets/plus.png" onclick="$('#saveDiv').show(); saveLevel()" style="height: 12vmin">
+    <img class="gdButton" id="infoButton"  src="../assets/info.png"  onclick="$('#infoDiv').show()" style="height: 12vmin">
+    <a style="height: 12vmin" href="./comments/[[ID]]"><img style="height: 100%; width: auto" class="gdButton" src="../assets/comment.png"></a>
+    <a style="height: 12vmin" href="./analyze/[[ID]]"><img style="height: 100%; width: auto" class="gdButton" src="../assets/edit.png"></a>
+    <img class="gdButton outOfOrder" id="scoreButton" src="../assets/leaderboard.png" onclick="$('#scoreDiv').show()" style="height: 12vmin">
   </div>
 
 	<div style="position:absolute; top: 2%; left: 1.5%; width: 10%; height: 25%; pointer-events: none">

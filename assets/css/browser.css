@@ -139,7 +139,6 @@ img, .noSelect {
 
 .levelSearch {
   padding: 1vmin;
-  height: 8vmin;
 }
 
 .inline {
@@ -375,7 +374,6 @@ input::-webkit-inner-spin-button {
 }
 
 .diffDiv {
-    width: 10%;
     margin-left: 0.8%;
     margin-right: 0.8%;
     filter: brightness(50%);
@@ -383,8 +381,8 @@ input::-webkit-inner-spin-button {
 }
 
 .diffDiv img {
-  height: 8vmin;
-  width: auto;
+  width: 8vmin;
+  max-width: 6vw;
 }
 
 .demonDiff {
@@ -400,8 +398,6 @@ input::-webkit-inner-spin-button {
 
 .lengthDiv {
     display: inline-block;
-    margin-left: 2%;
-    margin-right: 2%;
     filter: brightness(50%);
 }
 
@@ -685,7 +681,6 @@ input::-webkit-inner-spin-button {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  width: 80%;
   margin: 0 auto;
 }
 
