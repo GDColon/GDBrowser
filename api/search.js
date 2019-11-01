@@ -89,7 +89,7 @@ module.exports = async (app, req, res) => {
         let keys = Object.keys(x)
         x.name = x[2];
         x.id = x[1];
-        x.description = app.clean(Buffer.from(x[3], 'base64').toString() || "(No description provided)"),
+        x.description = Buffer.from(x[3], 'base64').toString() || "(No description provided)",
         x.author = authorList[x[6]] ? authorList[x[6]][0] : "-";
         x.authorID = x[6];
         x.accountID = authorList[x[6]] ? authorList[x[6]][1] : "0";
