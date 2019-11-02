@@ -115,6 +115,10 @@ img, .noSelect {
     filter: brightness(50%);
 }
 
+.darken {
+    filter: brightness(65%);
+}
+
 #everything {
     width: 100%;
     height: 100%;

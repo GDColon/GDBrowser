@@ -89,7 +89,8 @@ $('#compactMode').attr('src', `../assets/compact-${compact ? "on" : "off"}.png`)
 let target = `../api/level/${lvlID}`
 
 if (lvlID > 99999999 || lvlID < -99999999) window.location.href = window.location.href.replace("comments", "search")
-if (!Number(lvlID)) {history = true; target = `../api/profile/${lvlID}`}
+if (!Number.isInteger(+lvlID)) {history = true; target = `../api/profile/${lvlID}`}
+else lvlID = Math.round(+lvlID)
 
 fetch(target).then(res => res.json()).then(lvl => {
 

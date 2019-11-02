@@ -150,9 +150,6 @@ else $('#pageDown').show()
 
 fetch(`../api/comments/[[ACCOUNTID]]?type=profile&page=${page}`).then(res => res.json()).then(res => {
 
-
-	console.log(res)
-
 	if (res.length != 10) $('#pageUp').hide()
 	else $('#pageUp').show()
 

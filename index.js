@@ -71,6 +71,10 @@ app.get("/leaderboard", function(req, res) {
   res.sendFile(__dirname + "/html/leaderboard.html")
 }) 
 
+app.get("/leaderboard/:text", function(req, res) {
+  res.sendFile(__dirname + "/html/levelboard.html")
+})   
+
 app.get("/profile/:id", function(req, res) {
   app.modules.profile(app, req, res)
 })  
