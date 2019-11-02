@@ -198,7 +198,7 @@ $(window).on('load', function() {
 
 	if ($('#songname')[0].scrollWidth > $('#songBox')[0].scrollWidth) {
 		let overflow = ($('#songname')[0].scrollWidth - $('#songBox')[0].scrollWidth) * 0.007
-		if (overflow > 6) overflow = 3
+		if (overflow > 3) overflow = 3
 		$('#songname').addClass('smaller').css('font-size', (6 - (overflow)) + 'vh')
 		}
 });

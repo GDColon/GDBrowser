@@ -117,7 +117,7 @@ function Append() {
 	$('#pageSelect').val(page + 1)
 	$('#loading').show()
 
-	fetch(`../api/search/${type == 'saved' ? JSON.parse(localStorage.getItem('saved') || '[]').toString() : accID || path}?page=${page}${window.location.search.replace("?", "&").replace("page", "nope")}`).then(res => res.json()).then(res => {
+	fetch(`../api/search/${type == 'saved' ? JSON.parse(localStorage.getItem('saved') || '[]').reverse().toString() : accID || path}?page=${page}${window.location.search.replace("?", "&").replace("page", "nope")}`).then(res => res.json()).then(res => {
 
 	if (page == 0) $('#pageDown').hide()
 	else $('#pageDown').show()
