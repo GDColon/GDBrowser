@@ -497,7 +497,6 @@ input::-webkit-inner-spin-button {
     height: 75%; 
     overflow-y: auto; 
     overflow-x: hidden;
-    cursor: default;
 }
 
 #searchBox::-webkit-scrollbar, #statusDiv::-webkit-scrollbar, #commentBox::-webkit-scrollbar { 

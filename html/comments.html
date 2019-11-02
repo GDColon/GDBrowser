@@ -51,12 +51,12 @@
 
 		<div class="supercenter" id="pageUp" style="top: 4.8%; height: 10%; width: 100%;">
 			<h1 class="smaller inline" id="levelName"></h1>
-			<h2 class="smallGold inline" id="levelAuthor" style="margin: 0.8vh 0 0 3vh"></h2>
+			<a id="authorLink"><h2 class="smallGold inline gdButton" id="levelAuthor" style="margin: 0.8vh 0 0 3vh"></h2></a>
 		</div>
 
 		<div class="supercenter" id="pageUp" style="top: 100%; height: 10%; width: 100%;">
 			<h2 class="smallGold inline" id="levelVersion"></h2>
-			<h2 class="smallGold inline" id="levelID" style="margin-left: 6vh"></h2>
+			<a id="levelLink"><h2 class="smallGold inline gdButton" id="levelID" style="margin-left: 6vh"></h2></a>
 		</div>
 
 	</div>
@@ -78,6 +78,7 @@ let {mode, compact} = JSON.parse(localStorage.getItem('commentPreset') || '{"mod
 let lvlID = window.location.pathname.split('/')[2]
 let history = false;
 let page = 0
+let loadingComments = true
 
 if (mode == "top") {
 	$('#timeSort').attr('src', "../assets/sort-time.png")
@@ -106,10 +107,14 @@ fetch(target).then(res => res.json()).then(lvl => {
 	}
 
 	else {
-		if (lvl.accountID == "0") $('#levelAuthor').addClass("green")
+		console.log(lvl)
+		if (lvl.accountID == "0" || !lvl.accountID) $('#levelAuthor').addClass("green").removeClass("gdButton")
 		$('#levelName').text(lvl.name || ("Nonexistent level " + lvlID))
 		$('#levelAuthor').text("By " + (lvl.author || "-"))
 		$('#levelID').text("ID: " + lvlID)
+		if (lvl.accountID && lvl.author != "-") $('#authorLink').attr('href', '../profile/' + lvl.author)
+		if (lvl.id) $('#levelLink').attr('href', '../' + lvl.id)
+		else $('#levelID').removeClass("gdButton")
 		$('#levelVersion').text("Version: " + (lvl.version || 0))
 		document.title = "Comments for " + (lvl.name || lvlID)
 
@@ -204,20 +209,19 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 	}
 
 	 $('#loading').hide()
+	 return loadingComments = false;
 	})
-
-	return loadingComments = false;
 
 }
 
-let loadingComments = false
+loadingComments = false
 appendComments()
 
-$('#pageUp').click(function() {page += 1; appendComments()})
-$('#pageDown').click(function() {page -= 1; appendComments()})
+$('#pageUp').click(function() {if (loadingComments) return; page += 1; appendComments()})
+$('#pageDown').click(function() {if (loadingComments) return; page -= 1; appendComments()})
 
 $('#topSort').click(function() {
-	if (mode == "top") return;
+	if (mode == "top" || loadingComments) return;
 	mode = "top";
 	page = 0;
 	$('#timeSort').attr('src', "../assets/sort-time.png")
@@ -226,7 +230,7 @@ $('#topSort').click(function() {
 })
 
 $('#timeSort').click(function() {
-	if (mode == "time") return;
+	if (mode == "time" || loadingComments) return;
 	mode = "time";
 	page = 0;
 	$('#timeSort').attr('src', "../assets/sort-time-on.png")
@@ -235,6 +239,7 @@ $('#timeSort').click(function() {
 })
 
 $('#compactMode').click(function() {
+	if (loadingComments) return;
 	compact = !compact
 	page = 0;
 	$('#compactMode').attr('src', `../assets/compact-${compact ? "on" : "off"}.png`)
@@ -242,6 +247,7 @@ $('#compactMode').click(function() {
 })
 
 $('#refresh').click(function() {
+	if (loadingComments) return
 	page = 0;
 	appendComments()
 })
@@ -253,6 +259,18 @@ localStorage.setItem('commentPreset', JSON.stringify({
   compact
 }))
 })
+
+$(document).keydown(function(k) {
+	if (loadingComments) return;
+
+    if (k.which == 37 && $('#pageDown').is(":visible")) { //left
+		$('#pageDown').trigger('click')
+	}
+	
+	if (k.which == 39 && $('#pageUp').is(":visible")) { //right
+		$('#pageUp').trigger('click')
+    }
+});
 
 });
 
