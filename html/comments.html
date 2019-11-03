@@ -107,7 +107,6 @@ fetch(target).then(res => res.json()).then(lvl => {
 	}
 
 	else {
-		console.log(lvl)
 		if (lvl.accountID == "0" || !lvl.accountID) $('#levelAuthor').addClass("green").removeClass("gdButton")
 		$('#levelName').text(lvl.name || ("Nonexistent level " + lvlID))
 		$('#levelAuthor').text("By " + (lvl.author || "-"))
@@ -128,7 +127,7 @@ function appendComments(dontClear, bump) {
 
 let p = compact ? ((page + 1) * 2) - 2 + (bump||0) : page
 
-if (loadingComments) return;
+if (loadingComments && !dontClear) return;
 else loadingComments = true;
 
 if (!dontClear) $('#commentBox').html(`<div class="supercenter" id="loading" style="height: 12%;"><img class="spin noSelect" src="../assets/loading.png" height="105%"></div>`)
