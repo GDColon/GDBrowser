@@ -187,8 +187,8 @@ if ([[COINS]] > 1) $("#coins").append(`<img class="squeeze" src="../assets/${coi
 if ([[COINS]] > 2) $("#coins").append(`<img class="squeeze" src="../assets/${coinColor}.png" height="5%">`)
 
 if ("[[ACCOUNTID]]" == "0") {
-		$("#authorName").addClass("green").removeClass('gdButton')
-		$("#authorLink").removeAttr('href')
+		$("#authorName").addClass("green").addClass("unregistered")
+		$("#authorLink").attr('href', '/search/[[AUTHORID]]?user')
 	}
 
 if (window.location.pathname == "/weekly") $('body').addClass('darkBG')

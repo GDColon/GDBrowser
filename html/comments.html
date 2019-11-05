@@ -107,11 +107,13 @@ fetch(target).then(res => res.json()).then(lvl => {
 	}
 
 	else {
-		if (lvl.accountID == "0" || !lvl.accountID) $('#levelAuthor').addClass("green").removeClass("gdButton")
+		if (lvl.accountID == undefined) $('#levelAuthor').remove()
+		else if (lvl.authorID) $('#levelAuthor').addClass("green").addClass("unregistered")
 		$('#levelName').text(lvl.name || ("Nonexistent level " + lvlID))
 		$('#levelAuthor').text("By " + (lvl.author || "-"))
 		$('#levelID').text("ID: " + lvlID)
 		if (lvl.accountID && lvl.author != "-") $('#authorLink').attr('href', '../profile/' + lvl.author)
+		else if (lvl.authorID) $('#authorLink').attr('href', '../search/' + lvl.authorID + "?user")
 		if (lvl.id) $('#levelLink').attr('href', '../' + lvl.id)
 		else $('#levelID').removeClass("gdButton")
 		$('#levelVersion').text("Version: " + (lvl.version || 0))
@@ -153,7 +155,8 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 			<div class="commentBG">
 				<div class="comment">
 					<img class="inline" src="../icon/${!history ? x.username : lvl.username}?form=${x.form}" height=21% style="margin-right: 0.8%">
-					<a ${x.username == "Unknown" || x.accountID == "0" ? "" : "href"}="../profile/${!history ? x.username : lvl.username}"><h2 class="inline ${x.username == "Unknown" || x.accountID == "0" ? "green" : "gdButton"}">${!history ? x.username : lvl.username}</h2></a>
+					<a href=../${x.accountID == "0" ? `search/${x.playerID}?user` : `../profile/${!history ? x.username : lvl.username}`}>
+					<h2 class="inline gdButton ${x.accountID == "0" ? "green unregistered" : ""}">${!history ? x.username : lvl.username}</h2></a>
 					${x.modColor || lvl.moderator == "2" ? `<img class="inline" src="../assets/mod-elder.png" height=18% style="margin-left: 0.6%;">` : ""}
 					<p class="commentPercent inline">${x.percent ? x.percent + "%" : ""}</p>
 
@@ -176,7 +179,8 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 			<div class="commentBG compactBG">
 				<div class="comment compact">
 					<img class="inline" src="../icon/${!history ? x.username : lvl.username}?form=${x.form}" height=21% style="margin-right: 0.8%">
-					<a ${x.username == "Unknown" || x.accountID == "0" ? "" : "href"}="../profile/${!history ? x.username : lvl.username}"><h2 class="inline ${x.username == "Unknown" || x.accountID == "0" ? "green" : "gdButton"}">${!history ? x.username : lvl.username}</h2></a>
+					<a href=../${x.accountID == "0" ? `search/${x.playerID}?user` : `../profile/${!history ? x.username : lvl.username}`}>
+					<h2 class="inline gdButton ${x.accountID == "0" ? "green unregistered" : ""}">${!history ? x.username : lvl.username}</h2></a>
 					${x.modColor || lvl.moderator == "2" ? `<img class="inline" src="../assets/mod-elder.png" height=18% style="margin-left: 0.6%;">` : ""}
 					<p class="commentPercent inline">${x.percent ? x.percent + "%" : ""}</p>
 

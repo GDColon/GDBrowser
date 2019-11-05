@@ -100,15 +100,14 @@ fetch(`./api/credits`).then(res => res.json()).then(res => {
 	})
 
 	$('#credits').append(`<div id="credits${res.credits.length + 1}" class="subCredits" style="display: none;">
-			<div id="githubbers" class="brownBox center supercenter" style="width: 80vh; height: 43%; padding-top: 1.5%; padding-bottom: 3.5%;">
-				<h1>GitHub Contributors</h1><br>
+			<div id="specialthanks" class="brownBox center supercenter" style="width: 80vh; height: 43%; padding-top: 1.5%; padding-bottom: 3.5%;">
+				<h1>Special Thanks!</h1><br>
 			</div>
-			<div class="supercenter" style="top: 71.5%"><h2 class="smaller gdButton"><a href="https://github.com/GDColon/GDBrowser">View on GitHub!</a></h2></div>
 			<img class="gdButton" src="../assets/arrow-left.png" width="60vh" style="position: absolute; top: 45%; right: 75%" onclick="page -= 1; loadCredits()">
 		</div>`)
 
-	res.contributors.forEach((x, y) => {
-		$('#githubbers').append(`<div class="githubChad">
+	res.specialThanks.forEach((x, y) => {
+		$('#specialthanks').append(`<div class="specialThanks">
 				<h2 class="gdButton smaller"><a href="./profile/${x[1]}">${x[0]}</h2></a>
 				<img src="./icon/${x[1]}" height=85%><br>
 				</div>`)

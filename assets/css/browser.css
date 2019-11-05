@@ -427,6 +427,10 @@ input::-webkit-inner-spin-button {
     border-bottom: 2px solid lime
 }
 
+.unregistered:hover {
+    color: rgb(0, 230, 0);
+}
+
 .popup {
     position: fixed; 
     display: none; 
@@ -638,14 +642,14 @@ input::-webkit-inner-spin-button {
     height: 5.5%;
 }
 
-.githubChad {
+.specialThanks {
     display: inline-block;
-    width: 30%;
-    height: 20%;
-    margin: 1% 0%;
+    width: 27%;
+    height: 21%;
+    margin: 2% 0%;
 }
 
-.githubChad h2 {
+.specialThanks h2 {
     margin-bottom: 3%;
     font-size: 4vh;
 }
@@ -768,7 +772,7 @@ input::-webkit-inner-spin-button {
 .portalSetting {
     text-align: left;
     display: inline-block;
-    width: 19%;
+    width: 23%;
 }
 
 .triggerDiv {

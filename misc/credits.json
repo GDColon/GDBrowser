@@ -26,14 +26,6 @@
         },
 
         {
-            "header": "Level Analyzing Help",
-            "name": "AlFas",
-            "youtube": ["https://youtube.com/user/Alex100077", "youtube"],
-            "twitter": ["https://twitter.com/AlFas6237", "twitter"],
-            "github": ["https://github.com/AlFasGD", "github"]
-        },
-
-        {
             "header": "Accurate Leaderboard",
             "name": "SMJSGaming",
             "youtube": ["https://youtube.com/channel/UCwEsWDs9kGN2vvoiNTJKdaQ", "youtube"],
@@ -75,7 +67,9 @@
         }
     ],
 
-    "contributors": [
-        ["Qufyy", "qufy"]
+    "specialThanks": [
+        ["Qufyy", "qufy"],
+        ["AlFas", "AlFas"],
+        ["ViPriN", "ViPriN"]
     ]
 }
