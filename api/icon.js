@@ -145,7 +145,8 @@ module.exports = async (app, req, res) => {
             //ic.composite(ufoTop, (iconSize[0] / 2) - (size[0] / 2) + 7, iconSize[1] + topOffset[3] + 30, {mode: Jimp.BLEND_DESTINATION_OVER})
           }
 
-          if (form == "robot") {
+          console.log(form)
+          if (form == "robot" || req.query.form == "cursed") {
 
             ic.contain(iconSize[0], 300, Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_TOP)
             ic.contain(iconSize[0] + 200, 300, Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_TOP)
@@ -201,7 +202,7 @@ module.exports = async (app, req, res) => {
           }
 
 
-          if (form == "spider") {
+          else if (form == "spider") {
 
             let spiderBody;
             ic.contain(iconSize[0], 300, Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_TOP)
