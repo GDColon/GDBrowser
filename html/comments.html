@@ -107,13 +107,17 @@ fetch(target).then(res => res.json()).then(lvl => {
 	}
 
 	else {
+		console.log(lvl)
 		if (lvl.accountID == undefined) $('#levelAuthor').remove()
-		else if (lvl.authorID) $('#levelAuthor').addClass("green").addClass("unregistered")
+		else if (lvl.accountID == 0) {
+			$('#levelAuthor').addClass("green").addClass("unregistered")
+			$('#authorLink').attr('href', '../search/' + lvl.authorID + "?user")
+		}
+		else $('#authorLink').attr('href', '../profile/' + lvl.author)
 		$('#levelName').text(lvl.name || ("Nonexistent level " + lvlID))
 		$('#levelAuthor').text("By " + (lvl.author || "-"))
 		$('#levelID').text("ID: " + lvlID)
-		if (lvl.accountID && lvl.author != "-") $('#authorLink').attr('href', '../profile/' + lvl.author)
-		else if (lvl.authorID) $('#authorLink').attr('href', '../search/' + lvl.authorID + "?user")
+		if (lvl.accountID && lvl.author != "-") 
 		if (lvl.id) $('#levelLink').attr('href', '../' + lvl.id)
 		else $('#levelID').removeClass("gdButton")
 		$('#levelVersion').text("Version: " + (lvl.version || 0))
