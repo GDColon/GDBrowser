@@ -55,7 +55,9 @@ colors.json - The colors for generating icons
 
 level.json - An array of the official GD tracks, and also difficulty face stuff for level searching
 
-mapPacks.json - The IDs for the levels in map packs. I can't believe I have to hardcode this. 
+mapPacks.json - The IDs for the levels in map packs. I can't believe I have to hardcode this.
+
+sizecheck.js - Excecuted on most pages, used for the 'page isn't wide enough' message, back button, and a few other things
 
 XOR.js - Decrypts ciphered GD passwords. I stole the code from somewhere so uh if you wrote it, please don't hunt me down
 

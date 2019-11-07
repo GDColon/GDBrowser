@@ -1,10 +1,10 @@
 const express = require('express');
-const path = require('path');
 const fs = require("fs")
 const timeout = require('connect-timeout')
+const compression = require('compression');
+
 let api = true;
 let gdicons = fs.readdirSync('./icons/iconkit')
-const compression = require('compression');
 const app = express();
 app.use(compression());
 app.use(express.json());
@@ -134,7 +134,11 @@ app.get("/api/mappacks", async function(req, res) {
 
 app.get("/api/credits", function(req, res) {
   res.send(require('./misc/credits.json'))
-})    
+})  
+
+app.get("/assets/sizecheck.js", function(req, res) {
+  res.sendFile(__dirname + "/misc/sizecheck.js")
+})  
 
 app.get("/iconkit", function(req, res) {
   res.sendFile(__dirname + "/html/iconkit.html")
