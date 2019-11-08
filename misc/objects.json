@@ -38,6 +38,7 @@
         "31": "StartPos",
         "32": "EnableTrail",
         "33": "DisableTrail",
+        "34": "StartPos2",
         "104": "Color",
         "105": "Color",
         "221": "Color",
@@ -76,10 +77,18 @@
         "26": "Transition",
         "27": "Transition",
         "28": "Transition",
+        "55": "Transition",
         "56": "Transition",
         "57": "Transition",
         "58": "Transition",
-        "59": "Transition"
+        "59": "Transition",
+
+        "1912": "Random",
+        "1913": "CameraZoom",
+        "1914": "CameraStatic",
+        "1916": "CameraOffset",
+        "1917": "Reverse",
+        "1931": "LevelEnd"
     },
 
     "misc": {
