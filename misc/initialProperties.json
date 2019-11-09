@@ -9,6 +9,7 @@
         "kA13": ["songOffset", "number"],
 
         "kA3": ["startMini", "bool"],
+        "kA8": ["startDual", "bool"],
         "kA10": ["twoPlayer", "bool"],
         "kA15": ["fadeIn", "bool"],
         "kA16": ["fadeOut", "bool"],

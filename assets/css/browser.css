@@ -779,12 +779,27 @@ input::-webkit-inner-spin-button {
     margin: 1.6% 1.7%;
 }
 
-.orbDiv, .blockDiv {
+.orbDiv, .blockDiv, .styleDiv {
     margin: 1.75% 1.7%;
 }
 
 .miscDiv {
     margin: 1% 2%;
+}
+
+.styleDiv {
+    margin-top: 3.5vh;
+}
+
+#style {
+    border-top-right-radius: 2vh;
+    border-bottom-right-radius: 2vh;
+}
+
+.styleBG {
+    background-position: 2vh;
+    outline: 0.4vh solid black;
+    outline-offset: -0.4vh;
 }
 
 .gold {

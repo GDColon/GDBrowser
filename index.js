@@ -46,6 +46,7 @@ app.use('/assets', express.static(__dirname + '/assets', {maxAge: "7d"}));
 app.use('/css', express.static(__dirname + '/assets/css'));
 app.use('/objects', express.static(__dirname + '/assets/objects', {maxAge: "7d"}));
 app.use('/blocks', express.static(__dirname + '/assets/blocks', {maxAge: "7d"}));
+app.use('/levelstyle', express.static(__dirname + '/assets/initial', {maxAge: "7d"}));
 app.use('/gauntlets', express.static(__dirname + '/assets/gauntlets', {maxAge: "7d"}));
 app.use('/difficulty', express.static(__dirname + '/assets/gdfaces', {maxAge: "7d"}));
 app.use('/iconkitbuttons', express.static(__dirname + '/assets/iconkitbuttons', {maxAge: "7d"}));
