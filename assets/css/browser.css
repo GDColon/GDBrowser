@@ -1,4 +1,4 @@
-@font-face {font-family: Pusab; src: url('./../assets/Pusab.ttf')}
+@font-face {font-family: Pusab; src: url('./../Pusab.ttf')}
 
 body {
     margin: 0;
@@ -261,7 +261,7 @@ input::-webkit-inner-spin-button {
     border: 2.5vh solid transparent;
     border-radius: 3vh;
     background-color: #995533;
-    border-image: url('./../assets/brownbox.png') 10% round;
+    border-image: url('./../brownbox.png') 10% round;
 }
 
 .fancybox {
@@ -270,7 +270,7 @@ input::-webkit-inner-spin-button {
     border: 3.5vh solid transparent;
     border-radius: 3vh;
     background-color: #001931;
-    border-image: url('./../assets/fancybox.png') 10% stretch;
+    border-image: url('./../fancybox.png') 10% stretch;
     border-image-slice: 65;
 }
 
@@ -280,14 +280,14 @@ input::-webkit-inner-spin-button {
 
 .epicbox {
     border: 3.5vh solid transparent;
-    border-image: url('./../assets/epicbox.png') 20% stretch;
+    border-image: url('./../epicbox.png') 20% stretch;
     border-image-slice: 85 77;
     border-image-width: 9.5vh;
 }
 
 .leaderboardBox {
     border: 3.5vh solid transparent;
-    border-image: url('./../assets/leaderboardbox.png') 20% stretch;
+    border-image: url('./../leaderboardbox.png') 20% stretch;
     border-image-slice: 85 77;
     border-image-width: 9.5vh;
 }
