@@ -5,7 +5,7 @@ module.exports = async (app, req, res) => {
     let amount = 100;
     let count = req.query.count ? parseInt(req.query.count) : null
     if (count && count > 0) {
-      if (count > 2500) amount = 2500
+      if (count > 5000) amount = 5000
       else amount = count;
     }
 

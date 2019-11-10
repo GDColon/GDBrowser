@@ -3,8 +3,8 @@
         "kA2": ["gamemode", "list"],
         "kA4": ["speed", "list"],
 
-        "kA6": ["background", "bump"],
-        "kA7": ["ground", "bump"],
+        "kA6": ["background", "number"],
+        "kA7": ["ground", "number"],
         "kA18": ["font", "bump"],
         "kA13": ["songOffset", "number"],
 
@@ -13,7 +13,7 @@
         "kA10": ["twoPlayer", "bool"],
         "kA15": ["fadeIn", "bool"],
         "kA16": ["fadeOut", "bool"],
-        "kA17": ["alternateLine", "bool"],
+        "kA17": ["alternateLine", "number"],
 
         "kS38": ["colors", "colors"]
     },

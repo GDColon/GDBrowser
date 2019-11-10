@@ -137,6 +137,12 @@ Object.keys(data[0]).forEach(x => {
     response.settings[name] = val
 })
 
+if (response.settings.ground == 0) response.settings.ground = 1
+if (response.settings.background == 0) response.settings.background = 1
+if (!response.settings.font) response.settings.font = 1
+if (response.alternateLine == 2) response.settings.alternateLine = true
+
+
 
 delete response.settings['colors']
 response.dataLength = rawData.length

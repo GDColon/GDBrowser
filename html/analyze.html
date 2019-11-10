@@ -142,10 +142,10 @@ appendPortals()
 	let grCol = res.colors.find(x => x.channel == "G")
 
 	if (!bgCol) bgCol = {r: 40, g: 125, b: 255}
-	else if (bgCol.r == 0 && bgCol.g == 0 && bgCol.b == 0) bgCol = {r: 75, g: 75, b: 75}
+	else if (bgCol.r < 35 && bgCol.g < 35 && bgCol.b < 35) bgCol = {r: 75, g: 75, b: 75}
 
 	if (!grCol) grCol = {r: 0, g: 102, b: 255}
-	else if (grCol.r == 0 && grCol.g == 0 && grCol.b == 0) grCol = {r: 75, g: 75, b: 75}
+	else if (grCol.r < 35 && grCol.g < 35 && grCol.b < 35) grCol = {r: 75, g: 75, b: 75}
 
 	$('#style').append(`<div class="inline styleDiv styleBG" style='background-color: rgb(${bgCol.r}, ${bgCol.g}, ${bgCol.b})'><img height="60%" src='../levelstyle/bg-${res.settings.background}.png'></div>`)
 	$('#style').append(`<div class="inline styleDiv styleBG" style='background-color: rgb(${grCol.r}, ${grCol.g}, ${grCol.b})'><img height="60%" src='../levelstyle/gr-${res.settings.ground}.png'></div>`)
