@@ -9,6 +9,11 @@ module.exports = async (app, req, res, api, getLevels) => {
       secret: app.secret
     }
   }, function (err1, res1, b1) {
+    
+    if (err1 || b1 == '-1' || !b1) {
+      if (!api) return res.redirect('/search/' + req.params.id)
+      else return res.send("-1")
+    }
 
     let gdSearchResult = app.parseResponse(b1)
 
@@ -19,7 +24,7 @@ module.exports = async (app, req, res, api, getLevels) => {
       }
     }, function (err2, res2, body) {
 
-      if (body == '-1') {
+      if (err2 || body == '-1' || !body) {
         if (!api) return res.redirect('/search/' + req.params.id)
         else return res.send("-1")
       }
@@ -32,7 +37,7 @@ module.exports = async (app, req, res, api, getLevels) => {
               accountID: account[16],
               rank: account[30],
               stars: account[3],
-              diamonds: account[46],
+              diamonds: account[46] == '65535' ? '65535+' : account[46],
               coins: account[13],
               userCoins: account[17],
               demons: account[4],

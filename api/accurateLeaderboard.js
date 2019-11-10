@@ -3,6 +3,7 @@ const request = require('request')
 module.exports = async (app, req, res) => {
 
       request.get(`https://gdleaderboards.com/incl/lbxml.php`, function (err, resp, topPlayers) {
+      if (err || !topPlayers) topPlayers = ""
       let idArray = topPlayers.split(",")
 
       let leaderboard = []
@@ -13,6 +14,7 @@ module.exports = async (app, req, res) => {
         request.post('http://boomlings.com/database/getGJUserInfo20.php', {
           form: {targetAccountID: x, secret: app.secret}
         }, function (err, resp, body) {
+          if (err || !body || body == '-1') return res.send([])
 
           let account = app.parseResponse(body)
           let accObj = {
@@ -25,7 +27,7 @@ module.exports = async (app, req, res) => {
             cp: account[8],
             coins: account[13],
             usercoins: account[17],
-            diamonds: account[46],
+            diamonds: account[46] == '65535' ? '65535+' : account[46],
           }
 
           leaderboard.push(accObj)

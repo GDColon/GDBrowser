@@ -21,7 +21,7 @@ module.exports = async (app, req, res) => {
     request.post('http://boomlings.com/database/getGJLevelScores211.php', {
     form : params}, async function(err, resp, body) { 
 
-      if (body == '-1' || !body) return res.send("-1")
+      if (err || body == '-1' || !body) return res.send("-1")
       scores = body.split('|').map(x => app.parseResponse(x))
       if (!(scores.filter(x => x[1]).length)) return res.send("-1")
 

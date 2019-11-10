@@ -30,23 +30,26 @@ let cache = {};
 module.exports = async (app, req, res) => {
 
   let username = req.params.text
+  let result = []
+  let account = []
 
   request.post('http://boomlings.com/database/getGJUsers20.php', {
     form: {
       str: username,
-      secret: 'Wmfd2893gb7'
+      secret: app.secret
     }
   }, function (err1, res1, body1) {
-    let result = app.parseResponse(body1);
+    if (err1 || !body1 || body1 == "-1") result[16] = "23766"
+    else result = app.parseResponse(body1);
 
     request.post('http://boomlings.com/database/getGJUserInfo20.php', {
       form: {
         targetAccountID: result[16],
-        secret: 'Wmfd2893gb7'
+        secret: app.secret
       }
     }, function (err2, res2, body2) {
 
-      let account = app.parseResponse(body2);
+      if (!err2 && body2 && body2 != '-1') account = app.parseResponse(body2);
 
       let { form, ind } = forms[req.query.form] || {};
       form = form || 'player';

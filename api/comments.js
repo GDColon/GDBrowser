@@ -18,7 +18,7 @@ module.exports = async (app, req, res) => {
     request.post(`http://boomlings.com/database/${path}.php`, {
     form : params}, async function(err, resp, body) { 
 
-      if (body == '-1' || !body) return res.send("-1")
+      if (err || body == '-1' || !body) return res.send("-1")
 
       comments = body.split('|')
       comments = comments.map(x => x.split(':'))

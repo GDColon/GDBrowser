@@ -73,6 +73,7 @@ response.level = {
 }
 
 response.objects = data.length - 2
+response.settings = {}
 
 response.portals = data.filter(x => x.portal).sort(function (a, b) {return parseInt(a.x) - parseInt(b.x)}).map(x => x.portal + " " + Math.round(x.x / last * 99) + "%").join(", ")
 
@@ -94,7 +95,6 @@ response.triggers.total = data.filter(x => x.trigger).length
 
 response.blocks = sortObj(blockCounts)
 response.misc = sortObj(miscCounts, '0')
-response.settings = {}
 response.colors = []
 
 Object.keys(data[0]).forEach(x => {
@@ -147,6 +147,7 @@ else response.settings.alternateLine = false
 
 
 delete response.settings['colors']
+response.text = data.filter(x => x.message).sort(function (a, b) {return parseInt(a.x) - parseInt(b.x)}).map(x => [Buffer.from(x.message, 'base64').toString(), Math.round(x.x / last * 99) + "%"])
 response.dataLength = rawData.length
 response.data = rawData
 

@@ -18,7 +18,7 @@ module.exports = async (app, req, res) => {
     request.post('http://boomlings.com/database/getGJScores20.php', {
     form : params}, async function(err, resp, body) { 
 
-      if (body == '-1' || !body) return res.send("-1")
+      if (err || body == '-1' || !body) return res.send("-1")
       scores = body.split('|').map(x => app.parseResponse(x)).filter(x => x[1])
       if (!scores.length) return res.send("-1")
 
@@ -33,7 +33,7 @@ module.exports = async (app, req, res) => {
         x.cp = x[8]
         x.coins = x[13]
         x.usercoins = x[17]
-        x.diamonds = x[46]
+        x.diamonds = x[46] == '65535' ? '65535+' : x[46],
         keys.forEach(k => delete x[k])
       }) 
       return res.send(scores)

@@ -69,7 +69,7 @@ module.exports = async (app, req, res) => {
     request.post('http://boomlings.com/database/getGJLevels21.php', {
     form : filters}, async function(err, resp, body) {
         
-    if (!body || body == '-1') return res.send("-1")
+    if (err || !body || body == '-1') return res.send("-1")
     let preRes = body.split('#')[0].split('|', 10)
     let authorList = {}
     let songList = {}
