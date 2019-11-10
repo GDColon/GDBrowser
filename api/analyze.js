@@ -140,7 +140,7 @@ Object.keys(data[0]).forEach(x => {
 if (response.settings.ground == 0) response.settings.ground = 1
 if (response.settings.background == 0) response.settings.background = 1
 if (!response.settings.font) response.settings.font = 1
-if (response.alternateLine == 2) response.settings.alternateLine = true
+if (response.settings.alternateLine == 2) response.settings.alternateLine = true
 
 
 
