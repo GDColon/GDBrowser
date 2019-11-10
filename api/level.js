@@ -33,7 +33,7 @@ module.exports = async (app, req, res, api, analyze) => {
     let preRes = body.split('#')[0].split('|', 10)
     let author = body.split('#')[1].split('|')[0].split(':')
     let song = '~' + body.split('#')[2]; 
-    song =  app.parseResponse(song.split(':')[0], '~|~')
+    song =  app.parseResponse(song, '~|~')
 
     let levelInfo = app.parseResponse(preRes[0])
         let level = {

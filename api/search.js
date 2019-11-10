@@ -74,7 +74,7 @@ module.exports = async (app, req, res) => {
     let authorList = {}
     let songList = {}
     let authors = body.split('#')[1].split('|')
-    let songs = '~' + body.split('#')[2];songs = songs.split(':').map(x => app.parseResponse(x, '~|~'))
+    let songs = '~' + body.split('#')[2]; songs = songs.split('|~1~:~1~|').map(x => app.parseResponse(x, '~|~'))
     songs.forEach(x => {songList[x['~1']] = x['2']})
 
     authors.splice(10, 999)
