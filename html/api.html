@@ -29,6 +29,7 @@
 				<a class="header-link" href="#levelleaderboard">Level Leaderboards</a>
 				<a class="header-link" href="#comments">Comments & Posts</a> 
 				<a class="header-link" href="#analyze">Level Analysis</a> 
+				<a class="header-link" href="#icons">Icons</a> 
 			</div>
 		</div>
 	</div>
@@ -55,6 +56,7 @@
 				<p><a href="#levelleaderboard"><u>Level Leaderboards</u></a> <i>/api/leaderboardLevel/levelID</i></p>
 				<p><a href="#comments"><u>Comments & Posts</u></a> <i>/api/comments/level-or-user-ID</i></p>
 				<p><a href="#analyze"><u>Level Analysis</u></a> <i>/api/analyze/levelID</i></p>
+				<p><a href="#icons"><u>Icons</u></a> <i>/icon/username</i></p>
 			</quote>
 			<br>
 			<p>In the event that something goes horribly wrong and the server doesn't like your request (or you tried to search for a level/profile/etc that doesn't exist), the API will return
@@ -436,7 +438,7 @@
 			<p>/api/analyze/levelID</p>
 
 			<p>Analyzes a level's data</p>
-			<p><sb>Level analyzing is still a big WIP so there may be changes in the future</sb></p>
+			<p><sb>Level analysis is updated a lot so there may be changes in the future</sb></p>
 
 			<br>
 			<p class="reveal" onclick="$('#params-analyze').slideToggle(100)"><b>Parameters (0)</b></p>
@@ -445,7 +447,7 @@
 			</div>
 
 			<br>
-			<p class="reveal" onclick="$('#response-analyze').slideToggle(100)"><b>Response (?)</b></p>
+			<p class="reveal" onclick="$('#response-analyze').slideToggle(100)"><b>Response (10)</b></p>
 			<div class="subdiv" id="response-analyze">
 				<p><b>Response is subject to change in the future</b></p>
 				<p>The API will return an array of each player with the following information:</p>
@@ -460,6 +462,51 @@
 				<p>text: An array of all the text objects in a level. ([text, percent])</p>
 				<p>dataLength: How long the level data is (spoilers - very)</p>
 				<p>data: The decrypted data of the level. And it's freakin' huge</p>
+			</div>
+
+			<br>
+		</div>
+
+		<div class="seperator"></div>
+
+	</main>
+
+	<main>
+		<div id="icons" class="anchor"></div>
+		<div class="main-block">
+			<h1>Icons</h1>
+			<p>/icon/username</p>
+
+			<p>Gets a player's GD icon, or builds a custom one (Sent as a PNG)</p>
+			<p style="font-size:15px; margin-top:-7px">This one isn't really part of the API, but dammit, my website my rules</p>
+
+			<br>
+			<p class="reveal" onclick="$('#params-icons').slideToggle(100)"><b>Parameters (6)</b></p>
+			<div class="subdiv" id="params-icons">
+				<p><b>Parameters can be used to modify parts of a fetched user's icon</b></p>
+				<p>IDs generally correspond to their order of appearance in GD</p>
+				<p>form: The form of the icon (cube/ship/ball/ufo/wave/robot/spider/cursed)</p>
+				<p>icon: The ID of the icon to use</p>
+				<p>col1: The ID of the primary color to use</p>
+				<p>col2: The ID of the secondary color to use</p>
+				<p>glow: If the icon should have a glow/outline (0 = off, anything else = on)</p>
+				<p>noUser: Disables fetching the icon from the GD servers. Slightly faster, but comes at the cost of having to build icons from the ground up using the parameters listed above. It completely ignores the entered username and always returns the default icon</p>
+			</div>
+
+			<br>
+			<p class="reveal" onclick="$('#response-icons').slideToggle(100)"><b>Response (1)</b></p>
+			<div class="subdiv" id="response-icons">
+				<p>A lovely PNG of the icon you fetched!</p>
+			</div>
+			<br>
+			<p class="reveal" onclick="$('#request-icons').slideToggle(100)"><b>Examples</b></p>
+			<div class="subdiv" id="request-icons">
+				<p><b>Sample Icons</b></p>
+				<p><a target="_blank" style="font-weight:400" href="../icon/colon">/icon/colon</a> (Colon's beautiful icon)</p>
+				<p><a target="_blank" style="font-weight:400" href="../icon/colon?form=ship">/icon/colon?form=ship</a> (Colon's beautiful ship)</p>
+				<p><a target="_blank" style="font-weight:400" href="../icon/colon?col1=5&col2=3">/icon/colon?col1=5&col2=3</a> (Colon's beautiful icon, but it's blue)</p>
+				<p><a target="_blank" style="font-weight:400" href="../icon/colon?icon=98&col1=40&col2=12&glow=0">/icon/colon?icon=98&col1=40&col2=12&glow=0</a> (Colon's beautiful icon, but edited to a familiar face)</p>
+				<p style="margin-top:-9px; font-weight:400">^since practically all the values are being changed for that last one, it's a good idea to use the noUser parameter</p>
 			</div>
 
 			<br>

@@ -29,27 +29,9 @@ let cache = {};
 
 module.exports = async (app, req, res) => {
 
-  let username = req.params.text
-  let result = []
-  let account = []
+  function buildIcon(account) {
 
-  request.post('http://boomlings.com/database/getGJUsers20.php', {
-    form: {
-      str: username,
-      secret: app.secret
-    }
-  }, function (err1, res1, body1) {
-    if (err1 || !body1 || body1 == "-1") result[16] = "23766"
-    else result = app.parseResponse(body1);
-
-    request.post('http://boomlings.com/database/getGJUserInfo20.php', {
-      form: {
-        targetAccountID: result[16],
-        secret: app.secret
-      }
-    }, function (err2, res2, body2) {
-
-      if (!err2 && body2 && body2 != '-1') account = app.parseResponse(body2);
+      if (!account) account = []
 
       let { form, ind } = forms[req.query.form] || {};
       form = form || 'player';
@@ -338,6 +320,31 @@ module.exports = async (app, req, res) => {
           })
         })
       })
+    }
+
+    let username = req.params.text
+    let result = []
+
+    if (req.query.hasOwnProperty("noUser") || req.query.hasOwnProperty("nouser")) return buildIcon()
+  
+    request.post('http://boomlings.com/database/getGJUsers20.php', {
+      form: {
+        str: username,
+        secret: app.secret
+      }
+    }, function (err1, res1, body1) {
+      if (err1 || !body1 || body1 == "-1") return buildIcon()
+      else result = app.parseResponse(body1);
+  
+      request.post('http://boomlings.com/database/getGJUserInfo20.php', {
+        form: {
+          targetAccountID: result[16],
+          secret: app.secret
+        }
+      }, function (err2, res2, body2) {
+  
+        if (!err2 && body2 && body2 != '-1') return buildIcon(app.parseResponse(body2));
+        else return buildIcon()
 
     })
   });
