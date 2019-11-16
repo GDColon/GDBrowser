@@ -325,7 +325,7 @@ module.exports = async (app, req, res) => {
     let username = req.params.text
     let result = []
 
-    if (req.query.hasOwnProperty("noUser") || req.query.hasOwnProperty("nouser")) return buildIcon()
+    if (req.query.hasOwnProperty("noUser") || req.query.hasOwnProperty("nouser") || username == "icon") return buildIcon()
   
     request.post('http://boomlings.com/database/getGJUsers20.php', {
       form: {
