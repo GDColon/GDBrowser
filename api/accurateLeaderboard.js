@@ -19,7 +19,7 @@ module.exports = async (app, req, res) => {
           let account = app.parseResponse(body)
           let accObj = {
             rank: "0",
-            username: app.clean(account[1]),
+            username: account[1],
             playerID: account[2],
             accountID: account[16],
             stars: account[3],

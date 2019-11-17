@@ -32,7 +32,7 @@ module.exports = async (app, req, res, api, getLevels) => {
       let account = app.parseResponse(body)
 
           let userData = {
-              username: app.clean(account[1]),
+              username: account[1],
               playerID: account[2],
               accountID: account[16],
               rank: account[30],
@@ -46,9 +46,9 @@ module.exports = async (app, req, res, api, getLevels) => {
               messages: account[18] == "0" ? "all" : account[18] == "1" ? "friends" : "off",
               commentHistory: account[50] == "0" ? "all" : account[50] == "1" ? "friends" : "off",
               moderator: account[49],
-              youtube: app.clean(account[20]) || null,
-              twitter: app.clean(account[44]) || null,
-              twitch: app.clean(account[45]) || null,
+              youtube: account[20] || null,
+              twitter: account[44] || null,
+              twitch: account[45] || null,
               icon: account[21],
               ship: account[22],
               ball: account[23],

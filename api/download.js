@@ -84,8 +84,8 @@ module.exports = async (app, req, res, api, ID, analyze) => {
           }, function (err2, res2, b2) {
               if (b2 != '-1') {
                 let account = app.parseResponse(b2)
-                level.author = app.clean(account[1])
-                level.accountID = app.clean(gdSearchResult[16])
+                level.author = account[1]
+                level.accountID = gdSearchResult[16]
               }
 
               else {
@@ -101,7 +101,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
 
       if (songRes != '-1') {
         let songData = app.parseResponse(songRes, '~|~')
-        level.songName = app.clean(songData[2] || "Unknown")
+        level.songName = songData[2] || "Unknown"
         level.songAuthor = songData[4] || "Unknown"
         level.songSize = (songData[5] || "0") + "MB"
         level.songID = songData[1] || level.customSong
