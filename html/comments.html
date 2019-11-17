@@ -84,6 +84,10 @@
 
 	</div>
 
+	<div style="position:absolute; top: 2%; left: 1.5%; width: 10%; height: 25%; pointer-events: none">
+		<img class="gdButton yesClick" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()">
+	</div>
+
 </div>
 
 </body>
@@ -280,7 +284,8 @@ $('#refresh').click(function() {
 })
 
 $('#content').on('input', function() {
-	$('#charcount').text(150-$('#content').val().length)
+	let remaining = 150-$('#content').val().length
+	$('#charcount').text(remaining)
 })
 
 $('#submitComment').click(function() {
