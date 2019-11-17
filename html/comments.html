@@ -147,7 +147,7 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 	else $('#pageUp').show()
 
 	if (res == -1 || (history && lvl.commentHistory != "all")) {
-		return $('#loading').hide()
+		loadingComments = false; return $('#loading').hide()
 	}
 
 	res.forEach(x => {
