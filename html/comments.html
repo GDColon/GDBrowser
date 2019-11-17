@@ -15,6 +15,7 @@
 
 	<div class="popup" id="postComment">
 		<div class="brownbox bounce center supercenter" style="height: 80%; width: 110vh">
+			<p style="position:absolute; right: 1vh; margin-top: 0; text-align: left" id="charcount">150</p>
 			<h1 class="smaller center" style="font-size: 5.5vh">Add Comment (Beta)</h1>
 			<textarea placeholder="Insert comment" id="content" maxlength="150" style="margin: 2% 0%"></textarea><br>
 			<form id="form" action="nothing lol">
@@ -276,6 +277,10 @@ $('#refresh').click(function() {
 	if (loadingComments) return
 	page = 0;
 	appendComments()
+})
+
+$('#content').on('input', function() {
+	$('#charcount').text(150-$('#content').val().length)
 })
 
 $('#submitComment').click(function() {
