@@ -52,6 +52,10 @@ app.use('/difficulty', express.static(__dirname + '/assets/gdfaces', {maxAge: "7
 app.use('/iconkitbuttons', express.static(__dirname + '/assets/iconkitbuttons', {maxAge: "7d"}));
 app.use('/gdicon', express.static(__dirname + '/icons/iconkit', {maxAge: "7d"}));
 
+app.post("/postComment", function(req, res) {
+  app.modules.postComment(app, req, res)
+})  
+
 app.get("/api", function(req, res) {
   res.sendFile(__dirname + "/html/api.html")
 })   

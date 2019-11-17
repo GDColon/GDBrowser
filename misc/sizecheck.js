@@ -34,8 +34,10 @@ function backButton() {
 	else window.location.href = "../../../../../"
 }
 
+let allowEsc = true;
 $(document).keydown(function(k) {
 	if (k.keyCode == 27) { //esc
+		if (!allowEsc) return
 		k.preventDefault()
 		if ($('.popup').is(":visible")) $('.popup').hide();   
 		else $('#backButton').trigger('click')

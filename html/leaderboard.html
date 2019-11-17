@@ -94,13 +94,12 @@ infoText(accurateText)
 
 function leaderboard() {
 
-	if (loading == true) return;
-
 	$('#searchBox').html(`<div style="height: 4.5%"></div>`)
-	loading = true;
 	$('#loading').show()
 
 	fetch(`../api/leaderboard?count=250&${type}`).then(res => res.json()).then(res => {
+
+		$('.ranking').remove()
 
 		res.forEach((x, y) => {
 
@@ -117,7 +116,7 @@ function leaderboard() {
 				${x.cp != 0 ? `${x.cp} <img class="valign" src="../assets/cp.png" style="cursor: help" title="Creator Points">` : ""}
 			</h3>
 		
-			<div class="center"
+			<div class="center ranking"
 				style="position:absolute; top: ${6.5 + (y * 26.572)}%; left: 3.5%; transform:scale(0.82); height: 10%; width: 12.5%;">
 				<img class="spaced lazyLoad" data-src="./icon/${x.username}" height="150%"
 					style="margin-bottom: 0%; transform:scale(1.1)">
@@ -127,7 +126,6 @@ function leaderboard() {
 		})
 
 		$('#searchBox').append('<div style="height: 4.5%"></div>')
-		loading = false;
 		$('#loading').hide();
 		$('.lazyLoad').Lazy({
 			appendScroll: '#searchBox'
@@ -140,7 +138,7 @@ function leaderboard() {
 	leaderboard()
 
 	$('#topTabOff').click(function() {
-		if (type == "top" || loading) return;
+		if (type == "top") return;
 		type = "top"
 		leaderboard()
 		$('.leaderboardTab').hide();
@@ -151,7 +149,7 @@ function leaderboard() {
 	})
 
 	$('#accurateTabOff').click(function() {
-		if (type == "accurate" || loading) return;
+		if (type == "accurate") return;
 		type = "accurate"
 		leaderboard()
 		$('.leaderboardTab').hide();
@@ -162,7 +160,7 @@ function leaderboard() {
 	})
 
 	$('#creatorTabOff').click(function() {
-		if (type == "creator" || loading) return;
+		if (type == "creator") return;
 		type = "creator"
 		leaderboard()
 		$('.leaderboardTab').hide();

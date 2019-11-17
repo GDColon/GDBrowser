@@ -38,6 +38,7 @@ module.exports = async (app, req, res) => {
 
         let comment = {}
         comment.content = app.clean(Buffer.from(x[2], 'base64').toString());
+        comment.ID = x[6]
         comment.likes = x[4]
         comment.date = (x[9] || "?") + " ago"
         if (req.query.type == "commentHistory") comment.levelID = x[1]
