@@ -115,8 +115,12 @@ img, .noSelect {
     filter: brightness(50%);
 }
 
-.darken {
+.darken, .youAreNotTheOne {
     filter: brightness(65%);
+}
+
+.youAreNotTheOne {
+    transform: scale(0.85)
 }
 
 #everything {
@@ -217,6 +221,7 @@ textarea::-webkit-scrollbar-thumb {
 }
 
 input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active {
+    box-shadow: 0 0 0px 1000px #764F1A inset !important;
     -webkit-box-shadow: 0 0 0px 1000px #764F1A inset !important;
     -webkit-text-fill-color: white !important;
 }
@@ -414,12 +419,18 @@ input::-webkit-inner-spin-button {
     cursor: pointer;
     z-index: 1;
     user-select: none;
+    pointer-events: all;
 }
 
 .gdButton:active {
     transition-duration: 0.07s;
     transition-timing-function: ease-in-out;
     transform: scale(1.08);
+}
+
+.likeButton {
+    height: 14vh;
+    margin: 2% 1.2% 2% 1.2%;
 }
 
 .iconRope {

@@ -16,19 +16,38 @@
 	<div class="popup" id="postComment">
 		<div class="brownbox bounce center supercenter" style="height: 80%; width: 110vh">
 			<p style="position:absolute; right: 1vh; margin-top: 0; text-align: left" id="charcount">150</p>
-			<h1 class="smaller center" style="font-size: 5.5vh">Add Comment (Beta)</h1>
+			<h1 class="smaller center" style="font-size: 5.5vh">Add Comment</h1>
 			<textarea placeholder="Insert comment" id="content" maxlength="150" style="margin: 2% 0%"></textarea><br>
-			<form id="form" action="nothing lol">
+			<form action="nothing lol">
 				<h3 class="center">GD Username</h3>
-				<input type="text" name="gdbrowser" id="username" maxlength="50" style="height: 8vh; width: 90%; text-align: center; margin-top: 0.5%"></textarea>
+				<input type="text" name="gdbrowser" id="username" maxlength="50" style="height: 8vh; width: 90%; text-align: center; margin-top: 0.5%">
 				<h3 class="center" style="margin-top: 2%">GD Password</h3>
-				<input type="password" id="password" maxlength="50" style="height: 8vh; width: 90%; text-align: center; margin-top: 0.5%"></textarea>
+				<input type="password" id="password" maxlength="50" style="height: 8vh; width: 90%; text-align: center; margin-top: 0.5%">
 			</form>
 			<div style="min-height: 16%; max-height: 16%">
 				<p id="message" style="padding: 0% 10%; margin-top: 1.5%"></p>
 			</div>
 			<img src="../assets/btn-cancel.png" height=10%; class="postButton gdButton center" style="margin-right: 1%" onclick="$('#postComment').hide(); $('textarea').val('')">
 			<img src="../assets/btn-submit.png" type="submit" height=10%; class="postButton gdButton center" style="margin-left: 1%" id="submitComment">
+		</div>
+	</div>
+
+	<div class="popup" id="likeComment">
+		<div class="brownbox bounce center supercenter" style="height: 75%; width: 100vh">
+			<h1 class="smaller center" style="font-size: 5.5vh">Vote</h1>
+			<img src="../assets/smashLike.png" id="likebtn" class="inline gdButton likeButton"><!--
+		 --><img src="../assets/smashDislike.png" id="dislikebtn" class="inline gdButton likeButton youAreNotTheOne">
+			<form action="nothing lol">
+				<h3 class="center">GD Username</h3>
+				<input type="text" name="gdbrowser" id="like-username" maxlength="50" style="height: 8vh; width: 90%; text-align: center; margin-top: 0.5%">
+				<h3 class="center" style="margin-top: 2%">GD Password</h3>
+				<input type="password" id="like-password" maxlength="50" style="height: 8vh; width: 90%; text-align: center; margin-top: 0.5%">
+			</form>
+			<div style="min-height: 18%; max-height: 18%">
+				<p id="likeMessage" style="padding: 0% 10%; margin-top: 2.5%"></p>
+			</div>
+			<img src="../assets/btn-cancel.png" height=10%; class="postButton gdButton center" style="margin-right: 1%" onclick="$('#likeComment').hide(); $('#likebtn').trigger('click');">
+			<img src="../assets/btn-submit.png" type="submit" height=10%; class="postButton gdButton center" style="margin-left: 1%" id="submitVote">
 		</div>
 	</div>
 	
@@ -78,7 +97,7 @@
 			<a id="levelLink"><h2 class="smallGold inline gdButton" id="levelID" style="margin-left: 6vh"></h2></a>
 		</div>
 		
-		<div style="position:absolute;bottom: 0%;right: 0%;width: 14%;text-align: right;transform: translate(30%, 40%);">
+		<div id="leaveComment" style="position:absolute;bottom: 0%;right: 0%;width: 14%;text-align: right;transform: translate(30%, 40%);">
 			<img class="gdButton" src="../assets/comment.png" width="60%" onclick="$('#postComment').show()">
 		</div>
 
@@ -99,11 +118,13 @@
 let {mode, compact} = JSON.parse(localStorage.getItem('commentPreset') || '{"mode": "top", "compact": true}')
 let messageText = 'Your <span style="color: yellow">Geometry Dash password</span> will <span style="color: lime">not be stored</span> anywhere on the site, both <span style="color:rgb(113, 234, 255)">locally and server-side.</span> You can view the code used for posting a comment <a class="menuLink" target="_blank" href="https://github.com/GDColon/GDBrowser/blob/master/api/postComment.js">here</a>.'
 $('#message').html(messageText)
+$('#likeMessage').html(messageText.replace("posting", "liking").replace("postComment", "like"))
 
 let lvlID = window.location.pathname.split('/')[2]
-let history = false;
+let history = false
 let page = 0
 let loadingComments = true
+let like = true
 
 if (mode == "top") {
 	$('#timeSort').attr('src', "../assets/sort-time.png")
@@ -114,7 +135,7 @@ $('#compactMode').attr('src', `../assets/compact-${compact ? "on" : "off"}.png`)
 
 let target = `../api/level/${lvlID}`
 
-if (lvlID > 99999999 || lvlID < -99999999) window.location.href = window.location.href.replace("comments", "search")
+if (lvlID > 999999999 || lvlID < -999999999) window.location.href = window.location.href.replace("comments", "search")
 if (!Number.isInteger(+lvlID)) {history = true; target = `../api/profile/${lvlID}`}
 else lvlID = Math.round(+lvlID)
 
@@ -125,6 +146,7 @@ fetch(target).then(res => res.json()).then(lvl => {
 		if (!lvl.username) return window.location.href = window.location.href.replace("comments", "search")
 
 		$('#levelName').text(lvl.username + "'s comments")
+		$('#leaveComment').hide()
 		document.title = lvl.username + "'s comments"
 
 		$('#meta-title').attr('content', lvl.username + "'s comment history")
@@ -195,7 +217,9 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 				<p class="commentDate">${x.date}</p>
 				<div class="commentLikes">
 					${history ? `<h3 style="margin-right: 1.5vh; pointer-events: all;" class="gold inline"><a href="../${x.levelID}">(${x.levelID})</a></h3>` : ""}
-					<img id="likeImg" class="inline" ${x.likes < 0 ? "style='transform: translateY(25%)'" : ""} src="../assets/${x.likes < 0 ? "dis" : ""}like.png" height=20% style="margin-right: 0.4%">
+					<div class="inline gdButton likeComment" commentID="${x.ID}" ${x.levelID ? `levelID="${x.levelID}"` : ""}">
+						<img class="inline gdButton" ${x.likes < 0 ? "style='transform: translateY(25%); margin-right: 0.4%'" : ""} src="../assets/${x.likes < 0 ? "dis" : ""}like.png" height=20%>
+					</div>
 					<h3 class="inline">${x.likes}</h3>
 				</div>
 			</div>`) }
@@ -217,9 +241,11 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 					</div>
 				</div>
 				<p class="commentDate compactDate">${x.date}</p>
-				<div class="commentLikes">
+				<div class="commentLikes" commentID="${x.ID}" ${x.levelID ? `levelID="${x.levelID}"` : ""}">
 					${history ? `<h3 style="margin-right: 0.5vh; pointer-events: all;" class="gold inline"><a href="../${x.levelID}">(${x.levelID})</a></h3>` : ""}
-					<img id="likeImg" class="inline" ${x.likes < 0 ? "style='transform: translateY(15%)'" : ""} src="../assets/${x.likes < 0 ? "dis" : ""}like.png" height=27% style="margin-right: 0.4%">
+					<div class="inline gdButton likeComment">
+						<img class="inline" ${x.likes < 0 ? "style='transform: translateY(15%); margin-right: 0.4%'" : ""} src="../assets/${x.likes < 0 ? "dis" : ""}like.png" height=27%>
+					</div>
 					<h3 class="inline">${x.likes}</h3>
 				</div>
 			</div>`) }
@@ -305,7 +331,7 @@ $('#submitComment').click(function() {
 		if (!res || res == "-1") {$('.postbutton').show(); return $('#message').text("The username you provided doesn't exist!")}
 		else accountID = res.accountID
 
-		$.post("../postComment",  {comment, username, password, levelID, accountID, })
+		$.post("../postComment",  {comment, username, password, levelID, accountID })
 		.done(x => {
 			$('#content').val("")
 			$('#postComment').hide()
@@ -322,7 +348,75 @@ $('#submitComment').click(function() {
 	})
 })
 
-$(window).on('beforeunload ',function() {
+$('#likebtn').click(function() {
+	$('#likebtn').removeClass('youAreNotTheOne')
+	$('#dislikebtn').addClass('youAreNotTheOne')
+	like = true
+})
+
+$('#dislikebtn').click(function() {
+	$('#likebtn').addClass('youAreNotTheOne')
+	$('#dislikebtn').removeClass('youAreNotTheOne')
+	like = false
+})
+
+let commentID = 0
+let lvID = 0
+let likeCount, likeImg;
+let likedComments;
+
+$(document).on('click', '.likeComment', function(cmnt) {
+	commentID = $(this).attr('commentID')
+
+	likedComments = localStorage.likedComments ? JSON.parse(localStorage.likedComments) : []
+	if (likedComments.includes(commentID)) return;
+
+	lvID = $(this).attr('levelID') || 0
+	likeImg = $(this).find('img')
+	likeCount = $(this).parent().find('h3:not(.gold)')
+	$('#likeComment').show()
+})
+
+$('#submitVote').click(function() {
+
+	if (likedComments.includes(commentID)) return $('#likeMessage').text("You've already liked/disliked this comment!");
+
+	let ID = commentID
+	let username = $('#like-username').val()
+	let password = $('#like-password').val()
+	let extraID = lvID || window.location.pathname.split('/')[2]
+	let accountID = 0
+	let likeType = like ? "1" : "0"
+
+	if (!ID || !username || !password || loadingComments) return $('#postComment').hide()
+
+	$('#likeMessage').text(like ? "Liking..." : "Disliking... :(")
+		$('.postbutton').hide()
+		allowEsc = false
+
+	fetch(`../api/profile/${username}`).then(res => res.json()).then(res => {
+		if (!res || res == "-1") {$('.postbutton').show(); return $('#likeMessage').text("The username you provided doesn't exist!")}
+		else accountID = res.accountID
+
+		$.post("../like",  { ID, accountID, password, like: likeType, type: 2, extraID })
+		.done(x => {
+			let newCount = parseInt(likeCount.text()) + (like ? 1 : -1)
+			likeCount.text(newCount)
+			if (newCount < 0) likeImg.attr('src', '../assets/dislike.png').css('transform', compact ? 'translateY(15%)' : 'translateY(25%)')
+			else likeImg.attr('src', '../assets/like.png').removeAttr('style')
+			$('#likeComment').hide()
+			$('#likebtn').trigger('click')
+			$('.postbutton').show()
+			$('#likeMessage').html(messageText.replace("posting", "liking").replace("postComment", "like"))
+			allowEsc = true
+			likedComments.push(commentID)
+			localStorage.setItem('likedComments', JSON.stringify(likedComments))
+		})		
+		.fail(e => {$('.postbutton').show();$('#likeMessage').text(e.responseText.includes("DOCTYPE") ? "Something went wrong..." : e.responseText)})
+	})
+})
+
+$(window).on('beforeunload ', function() {
 //0 - recent, 1 - top, 2 - recent/compact, 3 - top/compact
 localStorage.setItem('commentPreset', JSON.stringify({
   mode,

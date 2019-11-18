@@ -47,6 +47,25 @@
 		</div>
 	</div>
 
+	<!-- <div class="popup" id="likeDiv">
+		<div class="brownbox bounce center supercenter" style="height: 75%; width: 100vh">
+			<h1 class="smaller center" style="font-size: 5.5vh">Vote</h1>
+			<img src="../assets/smashLike.png" id="likebtn" class="inline gdButton likeButton">
+		 	<img src="../assets/smashDislike.png" id="dislikebtn" class="inline gdButton likeButton youAreNotTheOne">
+			<form action="nothing lol">
+				<h3 class="center">GD Username</h3>
+				<input type="text" name="gdbrowser" id="like-username" maxlength="50" style="height: 8vh; width: 90%; text-align: center; margin-top: 0.5%">
+				<h3 class="center" style="margin-top: 2%">GD Password</h3>
+				<input type="password" id="like-password" maxlength="50" style="height: 8vh; width: 90%; text-align: center; margin-top: 0.5%">
+			</form>
+			<div style="min-height: 18%; max-height: 18%">
+				<p id="message" style="padding: 0% 10%; margin-top: 2.5%"></p>
+			</div>
+			<img src="../assets/btn-cancel.png" height=10%; class="postButton gdButton center" style="margin-right: 1%" onclick="$('#likeDiv').hide(); $('#likebtn').trigger('click');">
+			<img src="../assets/btn-submit.png" type="submit" height=10%; class="postButton gdButton center" style="margin-left: 1%" id="submitVote">
+		</div>
+	</div> -->
+
 	<div style="position:absolute; bottom: 0%; left: 0%; width: 100%">
 		<img class="cornerPiece" src="../assets/corner.png" width=7%;>
 	</div>
@@ -109,8 +128,9 @@
 	<div class="levelButtons" style="position:absolute; top: 46%; right: 3.5%; transform: translateY(-50%); height: 75%;">
 		<img class="gdButton sideButton" id="saveButton" src="../assets/plus.png" onclick="$('#saveDiv').show(); saveLevel()"><br>
 		<img class="gdButton sideButton" id="infoButton"  src="../assets/info.png" onclick="$('#infoDiv').show()"><br>
-		<a href="./comments/[[ID]]"><img class="gdButton sideButton" src="../assets/comment.png"></a><br>
+		<!-- <img class="gdButton sideButton" id="likeButton"  src="../assets/vote.png" onclick="$('#likeDiv').show()"><br> -->
 		<a href="./analyze/[[ID]]"><img class="gdButton sideButton" src="../assets/edit.png"></a><br>
+		<a href="./comments/[[ID]]"><img class="gdButton sideButton" src="../assets/comment.png"></a><br>
 		<a href="./leaderboard/[[ID]]"><img class="gdButton sideButton" src="../assets/leaderboard.png"></a><br>
 	</div>
 
@@ -129,6 +149,9 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script async type="text/javascript" src="../assets/sizecheck.js"></script>
 <script>
+
+let messageText = 'Your <span style="color: yellow">Geometry Dash password</span> will <span style="color: lime">not be stored</span> anywhere on the site, both <span style="color:rgb(113, 234, 255)">locally and server-side.</span> You can view the code used for liking a level <a class="menuLink" target="_blank" href="https://github.com/GDColon/GDBrowser/blob/master/api/like.js">here</a>.'
+$('#message').html(messageText)
 
 if (window.location.href.endsWith('?download')) $('#infoDiv').show()
 
@@ -203,7 +226,6 @@ $(window).on('load', function() {
 		}
 });
 
-
 let savedLevels = JSON.parse(localStorage.getItem('saved') || '[]');
 let deleteMode = false;
 if (savedLevels.includes('[[ID]]')) {
@@ -219,7 +241,53 @@ function deleteLevel() {
   savedLevels = savedLevels.filter(function(el) {return el != '[[ID]]'})
   localStorage.setItem('saved', JSON.stringify(savedLevels));
   location.reload()
-	freeze = true;
+  freeze = true;
 }
+
+// let like;
+// let likedLevels = localStorage.likedLevels ? JSON.parse(localStorage.likedLevels) : []
+// if (likedLevels.includes('[[ID]]')) $('#likeButton').attr('src', '../assets/voted.png').removeClass('gdButton').prop("onclick", null)
+
+// $('#likebtn').click(function() {
+// 	$('#likebtn').removeClass('youAreNotTheOne')
+// 	$('#dislikebtn').addClass('youAreNotTheOne')
+// 	like = true
+// })
+
+// $('#dislikebtn').click(function() {
+// 	$('#likebtn').addClass('youAreNotTheOne')
+// 	$('#dislikebtn').removeClass('youAreNotTheOne')
+// 	like = false
+// })
+
+// $('#submitVote').click(function() {
+
+// 	if (likedLevels.includes('[[ID]]')) return $('#message').text("You've already liked/disliked this level!");
+
+// 	let ID = '[[ID]]'
+// 	let username = $('#like-username').val()
+// 	let password = $('#like-password').val()
+// 	let accountID = 0
+// 	let likeType = like ? "1" : "0"
+
+// 	if (!ID || !username || !password) return $('#commentDiv').hide()
+
+// 	$('#message').text(like ? "Liking..." : "Disliking... :(")
+// 		$('.postbutton').hide()
+// 		allowEsc = false
+
+// 	fetch(`../api/profile/${username}`).then(res => res.json()).then(res => {
+// 		if (!res || res == "-1") {$('.postbutton').show(); return $('#message').text("The username you provided doesn't exist!")}
+// 		else accountID = res.accountID
+
+// 		$.post("../like",  { ID, accountID, password, like: likeType, type: 1, extraID: 0 })
+// 		.done(x => {
+// 			likedLevels.push('[[ID]]')
+// 			localStorage.setItem('likedLevels', JSON.stringify(likedLevels))
+// 			location.reload()
+// 		})		
+// 		.fail(e => {$('.postbutton').show();$('#message').text(e.responseText.includes("DOCTYPE") ? "Something went wrong..." : e.responseText)})
+// 	})
+// })
 
 </script>

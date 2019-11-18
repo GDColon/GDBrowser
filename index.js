@@ -56,6 +56,10 @@ app.post("/postComment", function(req, res) {
   app.modules.postComment(app, req, res)
 })  
 
+app.post("/like", function(req, res) {
+  app.modules.like(app, req, res)
+})  
+
 app.get("/api", function(req, res) {
   res.sendFile(__dirname + "/html/api.html")
 })   
