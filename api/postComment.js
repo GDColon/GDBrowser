@@ -44,8 +44,6 @@ module.exports = async (app, req, res) => {
 
   params.chk = chk
 
-  console.log(params)
-
   request.post('http://boomlings.com/database/uploadGJComment21.php', {
     form: params
   }, function (err, resp, body) {
