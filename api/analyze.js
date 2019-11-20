@@ -106,6 +106,74 @@ Object.keys(data[0]).forEach(x => {
     else if (val[1] == "bump") val = Number(property) + 1
     else if (val[1] == "bool") val = property != "0"
 
+    // you can only imagine my fear when i discovered this was a thing
+    // these literally are keys set the value, and to convert this to the color list we have to do this fun messy thing that shouldn't exist
+    else if (val[1] == 'extra-legacy-color') {
+        // since i wrote the 1.9 color before this, a lot of explaination will be there instead
+        const colorInfo = name.split('-');
+        const color = colorInfo[2]; // r,g,b
+        const channel = colorInfo[1];
+
+        if (color == 'r') {
+            // first we create the color object
+            response.colors.push({"channel": channel, "opacity": 1});
+        }
+        // from here we touch the color object
+        let currentChannel = response.colors.find(k => k.channel == channel);
+        if (color == 'blend') {
+            currentChannel.blending = true; // only one color has blending though lol
+        } else if (color == 'pcol') {
+            currentChannel.pColor = property;
+        }
+        currentChannel[color] = property;
+    }
+
+    // if a level has a legacy color, we can assume that it does not have a kS38 at all
+    else if (val[1] == "legacy-color") {
+        color = app.parseResponse(property, "_");
+
+        const keys = Object.keys(color)
+        let colorObj = {}
+
+        // so here we parse the color to something understandable by the rest
+        // slightly smart naming but it is also pretty gross
+        // in a sense - the name would be something like legacy-G -> G
+        const colorVal = name.split('-').pop()
+
+        keys.forEach(k => {if (colorStuff.properties[k]) colorObj[colorStuff.properties[k]] = color[k]})
+
+        // if color value is not a number, then it goes through the list of channels to find the channel for the special color
+        colorObj.channel = (parseInt(colorVal)) ? colorVal : Object.keys(colorStuff.channels).find(k => colorStuff.channels[k] == colorVal);
+
+        // from here stuff can continue as normal, ish
+        if (colorStuff.channels[colorObj.channel]) colorObj.channel = colorStuff.channels[colorObj.channel];
+        if (colorObj.channel > 1000) return;
+        if (colorObj.pColor == "-1") delete colorObj.pColor;
+        colorObj.opacity = 1; // 1.9 colors don't have this!
+        if (colorObj.blending && colorObj.blending == '1') colorObj.blending = true; // 1.9 colors manage to always think they're blending - they're not
+        else delete colorObj.blending;
+
+        switch (colorVal) {
+            /* case 'G': (removed - this lets it fit on a single row for me and that matters more)
+                response.colors.push(colorObj);
+                // javascript likes to link arrays, but we don't want that
+                const g2channel = Object.assign({}, colorObj); // fake ground 2 to make it look nice
+                g2channel.channel = 'G2';
+                response.colors.push(g2channel);
+                break;
+            */
+            case '3DL':
+                // hardcode the position of 3DL, it typically goes at the end due to how RobTop make the headers
+                response.colors.splice(5, 0, colorObj);
+                break;
+            case 'Line':
+                colorObj.blending = true; // in line with 2.1 behavior
+            default:
+                response.colors.push(colorObj); // bruh whatever was done to make the color list originally was long
+                break;
+        }
+    }
+
     else if (val[1] == "colors") {
         let colorList = property.split("|")
         colorList.forEach((x, y) => {
@@ -137,14 +205,17 @@ Object.keys(data[0]).forEach(x => {
     response.settings[name] = val
 })
 
-if (response.settings.ground == 0) response.settings.ground = 1
-if (response.settings.background == 0) response.settings.background = 1
+if (response.settings.ground == 0 || !response.settings.ground) response.settings.ground = 1
+if (response.settings.background == 0 || !response.settings.background) response.settings.background = 1
 if (!response.settings.font) response.settings.font = 1
 
 if (response.settings.alternateLine == 2) response.settings.alternateLine = true
 else response.settings.alternateLine = false
 
-
+Object.keys(response.settings).filter(k => {
+    // this should be parsed into color list instead
+    if (k.includes('legacy')) delete response.settings[k];
+});
 
 delete response.settings['colors']
 response.text = data.filter(x => x.message).sort(function (a, b) {return parseInt(a.x) - parseInt(b.x)}).map(x => [Buffer.from(x.message, 'base64').toString(), Math.round(x.x / last * 99) + "%"])

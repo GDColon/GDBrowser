@@ -15,6 +15,44 @@
         "kA16": ["fadeOut", "bool"],
         "kA17": ["alternateLine", "number"],
 
+        "kS1": ["legacy-BG-r", "extra-legacy-color"],
+        "kS2": ["legacy-BG-g", "extra-legacy-color"],
+        "kS3": ["legacy-BG-b", "extra-legacy-color"],
+
+        "kS4": ["legacy-G-r", "extra-legacy-color"],
+        "kS5": ["legacy-G-g", "extra-legacy-color"],
+        "kS6": ["legacy-G-b", "extra-legacy-color"],
+
+        "kS7": ["legacy-Line-r", "extra-legacy-color"],
+        "kS8": ["legacy-Line-g", "extra-legacy-color"],
+        "kS9": ["legacy-Line-b", "extra-legacy-color"],
+
+        "kS10": ["legacy-Obj-r", "extra-legacy-color"],
+        "kS11": ["legacy-Obj-g", "extra-legacy-color"],
+        "kS12": ["legacy-Obj-b", "extra-legacy-color"],
+
+        "kS13": ["legacy-1-r", "extra-legacy-color"],
+        "kS14": ["legacy-1-g", "extra-legacy-color"],
+        "kS15": ["legacy-1-b", "extra-legacy-color"],
+
+        "kA5": ["legacy-1-blend", "extra-legacy-color"],
+
+        "kS16": ["legacy-BG-pcol", "extra-legacy-color"],
+        "kS17": ["legacy-G-pcol", "extra-legacy-color"],
+        "kS18": ["legacy-Line-pcol", "extra-legacy-color"],
+        "kS19": ["legacy-Obj-pcol", "extra-legacy-color"],
+        "kS20": ["legacy-1-pcol", "extra-legacy-color"],
+
+        "kS29": ["legacy-BG", "legacy-color"],
+        "kS30": ["legacy-G", "legacy-color"],
+        "kS31": ["legacy-Line", "legacy-color"],
+        "kS32": ["legacy-Obj", "legacy-color"],
+        "kS33": ["legacy-1", "legacy-color"],
+        "kS34": ["legacy-2", "legacy-color"],
+        "kS35": ["legacy-3", "legacy-color"],
+        "kS36": ["legacy-4", "legacy-color"],
+        "kS37": ["legacy-3DL", "legacy-color"],
+
         "kS38": ["colors", "colors"]
     },
 
