@@ -161,7 +161,7 @@ appendPortals()
 		</div><h3 style="padding-top: 7%">${c.channel > 0 ? "Col " + c.channel : c.channel}</h3></div>`)
 	})
 
-	if (colorList.length == 0) $('#colorDiv').append('<h3 style="margin-top: 7vh">Level is too old to get color info!</h3>')
+	if (colorList.length == 0) $('#colorDiv').append('<h3 style="margin-top: 7vh">Could not get color info!</h3>')
 
 	$(".portalToggle").click(function() {
 		if ($(this).prop('checked')) disabledPortals = disabledPortals.filter(x => x != $(this).attr('portal'))
