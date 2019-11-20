@@ -142,36 +142,17 @@ Object.keys(data[0]).forEach(x => {
 
         keys.forEach(k => {if (colorStuff.properties[k]) colorObj[colorStuff.properties[k]] = color[k]})
 
-        // if color value is not a number, then it goes through the list of channels to find the channel for the special color
-        colorObj.channel = (parseInt(colorVal)) ? colorVal : Object.keys(colorStuff.channels).find(k => colorStuff.channels[k] == colorVal);
+        colorObj.channel = colorVal
 
         // from here stuff can continue as normal, ish
-        if (colorStuff.channels[colorObj.channel]) colorObj.channel = colorStuff.channels[colorObj.channel];
-        if (colorObj.channel > 1000) return;
         if (colorObj.pColor == "-1" || colorObj.pColor == "0") delete colorObj.pColor;
         colorObj.opacity = 1; // 1.9 colors don't have this!
         if (colorObj.blending && colorObj.blending == '1') colorObj.blending = true; // 1.9 colors manage to always think they're blending - they're not
         else delete colorObj.blending;
 
-        switch (colorVal) {
-            /* case 'G': (removed - this lets it fit on a single row for me and that matters more)
-                response.colors.push(colorObj);
-                // javascript likes to link arrays, but we don't want that
-                const g2channel = Object.assign({}, colorObj); // fake ground 2 to make it look nice
-                g2channel.channel = 'G2';
-                response.colors.push(g2channel);
-                break;
-            */
-            case '3DL':
-                // hardcode the position of 3DL, it typically goes at the end due to how RobTop make the headers
-                response.colors.splice(5, 0, colorObj);
-                break;
-            case 'Line':
-                colorObj.blending = true; // in line with 2.1 behavior
-            default:
-                response.colors.push(colorObj); // bruh whatever was done to make the color list originally was long
-                break;
-        }
+        if (colorVal == '3DL') { response.colors.splice(4, 0, colorObj); } // hardcode the position of 3DL, it typically goes at the end due to how RobTop make the headers
+        else if (colorVal == 'Line') { colorObj.blending = true; response.colors.push(colorObj); }  // in line with 2.1 behavior
+        else { response.colors.push(colorObj); } // bruh whatever was done to make the color list originally was long
     }
 
     else if (val[1] == "colors") {
@@ -181,7 +162,7 @@ Object.keys(data[0]).forEach(x => {
             let keys = Object.keys(color)
             let colorObj = {}
             if (!color['6']) return colorList = colorList.filter((h, i) => y != i)
-        
+
             keys.forEach(k => {if (colorStuff.properties[k]) colorObj[colorStuff.properties[k]] = color[k]})
             if (colorStuff.channels[colorObj.channel]) colorObj.channel = colorStuff.channels[colorObj.channel]
             if (colorObj.channel > 1000) return;
