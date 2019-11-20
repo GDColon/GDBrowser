@@ -205,8 +205,8 @@ Object.keys(data[0]).forEach(x => {
     response.settings[name] = val
 })
 
-if (response.settings.ground == 0 || !response.settings.ground) response.settings.ground = 1
-if (response.settings.background == 0 || !response.settings.background) response.settings.background = 1
+if (!response.settings.ground || response.settings.ground > 17) response.settings.ground = 1
+if (!response.settings.background || response.settings.background > 20) response.settings.background = 1
 if (!response.settings.font) response.settings.font = 1
 
 if (response.settings.alternateLine == 2) response.settings.alternateLine = true

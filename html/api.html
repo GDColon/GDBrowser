@@ -4,7 +4,7 @@
 	<title>GD Level Browser API</title>
 	<meta charset="utf-8">
 	<link rel="icon" href="../difficulty/auto.png">
-	<link href="../css/api.css" type="text/css" rel="stylesheet">
+	<link href="../assets/css/api.css" type="text/css" rel="stylesheet">
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,600,700,800&display=swap" rel="stylesheet">
 	
@@ -22,14 +22,36 @@
 			</div>
 			<div class="header-links hid">
 				<a class="header-link" href="#intro">Introduction</a>
-				<a class="header-link" href="#level">Levels</a>
-				<a class="header-link" href="#profile">Profiles</a>
-				<a class="header-link" href="#search">Searching</a>
-				<a class="header-link" href="#leaderboard">Leaderboards</a>
-				<a class="header-link" href="#levelleaderboard">Level Leaderboards</a>
-				<a class="header-link" href="#comments">Comments & Posts</a> 
-				<a class="header-link" href="#analyze">Level Analysis</a> 
-				<a class="header-link" href="#icons">Icons</a> 
+				<div class="header-category">
+					<div class="category-name">Levels</div>
+					<div class="category-content">
+						<a class="header-link" href="#level">Levels</a>
+						<a class="header-link" href="#search">Searching</a>
+						<a class="header-link" href="#levelleaderboard">Level Leaderboards</a>
+					</div>
+				</div>
+				<div class="header-category">
+					<div class="category-name">Users</div>
+					<div class="category-content">
+						<a class="header-link" href="#profile">Profiles</a>
+						<a class="header-link" href="#leaderboard">Leaderboards</a>
+						<a class="header-link" href="#comments">Comments & Posts</a> 
+					</div>
+				</div>
+				<div class="header-category">
+					<div class="category-name">Account</div>
+					<div class="category-content">
+							<a class="header-link" href="#commenting">Commenting</a> 
+						<a class="header-link" href="#liking">Liking</a> 
+					</div>
+				</div>
+				<div class="header-category">
+					<div class="category-name">Misc</div>
+					<div class="category-content">
+							<a class="header-link" href="#analyze">Level Analysis</a> 
+						<a class="header-link" href="#icons">Icons</a> 
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -56,6 +78,8 @@
 				<p><a href="#levelleaderboard"><u>Level Leaderboards</u></a> <i>/api/leaderboardLevel/levelID</i></p>
 				<p><a href="#comments"><u>Comments & Posts</u></a> <i>/api/comments/level-or-user-ID</i></p>
 				<p><a href="#analyze"><u>Level Analysis</u></a> <i>/api/analyze/levelID</i></p>
+				<p><a href="#commenting"><u>Commenting</u></a> <i>/api/postComment (POST)</i></p>
+				<p><a href="#liking"><u>Liking</u></a> <i>/api/like (POST)</i></p>
 				<p><a href="#icons"><u>Icons</u></a> <i>/icon/username</i></p>
 			</quote>
 			<br>
@@ -432,6 +456,7 @@
 		</div>
 		<div class="seperator"></div>
 	</main>
+	
 	<main class="alt">
 		<div id="analyze" class="anchor"></div>
 		<div class="main-block">
@@ -471,6 +496,88 @@
 		<div class="seperator"></div>
 
 	</main>
+
+	<main class="grey">
+			<div id="commenting" class="anchor"></div>
+			<div class="main-block">
+				<h1>Commenting</h1>
+				<p>POST: /api/postComment</p>
+	
+				<p>Leaves a comment on a level. This one is a POST request!</p>
+				<p>*Commenting has a rate limit of 10 seconds</p>
+	
+				<br>
+				<p class="reveal" onclick="$('#params-commenting').slideToggle(100)"><b>Parameters (6)</b></p>
+				<div class="subdiv" id="params-commenting">
+					<p>comment: The content of the comment</p>
+					<p>username: Your username</p>
+					<p>accountID: Your account ID</p>
+					<p>password: Your password (as plain text)</p>
+					<p>levelID: The ID of the level to comment on</p>
+					<p>percent: The percent shown on the comment (optional)</p>
+				</div>
+	
+				<br>
+
+				<p class="reveal" onclick="$('#request-commenting').slideToggle(100)"><b>Example</b></p>
+				<div class="subdiv" id="request-commenting">
+					<p><b>Example Requests</b></p>
+					<p>POST /api/postComment<br>
+						?comment=This is a nifty comment!<br>
+						&username=colon<br>
+						&accountID=106255<br>
+						&password=KitsuneColon333<br>
+						&levelID=21448270<br>
+						&percent=69
+					<br>
+					<p>If a status of 200 is returned, then the comment was successfully posted. Otherwise, a 400 will return with an error message.</p>
+				</div>
+	
+			</div>
+			<div class="seperator"></div>
+		</main>
+
+
+		<main class="alt">
+			<div id="liking" class="anchor"></div>
+			<div class="main-block">
+				<h1>Liking</h1>
+				<p>POST: /api/like</p>
+	
+				<p>Likes/dislikes level, comment, or post. This one is a POST request!</p>
+	
+				<br>
+				<p class="reveal" onclick="$('#params-liking').slideToggle(100)"><b>Parameters (6)</b></p>
+				<div class="subdiv" id="params-liking">
+					<p>ID: The ID of the item to like. This should be a level ID, comment ID, or profile post ID</p>
+					<p>like: Whether to like or dislike the level. 1=like, 0=dislike</p>
+					<p>type: The type of item you're liking. 1=level, 2=comment, 3=profile post</p>
+					<p>extraID: An extra ID. This should be the level ID for comments, the account ID for profile posts, or "0" for levels</p>
+					<p>accountID: Your account ID</p>
+					<p>password: Your password (as plain text)</p>
+				</div>
+	
+				<br>
+
+				<p class="reveal" onclick="$('#request-liking').slideToggle(100)"><b>Example</b></p>
+				<div class="subdiv" id="request-liking">
+					<p><b>Example Requests</b></p>
+					<p>Drop a like on RobTop's popular "can you handle the kappa" comment:</p>
+					<p>POST /api/like<br>
+						?id=42602304 (ID of the comment)<br>
+						&like=1 (thumbs up)<br>
+						&type=2 (liking a comment)<br>
+						&extraID=7485599 (ID of Kappaclysm)<br>
+						&accountID=106255<br>
+						&password=KitsuneColon333<br>
+					<br>
+					<p>A status of 200 will return if everything goes well, otherwise a 400 will return with an error message.<br>
+						Liking a comment multiple times on the same account will return a 200, but not actually increase the in-game like counter.</p>
+				</div>
+	
+			</div>
+			<div class="seperator"></div>
+		</main>
 
 	<main>
 		<div id="icons" class="anchor"></div>

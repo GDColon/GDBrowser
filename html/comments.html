@@ -98,7 +98,7 @@
 		</div>
 		
 		<div id="leaveComment" style="position:absolute;bottom: 0%;right: 0%;width: 14%;text-align: right;transform: translate(30%, 40%);">
-			<img class="gdButton" src="../assets/comment.png" width="60%" onclick="$('#postComment').show()">
+			<img class="gdButton" src="../assets/comment.png" width="60%" onclick="$('#content').trigger('input'); $('#postComment').show();">
 		</div>
 
 	</div>
@@ -241,9 +241,9 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 					</div>
 				</div>
 				<p class="commentDate compactDate">${x.date}</p>
-				<div class="commentLikes" commentID="${x.ID}" ${x.levelID ? `levelID="${x.levelID}"` : ""}">
+				<div class="commentLikes">
 					${history ? `<h3 style="margin-right: 0.5vh; pointer-events: all;" class="gold inline"><a href="../${x.levelID}">(${x.levelID})</a></h3>` : ""}
-					<div class="inline gdButton likeComment">
+					<div class="inline gdButton likeComment" commentID="${x.ID}"${x.levelID ? `levelID="${x.levelID}"` : ""}>
 						<img class="inline" ${x.likes < 0 ? "style='transform: translateY(15%); margin-right: 0.4%'" : ""} src="../assets/${x.likes < 0 ? "dis" : ""}like.png" height=27%>
 					</div>
 					<h3 class="inline">${x.likes}</h3>
@@ -387,7 +387,7 @@ $('#submitVote').click(function() {
 	let extraID = lvID || window.location.pathname.split('/')[2]
 	let accountID = 0
 	let likeType = like ? "1" : "0"
-
+	
 	if (!ID || !username || !password || loadingComments) return $('#postComment').hide()
 
 	$('#likeMessage').text(like ? "Liking..." : "Disliking... :(")
@@ -425,7 +425,7 @@ localStorage.setItem('commentPreset', JSON.stringify({
 })
 
 $(document).keydown(function(k) {
-	if (loadingComments) return;
+	if (loadingComments || $('.popup').is(":visible")) return;
 
     if (k.which == 37 && $('#pageDown').is(":visible")) { //left
 		$('#pageDown').trigger('click')
