@@ -122,7 +122,7 @@ Object.keys(data[0]).forEach(x => {
         let currentChannel = response.colors.find(k => k.channel == channel);
         if (color == 'blend') {
             currentChannel.blending = true; // only one color has blending though lol
-        } else if (color == 'pcol') {
+        } else if (color == 'pcol' && property != 0) {
             currentChannel.pColor = property;
         }
         currentChannel[color] = property;
