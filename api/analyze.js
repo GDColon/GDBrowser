@@ -148,7 +148,7 @@ Object.keys(data[0]).forEach(x => {
         // from here stuff can continue as normal, ish
         if (colorStuff.channels[colorObj.channel]) colorObj.channel = colorStuff.channels[colorObj.channel];
         if (colorObj.channel > 1000) return;
-        if (colorObj.pColor == "-1") delete colorObj.pColor;
+        if (colorObj.pColor == "-1" || colorObj.pColor == "0") delete colorObj.pColor;
         colorObj.opacity = 1; // 1.9 colors don't have this!
         if (colorObj.blending && colorObj.blending == '1') colorObj.blending = true; // 1.9 colors manage to always think they're blending - they're not
         else delete colorObj.blending;
