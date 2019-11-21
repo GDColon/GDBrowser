@@ -101,7 +101,8 @@ let hdPercent = (res.highDetail / res.objects) * 100
 if (res.highDetail == 0 || res.hdPercent == 0) $('#highDetailDiv').hide()
 
 else {
-	$('#highdetail').append(`<div class="inline" style="width:${hdPercent}%; height: 100%; background-color: lime; margin-left: -2.25%"></div>`)
+	let offset = hdPercent < 20 ? 1 : hdPercent < 40 ? 2 : hdPercent < 60 ? 3 : hdPercent < 80 ? 4 : 5
+	$('#highdetail').append(`<div class="inline" style="width:${hdPercent + offset}%; height: 100%; background-color: lime; margin-left: -2.25%"></div>`)
 	$('#hdText').text(`${res.highDetail}/${res.objects} marked high detail • ${+hdPercent.toFixed(1)}% optimized`)
 }
 
