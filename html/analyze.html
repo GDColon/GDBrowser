@@ -22,6 +22,13 @@
 	<div id="analysisDiv" style="margin-top: 2%; display:none">
 		<h2 id="levelName"></h2>
 		<h3 id="objectCount"></h3>
+
+		<div id="highDetailDiv">
+			<h1 class="topMargin">Low Detail Mode</h1>
+			<div class="transparentBox analysis roundBottom" id="highdetail" style="height: 10%; text-align: left; overflow: hidden; background-color: darkblue;"></div>
+			<h3 style="margin-top: -0.25%" id="hdText"></h3>
+		</div>
+
 		<h1 class="topMargin">Portal order</h1>
 		<div class="transparentBox analysis" id="portals" style="height: 23%"></div>
 		<div>
@@ -88,6 +95,15 @@ fetch(`../api${window.location.pathname}`).then(res => res.json()).then(res => {
 
 	$('#meta-title').attr('content',  "Analysis of " + res.level.name)
 	$('#meta-desc').attr('content',  `${res.portals.split(",").length}x portals, ${res.orbs.total || 0}x orbs, ${res.triggers.total || 0}x triggers, ${res.misc.glow || 0}x glow...`)
+
+
+let hdPercent = (res.highDetail / res.objects) * 100
+if (res.highDetail == 0 || res.hdPercent == 0) $('#highDetailDiv').hide()
+
+else {
+	$('#highdetail').append(`<div class="inline" style="width:${hdPercent}%; height: 100%; background-color: lime; margin-left: -2.25%"></div>`)
+	$('#hdText').text(`${res.highDetail}/${res.objects} marked high detail • ${+hdPercent.toFixed(1)}% optimized`)
+}
 
 let triggerList = Object.keys(res.triggers)
 let orbList = Object.keys(res.orbs)

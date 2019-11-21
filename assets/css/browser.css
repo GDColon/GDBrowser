@@ -712,6 +712,11 @@ input::-webkit-inner-spin-button {
     border-bottom-right-radius: 0;
 }
 
+.roundBottom {
+    border-bottom-left-radius: 2vh;
+    border-bottom-right-radius: 2vh;
+}
+
 .analysis::-webkit-scrollbar, .levelCode::-webkit-scrollbar {
     height: 8%;
     width: 1%;

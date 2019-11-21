@@ -21,6 +21,7 @@ let blockNames = Object.keys(blocks)
 let miscNames = Object.keys(ids.misc)
 let blockCounts = {}
 let miscCounts = {}
+let highDetail = 0
 
 data = data.split(";")
 
@@ -45,6 +46,8 @@ data.forEach((x, y) => {
     if (ids.portals[id]) obj.portal = ids.portals[id]
     if (ids.orbs[id]) obj.orb = ids.orbs[id]
     if (ids.triggers[id]) obj.trigger = ids.triggers[id]
+
+    if (obj.highDetail == 1) highDetail += 1 
 
     blockNames.forEach(b => {
         if (blocks[b].includes(id)) {
@@ -73,6 +76,7 @@ response.level = {
 }
 
 response.objects = data.length - 2
+response.highDetail = highDetail
 response.settings = {}
 
 response.portals = data.filter(x => x.portal).sort(function (a, b) {return parseInt(a.x) - parseInt(b.x)}).map(x => x.portal + " " + Math.round(x.x / last * 99) + "%").join(", ")
