@@ -138,8 +138,8 @@
 		<img class="gdButton yesClick" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()">
 	</div>
 	<div id="copied" style="display: none;">
-		<div class="copied center noClick" style="position:absolute; top: 36%; left: 50%; transform: translate(-50%,-50%); width: 80vh">
-			<h1 class="smaller noSelect">ID copied to clipboard</h1>
+		<div class="copied center noClick" style="position:absolute; top: 36%; left: 50%; transform: translate(-50%,-50%); width: 90vh">
+			<h1 class="smaller noSelect" id="copiedText">ID copied to clipboard</h1>
 		</div>
 	</div>
 
@@ -155,14 +155,28 @@ $('#message').html(messageText)
 
 if (window.location.href.endsWith('?download')) $('#infoDiv').show()
 
-	let freeze = false;
-	$('#playButton').click(function() {
-	if (!($('#copied').is(':animated'))) $('#copied').stop().fadeIn(200).delay(500).fadeOut(500)
-	var temp = $("<input>");
-    $("body").append(temp);
-    temp.val('[[ID]]').select();
-    document.execCommand("copy"); temp.remove()})
-$('.closeWindow').click(function() {if (!freeze) $(".popup").attr('style', 'display: none;')})
+		let copyMessages = ["ID copied to clipboard", "ID copied x[C]!", "ID copied again!", "ID copied once more!", "ID clipboard to copied!", "ID copied yet again!", "As you wish", "Copy that!", "This one actually works", "You can't play levels, son", "Keep it coming", "Click again, I dare you", "C-C-C-C-COPIED!",
+							"Get a life", "...", "bruh moment", "Etched into thy's memory!", "h", "I feel physical pain", "Play it in GD!", "[[ID]]", "go away", "Every copy costs 2 cents!", "Un-copied!", "Copied++", "C O P I E D", "help me please", "Open GD to play the level!", "pretend you're playing it", "Anotha one!"]
+
+		let copies = 0
+		let animated = false;
+		let freeze = false;
+
+		$('#playButton').click(function () {
+			if (!($('#copied').is(':animated')) && !animated) {
+				animated = true;
+				copies += 1
+				$('#copied').stop().fadeIn(200).delay(500).fadeOut(500, function() {
+					animated = false
+					if (copies > 1) $('#copiedText').text(copyMessages[Math.floor(Math.random()*(copies > 4 ? copyMessages.length : 6))].replace("[C]", copies))
+				})
+			}
+			var temp = $("<input>");
+			$("body").append(temp);
+			temp.val('[[ID]]').select();
+			document.execCommand("copy"); temp.remove()
+		})
+		$('.closeWindow').click(function () { if (!freeze) $(".popup").attr('style', 'display: none;') })
 
 $('#difficultytext').html('[[DIFFICULTY]]'.replace(' ', "<br>"))
 
@@ -196,7 +210,6 @@ if ([[DIAMONDS]] == 0 || !'[[DEMONLIST]]'.startsWith("[")) $('.diamonds').hide()
 if (!'[[DEMONLIST]]'.startsWith("[")) $('.demonList').show()
 else $('.demonList').remove()
 
-
 if ("[[SONGID]]".startsWith("Level")) {
 	$('#songInfo').text('[[SONGID]]')
 	$('.songLink').hide()}
@@ -215,7 +228,6 @@ if ("[[ACCOUNTID]]" == "0") {
 	}
 
 if (window.location.pathname == "/weekly") $('body').addClass('darkBG')
-
 
 $(window).on('load', function() {
 
