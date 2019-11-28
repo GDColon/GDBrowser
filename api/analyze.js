@@ -21,6 +21,7 @@ let blockNames = Object.keys(blocks)
 let miscNames = Object.keys(ids.misc)
 let blockCounts = {}
 let miscCounts = {}
+let triggerGroups = []
 let highDetail = 0
 
 data = data.split(";")
@@ -47,6 +48,7 @@ data.forEach((x, y) => {
     if (ids.orbs[id]) obj.orb = ids.orbs[id]
     if (ids.triggers[id]) obj.trigger = ids.triggers[id]
 
+    if (obj.triggerGroups) obj.triggerGroups.split('.').forEach(x => triggerGroups.push(x))
     if (obj.highDetail == 1) highDetail += 1 
 
     blockNames.forEach(b => {
@@ -97,9 +99,18 @@ triggerArray = data.filter(x => x.trigger).reduce( (a,b) => {
 triggerArray.forEach(x => response.triggers[x.trigger] = x.count)
 response.triggers.total = data.filter(x => x.trigger).length
 
+response.triggerGroups = {}
 response.blocks = sortObj(blockCounts)
 response.misc = sortObj(miscCounts, '0')
 response.colors = []
+
+triggerGroups.forEach(x => {
+    if (response.triggerGroups['Group ' + x]) response.triggerGroups['Group ' + x] += 1
+    else response.triggerGroups['Group ' + x] = 1
+})
+
+response.triggerGroups = sortObj(response.triggerGroups)
+response.triggerGroups.total = triggerGroups.length
 
 Object.keys(data[0]).forEach(x => {
     let val = init.values[x]
