@@ -838,6 +838,7 @@ input::-webkit-inner-spin-button {
 .groupID {
     font-size: 8vh;
     margin: 0% 2%;
+    overflow: visible;
 }
 
 .orbDiv, .blockDiv, .styleDiv {
