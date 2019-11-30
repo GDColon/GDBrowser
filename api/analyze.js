@@ -185,6 +185,14 @@ Object.keys(data[0]).forEach(x => {
             if (colorObj.copiedChannel > 1000) delete colorObj.copiedChannel;
             if (colorObj.pColor == "-1") delete colorObj.pColor
             if (colorObj.blending) colorObj.blending = true
+            if (colorObj.copiedHSV) {
+                let hsv = colorObj.copiedHSV.split("a")
+                colorObj.copiedHSV = {}
+                hsv.forEach((x, y) => { colorObj.copiedHSV[colorStuff.hsv[y]] = x })
+                colorObj.copiedHSV['s-checked'] = colorObj.copiedHSV['s-checked'] == 1
+                colorObj.copiedHSV['v-checked'] = colorObj.copiedHSV['v-checked'] == 1
+            if (colorObj.copyOpacity == 1) colorObj.copyOpacity = true
+            }
             colorObj.opacity = +Number(colorObj.opacity).toFixed(2)
             colorList[y] = colorObj
 

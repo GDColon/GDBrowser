@@ -19,6 +19,11 @@
 		<img class="spin noSelect" src="../assets/loading.png" height="25%" style="margin-top: 7%">
 	</div>
 
+	<div class="popup" id="colorInfo">
+		<div id="colorStuff" class="brownbox bounce center supercenter" style="height: 60%; width: 90vh">
+		</div>
+	</div>
+
 	<div id="analysisDiv" style="margin-top: 2%; display:none">
 		<h2 id="levelName"></h2>
 		<h3 id="objectCount"></h3>
@@ -181,8 +186,10 @@ appendPortals()
 
 	colorList.forEach((x, y) => {
 		let c = res.colors[x]
-		$('#colorDiv').append(`${y % 8 == 0 ? "<brr>" : ""}<div class="inline aColor"><div style="background-color: rgba(${c.r}, ${c.g}, ${c.b}, ${c.opacity}); border: 0.4vh solid rgb(${c.r}, ${c.g}, ${c.b})">
+
+		$('#colorDiv').append(`${y % 8 == 0 ? "<brr>" : ""}<div class="inline aColor"><div class="color" channel="${c.channel}" style="background-color: rgba(${c.cr || c.r}, ${c.cg || c.g}, ${c.cb || c.b}, ${c.opacity}); border: 0.4vh solid rgb(${c.r}, ${c.g}, ${c.b})">
 		${c.copiedChannel ? `<h3 class='copiedColor'>C:${c.copiedChannel}</h3>` : c.pColor ? `<h3 class='copiedColor'>P${c.pColor}</h3>` : c.blending ? "<h3 class='blendingDot'>•</h3>" : ""}	
+		${c.copiedChannel && c.copiedHSV ? `<h3 class='copiedColor copiedHSV'> +HSV</h3>` : ""}
 		${c.opacity != "1" ? `<h3 class='copiedColor'>${c.opacity}%</h3>` : ""}
 		</div><h3 style="padding-top: 7%">${c.channel > 0 ? "Col " + c.channel : c.channel}</h3></div>`)
 	})
@@ -216,6 +223,60 @@ appendPortals()
 	window.setTimeout(function () { //small delay so "loading" message appears
 		$('#levelCode').html(`<p class="codeFont">${res.data}</p>`)}, 50);
 		$('#levelCode').focus().select()
+	})
+
+	$(document).on('click', '.color', function() {
+		let col = res.colors.find(x => x.channel == $(this).attr('channel'))
+		let hsv = col.copiedHSV
+		if (hsv) {
+			hsv.s = Number(hsv.s).toFixed(2)
+			hsv.v = Number(hsv.v).toFixed(2)
+		}
+		let hex = "#" + ((1 << 24) + (+col.r << 16) + (+col.g << 8) + +col.b).toString(16).slice(1)
+		$('#colorStuff').html(`
+		<h2 class="slightlySmaller">${isNaN(col.channel) ? col.channel : "Color " + col.channel}</h2>
+			<div class="colorSection">
+				<h3>Hex Code</h3>
+				<p>${hex}</p>
+			</div>
+			<div class="colorSection">
+				<h3>RGB</h3>
+				<p>${col.r}, ${col.g}, ${col.b}</p>
+			</div>
+			<div class="colorSection">
+				<h3>Opacity</h3>
+				<p>${Number(col.opacity).toFixed(2)}</p>
+			</div>
+			<br>
+			<div class="colorSection2" style="width: 40%; ${col.copiedChannel ? "" : "margin-right:55.4%"}">
+				<div class="colorCheckbox"><h3><input ${col.pColor == 1 ? "checked" : ""} type="checkbox"> <label class="gdcheckbox gdButton"></label>Player 1</h3></div>
+				<div class="colorCheckbox"><h3><input ${col.pColor == 2 ? "checked" : ""} type="checkbox"> <label class="gdcheckbox gdButton"></label>Player 2</h3></div>
+				<div class="colorCheckbox"><h3><input ${col.blending ? "checked" : ""} type="checkbox"> <label class="gdcheckbox gdButton"></label>Blending</h3></div>
+				<div class="colorCheckbox"><h3><input ${col.copiedChannel ? "checked" : ""} type="checkbox"> <label class="gdcheckbox gdButton"></label>Copy Color</h3></div>
+				<div class="colorCheckbox"><h3><input ${col.copyOpacity ? "checked" : ""} type="checkbox"> <label class="gdcheckbox gdButton"></label>Copy Opacity</h3></div>
+			</div>
+			${col.copiedChannel ? `
+			<div class="colorSection2">
+				<div class="colorSection copyDetails">
+					<h3>Copied</h3>
+					<p>${isNaN(col.copiedChannel) ? col.copiedChannel : "Col " + col.copiedChannel}</p>
+				</div>
+				<div class="colorSection copyDetails">
+					<h3>Hue</h3>
+					<p>${!hsv ? 0 : hsv.h > 0 ? "+" + hsv.h : hsv.h}</p>
+				</div>
+				<div class="colorSection copyDetails">
+					<h3>Saturation</h3>
+					<p>${!hsv ? "x1.00" : !hsv['s-checked'] ? "x" + hsv.s : hsv.s > 0 ? "+" + hsv.s : hsv.s}</p>
+				</div>
+				<div class="colorSection copyDetails">
+					<h3>Brightness</h3>
+					<p>${!hsv ? "x1.00" : !hsv['v-checked'] ? "x" + hsv.v : hsv.v > 0 ? "+" + hsv.v : hsv.v}</p>
+				</div>
+			</div>`
+			: `<div class="colorBox" style="background-color: rgba(${col.r}, ${col.g}, ${col.b}, ${col.opacity}); border-color: ${hex}"></div>`}
+			<br><img src="../assets/ok.png" width=14%; style="margin-top: 4%" class="gdButton center" onclick="$('.popup').hide()">`)
+	$('#colorInfo').show()
 	})
 
 	$('#loadingDiv').hide()

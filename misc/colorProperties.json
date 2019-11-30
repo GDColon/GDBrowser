@@ -7,7 +7,9 @@
         "5": "blending",
         "6": "channel",
         "7": "opacity",
-        "9": "copiedChannel"
+        "9": "copiedChannel",
+        "10": "copiedHSV",
+        "17": "copyOpacity"
     },
     
     "channels": {
@@ -17,5 +19,7 @@
         "1003": "Obj",
         "1004": "3DL",
         "1009": "G2"
-    }
+    },
+
+    "hsv": ["h", "s", "v", "s-checked", "v-checked"]
 }

@@ -769,6 +769,70 @@ input::-webkit-inner-spin-button {
     font-size: 3vh;
 }
 
+.color {
+    cursor: pointer;
+}
+
+.color:hover {
+    transform:scale(1.1);
+    transition-duration: 0.1s;
+    transition-timing-function: ease-in-out;
+}
+
+.colorBox {
+    position: absolute;
+    height: 22vh;
+    width: 22vh;
+    border-radius: 2vh;
+    border: 0.75vh solid;
+    margin: 2.5% auto;
+    right: 20%;
+    top: 34%;
+}
+
+.colorSection {
+    display: inline-block;
+    width: 30%;
+    margin: 3% 0;
+}
+
+.colorSection h1 {
+    font-size: 4vh;
+}
+
+.colorSection p {
+    font-size: 3.2vh;
+    margin: 3% auto;
+    padding: 0.5% 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-color: rgba(0, 0, 0, 0.2);
+    border-radius: 1vh;
+    max-width: 80%;
+}
+
+.colorCheckbox {
+    text-align: left;
+    margin: 3% 0 0.5% 7%;
+}
+
+.colorCheckbox label {
+    height: 7%;
+    padding-right: 17%;
+}
+
+.colorSection2 {
+    width: 55%;
+    text-align: left;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.copyDetails {
+    text-align: center;
+    width: 48%;
+    margin: 3% 0;
+}
+
 .blendingDot {
     text-align: left;
     margin-left: 9%;
@@ -783,6 +847,10 @@ input::-webkit-inner-spin-button {
     margin-top: 3%;
     font-size: 2.5vh !important;
     user-select: none;
+}
+
+.copiedHSV {
+    font-size: 2vh !important;
 }
 
 .codeFont {
