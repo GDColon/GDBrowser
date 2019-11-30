@@ -211,7 +211,7 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 					<p class="commentPercent inline">${x.percent ? x.percent + "%" : ""}</p>
 
 					<div class="commentAlign">
-						<p class="commentText" style="color: rgb(${!history && x.playerID == lvl.authorID ? "255, 255, 75" : x.playerID == "16" ? "50, 255, 255" : x.modColor || lvl.moderator == "2" ? "75, 255, 75" : x.browserColor ? "255, 150, 255" : "255, 255, 255"})">${x.content}</p>
+						<p class="commentText" style="color: rgb(${!history && x.playerID == lvl.authorID ? "255, 255, 75" : x.playerID == "16" ? "50, 255, 255" : x.modColor || lvl.moderator == "2" ? "75, 255, 75" : x.browserColor ? "255, 180, 255" : "255, 255, 255"})">${x.content}</p>
 					</div>
 				</div>
 				<p class="commentDate">${x.date}</p>
@@ -237,7 +237,7 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 					<p class="commentPercent inline">${x.percent ? x.percent + "%" : ""}</p>
 
 					<div class="commentAlign">
-						<p class="commentText" style="color: rgb(${!history && x.playerID == lvl.authorID ? "255, 255, 75" : x.playerID == "16" ? "50, 255, 255" : x.modColor || lvl.moderator == "2" ? "75, 255, 75" : x.browserColor ? "255, 150, 255" : "255, 255, 255"})">${x.content}</p>
+						<p class="commentText" style="color: rgb(${!history && x.playerID == lvl.authorID ? "255, 255, 75" : x.playerID == "16" ? "50, 255, 255" : x.modColor || lvl.moderator == "2" ? "75, 255, 75" : x.browserColor ? "255, 180, 255" : "255, 255, 255"})">${x.content}</p>
 					</div>
 				</div>
 				<p class="commentDate compactDate">${x.date}</p>
@@ -422,6 +422,10 @@ localStorage.setItem('commentPreset', JSON.stringify({
   mode,
   compact
 }))
+})
+
+$('#content').keydown(function(k){
+   if (k.keyCode == 13) return false
 })
 
 $(document).keydown(function(k) {
