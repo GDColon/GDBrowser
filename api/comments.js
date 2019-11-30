@@ -41,16 +41,21 @@ module.exports = async (app, req, res) => {
         comment.ID = x[6]
         comment.likes = x[4]
         comment.date = (x[9] || "?") + " ago"
-        if (req.query.type == "commentHistory") comment.levelID = x[1]
         if (req.query.type != "profile") {
           comment.username = y[1] || "Unknown"
+          comment.levelID = x[1] || req.params.id
           comment.playerID = x[3]
           comment.accountID = y[16]
           comment.form = ['icon', 'ship', 'ball', 'ufo', 'wave', 'robot', 'spider'][Number(y[14])]
           if (x[10] > 0) comment.percent = x[10]
+          if (comment.content.endsWith("⍟")) {
+            comment.content = comment.content.slice(0, -1)
+            comment.browserColor = true }
           if (x[12] && x[12].includes(',')) comment.modColor = true
         }
+
         commentArray.push(comment)
+
       }) 
 
       return res.send(commentArray)

@@ -31,7 +31,7 @@ module.exports = async (app, req, res) => {
     percent: 0
   }
 
-  params.comment = new Buffer(req.body.comment).toString('base64').replace(/\//g, '_').replace(/\+/g, "-")
+  params.comment = new Buffer(req.body.comment + (req.body.color ? "⍟" : "")).toString('base64').replace(/\//g, '_').replace(/\+/g, "-")
   params.gjp = xor.encrypt(req.body.password, 37526)
   params.levelID = req.body.levelID.toString()
   params.accountID = req.body.accountID.toString()

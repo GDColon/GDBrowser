@@ -211,7 +211,7 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 					<p class="commentPercent inline">${x.percent ? x.percent + "%" : ""}</p>
 
 					<div class="commentAlign">
-						<p class="commentText" style="color: ${!history && x.playerID == lvl.authorID ? "rgb(255, 255, 75)" : x.playerID == "16" ? "rgb(50, 255, 255)" : x.modColor || lvl.moderator == "2" ? `rgb(75, 255, 75)` : "white"}">${x.content}</p>
+						<p class="commentText" style="color: rgb(${!history && x.playerID == lvl.authorID ? "255, 255, 75" : x.playerID == "16" ? "50, 255, 255" : x.modColor || lvl.moderator == "2" ? "75, 255, 75" : x.browserColor ? "255, 150, 255" : "255, 255, 255"})">${x.content}</p>
 					</div>
 				</div>
 				<p class="commentDate">${x.date}</p>
@@ -237,7 +237,7 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 					<p class="commentPercent inline">${x.percent ? x.percent + "%" : ""}</p>
 
 					<div class="commentAlign">
-						<p class="commentText" style="color: ${!history && x.playerID == lvl.authorID ? "rgb(255, 255, 75)" : x.playerID == "16" ? "rgb(50, 255, 255)" : x.modColor || lvl.moderator == "2" ? `rgb(75, 255, 75)` : "white"}">${x.content}</p>
+						<p class="commentText" style="color: rgb(${!history && x.playerID == lvl.authorID ? "255, 255, 75" : x.playerID == "16" ? "50, 255, 255" : x.modColor || lvl.moderator == "2" ? "75, 255, 75" : x.browserColor ? "255, 150, 255" : "255, 255, 255"})">${x.content}</p>
 					</div>
 				</div>
 				<p class="commentDate compactDate">${x.date}</p>
@@ -331,7 +331,7 @@ $('#submitComment').click(function() {
 		if (!res || res == "-1") {$('.postbutton').show(); return $('#message').text("The username you provided doesn't exist!")}
 		else accountID = res.accountID
 
-		$.post("../postComment",  {comment, username, password, levelID, accountID })
+		$.post("../postComment",  {comment, username, password, levelID, accountID, color: true})
 		.done(x => {
 			$('#content').val("")
 			$('#postComment').hide()
