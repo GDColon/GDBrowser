@@ -128,8 +128,7 @@ module.exports = async (app, req, res, api, analyze) => {
       const songEncoded = songName.split(' ').join('-');
       const AUDIO = 'https://www.newgrounds.com/audio/listen/' + songid;
       let BASE_URL = 'https://audio.ngfiles.com/';
-      let songBracket = Math.round(songid / 1000) * 1000;
-
+      let songBracket = Math.round(songid / 100) * 100;
       return BASE_URL + songBracket + '/' + `${songid}_${songEncoded}.mp3`;
     }
 
