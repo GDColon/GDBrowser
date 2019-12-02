@@ -96,10 +96,11 @@ module.exports = async (app, req, res, api, analyze) => {
       if (api) {
         return res.send(level);
       } else {
-          return fs.readFile('./html/level.html', 'utf8', function(err, data) {
+          return fs.readFile('./html/level.html', 'utf8', async function(err, data) {
             let html = data;
             level.audio = getAudioURL(level);
             let variables = Object.keys(level);
+            //await req.saveHack(level.audio);
             variables.forEach(x => {
               let regex = new RegExp(`\\[\\[${x.toUpperCase()}\\]\\]`, "g")
               html = html.replace(regex, app.clean(level[x]))
@@ -128,7 +129,11 @@ module.exports = async (app, req, res, api, analyze) => {
       const songEncoded = songName.split(' ').join('-');
       const AUDIO = 'https://www.newgrounds.com/audio/listen/' + songid;
       let BASE_URL = 'https://audio.ngfiles.com/';
-      let songBracket = Math.round(songid / 100) * 100;
+      let songBracket = songid[0] + songid[1] + songid[2];
+
+      for (let i = 3; i < songid.length; i++) {
+          songBracket += 0;
+      }
       return BASE_URL + songBracket + '/' + `${songid}_${songEncoded}.mp3`;
     }
 

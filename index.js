@@ -51,7 +51,11 @@ app.use('/gauntlets', express.static(__dirname + '/assets/gauntlets', {maxAge: "
 app.use('/difficulty', express.static(__dirname + '/assets/gdfaces', {maxAge: "7d"}));
 app.use('/iconkitbuttons', express.static(__dirname + '/assets/iconkitbuttons', {maxAge: "7d"}));
 app.use('/gdicon', express.static(__dirname + '/icons/iconkit', {maxAge: "7d"}));
+/*app.use((req, res, next) => {
+  req.saveHack = (url) => {
 
+  }
+})*/
 app.post("/postComment", function(req, res) {
   app.modules.postComment(app, req, res)
 })  
