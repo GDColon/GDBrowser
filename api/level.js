@@ -93,18 +93,21 @@ module.exports = async (app, req, res, api, analyze) => {
 
     function sendLevel() {
 
-    if (api) return res.send(level)
-
-    else return fs.readFile('./html/level.html', 'utf8', function(err, data) {
-      let html = data;
-      let variables = Object.keys(level)
-      variables.forEach(x => {
-        let regex = new RegExp(`\\[\\[${x.toUpperCase()}\\]\\]`, "g")
-        html = html.replace(regex, app.clean(level[x]))
-      })
-      return res.send(html)
-    }) 
+      if (api) {
+        return res.send(level);
+      } else {
+          return fs.readFile('./html/level.html', 'utf8', function(err, data) {
+            let html = data;
+            level.audio = getAudioURL(level);
+            let variables = Object.keys(level);
+            variables.forEach(x => {
+              let regex = new RegExp(`\\[\\[${x.toUpperCase()}\\]\\]`, "g")
+              html = html.replace(regex, app.clean(level[x]))
+            })
+            return res.send(html)
+          }) 
       }
+    }
 
       //demon list stuff
       if (level.difficulty == "Extreme Demon") {
@@ -118,4 +121,16 @@ module.exports = async (app, req, res, api, analyze) => {
     else return sendLevel()
 
     })
+
+    function getAudioURL(level) {
+      const songName = level.songName || '';
+      const songid = level.songID;
+      const songEncoded = songName.split(' ').join('-');
+      const AUDIO = 'https://www.newgrounds.com/audio/listen/' + songid;
+      let BASE_URL = 'https://audio.ngfiles.com/';
+      let songBracket = Math.round(songid / 1000) * 1000;
+
+      return BASE_URL + songBracket + '/' + `${songid}_${songEncoded}.mp3`;
+    }
+
 }

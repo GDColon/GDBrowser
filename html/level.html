@@ -2,7 +2,7 @@
 	<title>[[NAME]] ([[ID]])</title>
 	<meta charset="utf-8">
 	<link href="../css/browser.css" type="text/css" rel="stylesheet">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
 	<link rel="icon" href="../difficulty/[[DIFFICULTYFACE]].png">
 	<meta id="meta-title" property="og:title" content="[[NAME]] by [[AUTHOR]]">
 	<meta id="meta-desc" property="og:description" content="ID: [[ID]] | Stars: [[STARS]] | Difficulty: [[DIFFICULTY]] | Downloads: [[DOWNLOADS]] | Likes: [[LIKES]] | Length: [[LENGTH]] | Song: [[SONGNAME]] ([[SONGID]])">
@@ -111,10 +111,14 @@
 
 	<div class="brownBox" id="songBox" style="position:absolute; bottom: 4%; left: 0; right: 0; width: 85vh; height: 20%; margin-left: auto; margin-right: auto;">
 		<div style="margin-left: 0.5%">
-			<h1 class="slightlySmaller" id="songname">[[SONGNAME]]</h1>
+			<h1 class="slightlySmaller" id="songname"><a href="https://www.newgrounds.com/audio/listen/[[SONGID]]">[[SONGNAME]]</a></h1>
 			<h2 class="smaller">By: [[SONGAUTHOR]] <a class="songLink" href="https://[[SONGAUTHOR]].newgrounds.com" target="_blank"><img class="gdButton valign" src="../assets/more.png" width="12%"></a></h2>
 		</div>
-		<a class="songLink" href="https://www.newgrounds.com/audio/listen/[[SONGID]]" target="_blank"><img class="gdButton sideButton" src="../assets/playsong.png" style="position:absolute; right: 1%; top: 50%; width: 11%; height: auto;"></a>
+		<!--<a class="songLink" href="https://www.newgrounds.com/audio/listen/[[SONGID]]" target="_blank"><img class="gdButton sideButton" src="../assets/playsong.png" style="position:absolute; right: 1%; top: 50%; width: 11%; height: auto;"></a>-->
+		<a class="songLink" target="_blank" onclick="playSong()">
+			<img id="songPlay" class="gdButton sideButton" src="../assets/playsong.png" style="position:absolute; right: 1%; top: 50%; width: 11%; height: auto;">
+			<img id="songPause" class="gdButton sideButton" src="../assets/pausesong.png" style="position:absolute; right: 1%; top: 50%; width: 11%; height: auto; display: none;">
+		</a>
 	</div>
 
 	<div class="center" style="position:absolute; bottom: 5%; left: 0; right: 0">
@@ -144,12 +148,12 @@
 	</div>
 
 </div>
-
+	<audio id="songLoader" src="[[AUDIO]]" onended="stopSongPlaying()"></audio>
 </body>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script async type="text/javascript" src="../assets/sizecheck.js"></script>
 <script>
-
+let locals = {};
 let messageText = 'Your <span style="color: yellow">Geometry Dash password</span> will <span style="color: lime">not be stored</span> anywhere on the site, both <span style="color:rgb(113, 234, 255)">locally and server-side.</span> You can view the code used for liking a level <a class="menuLink" target="_blank" href="https://github.com/GDColon/GDBrowser/blob/master/api/like.js">here</a>.'
 $('#message').html(messageText)
 
@@ -212,7 +216,8 @@ else $('.demonList').remove()
 
 if ("[[SONGID]]".startsWith("Level")) {
 	$('#songInfo').text('[[SONGID]]')
-	$('.songLink').hide()}
+	$('.songLink').hide()
+}
 
 if ("[[INVALIDSONG]]" == "true") $('.songLink').hide()
 if ("[[DISLIKED]]" == "true") $('#likeImg').attr('src', '../assets/dislike.png').css('transform', 'translateY(20%)')
@@ -255,51 +260,74 @@ function deleteLevel() {
   location.reload()
   freeze = true;
 }
+async function playSong() {
+	const songid = [[SONGID]];
+	const elm = document.getElementById('songLoader');
+	if (typeof songid == 'string') return alert('Error: Can not play default songs.');
+	if (!locals.custom_start) {
+		locals.custom_start = true;
+		document.getElementById('songPlay').style.display = 'none';
+		document.getElementById('songPause').style.display = 'block';
+		elm.play();
+	} else {
+		locals.custom_start = false;
+		document.getElementById('songPlay').style.display = 'block';
+		document.getElementById('songPause').style.display = 'none';
+		elm.pause();
+	}
+}
+function stopSongPlaying() {
+	const elm = document.getElementById('songLoader');
+	elm.currentTime = 0;
+	locals.custom_start = false;
+	document.getElementById('songPlay').style.display = 'block';
+	document.getElementById('songPause').style.display = 'none';
+}
+/*
+ let like;
+ let likedLevels = localStorage.likedLevels ? JSON.parse(localStorage.likedLevels) : []
+ if (likedLevels.includes('[[ID]]')) $('#likeButton').attr('src', '../assets/voted.png').removeClass('gdButton').prop("onclick", null)
 
-// let like;
-// let likedLevels = localStorage.likedLevels ? JSON.parse(localStorage.likedLevels) : []
-// if (likedLevels.includes('[[ID]]')) $('#likeButton').attr('src', '../assets/voted.png').removeClass('gdButton').prop("onclick", null)
+ $('#likebtn').click(function() {
+ 	$('#likebtn').removeClass('youAreNotTheOne')
+ 	$('#dislikebtn').addClass('youAreNotTheOne')
+ 	like = true
+ })
 
-// $('#likebtn').click(function() {
-// 	$('#likebtn').removeClass('youAreNotTheOne')
-// 	$('#dislikebtn').addClass('youAreNotTheOne')
-// 	like = true
-// })
+ $('#dislikebtn').click(function() {
+ 	$('#likebtn').addClass('youAreNotTheOne')
+ 	$('#dislikebtn').removeClass('youAreNotTheOne')
+ 	like = false
+ })
 
-// $('#dislikebtn').click(function() {
-// 	$('#likebtn').addClass('youAreNotTheOne')
-// 	$('#dislikebtn').removeClass('youAreNotTheOne')
-// 	like = false
-// })
+ $('#submitVote').click(function() {
 
-// $('#submitVote').click(function() {
+ 	if (likedLevels.includes('[[ID]]')) return $('#message').text("You've already liked/disliked this level!");
 
-// 	if (likedLevels.includes('[[ID]]')) return $('#message').text("You've already liked/disliked this level!");
+ 	let ID = '[[ID]]'
+ 	let username = $('#like-username').val()
+ 	let password = $('#like-password').val()
+ 	let accountID = 0
+ 	let likeType = like ? "1" : "0"
 
-// 	let ID = '[[ID]]'
-// 	let username = $('#like-username').val()
-// 	let password = $('#like-password').val()
-// 	let accountID = 0
-// 	let likeType = like ? "1" : "0"
+ 	if (!ID || !username || !password) return $('#commentDiv').hide()
 
-// 	if (!ID || !username || !password) return $('#commentDiv').hide()
+ 	$('#message').text(like ? "Liking..." : "Disliking... :(")
+ 		$('.postbutton').hide()
+ 		allowEsc = false
 
-// 	$('#message').text(like ? "Liking..." : "Disliking... :(")
-// 		$('.postbutton').hide()
-// 		allowEsc = false
+ 	fetch(`../api/profile/${username}`).then(res => res.json()).then(res => {
+ 		if (!res || res == "-1") {$('.postbutton').show(); return $('#message').text("The username you provided doesn't exist!")}
+ 		else accountID = res.accountID
 
-// 	fetch(`../api/profile/${username}`).then(res => res.json()).then(res => {
-// 		if (!res || res == "-1") {$('.postbutton').show(); return $('#message').text("The username you provided doesn't exist!")}
-// 		else accountID = res.accountID
-
-// 		$.post("../like",  { ID, accountID, password, like: likeType, type: 1, extraID: 0 })
-// 		.done(x => {
-// 			likedLevels.push('[[ID]]')
-// 			localStorage.setItem('likedLevels', JSON.stringify(likedLevels))
-// 			location.reload()
-// 		})		
-// 		.fail(e => {$('.postbutton').show();$('#message').text(e.responseText.includes("DOCTYPE") ? "Something went wrong..." : e.responseText)})
-// 	})
-// })
+ 		$.post("../like",  { ID, accountID, password, like: likeType, type: 1, extraID: 0 })
+ 		.done(x => {
+ 			likedLevels.push('[[ID]]')
+ 			localStorage.setItem('likedLevels', JSON.stringify(likedLevels))
+ 			location.reload()
+ 		})		
+ 		.fail(e => {$('.postbutton').show();$('#message').text(e.responseText.includes("DOCTYPE") ? "Something went wrong..." : e.responseText)})
+ 	})
+ }) */
 
 </script>
