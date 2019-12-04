@@ -110,7 +110,7 @@ triggerGroups.forEach(x => {
 })
 
 response.triggerGroups = sortObj(response.triggerGroups)
-response.triggerGroups.total = triggerGroups.length
+response.triggerGroups.total = Object.keys(response.triggerGroups).length
 
 Object.keys(data[0]).forEach(x => {
     let val = init.values[x]
