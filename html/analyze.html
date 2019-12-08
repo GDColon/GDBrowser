@@ -62,7 +62,7 @@
 		<h1 class="topMargin2">Level Style</h1>
 		<div class="transparentBox analysis" id="style" style="height: 20%"></div>
 
-		<h1 class="topMargin2">Trigger Groups</h1>
+		<h1 class="topMargin2" id="grouptext">Trigger Groups</h1>
 		<div class="transparentBox analysis" id="groups" style="height: 18%"></div>
 
 		<h1 class="topMargin2">Color Channels</h1>
@@ -165,7 +165,7 @@ appendPortals()
 	})
 
 	groupList.forEach(x => {
-		if (x == "total") $('#triggerText').text(`Trigger Groups (${res.triggerGroups[x]})`)
+		if (x == "total") $('#grouptext').text(`Trigger Groups (${res.triggerGroups[x]})`)
 		else $('#groups').append(`<div class="inline groupDiv"><h1 class="groupID">${x.slice(6)}</h1><h3 style="padding-top: 7%">x${res.triggerGroups[x]}</h3></div>`)
 	})
 
