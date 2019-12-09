@@ -41,7 +41,6 @@ module.exports = async (app, req, res, api, analyze) => {
         level.cp = (level.stars > 0) + level.featured + level.epic
 
         // parse difficulty
-        console.log(levelInfo)
         level.parseDifficulty();
         level.difficultyFace = `${levelInfo[17] != 1 ? level.difficulty.toLowerCase() : `demon-${level.difficulty.toLowerCase().split(' ')[0]}`}${level.epic ? '-epic' : `${level.featured ? '-featured' : ''}`}`
 
@@ -50,7 +49,6 @@ module.exports = async (app, req, res, api, analyze) => {
             level.songAuthor = song[4] || "Unknown"
             level.songSize = (song[5] || "0") + "MB"
             level.songID = song[1] || level.customSong
-            console.log(level.songName)
         }
 
         else {
