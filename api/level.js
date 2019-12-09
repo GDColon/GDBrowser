@@ -6,10 +6,6 @@ const Level = require("./../classes/Level");
 
 module.exports = async (app, req, res, api, analyze) => {
 
-    let orbs = [0, 0, 50, 75, 125, 175, 225, 275, 350, 425, 500]
-    let length = ['Tiny', 'Short', 'Medium', 'Long', 'XL']
-    let difficulty = { 0: 'Unrated', 10: 'Easy', 20: 'Normal', 30: 'Hard', 40: 'Harder', 50: 'Insane' }
-
     let levelID = req.params.id
     if (levelID == "daily") return app.modules.download(app, req, res, api, 'daily', analyze)
     else if (levelID == "weekly") return app.modules.download(app, req, res, api, 'weekly', analyze)
@@ -40,22 +36,21 @@ module.exports = async (app, req, res, api, analyze) => {
         song = app.parseResponse(song, '~|~')
 
         let levelInfo = app.parseResponse(preRes[0])
-        let level = new Level(levelInfo)
+        let level = new Level(levelInfo, author)
 
         level.cp = (level.stars > 0) + level.featured + level.epic
 
-        if (levelInfo[17] == 1) level.difficulty += ' Demon'
-        if (level.difficulty == "Insane Demon") level.difficulty = "Extreme Demon"
-        else if (level.difficulty == "Harder Demon") level.difficulty = "Insane Demon"
-        else if (level.difficulty == "Normal Demon") level.difficulty = "Medium Demon"
-        else if (levelInfo[25] == 1) level.difficulty = 'Auto'
+        // parse difficulty
+        console.log(levelInfo)
+        level.parseDifficulty();
         level.difficultyFace = `${levelInfo[17] != 1 ? level.difficulty.toLowerCase() : `demon-${level.difficulty.toLowerCase().split(' ')[0]}`}${level.epic ? '-epic' : `${level.featured ? '-featured' : ''}`}`
 
         if (song[2]) {
-            level.songName = song[2] || "Unknown"
+            level.songName = unescape(escape(song[2])) || "Unknown"
             level.songAuthor = song[4] || "Unknown"
             level.songSize = (song[5] || "0") + "MB"
             level.songID = song[1] || level.customSong
+            console.log(level.songName)
         }
 
         else {
