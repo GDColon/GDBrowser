@@ -51,12 +51,10 @@ class Level {
 
     decodePassword() {
         let xor = new XOR();
-
-        if (this.password != "0") {
-            this.password = xor.decrypt(this.password, 26364);
-            if (this.password.length > 1) this.password = this.password.slice(1);
-            else return this.password;
-        } else return;
+        
+        this.password = xor.decrypt(this.password, 26364);
+        if (this.password.length > 1) this.password = this.password.slice(1);
+        else return this.password;
     }
 }
 
