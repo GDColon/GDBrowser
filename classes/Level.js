@@ -60,8 +60,8 @@ class Level {
     }
 }
 
-Level.Orbs = orbs;
-Level.Difficulties = difficulty;
-Level.Length = length;
+Level.ORBS. = orbs;
+Level.DIFFICULTIES = difficulty;
+Level.LENGTH = length;
 
 module.exports = Level;
