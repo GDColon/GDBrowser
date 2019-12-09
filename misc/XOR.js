@@ -12,8 +12,6 @@
 //////////////////////////////////////////////////////////////////////////////////////////
 
 //Stolen from https://github.com/fakemancat/geometry-dash-api/blob/master/classes/XOR.js because I am stupid.
-// edited
-const map = Array.prototype.map;
 
 module.exports = class XOR {
     // Xor functions
