@@ -34,13 +34,12 @@ app.parseResponse = function (responseBody, splitter) {
   let response = responseBody.split('#')[0].split(splitter || ':');
   let res = {};
   for (let i = 0; i < response.length; i += 2) {
-  res[response[i]] = response[i + 1]}
-  return res  }
+    res[response[i]] = response[i + 1]}
+  return res;
+}
 
 //xss bad
 app.clean = function(text) {if (!text || typeof text != "string") return text; else return text.replace(/&/g, "&#38;").replace(/</g, "&#60;").replace(/>/g, "&#62;").replace(/=/g, "&#61;").replace(/"/g, "&#34;").replace(/'/g, "&#39;")}
-
-console.log("Site online!")
 
 app.use('/assets', express.static(__dirname + '/assets', {maxAge: "7d"}));
 app.use('/css', express.static(__dirname + '/assets/css'));
@@ -177,4 +176,6 @@ app.get('*', function(req, res) {
   res.redirect('/search/404%20')
 });
 
-app.listen(2000);
+app.listen(2000, function() {
+    console.log("Site online!");
+});
