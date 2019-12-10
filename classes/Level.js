@@ -58,7 +58,7 @@ class Level {
     }
 }
 
-Level.ORBS. = orbs;
+Level.ORBS = orbs;
 Level.DIFFICULTIES = difficulty;
 Level.LENGTH = length;
 
