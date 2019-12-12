@@ -26,5 +26,9 @@
   "cursed": {
     "form": "spider",
     "ind": 43
+  },
+  "swing": {
+    "form": "swing",
+    "ind": -1
   }
 }

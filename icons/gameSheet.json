@@ -35176,5 +35176,83 @@
       ]
     ],
     "textureRotated": false
+  },
+  "swing_01_001.png": {
+    "aliases": [],
+    "spriteOffset": [
+      -2,
+      0
+    ],
+    "spriteSize": [
+      68,
+      60
+    ],
+    "spriteSourceSize": [
+      72,
+      60
+    ],
+    "textureRect": [
+      [
+        978,
+        702
+      ],
+      [
+        68,
+        60
+      ]
+    ],
+    "textureRotated": false
+  },
+  "swing_01_2_001.png": {
+    "aliases": [],
+    "spriteOffset": [
+      11,
+      6
+    ],
+    "spriteSize": [
+      20,
+      20
+    ],
+    "spriteSourceSize": [
+      42,
+      32
+    ],
+    "textureRect": [
+      [
+        1764,
+        1591
+      ],
+      [
+        20,
+        20
+      ]
+    ],
+    "textureRotated": false
+  },
+  "swing_01_extra_001.png": {
+    "aliases": [],
+    "spriteOffset": [
+      12,
+      8
+    ],
+    "spriteSize": [
+      24,
+      24
+    ],
+    "spriteSourceSize": [
+      50,
+      40
+    ],
+    "textureRect": [
+      [
+        1649,
+        1564
+      ],
+      [
+        24,
+        24
+      ]
+    ],
+    "textureRotated": false
   }
 }

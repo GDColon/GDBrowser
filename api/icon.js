@@ -124,7 +124,7 @@ module.exports = async (app, req, res) => {
           recolor(ic, col1)
           ic.composite(glow, (iconSize[0] / 2) - (size[0] / 2) + offset[0], (iconSize[1] / 2) - (size[1] / 2) - offset[1], { mode: Jimp.BLEND_DESTINATION_OVER })
 
-          if (form == "ufo") {
+          if (form == "ufo") { //ufo top WIP
             ic.contain(iconSize[0], iconSize[1] * 1.1, Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_CENTER)
             //ic.contain(iconSize[0], 300, Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_BOTTOM)
             //ic.composite(ufoTop, (iconSize[0] / 2) - (size[0] / 2) + 7, iconSize[1] + topOffset[3] + 30, {mode: Jimp.BLEND_DESTINATION_OVER})
@@ -263,6 +263,7 @@ module.exports = async (app, req, res) => {
 
           if (useExtra) ic.composite(extra, imgOff + (iconSize[0] / 2) - (size2[0] / 2) + offset2[0], (iconSize[1] / 2) - (size2[1] / 2) - offset2[1])
           if (form != "ufo") ic.autocrop(0.01, false)
+          if (form == "swing") ic.resize(120, 111)
           else if (ic.bitmap.height == '300') ic.autocrop(1, false)
 
           let finalSize = [ic.bitmap.width, ic.bitmap.height]
