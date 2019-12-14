@@ -41,6 +41,17 @@
 		</div>
 	</div>
 
+	<div class="popup" id="shuffleDiv">
+		<div class="fancybox bounce center supercenter">
+			<h2 class="smaller center" style="font-size: 5.5vh">Random Level</h2>
+			<p class="bigger center" id="levelInfo" style="line-height: 5vh; margin-top: 1.5vh;">
+				A random level cannot be picked with your current <span style="color:yellow">search filters!</span>
+				This is because there is no way to tell how many results were found, due to the GD servers inaccurately saying there's <span style="color:lime">9999</span>.
+			</p>
+			<img src="../assets/ok.png" width=20%; class="gdButton center closeWindow">
+		</div>
+	</div>
+
 	<div style="position:absolute; bottom: 0%; left: 0%; width: 100%">
 		<img class="cornerPiece" src="../assets/corner.png" width=7%;>
 	</div>
@@ -64,7 +75,11 @@
 	</div>
 
 	<div style="text-align: right; position:absolute; top: 7.5%; right: 2%; height: 12%;">
-		<img src="../assets/magnify.png" height="55%" class="gdButton" style="margin-top: 5%" onclick="$('#pageDiv').show(); $('#pageSelect').focus().select()">
+		<img src="../assets/magnify.png" height="60%" class="gdButton" style="margin-top: 5%" onclick="$('#pageDiv').show(); $('#pageSelect').focus().select()">
+	</div>
+
+	<div id="shuffle" style="display: none; text-align: right; position:absolute; top: 7.5%; right: 6.5%; height: 12%;">
+		<img src="../assets/random.png" height="60%" class="gdButton" style="margin-top: 5%">
 	</div>
 
 	<div style="position:absolute; top: 2%; left: 1.5%; width: 10%; height: 25%; pointer-events: none">
@@ -110,7 +125,11 @@ let gauntlets = ["Fire", "Ice", "Poison", "Shadow", "Lava", "Bonus", "Chaos", "D
 
 let page = 0
 let pages = 0
+let results = 0
 let legalPages = true
+let superSearch = ['*', '?type=mostliked', '*?type=mostdownloaded', '*?type=recent'].includes(window.location.href.split('/')[4].toLowerCase())
+
+let searchFilters = `../api/search/${type == 'saved' ? JSON.parse(localStorage.getItem('saved') || '[]').reverse().toString() : accID || path}?page=${page}${window.location.search.replace("?", "&").replace("page", "nope")}`
 
 function Append(firstLoad) {
 
@@ -123,7 +142,7 @@ function Append(firstLoad) {
 	if (page == 0) $('#pageDown').hide()
 	else $('#pageDown').show()
 
-	fetch(`../api/search/${type == 'saved' ? JSON.parse(localStorage.getItem('saved') || '[]').reverse().toString() : accID || path}?page=${page}${window.location.search.replace("?", "&").replace("page", "nope")}`).then(res => res.json()).then(res => {
+	fetch(searchFilters).then(res => res.json()).then(res => {
 
 	if (res == '-1' || (res.length < 9 && type != "recent")) $('#pageUp').hide()
 	else $('#pageUp').show()
@@ -132,8 +151,17 @@ function Append(firstLoad) {
 
 	if (firstLoad) {
 		pages = res[0].pages
-		if (res.length < 9 && res.length > 0) pages = 1
-		else if (pages > 999 || pages < 1) pages = null
+		results = res[0].results
+		if (res.length < 9 && res.length > 0) {
+			pages = 1
+			results = res.length
+		}
+		else if (pages > 999 || pages < 1) {
+			pages = null
+			if (!superSearch) $('#shuffle').addClass('grayscale')
+			else $('#shuffle').css('filter', 'hue-rotate(100deg)')
+		}
+		$('#shuffle').show()
 		$('#pagenum').text(`Page 1${pages ? ` of ${pages}` : ""}`)
 	}
 
@@ -233,6 +261,36 @@ $('#pageSelect').on('blur', function () {
     var x = $(this).val();
     if ($(this).val() != "") $(this).val(Math.max(Math.min(Math.floor(x), max), min));
 });
+
+$('#shuffle').click(function() {
+	if (superSearch) {
+		$('#searchBox').html('<div style="height: 4.5%"></div>')
+		$('#loading').show()
+		fetch("../api/search/*?page=0&type=recent").then(res => res.json()).then(recent => {
+			let mostRecent = recent[0].id
+			function fetchRandom() {
+				fetch(`../api/level/${Math.floor(Math.random() * (mostRecent)) + 1}`).then(res => res.json()).then(res => {
+					if (res == "-1" || !res.id) return fetchRandom()
+					else window.location.href = "../" + res.id
+				})
+			}
+			fetchRandom()
+		})
+	}
+	else if (pages) {
+		let random = {}
+		randomResult = Math.floor(Math.random() * (results)) + 1
+		randomPage = Math.ceil(randomResult / 10)
+		randomIndex = randomResult % 10
+		if (randomIndex == 0) randomIndex = 10
+		$('#searchBox').html('<div style="height: 4.5%"></div>')
+		$('#loading').show()
+		fetch(searchFilters.replace(/(\?page=)\d+/, `$1${randomPage-1}`)).then(res => res.json()).then(res => {
+			window.location.href = "../" + res[randomIndex].id
+		})
+	}
+	else return $('#shuffleDiv').show()
+})
 
 $(document).keydown(function(k) {
 	if (loading) return;
