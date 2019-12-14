@@ -127,7 +127,7 @@ let page = 0
 let pages = 0
 let results = 0
 let legalPages = true
-let superSearch = ['*', '?type=mostliked', '*?type=mostdownloaded', '*?type=recent'].includes(window.location.href.split('/')[4].toLowerCase())
+let superSearch = ['*', '*?type=mostliked', '*?type=mostdownloaded', '*?type=recent'].includes(window.location.href.split('/')[4].toLowerCase())
 
 let searchFilters = `../api/search/${type == 'saved' ? JSON.parse(localStorage.getItem('saved') || '[]').reverse().toString() : accID || path}?page=${page}${window.location.search.replace("?", "&").replace("page", "nope")}`
 
