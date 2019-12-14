@@ -73,10 +73,6 @@ img, .noSelect {
     font-size: 6vh;
 }
 
-.smaller {
-    font-size: 5vh;
-    text-shadow: -0.2vh -0.2vh 0vh #000, 0.2vh -0.2vh 0vh #000, -0.2vh 0.2vh 0vh #000, 0.2vh 0.2vh 0vh #000, 0.3vh 0.4vh 0vh rgba(0,0,0,0.4);
-}
 
 .bigger {
     font-size: 3.5vh;

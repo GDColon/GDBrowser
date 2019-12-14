@@ -59,8 +59,8 @@
 		<h1 id="header"></h1>
 	</div>
 
-	<div style="text-align: right; position:absolute; top: 1.5%; right: 2%">
-		<h2 class="smaller" id="pagenum"></h2>
+	<div style="text-align: right; position:absolute; top: 1%; right: 2%">
+		<h2 class="smaller" style="font-size: 4.5vh" id="pagenum"></h2>
 	</div>
 
 	<div style="text-align: right; position:absolute; top: 7.5%; right: 2%; height: 12%;">
@@ -105,27 +105,37 @@ let gauntlet = url.searchParams.get('gauntlet')
 let mappack = url.searchParams.get('mappack')
 let userMode = url.searchParams.get('user')
 let type = url.searchParams.get('type')
-let page = 0
 let loading = false;
 let gauntlets = ["Fire", "Ice", "Poison", "Shadow", "Lava", "Bonus", "Chaos", "Demon", "Time", "Crystal", "Magic", "Spike", "Monster", "Doom", "Death"]
 
-function Append() {
+let page = 0
+let pages = 0
+let legalPages = true
+
+function Append(firstLoad) {
 
 	loading = true;
+	if (!firstLoad) $('#pagenum').text(`Page ${(page + 1)}${pages ? ` of ${pages}` : ""}`)
 	$('#searchBox').html('<div style="height: 4.5%"></div>')
-	$('#pagenum').text('Page ' + (page + 1))
 	$('#pageSelect').val(page + 1)
 	$('#loading').show()
-
-	fetch(`../api/search/${type == 'saved' ? JSON.parse(localStorage.getItem('saved') || '[]').reverse().toString() : accID || path}?page=${page}${window.location.search.replace("?", "&").replace("page", "nope")}`).then(res => res.json()).then(res => {
 
 	if (page == 0) $('#pageDown').hide()
 	else $('#pageDown').show()
 
+	fetch(`../api/search/${type == 'saved' ? JSON.parse(localStorage.getItem('saved') || '[]').reverse().toString() : accID || path}?page=${page}${window.location.search.replace("?", "&").replace("page", "nope")}`).then(res => res.json()).then(res => {
+
 	if (res == '-1' || (res.length < 9 && type != "recent")) $('#pageUp').hide()
 	else $('#pageUp').show()
 
-	if (res == '-1') { $('#loading').hide(); return loading = false }
+	if (res == '-1' || res.length == 0) { $('#loading').hide(); return loading = false }
+
+	if (firstLoad) {
+		pages = res[0].pages
+		if (res.length < 9 && res.length > 0) pages = 1
+		else if (pages > 999 || pages < 1) pages = null
+		$('#pagenum').text(`Page 1${pages ? ` of ${pages}` : ""}`)
+	}
 
 	res.forEach((x, y) => {
 		let hasAuthor = (x.accountID != "0")
@@ -168,7 +178,7 @@ function Append() {
 })
 }
 
-Append()
+Append(true)
 
 $('#pageUp').click(function() {page += 1; if (!loading) Append()})
 $('#pageDown').click(function() {page -= 1; if (!loading) Append()})

@@ -70,11 +70,13 @@ module.exports = async (app, req, res) => {
     form : filters}, async function(err, resp, body) {
         
     if (err || !body || body == '-1') return res.send("-1")
-    let preRes = body.split('#')[0].split('|', 10)
+    console.log(body)
+    let splitBody = body.split('#')
+    let preRes = splitBody[0].split('|', 10)
     let authorList = {}
     let songList = {}
-    let authors = body.split('#')[1].split('|')
-    let songs = '~' + body.split('#')[2]; songs = songs.split('|~1~:').map(x => app.parseResponse(x + '|~1~', '~|~'))
+    let authors = splitBody[1].split('|')
+    let songs = '~' + splitBody[2]; songs = songs.split('|~1~:').map(x => app.parseResponse(x + '|~1~', '~|~'))
     songs.forEach(x => {songList[x['~1']] = x['2']})
 
     authors.splice(10, 999)
@@ -87,6 +89,13 @@ module.exports = async (app, req, res) => {
 
     await levelArray.forEach(async (x, y) => {
         let keys = Object.keys(x)
+
+        if (filters.page == 0) {                    //this is broken if you're not on page 0
+            let pages = splitBody[3].split(":");
+            x.results = +pages[0];
+            x.pages = +Math.ceil(pages[0] / 10);
+        }
+
         x.name = x[2];
         x.id = x[1];
         x.description = Buffer.from(x[3], 'base64').toString() || "(No description provided)",
@@ -100,7 +109,7 @@ module.exports = async (app, req, res) => {
         x.length = length[x[15]] || "?";
         x.stars = x[18];
         x.orbs = orbs[x[18]];
-        x.diamonds = x[18] < 2 ? 0 : parseInt(x[18]) + 2,
+        x.diamonds = x[18] < 2 ? 0 : parseInt(x[18]) + 2;
         x.featured = x[19] > 0;
         x.epic = x[42] == 1;
         x.version = x[5];
