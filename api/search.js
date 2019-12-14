@@ -70,7 +70,6 @@ module.exports = async (app, req, res) => {
     form : filters}, async function(err, resp, body) {
         
     if (err || !body || body == '-1') return res.send("-1")
-    console.log(body)
     let splitBody = body.split('#')
     let preRes = splitBody[0].split('|', 10)
     let authorList = {}
