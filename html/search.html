@@ -286,7 +286,7 @@ $('#shuffle').click(function() {
 		$('#searchBox').html('<div style="height: 4.5%"></div>')
 		$('#loading').show()
 		fetch(searchFilters.replace(/(\?page=)\d+/, `$1${randomPage-1}`)).then(res => res.json()).then(res => {
-			window.location.href = "../" + res[randomIndex].id
+			window.location.href = "../" + res[randomIndex-1].id
 		})
 	}
 	else return $('#shuffleDiv').show()
