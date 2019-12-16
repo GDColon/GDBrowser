@@ -56,6 +56,10 @@ app.post("/postComment", function(req, res) {
   app.modules.postComment(app, req, res)
 })  
 
+app.post("/postProfileComment", function(req, res) {
+  app.modules.postProfileComment(app, req, res)
+})  
+
 app.post("/like", function(req, res) {
   app.modules.like(app, req, res)
 })  
@@ -174,7 +178,8 @@ app.get("/", function(req, res) {
 })    
 
 app.get('*', function(req, res) {
-  res.redirect('/search/404%20')
+  if (req.path.startsWith('/assets')) res.send("Looks like this file doesn't exist ¯\\_(ツ)_/¯<br>You can check out all of the assets <a href='https://github.com/GDColon/GDBrowser/tree/master/assets'>here</a>")
+  else res.redirect('/search/404%20')
 });
 
 app.listen(2000);

@@ -14,7 +14,7 @@ main {
 	background: #556c7d;
 }
 
-main.alt {
+main:nth-child(even) {
 	background: #3979b8;
 }
 

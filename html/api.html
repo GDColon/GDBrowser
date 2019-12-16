@@ -41,14 +41,15 @@
 				<div class="header-category">
 					<div class="category-name">Account</div>
 					<div class="category-content">
-							<a class="header-link" href="#commenting">Commenting</a> 
+						<a class="header-link" href="#commenting">Commenting</a> 
+						<a class="header-link" href="#profileposting">Profile Posting</a> 
 						<a class="header-link" href="#liking">Liking</a> 
 					</div>
 				</div>
 				<div class="header-category">
 					<div class="category-name">Misc</div>
 					<div class="category-content">
-							<a class="header-link" href="#analyze">Level Analysis</a> 
+						<a class="header-link" href="#analyze">Level Analysis</a> 
 						<a class="header-link" href="#icons">Icons</a> 
 					</div>
 				</div>
@@ -56,7 +57,7 @@
 		</div>
 	</div>
 	<div id="intro" class="anchor"></div>
-	<main class="grey">
+	<main>
 		<div class="main-block">
 			<h1>Hi there!</h1>
 			<p>This is the documentation for the
@@ -79,6 +80,7 @@
 				<p><a href="#comments"><u>Comments & Posts</u></a> <i>/api/comments/level-or-user-ID</i></p>
 				<p><a href="#analyze"><u>Level Analysis</u></a> <i>/api/analyze/levelID</i></p>
 				<p><a href="#commenting"><u>Commenting</u></a> <i>/api/postComment (POST)</i></p>
+				<p><a href="#profileposting"><u>Profile Posting</u></a> <i>/api/postProfileComment (POST)</i></p>
 				<p><a href="#liking"><u>Liking</u></a> <i>/api/like (POST)</i></p>
 				<p><a href="#icons"><u>Icons</u></a> <i>/icon/username</i></p>
 			</quote>
@@ -90,7 +92,7 @@
 
 		<div class="seperator"></div>
 	</main>
-	<main class="alt">
+	<main>
 		<div id="level" class="anchor"></div>
 		<div class="main-block">
 			<h1>Levels</h1>
@@ -168,7 +170,7 @@
 
 
 	</main>
-	<main class="grey">
+	<main>
 
 		<div id="profile" class="anchor"></div>
 		
@@ -225,7 +227,7 @@
 
 
 	</main>
-	<main class="alt">
+	<main>
 
 		<div id="search" class="anchor"></div>
 		
@@ -309,7 +311,7 @@
 
 
 	</main>
-	<main class="grey">
+	<main>
 		<div id="leaderboard" class="anchor"></div>
 		<div class="main-block">
 			<h1>Leaderboards</h1>
@@ -360,7 +362,7 @@
 		<div class="seperator"></div>
 
 	</main>
-	<main class="alt">
+	<main>
 		<div id="levelleaderboard" class="anchor"></div>
 		<div class="main-block">
 			<h1>Level Leaderboards</h1>
@@ -405,7 +407,7 @@
 		<div class="seperator"></div>
 
 	</main>
-	<main class="grey">
+	<main>
 		<div id="comments" class="anchor"></div>
 		<div class="main-block">
 			<h1>Comments and Profile Posts</h1>
@@ -432,12 +434,12 @@
 				<p>likes: The number of likes the comment has</p>
 				<p>date: Time since the comment was posted (sent as "x days/weeks/months" ago, since it's all the API sends)</p>
 				<p>levelID: The ID of the level</p>
+				<p>browserColor: If the comment was posted through GDBrowser</p>
 				<p class="red">username: The commenter's username</p>
 				<p class="red">playerID: The commenter's ID</p>
 				<p class="red">accountID: The commenter's account ID</p>
 				<p class="red">form: The form of the commenter's icon</p>
 				<p class="red">percent: The commenter's percent on the level, if provided</p>
-				<p class="red">browserColor: If the comment was posted through GDBrowser</p>
 				<p class="red">modColor: If the commenter is an elder mod and gets fancy green text</p>
 			</div>
 
@@ -459,7 +461,7 @@
 		<div class="seperator"></div>
 	</main>
 	
-	<main class="alt">
+	<main>
 		<div id="analyze" class="anchor"></div>
 		<div class="main-block">
 			<h1>Level Analysis</h1>
@@ -500,7 +502,7 @@
 
 	</main>
 
-	<main class="grey">
+	<main>
 			<div id="commenting" class="anchor"></div>
 			<div class="main-block">
 				<h1>Commenting</h1>
@@ -518,7 +520,7 @@
 					<p>password: Your password (as plain text)</p>
 					<p>levelID: The ID of the level to comment on</p>
 					<p>percent: The percent shown on the comment (optional)</p>
-					<p>color: If the comment should have a special color on GDBrowser (optional)</p>
+					<p>color: If the comment should have a special pink color on GDBrowser (optional)</p>
 				</div>
 	
 				<br>
@@ -541,8 +543,44 @@
 			<div class="seperator"></div>
 		</main>
 
+		<main>
+			<div id="profileposting" class="anchor"></div>
+			<div class="main-block">
+				<h1>Profile Posting</h1>
+				<p>POST: /api/postProfileComment</p>
+	
+				<p>Leaves a profile post. This one is a POST request!</p>
+	
+				<br>
+				<p class="reveal" onclick="$('#params-profileposting').slideToggle(100)"><b>Parameters (5)</b></p>
+				<div class="subdiv" id="params-profileposting">
+					<p>comment: The content of the profile post</p>
+					<p>username: Your username</p>
+					<p>accountID: Your account ID</p>
+					<p>password: Your password (as plain text)</p>
+					<p>color: If the comment should have a special pink color on GDBrowser (optional)</p>
+				</div>
+	
+				<br>
 
-		<main class="alt">
+				<p class="reveal" onclick="$('#request-profileposting').slideToggle(100)"><b>Example</b></p>
+				<div class="subdiv" id="request-profileposting">
+					<p><b>Example Requests</b></p>
+					<p>POST /api/postProfileComment<br>
+						?comment=Update 2.0 is revolution!<br>
+						&username=viprin<br>
+						&accountID=2795<br>
+						&password=CopyAndPasteTurnsMeOn<br>
+					<br>
+					<p>If a status of 200 is returned, then the profile post was successfully posted. Otherwise, a 400 will return with an error message.</p>
+				</div>
+	
+			</div>
+			<div class="seperator"></div>
+		</main>
+
+
+		<main>
 			<div id="liking" class="anchor"></div>
 			<div class="main-block">
 				<h1>Liking</h1>

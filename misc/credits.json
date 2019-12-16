@@ -68,11 +68,11 @@
     ],
 
     "specialThanks": [
-        ["Qufy", "Qufy"],
-        ["AlFas", "AlFas"],
-        ["ViPriN", "ViPriN"],
-        ["NeKitDS", "NeKitDS"],
-        ["cos8o", "cos8o"],
-        ["zmxmx", "zmxmx"]
+        "Qufy",
+        "AlFas",
+        "ViPriN",
+        "NeKitDS",
+        "cos8o",
+        "zmxmx"
     ]
 }

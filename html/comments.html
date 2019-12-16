@@ -330,7 +330,7 @@ $('#submitComment').click(function() {
 		allowEsc = false
 
 	fetch(`../api/profile/${username}`).then(res => res.json()).then(res => {
-		if (!res || res == "-1") {$('.postbutton').show(); return $('#message').text("The username you provided doesn't exist!")}
+		if (!res || res == "-1") {allowEsc = true; $('.postbutton').show(); return $('#message').text("The username you provided doesn't exist!")}
 		else accountID = res.accountID
 
 		$.post("../postComment",  {comment, username, password, levelID, accountID, color: true})
@@ -346,7 +346,7 @@ $('#submitComment').click(function() {
 			page = 0
 			appendComments()
 		})		
-		.fail(e => {$('.postbutton').show();$('#message').text(e.responseText.includes("DOCTYPE") ? "Something went wrong..." : e.responseText)})
+		.fail(e => {allowEsc = true; $('.postbutton').show();$('#message').text(e.responseText.includes("DOCTYPE") ? "Something went wrong..." : e.responseText)})
 	})
 })
 
@@ -397,7 +397,7 @@ $('#submitVote').click(function() {
 		allowEsc = false
 
 	fetch(`../api/profile/${username}`).then(res => res.json()).then(res => {
-		if (!res || res == "-1") {$('.postbutton').show(); return $('#likeMessage').text("The username you provided doesn't exist!")}
+		if (!res || res == "-1") {allowEsc = true; $('.postbutton').show(); return $('#likeMessage').text("The username you provided doesn't exist!")}
 		else accountID = res.accountID
 
 		$.post("../like",  { ID, accountID, password, like: likeType, type: 2, extraID })
@@ -414,7 +414,7 @@ $('#submitVote').click(function() {
 			likedComments.push(commentID)
 			localStorage.setItem('likedComments', JSON.stringify(likedComments))
 		})		
-		.fail(e => {$('.postbutton').show();$('#likeMessage').text(e.responseText.includes("DOCTYPE") ? "Something went wrong..." : e.responseText)})
+		.fail(e => {allowEsc = true; $('.postbutton').show();$('#likeMessage').text(e.responseText.includes("DOCTYPE") ? "Something went wrong..." : e.responseText)})
 	})
 })
 

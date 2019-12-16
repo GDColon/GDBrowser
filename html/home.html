@@ -108,8 +108,8 @@ fetch(`./api/credits`).then(res => res.json()).then(res => {
 
 	res.specialThanks.forEach((x, y) => {
 		$('#specialthanks').append(`<div class="specialThanks">
-				<h2 class="gdButton smaller"><a href="./profile/${x[1]}">${x[0]}</h2></a>
-				<img src="./icon/${x[1]}" height=85%><br>
+				<h2 class="gdButton smaller"><a href="./profile/${x}">${x}</h2></a>
+				<img src="./icon/${x}" height=85%><br>
 				</div>`)
 	})
 

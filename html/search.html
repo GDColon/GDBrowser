@@ -129,7 +129,7 @@ let results = 0
 let legalPages = true
 let superSearch = ['*', '*?type=mostliked', '*?type=mostdownloaded', '*?type=recent'].includes(window.location.href.split('/')[4].toLowerCase())
 
-let searchFilters = `../api/search/${type == 'saved' ? JSON.parse(localStorage.getItem('saved') || '[]').reverse().toString() : accID || path}?page=${page}${window.location.search.replace("?", "&").replace("page", "nope")}`
+let searchFilters = `../api/search/${type == 'saved' ? JSON.parse(localStorage.getItem('saved') || '[]').reverse().toString() : accID || path}?page=[PAGE]${window.location.search.replace("?", "&").replace("page", "nope")}`
 
 function Append(firstLoad) {
 
@@ -142,7 +142,7 @@ function Append(firstLoad) {
 	if (page == 0) $('#pageDown').hide()
 	else $('#pageDown').show()
 
-	fetch(searchFilters).then(res => res.json()).then(res => {
+	fetch(searchFilters.replace("[PAGE]", page)).then(res => res.json()).then(res => {
 
 	if (res == '-1' || (res.length < 9 && type != "recent")) $('#pageUp').hide()
 	else $('#pageUp').show()
@@ -285,7 +285,7 @@ $('#shuffle').click(function() {
 		if (randomIndex == 0) randomIndex = 10
 		$('#searchBox').html('<div style="height: 4.5%"></div>')
 		$('#loading').show()
-		fetch(searchFilters.replace(/(\?page=)\d+/, `$1${randomPage-1}`)).then(res => res.json()).then(res => {
+		fetch(searchFilters.replace('PAGE', randomPage-1)).then(res => res.json()).then(res => {
 			window.location.href = "../" + res[randomIndex-1].id
 		})
 	}
