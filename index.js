@@ -70,18 +70,12 @@ app.get("/analyze/:id", async function(req, res) { res.sendFile(__dirname + "/ht
 app.get("/api", function(req, res) { res.sendFile(__dirname + "/html/api.html") })
 app.get("/comments/:id", function(req, res) { res.sendFile(__dirname + "/html/comments.html") })
 app.get("/gauntlets", function(req, res) { res.sendFile(__dirname + "/html/gauntlets.html") })
+app.get("/iconkit", function(req, res) { res.sendFile(__dirname + "/html/iconkit.html") })
 app.get("/leaderboard", function(req, res) { res.sendFile(__dirname + "/html/leaderboard.html") })
 app.get("/leaderboard/:text", function(req, res) { res.sendFile(__dirname + "/html/levelboard.html") })
 app.get("/mappacks", function(req, res) { res.sendFile(__dirname + "/html/mappacks.html") })
 app.get("/search", function(req, res) { res.sendFile(__dirname + "/html/filters.html") })
 app.get("/search/:text", function(req, res) { res.sendFile(__dirname + "/html/search.html") })
-
-
-// API AND HTML
-
-app.get("/:id", function(req, res) { app.modules.level(app, req, res) })    
-app.get("/profile/:id", function(req, res) { app.modules.profile(app, req, res) })
-app.get("/iconkit", function(req, res) { res.sendFile(__dirname + "/html/iconkit.html") })
 
 
 // API
@@ -95,6 +89,12 @@ app.get("/api/level/:id", async function(req, res) { app.modules.level(app, req,
 app.get("/api/mappacks", async function(req, res) { res.send(require('./misc/mapPacks.json')) })
 app.get("/api/profile/:id", function(req, res) { app.modules.profile(app, req, res, api) })
 app.get("/api/search/:text", function(req, res) { app.modules.search(app, req, res, api) })
+
+
+// API AND HTML
+   
+app.get("/profile/:id", function(req, res) { app.modules.profile(app, req, res) })
+app.get("/:id", function(req, res) { app.modules.level(app, req, res) }) 
  
 
 // REDIRECTS
