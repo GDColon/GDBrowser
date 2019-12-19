@@ -45,6 +45,7 @@ console.log("Site online!")
 
 // ASSETS
 
+let assets = ['/css', '/assets', '/blocks', '/difficulty', '/gauntlets', '/gdicon', '/iconkitbuttons', '/levelstyle', '/objects']
 app.use('/css', express.static(__dirname + '/assets/css'));
 app.use('/assets', express.static(__dirname + '/assets', {maxAge: "7d"}));
 app.use('/blocks', express.static(__dirname + '/assets/blocks', {maxAge: "7d"}));
@@ -117,7 +118,7 @@ app.get("/icon/:text", function(req, res) { app.modules.icon(app, req, res) })
 
 app.get('*', function(req, res) {
   if (req.path.startsWith('/api')) res.send('-1')
-  if (req.path.startsWith('/assets')) res.send("Looks like this file doesn't exist ¯\\_(ツ)_/¯<br>You can check out all of the assets <a href='https://github.com/GDColon/GDBrowser/tree/master/assets'>here</a>")
+  if (assets.some(x => req.path.startsWith(x))) res.send("Looks like this file doesn't exist ¯\\_(ツ)_/¯<br>You can check out all of the assets <a href='https://github.com/GDColon/GDBrowser/tree/master/assets'>here</a>")
   else res.redirect('/search/404%20')
 });
 
