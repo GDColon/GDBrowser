@@ -92,13 +92,14 @@
 		</h3>
 
 		<div class="lightBox center" id="iconsDiv" style="margin: 2% auto; width: 105vh">
-			<img src="../icon/[[USERNAME]]?form=cube">
-			<img src="../icon/[[USERNAME]]?form=ship" style="height: 9%">
-			<img src="../icon/[[USERNAME]]?form=ball">
-			<img src="../icon/[[USERNAME]]?form=ufo" style="height: 7%">
-			<img src="../icon/[[USERNAME]]?form=wave" style="height: 9%">
-			<img src="../icon/[[USERNAME]]?form=robot">
-			<img src="../icon/[[USERNAME]]?form=spider">
+			<img src="../icon/[[USERNAME]]?form=cube" title="Cube [[ICON]]">
+			<img src="../icon/[[USERNAME]]?form=ship" title="Ship [[SHIP]]" style="height: 8%">
+			<img src="../icon/[[USERNAME]]?form=ball" title="Ball [[BALL]]" >
+			<img src="../icon/[[USERNAME]]?form=ufo" title="UFO [[UFO]]" style="height: 6%">
+			<img src="../icon/[[USERNAME]]?form=wave" title="Wave [[WAVE]]" style="height: 7%">
+			<img src="../icon/[[USERNAME]]?form=robot" title="Robot [[ROBOT]]" >
+			<img src="../icon/[[USERNAME]]?form=spider" title="Spider [[SPIDER]]">
+			<img src="../deatheffects/[[DEATHEFFECT]].png" title="Death Effect [[DEATHEFFECT]]">
 		</div>
 
 		<div class="lightBox center dragscroll" id="statusDiv" style="margin: 2% auto; width: 105vh; height: 35vh; background-color: #BE6F3F">
@@ -326,6 +327,10 @@ $('#submitVote').click(function() {
 		.fail(e => {allowEsc = true; $('.postbutton').show();$('#likeMessage').text(e.responseText.includes("DOCTYPE") ? "Something went wrong..." : e.responseText)})
 	})
 })
+
+$(document).keydown(function(k){
+   if (k.keyCode == 13) return false
+}) 
 
 
 </script>

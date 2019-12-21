@@ -45,10 +45,11 @@ console.log("Site online!")
 
 // ASSETS
 
-let assets = ['/css', '/assets', '/blocks', '/difficulty', '/gauntlets', '/gdicon', '/iconkitbuttons', '/levelstyle', '/objects']
+let assets = ['css', 'assets', 'blocks', 'deatheffects', 'difficulty', 'gauntlets', 'gdicon', 'iconkitbuttons', 'levelstyle', 'objects']
 app.use('/css', express.static(__dirname + '/assets/css'));
 app.use('/assets', express.static(__dirname + '/assets', {maxAge: "7d"}));
 app.use('/blocks', express.static(__dirname + '/assets/blocks', {maxAge: "7d"}));
+app.use('/deatheffects', express.static(__dirname + '/assets/deatheffects', {maxAge: "7d"}));
 app.use('/difficulty', express.static(__dirname + '/assets/gdfaces', {maxAge: "7d"}));
 app.use('/gauntlets', express.static(__dirname + '/assets/gauntlets', {maxAge: "7d"}));
 app.use('/gdicon', express.static(__dirname + '/icons/iconkit', {maxAge: "7d"}));
@@ -118,7 +119,7 @@ app.get("/icon/:text", function(req, res) { app.modules.icon(app, req, res) })
 
 app.get('*', function(req, res) {
   if (req.path.startsWith('/api')) res.send('-1')
-  if (assets.some(x => req.path.startsWith(x))) res.send("Looks like this file doesn't exist ¯\\_(ツ)_/¯<br>You can check out all of the assets <a href='https://github.com/GDColon/GDBrowser/tree/master/assets'>here</a>")
+  if (assets.some(x => req.path.startsWith("/" + x))) res.send("Looks like this file doesn't exist ¯\\_(ツ)_/¯<br>You can check out all of the assets on <a target='_blank' href='https://github.com/GDColon/GDBrowser/tree/master/assets'>GitHub</a>")
   else res.redirect('/search/404%20')
 });
 

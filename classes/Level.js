@@ -16,7 +16,7 @@ class Level {
         this.downloads = levelInfo[10]
         this.likes = levelInfo[14]
         this.disliked = levelInfo[14] < 0
-        this.length = length[levelInfo[15]] || "?"
+        this.length = length[levelInfo[15]] || "XL"
         this.stars = levelInfo[18]
         this.orbs = orbs[levelInfo[18]]
         this.diamonds = levelInfo[18] < 2 ? 0 : parseInt(levelInfo[18]) + 2

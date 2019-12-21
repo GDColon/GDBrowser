@@ -258,8 +258,9 @@ input:focus, textarea:focus {
 }
 
 #iconsDiv img {
-    height: 10%;
-    margin: 1% 1%
+    height: 9%;
+    margin: 1% 1%;
+    vertical-align: middle;
 }
 
 .transparentBox, input[type=text], input[type=password], input[type=number], textarea {
