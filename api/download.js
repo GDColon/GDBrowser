@@ -8,7 +8,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
   else if (levelID == "weekly") levelID = -2
   else levelID = levelID.replace(/[^0-9]/g, "")
 
-  request.post('http://boomlings.com/database/downloadGJLevel22.php', {
+  request.post(app.endpoint + 'downloadGJLevel22.php', {
     form: {
       levelID,
       secret: app.secret
@@ -24,11 +24,11 @@ module.exports = async (app, req, res, api, ID, analyze) => {
     let levelInfo = app.parseResponse(body)
     let level = new Level(levelInfo)
 
-    request.post('http://boomlings.com/database/getGJUsers20.php', {
+    request.post(app.endpoint + 'getGJUsers20.php', {
       form: { str: level.authorID, secret: app.secret }
     }, function (err1, res1, b1) {
       let gdSearchResult = app.parseResponse(b1)
-      request.post('http://boomlings.com/database/getGJUserInfo20.php', {
+      request.post(app.endpoint + 'getGJUserInfo20.php', {
         form: { targetAccountID: gdSearchResult[16], secret: app.secret }
       }, function (err2, res2, b2) {
         if (b2 != '-1') {
@@ -42,7 +42,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
           level.accountID = "0"
         }
 
-        request.post('http://boomlings.com/database/getGJSongInfo.php', {
+        request.post(app.endpoint + 'getGJSongInfo.php', {
           form: {
             songID: level.customSong,
             secret: app.secret

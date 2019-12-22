@@ -328,7 +328,7 @@ module.exports = async (app, req, res) => {
 
     if (req.query.hasOwnProperty("noUser") || req.query.hasOwnProperty("nouser") || username == "icon") return buildIcon()
   
-    request.post('http://boomlings.com/database/getGJUsers20.php', {
+    request.post(app.endpoint + 'getGJUsers20.php', {
       form: {
         str: username,
         secret: app.secret
@@ -337,7 +337,7 @@ module.exports = async (app, req, res) => {
       if (err1 || !body1 || body1 == "-1") return buildIcon()
       else result = app.parseResponse(body1);
   
-      request.post('http://boomlings.com/database/getGJUserInfo20.php', {
+      request.post(app.endpoint + 'getGJUserInfo20.php', {
         form: {
           targetAccountID: result[16],
           secret: app.secret

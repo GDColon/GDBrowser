@@ -30,7 +30,7 @@ module.exports = async (app, req, res) => {
   chk = xor.encrypt(chk, 29481)
   params.chk = chk
 
-  request.post('http://boomlings.com/database/uploadGJAccComment20.php', {
+  request.post(app.endpoint + 'uploadGJAccComment20.php', {
     form: params
   }, function (err, resp, body) {
     if (err) return res.status(400).send("The Geometry Dash servers returned an error! Perhaps they're down for maintenance")

@@ -11,7 +11,7 @@ module.exports = async (app, req, res) => {
 
       idArray.forEach((x, y) => {
         
-        request.post('http://boomlings.com/database/getGJUserInfo20.php', {
+        request.post(app.endpoint + 'getGJUserInfo20.php', {
           form: {targetAccountID: x, secret: app.secret}
         }, function (err, resp, body) {
           if (err || !body || body == '-1') return res.send([])

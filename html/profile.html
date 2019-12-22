@@ -99,7 +99,7 @@
 			<img src="../icon/[[USERNAME]]?form=wave" title="Wave [[WAVE]]" style="height: 7%">
 			<img src="../icon/[[USERNAME]]?form=robot" title="Robot [[ROBOT]]" >
 			<img src="../icon/[[USERNAME]]?form=spider" title="Spider [[SPIDER]]">
-			<img src="../deatheffects/[[DEATHEFFECT]].png" title="Death Effect [[DEATHEFFECT]]">
+			<img src="../deatheffects/[[DEATHEFFECT]].png" title="Death Effect [[DEATHEFFECT]]" id="deatheffect">
 		</div>
 
 		<div class="lightBox center dragscroll" id="statusDiv" style="margin: 2% auto; width: 105vh; height: 35vh; background-color: #BE6F3F">
@@ -159,6 +159,7 @@ $('#globalrank[[RANK]]').hide()
 if (`[[YOUTUBE]]` != "null") $('#youtube').show()
 if (`[[TWITTER]]` != "null") $('#twitter').show()
 if (`[[TWITCH]]` != "null")  $('#twitch').show()
+if (`[[DEATHEFFECT]]` == "undefined") $('#deatheffect').hide()
 
 let messages = "[[MESSAGES]]"
 let commenthistory = "[[COMMENTHISTORY]]"

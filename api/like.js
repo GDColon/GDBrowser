@@ -35,7 +35,7 @@ module.exports = async (app, req, res) => {
 
   params.chk = chk
 
-  request.post('http://boomlings.com/database/likeGJItem211.php', {
+  request.post(app.endpoint + 'likeGJItem211.php', {
     form: params
   }, function (err, resp, body) {
     if (err) return res.status(400).send("The Geometry Dash servers returned an error! Perhaps they're down for maintenance")

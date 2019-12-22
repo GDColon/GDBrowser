@@ -7,15 +7,21 @@ const blocks = require('../misc/blocks.json')
 
 module.exports = async (app, req, res, level) => {
 
-let levelString = Buffer.from(level.data, 'base64')
-let buffer;
+let unencrypted = level.data.startsWith('kS') // some gdps'es don't encrypt level data
+let levelString = unencrypted ? level.data : Buffer.from(level.data, 'base64') 
 let response = {};
+let rawData;
 
-try { buffer = pako.inflate(levelString, {to:"string"}) }
-catch(e) { return res.send("-1") }
+if (unencrypted) rawData = level.data
 
-let rawData = buffer.toString('utf8')
-let data = rawData
+else {
+    let buffer;
+    try { buffer = pako.inflate(levelString, {to:"string"}) }
+    catch(e) { return res.send("-1") }
+    rawData = buffer.toString('utf8')
+} 
+
+let data = rawData; // data is tweaked around a lot, so rawData is preserved
 
 let blockNames = Object.keys(blocks)
 let miscNames = Object.keys(ids.misc)

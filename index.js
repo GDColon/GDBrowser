@@ -19,11 +19,21 @@ fs.readdirSync('./api').forEach(x => {
 })
 
 app.secret = 'Wmfd2893gb7'
+app.endpoint = 'http://boomlings.com/database/'
+app.config = require('./misc/gdpsConfig')  // tweak settings in this file if you're using a GDPS
 
-const secrets = require("./misc/secretStuff.json")
-app.id = secrets.id
-app.gjp = secrets.gjp
-//these are the only two things in secretStuff.json, both are only used for level leaderboards
+
+try {
+  const secrets = require("./misc/secretStuff.json")
+  app.id = secrets.id
+  app.gjp = secrets.gjp
+}
+
+catch {
+  app.id = 0
+  app.gjp = 0
+  console.log("No GJP/Account ID has been set, which means that level leaderboards won't load. Put those two values in /misc/secretStuff.json")
+}
 
 function haltOnTimedout (req, res, next) {
   if (!req.timedout) next()

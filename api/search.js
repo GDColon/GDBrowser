@@ -67,7 +67,7 @@ module.exports = async (app, req, res) => {
     if (req.params.text == "*") delete filters.str
 
 
-    request.post('http://boomlings.com/database/getGJLevels21.php', {
+    request.post(app.endpoint + 'getGJLevels21.php', {
     form : filters}, async function(err, resp, body) {
         
     if (err || !body || body == '-1') return res.send("-1")
@@ -85,7 +85,7 @@ module.exports = async (app, req, res) => {
       let arr = x.split(':')
       authorList[arr[0]] = [arr[1], arr[2]]})
 
-    let levelArray = preRes.map(x => app.parseResponse(x))
+    let levelArray = preRes.map(x => app.parseResponse(x)).filter(x => x[1])
     let parsedLevels = []
 
     await levelArray.forEach(async (x, y) => {

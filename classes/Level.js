@@ -1,4 +1,5 @@
 const XOR = require(__dirname + "/../classes/XOR");
+const config = require(__dirname + "/../misc/gdpsConfig");
 
 let orbs = [0, 0, 50, 75, 125, 175, 225, 275, 350, 425, 500]
 let length = ['Tiny', 'Short', 'Medium', 'Long', 'XL']
@@ -6,9 +7,10 @@ let difficulty = { 0: 'Unrated', 10: 'Easy', 20: 'Normal', 30: 'Hard', 40: 'Hard
 
 class Level {
     constructor(levelInfo, author = []) {
+        if (!levelInfo[2]) return;
         this.name = levelInfo[2];
         this.id = levelInfo[1];
-        this.description = Buffer.from(levelInfo[3], "base64").toString() || "(No description provided)";
+        this.description = (config.base64descriptions ? Buffer.from(levelInfo[3], "base64").toString() : levelInfo[3]) || "(No description provided)";
         this.author = author[1] || "-"
         this.authorID = levelInfo[6]
         this.accountID = author[2] || 0
@@ -22,8 +24,8 @@ class Level {
         this.diamonds = levelInfo[18] < 2 ? 0 : parseInt(levelInfo[18]) + 2
         this.featured = levelInfo[19] > 0
         this.epic = levelInfo[42] == 1
-        if (levelInfo[28]) this.uploaded = levelInfo[28] + ' ago'
-        if (levelInfo[29]) this.updated = levelInfo[29] + ' ago'
+        if (levelInfo[28]) this.uploaded = levelInfo[28] + config.timestampSuffix
+        if (levelInfo[29]) this.updated = levelInfo[29] + config.timestampSuffix
         this.version = levelInfo[5];
         if (levelInfo[27]) this.password = levelInfo[27];
         this.copiedID = levelInfo[30]
@@ -46,7 +48,7 @@ class Level {
 
         if (this.password && this.password != 0) {
             let xor = new XOR();
-            let pass = xor.decrypt(this.password, 26364);
+            let pass = config.xorPasswords ? xor.decrypt(this.password, 26364) : this.password;
             if (pass.length > 1) this.password = pass.slice(1);
             else this.password = pass;
         }

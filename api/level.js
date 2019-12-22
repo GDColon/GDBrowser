@@ -15,7 +15,7 @@ module.exports = async (app, req, res, api, analyze) => {
 
   if (analyze || req.query.hasOwnProperty("download")) return app.modules.download(app, req, res, api, levelID, analyze)
 
-  request.post('http://boomlings.com/database/getGJLevels21.php', {
+  request.post(app.endpoint + 'getGJLevels21.php', {
     form: {
       str: levelID,
       secret: app.secret,

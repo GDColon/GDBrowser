@@ -15,7 +15,7 @@ module.exports = async (app, req, res) => {
       type: (req.query.hasOwnProperty("creator") || req.query.hasOwnProperty("creators")) ? "creators" : "top",
     }  
 
-    request.post('http://boomlings.com/database/getGJScores20.php', {
+    request.post(app.endpoint + 'getGJScores20.php', {
     form : params}, async function(err, resp, body) { 
 
       if (err || body == '-1' || !body) return res.send("-1")

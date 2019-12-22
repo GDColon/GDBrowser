@@ -4,7 +4,26 @@ Uh... so I've never actually used GitHub before this. But I'll try to explain ev
 
 Sorry for my messy code. It's why I was skeptical about making this open source, but you know what, the code runs fine in the end.
 
-## The API folder
+## Using this for a GDPS?
+I mean, sure. Why not.
+
+Just make sure to give credit, obviously. Via the bottom of the homepage, the credits button, or maybe even both if you're feeling extra nice.
+
+Obviously, GDBrowser isn't perfect when it comes to GD private servers, since both requests and responses might be a bit different. Or a LOT, as I learned.
+
+You can tweak the endpoint (e.g. boomlings.com) in index.js
+
+You can also check out `/misc/gdpsConfig.js` to tweak some additional GDPS settings such as whether to decrypt level descriptions or if timestamps should end with "ago"
+
+GDPS compatibility is still a HUGE work in progress, so pull requests would be greatly appreciated if you manage to make any improvements! 
+
+# Folders
+
+GDBrowser has a lot of folders. I like to keep things neat.
+
+Most folders contain exactly what you'd expect, but here's some in-depth info in case you're in the dark.
+
+## API
 This is where all the backend stuff happens! Yipee!
 
 They're all fairly similar. Fetch something from boomlings.com, parse the response, and serve it in a crisp and non-intimidating JSON. This is probably what you came for.
@@ -69,6 +88,8 @@ objects.json - IDs for portals, orbs, triggers, and misc stuff
 colors.json - The colors for generating icons
 
 credits.json - Credits! (shown on the homepage)
+
+gdpsConfig.js - Tweak small settings for GDPS'es here, such as whether to decrypt level descriptions or if timestamps should end with "ago"
 
 level.json - An array of the official GD tracks, and also difficulty face stuff for level searching
 

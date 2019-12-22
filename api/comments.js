@@ -15,7 +15,7 @@ module.exports = async (app, req, res) => {
     if (req.query.type == "commentHistory") path = "getGJCommentHistory"
     else if (req.query.type == "profile") path = "getGJAccountComments20"
 
-    request.post(`http://boomlings.com/database/${path}.php`, {
+    request.post(`${app.endpoint}${path}.php`, {
     form : params}, async function(err, resp, body) { 
 
       if (err || body == '-1' || !body) return res.send("-1")
@@ -24,7 +24,7 @@ module.exports = async (app, req, res) => {
       comments = comments.map(x => x.split(':'))
       comments = comments.map(x => x.map(x => app.parseResponse(x, "~")))
       if (req.query.type == "profile") comments.filter(x => x[0][2])
-      else comments = comments.filter(x => x[1][1])
+      else comments = comments.filter(x => x[1] && x[1][1])
       if (!comments.length) return res.send("-1")
 
       let commentArray = []
@@ -40,7 +40,7 @@ module.exports = async (app, req, res) => {
         comment.content = app.clean(Buffer.from(x[2], 'base64').toString());
         comment.ID = x[6]
         comment.likes = x[4]
-        comment.date = (x[9] || "?") + " ago"
+        comment.date = (x[9] || "?") + app.config.timestampSuffix
         if (comment.content.endsWith("⍟")) {
           comment.content = comment.content.slice(0, -1)
           comment.browserColor = true 

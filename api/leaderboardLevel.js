@@ -18,7 +18,7 @@ module.exports = async (app, req, res) => {
       type: req.query.hasOwnProperty("week") ? "2" : "1",
     }  
 
-    request.post('http://boomlings.com/database/getGJLevelScores211.php', {
+    request.post(app.endpoint + 'getGJLevelScores211.php', {
     form : params}, async function(err, resp, body) { 
 
       if (err || body == '-1' || !body) return res.send("-1")
@@ -32,7 +32,7 @@ module.exports = async (app, req, res) => {
         x.percent = x[3]
         x.coins = x[13]
         x.playerID = x[2]
-        x.date = x[42] + " ago"
+        x.date = x[42] + app.config.timestampSuffix
         keys.forEach(k => delete x[k])
       }) 
 
