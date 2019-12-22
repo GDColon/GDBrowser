@@ -18,18 +18,25 @@ fs.readdirSync('./api').forEach(x => {
   app.modules[x.split('.')[0]] = require('./api/' + x)
 })
 
+function haltOnTimedout (req, res, next) {
+  if (!req.timedout) next()
+}
+
 app.secret = 'Wmfd2893gb7'
 app.endpoint = 'http://boomlings.com/database/'
 app.config = require('./misc/gdpsConfig')  // tweak settings in this file if you're using a GDPS
 
-const secrets = require("./misc/secretStuff.json")
-app.id = secrets.id
-app.gjp = secrets.gjp
+try {
+  const secrets = require("./misc/secretStuff.json")
+  app.id = secrets.id
+  app.gjp = secrets.gjp
+  if (app.id == "account id goes here" || app.gjp == "account gjp goes here") console.log("Warning: No account ID and/or GJP has been provided in secretStuff.json! These are required for level leaderboards to work.")
+}
 
-if (app.id == "account id goes here" || app.gjp == "account gjp goes here") console.log("Warning: No account ID and/or GJP has been provided in secretStuff.json! These are required for level leaderboards to work.")
-
-function haltOnTimedout (req, res, next) {
-  if (!req.timedout) next()
+catch {
+  app.id = 0
+  app.gjp = 0
+  console.log("Warning: secretStuff.json has not been created! These are required for level leaderboards to work.")
 }
 
 app.parseResponse = function (responseBody, splitter) {
