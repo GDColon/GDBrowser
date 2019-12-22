@@ -22,18 +22,11 @@ app.secret = 'Wmfd2893gb7'
 app.endpoint = 'http://boomlings.com/database/'
 app.config = require('./misc/gdpsConfig')  // tweak settings in this file if you're using a GDPS
 
+const secrets = require("./misc/secretStuff.json")
+app.id = secrets.id
+app.gjp = secrets.gjp
 
-try {
-  const secrets = require("./misc/secretStuff.json")
-  app.id = secrets.id
-  app.gjp = secrets.gjp
-}
-
-catch {
-  app.id = 0
-  app.gjp = 0
-  console.log("No GJP/Account ID has been set, which means that level leaderboards won't load. Put those two values in /misc/secretStuff.json")
-}
+if (app.id == "account id goes here" || app.gjp == "account gjp goes here") console.log("Warning: No account ID and/or GJP has been provided in secretStuff.json! These are required for level leaderboards to work.")
 
 function haltOnTimedout (req, res, next) {
   if (!req.timedout) next()
