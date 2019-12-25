@@ -8,6 +8,8 @@ module.exports = async (app, req, res) => {
         levelID: req.params.id,
         page: req.query.page || 0,
         secret: app.secret,
+        gameVersion: app.gameVersion,
+        binaryVersion: app.binaryVersion,
         mode: req.query.hasOwnProperty("top") ? "1" : "0",
     }  
 

@@ -11,6 +11,8 @@ module.exports = async (app, req, res, api, ID, analyze) => {
   request.post(app.endpoint + 'downloadGJLevel22.php', {
     form: {
       levelID,
+      gameVersion: app.gameVersion,
+      binaryVersion: app.binaryVersion,
       secret: app.secret
     }
   }, async function (err, resp, body) {

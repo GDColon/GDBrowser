@@ -2,6 +2,8 @@ const request = require('request')
 
 module.exports = async (app, req, res) => {
 
+      if (app.endpoint != "http://boomlings.com/database/") return res.send([])
+      
       request.get(`https://gdleaderboards.com/incl/lbxml.php`, function (err, resp, topPlayers) {
       if (err || !topPlayers) topPlayers = ""
       let idArray = topPlayers.split(",")

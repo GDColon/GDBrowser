@@ -35,6 +35,8 @@ module.exports = async (app, req, res) => {
         customSong: req.query.hasOwnProperty("customSong") ? 1 : 0,
 
         type: req.query.type || 0,
+        gameVersion: app.gameVersion,
+        binaryVersion: app.binaryVersion,
         secret: app.secret
     }  
 

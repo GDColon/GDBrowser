@@ -23,6 +23,8 @@ function haltOnTimedout (req, res, next) {
 }
 
 app.secret = 'Wmfd2893gb7'
+app.gameVersion = '21'
+app.binaryVersion = '35'
 app.endpoint = 'http://boomlings.com/database/'
 app.config = require('./misc/gdpsConfig')  // tweak settings in this file if you're using a GDPS
 

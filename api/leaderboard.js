@@ -11,6 +11,8 @@ module.exports = async (app, req, res) => {
 
     let params = {
       count: amount,
+      gameVersion: app.gameVersion,
+      binaryVersion: app.binaryVersion,
       secret: app.secret,
       type: (req.query.hasOwnProperty("creator") || req.query.hasOwnProperty("creators")) ? "creators" : "top",
     }  

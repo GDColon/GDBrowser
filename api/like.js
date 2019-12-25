@@ -14,8 +14,8 @@ module.exports = async (app, req, res) => {
   if (!req.body.extraID) return res.status(400).send("No extra ID provided! (this should be a level ID, account ID, or '0' for levels")
   
   let params = {
-    gameVersion: '21',
-    binaryVersion: '35',
+    gameVersion: app.gameVersion,
+    binaryVersion: app.binaryVersion,
     secret: app.secret,
     udid: '0',
     uuid: '0',

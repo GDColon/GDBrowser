@@ -25,8 +25,8 @@ module.exports = async (app, req, res) => {
   if (rateLimit[req.body.username]) return res.status(400).send(`Please wait ${getTime(rateLimit[req.body.username] + cooldown - Date.now())} seconds before posting another comment!`)
   
   let params = {
-    gameVersion: '21',
-    binaryVersion: '35',
+    gameVersion: app.gameVersion,
+    binaryVersion: app.binaryVersion,
     secret: app.secret,
     percent: 0
   }

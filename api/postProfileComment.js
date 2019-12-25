@@ -14,8 +14,8 @@ module.exports = async (app, req, res) => {
   if (req.body.comment.includes('\n')) return res.status(400).send("Profile posts cannot contain line breaks!")
   
   let params = {
-    gameVersion: '21',
-    binaryVersion: '35',
+    gameVersion: app.gameVersion,
+    binaryVersion: app.binaryVersion,
     secret: app.secret,
     cType: '1'
   }
