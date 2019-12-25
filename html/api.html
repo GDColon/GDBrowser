@@ -44,6 +44,7 @@
 						<a class="header-link" href="#commenting">Commenting</a> 
 						<a class="header-link" href="#profileposting">Profile Posting</a> 
 						<a class="header-link" href="#liking">Liking</a> 
+						<a class="header-link" href="#messages">Messages</a> 
 					</div>
 				</div>
 				<div class="header-category">
@@ -81,6 +82,7 @@
 				<p><a href="#analyze"><u>Level Analysis</u></a> <i>/api/analyze/levelID</i></p>
 				<p><a href="#commenting"><u>Commenting</u></a> <i>/api/postComment (POST)</i></p>
 				<p><a href="#profileposting"><u>Profile Posting</u></a> <i>/api/postProfileComment (POST)</i></p>
+				<p><a href="#messages"><u>Messages</u></a> <i>/messages (4 different POSTs)</i></p>
 				<p><a href="#liking"><u>Liking</u></a> <i>/api/like (POST)</i></p>
 				<p><a href="#icons"><u>Icons</u></a> <i>/icon/username</i></p>
 			</quote>
@@ -527,7 +529,7 @@
 
 				<p class="reveal" onclick="$('#request-commenting').slideToggle(100)"><b>Example</b></p>
 				<div class="subdiv" id="request-commenting">
-					<p><b>Example Requests</b></p>
+					<p><b>Example Request</b></p>
 					<p>POST /api/postComment<br>
 						?comment=This is a nifty comment!<br>
 						&username=colon<br>
@@ -603,7 +605,7 @@
 
 				<p class="reveal" onclick="$('#request-liking').slideToggle(100)"><b>Example</b></p>
 				<div class="subdiv" id="request-liking">
-					<p><b>Example Requests</b></p>
+					<p><b>Example Request</b></p>
 					<p>Drop a like on RobTop's popular "can you handle the kappa" comment:</p>
 					<p>POST /api/like<br>
 						?id=42602304 (ID of the comment)<br>
@@ -617,6 +619,79 @@
 						Liking a comment multiple times on the same account will return a 200, but not actually increase the in-game like counter.</p>
 				</div>
 	
+			</div>
+			<div class="seperator"></div>
+		</main>
+
+		<main>
+			<div id="messages" class="anchor"></div>
+			<div class="main-block">
+				<h1>Messages</h1>
+				<p>POST:<br>
+				<b>/messages</b> (fetches messages, includes subject but not actual content. blame robtop)<br>
+				<b>/messages/messageID</b> (reads a message)<br>
+				<b>/deleteMessage</b> (deletes a message)<br>
+				<b>/sendMessage</b> (sends a message)</p>
+
+				<p>I decided to put all 4 of these requests in one section because they're fairly similar ¯\_(ツ)_/¯</p>
+	
+				<br>
+				<p class="reveal" onclick="$('#params-msg').slideToggle(100)"><b>Parameters</b></p>
+				<div class="subdiv" id="params-msg">
+					<p><b>All:</b></p>
+					<p>accountID: Your account ID</p>
+					<p>password: Your password (as plain text)</p>
+
+					<br><p><b>/messages:</b></p>
+					<p>page: The page of the search</p>
+					<p>sent: Set to 1 or true to fetch your sent messages</p>
+
+					<br><p><b>/deleteMessage:</b></p>
+					<p>id: The ID of the message to delete, or an array of multiple IDs</p>
+
+					<br><p><b>/sendMessage:</b></p>
+					<p>targetID: The account ID of the message recipient</p>
+					<p>subject: The subject of the message, max 50 characters</p>
+					<p>message: The content of the message, max 300 characters</p>
+				</div>
+	
+				<br>
+
+				<p class="reveal" onclick="$('#request-msg').slideToggle(100)"><b>Example</b></p>
+				<div class="subdiv" id="request-msg">
+					<p><b>Example Request</b></p>
+					<p>Fetch your messages:</p>
+					<p>POST /messages<br>
+						?page=0<br>
+						&accountID=106255<br>
+						&password=KitsuneColon333<br>
+					<br>
+					
+					<p>Read message with ID of 177013:</p>
+					<p>POST /messages/177013<br>
+						?accountID=106255<br>
+						&password=KitsuneColon333<br>
+					<br>
+
+					<p>Delete message with ID of 177013:</p>
+					<p>POST /deleteMessage<br>
+						?accountID=106255<br>
+						&id=177013<br>
+						&password=KitsuneColon333<br>
+					<br>
+					
+					<p>Send "Hello!" to Tubular9:</p>
+					<p>POST /deleteMessage<br>
+						?accountID=106255<br>
+						&password=KitsuneColon333<br>
+						&subject=Message for you<br>
+						&message=Hello!<br>
+						&targetID=10760804 (Account ID of Tubular9)<br>
+					<br>
+
+					<p>A status of 200 will return if everything goes well, otherwise a 400 will return with an error message.<br>
+						Deleting a message ID that doesn't exist will still return a 200 but won't do anything.</p>
+				</div>
 			</div>
 			<div class="seperator"></div>
 		</main>

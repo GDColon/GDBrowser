@@ -63,7 +63,7 @@ module.exports = async (app, req, res) => {
 
     if (req.query.hasOwnProperty("user")) {
         filters.type = 5
-        if (!req.params.text.match(/^[0-9]*$/)) return app.modules.profile(app, req, res, null, req.params.text)
+        if (!req.params.text.match(/^[0-9]*$/)) return app.run.profile(app, req, res, null, req.params.text)
     } 
 
     if (req.params.text == "*") delete filters.str

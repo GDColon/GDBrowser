@@ -5,15 +5,15 @@ const Level = require('../classes/Level.js')
 module.exports = async (app, req, res, api, analyze) => {
 
   let levelID = req.params.id
-  if (levelID == "daily") return app.modules.download(app, req, res, api, 'daily', analyze)
-  else if (levelID == "weekly") return app.modules.download(app, req, res, api, 'weekly', analyze)
+  if (levelID == "daily") return app.run.download(app, req, res, api, 'daily', analyze)
+  else if (levelID == "weekly") return app.run.download(app, req, res, api, 'weekly', analyze)
   else if (levelID.match(/[^0-9]/)) {
     if (!api) return res.redirect('search/' + req.params.id)
     else return res.send("-1")
   }
   else levelID = levelID.replace(/[^0-9]/g, "")
 
-  if (analyze || req.query.hasOwnProperty("download")) return app.modules.download(app, req, res, api, levelID, analyze)
+  if (analyze || req.query.hasOwnProperty("download")) return app.run.download(app, req, res, api, levelID, analyze)
 
   request.post(app.endpoint + 'getGJLevels21.php', {
     form: {

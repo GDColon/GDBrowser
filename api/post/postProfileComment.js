@@ -1,5 +1,5 @@
 const request = require('request')
-const XOR = require('../classes/XOR.js');
+const XOR = require('../../classes/XOR.js');
 const xor = new XOR();
 const crypto = require('crypto')
 function sha1(data) { return crypto.createHash("sha1").update(data, "binary").digest("hex"); }
@@ -20,7 +20,7 @@ module.exports = async (app, req, res) => {
     cType: '1'
   }
 
-  params.comment = new Buffer(req.body.comment.slice(0, 190) + (req.body.color ? "⍟" : "")).toString('base64').replace(/\//g, '_').replace(/\+/g, "-")
+  params.comment = new Buffer(req.body.comment.slice(0, 190) + (req.body.color ? "☆" : "")).toString('base64').replace(/\//g, '_').replace(/\+/g, "-")
   params.gjp = xor.encrypt(req.body.password, 37526)
   params.accountID = req.body.accountID.toString()
   params.userName = req.body.username

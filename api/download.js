@@ -70,7 +70,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
 
           level.data = levelInfo[4]
 
-          if (analyze) return app.modules.analyze(app, req, res, level)
+          if (analyze) return app.run.analyze(app, req, res, level)
 
           function sendLevel() {
             if (api) return res.send(level)

@@ -9,13 +9,15 @@ const app = express();
 app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(timeout('25s'));
+app.use(timeout('30s'));
 app.use(haltOnTimedout)
 app.set('json spaces', 2)
 
-app.modules = {}
-fs.readdirSync('./api').forEach(x => {
-  app.modules[x.split('.')[0]] = require('./api/' + x)
+let directories = ["", "post", "messages"] //this can probably be automated but i'm lazy
+
+app.run = {}
+directories.forEach(d => {
+  fs.readdirSync('./api/' + d).forEach(x => {if (x.includes('.')) app.run[x.split('.')[0]] = require('./api/' + d + "/" + x) })
 })
 
 function haltOnTimedout (req, res, next) {
@@ -35,7 +37,7 @@ try {
   if (app.id == "account id goes here" || app.gjp == "account gjp goes here") console.log("Warning: No account ID and/or GJP has been provided in secretStuff.json! These are required for level leaderboards to work.")
 }
 
-catch {
+catch(e) {
   app.id = 0
   app.gjp = 0
   console.log("Warning: secretStuff.json has not been created! These are required for level leaderboards to work.")
@@ -72,9 +74,14 @@ app.use('/objects', express.static(__dirname + '/assets/objects', {maxAge: "7d"}
 
 // POST REQUESTS
 
-app.post("/like", function(req, res) { app.modules.like(app, req, res) })  
-app.post("/postComment", function(req, res) { app.modules.postComment(app, req, res) })  
-app.post("/postProfileComment", function(req, res) { app.modules.postProfileComment(app, req, res) })  
+app.post("/like", function(req, res) { app.run.like(app, req, res) })  
+app.post("/postComment", function(req, res) { app.run.postComment(app, req, res) })  
+app.post("/postProfileComment", function(req, res) { app.run.postProfileComment(app, req, res) })  
+
+app.post("/messages", async function(req, res) { app.run.getMessages(app, req, res, api) })
+app.post("/messages/:id", async function(req, res) { app.run.fetchMessage(app, req, res, api) })
+app.post("/deleteMessage", function(req, res) { app.run.deleteMessage(app, req, res) })  
+app.post("/sendMessage", function(req, res) { app.run.sendMessage(app, req, res) })  
 
 
 // HTML
@@ -94,21 +101,20 @@ app.get("/search/:text", function(req, res) { res.sendFile(__dirname + "/html/se
 
 // API
 
-app.get("/api/analyze/:id", async function(req, res) { app.modules.level(app, req, res, api, true) })
-app.get("/api/comments/:id", function(req, res) { app.modules.comments(app, req, res, api) })
+app.get("/api/analyze/:id", async function(req, res) { app.run.level(app, req, res, api, true) })
+app.get("/api/comments/:id", function(req, res) { app.run.comments(app, req, res, api) })
 app.get("/api/credits", function(req, res) { res.send(require('./misc/credits.json')) })
-app.get("/api/leaderboard", function(req, res, api) { app.modules[req.query.hasOwnProperty("accurate") ? "accurateLeaderboard" : "leaderboard"](app, req, res) })
-app.get("/api/leaderboardLevel/:id", function(req, res) { app.modules.leaderboardLevel(app, req, res, api) })
-app.get("/api/level/:id", async function(req, res) { app.modules.level(app, req, res, api) })
+app.get("/api/leaderboard", function(req, res, api) { app.run[req.query.hasOwnProperty("accurate") ? "accurateLeaderboard" : "leaderboard"](app, req, res) })
+app.get("/api/leaderboardLevel/:id", function(req, res) { app.run.leaderboardLevel(app, req, res, api) })
+app.get("/api/level/:id", async function(req, res) { app.run.level(app, req, res, api) })
 app.get("/api/mappacks", async function(req, res) { res.send(require('./misc/mapPacks.json')) })
-app.get("/api/profile/:id", function(req, res) { app.modules.profile(app, req, res, api) })
-app.get("/api/search/:text", function(req, res) { app.modules.search(app, req, res, api) })
-
+app.get("/api/profile/:id", function(req, res) { app.run.profile(app, req, res, api) })
+app.get("/api/search/:text", function(req, res) { app.run.search(app, req, res, api) })
 
 // API AND HTML
    
-app.get("/profile/:id", function(req, res) { app.modules.profile(app, req, res) })
-app.get("/:id", function(req, res) { app.modules.level(app, req, res) }) 
+app.get("/profile/:id", function(req, res) { app.run.profile(app, req, res) })
+app.get("/:id", function(req, res) { app.run.level(app, req, res) }) 
  
 
 // REDIRECTS
@@ -127,7 +133,7 @@ app.get("/p/:id", function(req, res) { res.redirect('/profile/' + req.params.id)
 
 app.get("/assets/sizecheck.js", function(req, res) { res.sendFile(__dirname + "/misc/sizecheck.js") }) 
 app.get('/api/icons', function(req, res) { res.send(gdicons); });
-app.get("/icon/:text", function(req, res) { app.modules.icon(app, req, res) })
+app.get("/icon/:text", function(req, res) { app.run.icon(app, req, res) })
 
 app.get('*', function(req, res) {
   if (req.path.startsWith('/api')) res.send('-1')

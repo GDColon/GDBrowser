@@ -1,5 +1,5 @@
 const request = require('request')
-const XOR = require('../classes/XOR.js');
+const XOR = require('../../classes/XOR.js');
 const xor = new XOR();
 const crypto = require('crypto')
 function sha1(data) { return crypto.createHash("sha1").update(data, "binary").digest("hex"); }

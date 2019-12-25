@@ -64,7 +64,7 @@ module.exports = async (app, req, res, api, getLevels) => {
    
       if (getLevels) {
           req.params.text = account[2]
-          return app.modules.search(app, req, res)
+          return app.run.search(app, req, res)
       }
 
       else if (api) return res.send(userData)

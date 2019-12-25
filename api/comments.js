@@ -43,7 +43,7 @@ module.exports = async (app, req, res) => {
         comment.ID = x[6]
         comment.likes = x[4]
         comment.date = (x[9] || "?") + app.config.timestampSuffix
-        if (comment.content.endsWith("⍟")) {
+        if (comment.content.endsWith("⍟") || comment.content.endsWith("☆")) {
           comment.content = comment.content.slice(0, -1)
           comment.browserColor = true 
         }
