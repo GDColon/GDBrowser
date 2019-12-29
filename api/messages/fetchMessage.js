@@ -23,13 +23,17 @@ module.exports = async (app, req, res, api) => {
     let x = app.parseResponse(body)
     let msg = {}
     msg.id = x[1];
-    msg.playerID = x[2]
-    msg.accountID = x[3]
+    msg.playerID = x[3]
+    msg.accountID = x[2]
     msg.author = x[6]
     msg.subject = Buffer.from(x[4], "base64").toString()
     msg.content = xor.decrypt(x[5], 14251)
     msg.date = x[7] + app.config.timestampSuffix
-
+    if (msg.subject.endsWith("☆")) {
+        msg.subject = msg.subject.slice(0, -1)
+        msg.browserColor = true 
+    }
+    
     return res.status(200).send(msg)
   })
 

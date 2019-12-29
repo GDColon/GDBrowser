@@ -78,8 +78,8 @@ app.post("/like", function(req, res) { app.run.like(app, req, res) })
 app.post("/postComment", function(req, res) { app.run.postComment(app, req, res) })  
 app.post("/postProfileComment", function(req, res) { app.run.postProfileComment(app, req, res) })  
 
-app.post("/messages", async function(req, res) { app.run.getMessages(app, req, res, api) })
-app.post("/messages/:id", async function(req, res) { app.run.fetchMessage(app, req, res, api) })
+app.post("/messages", async function(req, res) { app.run.getMessages(app, req, res) })
+app.post("/messages/:id", async function(req, res) { app.run.fetchMessage(app, req, res) })
 app.post("/deleteMessage", function(req, res) { app.run.deleteMessage(app, req, res) })  
 app.post("/sendMessage", function(req, res) { app.run.sendMessage(app, req, res) })  
 
@@ -95,6 +95,7 @@ app.get("/iconkit", function(req, res) { res.sendFile(__dirname + "/html/iconkit
 app.get("/leaderboard", function(req, res) { res.sendFile(__dirname + "/html/leaderboard.html") })
 app.get("/leaderboard/:text", function(req, res) { res.sendFile(__dirname + "/html/levelboard.html") })
 app.get("/mappacks", function(req, res) { res.sendFile(__dirname + "/html/mappacks.html") })
+app.get("/messages", function(req, res) { res.sendFile(__dirname + "/html/messages.html") })
 app.get("/search", function(req, res) { res.sendFile(__dirname + "/html/filters.html") })
 app.get("/search/:text", function(req, res) { res.sendFile(__dirname + "/html/search.html") })
 

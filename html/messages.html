@@ -1,0 +1,508 @@
+<head>
+	<title>Messages</title>
+	<meta charset="utf-8">
+	<link href="../css/browser.css" type="text/css" rel="stylesheet">
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script>
+	<script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-135255146-3');</script>
+	<link rel="icon" href="../assets/messages.png">
+	<meta id="meta-title" property="og:title" content="Messages">
+	<meta id="meta-desc" property="og:description" content="Read, write, and delete your Geometry Dash messages!">
+	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/assets/messages.png">
+</head>
+
+<body class="levelBG" onbeforeunload="saveUrl()">
+
+	<div id="everything">
+
+		<div id="access">
+			<div class="brownbox center supercenter" style="height: 65%; width: 110vh">
+				<h1 class="smaller center" style="font-size: 5.5vh; margin-top: 1.5%">Sign In</h1>
+				<form>
+					<h3 class="center" style="margin-top: 4%">GD Username</h3>
+					<input type="text" name="gdbrowser" id="username" maxlength="50"
+						style="height: 8vh; width: 90%; text-align: center; margin-top: 0.5%">
+					<h3 class="center" style="margin-top: 2%">GD Password</h3>
+					<input type="password" id="password" maxlength="50"
+						style="height: 8vh; width: 90%; text-align: center; margin-top: 0.5%">
+				</form>
+				<div style="margin-bottom: 3%">
+					<p id="message" style="padding: 0% 10%; margin-top: 1.5%"></p>
+				</div>
+				<img src="../assets/btn-cancel.png" height=11%; class="gdButton postbutton center"
+					style="margin-right: 1%" onclick="backButton()">
+				<img src="../assets/btn-submit.png" type="submit" height=11%; class="gdButton postbutton center"
+					style="margin-left: 1%" id="logIn">
+			</div>
+		</div>
+
+		<div id="loading" style="display: none;">
+			<div class="brownbox center supercenter" style="height: 65%; width: 110vh">
+				<div style="position:absolute; top: 25%; width: 100%">
+					<p id="msgCount" style="font-size: 3.5vh; margin-bottom: 5%"></p>
+					<img class="spin noSelect" id="loadingicon" src="../assets/loading.png" width="10%">
+				</div>
+			</div>
+		</div>
+
+		<div id="messages" style="display: none;">
+			<div class="brownbox center supercenter" style="height: 85%; width: 138vh">
+				<h1 class="smaller center" style="font-size: 5.5vh; margin-top: 1.5%">Messages</h1>
+				<div class="lightBox center dragscroll" id="msgList" style="margin-bottom: 0.7%">
+				</div>
+
+				<div style="text-align: left">
+					<img class="gdButton inline" id="purge" src="../assets/trash-square.png" width="7%">
+					<div id="selectCount" style="display: none; pointer-events: none;">
+						<h3 class="center" style="font-size: 3vh; margin-top: 12%"></h3>
+					</div>
+					<img class="gdButton inline" id="selectAll" src="../assets/select-all.png" width="15%"
+						style="margin: 0% 0% 0.5% 2%">
+					<img class="gdButton inline" id="selectNone" src="../assets/select-none.png" width="15%"
+						style="display: none; margin: 0% 0% 0.5% 2%">
+				</div>
+
+				<img src="../assets/refresh.png" style="height: 13%;position: absolute;right: 0%;bottom: 0%;" onclick="page = 0; getMessages()" class="gdButton center sideSpaceB">
+
+				<div style="position: absolute; left: 0.5%; top: 45%; height: 11%;">
+					<img class="gdButton" style="display: none" id="pageDown" src="../assets/arrow-left.png"
+						height="90%">
+				</div>
+
+				<div style="position: absolute; right: 0.5%; top: 45%; height: 11%;">
+					<img class="gdButton" style="display: none" id="pageUp" src="../assets/arrow-right.png"
+						height="90%">
+				</div>
+
+			</div>
+		</div>
+
+		<div class="popup" id="confirmDelete" style="z-index: 3;">
+			<div class="fancybox bounce center supercenter" style="width: 47%; height: 25%">
+				<div id="preDelete">
+					<h2 class="smaller center" style="font-size: 5.5vh">Delete</h2>
+					<p class="bigger center" style="line-height: 6vh; margin-top: 1.5vh;">
+						Are you sure you want to <span style="color: #F05C5C">delete</span> this message?
+					</p>
+					<img src="../assets/btn-cancel.png" height=29%; class="gdButton center"
+						onclick="$('#confirmDelete').hide()">
+					<img src="../assets/btn-delete.png" height=29%; id="deleteCurrentMessage"
+						class="gdButton center sideSpaceB">
+				</div>
+
+				<div id="deleting" style="display: none">
+					<h2 class="smaller center" style="font-size: 5.5vh">Delete</h2>
+					<p class="bigger center" style="line-height: 6vh; margin-top: 1.5vh;">Deleting message...</p>
+					<img src="../assets/loading.png" class="spin noSelect" style="height: 35%; margin-top: -2%">
+				</div>
+			</div>
+		</div>
+
+		<div class="popup" id="bulkDelete">
+			<div class="fancybox bounce center supercenter" style="width: 47%; height: 25%">
+				<div id="preBulkDelete">
+					<h2 class="smaller center" style="font-size: 5.5vh">Bulk Delete</h2>
+					<p class="bigger center" style="line-height: 6vh; margin-top: 1.5vh;">
+						Are you sure you want to <span style="color: #F05C5C">delete</span> <span class="selectedAmount"
+							style="color: yelow"></span>?
+					</p>
+					<img src="../assets/btn-cancel-green.png" height=29%; class="gdButton center"
+						onclick="$('#bulkDelete').hide()">
+					<img src="../assets/btn-delete.png" height=29%; id="bulkDeleteMessages"
+						class="gdButton center sideSpaceB">
+				</div>
+
+				<div id="bulkDeleting" style="display: none">
+					<h2 class="smaller center" style="font-size: 5.5vh">Delete</h2>
+					<p class="bigger center" style="line-height: 6vh; margin-top: 1.5vh;">Deleting <span
+							class="selectedAmount"></span>...</p>
+					<img src="../assets/loading.png" class="spin noSelect" style="height: 35%; margin-top: -2%">
+				</div>
+			</div>
+		</div>
+
+		<div id="selectedMessage" class="popup">
+			<div class="bounce center supercenter" style="height: 70%; width: 115vh">
+				<div class="bluebox center supercenter" style="width: 100%; height: 100%">
+					<img class="gdButton" src="../assets/close.png" width="9%"
+						style="position: absolute; top: -7.5%; left: -6.5vh" onclick="$('#selectedMessage').hide()">
+					<h1 id="messageSubject" class="smaller center"
+						style="font-size: 5.5vh; min-height: 9%; margin-top: 1%"></h1>
+					<h3 id="messageAuthor" class="gold center gauntletText gdButton"></h3>
+					<div class="transparentBox center dragscroll" id="theMfMessage">
+						<img id="messageLoad" src="../assets/loading.png" class="spin noSelect"
+							style="width: 10%; margin-top: 15%">
+						<p id="messageBody"></p>
+					</div>
+					<div id="messageOptions">
+						<img class="gdButton" style="width: 8%" title="Reply" src="../assets/reply.png" id="replyButton">
+						<img class="gdButton" style="width: 8%" title="Delete" src="../assets/trash.png"
+							onclick="$('#confirmDelete').show()">
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="sendMessage" class="popup">
+			<div class="bounce center supercenter" style="height: 70%; width: 115vh">
+				<div class="bluebox center supercenter" style="width: 100%; height: 100%">
+					<h1 id="sendreply" class="smaller center" style="font-size: 5.5vh; min-height: 9%; margin-top: 1%">Send Reply</h1>
+					<h3 id="replyAuthor" class="gold center gauntletText gdButton" style="min-height: 6.2%"></h3>
+					<div id="textareas">
+						<textarea id="postSubject" maxlength="50" style="height: 7vh; white-space: nowrap !important;"
+							class="messageInput" placeholder="Subject"></textarea>
+						<textarea id="postContent" maxlength="300" style="height: 35vh" class="messageInput"
+							placeholder="Message"></textarea>
+					</div>
+					<p id="messageStatus" style="margin: 1% 0% 1.5% 0%; min-height: 5%;"></p>
+					<img src="../assets/btn-cancel.png" height=10%; class="gdButton center"
+						onclick="$('textarea').val(''); $('#sendMessage').hide()">
+					<img src="../assets/btn-submit.png" height=10%; id="postMessage" class="gdButton center sideSpaceB">
+					<img src="../assets/refresh.png" style="height: 10%; position: absolute; right: 0%"
+						onclick="$('#postContent').val('');" class="gdButton center sideSpaceB">
+				</div>
+			</div>
+		</div>
+
+		<div class="popup" id="postingMessage" style="z-index: 3">
+			<div class="bluebox bounce center supercenter" style="height: 27%; width: 55vh">
+
+				<div id="reply-loading">
+					<img src="../assets/loading.png" class="spin noSelect" style="height: 40%; margin-top: 7.5%">
+					<p class="bigger">Sending...</p>
+				</div>
+
+				<div id="reply-sent" style="display: none;">
+					<img class="gdButton" src="../assets/close.png" style="width: 15%; position: absolute; top: -17.5%; left: -5.5vh" onclick="$('.popup').hide()">
+					<img src="../assets/check.png" style="height: 40%; margin-top: 7.5%">
+					<p class="bigger">Message sent!</p>
+				</div>
+
+				<div id="reply-error" style="display: none;">
+					<img class="gdButton" src="../assets/close.png" style="width: 15%; position: absolute; top: -17.5%; left: -5.5vh" onclick="$('.popup').hide()">
+					<img src="../assets/exclamation.png" style="height: 40%; margin-top: 7.5%">
+					<p class="bigger" style="margin-bottom: 0%;">Something went wrong!</p>
+					<p style="font-size: 2.4vh; margin-top: 1%">Does the recipient have messages enabled?</p>
+				</div>
+
+			</div>
+		</div>
+
+		<div style="position:absolute; bottom: 0%; left: 0%; width: 100%; pointer-events: none;">
+			<img class="cornerPiece" src="../assets/corner.png" width=7%;>
+		</div>
+
+		<div style="position:absolute; bottom: 0%; right: 0%; width: 100%; text-align: right; pointer-events: none;">
+			<img class="cornerPiece" src="../assets/corner.png" width=7%; style="transform: scaleX(-1)">
+		</div>
+
+		<div style="position:absolute; top: 2%; left: 1.5%; width: 10%; height: 25%; pointer-events: none">
+			<img class="gdButton yesClick" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()">
+		</div>
+
+	</div>
+
+</body>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script async type="text/javascript" src="../assets/sizecheck.js"></script>
+<script type="text/javascript" src="../assets/dragscroll.js"></script>
+<script>
+
+	let accountID;
+	let password;
+	let page = 0;
+	let messageID = 0;
+	let authorID = 0;
+	let messages = [];
+	let messageStatus = {};
+	let cache = {};
+	let loading = false;
+
+	let messageText = 'Your <span style="color: yellow">Geometry Dash password</span> will <span style="color: lime">not be stored</span> anywhere on the site, both <span style="color:rgb(113, 234, 255)">locally and server-side.</span> For security, it will be <span style="color:yellow">forgotten</span> when you exit this page.'
+	$('#message').html(messageText)
+
+	function appendMessages(dontCheckPages) {
+
+		if (!dontCheckPages) {
+			if (page > 0) $('#pageDown').show()
+			else $('#pageDown').hide()
+
+			if (messages.length >= 48) $('#pageUp').show()
+			else $('#pageUp').hide()
+		}
+
+		$('#selectCount').hide()
+		$('#selectAll').show()
+		$('#selectNone').hide()
+		$('#msgList').html('')
+		messages.forEach((x, y) => {
+			$('#msgList').append(`
+			<div messageID=${x.id} authorID="${x.accountID}" ${x.browserColor ? 'browserColor="true" ' : ""}class="commentBG gdMessage">
+				<h3 style="color: ${x.browserColor ? 'rgb(120, 200, 255)' : 'white'}; font-size: ${x.subject.length > 35 ? "3" : x.subject.length > 30 ? "3.5" : x.subject.length > 25 ? "3.75" : "4"}vh">${x.subject}${x.unread ? " <span style='color:#00E600'>!</span>" : ""}</h3>
+				<h3 class="gold gdButton msgAuthor hitbox fit"><a href="../profile/${x.author}" target="_blank">From: ${x.author}</a></h3>
+				<p class="msgDate">${x.date}</p>
+				<div class="labelButton hitbox">
+					<input id="message-${y}" type="checkbox" class="chk" messageID=${x.id}>
+					<label for="message-${y}" class="gdcheckbox gdButton"></label>
+				</div>${/*
+				<div class="xButton hitbox">
+					<img class="gdButton" style="width: 8%" src="../assets/xbutton.png">
+				</div>*/""}
+			</div>`)
+		})
+
+		loading = false
+	}
+
+	$('#logIn').click(function () {
+		let username = $('#username').val()
+		password = $('#password').val()
+		accountID = 0
+
+		if (!username || !password) return;
+
+		$('#message').text("Logging in...")
+		$('.postbutton').hide()
+
+		fetch(`../api/profile/${username}`).then(res => res.json()).then(res => {
+			if (!res || res == "-1") { $('.postbutton').show(); return $('#message').text("The username you provided doesn't exist!") }
+			else accountID = res.accountID
+
+			$.post("../messages", { password, accountID, count: true })
+				.done(count => {
+					$('#msgCount').html(`Loading <span style="color: yellow">${count}</span> unread messages...`)
+					$('#access').hide()
+					$('#loading').show()
+
+					$.post("../messages", { password, accountID })
+						.done(msgs => {
+							messages = msgs
+							$('#loading').hide()
+							appendMessages()
+							$('#messages').show()
+
+							let targetUser = window.location.search.match(/\?sendTo=(.+)/)
+							if (targetUser) {
+								targetUser = decodeURIComponent(targetUser[1])
+								fetch(`../api/profile/${targetUser}`).then(res => res.json()).then(res => { 
+									if (res == "-1" || !res) return;
+									$('#replyAuthor').html(`<a href="../profile/${res.username}" target="_blank">To: ${res.username}</a>`)
+									messageStatus[res.accountID] = [res.messages, res.username]
+									authorID = res.accountID
+									if (res.messages == "all") $('#messageStatus').html(`<span style="color:yellow">${res.username}</span> has messages <span style="color:lime">enabled</span>`)
+									else if (res.messages == "friends") $('#messageStatus').html(`<span style="color:yellow">${res.username}</span> has messages set to <span style="color:orange">friends only</span>`)
+									else {
+										$('#messageStatus').html(`<span style="color:yellow">${res.username}</span> has messages <span style="color:#F05C5C">disabled</span>`)
+										$('#postMessage').addClass('grayscale')
+									}
+									$('#sendMessage').show()
+									$('#sendreply').text("Send Message")
+								})
+							}
+
+						})
+						.fail(e => { $('#loadingicon').hide(); $('#msgCount').text(e.responseText.includes("DOCTYPE") ? "Something went wrong..." : e.responseText) })
+
+				})
+				.fail(e => { $('.postbutton').show(); $('#message').text(e.responseText.includes("DOCTYPE") ? "Something went wrong..." : e.responseText) })
+		})
+	})
+
+	function getMessages() {
+		loading = true
+		$('#selectCount').hide()
+		$('#selectAll').show()
+		$('#selectNone').hide()
+		$('#msgList').html('<img src="../assets/loading.png" class="spin noSelect" style="margin-top: 20%; height: 20%;">')
+		$.post("../messages", { password, accountID, page })
+			.done(msgs => {
+				messages = msgs
+				appendMessages()
+			})
+	}
+
+	$(document).on('click', '.hitbox', function (x) {
+		x.stopImmediatePropagation();
+	})
+
+	$(document).on('mouseover', '.hitbox', function (x) {
+		$('.gdMessage').css('border', '0.6vh solid transparent')
+	})
+
+	$(document).on('mouseleave', '.hitbox', function (x) {
+		$('.gdMessage').removeAttr('style');
+	})
+
+	$(document).on('change', '.chk', function () {
+		let checked = $(document).find('.chk:checked').length
+		if (checked == 0) $('#selectCount').hide()
+		else $('#selectCount').show().children().text(checked)
+	})
+
+	$(document).on('click', '.gdMessage', function () {
+		messageID = $(this).attr('messageID')
+		authorID = $(this).attr('authorID')
+		let subject = $(this).find('h3:first')
+		subject.html(subject.html().replace('<span style="color:#00E600">!</span>', "")) //lazy way to mark as read
+		$('#messageSubject').attr('style', `color: ${$(this).attr('browserColor') ? 'rgb(120, 200, 255)' : "white"}`).text(subject.text())
+		$('#messageAuthor').html($(this).find('.gdButton').html())
+		$('#messageBody').text('').hide()
+		$('#messageLoad').show()
+		$('#selectedMessage').show()
+
+		$('textarea').val('');
+		$('#replyAuthor').html($(this).find('.gdButton').html().replace("From:", "To:"))
+		$('#postSubject').val("Re: " + subject.text())
+
+		if (cache[messageID]) {
+			$('#messageBody').attr('style', `color: ${cache[messageID][1] ? 'rgb(255, 140, 255)' : "white"}`).text(cache[messageID][0]).show()
+			$('#messageLoad').hide()
+		}
+
+		else $.post("../messages/" + messageID, { password, accountID })
+			.done(msg => {
+				cache[messageID] = [msg.content, msg.browserColor]
+
+				function loadMsg() {
+					$('#messageBody').attr('style', `color: ${msg.browserColor ? 'rgb(255, 140, 255)' : "white"}`).text(msg.content).show()
+					$('#messageLoad').hide()
+				}
+
+				if (!messageStatus[msg.accountID]) fetch(`../api/profile/${msg.author}`).then(res => res.json()).then(res => { 
+					messageStatus[msg.accountID] = [res.messages, msg.author]
+					loadMsg()
+				})
+				else {
+					loadMsg()
+				}
+			})
+	})
+
+	$('#deleteCurrentMessage').click(function () {
+		allowEsc = false
+		$('#preDelete').hide()
+		$('#deleting').show()
+
+		$.post("../deleteMessage/", { password, accountID, id: messageID })
+			.done(msg => {
+				messages = messages.filter(x => x.id != messageID)
+				appendMessages(true)
+				allowEsc = true
+				$('#selectedMessage').hide()
+				$('#confirmDelete').hide()
+				$('#preDelete').show()
+				$('#deleting').hide()
+			})
+	})
+
+	$('#purge').click(function () {
+		let checked = $(document).find('.chk:checked').length
+		if (checked == 0) return
+		let selectStr = checked + " message" + (checked != 1 ? "s" : "")
+		$('.selectedAmount').text(selectStr)
+		$('#bulkDelete').show()
+	})
+
+	$('#bulkDeleteMessages').click(function () {
+		allowEsc = false
+		let msgIDs = []
+		$('.chk:checked').each(function () { msgIDs.push($(this).attr('messageID')) })
+		$('#preBulkDelete').hide()
+		$('#bulkDeleting').show()
+
+		$.post("../deleteMessage/", { password, accountID, id: msgIDs })
+			.done(msg => {
+				if (msgIDs.length > 10) getMessages()
+				else {
+					messages = messages.filter(x => !msgIDs.includes(x.id))
+					appendMessages(true)
+				}
+				allowEsc = true
+				$('#bulkDelete').hide()
+				$('#preBulkDelete').show()
+				$('#bulkDeleting').hide()
+			})
+	})
+
+	$('#replyButton').click(function() {
+		if (!messageStatus[authorID]) return;
+		let status = messageStatus[authorID][0]
+		let name = messageStatus[authorID][1]
+		$('#postMessage').removeClass('grayscale')
+		if (status == "all") $('#messageStatus').html(`<span style="color:yellow">${name}</span> has messages <span style="color:lime">enabled</span>`)
+		else if (status == "friends") $('#messageStatus').html(`<span style="color:yellow">${name}</span> has messages set to <span style="color:orange">friends only</span>`)
+		else {
+			$('#messageStatus').html(`<span style="color:yellow">${name}</span> has messages <span style="color:#F05C5C">disabled</span>`)
+			$('#postMessage').addClass('grayscale')
+		}
+		$('#sendreply').text("Send Reply")
+		$('#sendMessage').show()
+	})
+
+	$('#postMessage').click(function () {
+		let subject = $('#postSubject').val()
+		let message = $('#postContent').val()
+		if (!subject || !message || !messageStatus[authorID] || messageStatus[authorID][0] == "off") return;
+		allowEsc = false
+		$('#reply-loading').show()
+		$('#reply-sent').hide()
+		$('#reply-error').hide()
+		$('#postingMessage').show()
+
+		$.post("../sendMessage/", { password, accountID, subject, message, targetID: authorID, color: true })
+			.done(msg => {
+				$('#reply-loading').hide()
+				$('#reply-sent').show()
+				allowEsc = true
+			})
+			.fail(e => { 
+				$('#reply-loading').hide()
+				$('#reply-error').show()
+				allowEsc = true
+			})
+	})
+
+
+	$('#pageUp').click(function () { page += 1; getMessages() })
+	$('#pageDown').click(function () { page -= 1; getMessages() })
+
+	$('#selectAll').click(function () {
+		$('#selectAll').hide()
+		$('#selectNone').show()
+		$('.chk').prop('checked', true).trigger('change')
+	})
+
+	$('#selectNone').click(function () {
+		$('#selectAll').show()
+		$('#selectNone').hide()
+		$('.chk').prop('checked', false).trigger('change')
+	})
+
+	$('#textareas').on("change keyup keydown paste click", "textarea", function () {
+		$('textarea').each(function () {
+			$(this).val($(this).val().replace(/[^\S ]+/g, ""))
+		})
+	});
+
+	$(document).keydown(function (k) {
+		if (loading) return;
+
+		if ($('#access').is(':visible')) {
+			if (k.which == 13) $('#logIn').trigger('click') //enter 
+			else return;
+		}
+
+		if ($('textarea').is(':visible')) {
+			if (k.which == 13) k.preventDefault() //enter
+		}
+
+		if (k.which == 37 && $('#pageDown').is(":visible") && !$('.popup').is(":visible")) { //left
+			$('#pageDown').trigger('click')
+		}
+
+		if (k.which == 39 && $('#pageUp').is(":visible") && !$('.popup').is(":visible")) { //right
+			$('#pageUp').trigger('click')
+		}
+	});
+
+</script>

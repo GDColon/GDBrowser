@@ -41,6 +41,10 @@ img, .noSelect {
     max-width: 100%;
 }
 
+.fit {
+    width: fit-content;
+}
+
 .supercenter {
     position: absolute; 
     top: 50%; 
@@ -302,6 +306,13 @@ input::-webkit-inner-spin-button {
     border-image: url('./../assets/brownbox.png') 10% round;
 }
 
+.blueBox {
+    border: 2.5vh solid transparent;
+    border-radius: 3vh;
+    background-color: #334499;
+    border-image: url('./../assets/bluebox.png') 10% round;
+}
+
 .fancybox {
     width: 69vh;
     padding: 1vh 3vh;
@@ -412,16 +423,20 @@ input::-webkit-inner-spin-button {
     height: 11%
 }
 
+.msgAuthor:hover {
+    transform: scale(1.03);
+}
+
 .gdButton {
     cursor: pointer;
     z-index: 1;
     user-select: none;
     pointer-events: all;
+    transition-duration: 0.07s;
+    transition-timing-function: ease-in-out;
 }
 
 .gdButton:active {
-    transition-duration: 0.07s;
-    transition-timing-function: ease-in-out;
     transform: scale(1.08);
 }
 
@@ -684,6 +699,110 @@ input::-webkit-inner-spin-button {
 #collectibles img:first-child, #collectibles img:last-child {
     transform: translate(-20%, -10%);
     height: 5.5%;
+}
+
+#msgList {
+    margin: 2% auto;
+    width: 115vh;
+    height: 75%;
+    background-color: #BE6F3F;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none; 
+}
+
+#msgList::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+#theMfMessage {
+    margin: 2% auto 1.2% auto;
+    width: 90%;
+    height: 65%;
+    display: table;
+    padding: 1% 3%;
+}
+
+#theMfMessage p {
+    white-space: normal;
+    vertical-align: middle;
+    display: table-cell;
+    font-size: 3.5vh;
+}
+
+#messageOptions img {
+    margin: 0% 5%;
+}
+
+.gdMessage {
+    text-align: left;
+    padding-left: 10%;
+    padding-top: 0.75%;
+    height: 12.5vh;
+    width: auto;
+    overflow: hidden;
+    cursor: pointer;
+    border: 0.6vh solid transparent;
+    transition-duration: 0.07s;
+}
+
+.gdMessage h3 {
+    font-size: 4vh;
+    min-height: 35%;
+}
+
+.gdMessage:hover {
+    border: 0.6vh solid rgba(0, 0, 0, 0.5);
+}
+
+/* .gdMessage:active {
+    box-shadow: inset 0px 0px 400px 400px rgba(0, 0, 0, .1);
+} */
+
+.messageInput {
+    font-size: 3.5vh;
+    text-align: left;
+    padding: 1.5%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.35);
+}
+
+.labelButton {
+    pointer-events: none;
+    position: relative;
+    bottom: 90%;
+    right: 9.25%;
+}
+
+.labelButton label {
+    padding: 3% 3.5%;
+}
+
+.xButton {
+    pointer-events: none;
+    position: relative;
+    bottom: 152%;
+    text-align: right;
+    margin-right: 2.5%;
+}
+
+#selectCount {
+    position: absolute;
+    bottom: 7.5%;
+    left: 4.8%;
+    background-color: red;
+    width: 4.5vh;
+    height: 4.5vh;
+    border-radius: 10vh;
+    border: 0.25vh solid white;
+}
+
+.msgDate {
+    text-align: left;
+    font-size: 1.9vh;
+    color: rgba(0, 0, 0, 0.5);
+    margin-top: 0.4%;
 }
 
 .specialThanks {

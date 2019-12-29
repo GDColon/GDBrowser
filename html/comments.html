@@ -422,11 +422,16 @@ $(window).on('beforeunload ', function() {
 	localStorage.setItem('commentPreset', JSON.stringify({mode, compact}))
 })
 
-$('#content').keydown(function(k){
-   if (k.keyCode == 13) return false
+$('#postComment').on("change keyup keydown paste click", "textarea", function () {
+	$('#content').val($('#content').val().replace(/[^\S ]+/g, ""))
 })
 
 $(document).keydown(function(k) {
+
+	if ($('#content').is(':visible')) {
+		if (k.which == 13) k.preventDefault() //enter
+	}
+
 	if (loadingComments || $('.popup').is(":visible")) return;
 
     if (k.which == 37 && $('#pageDown').is(":visible")) { //left

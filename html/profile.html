@@ -106,7 +106,7 @@
 		</div>
 
 		<div class="center" style="margin: 1.5% auto 2.5% auto;">
-			<img src="../assets/messages.png" height="10%" id="msgButton" class="sideSpace gdButton" onclick="$('#settingsDiv').show()">
+			<a id="msgA" target="_blank"><img src="../assets/messages.png" height="10%" id="msgButton" class="sideSpace gdButton" onclick="$('#settingsDiv').show()"></a>
 			<img src="../assets/friends.png" height="10%" id="friendButton" class="sideSpace gdButton" onclick="$('#settingsDiv').show()">
 			<a href="../search/[[USERNAME]]?user"><img height="10%" src="../assets/levels.png" class="sideSpace gdButton"></a>
 		</div>
@@ -175,6 +175,11 @@ else {
 	$('#commentA').attr('href', '../comments/[[USERNAME]]')
 }
 
+if (messages == "all") {
+	$('#msgButton').attr('onclick', '')
+	$('#msgA').attr('href', '../messages?sendTo=[[USERNAME]]')
+}
+
 if (messages == "friends") $('#msgButton').attr('src', '../assets/messages-yellow.png')
 else if (messages == "off") $('#msgButton').attr('src', '../assets/messages-grey.png')
 
@@ -183,7 +188,7 @@ if (![[FRIENDREQUESTS]]) $('#friendButton').attr('src', '../assets/friends-grey.
 $('#userInfo').html($('#userInfo').html()
 .replace("[[REQS]]", reqMode)
 .replace("[[DMS]]", dmMode)
-.replace("[[COMMENTS]]", commentMode))
+.replace("[[COMMENTS]]", commentMode) + (messages == "friends" ? "<br style='line-height: 69%'><span style='color: lime' class='youCanClickThis2'><a target='_blank' href='../messages?sendTo=[[USERNAME]]'>Send message</a></span><br>(if friended)" : ""))
 
 function appendComments() {
 
@@ -329,8 +334,16 @@ $('#submitVote').click(function() {
 	})
 })
 
-$(document).keydown(function(k){
-   if (k.keyCode == 13) return false
+$('#leavePost').on("change keyup keydown paste click", "textarea", function () {
+	$('#content').val($('#content').val().replace(/[^\S ]+/g, ""))
+})
+
+$(document).keydown(function(k) {
+	
+   if ($('#content').is(':visible')) {
+		if (k.which == 13) k.preventDefault() //enter
+   }
+
 }) 
 
 

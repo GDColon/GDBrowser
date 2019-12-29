@@ -6,6 +6,7 @@ module.exports = async (app, req, res, api) => {
 
   if (!req.body.accountID) return res.status(400).send("No account ID provided!")
   if (!req.body.password) return res.status(400).send("No password provided!")
+  if (!req.body.id) return res.status(400).send("No message ID(s) provided!")
 
   let params = {
     accountID: req.body.accountID,

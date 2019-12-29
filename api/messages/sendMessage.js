@@ -9,7 +9,7 @@ module.exports = async (app, req, res, api) => {
   if (!req.body.accountID) return res.status(400).send("No account ID provided!")
   if (!req.body.password) return res.status(400).send("No password provided!")
 
-  let subject = new Buffer(req.body.subject.slice(0, 50) || "No subject").toString('base64').replace(/\//g, '_').replace(/\+/g, "-")
+  let subject = new Buffer(req.body.subject ? (req.body.subject.slice(0, 50) + (req.body.color ? "☆" : "")) : "No subject").toString('base64').replace(/\//g, '_').replace(/\+/g, "-")
   let body = xor.encrypt(req.body.message.slice(0, 300), 14251)
 
   let params = {
