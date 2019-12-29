@@ -1,17 +1,17 @@
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-//            ******** **********   *******   **       ******** ****     **             //
-//           **////// /////**///   **/////** /**      /**///// /**/**   /**             //
-//          /**           /**     **     //**/**      /**      /**//**  /**             //
-//          /*********    /**    /**      /**/**      /******* /** //** /**             //
-//          ////////**    /**    /**      /**/**      /**////  /**  //**/**             //
-//                 /**    /**    //**     ** /**      /**      /**   //****             //
-//           ********     /**     //*******  /********/********/**    //***             //
-//          ////////      //       ///////   //////// //////// //      ///              //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                    //
+//          ******** **********   *******   **       ******** ****     **             //
+//         **////// /////**///   **/////** /**      /**///// /**/**   /**             //
+//        /**           /**     **     //**/**      /**      /**//**  /**             //
+//        /*********    /**    /**      /**/**      /******* /** //** /**             //
+//        ////////**    /**    /**      /**/**      /**////  /**  //**/**             //
+//               /**    /**    //**     ** /**      /**      /**   //****             //
+//         ********     /**     //*******  /********/********/**    //***             //
+//        ////////      //       ///////   //////// //////// //      ///              //
+//                                                                                    //
+////////////////////////////////////////////////////////////////////////////////////////
 
-//Stolen from https://github.com/fakemancat/geometry-dash-api/blob/master/classes/XOR.js because I am stupid.
+//Stolen from https://github.com/fakemancat/geometry-dash-api/blob/master/classes/XOR.js because why not.
 
 module.exports = class XOR {
     // Base64 functions
@@ -21,7 +21,6 @@ module.exports = class XOR {
     b64to(text) {
         return Buffer.from(text).toString('base64');
     }
-
     // Xor functions
     chr(ascii) {
         return String.fromCodePoint(ascii);
@@ -35,7 +34,6 @@ module.exports = class XOR {
         let keysize = key.length;
         let input_size = data.length;
         let cipher = '';
-
         for (let i = 0; i < input_size; i++) {
             cipher += this.chr(data[i] ^ key[i % keysize]);
         }
@@ -47,7 +45,6 @@ module.exports = class XOR {
         encode = encode
             .replace(/\//g, '_')
             .replace(/\+/g, '-');
-
         return encode;
     }
     decrypt(gjp, key = 37526) {
@@ -56,7 +53,6 @@ module.exports = class XOR {
             .replace(/-/g, '+');
         decode = Buffer.from(decode, 'base64').toString();
         decode = this.cipher(decode, key);
-
         return decode;
     }
-};
+}
