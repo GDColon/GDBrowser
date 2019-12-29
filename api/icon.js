@@ -15,10 +15,7 @@ function recolor(img, col) {
     }
   })
 }
-/*
-Caveat of genFileName is that if there are any falsey values in the arguments they are ignored. 
-This is usually a good thing though - avoid issues by not putting something like 0 instead of '0'
-*/
+/*Caveat of genFileName is that if there are any falsey values in the arguments they are ignored. This is usually a good thing though - avoid issues by not putting something like 0 instead of '0'*/
 function genFileName(...args) {
   return args.filter(function(val) {return val}).join('_')+'_001.png';
 }
@@ -91,11 +88,9 @@ module.exports = async (app, req, res) => {
         robotOffset1 = icons[legs[0]].spriteOffset.map(minusOrigOffset).concat(icons[legs[0]].spriteSize);
         robotOffset2 = icons[legs[1]].spriteOffset.map(minusOrigOffset).concat(icons[legs[1]].spriteSize);
         robotOffset3 = icons[legs[2]].spriteOffset.map(minusOrigOffset).concat(icons[legs[2]].spriteSize);
-
         robotOffset1b = icons[glows[0]].spriteOffset.map(minusOrigOffset).concat(icons[glows[0]].spriteSize);
         robotOffset2b = icons[glows[1]].spriteOffset.map(minusOrigOffset).concat(icons[glows[1]].spriteSize);
         robotOffset3b = icons[glows[2]].spriteOffset.map(minusOrigOffset).concat(icons[glows[2]].spriteSize);
-
         robotLeg1 = new Jimp(fromIcons(legs[0])); robotGlow1 = new Jimp(fromIcons(glows[0]))
         robotLeg2 = new Jimp(fromIcons(legs[1])); robotGlow2 = new Jimp(fromIcons(glows[1]))
         robotLeg3 = new Jimp(fromIcons(legs[2])); robotGlow3 = new Jimp(fromIcons(glows[2]))
@@ -139,40 +134,33 @@ module.exports = async (app, req, res) => {
               rob.rotate(-45)
               robotGlow1 = recolor(rob, col2)
             })
-
             await Jimp.read(new Jimp(robotGlow2)).then(rob => {
               rob.rotate(45)
               robotGlow2 = recolor(rob, col2)
             })
-
             await Jimp.read(new Jimp(robotGlow3)).then(rob => {
               robotGlow3 = recolor(rob, col2)
             })
-
             await Jimp.read(new Jimp(robotLeg1)).then(rob => {
               rob.rotate(-45)
               recolor(rob, col1)
               rob.composite(robotGlow1, (robotOffset1[2] - robotOffset1b[2]) + 1, (robotOffset1[3] - robotOffset1b[3]) / 2, { mode: Jimp.BLEND_DESTINATION_OVER })
               robotLeg1 = rob
             })
-
             await Jimp.read(new Jimp(robotLeg2)).then(rob => {
               rob.rotate(45)
               recolor(rob, col1)
               rob.composite(robotGlow2, (robotOffset2[2] - robotOffset2b[2]) / 2, (robotOffset2[3] - robotOffset2b[3]) / 2, { mode: Jimp.BLEND_DESTINATION_OVER })
               robotLeg2 = rob
             })
-
             await Jimp.read(new Jimp(robotLeg2)).then(rob => {
               robotLeg2b = rob.color([{ apply: 'darken', params: [20] }]).rotate(-5)
             })
-
             await Jimp.read(new Jimp(robotLeg3)).then(rob => {
               recolor(rob, col1)
               rob.composite(robotGlow3, (robotOffset3[2] - robotOffset3b[2]) / 2 - 2, (robotOffset3[3] - robotOffset3b[3]) / 2, { mode: Jimp.BLEND_DESTINATION_OVER })
               robotLeg3 = rob
             })
-
             await Jimp.read(new Jimp(robotLeg3)).then(rob => {
               robotLeg3b = rob.color([{ apply: 'darken', params: [10] }])
             })
@@ -184,7 +172,6 @@ module.exports = async (app, req, res) => {
             ic.composite(robotLeg1, 100 + (iconSize[0] / 2) - (robotOffset1[2]) + robotOffset1[0] - 20, (iconSize[1] / 2) - (robotOffset1[3]) - robotOffset1[1] + 50)
 
           }
-
 
           else if (form == "spider") {
 
@@ -210,42 +197,34 @@ module.exports = async (app, req, res) => {
               if (robotGlow1.bitmap.width < 10) robotGlow1.opacity(0)
               else robotGlow1 = recolor(rob, col2)
             })
-
             await Jimp.read(new Jimp(robotGlow2)).then(rob => {
               robotGlow2 = recolor(rob, col2)
             })
-
             await Jimp.read(new Jimp(robotGlow3)).then(rob => {
               robotGlow3 = recolor(rob, col2)
             })
-
             await Jimp.read(new Jimp(robotLeg1)).then(rob => {
               recolor(rob, col1)
               rob.composite(robotGlow1, (robotOffset1[2] - robotOffset1b[2]) / 2, (robotOffset1[3] - robotOffset1b[3]) / 4, { mode: Jimp.BLEND_DESTINATION_OVER })
               robotLeg1 = rob
             })
-
             await Jimp.read(new Jimp(robotLeg2)).then(rob => {
               recolor(rob, col1)
               rob.composite(robotGlow2, (robotOffset2[2] - robotOffset2b[2]) / 6, (robotOffset2[3] - robotOffset2b[3]) / 6, { mode: Jimp.BLEND_DESTINATION_OVER })
               rob.rotate(-40)
               robotLeg2 = rob
             })
-
             await Jimp.read(new Jimp(robotLeg1)).then(rob => {
               robotLeg1b = rob.color([{ apply: 'darken', params: [20] }])
             })
-
             await Jimp.read(new Jimp(robotLeg1b)).then(rob => {
               robotLeg1c = rob.mirror(true, false)
             })
-
             await Jimp.read(new Jimp(robotLeg3)).then(rob => {
               recolor(rob, col1)
               rob.composite(robotGlow3, (robotOffset3[2] - robotOffset3b[2]) / 2, (robotOffset3[3] - robotOffset3b[3]) / 2, { mode: Jimp.BLEND_DESTINATION_OVER })
               robotLeg3 = rob
             })
-
             await Jimp.read(new Jimp(ic)).then(rob => {
               spiderBody = rob
             })
