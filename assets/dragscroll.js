@@ -1,6 +1,4 @@
-function somethingSelected() {
-  return typeof window.getSelection == 'function' && window.getSelection().toString() != "";
-}
+function somethingSelected() {return typeof window.getSelection == 'function' && window.getSelection().toString() != "";}
 const remover = / |\n|\t/g;
 $('.dragscroll').each(function(_, el) {
   let previouslyMouseDown = false;
@@ -26,5 +24,5 @@ $('.dragscroll').each(function(_, el) {
     }
     //el.scrollLeft -= e.movementX;
     el.scrollTop -= e.movementY;
-  }, {passive: true});
-});
+  },{passive: true});
+})
