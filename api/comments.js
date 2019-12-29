@@ -1,7 +1,5 @@
 const request = require('request')
-
 module.exports = async (app, req, res) => {
-
     let params = {
         userID : req.params.id, 
         accountID : req.params.id, 
@@ -12,32 +10,23 @@ module.exports = async (app, req, res) => {
         binaryVersion: app.binaryVersion,
         mode: req.query.hasOwnProperty("top") ? "1" : "0",
     }  
-
     let path = "getGJComments21"
     if (req.query.type == "commentHistory") path = "getGJCommentHistory"
     else if (req.query.type == "profile") path = "getGJAccountComments20"
-
     request.post(`${app.endpoint}${path}.php`, {
     form : params}, async function(err, resp, body) { 
-
       if (err || body == '-1' || !body) return res.send("-1")
-
       comments = body.split('|')
       comments = comments.map(x => x.split(':'))
       comments = comments.map(x => x.map(x => app.parseResponse(x, "~")))
       if (req.query.type == "profile") comments.filter(x => x[0][2])
       else comments = comments.filter(x => x[1] && x[1][1])
       if (!comments.length) return res.send("-1")
-
       let commentArray = []
-
       comments.forEach(c => {
-
         var x = c[0] //comment info
         var y = c[1] //account info
-
         if (!x[2]) return;
-
         let comment = {}
         comment.content = app.clean(Buffer.from(x[2], 'base64').toString());
         comment.ID = x[6]
@@ -47,7 +36,6 @@ module.exports = async (app, req, res) => {
           comment.content = comment.content.slice(0, -1)
           comment.browserColor = true 
         }
-        
         if (req.query.type != "profile") {
           comment.username = y[1] || "Unknown"
           comment.levelID = x[1] || req.params.id
@@ -57,12 +45,8 @@ module.exports = async (app, req, res) => {
           if (x[10] > 0) comment.percent = x[10]
           if (x[12] && x[12].includes(',')) comment.modColor = true
         }
-
         commentArray.push(comment)
-
       }) 
-
       return res.send(commentArray)
-
       })
 }
