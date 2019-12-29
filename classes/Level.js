@@ -1,10 +1,8 @@
 const XOR = require(__dirname + "../../classes/XOR");
 const config = require(__dirname + "../../misc/gdpsConfig");
-
 let orbs = [0, 0, 50, 75, 125, 175, 225, 275, 350, 425, 500]
-let length = ['Tiny', 'Short', 'Medium', 'Long', 'XL']
-let difficulty = { 0: 'Unrated', 10: 'Easy', 20: 'Normal', 30: 'Hard', 40: 'Harder', 50: 'Insane' }
-
+let length = ['Tiny','Short','Medium','Long','XL']
+let difficulty = { 0:'Unrated',10:'Easy',20:'Normal',30:'Hard',40:'Harder',50:'Insane'}
 class Level {
     constructor(levelInfo, author = []) {
         if (!levelInfo[2]) return;
@@ -38,15 +36,13 @@ class Level {
         this.objects = levelInfo[45] == "65535" ? "65535+" : levelInfo[45]
         this.large = levelInfo[45] > 40000;
         this.cp = (this.stars > 0) + this.featured + this.epic
-
         if (levelInfo[17] == 1) this.difficulty += ' Demon'
         if (this.difficulty == "Insane Demon") this.difficulty = "Extreme Demon"
         else if (this.difficulty == "Harder Demon") this.difficulty = "Insane Demon"
         else if (this.difficulty == "Normal Demon") this.difficulty = "Medium Demon"
         else if (levelInfo[25] == 1) this.difficulty = 'Auto';
         this.difficultyFace = `${levelInfo[17] != 1 ? this.difficulty.toLowerCase() : `demon-${this.difficulty.toLowerCase().split(' ')[0]}`}${this.epic ? '-epic' : `${this.featured ? '-featured' : ''}`}`
-
-        if (this.password && this.password != 0) {
+        if (this.password && this.password != 0){
             let xor = new XOR();
             let pass = config.xorPasswords ? xor.decrypt(this.password, 26364) : this.password;
             if (pass.length > 1) this.password = pass.slice(1);
@@ -54,5 +50,4 @@ class Level {
         }
     }
 }
-
 module.exports = Level;
