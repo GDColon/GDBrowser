@@ -33,11 +33,12 @@ module.exports = async (app, req, res, api) => {
       msg.playerID = x[3]
       msg.accountID = x[2]
       msg.author = x[6]
-      msg.subject = Buffer.from(x[4], "base64").toString()
+      msg.subject = Buffer.from(x[4], "base64").toString().replace(/^Re: ☆/, "Re: ")
       msg.date = x[7] + app.config.timestampSuffix
       msg.unread = x[8] != "1"
-      if (msg.subject.endsWith("☆")) {
-        msg.subject = msg.subject.slice(0, -1)
+      if (msg.subject.endsWith("☆") || msg.subject.startsWith("☆")) {
+        if (msg.subject.endsWith("☆")) msg.subject = msg.subject.slice(0, -1)
+        else msg.subject = msg.subject.slice(1)
         msg.browserColor = true 
     }
 
