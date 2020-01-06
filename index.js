@@ -1,6 +1,6 @@
 const express = require('express');
 const fs = require("fs")
-const timeout = require('connect-timeout')
+const timeout = require('./misc/connectTimeout')
 const compression = require('compression');
 
 let api = true;
@@ -9,7 +9,7 @@ const app = express();
 app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(timeout('30s'));
+app.use(timeout(30000));
 app.use(haltOnTimedout)
 app.set('json spaces', 2)
 
