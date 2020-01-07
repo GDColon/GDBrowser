@@ -4,13 +4,17 @@ const connectTimeout = function(defaultTimeout = 15000, defaultResponse) {
     const startTime = Date.now();
     let id = -1;
     let timeout = defaultTimeout;
+    let finished = false;
     const onTimeout = function() {
+      if (finished) return;
       res.send(res.onTimeout() || {
         err: 'timeout'
       });
+      res.timedOut = true;
     }
     req.on('response', function() {
       clearTimeout(id);
+      finished = true;
     })
     const createTimeout = function() {
       clearTimeout(id);
@@ -21,6 +25,7 @@ const connectTimeout = function(defaultTimeout = 15000, defaultResponse) {
       }
     }
     res.onTimeout = defaultResponder;
+    res.timedOut = false;
     Object.defineProperty(res, 'timeout', {
       get: function() {
         return timeout;
