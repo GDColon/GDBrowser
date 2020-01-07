@@ -10,7 +10,6 @@ app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(timeout(30000));
-app.use(haltOnTimedout)
 app.set('json spaces', 2)
 
 let directories = ["", "post", "messages"] //this can probably be automated but i'm lazy
@@ -20,9 +19,6 @@ directories.forEach(d => {
   fs.readdirSync('./api/' + d).forEach(x => {if (x.includes('.')) app.run[x.split('.')[0]] = require('./api/' + d + "/" + x) })
 })
 
-function haltOnTimedout (req, res, next) {
-  if (!req.timedout) next()
-}
 
 app.secret = 'Wmfd2893gb7'
 app.gameVersion = '21'

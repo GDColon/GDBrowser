@@ -3,6 +3,7 @@ const connectTimeout = function(defaultTimeout = 15000, defaultResponse) {
   return function(req, res) {
     const startTime = Date.now();
     let id = -1;
+    let timeout = defaultTimeout;
     const onTimeout = function() {
       res.send(res.onTimeout() || {
         err: 'timeout'
@@ -11,7 +12,7 @@ const connectTimeout = function(defaultTimeout = 15000, defaultResponse) {
     req.on('response', function() {
       clearTimeout(id);
     })
-    const createTimeout = function(timeout) {
+    const createTimeout = function() {
       clearTimeout(id);
       if (Date.now() - startTime >= timeout) {
         onTimeout();
@@ -25,10 +26,11 @@ const connectTimeout = function(defaultTimeout = 15000, defaultResponse) {
         return timeout;
       },
       set: function(newTimeout) {
-        createTimeout(newTimeout);
+        timeout = newTimeout;
+        createTimeout();
       }
     });
-    createTimeout(defaultTimeout);
+    createTimeout();
   }
 }
 module.exports = connectTimeout;
