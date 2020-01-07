@@ -18,10 +18,11 @@ const connectTimeout = function(defaultTimeout = 15000, defaultResponse) {
     })
     const createTimeout = function() {
       clearTimeout(id);
-      if (Date.now() - startTime >= timeout) {
+      const diff = Date.now() - startTime;
+      if (diff >= timeout) {
         onTimeout();
       } else {
-        id = setTimeout(onTimeout, timeout);
+        id = setTimeout(onTimeout, timeout - diff);
       }
     }
     res.onTimeout = defaultResponder;

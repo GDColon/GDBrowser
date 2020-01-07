@@ -5,11 +5,17 @@ const compression = require('compression');
 
 let api = true;
 let gdicons = fs.readdirSync('./icons/iconkit')
+
+const haltOnTimeout = function(req, res, next) {
+  if (!req.timedOut) next();
+}
+
 const app = express();
 app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(timeout(30000));
+app.use(haltOnTimeout);
 app.set('json spaces', 2)
 
 let directories = ["", "post", "messages"] //this can probably be automated but i'm lazy
@@ -25,6 +31,7 @@ app.gameVersion = '21'
 app.binaryVersion = '35'
 app.endpoint = 'http://boomlings.com/database/'
 app.config = require('./misc/gdpsConfig')  // tweak settings in this file if you're using a GDPS
+
 
 try {
   const secrets = require("./misc/secretStuff.json")
