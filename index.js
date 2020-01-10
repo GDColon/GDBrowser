@@ -2,6 +2,8 @@ const express = require('express');
 const fs = require("fs")
 const timeout = require('./misc/connectTimeout')
 const compression = require('compression');
+const cookieParser = require('cookie-parser');
+const auth = require('./misc/auth');
 
 let api = true;
 let gdicons = fs.readdirSync('./icons/iconkit')
@@ -11,11 +13,13 @@ const haltOnTimeout = function(req, res, next) {
 }
 
 const app = express();
+app.use(cookieParser())
 app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(timeout(30000));
 app.use(haltOnTimeout);
+// app.use(auth.getPass);
 app.set('json spaces', 2)
 
 let directories = ["", "post", "messages"] //this can probably be automated but i'm lazy
@@ -37,7 +41,7 @@ try {
   const secrets = require("./misc/secretStuff.json")
   app.id = secrets.id
   app.gjp = secrets.gjp
-  if (app.id == "account id goes here" || app.gjp == "account gjp goes here") console.log("Warning: No account ID and/or GJP has been provided in secretStuff.json! These are required for level leaderboards to work.")
+  if (app.id == "account id goes here" || app.gjp == "account gjp goes here") console.warn("Warning: No account ID and/or GJP has been provided in secretStuff.json! These are required for level leaderboards to work.")
 }
 
 catch(e) {
@@ -56,9 +60,6 @@ app.parseResponse = function (responseBody, splitter) {
 
 //xss bad
 app.clean = function(text) {if (!text || typeof text != "string") return text; else return text.replace(/&/g, "&#38;").replace(/</g, "&#60;").replace(/>/g, "&#62;").replace(/=/g, "&#61;").replace(/"/g, "&#34;").replace(/'/g, "&#39;")}
-
-console.log("Site online!")
-
 
 // ASSETS
 
@@ -144,5 +145,8 @@ app.get('*', function(req, res) {
   if (assets.some(x => req.path.startsWith("/" + x))) res.send("Looks like this file doesn't exist ¯\\_(ツ)_/¯<br>You can check out all of the assets on <a target='_blank' href='https://github.com/GDColon/GDBrowser/tree/master/assets'>GitHub</a>")
   else res.redirect('/search/404%20')
 });
+// app.use(auth.savePass);
 
-app.listen(2000);
+app.listen(2000, () => {
+  console.log("Site online! http://localhost:2000")
+});
