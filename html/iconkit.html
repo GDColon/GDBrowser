@@ -15,12 +15,12 @@
 <div class="center hidden"><br>
     <img id="iconkitlogo" src="../assets/iconkit.png" height=50px; style="margin: 7px 0;"><br><br>
     <img id="loading" src="../assets/loading.png" class="spin" height=95px; style="margin: auto auto 25px auto">
-    <img id="result" src="../icon/icon" download="icon.png">
+    <img id="result" src="../icon/icon" download="cube_1.png">
     <hr id="gdfloor">
     <div id="menuButtons" style="height: 65px; margin: 0 0 15 0;">
-        <button class="blankButton menuButton" id="downloadIcon" title="Download icon"><a id="downloadLink" download="icon.png" href="../icon/icon"><img src="../iconkitbuttons/download.png" width=50px></a></button>
+        <button class="blankButton menuButton" id="downloadIcon" title="Download icon"><a id="downloadLink" download="cube_1.png" href="../icon/icon"><img src="../iconkitbuttons/download.png" width=50px></a></button>
         <button class="blankButton menuButton" id="generateIcon" title="Generate icon"><img src="../iconkitbuttons/play.png" width=65px></button>
-        <button class="blankButton menuButton" id="fetchUser" title="Get account icon"><img src="../iconkitbuttons/player.png" width=50px></button>
+        <button class="blankButton menuButton" id="fetchUser" title="Get player icon"><img src="../iconkitbuttons/player.png" width=50px></button>
         </div>
         <div id="iconTabs"></div><br>
         <div id="iconKitParent" class="iconKit">
@@ -67,7 +67,7 @@ function capitalize(str) {return str[0].toUpperCase() + str.substr(1)}
 if (mobile) $('#logo').attr('width', '80%');
 
 forms.forEach(form => {$("#iconTabs").append(`<button form="${form}" class="blankButton iconTabButton"><img src="../iconkitbuttons/${form}_off.png" width=50px></button>`)})
-$("#iconTabs").append(`<button class="blankButton glowToggle" id="glowbtn"><img id="glow" src="../iconkitbuttons/streak_off.png" width=50px></button>`)
+$("#iconTabs").append(`<button title="Glow" class="blankButton glowToggle" id="glowbtn"><img id="glow" src="../iconkitbuttons/streak_off.png" width=50px></button>`)
 
 forms.forEach(form => {$("#iconKitParent").append(`<div id="${form}s"></div>`)})
 
@@ -173,8 +173,8 @@ fetch('./api/icons').then(res => {
     $("#generateIcon").click(function () {
         $("#loading").show()
         $("#result").hide()
-        $("#result").attr('src', `../icon/icon?icon=${selectedIcon}&form=${selectedForm}&col1=${selectedCol1}&col2=${selectedCol2}&glow=${enableGlow}`)
-        $("#downloadLink").attr('href', `../icon/icon?icon=${selectedIcon}&form=${selectedForm}&col1=${selectedCol1}&col2=${selectedCol2}&glow=${enableGlow}`)
+        $("#result").attr('src', `../icon/icon?icon=${selectedIcon}&form=${selectedForm}&col1=${selectedCol1}&col2=${selectedCol2}&glow=${enableGlow}`).attr('download', `${selectedForm}_${selectedIcon}.png`)
+        $("#downloadLink").attr('href', `../icon/icon?icon=${selectedIcon}&form=${selectedForm}&col1=${selectedCol1}&col2=${selectedCol2}&glow=${enableGlow}`).attr('download', `${selectedForm}_${selectedIcon}.png`)
     })
 
     $('#result').on('load', function() {
@@ -192,8 +192,8 @@ fetch('./api/icons').then(res => {
         let iconURL = `../icon/${user}?form=${currentForm}`
         $("#loading").show()
         $("#result").hide()
-        $("#result").attr('src', iconURL)
-        $("#downloadLink").attr('href', iconURL)
+        $("#result").attr('src', iconURL).attr('download',  `${user}_${currentForm}.png`)
+        $("#downloadLink").attr('href', iconURL).attr('download',  `${user}_${currentForm}.png`)
         $('#glow').attr('src', '../iconkitbuttons/streak_off.png')
         enableGlow = 0
 
