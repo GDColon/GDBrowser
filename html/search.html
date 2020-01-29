@@ -285,7 +285,7 @@ $('#shuffle').click(function() {
 		if (randomIndex == 0) randomIndex = 10
 		$('#searchBox').html('<div style="height: 4.5%"></div>')
 		$('#loading').show()
-		fetch(searchFilters.replace('PAGE', randomPage-1)).then(res => res.json()).then(res => {
+		fetch(searchFilters.replace('[PAGE]', randomPage-1)).then(res => res.json()).then(res => {
 			window.location.href = "../" + res[randomIndex-1].id
 		})
 	}
