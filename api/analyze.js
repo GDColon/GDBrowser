@@ -87,7 +87,7 @@ response.objects = data.length - 2
 response.highDetail = highDetail
 response.settings = {}
 
-response.portals = data.filter(x => x.portal).sort(function (a, b) {return parseInt(a.x) - parseInt(b.x)}).map(x => x.portal + " " + Math.round(x.x / last * 99) + "%").join(", ")
+response.portals = data.filter(x => x.portal).sort(function (a, b) {return parseInt(a.x) - parseInt(b.x)}).map(x => x.portal + " " + Math.floor(x.x / (Math.max(last, 529.0) + 340.0) * 100) + "%").join(", ")
 
 response.orbs = {}
 orbArray = data.filter(x => x.orb).reduce( (a,b) => { //stolen from https://stackoverflow.com/questions/45064107/how-do-i-group-duplicate-objects-in-an-array
