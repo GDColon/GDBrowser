@@ -55,7 +55,8 @@ module.exports = async (app, req, res) => {
           comment.accountID = y[16]
           comment.form = ['icon', 'ship', 'ball', 'ufo', 'wave', 'robot', 'spider'][Number(y[14])]
           if (x[10] > 0) comment.percent = x[10]
-          if (x[12] && x[12].includes(',')) comment.modColor = true
+          if (x[12] && x[12].includes(',')) comment.moderator = 1 + (x[12] != "255,255,255")
+          else comment.moderator = 0
         }
 
         commentArray.push(comment)

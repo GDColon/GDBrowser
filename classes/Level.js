@@ -24,6 +24,7 @@ class Level {
         this.diamonds = levelInfo[18] < 2 ? 0 : parseInt(levelInfo[18]) + 2
         this.featured = levelInfo[19] > 0
         this.epic = levelInfo[42] == 1
+        this.gameVersion = levelInfo[13] > 17 ? levelInfo[13] / 10 : Number('1.' + (levelInfo[13]-1))
         if (levelInfo[28]) this.uploaded = levelInfo[28] + config.timestampSuffix
         if (levelInfo[29]) this.updated = levelInfo[29] + config.timestampSuffix
         this.version = levelInfo[5];

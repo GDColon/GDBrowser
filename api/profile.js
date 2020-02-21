@@ -10,16 +10,11 @@ module.exports = async (app, req, res, api, getLevels) => {
     }
   }, function (err1, res1, b1) {
     
-    if (err1 || b1 == '-1' || !b1) {
-      if (!api) return res.redirect('/search/' + req.params.id)
-      else return res.send("-1")
-    }
-
-    let gdSearchResult = app.parseResponse(b1)
+    let searchResult = (err1 || b1 == '-1' || !b1) ? req.params.id : app.parseResponse(b1)[16]
 
     request.post(app.endpoint + 'getGJUserInfo20.php', {
       form: {
-        targetAccountID: gdSearchResult[16],
+        targetAccountID: searchResult,
         secret: app.secret
       }
     }, function (err2, res2, body) {

@@ -200,6 +200,7 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 
 		let userName = !history ? x.username : lvl.username
 		let userLink = encodeURI(userName)
+		let modNumber = x.moderator || lvl.moderator
 
 		if (!compact) {
 		////// NORMAL MODE //////
@@ -210,11 +211,11 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 					<img class="inline" src="../icon/${userLink}?form=${x.form}" height=21% style="margin-right: 0.8%">
 					<a href=../${x.accountID == "0" ? `search/${x.playerID}?user` : `../profile/${userLink}`}>
 					<h2 class="inline gdButton ${x.accountID == "0" ? "green unregistered" : ""}">${userName}</h2></a>
-					${x.modColor || lvl.moderator == "2" ? `<img class="inline" src="../assets/mod-elder.png" height=18% style="margin-left: 0.6%;">` : ""}
+					${modNumber ? `<img class="inline" src="../assets/mod${modNumber == 2 ? "-elder" : ""}.png" height=18% style="margin-left: 0.6%;">` : ""}
 					<p class="commentPercent inline">${x.percent ? x.percent + "%" : ""}</p>
 
 					<div class="commentAlign">
-						<p class="commentText" style="color: rgb(${!history && x.playerID == lvl.authorID ? "255, 255, 75" : x.playerID == "16" ? "50, 255, 255" : x.modColor || lvl.moderator == "2" ? "75, 255, 75" : x.browserColor ? "255, 180, 255" : "255, 255, 255"})">${x.content}</p>
+						<p class="commentText" style="color: rgb(${!history && x.playerID == lvl.authorID ? "255, 255, 75" : x.playerID == "16" ? "50, 255, 255" : modNumber == 2 ? "75, 255, 75" : x.browserColor ? "255, 180, 255" : "255, 255, 255"})">${x.content}</p>
 					</div>
 				</div>
 				<p class="commentDate">${x.date}</p>
@@ -236,11 +237,11 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 					<img class="inline" src="../icon/${userLink}?form=${x.form}" height=21% style="margin-right: 0.8%">
 					<a href=../${x.accountID == "0" ? `search/${x.playerID}?user` : `../profile/${userLink}`}>
 					<h2 class="inline gdButton ${x.accountID == "0" ? "green unregistered" : ""}">${userName}</h2></a>
-					${x.modColor || lvl.moderator == "2" ? `<img class="inline" src="../assets/mod-elder.png" height=18% style="margin-left: 0.6%;">` : ""}
+					${modNumber ? `<img class="inline" src="../assets/mod${modNumber == 2 ? "-elder" : ""}.png" height=18% style="margin-left: 0.6%;">` : ""}
 					<p class="commentPercent inline">${x.percent ? x.percent + "%" : ""}</p>
 
 					<div class="commentAlign">
-						<p class="commentText" style="color: rgb(${!history && x.playerID == lvl.authorID ? "255, 255, 75" : x.playerID == "16" ? "50, 255, 255" : x.modColor || lvl.moderator == "2" ? "75, 255, 75" : x.browserColor ? "255, 180, 255" : "255, 255, 255"})">${x.content}</p>
+						<p class="commentText" style="color: rgb(${!history && x.playerID == lvl.authorID ? "255, 255, 75" : x.playerID == "16" ? "50, 255, 255" : modNumber == "2" ? "75, 255, 75" : x.browserColor ? "255, 180, 255" : "255, 255, 255"})">${x.content}</p>
 					</div>
 				</div>
 				<p class="commentDate compactDate">${x.date}</p>

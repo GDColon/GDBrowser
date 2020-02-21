@@ -47,7 +47,7 @@ module.exports = async (app, req, res) => {
 
   request.post(app.endpoint + 'uploadGJComment21.php', {
     form: params,
-    headers: {'x-forwarded-for': req.headers['x-forwarded-for'] || req.connection.remoteAddress } // prevent pesky ip bans
+    headers: {'x-forwarded-for': (Math.floor(Math.random() * 255) + 1)+"."+(Math.floor(Math.random() * 255) + 0)+"."+(Math.floor(Math.random() * 255) + 0)+"."+(Math.floor(Math.random() * 255) + 0) } // prevent pesky ip bans using a random ip
   }, function (err, resp, body) {
     if (err) return res.status(400).send("The Geometry Dash servers returned an error! Perhaps they're down for maintenance")
     if (!body || body == "-1") return res.status(400).send("The Geometry Dash servers rejected your comment! Try again later, or make sure your username and password are entered correctly.")

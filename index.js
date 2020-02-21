@@ -34,13 +34,13 @@ try {
   const secrets = require("./misc/secretStuff.json")
   app.id = secrets.id
   app.gjp = secrets.gjp
-  if (app.id == "account id goes here" || app.gjp == "account gjp goes here") console.log("Warning: No account ID and/or GJP has been provided in secretStuff.json! These are required for level leaderboards to work.")
+  if (app.id == "account id goes here" || app.gjp == "account gjp goes here") console.warn("Warning: No account ID and/or GJP has been provided in secretStuff.json! These are required for level leaderboards to work.")
 }
 
 catch(e) {
   app.id = 0
   app.gjp = 0
-  console.log("Warning: secretStuff.json has not been created! These are required for level leaderboards to work.")
+  console.warn("Warning: secretStuff.json has not been created! These are required for level leaderboards to work.")
 }
 
 app.parseResponse = function (responseBody, splitter) {

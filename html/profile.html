@@ -108,12 +108,16 @@
 		<div class="center" style="margin: 1.5% auto 2.5% auto;">
 			<a id="msgA" target="_blank"><img src="../assets/messages.png" height="10%" id="msgButton" class="sideSpace gdButton" onclick="$('#settingsDiv').show()"></a>
 			<img src="../assets/friends.png" height="10%" id="friendButton" class="sideSpace gdButton" onclick="$('#settingsDiv').show()">
-			<a href="../search/[[USERNAME]]?user"><img height="10%" src="../assets/levels.png" class="sideSpace gdButton"></a>
+		</div>
+
+		<div style="position: absolute; bottom: 0%; left: 5%">
+			<p style="text-align: left; font-size: 2.2vh; color: rgba(0, 0, 0, 0.5)">Account ID: [[ACCOUNTID]]<br>Player ID: [[PLAYERID]]</p>
 		</div>
 
 		<!-- <img src="../assets/follow-off.png" class="gdButton" style="position: absolute; left: 0.5%; bottom: 1%; width: 6%"> -->
 	
 		<a id="commentA"><img src="../assets/comments.png" class="gdButton" id="commentButton" style="position: absolute; right: 0.5%; bottom: 50%; width: 6%" onclick="$('#settingsDiv').show()"></a>
+		<a href="../search/[[USERNAME]]?user"><img src="../assets/levels.png" class="gdButton" style="position: absolute; right: 0.5%; bottom: 1%; width: 6%"></a>
 
 		<div style="position: absolute; right: 0.5%; top: 0%; width: 6%">
 			<a id="youtube" style="display: none" target="_blank" href="https://youtube.com/channel/[[YOUTUBE]]"><img src="../assets/youtube.png" class="gdButton socialButton"></a>
@@ -133,7 +137,7 @@
 			<img class="gdButton" src="../assets/arrow-right.png" height="95%" onclick="page += 1; appendComments()">
 		</div>
 
-		<div id="postButton" style="position:absolute;bottom: 0%;right: 0%;width: 14%;text-align: right;transform: translate(30%, 40%);">
+		<div id="postButton" style="position:absolute; bottom: 0%; left: 0%; width: 14%; text-align: left; transform: translate(-35%, 40%);">
 			<img class="gdButton" src="../assets/comment.png" width="60%" onclick="$('#content').trigger('input'); $('#leavePost').show();">
 		</div>
 

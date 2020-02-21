@@ -80,10 +80,10 @@
 				<p><a href="#levelleaderboard"><u>Level Leaderboards</u></a> <i>/api/leaderboardLevel/levelID</i></p>
 				<p><a href="#comments"><u>Comments & Posts</u></a> <i>/api/comments/level-or-user-ID</i></p>
 				<p><a href="#analyze"><u>Level Analysis</u></a> <i>/api/analyze/levelID</i></p>
-				<p><a href="#commenting"><u>Commenting</u></a> <i>/api/postComment (POST)</i></p>
-				<p><a href="#profileposting"><u>Profile Posting</u></a> <i>/api/postProfileComment (POST)</i></p>
+				<p><a href="#commenting"><u>Commenting</u></a> <i>/postComment (POST)</i></p>
+				<p><a href="#profileposting"><u>Profile Posting</u></a> <i>/postProfileComment (POST)</i></p>
 				<p><a href="#messages"><u>Messages</u></a> <i>/messages (4 different POSTs)</i></p>
-				<p><a href="#liking"><u>Liking</u></a> <i>/api/like (POST)</i></p>
+				<p><a href="#liking"><u>Liking</u></a> <i>/like (POST)</i></p>
 				<p><a href="#icons"><u>Icons</u></a> <i>/icon/username</i></p>
 			</quote>
 			<br>
@@ -132,6 +132,7 @@
 				<p>diamonds: Amount of diamonds received for beating the level (stars + 2)</p>
 				<p>featured: Whether the level is featured or not</p>
 				<p>epic: Whether the level has an "epic" rating or not</p>
+				<p>gameVersion: The version of GD the level was released on (1.9, 2.1, etc)</p>
 				<p>version: Number of times the level was updated</p>
 				<p>copiedID: The original level ID, if the level was copied. Otherwise returns 0</p>
 				<p>officialSong: The level number of the song, if no custom song is used. Otherwise returns 0</p>
@@ -442,7 +443,7 @@
 				<p class="red">accountID: The commenter's account ID</p>
 				<p class="red">form: The form of the commenter's icon</p>
 				<p class="red">percent: The commenter's percent on the level, if provided</p>
-				<p class="red">modColor: If the commenter is an elder mod and gets fancy green text</p>
+				<p class="red">moderator: If type of moderator the commenter is. Returns 0 (none), 1 (mod) or 2 (elder, green text)</p></p>
 			</div>
 
 			<br>
@@ -530,7 +531,7 @@
 				<p class="reveal" onclick="$('#request-commenting').slideToggle(100)"><b>Example</b></p>
 				<div class="subdiv" id="request-commenting">
 					<p><b>Example Request</b></p>
-					<p>POST /api/postComment<br>
+					<p>POST /postComment<br>
 						?comment=This is a nifty comment!<br>
 						&username=colon<br>
 						&accountID=106255<br>
@@ -549,7 +550,7 @@
 			<div id="profileposting" class="anchor"></div>
 			<div class="main-block">
 				<h1>Profile Posting</h1>
-				<p>POST: /api/postProfileComment</p>
+				<p>POST: /postProfileComment</p>
 	
 				<p>Leaves a profile post. This one is a POST request!</p>
 	
@@ -568,7 +569,7 @@
 				<p class="reveal" onclick="$('#request-profileposting').slideToggle(100)"><b>Example</b></p>
 				<div class="subdiv" id="request-profileposting">
 					<p><b>Example Requests</b></p>
-					<p>POST /api/postProfileComment<br>
+					<p>POST /postProfileComment<br>
 						?comment=Update 2.0 is revolution!<br>
 						&username=viprin<br>
 						&accountID=2795<br>
@@ -586,7 +587,7 @@
 			<div id="liking" class="anchor"></div>
 			<div class="main-block">
 				<h1>Liking</h1>
-				<p>POST: /api/like</p>
+				<p>POST: /like</p>
 	
 				<p>Likes/dislikes level, comment, or post. This one is a POST request!</p>
 	
@@ -607,7 +608,7 @@
 				<div class="subdiv" id="request-liking">
 					<p><b>Example Request</b></p>
 					<p>Drop a like on RobTop's popular "can you handle the kappa" comment:</p>
-					<p>POST /api/like<br>
+					<p>POST /like<br>
 						?id=42602304 (ID of the comment)<br>
 						&like=1 (thumbs up)<br>
 						&type=2 (liking a comment)<br>
@@ -683,7 +684,7 @@
 					<br>
 					
 					<p>Send "Hello!" to Tubular9:</p>
-					<p>POST /deleteMessage<br>
+					<p>POST /sendMessage<br>
 						?accountID=106255<br>
 						&password=KitsuneColon333<br>
 						&subject=Message for you<br>
