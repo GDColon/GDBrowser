@@ -131,6 +131,8 @@ if (mode == "top") {
 	$('#topSort').attr('src', "../assets/sort-likes-on.png")
 }
 
+function clean(text) {if (!text || typeof text != "string") return text; else return text.replace(/&/g, "&#38;").replace(/</g, "&#60;").replace(/>/g, "&#62;").replace(/=/g, "&#61;").replace(/"/g, "&#34;").replace(/'/g, "&#39;")}
+
 $('#compactMode').attr('src', `../assets/compact-${compact ? "on" : "off"}.png`)
 
 let target = `../api/level/${lvlID}`
@@ -215,7 +217,7 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 					<p class="commentPercent inline">${x.percent ? x.percent + "%" : ""}</p>
 
 					<div class="commentAlign">
-						<p class="commentText" style="color: rgb(${!history && x.playerID == lvl.authorID ? "255, 255, 75" : x.playerID == "16" ? "50, 255, 255" : modNumber == 2 ? "75, 255, 75" : x.browserColor ? "255, 180, 255" : "255, 255, 255"})">${x.content}</p>
+						<p class="commentText" style="color: rgb(${!history && x.playerID == lvl.authorID ? "255, 255, 75" : x.playerID == "16" ? "50, 255, 255" : modNumber == 2 ? "75, 255, 75" : x.browserColor ? "255, 180, 255" : "255, 255, 255"})">${clean(x.content)}</p>
 					</div>
 				</div>
 				<p class="commentDate">${x.date}</p>
@@ -241,7 +243,7 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 					<p class="commentPercent inline">${x.percent ? x.percent + "%" : ""}</p>
 
 					<div class="commentAlign">
-						<p class="commentText" style="color: rgb(${!history && x.playerID == lvl.authorID ? "255, 255, 75" : x.playerID == "16" ? "50, 255, 255" : modNumber == "2" ? "75, 255, 75" : x.browserColor ? "255, 180, 255" : "255, 255, 255"})">${x.content}</p>
+						<p class="commentText" style="color: rgb(${!history && x.playerID == lvl.authorID ? "255, 255, 75" : x.playerID == "16" ? "50, 255, 255" : modNumber == "2" ? "75, 255, 75" : x.browserColor ? "255, 180, 255" : "255, 255, 255"})">${clean(x.content)}</p>
 					</div>
 				</div>
 				<p class="commentDate compactDate">${x.date}</p>

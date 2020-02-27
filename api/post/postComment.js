@@ -5,7 +5,7 @@ const crypto = require('crypto')
 function sha1(data) { return crypto.createHash("sha1").update(data, "binary").digest("hex"); }
 
 let rateLimit = {};
-let cooldown = 10000
+let cooldown = 15000  // GD has a secret rate limit and doesn't alert you when a comment is rejected, so I'm doing the honors 
 
 function getTime(time) {
   let seconds = Math.ceil(time / 1000);
@@ -56,7 +56,5 @@ module.exports = async (app, req, res) => {
       return res.status(400).send(`You have been banned from commenting for ${(parseInt(banStuff[1]) / 86400).toFixed(0)} days. Reason: ${banStuff[2] || "None"}`)
     }
     res.status(200).send(`Comment posted to level ${params.levelID} with ID ${body}`)
-    rateLimit[req.body.username] = Date.now();
-    setTimeout(() => {delete rateLimit[req.body.username]; }, cooldown);
   })
 }

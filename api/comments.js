@@ -39,7 +39,7 @@ module.exports = async (app, req, res) => {
         if (!x[2]) return;
 
         let comment = {}
-        comment.content = app.clean(Buffer.from(x[2], 'base64').toString());
+        comment.content = Buffer.from(x[2], 'base64').toString();
         comment.ID = x[6]
         comment.likes = x[4]
         comment.date = (x[9] || "?") + app.config.timestampSuffix
