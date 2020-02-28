@@ -56,5 +56,7 @@ module.exports = async (app, req, res) => {
       return res.status(400).send(`You have been banned from commenting for ${(parseInt(banStuff[1]) / 86400).toFixed(0)} days. Reason: ${banStuff[2] || "None"}`)
     }
     res.status(200).send(`Comment posted to level ${params.levelID} with ID ${body}`)
+    rateLimit[req.body.username] = Date.now();
+    setTimeout(() => {delete rateLimit[req.body.username]; }, cooldown);
   })
 }
