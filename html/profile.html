@@ -165,6 +165,7 @@ let followed = localStorage.followed ? JSON.parse(localStorage.followed) : []
 if (followed.includes([[ACCOUNTID]])) {$('#followOff').hide(); $('#followOn').show()}
 
 $('#followOff').click(function() {
+	followed = localStorage.followed ? JSON.parse(localStorage.followed) : []
 	followed.push([[ACCOUNTID]])
 	localStorage.followed = JSON.stringify(followed)
 	$('#followOff').hide()
@@ -172,6 +173,7 @@ $('#followOff').click(function() {
 })
 
 $('#followOn').click(function() {
+	followed = localStorage.followed ? JSON.parse(localStorage.followed) : []
 	localStorage.followed = JSON.stringify(followed.filter(x => x != [[ACCOUNTID]]))
 	$('#followOff').show()
 	$('#followOn').hide()
