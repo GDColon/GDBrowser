@@ -110,11 +110,12 @@
 			<img src="../assets/friends.png" height="10%" id="friendButton" class="sideSpace gdButton" onclick="$('#settingsDiv').show()">
 		</div>
 
-		<div style="position: absolute; bottom: 0%; left: 5%">
+		<div style="position: absolute; bottom: 0%; left: 12%">
 			<p style="text-align: left; font-size: 2.2vh; color: rgba(0, 0, 0, 0.5)">Account ID: [[ACCOUNTID]]<br>Player ID: [[PLAYERID]]</p>
 		</div>
 
-		<!-- <img src="../assets/follow-off.png" class="gdButton" style="position: absolute; left: 0.5%; bottom: 1%; width: 6%"> -->
+		<img src="../assets/follow-off.png" id="followOff" class="gdButton" style="position: absolute; left: 4.5%; bottom: 1%; width: 6%">
+		<img src="../assets/follow-on.png"  id="followOn"  class="gdButton" style="position: absolute; left: 4.5%; bottom: 1%; width: 6%; display: none">
 	
 		<a id="commentA"><img src="../assets/comments.png" class="gdButton" id="commentButton" style="position: absolute; right: 0.5%; bottom: 50%; width: 6%" onclick="$('#settingsDiv').show()"></a>
 		<a href="../search/[[USERNAME]]?user"><img src="../assets/levels.png" class="gdButton" style="position: absolute; right: 0.5%; bottom: 1%; width: 6%"></a>
@@ -159,6 +160,22 @@ $('#likeMessage').html(messageText.replace("profile posts", "liking posts").repl
 $('#collectibles').html($('#collectibles').html().split('	0 <img class="valign" src="../assets/cp')[0])
 $('#modBadge[[MODERATOR]]').show()
 $('#globalrank[[RANK]]').hide()
+
+let followed = localStorage.followed ? JSON.parse(localStorage.followed) : []
+if (followed.includes([[ACCOUNTID]])) {$('#followOff').hide(); $('#followOn').show()}
+
+$('#followOff').click(function() {
+	followed.push([[ACCOUNTID]])
+	localStorage.followed = JSON.stringify(followed)
+	$('#followOff').hide()
+	$('#followOn').show()
+})
+
+$('#followOn').click(function() {
+	localStorage.followed = JSON.stringify(followed.filter(x => x != [[ACCOUNTID]]))
+	$('#followOff').show()
+	$('#followOn').hide()
+})
 
 if (`[[YOUTUBE]]` != "null") $('#youtube').show()
 if (`[[TWITTER]]` != "null") $('#twitter').show()

@@ -24,6 +24,7 @@ module.exports = async (app, req, res) => {
         gauntlet: req.query.gauntlet || 0,
         len: req.query.length,
         song: req.query.songID,
+        followed: req.query.creators,
 
         featured: req.query.hasOwnProperty("featured") ? 1 : 0,
         originalOnly: req.query.hasOwnProperty("original") ? 1 : 0,
@@ -65,6 +66,8 @@ module.exports = async (app, req, res) => {
         filters.type = 5
         if (!req.params.text.match(/^[0-9]*$/)) return app.run.profile(app, req, res, null, req.params.text)
     } 
+
+    if (req.query.hasOwnProperty("creators")) filters.type = 12
 
     if (req.params.text == "*") delete filters.str
 
