@@ -123,6 +123,7 @@ $('#userSearch').click(function() {
 $('.levelSearch').click(function() {
 
 	let url = "./search/" + (encodeURIComponent($('#levelName').val()) || "*") + "?type=" + $(this).attr('search')
+	if ($(this).attr('search') == "featured") return window.location.href = url
 
 	// === DIFFICULTY === //
 	let difficulties = []
