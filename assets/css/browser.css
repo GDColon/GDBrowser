@@ -46,9 +46,9 @@ img, .noSelect {
 }
 
 .supercenter {
-    position: absolute; 
-    top: 50%; 
-    left: 50%; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%,-50%);
 }
 
@@ -214,7 +214,7 @@ textarea::-webkit-scrollbar {
     width: 2.2%;
     background: #6d3c24;
 }
-  
+
 textarea::-webkit-scrollbar-thumb {
     background: rgb(83, 47, 28);
     overflow: hidden;
@@ -491,8 +491,8 @@ input::-webkit-inner-spin-button {
 }
 
 .popup {
-    position: fixed; 
-    display: none; 
+    position: fixed;
+    display: none;
     width: 100%;
     height: 100%;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -547,9 +547,9 @@ input::-webkit-inner-spin-button {
 }
 
 #scoreTabs {
-   position: absolute; 
+   position: absolute;
    text-align: center;
-   top: 2.45%; 
+   top: 2.45%;
    width: 100%;
    margin-left: -13.5vh
 }
@@ -557,13 +557,13 @@ input::-webkit-inner-spin-button {
 #searchBox {
     background-color: rgb(173, 115, 76);
     width: 122vh;
-    height: 75%; 
-    overflow-y: auto; 
+    height: 75%;
+    overflow-y: auto;
     overflow-x: hidden;
 }
 
-#searchBox::-webkit-scrollbar, #statusDiv::-webkit-scrollbar, #commentBox::-webkit-scrollbar { 
-    display: none; 
+#searchBox::-webkit-scrollbar, #statusDiv::-webkit-scrollbar, #commentBox::-webkit-scrollbar {
+    display: none;
 }
 
 .searchResult {
@@ -708,7 +708,7 @@ input::-webkit-inner-spin-button {
     background-color: #BE6F3F;
     overflow-y: scroll;
     scrollbar-width: none;
-    -ms-overflow-style: none; 
+    -ms-overflow-style: none;
 }
 
 #msgList::-webkit-scrollbar {
@@ -838,9 +838,9 @@ input::-webkit-inner-spin-button {
     width: 1%;
     background: rgba(0, 0, 0, 0.1);
 }
-  
+
 .analysis::-webkit-scrollbar-thumb, .levelCode::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.3); 
+    background: rgba(0, 0, 0, 0.3);
     overflow: hidden;
 }
 
@@ -980,6 +980,16 @@ input::-webkit-inner-spin-button {
     margin-top: -0.3%;
 }
 
+#codeLengthKB {
+    font-size: 2.2vh;
+    margin-top: -0.3%;
+}
+
+#codeLengthMB {
+    font-size: 2.2vh;
+    margin-top: -0.3%;
+}
+
 .portalImage {
     height: 65%;
     vertical-align: top;
@@ -1078,10 +1088,10 @@ input::-webkit-inner-spin-button {
 @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
 @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
 
-@keyframes spin { 
-    100% { 
-        -webkit-transform: rotate(360deg); 
-        transform:rotate(360deg); } 
+@keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform:rotate(360deg); }
     }
 
 @keyframes boxAnimator {

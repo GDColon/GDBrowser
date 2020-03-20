@@ -8,7 +8,7 @@ const blocks = require('../misc/blocks.json')
 module.exports = async (app, req, res, level) => {
 
 let unencrypted = level.data.startsWith('kS') // some gdps'es don't encrypt level data
-let levelString = unencrypted ? level.data : Buffer.from(level.data, 'base64') 
+let levelString = unencrypted ? level.data : Buffer.from(level.data, 'base64')
 let response = {};
 let rawData;
 
@@ -19,7 +19,7 @@ else {
     try { buffer = pako.inflate(levelString, {to:"string"}) }
     catch(e) { return res.send("-1") }
     rawData = buffer.toString('utf8')
-} 
+}
 
 let data = rawData; // data is tweaked around a lot, so rawData is preserved
 
@@ -55,7 +55,7 @@ data.forEach((x, y) => {
     if (ids.triggers[id]) obj.trigger = ids.triggers[id]
 
     if (obj.triggerGroups) obj.triggerGroups.split('.').forEach(x => triggerGroups.push(x))
-    if (obj.highDetail == 1) highDetail += 1 
+    if (obj.highDetail == 1) highDetail += 1
 
     blockNames.forEach(b => {
         if (blocks[b].includes(id)) {
@@ -230,6 +230,8 @@ Object.keys(response.settings).filter(k => {
 delete response.settings['colors']
 response.text = data.filter(x => x.message).sort(function (a, b) {return parseInt(a.x) - parseInt(b.x)}).map(x => [Buffer.from(x.message, 'base64').toString(), Math.round(x.x / last * 99) + "%"])
 response.dataLength = rawData.length
+response.dataLengthKB = response.dataLength / 1024
+response.dataLengthMB = response.dataLengthKB / 1024
 response.data = rawData
 
 return res.send(response)

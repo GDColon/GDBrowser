@@ -26,6 +26,7 @@
 
 	<div id="analysisDiv" style="margin-top: 2%; display:none">
 		<h2 id="levelName"></h2>
+		<p></p>
 		<h3 id="objectCount"></h3>
 
 		<div id="highDetailDiv">
@@ -52,7 +53,7 @@
 
 		<h1 class="topMargin2" id="orbText">Jump Rings</h1>
 		<div class="transparentBox analysis" id="orbs"></div>
-		
+
 		<h1 class="topMargin2">Block Types</h1>
 		<div class="transparentBox analysis" id="blocks"></div>
 
@@ -72,6 +73,8 @@
 		<div class="transparentBox levelCode" id="levelCode">
 			<p class="menuLink" id="revealCode">Reveal level data</p>
 			<p id="codeLength"></p>
+			<p id="codeLengthKB"></p>
+			<p id="codeLengthMB"></p>
 		</div>
 
 		<div style="height: 7%"></div>
@@ -149,7 +152,7 @@ appendPortals()
 		if (x == "total") $('#triggerText').text(`Triggers (${res.triggers[x]})`)
 		else $('#triggers').append(`<div class="inline triggerDiv"><img height="50%" src='../objects/trigger-${x}.png'><h3 style="padding-top: 7%">x${res.triggers[x]}</h3></div>`)
 	})
-	
+
 	orbList.forEach(x => {
 		if (x == "total") $('#orbText').text(`Jump Rings (${res.orbs[x]})`)
 		else $('#orbs').append(`<div class="inline orbDiv"><img height="50%" src='../objects/orb-${x}.png'><h3 style="padding-top: 7%">x${res.orbs[x]}</h3></div>`)
@@ -188,7 +191,7 @@ appendPortals()
 		let c = res.colors[x]
 
 		$('#colorDiv').append(`${y % 8 == 0 ? "<brr>" : ""}<div class="inline aColor"><div class="color" channel="${c.channel}" style="background-color: rgba(${c.cr || c.r}, ${c.cg || c.g}, ${c.cb || c.b}, ${c.opacity}); border: 0.4vh solid rgb(${c.r}, ${c.g}, ${c.b})">
-		${c.copiedChannel ? `<h3 class='copiedColor'>C:${c.copiedChannel}</h3>` : c.pColor ? `<h3 class='copiedColor'>P${c.pColor}</h3>` : c.blending ? "<h3 class='blendingDot'>•</h3>" : ""}	
+		${c.copiedChannel ? `<h3 class='copiedColor'>C:${c.copiedChannel}</h3>` : c.pColor ? `<h3 class='copiedColor'>P${c.pColor}</h3>` : c.blending ? "<h3 class='blendingDot'>•</h3>" : ""}
 		${c.copiedChannel && c.copiedHSV ? `<h3 class='copiedColor copiedHSV'> +HSV</h3>` : ""}
 		${c.opacity != "1" ? `<h3 class='copiedColor'>${c.opacity}%</h3>` : ""}
 		</div><h3 style="padding-top: 7%">${c.channel > 0 ? "Col " + c.channel : c.channel}</h3></div>`)
@@ -199,7 +202,7 @@ appendPortals()
 	$(".portalToggle").click(function() {
 		if ($(this).prop('checked')) disabledPortals = disabledPortals.filter(x => x != $(this).attr('portal'))
 		else disabledPortals.push($(this).attr('portal'))
-		
+
 		portals = res.portals.split(", ").map(x => x.split(" "))
 		if (disabledPortals.includes('form')) portals = portals.filter(x => !formPortals.includes(x[0]))
 		if (disabledPortals.includes('speed')) portals = portals.filter(x => !speedPortals.includes(x[0]))
@@ -215,7 +218,9 @@ appendPortals()
 		appendPortals()
 	})
 
-	$('#codeLength').html(`(${res.dataLength} characters)`)
+	$('#codeLength').html(`(${res.dataLength} characters/bits)`)
+	$('#codeLengthKB').html(`(${res.dataLengthKB} kilobytes)`)
+	$('#codeLengthMB').html(`(${res.dataLengthMB} megabytes)`)
 
 	$('#revealCode').click(function() {
 		$('#levelCode').html('<p>Loading...</p>')
