@@ -44,7 +44,13 @@
 		<div style="height: 4.5%"></div>
 	</div>
 	
-	<div class="leaderboardBox supercenter gs" style="width: 120vh; height: 80%; pointer-events: none"></div>
+	<div class="leaderboardBox supercenter gs" style="width: 120vh; height: 80%; pointer-events: none">
+		<div id="sortDiv" style="position: relative; right: 10.5%; top: 10.5%; width: 0.1%">
+			<img class="gdButton sortButton" style="margin-bottom: 1vh" sort="stars" src="../assets/sort-stars-on.png" height="11%">
+			<img class="gdButton sortButton" style="margin-bottom: 1vh" sort="coins"  src="../assets/sort-coins.png" height="11%">
+			<img class="gdButton sortButton" style="margin-bottom: 1vh" sort="demons"  src="../assets/sort-demons.png" height="11%">
+		</div>
+	</div>
 
 	<div style="position:absolute; top: 2%; left: 1.5%; width: 10%; height: 25%; pointer-events: none">
 		<img class="gdButton yesClick" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()">
@@ -68,7 +74,7 @@
 <script type="text/javascript" src="../assets/dragscroll.js"></script>
 <script>
 
-let loading = false;
+let sort = "stars"
 
 let top250Text = 
 `The <g>Top 250<> leaderboard contains the <g>top 250 players<>, sorted by <y>star<> value. However, due to <o>hackers<> flooding the leaderboard, this leaderboard has been <b>frozen<> for well over 2 years and displays <o>very outdated information<>.`
@@ -97,7 +103,7 @@ function leaderboard(val) {
 	$('#searchBox').html(`<div style="height: 4.5%"></div>`)
 	$('#loading').show()
 
-	fetch(`../api/leaderboard?count=250&${val}`).then(res => res.json()).then(res => {
+	fetch(`../api/leaderboard?count=250&${val}&type=${sort}`).then(res => res.json()).then(res => {
 
 		if (val != type) return;
 
@@ -134,11 +140,19 @@ function leaderboard(val) {
 			appendScroll: '#searchBox'
 		});
 	})
-
 }
 
 	let type = "accurate"
 	leaderboard(type)
+
+	$(document).on('click', '.sortButton', function () {
+		if ($('#loading').is(":visible")) return
+		sort = $(this).attr('sort')
+		$('.sortButton').each(function() {
+			$(this).attr('src', $(this).attr('src').replace('-on', '').replace('.png', '') + ($(this).attr('sort') == sort ? "-on" : "") + ".png")
+		})
+		return leaderboard("accurate")
+	})
 
 	$('#topTabOff').click(function() {
 		if (type == "top") return;
@@ -149,6 +163,7 @@ function leaderboard(val) {
 		$('#accurateTabOff').show()
 		$('#creatorTabOff').show()
 		infoText(top250Text)
+		$('#sortDiv').hide()
 	})
 
 	$('#accurateTabOff').click(function() {
@@ -160,6 +175,7 @@ function leaderboard(val) {
 		$('#accurateTabOn').show()
 		$('#creatorTabOff').show()
 		infoText(accurateText)
+		$('#sortDiv').show()
 	})
 
 	$('#creatorTabOff').click(function() {
@@ -171,6 +187,7 @@ function leaderboard(val) {
 		$('#accurateTabOff').show()
 		$('#creatorTabOn').show()
 		infoText(creatorText)
+		$('#sortDiv').hide()
 	});
 
 

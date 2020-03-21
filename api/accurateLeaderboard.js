@@ -3,13 +3,21 @@ const request = require('request')
 module.exports = async (app, req, res) => {
 
       if (app.endpoint != "http://boomlings.com/database/") return res.send([])
+
+      let type = req.query.type ? req.query.type.toLowerCase() : ''
+      if (type == "usercoins") type = "coins"
+      if (type == "demons" || type == "coins") type = `?${type}=1`
+      else type = ''
       
-      request.get(`https://gdleaderboards.com/incl/lbxml.php`, function (err, resp, topPlayers) {
+      request.get(`https://gdleaderboards.com/incl/lbxml.php${type}`, function (err, resp, topPlayers) {
       if (err || !topPlayers) topPlayers = ""
       let idArray = topPlayers.split(",")
 
       let leaderboard = []
       let total = idArray.length
+
+      if (!type.length) type = "stars"
+      if (type == "coins") type = "usercoins"
 
       idArray.forEach((x, y) => {
         
@@ -34,7 +42,7 @@ module.exports = async (app, req, res) => {
 
           leaderboard.push(accObj)
           if (leaderboard.length == total) {
-            leaderboard = leaderboard.filter(x => x.stars).sort(function (a, b) {return parseInt(b.stars) - parseInt(a.stars)})
+            leaderboard = leaderboard.filter(x => x.stars).sort(function (a, b) {return parseInt(b[type]) - parseInt(a[type])})
             leaderboard.forEach((a, b) => a.rank = b + 1)
             return res.send(leaderboard)
           } 
