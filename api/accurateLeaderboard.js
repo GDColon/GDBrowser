@@ -6,10 +6,9 @@ module.exports = async (app, req, res) => {
 
       let type = req.query.type ? req.query.type.toLowerCase() : ''
       if (type == "usercoins") type = "coins"
-      if (type == "demons" || type == "coins") type = `?${type}=1`
-      else type = ''
+      if (type != "demons" && type != "coins") type = ''
       
-      request.get(`https://gdleaderboards.com/incl/lbxml.php${type}`, function (err, resp, topPlayers) {
+      request.get(`https://gdleaderboards.com/incl/lbxml.php${type ? `?${type}=1` : ''}`, function (err, resp, topPlayers) {
       if (err || !topPlayers) topPlayers = ""
       let idArray = topPlayers.split(",")
 
