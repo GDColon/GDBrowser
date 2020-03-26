@@ -15,6 +15,7 @@ function recolor(img, col) {
     }
   })
 }
+
 /*
 Caveat of genFileName is that if there are any falsey values in the arguments they are ignored. 
 This is usually a good thing though - avoid issues by not putting something like 0 instead of '0'
@@ -42,6 +43,7 @@ module.exports = async (app, req, res) => {
       let col2 = req.query.col2 || account[11] || 3;
       let outline = req.query.glow || account[28] || "0";
 
+      let sizeParam = req.query.size && !isNaN(req.query.size)
       if (outline == "0") outline = false;
 
       if (iconID && iconID.toString().length == 1) iconID = "0" + iconID;
@@ -71,7 +73,7 @@ module.exports = async (app, req, res) => {
 
       let iconCode = `${req.query.form == "cursed" ? "cursed" : form}-${iconID}-${col1}-${col2}-${outline ? 1 : 0}` 
       
-      if (cache[iconCode]) {
+      if (!sizeParam && cache[iconCode]) {
         clearTimeout(cache[iconCode].timeoutID);
         cache[iconCode].timeoutID = setTimeout(function() {delete cache[iconCode]}, 600000);
         return res.end(cache[iconCode].value);
@@ -125,7 +127,7 @@ module.exports = async (app, req, res) => {
           ic.composite(glow, (iconSize[0] / 2) - (size[0] / 2) + offset[0], (iconSize[1] / 2) - (size[1] / 2) - offset[1], { mode: Jimp.BLEND_DESTINATION_OVER })
 
           if (form == "ufo") { //ufo top WIP
-            ic.contain(iconSize[0], iconSize[1] * 1.1, Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_CENTER)
+            ic.contain(iconSize[0], iconSize[1] * 1.1, Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_MIDDLE)
             //ic.contain(iconSize[0], 300, Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_BOTTOM)
             //ic.composite(ufoTop, (iconSize[0] / 2) - (size[0] / 2) + 7, iconSize[1] + topOffset[3] + 30, {mode: Jimp.BLEND_DESTINATION_OVER})
           }
@@ -264,23 +266,34 @@ module.exports = async (app, req, res) => {
           if (useExtra) ic.composite(extra, imgOff + (iconSize[0] / 2) - (size2[0] / 2) + offset2[0], (iconSize[1] / 2) - (size2[1] / 2) - offset2[1])
           if (form != "ufo") ic.autocrop(0.01, false)
           if (form == "swing") ic.resize(120, 111)
-          else if (ic.bitmap.height == '300') ic.autocrop(1, false)
+
+          if (ic.bitmap.height == '300') ic.autocrop(1, false)
+
+          if (!outline && sizeParam) {
+            let imgSize = Math.round(req.query.size)
+            if (imgSize < 32) imgSize = 32
+            if (imgSize > 512) imgSize = 512
+            ic.resize(imgSize, imgSize)
+          }
+
+          if (sizeParam) {
+            if (ic.bitmap.width > ic.bitmap.height) ic.contain(ic.bitmap.width, ic.bitmap.width, Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_MIDDLE)
+            else if (ic.bitmap.width < ic.bitmap.height) ic.contain(ic.bitmap.height, ic.bitmap.height, Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_MIDDLE)
+          }
 
           let finalSize = [ic.bitmap.width, ic.bitmap.height]
 
           ic.getBuffer(Jimp.AUTO, function (err, buff) {
 
             if (!outline) { 
-              cache[iconCode] = {
-                value: buff,
-                timeoutID: setTimeout(function() {delete cache[iconCode]}, 600000)
+              if (!sizeParam) {
+                cache[iconCode] = {
+                  value: buff,
+                  timeoutID: setTimeout(function() {delete cache[iconCode]}, 600000)
+                }
               }
               return res.end(buff)
             }
-
-            //else if (ufoMode) {
-            //  return res.end(buff)
-            //}
 
             else {
 
@@ -297,25 +310,40 @@ module.exports = async (app, req, res) => {
                 var dArr = [-1, -1, 0, -1, 1, -1, -1, 0, 1, 0, -1, 1, 0, 1, 1, 1], // offset array
                   s = 2, i = 0, x = canvas.width / 2 - finalSize[0] / 2, y = canvas.height / 2 - finalSize[1] / 2;
 
-                for (; i < dArr.length; i += 2)
-                  ctx.drawImage(img, x + dArr[i] * s, y + dArr[i + 1] * s);
+                for (; i < dArr.length; i += 2) ctx.drawImage(img, x + dArr[i] * s, y + dArr[i + 1] * s);
 
                 ctx.globalCompositeOperation = "source-in";
                 ctx.fillStyle = `rgba(${colors[col2].r}, ${colors[col2].g}, ${colors[col2].b}, 1})`;
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 ctx.globalCompositeOperation = "source-over";
                 ctx.imageSmoothingEnabled = false;
+
                 ctx.drawImage(img, x, y)
+
               }
 
               img.onerror = err => { throw err }
               img.src = buff;
               const buffer = canvas.toBuffer();
-              cache[iconCode] = {
-                value: buffer,
-                timeoutID: setTimeout(function() {delete cache[iconCode]}, 600000)
+
+              if (!sizeParam) {
+                cache[iconCode] = {
+                  value: buffer,
+                  timeoutID: setTimeout(function() {delete cache[iconCode]}, 600000)
+                }
+                return res.end(buffer, 'base64')
               }
-              return res.end(buffer, 'base64');
+
+              else {
+                let imgSize = Math.round(req.query.size)
+                if (imgSize < 32) imgSize = 32
+                if (imgSize > 512) imgSize = 512
+
+                Jimp.read(buffer).then(i => {
+                  i.resize(imgSize, imgSize)
+                  i.getBuffer(Jimp.AUTO, (err, b) => res.end(b))
+                })
+              }
 
             }
           })

@@ -210,7 +210,7 @@
 				<p>twitter: The URL of the player's Twitter account, if linked. Plug it into https://twitter.com/{twitter}</p>
 				<p>twitch: The URL of the player's Twitch account, if linked. Plug it into https://twitch.tv/{twitch}</p>
 				<p>glow: If the player's icon has a glow or not</p>
-				<p>icon, ship, ball, ufo, wave, robot, spider, col1, col2, deathEffect: The number of the icon/color used for each form. The actual icon needs to be manually constructed. My <a href="https://gdcolon.com/tools/iconkit" target="_blank">Online Icon Kit</a> could be of assistance.</p>
+				<p>icon, ship, ball, ufo, wave, robot, spider, col1, col2, deathEffect: The number of the icon/color used for each form. The actual icon can be generated through <a href="#icons">/icon</a></p>
 			</div>
 
 			<br>
@@ -711,7 +711,7 @@
 			<p style="font-size:15px; margin-top:-7px">This one isn't really part of the API, but dammit, my website my rules</p>
 
 			<br>
-			<p class="reveal" onclick="$('#params-icons').slideToggle(100)"><b>Parameters (6)</b></p>
+			<p class="reveal" onclick="$('#params-icons').slideToggle(100)"><b>Parameters (7)</b></p>
 			<div class="subdiv" id="params-icons">
 				<p><b>Parameters can be used to modify parts of a fetched user's icon</b></p>
 				<p>IDs generally correspond to their order of appearance in GD</p>
@@ -720,6 +720,7 @@
 				<p>col1: The ID of the primary color to use</p>
 				<p>col2: The ID of the secondary color to use</p>
 				<p>glow: If the icon should have a glow/outline (0 = off, anything else = on)</p>
+				<p>size: The size (in pixels) the icon should be, in case you don't want the default. Will always be square</p>
 				<p>noUser: Disables fetching the icon from the GD servers. Slightly faster, but comes at the cost of having to build icons from the ground up using the parameters listed above. It completely ignores the entered username and always returns the default icon</p>
 			</div>
 
