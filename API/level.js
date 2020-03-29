@@ -19,8 +19,6 @@ module.exports = async (app, req, res, api, analyze) => {
     form: {
       gameVersion: app.gameVersion,
       binaryVersion: app.binaryVersion,
-      //Fixed by 101arrowz and WOSHIZHAZHA120
-      //When user used GDPS, the level song always stereo madness and demon didn't have difficulty
       str: levelID,
       secret: app.secret,
       type: 0
