@@ -68,7 +68,7 @@ module.exports = async (app, req, res) => {
         if (!fs.existsSync(fromIcons(icon))) return res.sendFile(path.join(__dirname, '../assets/unknownIcon.png'))
       }
 
-      if (!colors[col1]) col1 = 1
+      if (!colors[col1]) col1 = 0
       if (!colors[col2]) col2 = 3
 
       let iconCode = `${req.query.form == "cursed" ? "cursed" : form}-${iconID}-${col1}-${col2}-${outline ? 1 : 0}` 
