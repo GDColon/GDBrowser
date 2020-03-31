@@ -39,7 +39,7 @@ module.exports = async (app, req, res) => {
       ind = ind || 21;
 
       let iconID = req.query.icon || account[ind] || 1;
-      let col1 = req.query.col1 || account[10] || 1;
+      let col1 = req.query.col1 || account[10] || 0;
       let col2 = req.query.col2 || account[11] || 3;
       let outline = req.query.glow || account[28] || "0";
 
