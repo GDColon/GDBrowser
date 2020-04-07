@@ -40,24 +40,26 @@ class Level {
         this.large = levelInfo[45] > 40000;
         this.cp = (this.stars > 0) + this.featured + this.epic
         
-        switch (levelInfo[43]) {
-        	case "3":
-        		this.difficulty = "Easy";
-        	break;
-        	case "4":
-        		this.difficulty = "Medium";
-        	break;
-        	case "5":
-        		this.difficulty = "Insane";
-        	break;
-        	case "6":
-        		this.difficulty = "Extreme";
-        	break;
-        	default:
-        		this.difficulty = "Hard";
-        	break;
-        }
-
+		if (levelInfo[17] == 1) {
+			switch (levelInfo[43]) {
+        		case "3":
+        			this.difficulty = "Easy";
+        		break;
+        		case "4":
+        			this.difficulty = "Medium";
+        		break;
+        		case "5":
+        			this.difficulty = "Insane";
+        		break;
+        		case "6":
+        			this.difficulty = "Extreme";
+        		break;
+        		default:
+        			this.difficulty = "Hard";
+        		break;
+        	}
+		}
+		
         if (levelInfo[17] == 1) this.difficulty += ' Demon'
         if (this.difficulty == "Insane Demon") this.difficulty = "Extreme Demon"
         else if (this.difficulty == "Harder Demon") this.difficulty = "Insane Demon"
