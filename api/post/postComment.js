@@ -5,7 +5,7 @@ const crypto = require('crypto')
 function sha1(data) { return crypto.createHash("sha1").update(data, "binary").digest("hex"); }
 
 let rateLimit = {};
-let cooldown = 15000  // GD has a secret rate limit and doesn't alert you when a comment is rejected, so I'm doing the honors 
+let cooldown = 15000  // GD has a secret rate limit and doesn't return -1 when a comment is rejected, so this keeps track
 
 function getTime(time) {
   let seconds = Math.ceil(time / 1000);
@@ -47,7 +47,7 @@ module.exports = async (app, req, res) => {
 
   request.post(app.endpoint + 'uploadGJComment21.php', {
     form: params,
-    headers: {'x-forwarded-for': (Math.floor(Math.random() * 255) + 1)+"."+(Math.floor(Math.random() * 255) + 0)+"."+(Math.floor(Math.random() * 255) + 0)+"."+(Math.floor(Math.random() * 255) + 0) } // prevent pesky ip bans using a random ip
+    headers: {'x-forwarded-for': req.headers['x-forwarded-for'] || req.connection.remoteAddress} // prevent pesky ip bans
   }, function (err, resp, body) {
     if (err) return res.status(400).send("The Geometry Dash servers returned an error! Perhaps they're down for maintenance")
     if (!body || body == "-1") return res.status(400).send("The Geometry Dash servers rejected your comment! Try again later, or make sure your username and password are entered correctly.")
