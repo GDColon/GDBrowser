@@ -54,8 +54,6 @@ app.parseResponse = function (responseBody, splitter) {
 //xss bad
 app.clean = function(text) {if (!text || typeof text != "string") return text; else return text.replace(/&/g, "&#38;").replace(/</g, "&#60;").replace(/>/g, "&#62;").replace(/=/g, "&#61;").replace(/"/g, "&#34;").replace(/'/g, "&#39;")}
 
-console.log("Site online!")
-
 
 // ASSETS
 
@@ -142,4 +140,4 @@ app.get('*', function(req, res) {
   else res.redirect('/search/404%20')
 });
 
-app.listen(2000);
+app.listen(2000, () => console.log("Site online!"))
