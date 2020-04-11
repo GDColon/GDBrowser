@@ -21,7 +21,8 @@ module.exports = async (app, req, res, api) => {
   }
 
   request.post(app.endpoint + 'uploadGJMessage20.php', {
-    form: params
+    form: params,
+    headers: {'x-forwarded-for': req.headers['x-real-ip']}
   }, async function (err, resp, body) {
 
     if (body != 1) return res.status(400).send("The Geometry Dash servers refused to send the message! Make sure your username and password are entered correctly.")

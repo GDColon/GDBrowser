@@ -19,7 +19,7 @@ module.exports = async (app, req, res) => {
     }  
 
     request.post(app.endpoint + 'getGJLevelScores211.php', {
-    form : params}, async function(err, resp, body) { 
+    form : params, headers: {'x-forwarded-for': req.headers['x-real-ip']}}, async function(err, resp, body) { 
 
       if (err || body == '-1' || !body) return res.send("-1")
       scores = body.split('|').map(x => app.parseResponse(x))

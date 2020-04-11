@@ -163,6 +163,7 @@ fetch(target).then(res => res.json()).then(lvl => {
 		}
 		else $('#authorLink').attr('href', '../profile/' + lvl.author)
 		$('#levelName').text(lvl.name || ("Nonexistent level " + lvlID))
+		if (!lvl.name) $('#leaveComment').hide()
 		$('#levelAuthor').text("By " + (lvl.author || "-"))
 		$('#levelID').text("ID: " + lvlID)
 		if (lvl.accountID && lvl.author != "-") 

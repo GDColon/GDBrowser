@@ -36,7 +36,8 @@ module.exports = async (app, req, res) => {
   params.chk = chk
 
   request.post(app.endpoint + 'likeGJItem211.php', {
-    form: params
+    form: params,
+    headers: {'x-forwarded-for': req.headers['x-real-ip']}
   }, function (err, resp, body) {
     if (err) return res.status(400).send("The Geometry Dash servers returned an error! Perhaps they're down for maintenance")
     if (!body || body == "-1") return res.status(400).send("The Geometry Dash servers rejected your vote! Make sure your username and password are entered correctly.")
