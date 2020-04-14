@@ -94,7 +94,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
             })
         }
 
-          return sendLevel()
+          else return sendLevel()
 
         })
       })
