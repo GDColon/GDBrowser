@@ -35,7 +35,7 @@ module.exports = async (app, req, res) => {
         x.cp = x[8]
         x.coins = x[13]
         x.usercoins = x[17]
-        x.diamonds = x[46] == '65535' ? '65535+' : x[46],
+        x.diamonds = x[46]
         keys.forEach(k => delete x[k])
       }) 
       return res.send(scores)

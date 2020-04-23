@@ -1048,6 +1048,10 @@ input::-webkit-inner-spin-button {
     outline-offset: -0.4vh;
 }
 
+.yellow {
+    color: #ffde00;
+}
+
 .gold {
     color: rgb(255, 200, 0);
 }

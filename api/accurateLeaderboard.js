@@ -36,7 +36,7 @@ module.exports = async (app, req, res) => {
             cp: account[8],
             coins: account[13],
             usercoins: account[17],
-            diamonds: account[46] == '65535' ? '65535+' : account[46],
+            diamonds: account[46]
           }
 
           leaderboard.push(accObj)

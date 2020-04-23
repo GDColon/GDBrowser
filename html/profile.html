@@ -83,9 +83,9 @@
 		
 		<hr style="margin-bottom: 2%">
 		<h3 id="collectibles">
-			[[STARS]] <img class="valign" src="../assets/star.png" style="cursor: help" title="Stars">
-			[[DIAMONDS]] <img class="valign" src="../assets/diamond.png" style="cursor: help" title="Diamonds">
-			[[COINS]] <img class="valign" src="../assets/coin.png" style="cursor: help" title="Secret Coins">
+			<span id="stars">[[STARS]]</span> <img class="valign" src="../assets/star.png" style="cursor: help" title="Stars">
+			<span id="diamonds">[[DIAMONDS]]</span> <img class="valign" src="../assets/diamond.png" style="cursor: help" title="Diamonds">
+			<span id="coins">[[COINS]]</span> <img class="valign" src="../assets/coin.png" style="cursor: help" title="Secret Coins">
 			[[USERCOINS]] <img class="valign"src="../assets/silvercoin.png" style="cursor: help" title="User Coins">
 			[[DEMONS]] <img class="valign"src="../assets/demon.png" style="cursor: help" title="Demons">
 			[[CP]] <img class="valign" src="../assets/cp.png" style="cursor: help" title="Creator Points">
@@ -266,6 +266,10 @@ $('#content').on('input', function() {
 	let remaining = 180-$('#content').val().length
 	$('#charcount').text(remaining)
 })
+
+if ([[DIAMONDS]] >= 65535) $('#diamonds').addClass('blue')
+if ([[COINS]] >= 149) $('#coins').addClass('yellow')
+if ([[STARS]] >= 100000) $('#stars').addClass('yellow')
 
 $('#submitComment').click(function () {
 	let comment = $('#content').val()
