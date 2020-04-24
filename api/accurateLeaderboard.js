@@ -1,15 +1,23 @@
 const request = require('request')
+const {GoogleSpreadsheet} = require('google-spreadsheet');
+const sheet = new GoogleSpreadsheet('1ADIJvAkL0XHGBDhO7PP9aQOuK3mPIKB2cVPbshuBBHc'); // accurate leaderboard spreadsheet
 
 module.exports = async (app, req, res) => {
 
-      if (app.endpoint != "http://boomlings.com/database/") return res.send([])
+      if (!app.sheetsKey || app.endpoint != "http://boomlings.com/database/") return res.send([])
 
       let type = req.query.type ? req.query.type.toLowerCase() : ''
       if (type == "usercoins") type = "coins"
       if (type != "demons" && type != "coins") type = ''
+
+      let cell = type == "demons" ? 2 : type == "coins" ? 1 : 0
       
-      request.get(`https://gdleaderboards.com/incl/lbxml.php${type ? `?${type}=1` : ''}`, function (err, resp, topPlayers) {
-      if (err || !topPlayers) topPlayers = ""
+      sheet.useApiKey(app.sheetsKey)
+      sheet.loadInfo().then(async () => {
+      let tab = sheet.sheetsById[1555821000]
+      await tab.loadCells('A2:C2')
+      let topPlayers = tab.getCell(1, cell).value
+      
       let idArray = topPlayers.split(",")
 
       let leaderboard = []

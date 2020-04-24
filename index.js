@@ -34,7 +34,9 @@ try {
   const secrets = require("./misc/secretStuff.json")
   app.id = secrets.id
   app.gjp = secrets.gjp
+  app.sheetsKey = secrets.sheetsKey
   if (app.id == "account id goes here" || app.gjp == "account gjp goes here") console.warn("Warning: No account ID and/or GJP has been provided in secretStuff.json! These are required for level leaderboards to work.")
+  if (app.sheetsKey.startsWith("google sheets api key")) app.sheetsKey = undefined
 }
 
 catch(e) {

@@ -27,6 +27,23 @@
 
         {
             "header": "Accurate Leaderboard",
+            "name": "XShadowWizardX",
+            "youtube": ["https://www.youtube.com/channel/UCaf3-yyZDsAwh1IlYte5VtA", "youtube"],
+            "twitter": ["https://twitter.com/XShadowWizardX", "twitter"],
+            "github": ["https://docs.google.com/spreadsheets/d/10lbPnDYJXhbtlA0ls0cGjjX_osFSG559IDrTbhgPHvc", "ulButton"]
+        },
+
+        {
+            "header": "Demon List",
+            "name": "stadust1971",
+            "ign": "stardust1971",
+            "youtube": ["https://youtube.com/user/stardust19710", "youtube"],
+            "twitter": ["https://twitter.com/stadust1971", "twitter"],
+            "github": ["https://pointercrate.com", "demonButton"]
+        },
+
+        {
+            "header": "API Help",
             "name": "SMJSGaming",
             "youtube": ["https://youtube.com/channel/UCwEsWDs9kGN2vvoiNTJKdaQ", "youtube"],
             "twitter": ["https://instagram.com/smjs_gaming", "instagram"],
@@ -41,22 +58,6 @@
             "github": ["https://github.com/Alex1304", "github"]
         },
 
-        {
-            "header": "Web Design Help",
-            "name": "Ucrash",
-            "youtube": ["https://youtube.com/channel/UCfPgDZBhCodHIFo6OOVcH2A", "youtube"],
-            "twitter": ["https://twitter.com/GDUcrash", "twitter"],
-            "github": ["https://github.com/GDUcrash", "github"]
-        },
-
-        {
-            "header": "Demon List API",
-            "name": "stadust1971",
-            "ign": "stardust1971",
-            "youtube": ["https://youtube.com/user/stardust19710", "youtube"],
-            "twitter": ["https://twitter.com/stadust1971", "twitter"],
-            "github": ["https://pointercrate.com", "demonButton"]
-        },
 
         {
             "header": "Everything Else",
@@ -72,7 +73,7 @@
         "AlFas",
         "ViPriN",
         "Cvolton",
-        "cos8o",
+        "Ucrash",
         "zmxmx"
     ]
 }
