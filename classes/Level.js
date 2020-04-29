@@ -23,28 +23,29 @@ class Level {
         this.orbs = orbs[levelInfo[18]]
         this.diamonds = levelInfo[18] < 2 ? 0 : parseInt(levelInfo[18]) + 2
         this.featured = levelInfo[19] > 0
-        this.epic = levelInfo[42] == 1
+        this.epic = levelInfo[42] > 0
         this.gameVersion = levelInfo[13] > 17 ? (levelInfo[13] / 10).toFixed(1) : levelInfo[13] == 11 ? "1.8" : levelInfo[13] == 10 ? "1.7" : "Pre-1.7"
         if (levelInfo[28]) this.uploaded = levelInfo[28] + config.timestampSuffix
         if (levelInfo[29]) this.updated = levelInfo[29] + config.timestampSuffix
         this.version = levelInfo[5];
         if (levelInfo[27]) this.password = levelInfo[27];
         this.copiedID = levelInfo[30]
+        this.twoPlayer = levelInfo[31] > 0
         this.officialSong = levelInfo[12] != 0 ? parseInt(levelInfo[12]) + 1 : 0
         this.customSong = levelInfo[35]
         this.coins = levelInfo[37]
-        this.verifiedCoins = levelInfo[38] == 1
+        this.verifiedCoins = levelInfo[38] > 0
         this.starsRequested = levelInfo[39]
-        this.ldm = levelInfo[40] == 1
+        this.ldm = levelInfo[40] > 0
         this.objects = levelInfo[45]
         this.large = levelInfo[45] > 40000;
         this.cp = (this.stars > 0) + this.featured + this.epic
 
-        if (levelInfo[17] == 1) this.difficulty += ' Demon'
+        if (levelInfo[17] > 0) this.difficulty += ' Demon'
         if (this.difficulty == "Insane Demon") this.difficulty = "Extreme Demon"
         else if (this.difficulty == "Harder Demon") this.difficulty = "Insane Demon"
         else if (this.difficulty == "Normal Demon") this.difficulty = "Medium Demon"
-        else if (levelInfo[25] == 1) this.difficulty = 'Auto';
+        else if (levelInfo[25] > 0) this.difficulty = 'Auto';
         this.difficultyFace = `${levelInfo[17] != 1 ? this.difficulty.toLowerCase() : `demon-${this.difficulty.toLowerCase().split(' ')[0]}`}${this.epic ? '-epic' : `${this.featured ? '-featured' : ''}`}`
 
         if (this.password && this.password != 0) {
