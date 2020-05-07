@@ -1092,7 +1092,7 @@ input::-webkit-inner-spin-button {
         -webkit-transform: rotate(360deg); 
         transform:rotate(360deg); } 
     }
-
+}
 @keyframes boxAnimator {
     0% {
         transform: scale(0) translate(-50%, -50%);
