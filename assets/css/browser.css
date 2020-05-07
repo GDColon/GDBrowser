@@ -430,10 +430,15 @@ input::-webkit-inner-spin-button {
 .gdButton {
     cursor: pointer;
     z-index: 1;
-    user-select: none;
     pointer-events: all;
     transition-duration: 0.07s;
     transition-timing-function: ease-in-out;
+    user-drag: none; 
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 
 .gdButton:active {
