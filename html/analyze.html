@@ -89,6 +89,8 @@
 <script async type="text/javascript" src="../assets/sizecheck.js"></script>
 <script>
 
+function clean(text) {return text.replace(/&/g, "&#38;").replace(/</g, "&#60;").replace(/>/g, "&#62;").replace(/=/g, "&#61;").replace(/"/g, "&#34;").replace(/'/g, "&#39;")}
+
 let disabledPortals = []
 let formPortals = ['cube', 'ship', 'ball', 'ufo', 'wave', 'robot', 'spider']
 let speedPortals = ['-1x', '1x', '2x', '3x', '4x']
@@ -227,7 +229,7 @@ appendPortals()
 		$('#levelCode').html('<p>Loading...</p>')
 
 	window.setTimeout(function () { //small delay so "loading" message appears
-		$('#levelCode').html(`<p class="codeFont">${res.data}</p>`)}, 50);
+		$('#levelCode').html(`<p class="codeFont">${clean(res.data)}</p>`)}, 50);
 		$('#levelCode').focus().select()
 	})
 

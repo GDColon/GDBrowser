@@ -131,7 +131,7 @@ if (mode == "top") {
 	$('#topSort').attr('src', "../assets/sort-likes-on.png")
 }
 
-function clean(text) {if (!text || typeof text != "string") return text; else return text.replace(/&/g, "&#38;").replace(/</g, "&#60;").replace(/>/g, "&#62;").replace(/=/g, "&#61;").replace(/"/g, "&#34;").replace(/'/g, "&#39;")}
+function clean(text) {return text.replace(/&/g, "&#38;").replace(/</g, "&#60;").replace(/>/g, "&#62;").replace(/=/g, "&#61;").replace(/"/g, "&#34;").replace(/'/g, "&#39;")}
 
 $('#compactMode').attr('src', `../assets/compact-${compact ? "on" : "off"}.png`)
 
