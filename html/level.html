@@ -115,7 +115,7 @@
 			<h1 class="slightlySmaller" id="songname">[[SONGNAME]]</h1>
 			<h2 class="smaller">By: [[SONGAUTHOR]] <a class="songLink" href="https://[[SONGAUTHOR]].newgrounds.com" target="_blank"><img class="gdButton valign" src="../assets/more.png" width="12%"></a></h2>
 		</div>
-		<a class="songLink" href="https://www.newgrounds.com/audio/listen/[[SONGID]]" target="_blank"><img class="gdButton sideButton" src="../assets/playsong.png" style="position:absolute; right: 1%; top: 50%; width: 11%; height: auto;"></a>
+		<a class="songLink playSongButton" onClick="songClick()" target="_blank"><img class="gdButton sideButton playSongImage" src="../assets/playsong.png" style="position:absolute; right: 1%; top: 50%; width: 11%; height: auto;"></a>
 	</div>
 
 	<div class="center" style="position:absolute; bottom: 5%; left: 0; right: 0">
@@ -215,6 +215,21 @@ if ("[[SONGID]]".startsWith("Level")) {
 	$('#songInfo').text('[[SONGID]]')
 	$('.songLink').hide()}
 
+let songPlaying = false;
+let songURL = "/api/proxyAudio/" + encodeURIComponent("[[SONGURL]]");
+let audio;
+function songClick() {
+	songPlaying = !songPlaying;
+	if (songPlaying) {
+		audio = new Audio(songURL);
+		audio.play();
+		$('.playSongImage').eq(0).attr('src', '../assets/stopSong.png');
+	} else {
+		audio.pause();
+		$('.playSongImage').eq(0).attr('src', '../assets/playSong.png');
+	}
+}
+
 if ("[[INVALIDSONG]]" == "true") $('.songLink').hide()
 if ("[[DISLIKED]]" == "true") $('#likeImg').attr('src', '../assets/dislike.png').css('transform', 'translateY(20%)')
 
@@ -231,7 +246,6 @@ if ("[[ACCOUNTID]]" == "0") {
 if (window.location.pathname == "/weekly") $('body').addClass('darkBG')
 
 $(window).on('load', function() {
-
 	if ($('#songname')[0].scrollWidth > $('#songBox')[0].scrollWidth) {
 		let overflow = ($('#songname')[0].scrollWidth - $('#songBox')[0].scrollWidth) * 0.007
 		if (overflow > 3) overflow = 3

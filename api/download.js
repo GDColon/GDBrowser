@@ -1,6 +1,8 @@
 const request = require('request')
 const fs = require('fs')
 const Level = require('../classes/Level.js')
+const newgroundsParser = require('./newgroundsParser');
+
 module.exports = async (app, req, res, api, ID, analyze) => {
 
   let levelID = ID || req.params.id
@@ -57,6 +59,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
             level.songAuthor = songData[4] || "Unknown"
             level.songSize = (songData[5] || "0") + "MB"
             level.songID = songData[1] || level.customSong
+            level.songURL = await newgroundsParser.getSongURL(level.songID);
             if (!songData[2]) level.invalidSong = true
           }
 

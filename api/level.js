@@ -1,6 +1,7 @@
 const request = require('request')
 const fs = require('fs')
 const Level = require('../classes/Level.js')
+const newgroundsParser = require('./newgroundsParser');
 
 module.exports = async (app, req, res, api, analyze) => {
 
@@ -42,6 +43,7 @@ module.exports = async (app, req, res, api, analyze) => {
       level.songAuthor = song[4] || "Unknown"
       level.songSize = (song[5] || "0") + "MB"
       level.songID = song[1] || level.customSong
+      level.songURL = await newgroundsParser.getSongURL(level.songID);
     }
 
     else {
@@ -61,6 +63,7 @@ module.exports = async (app, req, res, api, analyze) => {
         level.songName = level.songName.replace(/[^ -~]/g, "")  // strip off unsupported characters
         let variables = Object.keys(level)
         variables.forEach(x => {
+          console.log(x);
           let regex = new RegExp(`\\[\\[${x.toUpperCase()}\\]\\]`, "g")
           html = html.replace(regex, app.clean(level[x]))
         })

@@ -108,6 +108,7 @@ app.get("/api/credits", function(req, res) { res.send(require('./misc/credits.js
 app.get("/api/leaderboard", function(req, res, api) { app.run[req.query.hasOwnProperty("accurate") ? "accurateLeaderboard" : "leaderboard"](app, req, res) })
 app.get("/api/leaderboardLevel/:id", function(req, res) { app.run.leaderboardLevel(app, req, res, api) })
 app.get("/api/level/:id", async function(req, res) { app.run.level(app, req, res, api) })
+app.get("/api/proxyAudio/:audio", async function(req, res) { app.run.proxyAudio(app, req, res, api) })
 app.get("/api/mappacks", async function(req, res) { res.send(require('./misc/mapPacks.json')) })
 app.get("/api/profile/:id", function(req, res) { app.run.profile(app, req, res, api) })
 app.get("/api/search/:text", function(req, res) { app.run.search(app, req, res, api) })
