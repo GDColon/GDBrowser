@@ -63,7 +63,6 @@ module.exports = async (app, req, res, api, analyze) => {
         level.songName = level.songName.replace(/[^ -~]/g, "")  // strip off unsupported characters
         let variables = Object.keys(level)
         variables.forEach(x => {
-          console.log(x);
           let regex = new RegExp(`\\[\\[${x.toUpperCase()}\\]\\]`, "g")
           html = html.replace(regex, app.clean(level[x]))
         })
