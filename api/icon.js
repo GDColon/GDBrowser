@@ -5,6 +5,7 @@ const path = require('path');
 const icons = require('../icons/gameSheet.json');
 const colors = require('../misc/colors.json');
 const forms = require('../icons/forms.json')
+const offsets = require('../icons/offsets.json')
 
 function recolor(img, col) {
   return img.scan(0, 0, img.bitmap.width, img.bitmap.height, function (x, y, idx) {
@@ -16,16 +17,10 @@ function recolor(img, col) {
   })
 }
 
-/*
-Caveat of genFileName is that if there are any falsey values in the arguments they are ignored. 
-This is usually a good thing though - avoid issues by not putting something like 0 instead of '0'
-*/
-function genFileName(...args) {
-  return args.filter(function(val) {return val}).join('_')+'_001.png';
-}
-function fromIcons(filename) {
-  return `./icons/${filename}`;
-}
+/* Caveat of genFileName is that if there are any falsey values in the arguments they are ignored. 
+This is usually a good thing though - avoid issues by not putting something like 0 instead of '0' */
+function genFileName(...args) { return args.filter(function(val) {return val}).join('_')+'_001.png' }
+function fromIcons(filename) { return `./icons/${filename}` }
 let cache = {};
 
 module.exports = async (app, req, res) => {
@@ -42,6 +37,10 @@ module.exports = async (app, req, res) => {
       let col1 = req.query.col1 || account[10] || 0;
       let col2 = req.query.col2 || account[11] || 3;
       let outline = req.query.glow || account[28] || "0";
+
+      // meant for debugging robot/spider offsets, but i'll leave it in anyways
+      let glowOffset = (req.query.off || "").split(",").map(x => Number(x))
+      if (!glowOffset.some(x => x != 0)) glowOffset = []
 
       let sizeParam = req.query.size && !isNaN(req.query.size)
       if (outline == "0") outline = false;
@@ -73,7 +72,7 @@ module.exports = async (app, req, res) => {
 
       let iconCode = `${req.query.form == "cursed" ? "cursed" : form}-${iconID}-${col1}-${col2}-${outline ? 1 : 0}` 
       
-      if (!sizeParam && cache[iconCode]) {
+      if (!sizeParam && !glowOffset.length && cache[iconCode]) {
         clearTimeout(cache[iconCode].timeoutID);
         cache[iconCode].timeoutID = setTimeout(function() {delete cache[iconCode]}, 600000);
         return res.end(cache[iconCode].value);
@@ -82,11 +81,12 @@ module.exports = async (app, req, res) => {
       let useExtra = false
 
       let originalOffset = icons[icon].spriteOffset;
-      const minusOrigOffset = function(x, y) { return x - originalOffset[y] }
+      let minusOrigOffset = function(x, y) { return x - originalOffset[y] }
       let offset = icons[glow].spriteOffset.map(minusOrigOffset);
       let robotLeg1, robotLeg2, robotLeg3, robotLeg3b, robotLeg2b, robotLeg1b, robotLeg1c;
       let robotOffset1, robotOffset2, robotOffset3, robotOffset1b, robotOffset2b, robotOffset3b;
       let robotGlow1, robotGlow2, robotGlow3;
+
       if (isSpecial) {
         const legs = [1,2,3].map(function(val) {return genImageName(`0${val+1}`)});
         const glows = [1,2,3].map(function(val) {return genImageName(`0${val+1}`, '2')});
@@ -101,6 +101,8 @@ module.exports = async (app, req, res) => {
         robotLeg1 = new Jimp(fromIcons(legs[0])); robotGlow1 = new Jimp(fromIcons(glows[0]))
         robotLeg2 = new Jimp(fromIcons(legs[1])); robotGlow2 = new Jimp(fromIcons(glows[1]))
         robotLeg3 = new Jimp(fromIcons(legs[2])); robotGlow3 = new Jimp(fromIcons(glows[2]))
+
+        if (!glowOffset.length) glowOffset = offsets[form][+iconID] || []
       }
 
       res.contentType('image/png');
@@ -154,14 +156,14 @@ module.exports = async (app, req, res) => {
             await Jimp.read(new Jimp(robotLeg1)).then(rob => {
               rob.rotate(-45)
               recolor(rob, col1)
-              rob.composite(robotGlow1, (robotOffset1[2] - robotOffset1b[2]) + 1, (robotOffset1[3] - robotOffset1b[3]) / 2, { mode: Jimp.BLEND_DESTINATION_OVER })
+              rob.composite(robotGlow1, (robotOffset1[2] - robotOffset1b[2]) + (glowOffset[0] || 1), ((robotOffset1[3] - robotOffset1b[3]) / 2) + (glowOffset[1] || 0), { mode: Jimp.BLEND_DESTINATION_OVER })
               robotLeg1 = rob
             })
 
             await Jimp.read(new Jimp(robotLeg2)).then(rob => {
               rob.rotate(45)
               recolor(rob, col1)
-              rob.composite(robotGlow2, (robotOffset2[2] - robotOffset2b[2]) / 2, (robotOffset2[3] - robotOffset2b[3]) / 2, { mode: Jimp.BLEND_DESTINATION_OVER })
+              rob.composite(robotGlow2, ((robotOffset2[2] - robotOffset2b[2]) / 4) + (glowOffset[4] || 0), ((robotOffset2[3] - robotOffset2b[3]) / 2) + (glowOffset[5] || 0), { mode: Jimp.BLEND_DESTINATION_OVER })
               robotLeg2 = rob
             })
 
@@ -171,7 +173,7 @@ module.exports = async (app, req, res) => {
 
             await Jimp.read(new Jimp(robotLeg3)).then(rob => {
               recolor(rob, col1)
-              rob.composite(robotGlow3, (robotOffset3[2] - robotOffset3b[2]) / 2 - 2, (robotOffset3[3] - robotOffset3b[3]) / 2, { mode: Jimp.BLEND_DESTINATION_OVER })
+              rob.composite(robotGlow3, ((robotOffset3[2] - robotOffset3b[2]) / 2) + (glowOffset[2] || 0), ((robotOffset3[3] - robotOffset3b[3]) / 2) + (glowOffset[3] || 0), { mode: Jimp.BLEND_DESTINATION_OVER })
               robotLeg3 = rob
             })
 
@@ -223,13 +225,13 @@ module.exports = async (app, req, res) => {
 
             await Jimp.read(new Jimp(robotLeg1)).then(rob => {
               recolor(rob, col1)
-              rob.composite(robotGlow1, (robotOffset1[2] - robotOffset1b[2]) / 2, (robotOffset1[3] - robotOffset1b[3]) / 4, { mode: Jimp.BLEND_DESTINATION_OVER })
+              rob.composite(robotGlow1, ((robotOffset1[2] - robotOffset1b[2]) / 2) + (glowOffset[2] || 0), ((robotOffset1[3] - robotOffset1b[3]) / 4) + (glowOffset[3] || 0), { mode: Jimp.BLEND_DESTINATION_OVER })
               robotLeg1 = rob
             })
 
             await Jimp.read(new Jimp(robotLeg2)).then(rob => {
               recolor(rob, col1)
-              rob.composite(robotGlow2, (robotOffset2[2] - robotOffset2b[2]) / 6, (robotOffset2[3] - robotOffset2b[3]) / 6, { mode: Jimp.BLEND_DESTINATION_OVER })
+              rob.composite(robotGlow2, ((robotOffset2[2] - robotOffset2b[2]) / 6) + (glowOffset[0] || 0), ((robotOffset2[3] - robotOffset2b[3]) / 6) + (glowOffset[1] || 0), { mode: Jimp.BLEND_DESTINATION_OVER })
               rob.rotate(-40)
               robotLeg2 = rob
             })
@@ -244,7 +246,7 @@ module.exports = async (app, req, res) => {
 
             await Jimp.read(new Jimp(robotLeg3)).then(rob => {
               recolor(rob, col1)
-              rob.composite(robotGlow3, (robotOffset3[2] - robotOffset3b[2]) / 2, (robotOffset3[3] - robotOffset3b[3]) / 2, { mode: Jimp.BLEND_DESTINATION_OVER })
+              rob.composite(robotGlow3, ((robotOffset3[2] - robotOffset3b[2]) / 2) + (glowOffset[4] || 0), ((robotOffset3[3] - robotOffset3b[3]) / 2) + (glowOffset[5] || 0), { mode: Jimp.BLEND_DESTINATION_OVER })
               robotLeg3 = rob
             })
 
@@ -255,7 +257,6 @@ module.exports = async (app, req, res) => {
             ic.composite(robotLeg3, 100 + (iconSize[0] / 2) - (robotOffset3[2]) + (robotOffset3[0]), (iconSize[1] / 2) - (robotOffset2[3]) - robotOffset2[1] + 77)
             ic.composite(robotLeg1b, 100 + (iconSize[0] / 2) - (robotOffset1[2]) + robotOffset1[0] + 35, (iconSize[1] / 2) - (robotOffset1[3]) - robotOffset1[1] + 70)
             ic.composite(robotLeg1c, 100 + (iconSize[0] / 2) - (robotOffset1[2]) + robotOffset1[0] + 75, (iconSize[1] / 2) - (robotOffset1[3]) - robotOffset1[1] + 70)
-
             // ^ BELOW
             ic.composite(spiderBody, 0, 0)
             // v ABOVE
@@ -269,16 +270,13 @@ module.exports = async (app, req, res) => {
 
           if (ic.bitmap.height == '300') ic.autocrop(1, false)
 
-          if (!outline && sizeParam) {
+          if (sizeParam) {
             let imgSize = Math.round(req.query.size)
             if (imgSize < 32) imgSize = 32
             if (imgSize > 512) imgSize = 512
-            ic.resize(imgSize, imgSize)
-          }
-
-          if (sizeParam) {
             if (ic.bitmap.width > ic.bitmap.height) ic.contain(ic.bitmap.width, ic.bitmap.width, Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_MIDDLE)
             else if (ic.bitmap.width < ic.bitmap.height) ic.contain(ic.bitmap.height, ic.bitmap.height, Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_MIDDLE)
+            ic.resize(imgSize, Jimp.AUTO)
           }
 
           let finalSize = [ic.bitmap.width, ic.bitmap.height]
