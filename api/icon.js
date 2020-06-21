@@ -284,7 +284,7 @@ module.exports = async (app, req, res) => {
           ic.getBuffer(Jimp.AUTO, function (err, buff) {
 
             if (!outline) { 
-              if (!sizeParam) {
+              if (!sizeParam && !glowOffset.length) {
                 cache[iconCode] = {
                   value: buff,
                   timeoutID: setTimeout(function() {delete cache[iconCode]}, 600000)
@@ -324,7 +324,7 @@ module.exports = async (app, req, res) => {
               img.src = buff;
               const buffer = canvas.toBuffer();
 
-              if (!sizeParam) {
+              if (!sizeParam && !glowOffset.length) {
                 cache[iconCode] = {
                   value: buffer,
                   timeoutID: setTimeout(function() {delete cache[iconCode]}, 600000)
