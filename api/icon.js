@@ -5,7 +5,8 @@ const path = require('path');
 const icons = require('../icons/gameSheet.json');
 const colors = require('../misc/colors.json');
 const forms = require('../icons/forms.json')
-const offsets = require('../icons/offsets.json')
+const offsets = require('../icons/offsets.json');
+const { finished } = require('stream');
 
 function recolor(img, col) {
   return img.scan(0, 0, img.bitmap.width, img.bitmap.height, function (x, y, idx) {
@@ -19,7 +20,7 @@ function recolor(img, col) {
 
 /* Caveat of genFileName is that if there are any falsey values in the arguments they are ignored. 
 This is usually a good thing though - avoid issues by not putting something like 0 instead of '0' */
-function genFileName(...args) { return args.filter(function(val) {return val}).join('_')+'_001.png' }
+function genFileName(...args) { return args.filter(function(val) {return val}).join('_') +'_001.png' }
 function fromIcons(filename) { return `./icons/${filename}` }
 let cache = {};
 
@@ -42,6 +43,7 @@ module.exports = async (app, req, res) => {
       let glowOffset = (req.query.off || "").split(",").map(x => Number(x))
       if (!glowOffset.some(x => x != 0)) glowOffset = []
 
+      let topless = form == "bird" && req.query.topless
       let sizeParam = req.query.size && !isNaN(req.query.size)
       if (outline == "0") outline = false;
 
@@ -70,7 +72,7 @@ module.exports = async (app, req, res) => {
       if (!colors[col1]) col1 = 0
       if (!colors[col2]) col2 = 3
 
-      let iconCode = `${req.query.form == "cursed" ? "cursed" : form}-${iconID}-${col1}-${col2}-${outline ? 1 : 0}` 
+      let iconCode = `${req.query.form == "cursed" ? "cursed" : form}${topless ? "topless" : ""}-${iconID}-${col1}-${col2}-${outline ? 1 : 0}` 
       
       if (!sizeParam && !glowOffset.length && cache[iconCode]) {
         clearTimeout(cache[iconCode].timeoutID);
@@ -85,7 +87,8 @@ module.exports = async (app, req, res) => {
       let offset = icons[glow].spriteOffset.map(minusOrigOffset);
       let robotLeg1, robotLeg2, robotLeg3, robotLeg3b, robotLeg2b, robotLeg1b, robotLeg1c;
       let robotOffset1, robotOffset2, robotOffset3, robotOffset1b, robotOffset2b, robotOffset3b;
-      let robotGlow1, robotGlow2, robotGlow3;
+      let robotGlow1, robotGlow2, robotGlow3
+      let ufoTop, ufoOffset, ufoCoords, ufoSprite
 
       if (isSpecial) {
         const legs = [1,2,3].map(function(val) {return genImageName(`0${val+1}`)});
@@ -128,10 +131,14 @@ module.exports = async (app, req, res) => {
           recolor(ic, col1)
           ic.composite(glow, (iconSize[0] / 2) - (size[0] / 2) + offset[0], (iconSize[1] / 2) - (size[1] / 2) - offset[1], { mode: Jimp.BLEND_DESTINATION_OVER })
 
-          if (form == "ufo") { //ufo top WIP
-            ic.contain(iconSize[0], iconSize[1] * 1.1, Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_MIDDLE)
-            //ic.contain(iconSize[0], 300, Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_BOTTOM)
-            //ic.composite(ufoTop, (iconSize[0] / 2) - (size[0] / 2) + 7, iconSize[1] + topOffset[3] + 30, {mode: Jimp.BLEND_DESTINATION_OVER})
+          if (form == "bird" && !topless) {
+            ufoTop = genImageName('3')
+            ufoOffset = icons[ufoTop].spriteOffset.map(minusOrigOffset).concat(icons[ufoTop].spriteSize);
+            ufoCoords = [imgOff + (iconSize[0] / 2) - (ufoOffset[2] / 2) + ufoOffset[0], (iconSize[1] / 2) - (ufoOffset[3] / 2) - ufoOffset[1] + 300 - iconSize[1]]
+            ufoSprite = fromIcons(ufoTop)
+            ic.contain(iconSize[0], 300, Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_BOTTOM)
+            // Only add dome if there's no glow, otherwise the dome will be outlined as well
+            if (!outline) ic.composite(await Jimp.read(ufoSprite), ufoCoords[0], ufoCoords[1], {mode: Jimp.BLEND_DESTINATION_OVER})
           }
 
           if (form == "robot" || req.query.form == "cursed") {
@@ -188,7 +195,6 @@ module.exports = async (app, req, res) => {
             ic.composite(robotLeg1, 100 + (iconSize[0] / 2) - (robotOffset1[2]) + robotOffset1[0] - 20, (iconSize[1] / 2) - (robotOffset1[3]) - robotOffset1[1] + 50)
 
           }
-
 
           else if (form == "spider") {
 
@@ -264,36 +270,38 @@ module.exports = async (app, req, res) => {
             ic.composite(robotLeg1, 100 + (iconSize[0] / 2) - (robotOffset1[2]) + robotOffset1[0] + 7, (iconSize[1] / 2) - (robotOffset1[3]) - robotOffset1[1] + 70)
           }
 
-          if (useExtra) ic.composite(extra, imgOff + (iconSize[0] / 2) - (size2[0] / 2) + offset2[0], (iconSize[1] / 2) - (size2[1] / 2) - offset2[1])
-          if (form != "ufo") ic.autocrop(0.01, false)
-          if (form == "swing") ic.resize(120, 111)
-
-          if (ic.bitmap.height == '300') ic.autocrop(1, false)
-
-          if (sizeParam) {
-            let imgSize = Math.round(req.query.size)
-            if (imgSize < 32) imgSize = 32
-            if (imgSize > 512) imgSize = 512
-            if (ic.bitmap.width > ic.bitmap.height) ic.contain(ic.bitmap.width, ic.bitmap.width, Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_MIDDLE)
-            else if (ic.bitmap.width < ic.bitmap.height) ic.contain(ic.bitmap.height, ic.bitmap.height, Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_MIDDLE)
-            ic.resize(imgSize, Jimp.AUTO)
-          }
+          if (useExtra) ic.composite(extra, imgOff + (iconSize[0] / 2) - (size2[0] / 2) + offset2[0], (iconSize[1] / 2) - (size2[1] / 2) - offset2[1] + (form == "bird" ? 300 - iconSize[1] : 0))
 
           let finalSize = [ic.bitmap.width, ic.bitmap.height]
 
-          ic.getBuffer(Jimp.AUTO, function (err, buff) {
-
-            if (!outline) { 
+          function finish(img) {
+            img.autocrop(0.01, false)
+            if (form == "swing") b.resize(120, 111)
+            if (img.bitmap.height == 300) ic.autocrop(1, false)
+            if (sizeParam) {
+              let imgSize = Math.round(req.query.size)
+              if (imgSize < 32) imgSize = 32
+              if (imgSize > 512) imgSize = 512
+              if (img.bitmap.width > img.bitmap.height) img.contain(img.bitmap.width, img.bitmap.width, Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_MIDDLE)
+              else if (img.bitmap.width < img.bitmap.height) img.contain(img.bitmap.height, img.bitmap.height, Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_MIDDLE)
+              img.resize(imgSize, Jimp.AUTO)
+            }
+            img.getBuffer(Jimp.AUTO, (err, buffer) => {
               if (!sizeParam && !glowOffset.length) {
                 cache[iconCode] = {
-                  value: buff,
+                  value: buffer,
                   timeoutID: setTimeout(function() {delete cache[iconCode]}, 600000)
                 }
               }
-              return res.end(buff)
-            }
+              return res.end(buffer, 'base64')
+            })
+          }
 
-            else {
+          if (!outline) return finish(ic)
+
+          else {
+
+            ic.getBuffer(Jimp.AUTO, function (err, buff) {
 
               const Canvas = require('canvas')
                 , Image = Canvas.Image
@@ -316,35 +324,25 @@ module.exports = async (app, req, res) => {
                 ctx.globalCompositeOperation = "source-over";
                 ctx.imageSmoothingEnabled = false;
 
+                // Add UFO top last so it doesn't get glow'd
+                if (form == "bird" && !topless) {
+                  const dome = new Image()
+                  dome.src = ufoSprite
+                  ctx.drawImage(dome, ufoCoords[0]+5, ufoCoords[1]+5)
+                }
+
                 ctx.drawImage(img, x, y)
 
               }
 
               img.onerror = err => { throw err }
-              img.src = buff;
-              const buffer = canvas.toBuffer();
+              img.src = buff
 
-              if (!sizeParam && !glowOffset.length) {
-                cache[iconCode] = {
-                  value: buffer,
-                  timeoutID: setTimeout(function() {delete cache[iconCode]}, 600000)
-                }
-                return res.end(buffer, 'base64')
-              }
-
-              else {
-                let imgSize = Math.round(req.query.size)
-                if (imgSize < 32) imgSize = 32
-                if (imgSize > 512) imgSize = 512
-
-                Jimp.read(buffer).then(i => {
-                  i.resize(imgSize, imgSize)
-                  i.getBuffer(Jimp.AUTO, (err, b) => res.end(b))
-                })
-              }
-
-            }
-          })
+              Jimp.read(canvas.toBuffer()).then(b => {
+                return finish(b)
+              })
+            })
+          }
         })
       })
     }
