@@ -15,7 +15,8 @@ module.exports = async (app, req, res, api) => {
   }
 
   request.post(app.endpoint + 'downloadGJMessage20.php', {
-    form: params
+    form: params,
+    headers: {'x-forwarded-for': req.headers['x-real-ip']}
   }, async function (err, resp, body) {
 
     if (err || body == '-1' || !body) return res.status(400).send("Error fetching message!")

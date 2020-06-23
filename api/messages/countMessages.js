@@ -17,7 +17,8 @@ module.exports = async (app, req, res) => {
   }
 
   request.post(app.endpoint + 'getGJUserInfo20.php', {
-    form: params
+    form: params,
+    headers: {'x-forwarded-for': req.headers['x-real-ip']}
   }, async function (err, resp, body) {
 
     if (err || body == '-1' || body == '-2' || !body) return res.status(400).send("Error fetching profile! Make sure your username and password are entered correctly.")

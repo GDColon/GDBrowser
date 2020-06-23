@@ -34,7 +34,9 @@ try {
   const secrets = require("./misc/secretStuff.json")
   app.id = secrets.id
   app.gjp = secrets.gjp
+  app.sheetsKey = secrets.sheetsKey
   if (app.id == "account id goes here" || app.gjp == "account gjp goes here") console.warn("Warning: No account ID and/or GJP has been provided in secretStuff.json! These are required for level leaderboards to work.")
+  if (app.sheetsKey.startsWith("google sheets api key")) app.sheetsKey = undefined
 }
 
 catch(e) {
@@ -53,8 +55,6 @@ app.parseResponse = function (responseBody, splitter) {
 
 //xss bad
 app.clean = function(text) {if (!text || typeof text != "string") return text; else return text.replace(/&/g, "&#38;").replace(/</g, "&#60;").replace(/>/g, "&#62;").replace(/=/g, "&#61;").replace(/"/g, "&#34;").replace(/'/g, "&#39;")}
-
-console.log("Site online!")
 
 
 // ASSETS
@@ -142,4 +142,4 @@ app.get('*', function(req, res) {
   else res.redirect('/search/404%20')
 });
 
-app.listen(2000);
+app.listen(2000, () => console.log("Site online!"))

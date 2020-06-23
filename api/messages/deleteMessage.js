@@ -18,7 +18,8 @@ module.exports = async (app, req, res, api) => {
   let deleted = params.messages.split(",").length
 
   request.post(app.endpoint + 'deleteGJMessages20.php', {
-    form: params
+    form: params,
+    headers: {'x-forwarded-for': req.headers['x-real-ip']}
   }, async function (err, resp, body) {
 
     if (body != 1) return res.status(400).send("The Geometry Dash servers refused to delete the message! Make sure your username and password are entered correctly.")

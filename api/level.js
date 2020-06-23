@@ -58,6 +58,7 @@ module.exports = async (app, req, res, api, analyze) => {
 
       else return fs.readFile('./html/level.html', 'utf8', function (err, data) {
         let html = data;
+        level.songName = level.songName.replace(/[^ -~]/g, "")  // strip off unsupported characters
         let variables = Object.keys(level)
         variables.forEach(x => {
           let regex = new RegExp(`\\[\\[${x.toUpperCase()}\\]\\]`, "g")
@@ -68,7 +69,8 @@ module.exports = async (app, req, res, api, analyze) => {
     }
 
     if (level.difficulty == "Extreme Demon") {
-      request.get('https://www.pointercrate.com/api/v1/demons/?name=' + level.name.trim(), function (err, resp, demonList) {
+      request.get('http://www.pointercrate.com/api/v1/demons/?name=' + level.name.trim(), function (err, resp, demonList) {
+          if (err) return sendLevel()
           let demon = JSON.parse(demonList)
           if (demon[0] && demon[0].position <= 150) level.demonList = demon[0].position
           return sendLevel()

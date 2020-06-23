@@ -26,6 +26,7 @@
 
 	<div id="analysisDiv" style="margin-top: 2%; display:none">
 		<h2 id="levelName"></h2>
+		<p></p>
 		<h3 id="objectCount"></h3>
 
 		<div id="highDetailDiv">
@@ -52,7 +53,7 @@
 
 		<h1 class="topMargin2" id="orbText">Jump Rings</h1>
 		<div class="transparentBox analysis" id="orbs"></div>
-		
+
 		<h1 class="topMargin2">Block Types</h1>
 		<div class="transparentBox analysis" id="blocks"></div>
 
@@ -98,7 +99,7 @@ let mirrorPortals = ['mirrorOn', 'mirrorOff']
 fetch(`../api${window.location.pathname}`).then(res => res.json()).then(res => {
 	if (!res.level) return window.location.href = window.location.href.replace("analyze", "search")
 	$('#levelName').text(res.level.name)
-	$('#objectCount').text(res.objects + " objects")
+	$('#objectCount').text(commafy(res.objects) + " objects")
 	document.title = "Analysis of " + res.level.name
 
 	$('#meta-title').attr('content',  "Analysis of " + res.level.name)
@@ -111,7 +112,7 @@ if (res.highDetail == 0 || res.hdPercent == 0) $('#highDetailDiv').hide()
 else {
 	let offset = hdPercent < 20 ? 1 : hdPercent < 40 ? 2 : hdPercent < 60 ? 3 : hdPercent < 80 ? 4 : 5
 	$('#highdetail').append(`<div class="inline" style="width:${hdPercent + offset}%; height: 100%; background-color: lime; margin-left: -2.25%"></div>`)
-	$('#hdText').text(`${res.highDetail}/${res.objects} marked high detail • ${+hdPercent.toFixed(1)}% optimized`)
+	$('#hdText').text(`${commafy(res.highDetail)}/${commafy(res.objects)} marked high detail • ${+hdPercent.toFixed(1)}% optimized`)
 }
 
 let triggerList = Object.keys(res.triggers)
@@ -122,6 +123,8 @@ let blockList = Object.keys(res.blocks)
 let colorList = Object.keys(res.colors)
 
 let portals = res.portals.split(", ").map(x => x.split(" "))
+
+function commafy(num) { return (+num || 0).toString().replace(/(\d)(?=(\d\d\d)+$)/g, "$1,") }
 
 function appendPortals() {
 	$('#portals').html("")
@@ -146,27 +149,27 @@ function appendPortals() {
 appendPortals()
 
 	triggerList.forEach(x => {
-		if (x == "total") $('#triggerText').text(`Triggers (${res.triggers[x]})`)
-		else $('#triggers').append(`<div class="inline triggerDiv"><img height="50%" src='../objects/trigger-${x}.png'><h3 style="padding-top: 7%">x${res.triggers[x]}</h3></div>`)
+		if (x == "total") $('#triggerText').text(`Triggers (${commafy(res.triggers[x])})`)
+		else $('#triggers').append(`<div class="inline triggerDiv"><img height="50%" src='../objects/trigger-${x}.png'><h3 style="padding-top: 7%">x${commafy(res.triggers[x])}</h3></div>`)
 	})
-	
+
 	orbList.forEach(x => {
-		if (x == "total") $('#orbText').text(`Jump Rings (${res.orbs[x]})`)
-		else $('#orbs').append(`<div class="inline orbDiv"><img height="50%" src='../objects/orb-${x}.png'><h3 style="padding-top: 7%">x${res.orbs[x]}</h3></div>`)
+		if (x == "total") $('#orbText').text(`Jump Rings (${commafy(res.orbs[x])})`)
+		else $('#orbs').append(`<div class="inline orbDiv"><img height="50%" src='../objects/orb-${x}.png'><h3 style="padding-top: 7%">x${commafy(res.orbs[x])}</h3></div>`)
 	})
 
 	blockList.forEach(x => {
-		$('#blocks').append(`<div class="inline blockDiv"><img height="45%" src='../blocks/${x}.png'><h3 style="padding-top: 15%">x${res.blocks[x]}</h3></div>`)
+		$('#blocks').append(`<div class="inline blockDiv"><img height="45%" src='../blocks/${x}.png'><h3 style="padding-top: 15%">x${commafy(res.blocks[x])}</h3></div>`)
 	})
 
 	miscList.forEach(x => {
 		if (x == "objects") return;
-		else $('#misc').append(`<div class="inline miscDiv"><img height="40%" src='../objects/obj-${x.slice(0, -1)}.png'><h3 style="padding-top: 15%">x${res.misc[x][0]}<br>${res.misc[x][1]}</h3></div>`)
+		else $('#misc').append(`<div class="inline miscDiv"><img height="40%" src='../objects/obj-${x.slice(0, -1)}.png'><h3 style="padding-top: 15%">x${commafy(res.misc[x][0])}<br>${res.misc[x][1]}</h3></div>`)
 	})
 
 	groupList.forEach(x => {
-		if (x == "total") $('#grouptext').text(`Trigger Groups (${res.triggerGroups[x]})`)
-		else $('#groups').append(`<div class="inline groupDiv"><h1 class="groupID">${x.slice(6)}</h1><h3 style="padding-top: 7%">x${res.triggerGroups[x]}</h3></div>`)
+		if (x == "total") $('#grouptext').text(`Trigger Groups (${commafy(res.triggerGroups[x])})`)
+		else $('#groups').append(`<div class="inline groupDiv"><h1 class="groupID">${x.slice(6)}</h1><h3 style="padding-top: 7%">x${commafy(res.triggerGroups[x])}</h3></div>`)
 	})
 
 	let bgCol = res.colors.find(x => x.channel == "BG")
@@ -188,7 +191,7 @@ appendPortals()
 		let c = res.colors[x]
 
 		$('#colorDiv').append(`${y % 8 == 0 ? "<brr>" : ""}<div class="inline aColor"><div class="color" channel="${c.channel}" style="background-color: rgba(${c.cr || c.r}, ${c.cg || c.g}, ${c.cb || c.b}, ${c.opacity}); border: 0.4vh solid rgb(${c.r}, ${c.g}, ${c.b})">
-		${c.copiedChannel ? `<h3 class='copiedColor'>C:${c.copiedChannel}</h3>` : c.pColor ? `<h3 class='copiedColor'>P${c.pColor}</h3>` : c.blending ? "<h3 class='blendingDot'>•</h3>" : ""}	
+		${c.copiedChannel ? `<h3 class='copiedColor'>C:${c.copiedChannel}</h3>` : c.pColor ? `<h3 class='copiedColor'>P${c.pColor}</h3>` : c.blending ? "<h3 class='blendingDot'>•</h3>" : ""}
 		${c.copiedChannel && c.copiedHSV ? `<h3 class='copiedColor copiedHSV'> +HSV</h3>` : ""}
 		${c.opacity != "1" ? `<h3 class='copiedColor'>${c.opacity}%</h3>` : ""}
 		</div><h3 style="padding-top: 7%">${c.channel > 0 ? "Col " + c.channel : c.channel}</h3></div>`)
@@ -199,7 +202,7 @@ appendPortals()
 	$(".portalToggle").click(function() {
 		if ($(this).prop('checked')) disabledPortals = disabledPortals.filter(x => x != $(this).attr('portal'))
 		else disabledPortals.push($(this).attr('portal'))
-		
+
 		portals = res.portals.split(", ").map(x => x.split(" "))
 		if (disabledPortals.includes('form')) portals = portals.filter(x => !formPortals.includes(x[0]))
 		if (disabledPortals.includes('speed')) portals = portals.filter(x => !speedPortals.includes(x[0]))
@@ -215,7 +218,10 @@ appendPortals()
 		appendPortals()
 	})
 
-	$('#codeLength').html(`(${res.dataLength} characters)`)
+	let dataSize = [Number((res.dataLength / 1024 / 1024).toFixed(1)), "MB"]
+	if (dataSize[0] < 1) dataSize = [Number((res.dataLength / 1024).toFixed(1)), "KB"]
+
+	$('#codeLength').html(`${commafy(res.dataLength)} characters (${dataSize.join(" ")})`)
 
 	$('#revealCode').click(function() {
 		$('#levelCode').html('<p>Loading...</p>')

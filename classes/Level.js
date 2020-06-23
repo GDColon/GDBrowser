@@ -36,7 +36,7 @@ class Level {
         this.verifiedCoins = levelInfo[38] == 1
         this.starsRequested = levelInfo[39]
         this.ldm = levelInfo[40] == 1
-        this.objects = levelInfo[45] == "65535" ? "65535+" : levelInfo[45]
+        this.objects = levelInfo[45]
         this.large = levelInfo[45] > 40000;
         this.cp = (this.stars > 0) + this.featured + this.epic
 

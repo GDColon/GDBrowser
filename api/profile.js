@@ -32,7 +32,7 @@ module.exports = async (app, req, res, api, getLevels) => {
               accountID: account[16],
               rank: account[30],
               stars: account[3],
-              diamonds: account[46] == '65535' ? '65535+' : account[46],
+              diamonds: account[46],
               coins: account[13],
               userCoins: account[17],
               demons: account[4],

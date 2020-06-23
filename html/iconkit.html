@@ -84,7 +84,7 @@ fetch('./api/icons').then(res => {
 
         form.forEach(function (i, p) {
         if (p != 0 && p % 12 == 0) $('#' + formName + 's').append('<br>')
-        $('#' + formName + 's').append(`<button num="${p + 1}" form="${formName}" class="blankButton iconButton" id="${formName}-${p + 1}"><img src="../gdicon/${i}" width="50px" title="${capitalize(formName)} ${p + 1}"></button>`)})
+        $('#' + formName + 's').append(`<button num="${p + 1}" form="${formName}" class="blankButton iconButton" id="${formName}-${p + 1}"><img src="../gdicon/${i}" width="50px" title="${capitalize(formName)} ${formName == "cube" && p+1 == form.length ? 0 : p + 1}"></button>`)})
         $('#' + formName + 's').imagesLoaded(function() {
         }).progress(function() {
         imagesLoaded += 1;
