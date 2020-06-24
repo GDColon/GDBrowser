@@ -276,7 +276,7 @@ module.exports = async (app, req, res) => {
 
           function finish(img) {
             img.autocrop(0.01, false)
-            if (form == "swing") b.resize(120, 111)
+            if (form == "swing") img.resize(120, 111)
             if (img.bitmap.height == 300) ic.autocrop(1, false)
             if (sizeParam) {
               let imgSize = Math.round(req.query.size)
