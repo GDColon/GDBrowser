@@ -89,7 +89,7 @@
 <script async type="text/javascript" src="../assets/sizecheck.js"></script>
 <script>
 
-function clean(text) {return text.replace(/&/g, "&#38;").replace(/</g, "&#60;").replace(/>/g, "&#62;").replace(/=/g, "&#61;").replace(/"/g, "&#34;").replace(/'/g, "&#39;")}
+function clean(text) {return text.toString().replace(/&/g, "&#38;").replace(/</g, "&#60;").replace(/>/g, "&#62;").replace(/=/g, "&#61;").replace(/"/g, "&#34;").replace(/'/g, "&#39;")}
 
 let disabledPortals = []
 let formPortals = ['cube', 'ship', 'ball', 'ufo', 'wave', 'robot', 'spider']
@@ -183,8 +183,8 @@ appendPortals()
 	if (!grCol) grCol = {r: 0, g: 102, b: 255}
 	else if (grCol.r < 35 && grCol.g < 35 && grCol.b < 35) grCol = {r: 75, g: 75, b: 75}
 
-	$('#style').append(`<div class="inline styleDiv styleBG" style='background-color: rgb(${bgCol.r}, ${bgCol.g}, ${bgCol.b})'><img height="60%" src='../levelstyle/bg-${res.settings.background}.png'></div>`)
-	$('#style').append(`<div class="inline styleDiv styleBG" style='background-color: rgb(${grCol.r}, ${grCol.g}, ${grCol.b})'><img height="60%" src='../levelstyle/gr-${res.settings.ground}.png'></div>`)
+	$('#style').append(`<div class="inline styleDiv styleBG" style='background-color: rgb(${clean(bgCol.r)}, ${clean(bgCol.g)}, ${clean(bgCol.b)})'><img height="60%" src='../levelstyle/bg-${res.settings.background}.png'></div>`)
+	$('#style').append(`<div class="inline styleDiv styleBG" style='background-color: rgb(${clean(grCol.r)}, ${clean(grCol.g)}, ${clean(grCol.b)})'><img height="60%" src='../levelstyle/gr-${res.settings.ground}.png'></div>`)
 	$('#style').append(`<div class="inline styleDiv"><img height="55%" src='../levelstyle/font-${res.settings.font}.png'></div>`)
 	$('#style').append(`<div class="inline styleDiv"><img height="60%" src='../levelstyle/line-${res.settings.alternateLine ? 2 : 1}.png'></div>`)
 	if (res.settings.twoPlayer) $('#style').append(`<div class="inline styleDiv"><img height="60%" src='../levelstyle/mode-2p.png'></div>`)
@@ -192,7 +192,7 @@ appendPortals()
 	colorList.forEach((x, y) => {
 		let c = res.colors[x]
 
-		$('#colorDiv').append(`${y % 8 == 0 ? "<brr>" : ""}<div class="inline aColor"><div class="color" channel="${c.channel}" style="background-color: rgba(${c.cr || c.r}, ${c.cg || c.g}, ${c.cb || c.b}, ${c.opacity}); border: 0.4vh solid rgb(${c.r}, ${c.g}, ${c.b})">
+		$('#colorDiv').append(`${y % 8 == 0 ? "<brr>" : ""}<div class="inline aColor"><div class="color" channel="${c.channel}" style="background-color: rgba(${clean(c.cr || c.r)}, ${clean(c.cg || c.g)}, ${clean(c.cb || c.b)}, ${clean(c.opacity)}); border: 0.4vh solid rgb(${c.r}, ${c.g}, ${c.b})">
 		${c.copiedChannel ? `<h3 class='copiedColor'>C:${c.copiedChannel}</h3>` : c.pColor ? `<h3 class='copiedColor'>P${c.pColor}</h3>` : c.blending ? "<h3 class='blendingDot'>•</h3>" : ""}
 		${c.copiedChannel && c.copiedHSV ? `<h3 class='copiedColor copiedHSV'> +HSV</h3>` : ""}
 		${c.opacity != "1" ? `<h3 class='copiedColor'>${c.opacity}%</h3>` : ""}
@@ -249,7 +249,7 @@ appendPortals()
 			</div>
 			<div class="colorSection">
 				<h3>RGB</h3>
-				<p>${col.r}, ${col.g}, ${col.b}</p>
+				<p>${clean(col.r)}, ${clean(col.g)}, ${clean(col.b)}</p>
 			</div>
 			<div class="colorSection">
 				<h3>Opacity</h3>
@@ -282,7 +282,7 @@ appendPortals()
 					<p>${!hsv ? "x1.00" : !hsv['v-checked'] ? "x" + hsv.v : hsv.v > 0 ? "+" + hsv.v : hsv.v}</p>
 				</div>
 			</div>`
-			: `<div class="colorBox" style="background-color: rgba(${col.r}, ${col.g}, ${col.b}, ${col.opacity}); border-color: ${hex}"></div>`}
+			: `<div class="colorBox" style="background-color: rgba(${clean(col.r)}, ${clean(col.g)}, ${clean(col.b)}, ${clean(col.opacity)}); border-color: ${hex}"></div>`}
 			<br><img src="../assets/ok.png" width=14%; style="margin-top: 4%" class="gdButton center" onclick="$('.popup').hide()">`)
 	$('#colorInfo').show()
 	})
