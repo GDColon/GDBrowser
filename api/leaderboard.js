@@ -2,6 +2,8 @@ const request = require('request')
 
 module.exports = async (app, req, res) => {
 
+   if (app.offline) return res.send("-1")
+
     let amount = 100;
     let count = req.query.count ? parseInt(req.query.count) : null
     if (count && count > 0) {

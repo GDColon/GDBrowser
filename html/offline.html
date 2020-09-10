@@ -1,0 +1,63 @@
+<head>
+	<title>#GDBrowserIsOverParty</title>
+	<meta charset="utf-8">
+	<link href="../css/browser.css?v=1" type="text/css" rel="stylesheet">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
+	<link rel="icon" href="../assets/keymaster-head.png">
+	<meta id="meta-title" property="og:title" content="Geometry Dash Browser!">
+	<meta id="meta-desc" property="og:description" content="Browse all of Geometry Dash's online features, right from this handy little website! Levels, profiles, leaderboards, comments, and more!">
+	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/assets/coin.png">
+</head>
+
+<body class="levelBG vaultBG" style="overflow-y:auto;" onbeforeunload="saveUrl()">
+
+<div id="everything" class="center" style="overflow: hidden">
+	<h2 style="margin-top: 2%; margin-bottom: 2.2%">RobTop's Purgatory</h2>
+	<h1 id="msg" class="smaller" style="margin-bottom: 1.2%; white-space: normal;">Hey, hey</h1>
+	<img id="glubfub" src="../assets/keymaster.png" height="25%" class="gdButton">
+
+	<div id="footer" style="position: absolute; left: 1%; bottom: 0%; text-align: left">
+		<p style="line-height: 150%"><a class="vaultLink" href="https://gdcolon.com/tools">• GD Tools</a><br>
+		<a class="vaultLink" href="./api">• API</a><br>
+		<a class="vaultLink" href="https://github.com/GDColon/GDBrowser">• GitHub</a><br>
+		<a class="vaultLink" href="https://store.steampowered.com/app/322170/Geometry_Dash/">• Buy Geometry Dash!</a></p>
+	</div>
+
+	<div style="position:absolute; bottom: 3%; right: 3%; width: 10%; text-align: right;">
+		<a href="../?home"><img class="gdButton" src="../assets/door.png" width=85%;"></a>
+	</div>
+	
+	<div style="position:absolute; top: -1.5%; right: 10%; text-align: right; width: 10%;">
+		<a href="../iconkit"><img class="iconRope" src="../assets/iconrope.png" width="40%"></a>
+	</div>	
+</div>
+
+</body>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script async type="text/javascript" src="../assets/sizecheck.js"></script>
+<script>
+
+let line = 0
+let dialogue = [
+	"Hey, hey", "Wondering what happened to GDBrowser?", "Me too, kid",
+	"Well the truth is, we got IP banned", "By RubRub himself", "Fear not, though.",
+	"Things will be worked out ASAP", "And if I obey RubRub's orders...",
+	"We'll be back in no time", "But in the meantime", "Yeah nothing is gonna work",
+	"API is down as well", "But keep in mind we're on GitHub", "So you can use GDBrowser locally",
+	"Gotta be big brain for that though...", "At least the icon kit is okay", "Well, mostly", "Anywhooo",
+	"Enjoy your time here in the Vault", "I'm sure you'll find something to do", "Just stay six feet from me",
+	"...", ".....", "Yeah that's all I have to say", "You can stop clicking now",
+	"I'm just gonna repeat myself", "Like my iPod stuck on replay", "*ahem*"
+]
+
+$("#glubfub").click(function() {
+	let msg = dialogue[line]
+	$("#msg").text(msg)
+	line++
+	if (line == dialogue.length) line = 0
+})
+
+$("#glubfub").trigger("click")
+
+
+</script>

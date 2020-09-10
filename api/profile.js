@@ -3,6 +3,8 @@ const fs = require('fs')
 
 module.exports = async (app, req, res, api, getLevels) => {
 
+  if (app.offline) return res.send("-1")
+
   request.post(app.endpoint + 'getGJUsers20.php', {
     form: {
       str: getLevels || req.params.id,

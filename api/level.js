@@ -4,6 +4,11 @@ const Level = require('../classes/Level.js')
 
 module.exports = async (app, req, res, api, analyze) => {
 
+  if (app.offline) {
+    if (!api) return res.redirect('search/' + req.params.id)
+    else return res.send("-1")
+  }
+
   let levelID = req.params.id
   if (levelID == "daily") return app.run.download(app, req, res, api, 'daily', analyze)
   else if (levelID == "weekly") return app.run.download(app, req, res, api, 'weekly', analyze)

@@ -1,12 +1,11 @@
 const request = require('request')
-const orbs =  [0, 0, 50, 75, 125, 175, 225, 275, 350, 425, 500]
-const difficulty = {0: 'Unrated', 10: 'Easy', 20: 'Normal', 30: 'Hard', 40: 'Harder', 50: 'Insane'}
-const length = ['Tiny', 'Short', 'Medium', 'Long', 'XL']
 const mapPacks = require('../misc/mapPacks.json')
 const levels = require('../misc/level.json').music
 const Level = require('../classes/Level.js')
 
 module.exports = async (app, req, res) => {
+
+    if (app.offline) return res.send("-1")
 
     let amount = 10;
     let count = req.query.count ? parseInt(req.query.count) : null

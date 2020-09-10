@@ -350,7 +350,7 @@ module.exports = async (app, req, res) => {
     let username = req.params.text
     let result = []
 
-    if (req.query.hasOwnProperty("noUser") || req.query.hasOwnProperty("nouser") || username == "icon") return buildIcon()
+    if (app.offline || req.query.hasOwnProperty("noUser") || req.query.hasOwnProperty("nouser") || username == "icon") return buildIcon()
   
     request.post(app.endpoint + 'getGJUsers20.php', {
       form: {

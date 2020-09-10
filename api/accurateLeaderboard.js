@@ -4,7 +4,7 @@ const sheet = new GoogleSpreadsheet('1ADIJvAkL0XHGBDhO7PP9aQOuK3mPIKB2cVPbshuBBH
 
 module.exports = async (app, req, res) => {
 
-      if (!app.sheetsKey || app.endpoint != "http://boomlings.com/database/") return res.send([])
+      if (app.offline || !app.sheetsKey || app.endpoint != "http://boomlings.com/database/") return res.send([])
 
       let type = req.query.type ? req.query.type.toLowerCase() : ''
       if (type == "usercoins") type = "coins"

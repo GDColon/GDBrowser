@@ -3,6 +3,12 @@ const fs = require('fs')
 const Level = require('../classes/Level.js')
 module.exports = async (app, req, res, api, ID, analyze) => {
 
+  if (app.offline) {
+    if (!api && levelID < 0) return res.redirect('/')
+    if (!api) return res.redirect('search/' + req.params.id)
+    else return res.send("-1")
+  }
+
   let levelID = ID || req.params.id
   if (levelID == "daily") levelID = -1
   else if (levelID == "weekly") levelID = -2

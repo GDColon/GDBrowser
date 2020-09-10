@@ -2,6 +2,8 @@ const request = require('request')
 
 module.exports = async (app, req, res) => {
 
+    if (app.offline) return res.send("-1")
+
     let params = {
         userID : req.params.id, 
         accountID : req.params.id, 
