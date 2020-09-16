@@ -2,29 +2,30 @@ const request = require('request')
 const {GoogleSpreadsheet} = require('google-spreadsheet');
 const sheet = new GoogleSpreadsheet('1ADIJvAkL0XHGBDhO7PP9aQOuK3mPIKB2cVPbshuBBHc'); // accurate leaderboard spreadsheet
 
+let lastIndex = {"stars": 0, "coins": 0, "demons": 0}
+let caches = [{"stars": null, "coins": null, "demons": null}, {"stars": null, "coins": null, "demons": null}] // 0 for JSON, 1 for GD
+
 module.exports = async (app, req, res) => {
 
       if (app.offline || !app.sheetsKey || app.endpoint != "http://boomlings.com/database/") return res.send([])
+      let gdMode = req.query.hasOwnProperty("gd")
+      let cache = caches[gdMode ? 1 : 0]
 
-      let type = req.query.type ? req.query.type.toLowerCase() : ''
+      let type = req.query.type ? req.query.type.toLowerCase() : 'stars'
       if (type == "usercoins") type = "coins"
-      if (type != "demons" && type != "coins") type = ''
+      if (!["stars", "coins", "demons"].includes(type)) type = "stars"
+      if (lastIndex[type] + 6000 > Date.now() && cache[type]) return res.send(gdMode ? cache[type] : JSON.parse(cache[type]))   // 10 min cache
 
-      let cell = type == "demons" ? 2 : type == "coins" ? 1 : 0
-      
       sheet.useApiKey(app.sheetsKey)
       sheet.loadInfo().then(async () => {
       let tab = sheet.sheetsById[1555821000]
       await tab.loadCells('A2:C2')
-      let topPlayers = tab.getCell(1, cell).value
+      let topPlayers = tab.getCell(1, type == "demons" ? 2 : type == "usercoins" ? 1 : 0).value
       
       let idArray = topPlayers.split(",")
 
       let leaderboard = []
       let total = idArray.length
-
-      if (!type.length) type = "stars"
-      if (type == "coins") type = "usercoins"
 
       idArray.forEach((x, y) => {
         
@@ -44,14 +45,23 @@ module.exports = async (app, req, res) => {
             cp: account[8],
             coins: account[13],
             usercoins: account[17],
-            diamonds: account[46]
+            diamonds: account[46],
+            icon: [account[21], account[10], account[11], account[28] == "1" ? "2" : "0"]
           }
 
           leaderboard.push(accObj)
           if (leaderboard.length == total) {
-            leaderboard = leaderboard.filter(x => x.stars).sort(function (a, b) {return parseInt(b[type]) - parseInt(a[type])})
+            let sortBy = type == "coins" ? "usercoins" : type
+            leaderboard = leaderboard.filter(x => x.stars).sort(function (a, b) {return parseInt(b[sortBy]) - parseInt(a[sortBy])})
             leaderboard.forEach((a, b) => a.rank = b + 1)
-            return res.send(leaderboard)
+
+            let gdFormatting = ""
+            leaderboard.forEach(x => { gdFormatting += `1:${x.username}:2:${x.playerID}:13:${x.coins}:17:${x.usercoins}:6:${x.rank}:9:${x.icon[0]}:10:${x.icon[1]}:11:${x.icon[2]}:14:0:15:${x.icon[3]}:16:${x.accountID}:3:${x.stars}:8:${x.cp}:46:${x.diamonds}:4:${x.demons}|`; delete x.icon})
+            caches[0][type] = JSON.stringify(leaderboard)
+            caches[1][type] = gdFormatting
+            lastIndex[type] = Date.now()
+            return res.send(gdMode ? gdFormatting : leaderboard)
+
           } 
 
       })

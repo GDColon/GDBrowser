@@ -322,15 +322,16 @@
 			<h1>Leaderboards</h1>
 			<p>/api/leaderboard</p>
 
-			<p>Simply returns the top player leaderboard</p>
+			<p>Returns the top player, creator, and accurate leaderboards</p>
 
 			<br>
-			<p class="reveal" onclick="$('#params-leaderboard').slideToggle(100)"><b>Parameters (4)</b></p>
+			<p class="reveal" onclick="$('#params-leaderboard').slideToggle(100)"><b>Parameters (5)</b></p>
 			<div class="subdiv" id="params-leaderboard">
 				<p>count: The amount of players to list (default is 100, max is 5000, does not work with accurate leaderboard)</p>
 				<p>creator: Fetches the creator leaderboard</p>
 				<p>accurate: Fetches the accurate leaderboard</p>
 				<p>type: Accurate leaderboard only - the type of stat to sort by (stars, coins, or demons)</p>
+				<p>gd: Accurate leaderboard only - formats the leaderboard using GD's number:value syntax (for use in GD)</p>
 			</div>
 
 			<br>
