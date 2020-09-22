@@ -20,7 +20,7 @@ module.exports = async (app, req, res) => {
       sheet.loadInfo().then(async () => {
       let tab = sheet.sheetsById[1555821000]
       await tab.loadCells('A2:C2')
-      let topPlayers = tab.getCell(1, type == "demons" ? 2 : type == "usercoins" ? 1 : 0).value
+      let topPlayers = tab.getCell(1, type == "demons" ? 2 : type == "coins" ? 1 : 0).value
       
       let idArray = topPlayers.split(",")
 

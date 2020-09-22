@@ -23,7 +23,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
     }
   }, async function (err, resp, body) {
 
-    if (err || !body || body == '-1') {
+    if (err || !body || body == '-1' || body.startsWith("<!")) {
       if (!api && levelID < 0) return res.redirect('/')
       if (!api) return res.redirect('search/' + req.params.id)
       else return res.send("-1")

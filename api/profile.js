@@ -8,11 +8,11 @@ module.exports = async (app, req, res, api, getLevels) => {
   request.post(app.endpoint + 'getGJUsers20.php', {
     form: {
       str: getLevels || req.params.id,
-      secret: app.secret
+      secret: app.secret,
     }
   }, function (err1, res1, b1) {
     
-    let searchResult = (err1 || b1 == '-1' || !b1) ? req.params.id : app.parseResponse(b1)[16]
+    let searchResult = (req.query.hasOwnProperty("account") || err1 || b1 == '-1' ||  b1.startsWith("<!") || !b1) ? req.params.id : app.parseResponse(b1)[16]
 
     request.post(app.endpoint + 'getGJUserInfo20.php', {
       form: {

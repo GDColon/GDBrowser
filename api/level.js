@@ -2,6 +2,8 @@ const request = require('request')
 const fs = require('fs')
 const Level = require('../classes/Level.js')
 
+function xor(str, key) { return Buffer.from(String.fromCodePoint(...str.split('').map((char, i) => char.charCodeAt(0) ^ key.charCodeAt(i % key.length)))).toString('base64') }
+
 module.exports = async (app, req, res, api, analyze) => {
 
   if (app.offline) {
@@ -28,7 +30,7 @@ module.exports = async (app, req, res, api, analyze) => {
     }
   }, async function (err, resp, body) {
 
-    if (err || !body || body == '-1') {
+    if (err || !body || body == '-1' || body.startsWith("<!")) {
       if (!api) return res.redirect('search/' + req.params.id)
       else return res.send("-1")
     }
@@ -40,7 +42,6 @@ module.exports = async (app, req, res, api, analyze) => {
 
     let levelInfo = app.parseResponse(preRes[0])
     let level = new Level(levelInfo, author)
-
 
     if (song[2]) {
       level.songName = song[2] || "Unknown"

@@ -6,7 +6,6 @@ const icons = require('../icons/gameSheet.json');
 const colors = require('../misc/colors.json');
 const forms = require('../icons/forms.json')
 const offsets = require('../icons/offsets.json');
-const { finished } = require('stream');
 
 function recolor(img, col) {
   return img.scan(0, 0, img.bitmap.width, img.bitmap.height, function (x, y, idx) {
@@ -44,7 +43,8 @@ module.exports = async (app, req, res) => {
       if (!glowOffset.some(x => x != 0)) glowOffset = []
 
       let topless = form == "bird" && req.query.topless
-      let sizeParam = req.query.size && !isNaN(req.query.size)
+      let autoSize = req.query.size == "auto"
+      let sizeParam = autoSize || (req.query.size && !isNaN(req.query.size))
       if (outline == "0") outline = false;
 
       if (iconID && iconID.toString().length == 1) iconID = "0" + iconID;
@@ -69,14 +69,20 @@ module.exports = async (app, req, res) => {
         if (!fs.existsSync(fromIcons(icon))) return res.sendFile(path.join(__dirname, '../assets/unknownIcon.png'))
       }
 
+      let ex = fromIcons(extra)
+      let hasExtra = fs.existsSync(ex)
+
       if (!colors[col1]) col1 = 0
       if (!colors[col2]) col2 = 3
 
-      let iconCode = `${req.query.form == "cursed" ? "cursed" : form}${topless ? "topless" : ""}-${iconID}-${col1}-${col2}-${outline ? 1 : 0}` 
-      
+      let col3 = req.query.col3
+      if (col3 && (!hasExtra || !colors[col3] || col3 == "12")) col3 = null
+
+      let iconCode = `${req.query.form == "cursed" ? "cursed" : form}${topless ? "top" : ""}-${iconID}-${col1}-${col2}-${col3 || "x"}-${outline ? 1 : 0}` 
+
       if (!sizeParam && !glowOffset.length && cache[iconCode]) {
         clearTimeout(cache[iconCode].timeoutID);
-        cache[iconCode].timeoutID = setTimeout(function() {delete cache[iconCode]}, 600000);
+        cache[iconCode].timeoutID = setTimeout(function() {delete cache[iconCode]}, 1800000);
         return res.end(cache[iconCode].value);
       }
 
@@ -89,6 +95,7 @@ module.exports = async (app, req, res) => {
       let robotOffset1, robotOffset2, robotOffset3, robotOffset1b, robotOffset2b, robotOffset3b;
       let robotGlow1, robotGlow2, robotGlow3
       let ufoTop, ufoOffset, ufoCoords, ufoSprite
+      let extrabit, offset2, size2;
 
       if (isSpecial) {
         const legs = [1,2,3].map(function(val) {return genImageName(`0${val+1}`)});
@@ -108,22 +115,21 @@ module.exports = async (app, req, res) => {
         if (!glowOffset.length) glowOffset = offsets[form][+iconID] || []
       }
 
-      res.contentType('image/png');
-      let extrabit, offset2, size2;
-      if (fs.existsSync(fromIcons(extra))) {
-        extrabit = icons[extra]
-        offset2 = extrabit.spriteOffset.map(minusOrigOffset);
-        size2 = extrabit.spriteSize;
-
-        extra = new Jimp(fromIcons(extra));
-        useExtra = true
-      }
-
       Jimp.read(fromIcons(glow)).then(async function (image) {
 
         let size = [image.bitmap.width, image.bitmap.height]
         let glow = recolor(image, col2)
         let imgOff = isSpecial ? 100 : 0
+
+        let eb = fromIcons(extra)
+        if (fs.existsSync(eb)) {
+          extrabit = icons[extra]
+          offset2 = extrabit.spriteOffset.map(minusOrigOffset);
+          size2 = extrabit.spriteSize;
+          extra = new Jimp(eb);
+          if (col3) await Jimp.read(eb).then(e => { extra = recolor(e, col3) })
+          useExtra = true
+        }
 
         Jimp.read(fromIcons(icon)).then(async function (ic) {
 
@@ -279,18 +285,19 @@ module.exports = async (app, req, res) => {
             if (form == "swing") img.resize(120, 111)
             if (img.bitmap.height == 300) ic.autocrop(1, false)
             if (sizeParam) {
-              let imgSize = Math.round(req.query.size)
+              let thicc = img.bitmap.width > img.bitmap.height
+              let imgSize = req.query.size == "auto" ? (thicc ? img.bitmap.width : img.bitmap.height) : Math.round(req.query.size)
               if (imgSize < 32) imgSize = 32
               if (imgSize > 512) imgSize = 512
-              if (img.bitmap.width > img.bitmap.height) img.contain(img.bitmap.width, img.bitmap.width, Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_MIDDLE)
-              else if (img.bitmap.width < img.bitmap.height) img.contain(img.bitmap.height, img.bitmap.height, Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_MIDDLE)
+              if (thicc) img.contain(img.bitmap.width, img.bitmap.width, Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_MIDDLE)
+              else img.contain(img.bitmap.height, img.bitmap.height, Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_MIDDLE)
               img.resize(imgSize, Jimp.AUTO)
             }
             img.getBuffer(Jimp.AUTO, (err, buffer) => {
               if (!sizeParam && !glowOffset.length) {
                 cache[iconCode] = {
                   value: buffer,
-                  timeoutID: setTimeout(function() {delete cache[iconCode]}, 600000)
+                  timeoutID: setTimeout(function() {delete cache[iconCode]}, 1800000)
                 }
               }
               return res.end(buffer, 'base64')
@@ -351,6 +358,7 @@ module.exports = async (app, req, res) => {
     let result = []
 
     if (app.offline || req.query.hasOwnProperty("noUser") || req.query.hasOwnProperty("nouser") || username == "icon") return buildIcon()
+    res.contentType('image/png');
   
     request.post(app.endpoint + 'getGJUsers20.php', {
       form: {

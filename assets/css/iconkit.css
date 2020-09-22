@@ -18,24 +18,43 @@ body {
 }
 
 p {
-  font-family: "Roboto";
+  font-family: aller, helvetica, arial;
   font-size: 18px;
 }
 
-h2 {
-  font-family: "Roboto";
+h1 {
   font-weight: normal;
-  font-size: 20px;
+  margin: 0 0;
+  font-size: 60px;
+  font-family: Pusab;
+  color: white;
+  letter-spacing: 0.02em;
+  overflow: hidden;
+  white-space: nowrap;
+  text-shadow: -2.2px -2.2px 0px #000, 2.2px -2.2px 0px #000, -2.2px 2.2px 0px #000, 2.2px 2.2px 0px #000, 5px 5px 0px rgba(0,0,0,0.4);
 }
 
-h3 {
-  font-family: "Roboto";
-  font-weight: bold;
-  font-size: 20px;
+h2 {
+  font-weight: normal;
+  margin: 0 0;
+  font-size: 35px;
+  font-family: Pusab;
+  width: fit-content;
+  color: white;
+  letter-spacing: 0.02em;
+  text-shadow: -1.5px -1.5px 0px #000, 1.5px -1.5px 0px #000, -1.5px 1.5px 0px #000, 1.5px 1.5px 0px #000;
 }
 
 .hidden {
   display: none;
+}
+
+.inline, .help {
+  display: inline-block;
+}
+
+.help {
+  cursor: help;
 }
 
 .small {
@@ -62,12 +81,6 @@ h3 {
   border: none;
 }
 
-input[type=checkbox] {
-  margin-left: 7px;
-  transform: scale(1.2) translateY(1px);
-  cursor: pointer;
-}
-
 input:focus, select:focus, textarea:focus, button:focus {
   outline: none;
  }
@@ -78,6 +91,12 @@ input:focus, select:focus, textarea:focus, button:focus {
   width: 15%;
   border-style: 1px inset black;
  }
+
+ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active {
+  box-shadow: 0 0 0px 1000px #764F1A inset !important;
+  -webkit-box-shadow: 0 0 0px 1000px #764F1A inset !important;
+  -webkit-text-fill-color: white !important;
+}
 
  textarea {
   border-radius: 5px;
@@ -113,6 +132,13 @@ input:focus, select:focus, textarea:focus, button:focus {
 
 .center {
   text-align: center;
+}
+
+.supercenter {
+  position: absolute; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%,-50%);
 }
 
 .iconimage {
@@ -262,12 +288,16 @@ input:focus, select:focus, textarea:focus, button:focus {
   border-image: url('https://gdcolon.com/assets/gj_select.png') 10 stretch !important;
 }
 
-.iconTabButton, .glowToggle {
+.iconTabButton, .glowToggle, .copyForm {
   margin: 0 5 0 5;
   transition: transform .1s ease-in-out;
 }
 
-.iconTabButton:active, .glowToggle:active {
+.copyForm {
+  margin: 18 10 0 10 !important;
+}
+
+.iconTabButton:active, .glowToggle:active, .copyForm:active {
   transform:scale(1.05)
 }
 
@@ -297,7 +327,7 @@ input:focus, select:focus, textarea:focus, button:focus {
   margin-top: -5;
 }
 
-#col1, #col2 {
+#colors div {
   display: flex;
 }
 
@@ -316,7 +346,11 @@ input:focus, select:focus, textarea:focus, button:focus {
 }
 
 .menuButton:hover {
-  transform:scale(1.1)
+  transform:scale(1.07)
+}
+
+.menuButton:active {
+  transform:scale(1.15)
 }
 
 #iconprogressbar {
@@ -335,6 +369,78 @@ input:focus, select:focus, textarea:focus, button:focus {
   background: transparent;
 }
 
+.popup {
+  position: fixed; 
+  display: none; 
+  width: 100%;
+  height: 100%;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0,0,0,0.4);
+  z-index: 2;
+}
+
+.brownBox {
+  border: 17px solid transparent;
+  border-radius: 25px;
+  background-color: #995533;
+  border-image: url('./../assets/brownbox.png') 10% round;
+}
+
+.xButton {
+  position: absolute;
+  top: -35px;
+  left: -40px;
+  text-align: left;
+}
+
+input[type=text] {
+  font-weight: normal;
+  margin: 0 0;
+  font-size: 45px;
+  font-family: Pusab;
+  color: white;
+  letter-spacing: 0.02em;
+  text-shadow: -0.2vh -0.2vh 0vh #000, 0.2vh -0.2vh 0vh #000, -0.2vh 0.2vh 0vh #000, 0.2vh 0.2vh 0vh #000;
+  border: 0 solid transparent;
+  border-radius: 15px;
+  background-color: rgba(0, 0, 0, 0.3);
+  white-space: nowrap;
+}
+
+input[type=text]::placeholder {
+  color: #6F98D8;
+  font-size: 40px;
+  text-shadow: -0.15vh -0.15vh 0vh #000, 0.15vh -0.15vh 0vh #000, -0.15vh 0.15vh 0vh #000, 0.15vh 0.15vh 0vh #000;
+}
+
+input[type=checkbox] {
+  display: none;
+}
+
+.gdcheckbox {
+  vertical-align: middle;
+  display: inline-block;
+  background-image: url(../assets/check-off.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding-right: 40px;
+  height: 42px;
+  text-align: left;
+  margin: 0 15 0 35;
+}
+
+input[type=checkbox]:checked + label.gdcheckbox {
+  background-image: url(../assets/check-on.png);
+}
+
+.bounce {
+  animation: boxAnimator 0.25s;
+}
+
+.gold {
+  color: rgb(255, 200, 0);
+}
+
 .blue {
   color: blue;
  }
@@ -344,7 +450,7 @@ input:focus, select:focus, textarea:focus, button:focus {
  }
 
 .inline {
-  display: inline;
+  display: inline-block;
 }
 
 .spin {
@@ -352,6 +458,21 @@ input:focus, select:focus, textarea:focus, button:focus {
   -moz-animation: spin 2s linear infinite;
    animation: spin 2s linear infinite;
    mix-blend-mode: luminosity;
+}
+
+@keyframes boxAnimator {
+  0% {
+      transform: scale(0) translate(-50%, -50%);
+      transform-origin:left top
+  }
+  75% {
+      transform: scale(1.075) translate(-50%, -50%);
+      transform-origin:left top
+  }
+  100% {
+      transform: scale(1) translate(-50%, -50%);
+      transform-origin:left top
+  }
 }
 
 @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }

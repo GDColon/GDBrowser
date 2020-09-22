@@ -13,14 +13,41 @@
 </head>
 <body class="iconscroll" style="background-image: linear-gradient(rgb(139, 139, 139), rgb(100, 100, 100));" onbeforeunload="saveUrl()">
 <div class="center hidden"><br>
+
+    <div class="popup" id="steal">
+        <div class="brownbox bounce center supercenter" style="height: 350px; width: 700px">
+			<h1 class="center gold" style="margin-top: 10px">Copy Icon</h1>
+            <input type="text" name="gdbrowser" id="playerName" autocomplete="off" placeholder="Username" maxlength="32" style="height: 58px; width: 90%; text-align: center; margin-top: 25px; margin-bottom: 5px;">
+            <div id="copyForms"></div>
+            <img src="../assets/ok.png" height=55px; class="postButton gdButton center" style="margin-top: 30px" id="fetchUser">
+            <img class="gdButton xButton" src="../assets/close.png" width="70px" onclick="$('#steal').hide()">
+		</div>
+    </div>
+    
+    <div class="popup" id="settings">
+        <div class="brownbox bounce center supercenter" style="height: 350px; width: 720px">
+            <h1 class="center gold" style="margin-top: 10px; margin-bottom: 20px;">Settings</h1>
+            <div class="inline"><h2 class="help" help="Removes the clear dome on top of UFOs"><input type="checkbox" class="iconsetting" id="box-ufo"><label for="box-ufo" class="gdcheckbox gdButton"></label>No UFO Dome</h2></div>
+            <div class="inline"><h2 class="help" help="Forces a square aspect ratio on generated icons"><input type="checkbox" class="iconsetting" id="box-square"><label for="box-square" class="gdcheckbox gdButton"></label>Square Image</h2></div>
+            <br>
+            <div class="inline" style="margin-top: 12px"><h2 class="help" help="Adds a third color option for normally non-colorable details"><input type="checkbox" class="iconsetting" id="box-col3"><label for="box-col3" class="gdcheckbox gdButton"></label>Color 3</h2></div>
+            <br>
+            <p class="white" id="helpText" style="font-size: 24px; margin-bottom: 0;">(Hover over a setting for information)</p>
+            <img src="../assets/ok.png" height=55px; class="postButton gdButton center" style="margin-top: 30px" onclick="$('#settings').hide()">
+            <img class="gdButton xButton" src="../assets/close.png" width="70px" onclick="$('#settings').hide()">
+        </div>
+	</div>
+
     <img id="iconkitlogo" src="../assets/iconkit.png" height=50px; style="margin: 7px 0;"><br><br>
     <img id="loading" src="../assets/loading.png" class="spin" height=95px; style="margin: auto auto 25px auto">
     <img id="result" src="../icon/icon" download="cube_1.png">
     <hr id="gdfloor">
     <div id="menuButtons" style="height: 65px; margin: 0 0 15 0;">
-        <button class="blankButton menuButton" id="downloadIcon" title="Download icon"><a id="downloadLink" download="cube_1.png" href="../icon/icon"><img src="../iconkitbuttons/download.png" width=50px></a></button>
-        <button class="blankButton menuButton" id="generateIcon" title="Generate icon"><img src="../iconkitbuttons/play.png" width=65px></button>
-        <button class="blankButton menuButton" id="fetchUser" title="Get player icon"><img src="../iconkitbuttons/player.png" width=50px></button>
+        <button class="blankButton menuButton" id="customColors" title="Settings" onclick="$('#settings').show()"><img src="../iconkitbuttons/cog.png" width=55px></button>
+        <button class="blankButton menuButton" id="downloadIcon" title="Download icon"><a id="downloadLink" download="cube_1.png" href="../icon/icon"><img src="../iconkitbuttons/download.png" width=55px></a></button>
+        <button class="blankButton menuButton" id="generateIcon" title="Generate icon"><img src="../iconkitbuttons/play.png" width=70px></button>
+        <button class="blankButton menuButton" id="getUserIcon" title="Get player icon"><img src="../iconkitbuttons/player.png" width=55px></button>
+        <button class="blankButton menuButton" id="randomIcon" title="Random Icon"><img src="../iconkitbuttons/shuffle.png" width=55px></button>
         </div>
         <div id="iconTabs"></div><br>
         <div id="iconKitParent" class="iconKit">
@@ -31,9 +58,9 @@
         <div id="colors" class="iconKit">
             <div id="col1"></div>
             <div id="col2"></div>
+            <div style="margin-top: 12px" id="col3"></div>
     </div><br>
-    <p style="color: rgb(20, 20, 20); margin-top: 3;">All sprites/assets belong to <a target=_blank href="http://robtopgames.com">RobTop Games</a>.</p>
-    <p><a target=_blank href="https://gdbrowser.com/api#icons">API Reference</a></p>
+    <p style="color: rgb(20, 20, 20); margin-top: 3px">Created by <a target=_blank href="https://gdcolon.com">GD Colon</a> • All sprites/assets belong to <a target=_blank href="http://robtopgames.com">RobTop Games</a> • <a target=_blank href="https://gdbrowser.com/api#icons">API Reference</a></p>
 
     <div style="position:absolute; top: 2%; left: -1.95%; width: 10%; height: 25%; pointer-events: none">
 		<img class="gdButton" style="pointer-events: all" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()">
@@ -52,22 +79,36 @@ $('.hidden').show();
 let mobile =  /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)
 let forms = ['cube', 'ship', 'ball', 'ufo', 'wave', 'robot', 'spider', 'swing']
 let currentForm = 'cube'
+let formCopy = 'cube'
 let beenThereDoneThat = false
 
 let selectedIcon = 1
 let selectedForm = 'cube'
 let selectedCol1 = 0
 let selectedCol2 = 3
+let selectedCol3 = null
 let enableGlow = 0
 
 let imagesLoaded = 0
 let totalLoaded = 0
 
-function capitalize(str) {return str[0].toUpperCase() + str.substr(1)}
-
 if (mobile) $('#logo').attr('width', '80%');
 
-forms.forEach(form => {$("#iconTabs").append(`<button form="${form}" class="blankButton iconTabButton"><img src="../iconkitbuttons/${form}_off.png" width=50px></button>`)})
+let iconSettings = localStorage.iconkit.split(",")
+iconSettings.forEach(x => {
+    $(`#box-${x}`).prop('checked', true)
+})
+
+function capitalize(str) { return str[0].toUpperCase() + str.substr(1) }
+function randInt(min, max) { return Math.floor(Math.random() * (max - min + 1) ) + min }
+function row3() { if (iconSettings.includes("col3")) $('#col3').show(); else $('#col3').hide() }
+
+row3()
+
+forms.forEach(form => {
+    $("#iconTabs").append(`<button form="${form}" class="blankButton iconTabButton"><img src="../iconkitbuttons/${form}_off.png" width=50px></button>`)
+    $("#copyForms").append(`<button form="${form}" class="blankButton copyForm"><img src="../iconkitbuttons/${form}_off.png" width=50px></button>`)
+})
 $("#iconTabs").append(`<button title="Glow" class="blankButton glowToggle" id="glowbtn"><img id="glow" src="../iconkitbuttons/streak_off.png" width=50px></button>`)
 
 forms.forEach(form => {$("#iconKitParent").append(`<div id="${form}s"></div>`)})
@@ -101,15 +142,19 @@ fetch('./api/icons').then(res => {
             $('[num="1"][form="cube"]').addClass('iconSelected');
         })
 
-        filterIcon('color').forEach(function (i, p) {
-           $('#col1').append(`<button col=${p} class="blankButton color1" title="Color ${p}" id="col1-${p}"><img src="../gdicon/color_${p}.png" width=50px></button>`)
-           $('#col2').append(`<button col=${p} class="blankButton color2" title="Color ${p}" id="col2-${p}"><img src="../gdicon/color_${p}.png" width=50px></button>`)})
+        filterIcon('color').forEach(function (n, p) {
+            for (i=1; i<=3; i++) {
+                $(`#col${i}`).append(`<button col=${p} class="blankButton color${i}" title="Color ${p}" id="col${i}-${p}"><img src="../gdicon/color_${p}.png" width=50px></button>`)
+            }
+        })
 
        $('#col1').append("<span style='min-width: 10px'></span>")
        $('#col2').append("<span style='min-width: 10px'></span>")
+       $('#col3').append("<span style='min-width: 10px'></span>")
 
         $('.color1[col="0"]').addClass('iconSelected');
         $('.color2[col="3"]').addClass('iconSelected');
+        $('.color3[col="12"]').addClass('iconSelected');
 
         $(document).on('click', '.iconTabButton', function () {
 
@@ -135,6 +180,28 @@ fetch('./api/icons').then(res => {
         })
 
         $('#iconTabs').find('.iconTabButton').first().children().first().attr('src', $('.iconTabButton').first().children().first().attr('src').replace('_off', '_on'))
+
+
+        $("#randomIcon").click(function() {
+
+            selectedForm = forms[Math.floor(Math.random() * forms.length)]
+            selectedIcon = randInt(0, iconArray.filter(x => x.startsWith(selectedForm)).length)
+            selectedCol1 = randInt(0, iconArray.filter(x => x.startsWith("color")).length) - 1
+            selectedCol2 = randInt(0, iconArray.filter(x => x.startsWith("color")).length) - 1
+            selectedCol3 = null
+            enableGlow = randInt(0, 2) == 1 ? 1 : 0   // 1 in 3 chance of glow
+
+            $('#glow').attr('src', '../iconkitbuttons/streak_off.png')
+
+            $(`.iconTabButton[form=${selectedForm}]`).trigger('click')
+            $(`#${selectedForm}-${selectedIcon}`).trigger('click')
+            $(`#col1-${selectedCol1}`).trigger('click')
+            $(`#col2-${selectedCol2}`).trigger('click')
+            $(`#col3-15`).trigger('click')
+            if (enableGlow == 1) $("#glow").attr('src', $("#glow").attr('src').replace('_off', '_on'))
+            else $("#glow").attr('src', $("#glow").attr('src').replace('_on', '_off'))
+            $("#generateIcon").trigger('click')
+        })
     })
 
     $(document).on('click', '.glowToggle', function () {
@@ -149,6 +216,13 @@ fetch('./api/icons').then(res => {
         enableGlow = 1;
     }
 
+    })
+
+    $(document).on('click', '.copyForm', function () {
+        $('.copyForm').each(function(x, y) {$(this).children().first().attr('src', $(this).children().first().attr('src').replace('_on', '_off'))})
+        formCopy = $(this).attr('form')
+        let src = $(this).children().first().attr('src')
+        $(this).children().first().attr('src', src.replace('_off', '_on'))
     })
 
     $(document).on('click', '.iconButton', function () {
@@ -171,11 +245,21 @@ fetch('./api/icons').then(res => {
     selectedCol2 = $(this).attr('col');
     })
 
+    $(document).on('click', '.color3', function () {
+    $(".color3").removeClass("iconSelected");
+    $(this).addClass('iconSelected');
+    selectedCol3 = $(this).attr('col');
+    if (selectedCol3 == 12) selectedCol3 = null
+    })
+
     $("#generateIcon").click(function () {
         $("#loading").show()
         $("#result").hide()
-        $("#result").attr('src', `../icon/icon?icon=${selectedIcon}&form=${selectedForm}&col1=${selectedCol1}&col2=${selectedCol2}&glow=${enableGlow}`).attr('download', `${selectedForm}_${selectedIcon}.png`)
-        $("#downloadLink").attr('href', `../icon/icon?icon=${selectedIcon}&form=${selectedForm}&col1=${selectedCol1}&col2=${selectedCol2}&glow=${enableGlow}`).attr('download', `${selectedForm}_${selectedIcon}.png`)
+        let noDome = selectedForm == "ufo" && iconSettings.includes("ufo")
+        let square = iconSettings.includes("square")
+        let finalURL = `../icon/icon?icon=${selectedIcon}&form=${selectedForm}${noDome ? "&topless=1" : ""}&col1=${selectedCol1}&col2=${selectedCol2}${iconSettings.includes("col3") && selectedCol3 ? `&col3=${selectedCol3}` : ""}${enableGlow == 1 ? "&glow=1" : ""}${square ? "&size=auto" : ""}`
+        $("#result").attr('src', finalURL).attr('download', `${selectedForm}_${selectedIcon}.png`)
+        $("#downloadLink").attr('href', finalURL).attr('download', `${selectedForm}_${selectedIcon}.png`)
     })
 
     $('#result').on('load', function() {
@@ -185,25 +269,34 @@ fetch('./api/icons').then(res => {
         else $("#gdfloor").css('margin-top', '0px')
     })
 
-    $("#fetchUser").click(function () {
-        
-        let user = prompt(`Enter a player's username to get their ${currentForm == "ufo" ? "UFO" : currentForm}!\n(Form will depend on selected tab)\n`)
-        if (!user) return;
+    $("#getUserIcon").click(function() {
+        $(`.copyForm[form=${currentForm}]`).trigger('click')
+        $('#steal').show();
+        $('#playerName').focus()
+    })
 
-        let iconURL = `../icon/${user}?form=${currentForm}`
+    $("#fetchUser").click(function () {
+
+        let user = $("#playerName").val()
+        if (!user || !user.length) return $("#steal").hide()
+
+        let iconURL = `../icon/${user}?form=${formCopy}`
+        $(`.iconTabButton[form=${formCopy}]`).trigger('click')
+        $("#steal").hide()
         $("#loading").show()
         $("#result").hide()
-        $("#result").attr('src', iconURL).attr('download',  `${user}_${currentForm}.png`)
-        $("#downloadLink").attr('href', iconURL).attr('download',  `${user}_${currentForm}.png`)
+        $("#result").attr('src', iconURL).attr('download',  `${user}_${formCopy}.png`)
+        $("#downloadLink").attr('href', iconURL).attr('download',  `${user}_${formCopy}.png`)
         $('#glow').attr('src', '../iconkitbuttons/streak_off.png')
         enableGlow = 0
 
         fetch('../api/profile/' + user).then(res => res.json())
         .then(info => {
-            $(`#${currentForm}-${info.icon}`).trigger('click')
+            $(`#${formCopy}-${info[formCopy == "cube" ? "icon" : formCopy] || 1}`).trigger('click')
             $(`#col1-${info.col1}`).trigger('click')
             $(`#col2-${info.col2}`).trigger('click')
-            if (info.glow)$('#glowbtn').trigger('click')
+            $(`#col3-12`).trigger('click')
+            if (info.glow) $('#glowbtn').trigger('click')
         })
 })
 
@@ -222,12 +315,42 @@ function backButton() {
 	window.location.href = "../../../../../"
 }
 
+let hoverText = $('#helpText').html()
+$(".help").hover(function() { 
+    $(this).css('color', 'rgba(200, 255, 255)')
+    $('#helpText').html($(this).attr('help')) 
+}, function() {
+    $(this).css('color', 'white')
+    $('#helpText').html(hoverText) 
+})
+
+$(document).on('change', '.iconsetting', function (e) {
+    let checkedSettings = []
+    $('.iconsetting:checkbox:checked').each((i, x) => { checkedSettings.push(x.id.split('-')[1]) })
+    iconSettings = checkedSettings
+    localStorage.iconkit = checkedSettings.join(",")
+    row3()
+})
+
 $(document).keydown(function(k) {
-	if (k.keyCode == 27) { //esc
+    if (k.keyCode == 13) {
+        if ($("#steal").is(":visible")) $("#fetchUser").trigger('click')
+        else $("#generateIcon").trigger('click')
+    }
+    if (k.keyCode == 27) { //esc
+        if ($(".popup").is(":visible")) return $('.popup').hide()
 		k.preventDefault()
 		$('#backButton').trigger('click')
 	}
 });
+
+$(document).on('click', '.brownbox', function (e) {
+    e.stopPropagation();
+})
+
+$(document).on('click', '.popup', function () {
+    $('.popup').hide()
+})
 
 function saveUrl() {
     sessionStorage.setItem('prevUrl', window.location.href);
