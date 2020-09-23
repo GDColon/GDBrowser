@@ -1,7 +1,7 @@
 <head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
     <title>Online Icon Kit</title>
-    <link href="../css/iconkit.css" type="text/css" rel="stylesheet">
+    <link href="../css/iconkit.css?v=1" type="text/css" rel="stylesheet">
     <meta name="viewport" content="width=1024">
     <meta property="og:description" content="Build and save your very own Geometry Dash icons, right from the internet!">
     <meta property="og:title" content="Geometry Dash Online Icon Kit">
@@ -44,9 +44,9 @@
     <hr id="gdfloor">
     <div id="menuButtons" style="height: 65px; margin: 0 0 15 0;">
         <button class="blankButton menuButton" id="customColors" title="Settings" onclick="$('#settings').show()"><img src="../iconkitbuttons/cog.png" width=55px></button>
-        <button class="blankButton menuButton" id="downloadIcon" title="Download icon"><a id="downloadLink" download="cube_1.png" href="../icon/icon"><img src="../iconkitbuttons/download.png" width=55px></a></button>
-        <button class="blankButton menuButton" id="generateIcon" title="Generate icon"><img src="../iconkitbuttons/play.png" width=70px></button>
-        <button class="blankButton menuButton" id="getUserIcon" title="Get player icon"><img src="../iconkitbuttons/player.png" width=55px></button>
+        <button class="blankButton menuButton" id="downloadIcon" title="Download icon"><a id="downloadLink" download="cube_1.png" href="../icon/icon"><img src="../iconkitbuttons/save.png" width=55px></a></button>
+        <button class="blankButton menuButton" id="generateIcon" title="Generate icon"><img src="../iconkitbuttons/generate.png" width=70px></button>
+        <button class="blankButton menuButton" id="getUserIcon" title="Get player icon"><img src="../iconkitbuttons/steal.png" width=55px></button>
         <button class="blankButton menuButton" id="randomIcon" title="Random Icon"><img src="../iconkitbuttons/shuffle.png" width=55px></button>
         </div>
         <div id="iconTabs"></div><br>
@@ -94,7 +94,7 @@ let totalLoaded = 0
 
 if (mobile) $('#logo').attr('width', '80%');
 
-let iconSettings = localStorage.iconkit.split(",")
+let iconSettings = (localStorage.iconkit || "").split(",")
 iconSettings.forEach(x => {
     $(`#box-${x}`).prop('checked', true)
 })
@@ -197,7 +197,7 @@ fetch('./api/icons').then(res => {
             $(`#${selectedForm}-${selectedIcon}`).trigger('click')
             $(`#col1-${selectedCol1}`).trigger('click')
             $(`#col2-${selectedCol2}`).trigger('click')
-            $(`#col3-15`).trigger('click')
+            $('#col3-12').trigger('click')
             if (enableGlow == 1) $("#glow").attr('src', $("#glow").attr('src').replace('_off', '_on'))
             else $("#glow").attr('src', $("#glow").attr('src').replace('_on', '_off'))
             $("#generateIcon").trigger('click')
@@ -335,6 +335,7 @@ $(document).on('change', '.iconsetting', function (e) {
 $(document).keydown(function(k) {
     if (k.keyCode == 13) {
         if ($("#steal").is(":visible")) $("#fetchUser").trigger('click')
+        else if ($(".popup").is(":visible")) return
         else $("#generateIcon").trigger('click')
     }
     if (k.keyCode == 27) { //esc
