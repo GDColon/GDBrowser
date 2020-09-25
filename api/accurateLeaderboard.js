@@ -14,7 +14,7 @@ module.exports = async (app, req, res) => {
       let type = req.query.type ? req.query.type.toLowerCase() : 'stars'
       if (type == "usercoins") type = "coins"
       if (!["stars", "coins", "demons"].includes(type)) type = "stars"
-      if (lastIndex[type] + 6000 > Date.now() && cache[type]) return res.send(gdMode ? cache[type] : JSON.parse(cache[type]))   // 10 min cache
+      if (lastIndex[type] + 600000 > Date.now() && cache[type]) return res.send(gdMode ? cache[type] : JSON.parse(cache[type]))   // 10 min cache
 
       sheet.useApiKey(app.sheetsKey)
       sheet.loadInfo().then(async () => {

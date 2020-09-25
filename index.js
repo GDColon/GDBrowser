@@ -24,7 +24,9 @@ const RL = rateLimit({
 })
 
 let api = true;
-let gdicons = fs.readdirSync('./icons/iconkit')
+let gdIcons = fs.readdirSync('./icons/iconkit')
+let sampleIcons = require('./misc/sampleIcons.json')
+
 app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -128,11 +130,6 @@ app.get("/api/level/:id", RL, async function(req, res) { app.run.level(app, req,
 app.get("/api/mappacks", async function(req, res) { res.send(require('./misc/mapPacks.json')) })
 app.get("/api/profile/:id", function(req, res) { app.run.profile(app, req, res, api) })
 app.get("/api/search/:text", function(req, res) { app.run.search(app, req, res, api) })
-
-// API AND HTML
-   
-app.get("/profile/:id", function(req, res) { app.run.profile(app, req, res) })
-app.get("/:id", function(req, res) { app.run.level(app, req, res) }) 
  
 
 // REDIRECTS
@@ -147,11 +144,22 @@ app.get("/u/:id", function(req, res) { res.redirect('/profile/' + req.params.id)
 app.get("/p/:id", function(req, res) { res.redirect('/profile/' + req.params.id) })
 
 
+// API AND HTML
+   
+app.get("/profile/:id", function(req, res) { app.run.profile(app, req, res) })
+app.get("/:id", function(req, res) { app.run.level(app, req, res) }) 
+
+
 // MISC
 
+
+
 app.get("/assets/sizecheck.js", function(req, res) { res.sendFile(__dirname + "/misc/sizecheck.js") }) 
-app.get('/api/icons', function(req, res) { res.send(gdicons); });
 app.get("/icon/:text", function(req, res) { app.run.icon(app, req, res) })
+app.get('/api/icons', function(req, res) { 
+  let sample = [JSON.stringify(sampleIcons[Math.floor(Math.random() * sampleIcons.length)].slice(1))]
+  res.send(gdIcons.concat(sample)); 
+});
 
 app.get('*', function(req, res) {
   if (req.path.startsWith('/api')) res.send('-1')

@@ -11,7 +11,7 @@
     <link rel="icon" href="../assets/icon.png">
     </link>
 </head>
-<body class="iconscroll" style="background-image: linear-gradient(rgb(139, 139, 139), rgb(100, 100, 100));" onbeforeunload="saveUrl()">
+<body class="iconscroll" style="background-image: linear-gradient(rgb(139, 139, 139), rgb(100, 100, 100));" onbeforeunload="sessionStorage.setItem('prevUrl', window.location.href)">
 <div class="center hidden"><br>
 
     <div class="popup" id="steal">
@@ -40,11 +40,11 @@
 
     <img id="iconkitlogo" src="../assets/iconkit.png" height=50px; style="margin: 7px 0;"><br><br>
     <img id="loading" src="../assets/loading.png" class="spin" height=95px; style="margin: auto auto 25px auto">
-    <img id="result" src="../icon/icon" download="cube_1.png">
+    <img id="result" src="" download="">
     <hr id="gdfloor">
     <div id="menuButtons" style="height: 65px; margin: 0 0 15 0;">
         <button class="blankButton menuButton" id="customColors" title="Settings" onclick="$('#settings').show()"><img src="../iconkitbuttons/cog.png" width=55px></button>
-        <button class="blankButton menuButton" id="downloadIcon" title="Download icon"><a id="downloadLink" download="cube_1.png" href="../icon/icon"><img src="../iconkitbuttons/save.png" width=55px></a></button>
+        <button class="blankButton menuButton" id="downloadIcon" title="Download icon"><a id="downloadLink" download="cube_1.png" href=""><img src="../iconkitbuttons/save.png" width=55px></a></button>
         <button class="blankButton menuButton" id="generateIcon" title="Generate icon"><img src="../iconkitbuttons/generate.png" width=70px></button>
         <button class="blankButton menuButton" id="getUserIcon" title="Get player icon"><img src="../iconkitbuttons/steal.png" width=55px></button>
         <button class="blankButton menuButton" id="randomIcon" title="Random Icon"><img src="../iconkitbuttons/shuffle.png" width=55px></button>
@@ -120,26 +120,30 @@ fetch('./api/icons').then(res => {
         function filterIcon(name) { return iconArray.filter(x => x.startsWith(name)).sort(function (a,b) {return a.replace(/[^0-9]/g, "") - b.replace(/[^0-9]/g, "");})}
 
         function appendIcon(form, formName) {
+            imagesLoaded = 0; totalLoaded = 0
+            $('#' + formName + 's').append('<br>')
 
-        imagesLoaded = 0; totalLoaded = 0
-        $('#' + formName + 's').append('<br>')
+            form.forEach(function (i, p) {
+            if (p != 0 && p % 12 == 0) $('#' + formName + 's').append('<br>')
+            $('#' + formName + 's').append(`<button num="${p + 1}" form="${formName}" class="blankButton iconButton" id="${formName}-${p + 1}"><img src="../gdicon/${i}" width="50px" title="${capitalize(formName)} ${formName == "cube" && p+1 == form.length ? 0 : p + 1}"></button>`)})
+            $('#' + formName + 's').imagesLoaded(function() {}).progress(function() {
+                imagesLoaded += 1;
+                totalLoaded = imagesLoaded / $('#' + formName + 's').find('img').length * 100
+                $('#iconloading').css('width', `${totalLoaded}%`)
+            }
+        )}
 
-        form.forEach(function (i, p) {
-        if (p != 0 && p % 12 == 0) $('#' + formName + 's').append('<br>')
-        $('#' + formName + 's').append(`<button num="${p + 1}" form="${formName}" class="blankButton iconButton" id="${formName}-${p + 1}"><img src="../gdicon/${i}" width="50px" title="${capitalize(formName)} ${formName == "cube" && p+1 == form.length ? 0 : p + 1}"></button>`)})
-        $('#' + formName + 's').imagesLoaded(function() {
-        }).progress(function() {
-        imagesLoaded += 1;
-        totalLoaded = imagesLoaded / $('#' + formName + 's').find('img').length * 100
-        $('#iconloading').css('width', `${totalLoaded}%`)
-        })}
+        let cubes = filterIcon('cube');
+        
+        let sample = JSON.parse(iconArray.find(x => x.startsWith("[")));
+        enableGlow = sample[3] * 2;
+        [selectedIcon, selectedCol1, selectedCol2] = sample;
 
-        let cubes = filterIcon('cube'); 
         cubes.push(cubes.shift())
 
         $('body').imagesLoaded(function () {
             appendIcon(cubes, "cube")
-            $('[num="1"][form="cube"]').addClass('iconSelected');
+            $(`[num="${sample[0]}"][form="cube"]`).addClass('iconSelected');
         })
 
         filterIcon('color').forEach(function (n, p) {
@@ -152,31 +156,32 @@ fetch('./api/icons').then(res => {
        $('#col2').append("<span style='min-width: 10px'></span>")
        $('#col3').append("<span style='min-width: 10px'></span>")
 
-        $('.color1[col="0"]').addClass('iconSelected');
-        $('.color2[col="3"]').addClass('iconSelected');
+        $(`.color1[col="${sample[1]}"]`).addClass('iconSelected');
+        $(`.color2[col="${sample[2]}"]`).addClass('iconSelected');
         $('.color3[col="12"]').addClass('iconSelected');
 
+        $("#generateIcon").trigger('click')
+
         $(document).on('click', '.iconTabButton', function () {
+            var form = $(this).attr('form')
+            var forms = '#' + form + 's'
 
-        var form = $(this).attr('form')
-        var forms = '#' + form + 's'
+            currentForm = form
 
-        currentForm = form
+            $('.iconTabButton').each(function(x, y) {
+            $(this).children().first().attr('src', $(this).children().first().attr('src').replace('_on', '_off'))})
 
-        $('.iconTabButton').each(function(x, y) {
-        $(this).children().first().attr('src', $(this).children().first().attr('src').replace('_on', '_off'))})
+            var img = $(this).children().first()
+            img.attr('src', img.attr('src').replace('_off', '_on'));
 
-        var img = $(this).children().first()
-        img.attr('src', img.attr('src').replace('_off', '_on'));
+            $('#iconKitParent').each(function(x, y) {
+            $(this).children().not('#iconprogressbar').hide()})
 
-        $('#iconKitParent').each(function(x, y) {
-        $(this).children().not('#iconprogressbar').hide()})
+            if ($(forms).html() == "") appendIcon(filterIcon(form), form)
 
-        if ($(forms).html() == "") appendIcon(filterIcon(form), form)
-
-        if (form == "swing" && !beenThereDoneThat) {beenThereDoneThat = true; $('#swings').append("<p class='white'>Since the texture was ripped from GD Meltdown, there's no UHD version available.</p>")}
-        
-        $(forms).show()
+            if (form == "swing" && !beenThereDoneThat) {beenThereDoneThat = true; $('#swings').append("<p class='white'>Since the texture was ripped from GD Meltdown, there's no UHD version available.</p>")}
+            
+            $(forms).show()
         })
 
         $('#iconTabs').find('.iconTabButton').first().children().first().attr('src', $('.iconTabButton').first().children().first().attr('src').replace('_off', '_on'))
@@ -257,15 +262,16 @@ fetch('./api/icons').then(res => {
         $("#result").hide()
         let noDome = selectedForm == "ufo" && iconSettings.includes("ufo")
         let square = iconSettings.includes("square")
-        let finalURL = `../icon/icon?icon=${selectedIcon}&form=${selectedForm}${noDome ? "&topless=1" : ""}&col1=${selectedCol1}&col2=${selectedCol2}${iconSettings.includes("col3") && selectedCol3 ? `&col3=${selectedCol3}` : ""}${enableGlow == 1 ? "&glow=1" : ""}${square ? "&size=auto" : ""}`
+        let finalURL = `../icon/icon?icon=${selectedIcon}&form=${selectedForm}${noDome ? "&topless=1" : ""}&col1=${selectedCol1}&col2=${selectedCol2}${iconSettings.includes("col3") && selectedCol3 ? `&col3=${selectedCol3}` : ""}${enableGlow > 0 ? "&glow=1" : ""}${square ? "&size=auto" : ""}`
         $("#result").attr('src', finalURL).attr('download', `${selectedForm}_${selectedIcon}.png`)
         $("#downloadLink").attr('href', finalURL).attr('download', `${selectedForm}_${selectedIcon}.png`)
+        if (enableGlow == 2) enableGlow = 0
     })
 
     $('#result').on('load', function() {
         $("#loading").hide()
         $("#result").show()
-        if (enableGlow == 1) $("#gdfloor").css('margin-top', '-3px')
+        if (enableGlow > 1) $("#gdfloor").css('margin-top', '-3px')
         else $("#gdfloor").css('margin-top', '0px')
     })
 
@@ -352,9 +358,5 @@ $(document).on('click', '.brownbox', function (e) {
 $(document).on('click', '.popup', function () {
     $('.popup').hide()
 })
-
-function saveUrl() {
-    sessionStorage.setItem('prevUrl', window.location.href);
-}
     
 </script>
