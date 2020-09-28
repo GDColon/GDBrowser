@@ -21,7 +21,7 @@ module.exports = async (app, req, res) => {
     headers: {'x-forwarded-for': req.headers['x-real-ip']}
   }, async function (err, resp, body) {
 
-    if (err || body == '-1' || body == '-2' || !body) return res.status(400).send("Error fetching profile! Make sure your username and password are entered correctly.")
+    if (err || body == '-1' || body == '-2' || !body) return res.status(400).send("Error fetching profile! Make sure your username and password are entered correctly. (this is not an issue with gdbrowser)")
     let count = app.parseResponse(body)[38]
     if (!count) return res.status(400).send("Error fetching unread messages!")
     else res.status(200).send(count)

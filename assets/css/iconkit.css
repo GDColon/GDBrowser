@@ -168,6 +168,12 @@ input:focus, select:focus, textarea:focus, button:focus {
   text-transform: capitalize;
 }
 
+.squareIcon {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 5px 5px;
+  border-radius: 10px;
+}
+
 #url {
   width: 500px;
   max-width: 90%;

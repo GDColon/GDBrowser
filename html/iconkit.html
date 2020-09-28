@@ -99,6 +99,9 @@ iconSettings.forEach(x => {
     $(`#box-${x}`).prop('checked', true)
 })
 
+if (iconSettings.includes("square")) $("#result").addClass("squareIcon")
+else $("#result").removeClass("squareIcon")
+
 function capitalize(str) { return str[0].toUpperCase() + str.substr(1) }
 function randInt(min, max) { return Math.floor(Math.random() * (max - min + 1) ) + min }
 function row3() { if (iconSettings.includes("col3")) $('#col3').show(); else $('#col3').hide() }
@@ -334,6 +337,8 @@ $(document).on('change', '.iconsetting', function (e) {
     let checkedSettings = []
     $('.iconsetting:checkbox:checked').each((i, x) => { checkedSettings.push(x.id.split('-')[1]) })
     iconSettings = checkedSettings
+    if (iconSettings.includes("square")) $("#result").addClass("squareIcon")
+    else $("#result").removeClass("squareIcon")
     localStorage.iconkit = checkedSettings.join(",")
     row3()
 })

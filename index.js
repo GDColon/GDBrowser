@@ -5,7 +5,7 @@ const compression = require('compression');
 const rateLimit = require("express-rate-limit");
 
 // set to false if you're using gdbrowser locally, for obvious reasons
-let useRateLimiting = false
+let useRateLimiting = true
 
 const app = express();
 app.offline = false  // set to true to go into "offline" mode (in case of ip ban from rob)
