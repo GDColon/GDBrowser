@@ -614,7 +614,14 @@ input::-webkit-inner-spin-button {
 }
 
 .commentBG:nth-child(odd) {
-    background-color: rgb(185, 108, 57);
+    background-color: #b96c39;
+}
+
+.oddComment {
+    background-color: #A1582C !important;
+}
+.evenComment {
+    background-color: #b96c39 !important;
 }
 
 .comment {
@@ -1084,6 +1091,11 @@ input::-webkit-inner-spin-button {
 
 .grayscale {
     filter: grayscale(100%) brightness(0.7);
+}
+
+.disabled {
+    filter: grayscale(100%) brightness(0.9);
+    pointer-events: none !important;
 }
 
 .spin {

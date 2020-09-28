@@ -122,14 +122,14 @@ app.get("/search/:text", function(req, res) { res.sendFile(__dirname + "/html/se
 // API
 
 app.get("/api/analyze/:id", RL, async function(req, res) { app.run.level(app, req, res, api, true) })
-app.get("/api/comments/:id", function(req, res) { app.run.comments(app, req, res, api) })
+app.get("/api/comments/:id", function(req, res) { app.run.comments(app, req, res) })
 app.get("/api/credits", function(req, res) { res.send(require('./misc/credits.json')) })
-app.get("/api/leaderboard", function(req, res, api) { app.run[req.query.hasOwnProperty("accurate") ? "accurateLeaderboard" : "leaderboard"](app, req, res) })
-app.get("/api/leaderboardLevel/:id", RL, function(req, res) { app.run.leaderboardLevel(app, req, res, api) })
+app.get("/api/leaderboard", function(req, res) { app.run[req.query.hasOwnProperty("accurate") ? "accurateLeaderboard" : "leaderboard"](app, req, res) })
+app.get("/api/leaderboardLevel/:id", RL, function(req, res) { app.run.leaderboardLevel(app, req, res) })
 app.get("/api/level/:id", RL, async function(req, res) { app.run.level(app, req, res, api) })
 app.get("/api/mappacks", async function(req, res) { res.send(require('./misc/mapPacks.json')) })
 app.get("/api/profile/:id", function(req, res) { app.run.profile(app, req, res, api) })
-app.get("/api/search/:text", function(req, res) { app.run.search(app, req, res, api) })
+app.get("/api/search/:text", function(req, res) { app.run.search(app, req, res) })
  
 
 // REDIRECTS

@@ -1,18 +1,23 @@
 const request = require('request')
 
-module.exports = async (app, req, res) => {
+module.exports = async (app, req, res, worstPage) => {
 
     if (app.offline) return res.send("-1")
+
+    let count = +req.query.count || 10
+    if (count > 1000) count = 1000
+    if (+req.query.worstPage) worstPage = +req.query.worstPage
 
     let params = {
         userID : req.params.id, 
         accountID : req.params.id, 
         levelID: req.params.id,
-        page: req.query.page || 0,
+        page: worstPage ? worstPage - (+req.query.page || 0) - 1 : +req.query.page || 0,
         secret: app.secret,
+        count,
         gameVersion: app.gameVersion,
         binaryVersion: app.binaryVersion,
-        mode: req.query.hasOwnProperty("top") ? "1" : "0",
+        mode: worstPage || req.query.hasOwnProperty("top") ? "1" : "0",
     }  
 
     let path = "getGJComments21"
@@ -31,9 +36,14 @@ module.exports = async (app, req, res) => {
       else comments = comments.filter(x => x[1] && x[1][1])
       if (!comments.length) return res.send("-1")
 
+      let pages = body.split('#')[1].split(":")
+      let lastPage = +Math.ceil(+pages[0] / +pages[2]);
+      if (path == "getGJComments21" && !worstPage && req.query.hasOwnProperty("worst")) return app.run.comments(app, req, res, lastPage)
+
       let commentArray = []
 
-      comments.forEach(c => {
+      if (worstPage) comments.reverse()
+      comments.forEach((c, i) => {
 
         var x = c[0] //comment info
         var y = c[1] //account info
@@ -59,6 +69,12 @@ module.exports = async (app, req, res) => {
           comment.color = (comment.playerID == "16" ? "50,255,255" : x[12] || "255,255,255")
           if (x[10] > 0) comment.percent = x[10]
           comment.moderator = +x[11] || 0
+        }
+
+        if (i == 0 && req.query.type != "commentHistory") {
+          comment.results = +pages[0];
+          comment.pages = lastPage;
+          comment.range = `${+pages[1] + 1} of ${Math.min(+pages[0], +pages[1] + +pages[2])}`
         }
 
         commentArray.push(comment)

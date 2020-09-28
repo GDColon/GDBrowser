@@ -72,11 +72,19 @@
 		</div>
 
 		<div class="supercenter" style="left: 3%; top: 25.5%; height: 10%">
-			<img class="gdButton" id="timeSort"  src="../assets/sort-time-on.png" height="90%">
+			<img class="gdButton" id="worstSort" src="../assets/sort-dislikes.png" height="90%">
+		</div>
+
+		<div class="supercenter" style="left: 3%; top: 36.5%; height: 10%">
+			<img class="gdButton" id="timeSort"  src="../assets/sort-time.png" height="90%">
 		</div>
 	
-		<div class="supercenter" style="left: 3%; top: 36%; height: 10%">
+		<div class="supercenter" style="left: 3%; top: 63%; height: 10%">
 			<img class="gdButton" id="compactMode" src="../assets/compact-off.png" height="90%">
+		</div>
+
+		<div class="supercenter" style="left: 3%; top: 75%; height: 11%">
+			<img class="gdButton" id="autoMode" src="../assets/playButton.png" height="90%">
 		</div>
 
 		<div class="supercenter" id="pageDown" style="left: 3%; top: 50%; height: 10%; display: none;">
@@ -88,6 +96,7 @@
 		</div>
 
 		<div class="supercenter" id="pageUp" style="top: 4.8%; height: 10%; width: 100%;">
+			<h2 class="smallGold inline" id="liveText" style="display: none; font-size: 4vh; color:red; margin: 0.4vh 3vh 0 0">[LIVE]</h2>
 			<h1 class="smaller inline" id="levelName"></h1>
 			<a id="authorLink"><h2 class="smallGold inline gdButton" id="levelAuthor" style="margin: 0.8vh 0 0 3vh"></h2></a>
 		</div>
@@ -125,25 +134,29 @@ let history = false
 let page = 0
 let loadingComments = true
 let like = true
+let worstPage = 0
+let auto = false
+let interval = null
 
-if (mode == "top") {
-	$('#timeSort').attr('src', "../assets/sort-time.png")
-	$('#topSort').attr('src', "../assets/sort-likes-on.png")
-}
+let target = `../api/level/${lvlID}`
+if (lvlID > 999999999 || lvlID < -999999999) window.location.href = window.location.href.replace("comments", "search")
+if (!Number.isInteger(+lvlID)) {history = true; target = `../api/profile/${lvlID}`}
+else lvlID = Math.round(+lvlID)
+
+if (mode == "top" || (history && mode == "worst")) { mode = "top"; $('#topSort').attr('src', "../assets/sort-likes-on.png") }
+else if (mode == "worst") $('#worstSort').attr('src', "../assets/sort-dislikes-on.png")
+else $('#timeSort').attr('src', "../assets/sort-time-on.png")
 
 function clean(text) {return text.replace(/&/g, "&#38;").replace(/</g, "&#60;").replace(/>/g, "&#62;").replace(/=/g, "&#61;").replace(/"/g, "&#34;").replace(/'/g, "&#39;")}
 
 $('#compactMode').attr('src', `../assets/compact-${compact ? "on" : "off"}.png`)
 
-let target = `../api/level/${lvlID}`
-
-if (lvlID > 999999999 || lvlID < -999999999) window.location.href = window.location.href.replace("comments", "search")
-if (!Number.isInteger(+lvlID)) {history = true; target = `../api/profile/${lvlID}`}
-else lvlID = Math.round(+lvlID)
-
 fetch(target).then(res => res.json()).then(lvl => {
 
 	if (history) {
+
+		$('#autoMode').remove()
+		$('#worstSort').addClass('disabled')
 
 		if (!lvl.username) return window.location.href = window.location.href.replace("comments", "search")
 
@@ -178,39 +191,48 @@ fetch(target).then(res => res.json()).then(lvl => {
 		}
 	}
 
-function appendComments(dontClear, bump) {
+function appendComments(auto) {
 
-let p = compact ? ((page + 1) * 2) - 2 + (bump||0) : page
-
-if (loadingComments && !dontClear) return;
+if (loadingComments) return;
 else loadingComments = true;
 
-if (!dontClear) $('#commentBox').html(`<div class="supercenter" id="loading" style="height: 12%;"><img class="spin noSelect" src="../assets/loading.png" height="105%"></div>`)
+if (!auto) $('#commentBox').html(`<div class="supercenter" id="loading" style="height: 12%;"><img class="spin noSelect" src="../assets/loading.png" height="105%"></div>`)
 
 if (page == 0) $('#pageDown').hide()
 else $('#pageDown').show()
 
-fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID}?page=${p}${history ? "&type=commentHistory" : ""}${mode == "top" ? "&top" : ""}`).then(res => res.json()).then(res => {
+fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID}?count=${compact && !auto ? 20 : 10}&page=${page}${history ? "&type=commentHistory" : ""}&${mode}${mode == "worst" && worstPage ? "&worstPage=" + worstPage : ""}`).then(res => res.json()).then(res => {
 	
-	if (res.length < 9 || (history && lvl.commentHistory != "all")) $('#pageUp').hide()
-	else $('#pageUp').show()
+	if (history && lvl.commentHistory != "all") $('#pageUp').hide()
 
 	if (res == -1 || (history && lvl.commentHistory != "all")) {
 		loadingComments = false; return $('#loading').hide()
 	}
 
-	res.forEach(x => {
+	res.forEach((x, index) => {
+
+		$(`#date-${x.ID}`).html(x.date)
+		if ($(`.comment[commentID=${x.ID}]`).length) return // auto mode, ignore duplicates
+
+		let bgCol = index % 2 ? "evenComment" : "oddComment"
+
+		if (auto) bgCol = $('.commentBG').first().hasClass('oddComment') ? "evenComment" : "oddComment"
 
 		let userName = !history ? x.username : lvl.username
 		let userLink = encodeURI(userName)
 		let modNumber = x.moderator || lvl.moderator
 
-		if (!compact) {
+		if (x.pages) {
+			worstPage = x.pages
+			if (page >= x.pages) $('#pageUp').hide()
+			else $('#pageUp').show()
+		}
+
 		////// NORMAL MODE //////
 
-		$('#commentBox').append(`
-			<div class="commentBG">
-				<div class="comment">
+		commentHTML = !compact ? `
+			<div class="commentBG ${bgCol}">
+				<div class="comment" commentID="${x.ID}">
 					<img class="inline" src="../icon/${userLink}?form=${x.form}" height=21% style="margin-right: 0.8%">
 					<a href=../${x.accountID == "0" ? `search/${x.playerID}?user` : `../profile/${userLink}`}>
 					<h2 class="inline gdButton ${x.accountID == "0" ? "green unregistered" : ""}">${userName}</h2></a>
@@ -221,7 +243,7 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 						<p class="commentText" style="color: rgb(${!history && x.playerID == lvl.authorID ? "255,255,75" : x.browserColor ? "255,180,255" : x.color})">${clean(x.content)}</p>
 					</div>
 				</div>
-				<p class="commentDate">${x.date}</p>
+				<p class="commentDate" id="date-${x.ID}">${x.date}</p>
 				<div class="commentLikes">
 					${history ? `<h3 style="margin-right: 1.5vh; pointer-events: all;" class="gold inline"><a href="../${x.levelID}">(${x.levelID})</a></h3>` : ""}
 					<div class="inline gdButton likeComment" commentID="${x.ID}" ${x.levelID ? `levelID="${x.levelID}"` : ""}">
@@ -229,14 +251,13 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 					</div>
 					<h3 class="inline">${x.likes}</h3>
 				</div>
-			</div>`) }
-
-		else {
-		////// COMPACT MODE //////
-
-		$('#commentBox').append(`
-			<div class="commentBG compactBG">
-				<div class="comment compact">
+			</div>` 
+			
+		////// COMPACT  MODE //////
+		
+			:  `
+			<div class="commentBG compactBG ${bgCol}">
+				<div class="comment compact" commentID="${x.ID}">
 					<img class="inline" src="../icon/${userLink}?form=${x.form}" height=21% style="margin-right: 0.8%">
 					<a href=../${x.accountID == "0" ? `search/${x.playerID}?user` : `../profile/${userLink}`}>
 					<h2 class="inline gdButton ${x.accountID == "0" ? "green unregistered" : ""}">${userName}</h2></a>
@@ -247,7 +268,7 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 						<p class="commentText" style="color: rgb(${!history && x.playerID == lvl.authorID ? "255,255,75" : x.browserColor ? "255,180,255" : x.color})">${clean(x.content)}</p>
 					</div>
 				</div>
-				<p class="commentDate compactDate">${x.date}</p>
+				<p class="commentDate compactDate" id="date-${x.ID}">${x.date}</p>
 				<div class="commentLikes">
 					${history ? `<h3 style="margin-right: 0.5vh; pointer-events: all;" class="gold inline"><a href="../${x.levelID}">(${x.levelID})</a></h3>` : ""}
 					<div class="inline gdButton likeComment" commentID="${x.ID}"${x.levelID ? `levelID="${x.levelID}"` : ""}>
@@ -255,7 +276,10 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 					</div>
 					<h3 class="inline">${x.likes}</h3>
 				</div>
-			</div>`) }
+			</div>`
+
+		if (auto) $('#commentBox').prepend(commentHTML)
+		else $('#commentBox').append(commentHTML)
 
 	})
 
@@ -266,11 +290,6 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 	}
 
 	});
-
-	if (compact && p % 2 == 0) {
-		$('#loading').hide()
-		return appendComments(true, 1)
-	}
 
 	 $('#loading').hide()
 	 return loadingComments = false;
@@ -283,34 +302,77 @@ appendComments()
 $('#pageUp').click(function() {if (loadingComments) return; page += 1; appendComments()})
 $('#pageDown').click(function() {if (loadingComments) return; page -= 1; appendComments()})
 
+function resetSort() {
+	page = 0
+	auto = false
+	clearInterval(interval)
+	$('#liveText').hide()
+	$('#autoMode').attr('src', `../assets/playbutton.png`)
+}
+
 $('#topSort').click(function() {
 	if (mode == "top" || loadingComments) return;
+	resetSort()
 	mode = "top";
-	page = 0;
 	$('#timeSort').attr('src', "../assets/sort-time.png")
 	$('#topSort').attr('src', "../assets/sort-likes-on.png")
+	$('#worstSort').attr('src', "../assets/sort-dislikes.png")
 	appendComments()
 })
 
 $('#timeSort').click(function() {
 	if (mode == "time" || loadingComments) return;
+	resetSort()
 	mode = "time";
-	page = 0;
 	$('#timeSort').attr('src', "../assets/sort-time-on.png")
 	$('#topSort').attr('src', "../assets/sort-likes.png")
+	$('#worstSort').attr('src', "../assets/sort-dislikes.png")
+	appendComments()
+})
+
+$('#worstSort').click(function() {
+	if (mode == "worst" || loadingComments) return;
+	resetSort()
+	mode = "worst";
+	$('#timeSort').attr('src', "../assets/sort-time.png")
+	$('#topSort').attr('src', "../assets/sort-likes.png")
+	$('#worstSort').attr('src', "../assets/sort-dislikes-on.png")
 	appendComments()
 })
 
 $('#compactMode').click(function() {
 	if (loadingComments) return;
 	compact = !compact
+	worstPage = 0;
 	page = 0;
 	$('#compactMode').attr('src', `../assets/compact-${compact ? "on" : "off"}.png`)
 	appendComments()
 })
 
+$('#autoMode').click(function() {
+	if (loadingComments) return;
+	auto = !auto
+	mode = "time"
+	page = 0;
+	$('#timeSort').attr('src', "../assets/sort-time-on.png")
+	$('#topSort').attr('src', "../assets/sort-likes.png")
+	$('#worstSort').attr('src', "../assets/sort-dislikes.png")
+	if (auto) {
+		$('#liveText').show()
+		$('#autoMode').attr('src', `../assets/stopbutton.png`)
+		interval = setInterval(function() { appendComments(true) }, 2000)
+	}
+	else {
+		$('#liveText').hide()
+		$('#autoMode').attr('src', `../assets/playbutton.png`)
+		clearInterval(interval)
+	}
+	appendComments(true)
+})
+
 $('#refresh').click(function() {
 	if (loadingComments) return
+	worstPage = 0;
 	page = 0;
 	appendComments()
 })

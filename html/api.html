@@ -423,17 +423,20 @@
 			<p>Returns up to 10 comments or profile posts</p>
 
 			<br>
-			<p class="reveal" onclick="$('#params-comment').slideToggle(100)"><b>Parameters (3)</b></p>
+			<p class="reveal" onclick="$('#params-comment').slideToggle(100)"><b>Parameters (5)</b></p>
 			<div class="subdiv" id="params-comment">
-				<p>top: Whether or not to sort by most liked (comments only)</p>
 				<p>page: The page of the search</p>
+				<p>top: Whether or not to sort by most liked (comments only)</p>
+				<p>worst: Whether or not to sort by most disliked (comments only)</p>
+				<p>worstPage: The total number of pages, if you already know what it is. Optional, but speeds up disliked sorting</p>
+				<p>count: The number of comments/posts to list (default is 10, max is 1000)</p>
 				<p>type: The type of comments to fetch. Instead of a level ID, they require a player and account ID, respectively.</p>
 				<p class="indent">• commentHistory - All the comments from a player, if public on their profile</p>
 				<p class="indent">• profile - A player's profile posts</p>
 			</div>
 
 			<br>
-			<p class="reveal" onclick="$('#response-comment').slideToggle(100)"><b>Response (13)</b></p>
+			<p class="reveal" onclick="$('#response-comment').slideToggle(100)"><b>Response (16)</b></p>
 			<div class="subdiv" id="response-comment">
 				<p>The API will return an array of each comment with the following information.<br>Values that don't work for profile posts are in <span style="color:red">red</span></p>
 				<p>content: The comment text</p>
@@ -449,6 +452,9 @@
 				<p class="red">percent: The commenter's percent on the level, if provided</p>
 				<p class="red">color: The RGB font color of the comment. Note that the yellow author text is not included</p>
 				<p class="red">moderator: If type of moderator the commenter is. Returns 0 (none), 1 (mod) or 2 (elder, green text)</p>
+				<p class="blue">results: The total number of comments (first comment only, doesn't work with comment history)</p>
+				<p class="blue">pages: The total number of pages, starting at 1</p>
+				<p class="blue">range: The index of comments that were fetched</p>
 			</div>
 
 			<br>

@@ -61,7 +61,12 @@ quote{
 
 .anchor{                                 
 	transform: translateY(-50px);       
-}                                     
+}    
+
+.blue .param {
+	background-color: #00abee;
+    color: #fff;
+}
 
 .red .param, .redExample {
 	background-color: #fc3542;
