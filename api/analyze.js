@@ -47,6 +47,13 @@ function analyze_level(app, level, rawData) {
 
     data = data.split(";")
 
+    let level_portals = [];
+    let level_orbs = [];
+    let level_triggers = [];
+    let level_text = [];
+
+    let last = 0;
+
     data.forEach((x, y) => {
         obj = app.parseResponse(x, ",")
 
@@ -58,12 +65,25 @@ function analyze_level(app, level, rawData) {
         })
 
         let id = obj.id
-        if (ids.portals[id]) obj.portal = ids.portals[id]
-        if (ids.orbs[id]) obj.orb = ids.orbs[id]
-        if (ids.triggers[id]) obj.trigger = ids.triggers[id]
+        if (ids.portals[id]) {
+            obj.portal = ids.portals[id];
+            level_portals.push(obj);
+        }
+        if (ids.orbs[id]) {
+            obj.orb = ids.orbs[id];
+            level_orbs.push(obj);
+        }
+        if (ids.triggers[id]) {
+            obj.trigger = ids.triggers[id];
+            level_triggers.push(obj);
+        }
+
+        if (obj.message) {
+            level_text.push(obj)
+        }
 
         if (obj.triggerGroups) obj.triggerGroups.split('.').forEach(x => triggerGroups.push(x))
-        if (obj.highDetail == 1) highDetail += 1 
+        if (obj.highDetail == 1) highDetail += 1
 
         blockNames.forEach(b => {
             if (blocks[b].includes(id)) {
@@ -79,13 +99,12 @@ function analyze_level(app, level, rawData) {
             }
         })
 
+        if (obj.x) { // sometimes the field doesn't exist
+            last = Math.max(last, obj.x);
+        }
+
         data[y] = obj;
     })
-
-    let last = 0;
-    let xArr = data.map(x => Number(x.x))
-    let dl = data.length
-    while (dl--) {last = xArr[dl] > last ? xArr[dl] : last}
 
     response.level = {
         name: level.name, id: level.id, author: level.author, authorID: level.authorID, accountID: level.accountID, large: level.large
@@ -95,23 +114,23 @@ function analyze_level(app, level, rawData) {
     response.highDetail = highDetail
     response.settings = {}
 
-    response.portals = data.filter(x => x.portal).sort(function (a, b) {return parseInt(a.x) - parseInt(b.x)}).map(x => x.portal + " " + Math.floor(x.x / (Math.max(last, 529.0) + 340.0) * 100) + "%").join(", ")
+    response.portals = level_portals.sort(function (a, b) {return parseInt(a.x) - parseInt(b.x)}).map(x => x.portal + " " + Math.floor(x.x / (Math.max(last, 529.0) + 340.0) * 100) + "%").join(", ")
 
     response.orbs = {}
-    orbArray = data.filter(x => x.orb).reduce( (a,b) => { //stolen from https://stackoverflow.com/questions/45064107/how-do-i-group-duplicate-objects-in-an-array
+    let orbArray = level_orbs.reduce( (a,b) => { //stolen from https://stackoverflow.com/questions/45064107/how-do-i-group-duplicate-objects-in-an-array
         var i = a.findIndex(x => x.orb === b.orb);
         return i === -1 ? a.push({ orb : b.orb, count : 1 }) : a[i].count++, a;
     }, []).sort(function (a, b) {return parseInt(b.count) - parseInt(a.count)})
     orbArray.forEach(x => response.orbs[x.orb] = x.count)
-    response.orbs.total = data.filter(x => x.orb).length
+    response.orbs.total = orbArray.reduce((a, x) => a + x.count, 0); // we already have an array of objects, use it
 
     response.triggers = {}
-    triggerArray = data.filter(x => x.trigger).reduce( (a,b) => {
+    let triggerArray = level_triggers.reduce( (a,b) => {
         var i = a.findIndex(x => x.trigger === b.trigger);
         return i === -1 ? a.push({ trigger : b.trigger, count : 1 }) : a[i].count++, a;
     }, []).sort(function (a, b) {return parseInt(b.count) - parseInt(a.count)})
     triggerArray.forEach(x => response.triggers[x.trigger] = x.count)
-    response.triggers.total = data.filter(x => x.trigger).length
+    response.triggers.total = triggerArray.reduce((a, x) => a + x.count, 0);
 
     response.triggerGroups = {}
     response.blocks = sortObj(blockCounts)
@@ -236,7 +255,7 @@ function analyze_level(app, level, rawData) {
     });
 
     delete response.settings['colors']
-    response.text = data.filter(x => x.message).sort(function (a, b) {return parseInt(a.x) - parseInt(b.x)}).map(x => [Buffer.from(x.message, 'base64').toString(), Math.round(x.x / last * 99) + "%"])
+    response.text = level_text.sort(function (a, b) {return parseInt(a.x) - parseInt(b.x)}).map(x => [Buffer.from(x.message, 'base64').toString(), Math.round(x.x / last * 99) + "%"])
     response.dataLength = rawData.length
     response.data = rawData
 
