@@ -209,15 +209,15 @@ function analyze_level(app, level, rawData) {
                 }
                 colorObj.opacity = +Number(colorObj.opacity).toFixed(2)
                 colorList[y] = colorObj
+            });
+            // we assume this is only going to be run once so... some stuff can go here
+            colorList = colorList.filter(x => typeof x == "object")
+            if (!colorList.find(x => x.channel == "Obj")) colorList.push({"r": "255", "g": "255", "b": "255", "channel": "Obj", "opacity": "1"})
 
-                colorList = colorList.filter(x => typeof x == "object")
-                if (!colorList.find(x => x.channel == "Obj")) colorList.push({"r": "255", "g": "255", "b": "255", "channel": "Obj", "opacity": "1"})
-
-                let specialSort = ["BG", "G", "G2", "Line", "Obj", "3DL"]
-                let specialColors = colorList.filter(x => isNaN(x.channel)).sort(function (a, b) {return specialSort.indexOf( a.channel ) > specialSort.indexOf( b.channel ) } )
-                let regularColors = colorList.filter(x => !isNaN(x.channel)).sort(function(a, b) {return (+a.channel) - (+b.channel) } );
-                response.colors = specialColors.concat(regularColors)
-            })
+            const specialSort = ["BG", "G", "G2", "Line", "Obj", "3DL"]
+            let specialColors = colorList.filter(x => isNaN(x.channel)).sort(function (a, b) {return specialSort.indexOf( a.channel ) > specialSort.indexOf( b.channel ) } )
+            let regularColors = colorList.filter(x => !isNaN(x.channel)).sort(function(a, b) {return (+a.channel) - (+b.channel) } );
+            response.colors = specialColors.concat(regularColors)
         }
 
         response.settings[name] = val
