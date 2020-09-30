@@ -183,7 +183,7 @@ $('#difficultytext').html('[[DIFFICULTY]]'.replace(' ', "<br>"))
 
 $('#levelInfo').html($('#levelInfo').html()
 	.replace('[[ORIGINALINFO]]', [[COPIEDID]] ==  "0" ? "" : `<br>Original: <a class="youCanClickThis" href="/[[COPIEDID]]"><span style="color:aqua">[[COPIEDID]]</span></a>`)
-	.replace('[[OBJECTINFO]]', '[[OBJECTS]]' ==  "0" ? "" : `<br>Objects: <span style="color:yellow">[[OBJECTS]]</span>`)
+	.replace('[[OBJECTINFO]]', '[[OBJECTS]]' ==  "0" ? "" : `<br>Objects: <span style="color:yellow">${'[[OBJECTS]]' == "65535" ? "65535+" : '[[OBJECTS]]'}</span>`)
 	.replace('[[REQUESTED]]', [[STARSREQUESTED]] ==  "0" ? "" : `<br>Stars Requested: <span style="color:yellow">[[STARSREQUESTED]]</span>`))
 
 if (!'[[UPLOADED]]'.startsWith('[')) {

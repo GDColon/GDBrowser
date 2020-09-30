@@ -163,6 +163,7 @@ fetch(target).then(res => res.json()).then(lvl => {
 	if (history) {
 
 		$('#autoMode').remove()
+		$('#lastPage').hide()
 
 		if (!lvl.username) return window.location.href = window.location.href.replace("comments", "search")
 
@@ -211,8 +212,10 @@ if (page == 0) {
 }
 else {
 	$('#pageDown').show()
-	$('#firstPage').show()
-	$('#refreshButton').hide()
+	if (!history) {
+		$('#firstPage').show()
+		$('#refreshButton').hide()
+	}
 }
 
 fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID}?count=${compact && !auto ? 20 : 10}&page=${page}${history ? "&type=commentHistory" : ""}&${mode}`).then(res => res.json()).then(res => {
