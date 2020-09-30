@@ -23,6 +23,13 @@ module.exports = async (app, req, res, level) => {
     }
 }
 
+function sortObj(obj, sortBy) {
+    var sorted = {}
+    var keys = !sortBy ? Object.keys(obj).sort((a,b) => obj[b] - obj[a]) : Object.keys(obj).sort((a,b) => obj[b][sortBy] - obj[a][sortBy])
+    keys.forEach(x => {sorted[x] = obj[x]})
+    return sorted
+}
+
 function analyze_level(app, res, level, rawData) {
     let response = {};
 
@@ -36,13 +43,6 @@ function analyze_level(app, res, level, rawData) {
     let highDetail = 0
 
     data = data.split(";")
-
-    function sortObj(obj, sortBy) {
-        var sorted = {}
-        var keys = !sortBy ? Object.keys(obj).sort((a,b) => obj[b] - obj[a]) : Object.keys(obj).sort((a,b) => obj[b][sortBy] - obj[a][sortBy])
-        keys.forEach(x => {sorted[x] = obj[x]})
-        return sorted
-    }
 
     data.forEach((x, y) => {
         obj = app.parseResponse(x, ",")
