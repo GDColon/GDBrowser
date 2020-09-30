@@ -34,6 +34,8 @@ function sortObj(obj, sortBy) {
 }
 
 function analyze_level(app, level, rawData) {
+    console.time("level analyze");
+
     let response = {};
 
     let data = rawData; // data is tweaked around a lot, so rawData is preserved
@@ -154,6 +156,7 @@ function analyze_level(app, level, rawData) {
     response.dataLength = rawData.length
     response.data = rawData
 
+    console.timeEnd("level analyze");
     return response;
 }
 
@@ -165,96 +168,105 @@ function parse_header(app, header) {
         let val = init.values[x]
         let name = val[0]
         let property = header[x]
-        if (val[1] == "list") val = init[(val[0] + "s")][property]
-        else if (val[1] == "number") val = Number(property)
-        else if (val[1] == "bump") val = Number(property) + 1
-        else if (val[1] == "bool") val = property != "0"
+        switch (val[1]) {
+            case 'list':
+                val = init[(val[0] + "s")][property];
+                break;
+            case 'number':
+                val = Number(property);
+                break;
+            case 'bump':
+                val = Number(property) + 1;
+                break;
+            case 'bool':
+                val = property != "0";
+                break;
+            case 'extra-legacy-color': { // scope?
+                // you can only imagine my fear when i discovered this was a thing
+                // these literally are keys set the value, and to convert this to the color list we have to do this fun messy thing that shouldn't exist
+                // since i wrote the 1.9 color before this, a lot of explaination will be there instead
+                const colorInfo = name.split('-');
+                const color = colorInfo[2]; // r,g,b
+                const channel = colorInfo[1];
 
-        // you can only imagine my fear when i discovered this was a thing
-        // these literally are keys set the value, and to convert this to the color list we have to do this fun messy thing that shouldn't exist
-        else if (val[1] == 'extra-legacy-color') {
-            // since i wrote the 1.9 color before this, a lot of explaination will be there instead
-            const colorInfo = name.split('-');
-            const color = colorInfo[2]; // r,g,b
-            const channel = colorInfo[1];
-
-            if (color == 'r') {
-                // first we create the color object
-                response.colors.push({"channel": channel, "opacity": 1});
+                if (color == 'r') {
+                    // first we create the color object
+                    response.colors.push({"channel": channel, "opacity": 1});
+                }
+                // from here we touch the color object
+                let currentChannel = response.colors.find(k => k.channel == channel);
+                if (color == 'blend') {
+                    currentChannel.blending = true; // only one color has blending though lol
+                } else if (color == 'pcol' && property != 0) {
+                    currentChannel.pColor = property;
+                }
+                currentChannel[color] = property;
+                break;
             }
-            // from here we touch the color object
-            let currentChannel = response.colors.find(k => k.channel == channel);
-            if (color == 'blend') {
-                currentChannel.blending = true; // only one color has blending though lol
-            } else if (color == 'pcol' && property != 0) {
-                currentChannel.pColor = property;
-            }
-            currentChannel[color] = property;
-        }
+            case 'legacy-color': {
+                // if a level has a legacy color, we can assume that it does not have a kS38 at all
+                const color = app.parseResponse(property, "_");
 
-        // if a level has a legacy color, we can assume that it does not have a kS38 at all
-        else if (val[1] == "legacy-color") {
-            color = app.parseResponse(property, "_");
-
-            const keys = Object.keys(color)
-            let colorObj = {}
-
-            // so here we parse the color to something understandable by the rest
-            // slightly smart naming but it is also pretty gross
-            // in a sense - the name would be something like legacy-G -> G
-            const colorVal = name.split('-').pop()
-
-            keys.forEach(k => {if (colorStuff.properties[k]) colorObj[colorStuff.properties[k]] = color[k]})
-
-            colorObj.channel = colorVal
-
-            // from here stuff can continue as normal, ish
-            if (colorObj.pColor == "-1" || colorObj.pColor == "0") delete colorObj.pColor;
-            colorObj.opacity = 1; // 1.9 colors don't have this!
-            if (colorObj.blending && colorObj.blending == '1') colorObj.blending = true; // 1.9 colors manage to always think they're blending - they're not
-            else delete colorObj.blending;
-
-            if (colorVal == '3DL') { response.colors.splice(4, 0, colorObj); } // hardcode the position of 3DL, it typically goes at the end due to how RobTop make the headers
-            else if (colorVal == 'Line') { colorObj.blending = true; response.colors.push(colorObj); }  // in line with 2.1 behavior
-            else { response.colors.push(colorObj); } // bruh whatever was done to make the color list originally was long
-        }
-
-        else if (val[1] == "colors") {
-            let colorList = property.split("|")
-            colorList.forEach((x, y) => {
-                color = app.parseResponse(x, "_")
-                let keys = Object.keys(color)
+                const keys = Object.keys(color)
                 let colorObj = {}
-                if (!color['6']) return colorList = colorList.filter((h, i) => y != i)
+
+                // so here we parse the color to something understandable by the rest
+                // slightly smart naming but it is also pretty gross
+                // in a sense - the name would be something like legacy-G -> G
+                const colorVal = name.split('-').pop()
 
                 keys.forEach(k => {if (colorStuff.properties[k]) colorObj[colorStuff.properties[k]] = color[k]})
-                if (colorStuff.channels[colorObj.channel]) colorObj.channel = colorStuff.channels[colorObj.channel]
-                if (colorObj.channel > 1000) return;
-                if (colorStuff.channels[colorObj.copiedChannel]) colorObj.copiedChannel = colorStuff.channels[colorObj.copiedChannel]
-                if (colorObj.copiedChannel > 1000) delete colorObj.copiedChannel;
-                if (colorObj.pColor == "-1") delete colorObj.pColor
-                if (colorObj.blending) colorObj.blending = true
-                if (colorObj.copiedHSV) {
-                    let hsv = colorObj.copiedHSV.split("a")
-                    colorObj.copiedHSV = {}
-                    hsv.forEach((x, y) => { colorObj.copiedHSV[colorStuff.hsv[y]] = x })
-                    colorObj.copiedHSV['s-checked'] = colorObj.copiedHSV['s-checked'] == 1
-                    colorObj.copiedHSV['v-checked'] = colorObj.copiedHSV['v-checked'] == 1
-                if (colorObj.copyOpacity == 1) colorObj.copyOpacity = true
-                }
-                colorObj.opacity = +Number(colorObj.opacity).toFixed(2)
-                colorList[y] = colorObj
-            });
-            // we assume this is only going to be run once so... some stuff can go here
-            colorList = colorList.filter(x => typeof x == "object")
-            if (!colorList.find(x => x.channel == "Obj")) colorList.push({"r": "255", "g": "255", "b": "255", "channel": "Obj", "opacity": "1"})
 
-            const specialSort = ["BG", "G", "G2", "Line", "Obj", "3DL"]
-            let specialColors = colorList.filter(x => isNaN(x.channel)).sort(function (a, b) {return specialSort.indexOf( a.channel ) > specialSort.indexOf( b.channel ) } )
-            let regularColors = colorList.filter(x => !isNaN(x.channel)).sort(function(a, b) {return (+a.channel) - (+b.channel) } );
-            response.colors = specialColors.concat(regularColors)
+                colorObj.channel = colorVal
+
+                // from here stuff can continue as normal, ish
+                if (colorObj.pColor == "-1" || colorObj.pColor == "0") delete colorObj.pColor;
+                colorObj.opacity = 1; // 1.9 colors don't have this!
+                if (colorObj.blending && colorObj.blending == '1') colorObj.blending = true; // 1.9 colors manage to always think they're blending - they're not
+                else delete colorObj.blending;
+
+                if (colorVal == '3DL') { response.colors.splice(4, 0, colorObj); } // hardcode the position of 3DL, it typically goes at the end due to how RobTop make the headers
+                else if (colorVal == 'Line') { colorObj.blending = true; response.colors.push(colorObj); }  // in line with 2.1 behavior
+                else { response.colors.push(colorObj); } // bruh whatever was done to make the color list originally was long
+                break;
+            }
+            case 'colors': {
+                let colorList = property.split("|")
+                colorList.forEach((x, y) => {
+                    const color = app.parseResponse(x, "_")
+                    let keys = Object.keys(color)
+                    let colorObj = {}
+                    if (!color['6']) return colorList = colorList.filter((h, i) => y != i)
+
+                    keys.forEach(k => {if (colorStuff.properties[k]) colorObj[colorStuff.properties[k]] = color[k]})
+                    if (colorStuff.channels[colorObj.channel]) colorObj.channel = colorStuff.channels[colorObj.channel]
+                    if (colorObj.channel > 1000) return;
+                    if (colorStuff.channels[colorObj.copiedChannel]) colorObj.copiedChannel = colorStuff.channels[colorObj.copiedChannel]
+                    if (colorObj.copiedChannel > 1000) delete colorObj.copiedChannel;
+                    if (colorObj.pColor == "-1") delete colorObj.pColor
+                    if (colorObj.blending) colorObj.blending = true
+                    if (colorObj.copiedHSV) {
+                        let hsv = colorObj.copiedHSV.split("a")
+                        colorObj.copiedHSV = {}
+                        hsv.forEach((x, y) => { colorObj.copiedHSV[colorStuff.hsv[y]] = x })
+                        colorObj.copiedHSV['s-checked'] = colorObj.copiedHSV['s-checked'] == 1
+                        colorObj.copiedHSV['v-checked'] = colorObj.copiedHSV['v-checked'] == 1
+                    if (colorObj.copyOpacity == 1) colorObj.copyOpacity = true
+                    }
+                    colorObj.opacity = +Number(colorObj.opacity).toFixed(2)
+                    colorList[y] = colorObj
+                });
+                // we assume this is only going to be run once so... some stuff can go here
+                colorList = colorList.filter(x => typeof x == "object")
+                if (!colorList.find(x => x.channel == "Obj")) colorList.push({"r": "255", "g": "255", "b": "255", "channel": "Obj", "opacity": "1"})
+
+                const specialSort = ["BG", "G", "G2", "Line", "Obj", "3DL"]
+                let specialColors = colorList.filter(x => isNaN(x.channel)).sort(function (a, b) {return specialSort.indexOf( a.channel ) > specialSort.indexOf( b.channel ) } )
+                let regularColors = colorList.filter(x => !isNaN(x.channel)).sort(function(a, b) {return (+a.channel) - (+b.channel) } );
+                response.colors = specialColors.concat(regularColors)
+                break;
+            }
         }
-
         response.settings[name] = val
     })
 
