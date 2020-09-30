@@ -38,8 +38,6 @@ function analyze_level(app, level, rawData) {
 
     let response = {};
 
-    let data = rawData; // data is tweaked around a lot, so rawData is preserved
-
     let blockNames = Object.keys(blocks)
     let miscNames = Object.keys(ids.misc)
     let blockCounts = {}
@@ -47,7 +45,7 @@ function analyze_level(app, level, rawData) {
     let triggerGroups = []
     let highDetail = 0
 
-    data = data.split(";")
+    const data = rawData.split(";");
 
     let level_portals = [];
     let level_orbs = [];
