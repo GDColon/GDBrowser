@@ -11,13 +11,10 @@ module.exports = async (app, req, res) => {
       else amount = count;
     }
 
-    let params = {
+    let params = app.gdParams({
       count: amount,
-      gameVersion: app.gameVersion,
-      binaryVersion: app.binaryVersion,
-      secret: app.secret,
       type: (req.query.hasOwnProperty("creator") || req.query.hasOwnProperty("creators")) ? "creators" : "top",
-    }  
+    })
 
     request.post(app.endpoint + 'getGJScores20.php', {
     form : params}, async function(err, resp, body) { 

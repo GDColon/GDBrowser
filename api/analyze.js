@@ -1,4 +1,4 @@
-const pako = require('pako')
+const pako = require('zlib')
 const properties = require('../misc/objectProperties.json')
 const init = require('../misc/initialProperties.json')
 const colorStuff = require('../misc/colorProperties.json')
@@ -16,7 +16,7 @@ if (unencrypted) rawData = level.data
 
 else {
     let buffer;
-    try { buffer = pako.inflate(levelString, {to:"string"}) }
+    try { buffer = zlib.gzipSync(levelString).toString() }
     catch(e) { return res.send("-1") }
     rawData = buffer.toString('utf8')
 } 

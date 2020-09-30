@@ -23,11 +23,10 @@ module.exports = async (app, req, res, api, analyze) => {
   if (analyze || req.query.hasOwnProperty("download")) return app.run.download(app, req, res, api, levelID, analyze)
 
   request.post(app.endpoint + 'getGJLevels21.php', {
-    form: {
+    form: app.gdParams({
       str: levelID,
-      secret: app.secret,
       type: 0
-    }
+    })
   }, async function (err, resp, body) {
 
     if (err || !body || body == '-1' || body.startsWith("<!")) {

@@ -30,7 +30,7 @@ module.exports = async (app, req, res) => {
       idArray.forEach((x, y) => {
         
         request.post(app.endpoint + 'getGJUserInfo20.php', {
-          form: {targetAccountID: x, secret: app.secret}
+          form: app.gdParams({targetAccountID: x})
         }, function (err, resp, body) {
           if (err || !body || body == '-1') return res.send([])
 

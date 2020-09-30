@@ -6,19 +6,13 @@ module.exports = async (app, req, res, api, getLevels) => {
   if (app.offline) return res.send("-1")
 
   request.post(app.endpoint + 'getGJUsers20.php', {
-    form: {
-      str: getLevels || req.params.id,
-      secret: app.secret,
-    }
+    form: app.gdParams({ str: getLevels || req.params.id })
   }, function (err1, res1, b1) {
     
     let searchResult = (req.query.hasOwnProperty("account") || err1 || b1 == '-1' ||  b1.startsWith("<!") || !b1) ? req.params.id : app.parseResponse(b1)[16]
 
     request.post(app.endpoint + 'getGJUserInfo20.php', {
-      form: {
-        targetAccountID: searchResult,
-        secret: app.secret
-      }
+      form: app.gdParams({ targetAccountID: searchResult })
     }, function (err2, res2, body) {
 
       if (err2 || body == '-1' || !body) {

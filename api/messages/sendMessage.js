@@ -12,13 +12,12 @@ module.exports = async (app, req, res, api) => {
   let subject = Buffer.from(req.body.subject ? (req.body.color ? "☆" : "") + (req.body.subject.slice(0, 50)) : (req.body.color ? "☆" : "") + "No subject").toString('base64').replace(/\//g, '_').replace(/\+/g, "-")
   let body = xor.encrypt(req.body.message.slice(0, 300), 14251)
 
-  let params = {
+  let params = app.gdParams({
     accountID: req.body.accountID,
     gjp: xor.encrypt(req.body.password, 37526),
     toAccountID: req.body.targetID,
     subject, body,
-    secret: app.secret,
-  }
+  })
 
   request.post(app.endpoint + 'uploadGJMessage20.php', {
     form: params,

@@ -7,14 +7,11 @@ module.exports = async (app, req, res) => {
   if (!req.body.accountID) return res.status(400).send("No account ID provided!")
   if (!req.body.password) return res.status(400).send("No password provided!")
 
-  let params = {
+  let params = app.gdParams({
     accountID: req.body.accountID,
     targetAccountID: req.body.accountID,
     gjp: xor.encrypt(req.body.password, 37526),
-    secret: app.secret,
-    gameVersion: app.gameVersion,
-    binaryVersion: app.binaryVersion,
-  }
+  })
 
   request.post(app.endpoint + 'getGJUserInfo20.php', {
     form: params,

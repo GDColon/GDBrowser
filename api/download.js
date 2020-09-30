@@ -15,12 +15,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
   else levelID = levelID.replace(/[^0-9]/g, "")
 
   request.post(app.endpoint + 'downloadGJLevel22.php', {
-    form: {
-      levelID,
-      gameVersion: app.gameVersion,
-      binaryVersion: app.binaryVersion,
-      secret: app.secret
-    }
+    form: app.gdParams({ levelID })
   }, async function (err, resp, body) {
 
     if (err || !body || body == '-1' || body.startsWith("<!")) {
@@ -33,11 +28,11 @@ module.exports = async (app, req, res, api, ID, analyze) => {
     let level = new Level(levelInfo)
 
     request.post(app.endpoint + 'getGJUsers20.php', {
-      form: { str: level.authorID, secret: app.secret }
+      form: app.gdParams({ str: level.authorID })
     }, function (err1, res1, b1) {
       let gdSearchResult = app.parseResponse(b1)
       request.post(app.endpoint + 'getGJUserInfo20.php', {
-        form: { targetAccountID: gdSearchResult[16], secret: app.secret }
+        form: app.gdParams({ targetAccountID: gdSearchResult[16] })
       }, function (err2, res2, b2) {
         if (b2 != '-1') {
           let account = app.parseResponse(b2)
@@ -51,10 +46,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
         }
 
         request.post(app.endpoint + 'getGJSongInfo.php', {
-          form: {
-            songID: level.customSong,
-            secret: app.secret
-          }
+          form: app.gdParams({ songID: level.customSong })
         }, async function (err, resp, songRes) {
 
           if (songRes != '-1') {

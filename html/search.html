@@ -180,7 +180,7 @@ function Append(firstLoad) {
 
 		$('#searchBox').append(`<div class="searchresult">
 			<h1 class="lessspaced">${x.name}</h1>
-			<h2 class="lessSpaced smaller inline gdButton ${hasAuthor ? "" : "green unregistered"}">${hasAuthor ? `<a href="../profile/${x.author}">By ${x.author}</a>` : `<a href="../search/${x.authorID}?user">By ${x.author}</a>`}</h2><h2 class="inline" style="margin-left: 1.5%; transform:translateY(30%)"> ${x.copiedID == '0' ? "" : '<img class="valign sideSpace" src="../assets/copied.png" height="12%">'}${x.large ? '<img class="valign sideSpaceD" src="../assets/large.png" height="12%">' : ''}</h2>
+			<h2 class="lessSpaced smaller inline gdButton ${hasAuthor ? "" : "green unregistered"}">${hasAuthor ? `<a href="../u/${x.author}">By ${x.author}</a>` : `<a href="../search/${x.authorID}?user">By ${x.author}</a>`}</h2><h2 class="inline" style="margin-left: 1.5%; transform:translateY(30%)"> ${x.copiedID == '0' ? "" : '<img class="valign sideSpace" src="../assets/copied.png" height="12%">'}${x.large ? '<img class="valign sideSpaceD" src="../assets/large.png" height="12%">' : ''}</h2>
 			<h3 class="lessSpaced ${x.customSong == 0 ? "blue" : "whatIfItWasPurple"}" style="overflow: hidden;">${x.songName.replace(/[^ -~]/g, "")}</h3>
 			<h3 class="lessSpaced">
 				<img class="valign" src="../assets/time.png" height="14%"> ${x.length}

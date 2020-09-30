@@ -4,6 +4,14 @@
 
 module.exports = {
 
+    endpoint: "http://boomlings.com/database/", // Server endpoint to send requests to
+
+    params: {   // Always send this stuff to the servers
+        secret: 'Wmfd2893gb7',
+        gameVersion: '21',
+        binaryVersion: '35',
+    },
+
     base64descriptions: true, // Are level descriptions encoded in Base64?
     xorPasswords: true, // Are level passwords XOR encrypted?
     timestampSuffix: " ago", // Suffix to add after timestamps, if any.

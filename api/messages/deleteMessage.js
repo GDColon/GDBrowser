@@ -8,12 +8,11 @@ module.exports = async (app, req, res, api) => {
   if (!req.body.password) return res.status(400).send("No password provided!")
   if (!req.body.id) return res.status(400).send("No message ID(s) provided!")
 
-  let params = {
+  let params = app.gdParams({
     accountID: req.body.accountID,
     gjp: xor.encrypt(req.body.password, 37526),
     messages: Array.isArray(req.body.id) ? req.body.id.map(x => x.trim()).join(",") : req.body.id,
-    secret: app.secret,
-  }
+  })
 
   let deleted = params.messages.split(",").length
 

@@ -97,7 +97,7 @@ function leaderboard() {
 		let shift = x.rank >= 100 ? [0.4, 50] : x.rank >= 10 ? [0.2, 25] : [0, 10] 
 
 		$('#searchBox').append(`<div class="searchresult leaderboardSlot" style="padding-left: 25.5vh; height: 15%">
-			<h2 class="small inline gdButton" style="margin-top: 1.5%; font-size: 6.5vh; margin-right: 3%;"><a href="../profile/${x.username}">${x.username}</a></h2>
+			<h2 class="small inline gdButton" style="margin-top: 1.5%; font-size: 6.5vh; margin-right: 3%;"><a href="../u/${x.username}">${x.username}</a></h2>
 		
 			<h3 class="inline lessSpaced leaderboardStats" style="transform:translateY(-10%)">
 				${x.percent}%

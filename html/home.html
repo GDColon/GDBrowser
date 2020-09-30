@@ -91,7 +91,7 @@ fetch(`./api/credits`).then(res => res.json()).then(res => {
 		$('#credits').append(`<div id="credits${y+1}" class="subCredits" style="display: none;">
 			<div class="brownBox center supercenter" style="width: 80vh; height: 43%; padding-top: 1.5%; padding-bottom: 3.5%;">
 				<h1>${x.header}</h1><br>
-				<h2 style="margin-bottom: 1.5%" class="gdButton"><a href="./profile/${x.ign || x.name}">${x.name}</h2></a>
+				<h2 style="margin-bottom: 1.5%" class="gdButton"><a href="./u/${x.ign || x.name}">${x.name}</h2></a>
 				<img src="./icon/${x.ign || x.name}" height=30%; style="margin-bottom: 7%"><br>
 				<a target=_blank href="${x.youtube[0]}"><img src="../assets/${x.youtube[1]}.png" width="11%" class="gdButton"></a>
 				<a target=_blank href="${x.twitter[0]}"><img src="../assets/${x.twitter[1]}.png" width="11%" class="sideSpace gdButton"></a>
@@ -112,7 +112,7 @@ fetch(`./api/credits`).then(res => res.json()).then(res => {
 
 	res.specialThanks.forEach((x, y) => {
 		$('#specialthanks').append(`<div class="specialThanks">
-				<h2 class="gdButton smaller"><a href="./profile/${x}">${x}</h2></a>
+				<h2 class="gdButton smaller"><a href="./u/${x}">${x}</h2></a>
 				<img src="./icon/${x}" height=85%><br>
 				</div>`)
 	})

@@ -11,13 +11,12 @@ module.exports = async (app, req, res) => {
       else amount = count;
     }
 
-    let params = {
+    let params = app.gdParams({
       levelID: req.params.id,
-      secret: app.secret,
       accountID: app.id,
       gjp: app.gjp, 
       type: req.query.hasOwnProperty("week") ? "2" : "1",
-    }  
+    })
 
     request.post(app.endpoint + 'getGJLevelScores211.php', {
     form : params, headers: {'x-forwarded-for': req.headers['x-real-ip']}}, async function(err, resp, body) { 

@@ -7,12 +7,11 @@ module.exports = async (app, req, res, api) => {
   if (!req.body.accountID) return res.status(400).send("No account ID provided!")
   if (!req.body.password) return res.status(400).send("No password provided!")
 
-  let params = {
+  let params = app.gdParams({
     accountID: req.body.accountID,
     gjp: xor.encrypt(req.body.password, 37526),
     messageID: req.params.id,
-    secret: app.secret,
-  }
+  })
 
   request.post(app.endpoint + 'downloadGJMessage20.php', {
     form: params,

@@ -13,14 +13,11 @@ module.exports = async (app, req, res) => {
   if (!req.body.type) return res.status(400).send("No type provided! (1=level, 2=comment, 3=profile")
   if (!req.body.extraID) return res.status(400).send("No extra ID provided! (this should be a level ID, account ID, or '0' for levels")
   
-  let params = {
-    gameVersion: app.gameVersion,
-    binaryVersion: app.binaryVersion,
-    secret: app.secret,
+  let params = app.gdParams({
     udid: '0',
     uuid: '0',
     rs: '8f0l0ClAN1'
-  }
+  })
 
   params.itemID = req.body.ID.toString()
   params.gjp = xor.encrypt(req.body.password, 37526)

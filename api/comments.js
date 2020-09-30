@@ -1,24 +1,20 @@
 const request = require('request')
 
-module.exports = async (app, req, res, worstPage) => {
+module.exports = async (app, req, res) => {
 
     if (app.offline) return res.send("-1")
 
     let count = +req.query.count || 10
     if (count > 1000) count = 1000
-    if (+req.query.worstPage) worstPage = +req.query.worstPage
 
-    let params = {
+    let params = app.gdParams({
         userID : req.params.id, 
         accountID : req.params.id, 
         levelID: req.params.id,
-        page: worstPage ? worstPage - (+req.query.page || 0) - 1 : +req.query.page || 0,
-        secret: app.secret,
+        page: +req.query.page || 0,
         count,
-        gameVersion: app.gameVersion,
-        binaryVersion: app.binaryVersion,
-        mode: worstPage || req.query.hasOwnProperty("top") ? "1" : "0",
-    }  
+        mode: req.query.hasOwnProperty("top") ? "1" : "0",
+    })
 
     let path = "getGJComments21"
     if (req.query.type == "commentHistory") path = "getGJCommentHistory"
@@ -38,11 +34,9 @@ module.exports = async (app, req, res, worstPage) => {
 
       let pages = body.split('#')[1].split(":")
       let lastPage = +Math.ceil(+pages[0] / +pages[2]);
-      if (path == "getGJComments21" && !worstPage && req.query.hasOwnProperty("worst")) return app.run.comments(app, req, res, lastPage)
 
       let commentArray = []
 
-      if (worstPage) comments.reverse()
       comments.forEach((c, i) => {
 
         var x = c[0] //comment info
@@ -74,7 +68,7 @@ module.exports = async (app, req, res, worstPage) => {
         if (i == 0 && req.query.type != "commentHistory") {
           comment.results = +pages[0];
           comment.pages = lastPage;
-          comment.range = `${+pages[1] + 1} of ${Math.min(+pages[0], +pages[1] + +pages[2])}`
+          comment.range = `${+pages[1] + 1} to ${Math.min(+pages[0], +pages[1] + +pages[2])}`
         }
 
         commentArray.push(comment)

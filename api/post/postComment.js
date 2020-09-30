@@ -24,12 +24,9 @@ module.exports = async (app, req, res) => {
 
   if (rateLimit[req.body.username]) return res.status(400).send(`Please wait ${getTime(rateLimit[req.body.username] + cooldown - Date.now())} seconds before posting another comment!`)
   
-  let params = {
-    gameVersion: app.gameVersion,
-    binaryVersion: app.binaryVersion,
-    secret: app.secret,
+  let params = app.gdParams({
     percent: 0
-  }
+  })
 
   params.comment = Buffer.from(req.body.comment + (req.body.color ? "☆" : "")).toString('base64').replace(/\//g, '_').replace(/\+/g, "-")
   params.gjp = xor.encrypt(req.body.password, 37526)

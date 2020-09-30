@@ -13,12 +13,9 @@ module.exports = async (app, req, res) => {
 
   if (req.body.comment.includes('\n')) return res.status(400).send("Profile posts cannot contain line breaks!")
   
-  let params = {
-    gameVersion: app.gameVersion,
-    binaryVersion: app.binaryVersion,
-    secret: app.secret,
+  let params = app.gdParams({
     cType: '1'
-  }
+  })
 
   params.comment = Buffer.from(req.body.comment.slice(0, 190) + (req.body.color ? "☆" : "")).toString('base64').replace(/\//g, '_').replace(/\+/g, "-")
   params.gjp = xor.encrypt(req.body.password, 37526)

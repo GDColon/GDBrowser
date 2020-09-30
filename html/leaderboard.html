@@ -111,7 +111,7 @@ function leaderboard(val) {
 		if (val == type && res != -1) res.forEach((x, y) => {
 
 		$('#searchBox').append(`<div class="searchresult leaderboardSlot">
-			<h2 class="small inline gdButton" style="margin-top: 1.5%"><a href="../profile/${x.username}">${x.username}</a></h2>
+			<h2 class="small inline gdButton" style="margin-top: 1.5%"><a href="../u/${x.username}">${x.username}</a></h2>
 			<h3 class="inline sideSpace${x.stars >= 100000 ? " yellow" : ""}" style="font-size: 4.5vh">${x.stars} <img class="valign" src="../assets/star.png"
 					style="cursor: help; height: 19%; transform: translate(-25%, -10%);" title="Stars"></h3>
 		

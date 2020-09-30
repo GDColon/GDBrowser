@@ -9,11 +9,15 @@ let useRateLimiting = true
 
 const app = express();
 app.offline = false  // set to true to go into "offline" mode (in case of ip ban from rob)
-app.secret = 'Wmfd2893gb7'
-app.gameVersion = '21'
-app.binaryVersion = '35'
-app.endpoint = 'http://boomlings.com/database/'
+app.secret = "Wmfd2893gb7" // lol
+
 app.config = require('./misc/gdpsConfig')  // tweak settings in this file if you're using a GDPS
+app.endpoint = app.config.endpoint  // boomlings.com/database/
+
+app.gdParams = function(obj={}) {
+  Object.keys(app.config.params).forEach(x => { if (!obj[x]) obj[x] = app.config.params[x] })
+  return obj
+}
 
 const RL = rateLimit({
   windowMs: useRateLimiting ? 5 * 60 * 1000 : 0,
@@ -137,22 +141,20 @@ app.get("/api/search/:text", function(req, res) { app.run.search(app, req, res) 
 app.get("/icon", function(req, res) { res.redirect('/iconkit') })
 app.get("/iconkit/:text", function(req, res) { res.redirect('/icon/' + req.params.text) })
 app.get("/leaderboards/:id", function(req, res) { res.redirect('/leaderboard/' + req.params.id) })
+app.get("/profile/:id", function(req, res) { res.redirect('/u/' + req.params.id) })
+app.get("/p/:id", function(req, res) { res.redirect('/u/' + req.params.id) })
 app.get("/l/:id", function(req, res) { res.redirect('/leaderboard/' + req.params.id) })
 app.get("/a/:id", function(req, res) { res.redirect('/analyze/' + req.params.id) })
 app.get("/c/:id", function(req, res) { res.redirect('/comments/' + req.params.id) })
-app.get("/u/:id", function(req, res) { res.redirect('/profile/' + req.params.id) })
-app.get("/p/:id", function(req, res) { res.redirect('/profile/' + req.params.id) })
 
 
 // API AND HTML
    
-app.get("/profile/:id", function(req, res) { app.run.profile(app, req, res) })
+app.get("/u/:id", function(req, res) { app.run.profile(app, req, res) })
 app.get("/:id", function(req, res) { app.run.level(app, req, res) }) 
 
 
 // MISC
-
-
 
 app.get("/assets/sizecheck.js", function(req, res) { res.sendFile(__dirname + "/misc/sizecheck.js") }) 
 app.get("/icon/:text", function(req, res) { app.run.icon(app, req, res) })

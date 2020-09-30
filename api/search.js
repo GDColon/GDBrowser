@@ -14,7 +14,7 @@ module.exports = async (app, req, res) => {
       else amount = count;
     }
     
-    let filters = {
+    let filters = app.gdParams({
         str: req.params.text,
 
         diff: req.query.diff,
@@ -35,10 +35,7 @@ module.exports = async (app, req, res) => {
         customSong: req.query.hasOwnProperty("customSong") ? 1 : 0,
 
         type: req.query.type || 0,
-        gameVersion: app.gameVersion,
-        binaryVersion: app.binaryVersion,
-        secret: app.secret
-    }  
+    })
 
     let foundPack = mapPacks[req.params.text.toLowerCase()]
     if (foundPack) filters.str = `${foundPack[0]},${foundPack[1]},${foundPack[2]}`;
@@ -73,7 +70,7 @@ module.exports = async (app, req, res) => {
 
     request.post(app.endpoint + 'getGJLevels21.php', {
     form : filters}, async function(err, resp, body) {
-        
+    
     if (err || !body || body == '-1' || body.startsWith("<!")) return res.send("-1")
     let splitBody = body.split('#')
     let preRes = splitBody[0].split('|', 10)
