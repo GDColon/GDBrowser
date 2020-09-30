@@ -11,14 +11,17 @@ module.exports = async (app, req, res, level) => {
 
     if (unencrypted) {
         const raw_data = level.data;
-        analyze_level(app, res, level, raw_data);
+        const response_data = analyze_level(app, level, raw_data);
+
+        return res.send(response_data);
     } else {
-        let buffer;
-        buffer = zlib.unzip(levelString, (err, buffer) => {
+        zlib.unzip(levelString, (err, buffer) => {
             if (err) { return res.send("-1"); }
 
             const raw_data = buffer.toString();
-            analyze_level(app, res, level, raw_data);
+            const response_data = analyze_level(app, level, raw_data);
+
+            return res.send(response_data);
         });
     }
 }
@@ -30,7 +33,7 @@ function sortObj(obj, sortBy) {
     return sorted
 }
 
-function analyze_level(app, res, level, rawData) {
+function analyze_level(app, level, rawData) {
     let response = {};
 
     let data = rawData; // data is tweaked around a lot, so rawData is preserved
@@ -237,5 +240,5 @@ function analyze_level(app, res, level, rawData) {
     response.dataLength = rawData.length
     response.data = rawData
 
-    return res.send(response)
+    return response;
 }
