@@ -145,10 +145,26 @@ function analyze_level(app, level, rawData) {
     response.triggerGroups = sortObj(response.triggerGroups)
     response.triggerGroups.total = Object.keys(response.triggerGroups).length
 
-    Object.keys(data[0]).forEach(x => {
+    response.text = level_text.sort(function (a, b) {return parseInt(a.x) - parseInt(b.x)}).map(x => [Buffer.from(x.message, 'base64').toString(), Math.round(x.x / last * 99) + "%"])
+
+    const header_response = parse_header(app, data[0]);
+    response.settings = header_response.settings;
+    response.colors = header_response.colors;
+
+    response.dataLength = rawData.length
+    response.data = rawData
+
+    return response;
+}
+
+function parse_header(app, header) {
+    let response = {};
+    response.settings = {};
+
+    Object.keys(header).forEach(x => {
         let val = init.values[x]
         let name = val[0]
-        let property = data[0][x]
+        let property = header[x]
         if (val[1] == "list") val = init[(val[0] + "s")][property]
         else if (val[1] == "number") val = Number(property)
         else if (val[1] == "bump") val = Number(property) + 1
@@ -254,10 +270,6 @@ function analyze_level(app, level, rawData) {
         if (k.includes('legacy')) delete response.settings[k];
     });
 
-    delete response.settings['colors']
-    response.text = level_text.sort(function (a, b) {return parseInt(a.x) - parseInt(b.x)}).map(x => [Buffer.from(x.message, 'base64').toString(), Math.round(x.x / last * 99) + "%"])
-    response.dataLength = rawData.length
-    response.data = rawData
-
+    delete response.settings['colors'];
     return response;
 }
