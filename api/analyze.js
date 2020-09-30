@@ -8,18 +8,24 @@ const blocks = require('../misc/blocks.json')
 module.exports = async (app, req, res, level) => {
 
 let unencrypted = level.data.startsWith('kS') // some gdps'es don't encrypt level data
-let levelString = unencrypted ? level.data : Buffer.from(level.data, 'base64') 
-let response = {};
-let rawData;
+let levelString = unencrypted ? level.data : Buffer.from(level.data, 'base64')
 
-if (unencrypted) rawData = level.data
-
-else {
+if (unencrypted) {
+    const raw_data = level.data;
+    analyze_level(app, res, level, raw_data);
+} else {
     let buffer;
-    try { buffer = zlib.unzipSync(levelString).toString() }
-    catch(e) { return res.send("-1") }
-    rawData = buffer.toString('utf8')
-} 
+    buffer = zlib.unzip(levelString, (err, buffer) => {
+        if (err) { return res.send("-1"); }
+
+        const raw_data = buffer.toString();
+        analyze_level(app, res, level, raw_data);
+    });
+}
+}
+
+function analyze_level(app, res, level, rawData) {
+let response = {};
 
 let data = rawData; // data is tweaked around a lot, so rawData is preserved
 
