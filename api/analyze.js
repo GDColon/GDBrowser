@@ -61,9 +61,10 @@ function analyze_level(app, level, rawData) {
     const data = rawData.split(";");
 
     let level_portals = [];
-    let level_orbs = [];
-    let level_triggers = [];
     let level_text = [];
+
+    let orb_array = {};
+    let trigger_array = {};
 
     let last = 0;
 
@@ -78,17 +79,26 @@ function analyze_level(app, level, rawData) {
         })
 
         let id = obj.id
+
         if (id in ids.portals) {
             obj.portal = ids.portals[id];
             level_portals.push(obj);
-        }
-        if (id in ids.orbs) {
+        } else if (id in ids.orbs) {
             obj.orb = ids.orbs[id];
-            level_orbs.push(obj);
-        }
-        if (id in ids.triggers) {
+
+            if (obj.orb in orb_array) {
+                orb_array[obj.orb]++;
+            } else {
+                orb_array[obj.orb] = 1;
+            }
+        } else if (id in ids.triggers) {
             obj.trigger = ids.triggers[id];
-            level_triggers.push(obj);
+
+            if (obj.trigger in trigger_array) {
+                trigger_array[obj.trigger]++;
+            } else {
+                trigger_array[obj.trigger] = 1;
+            }
         }
 
         if (obj.message) {
@@ -131,21 +141,11 @@ function analyze_level(app, level, rawData) {
 
     response.portals = level_portals.sort(function (a, b) {return parseInt(a.x) - parseInt(b.x)}).map(x => x.portal + " " + Math.floor(x.x / (Math.max(last, 529.0) + 340.0) * 100) + "%").join(", ")
 
-    response.orbs = {}
-    let orbArray = level_orbs.reduce( (a,b) => { //stolen from https://stackoverflow.com/questions/45064107/how-do-i-group-duplicate-objects-in-an-array
-        var i = a.findIndex(x => x.orb === b.orb);
-        return i === -1 ? a.push({ orb : b.orb, count : 1 }) : a[i].count++, a;
-    }, []).sort(function (a, b) {return parseInt(b.count) - parseInt(a.count)})
-    orbArray.forEach(x => response.orbs[x.orb] = x.count)
-    response.orbs.total = orbArray.reduce((a, x) => a + x.count, 0); // we already have an array of objects, use it
+    response.orbs = orb_array
+    response.orbs.total = Object.values(orb_array).reduce((a, x) => a + x, 0); // we already have an array of objects, use it
 
-    response.triggers = {}
-    let triggerArray = level_triggers.reduce( (a,b) => {
-        var i = a.findIndex(x => x.trigger === b.trigger);
-        return i === -1 ? a.push({ trigger : b.trigger, count : 1 }) : a[i].count++, a;
-    }, []).sort(function (a, b) {return parseInt(b.count) - parseInt(a.count)})
-    triggerArray.forEach(x => response.triggers[x.trigger] = x.count)
-    response.triggers.total = triggerArray.reduce((a, x) => a + x.count, 0);
+    response.triggers = trigger_array
+    response.triggers.total = Object.values(trigger_array).reduce((a, x) => a + x, 0);
 
     response.triggerGroups = {}
     response.blocks = sortObj(blockCounts)
