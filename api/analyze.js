@@ -46,7 +46,9 @@ function parse_obj(obj, splitter) {
      */
     const split_obj = obj.split(splitter);
     const robtop_obj = {};
-    for (let i = 0; i < split_obj.length; i += 2) {
+
+    const obj_length = split_obj.length; // semi-useless optimization depending on where at node js you're at
+    for (let i = 0; i < obj_length; i += 2) {
         robtop_obj[split_obj[i]] = split_obj[i + 1];
     }
     return robtop_obj;
@@ -87,8 +89,9 @@ function analyze_level(level, rawData) {
 
     let last = 0;
 
-    data.forEach((x, y) => {
-        obj = parse_obj(x, ',');
+    const obj_length = data.length;
+    for (let i = 0; i < obj_length; ++i) {
+        obj = parse_obj(data[i], ',');
 
         let keys = Object.keys(obj)
         keys.forEach((k, i) => {
@@ -149,8 +152,8 @@ function analyze_level(level, rawData) {
             last = Math.max(last, obj.x);
         }
 
-        data[y] = obj;
-    })
+        data[i] = obj;
+    }
 
     response.level = {
         name: level.name, id: level.id, author: level.author, authorID: level.authorID, accountID: level.accountID, large: level.large
