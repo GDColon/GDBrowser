@@ -69,7 +69,7 @@ function analyze_level(level, rawData) {
     let block_ids = {};
 
     for (const [name, object_ids] of Object.entries(ids.misc)) {
-        const copied_ids = object_ids.splice(1);
+        const copied_ids = object_ids.slice(1);
         // funny enough, shift effects the original id list
         copied_ids.forEach((object_id) => {
             misc_objects[object_id] = name;
