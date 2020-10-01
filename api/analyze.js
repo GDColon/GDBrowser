@@ -38,12 +38,27 @@ function analyze_level(app, level, rawData) {
 
     let response = {};
 
-    let blockNames = Object.keys(blocks)
-    let miscNames = Object.keys(ids.misc)
     let blockCounts = {}
     let miscCounts = {}
     let triggerGroups = []
     let highDetail = 0
+
+    let misc_objects = {};
+    let block_ids = {};
+
+    for (const [name, object_ids] of Object.entries(ids.misc)) {
+        const copied_ids = object_ids.splice(1);
+        // funny enough, shift effects the original id list
+        copied_ids.forEach((object_id) => {
+            misc_objects[object_id] = name;
+        });
+    }
+
+    for (const [name, object_ids] of Object.entries(blocks)) {
+        object_ids.forEach((object_id) => {
+            block_ids[object_id] = name;
+        });
+    }
 
     const data = rawData.split(";");
 
@@ -85,19 +100,21 @@ function analyze_level(app, level, rawData) {
         if (obj.triggerGroups) obj.triggerGroups.split('.').forEach(x => triggerGroups.push(x))
         if (obj.highDetail == 1) highDetail += 1
 
-        blockNames.forEach(b => {
-            if (blocks[b].includes(id)) {
-                if (!blockCounts[b]) blockCounts[b] = 1
-                else blockCounts[b] += 1
-            }
-        })
+        if (id in misc_objects) {
+            const name = misc_objects[id];
 
-        miscNames.forEach(b => {
-            if (ids.misc[b].includes(Number(id))) {
-                if (!miscCounts[b]) miscCounts[b] = [1, ids.misc[b][0]]
-                else miscCounts[b][0] += 1
+            if (!miscCounts[name]) {
+                miscCounts[name] = [1, ids.misc[name][0]];
+            } else {
+                miscCounts[name][0] += 1;
             }
-        })
+        }
+
+        if (id in block_ids) {
+            const name = block_ids[id];
+            if (!blockCounts[name]) blockCounts[name] = 1;
+            else blockCounts[name] += 1;
+        }
 
         if (obj.x) { // sometimes the field doesn't exist
             last = Math.max(last, obj.x);
