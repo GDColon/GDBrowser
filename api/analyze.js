@@ -80,6 +80,7 @@ function analyze_level(level, rawData) {
     }
 
     const data = rawData.split(";");
+    const header = data.shift();
 
     let level_portals = [];
     let level_text = [];
@@ -95,8 +96,7 @@ function analyze_level(level, rawData) {
 
         let keys = Object.keys(obj)
         keys.forEach((k, i) => {
-            if (k in init.values) k = obj[k][0]
-            else if (k in properties) obj[properties[k]] = obj[k]
+            if (k in properties) obj[properties[k]] = obj[k]
             delete obj[k]
         })
 
@@ -186,7 +186,7 @@ function analyze_level(level, rawData) {
 
     response.text = level_text.sort(function (a, b) {return parseInt(a.x) - parseInt(b.x)}).map(x => [Buffer.from(x.message, 'base64').toString(), Math.round(x.x / last * 99) + "%"])
 
-    const header_response = parse_header(data[0]);
+    const header_response = parse_header(header);
     response.settings = header_response.settings;
     response.colors = header_response.colors;
 
@@ -200,10 +200,16 @@ function parse_header(header) {
     let response = {};
     response.settings = {};
 
-    Object.keys(header).forEach(x => {
+    const header_keyed = parse_obj(header, ',');
+
+    Object.keys(header_keyed).forEach(x => {
+        if (!(x in init.values)) {
+            return;
+        }
+
         let val = init.values[x]
         let name = val[0]
-        let property = header[x]
+        let property = header_keyed[x]
         switch (val[1]) {
             case 'list':
                 val = init[(val[0] + "s")][property];
