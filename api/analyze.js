@@ -78,15 +78,15 @@ function analyze_level(app, level, rawData) {
         })
 
         let id = obj.id
-        if (ids.portals[id]) {
+        if (id in ids.portals) {
             obj.portal = ids.portals[id];
             level_portals.push(obj);
         }
-        if (ids.orbs[id]) {
+        if (id in ids.orbs) {
             obj.orb = ids.orbs[id];
             level_orbs.push(obj);
         }
-        if (ids.triggers[id]) {
+        if (id in ids.triggers) {
             obj.trigger = ids.triggers[id];
             level_triggers.push(obj);
         }
