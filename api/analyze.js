@@ -46,9 +46,8 @@ function parse_obj(obj, splitter, name_arr, valid_only) {
 
     // semi-useless optimization depending on where at node js you're at
     for (let i = 0, obj_l = s_obj.length; i < obj_l; i += 2) {
-        const valid = s_obj[i] in name_arr;
         let k_name = s_obj[i];
-        if (valid) {
+        if (s_obj[i] in name_arr) {
             if (!valid_only) {
                 k_name = name_arr[s_obj[i]];
             }
