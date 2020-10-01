@@ -40,16 +40,20 @@ function sortObj(obj, sortBy) {
     return sorted
 }
 
-function parse_obj(obj, splitter) {
-    /**
-     * slightly more efficient version of parseResponse with a _lot_ less safeguards
-     */
-    const split_obj = obj.split(splitter);
-    const robtop_obj = {};
+function parse_obj(obj, splitter, name_arr, valid_only) {
+    const s_obj = obj.split(splitter);
+    let robtop_obj = {};
 
-    const obj_length = split_obj.length; // semi-useless optimization depending on where at node js you're at
-    for (let i = 0; i < obj_length; i += 2) {
-        robtop_obj[split_obj[i]] = split_obj[i + 1];
+    // semi-useless optimization depending on where at node js you're at
+    for (let i = 0, obj_l = s_obj.length; i < obj_l; i += 2) {
+        const valid = s_obj[i] in name_arr;
+        let k_name = s_obj[i];
+        if (valid) {
+            if (!valid_only) {
+                k_name = name_arr[s_obj[i]];
+            }
+            robtop_obj[k_name] = s_obj[i + 1];
+        }
     }
     return robtop_obj;
 }
@@ -92,13 +96,7 @@ function analyze_level(level, rawData) {
 
     const obj_length = data.length;
     for (let i = 0; i < obj_length; ++i) {
-        obj = parse_obj(data[i], ',');
-
-        let keys = Object.keys(obj)
-        keys.forEach((k, i) => {
-            if (k in properties) obj[properties[k]] = obj[k]
-            delete obj[k]
-        })
+        obj = parse_obj(data[i], ',', properties);
 
         let id = obj.id
 
@@ -200,13 +198,9 @@ function parse_header(header) {
     let response = {};
     response.settings = {};
 
-    const header_keyed = parse_obj(header, ',');
+    const header_keyed = parse_obj(header, ',', init.values, true);
 
     Object.keys(header_keyed).forEach(x => {
-        if (!(x in init.values)) {
-            return;
-        }
-
         let val = init.values[x]
         let name = val[0]
         let property = header_keyed[x]
@@ -247,17 +241,14 @@ function parse_header(header) {
             }
             case 'legacy-color': {
                 // if a level has a legacy color, we can assume that it does not have a kS38 at all
-                const color = parse_obj(property, "_");
+                const color = parse_obj(property, "_", colorStuff.properties);
 
-                const keys = Object.keys(color)
-                let colorObj = {}
+                let colorObj = color
 
                 // so here we parse the color to something understandable by the rest
                 // slightly smart naming but it is also pretty gross
                 // in a sense - the name would be something like legacy-G -> G
                 const colorVal = name.split('-').pop()
-
-                keys.forEach(k => {if (colorStuff.properties[k]) colorObj[colorStuff.properties[k]] = color[k]})
 
                 colorObj.channel = colorVal
 
@@ -275,12 +266,10 @@ function parse_header(header) {
             case 'colors': {
                 let colorList = property.split("|")
                 colorList.forEach((x, y) => {
-                    const color = parse_obj(x, "_")
-                    let keys = Object.keys(color)
-                    let colorObj = {}
-                    if (!color['6']) return colorList = colorList.filter((h, i) => y != i)
+                    const color = parse_obj(x, "_", colorStuff.properties)
+                    let colorObj = color
+                    if (!color.channel) return colorList = colorList.filter((h, i) => y != i)
 
-                    keys.forEach(k => {if (colorStuff.properties[k]) colorObj[colorStuff.properties[k]] = color[k]})
                     if (colorStuff.channels[colorObj.channel]) colorObj.channel = colorStuff.channels[colorObj.channel]
                     if (colorObj.channel > 1000) return;
                     if (colorStuff.channels[colorObj.copiedChannel]) colorObj.copiedChannel = colorStuff.channels[colorObj.copiedChannel]
