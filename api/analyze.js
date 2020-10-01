@@ -11,7 +11,7 @@ module.exports = async (app, req, res, level) => {
 
     if (unencrypted) {
         const raw_data = level.data;
-        const response_data = analyze_level(app, level, raw_data);
+        const response_data = analyze_level(level, raw_data);
 
         return res.send(response_data);
     } else {
@@ -19,7 +19,7 @@ module.exports = async (app, req, res, level) => {
             if (err) { return res.send("-1"); }
 
             const raw_data = buffer.toString();
-            const response_data = analyze_level(app, level, raw_data);
+            const response_data = analyze_level(level, raw_data);
 
             return res.send(response_data);
         });
@@ -33,7 +33,19 @@ function sortObj(obj, sortBy) {
     return sorted
 }
 
-function analyze_level(app, level, rawData) {
+function parse_obj(obj, splitter) {
+    /**
+     * slightly more efficient version of parseResponse with a _lot_ less safeguards
+     */
+    const split_obj = obj.split(splitter);
+    const robtop_obj = {};
+    for (let i = 0; i < split_obj.length; i += 2) {
+        robtop_obj[split_obj[i]] = split_obj[i + 1];
+    }
+    return robtop_obj;
+}
+
+function analyze_level(level, rawData) {
     let response = {};
 
     let blockCounts = {}
@@ -69,7 +81,7 @@ function analyze_level(app, level, rawData) {
     let last = 0;
 
     data.forEach((x, y) => {
-        obj = app.parseResponse(x, ",")
+        obj = parse_obj(x, ',');
 
         let keys = Object.keys(obj)
         keys.forEach((k, i) => {
@@ -164,7 +176,7 @@ function analyze_level(app, level, rawData) {
 
     response.text = level_text.sort(function (a, b) {return parseInt(a.x) - parseInt(b.x)}).map(x => [Buffer.from(x.message, 'base64').toString(), Math.round(x.x / last * 99) + "%"])
 
-    const header_response = parse_header(app, data[0]);
+    const header_response = parse_header(data[0]);
     response.settings = header_response.settings;
     response.colors = header_response.colors;
 
@@ -174,7 +186,7 @@ function analyze_level(app, level, rawData) {
     return response;
 }
 
-function parse_header(app, header) {
+function parse_header(header) {
     let response = {};
     response.settings = {};
 
@@ -219,7 +231,7 @@ function parse_header(app, header) {
             }
             case 'legacy-color': {
                 // if a level has a legacy color, we can assume that it does not have a kS38 at all
-                const color = app.parseResponse(property, "_");
+                const color = parse_obj(property, "_");
 
                 const keys = Object.keys(color)
                 let colorObj = {}
@@ -247,7 +259,7 @@ function parse_header(app, header) {
             case 'colors': {
                 let colorList = property.split("|")
                 colorList.forEach((x, y) => {
-                    const color = app.parseResponse(x, "_")
+                    const color = parse_obj(x, "_")
                     let keys = Object.keys(color)
                     let colorObj = {}
                     if (!color['6']) return colorList = colorList.filter((h, i) => y != i)
