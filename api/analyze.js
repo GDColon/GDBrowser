@@ -11,17 +11,24 @@ module.exports = async (app, req, res, level) => {
 
     if (unencrypted) {
         const raw_data = level.data;
-        const response_data = analyze_level(level, raw_data);
 
-        return res.send(response_data);
+        try {
+            const response_data = analyze_level(level, raw_data);
+            return res.send(response_data);
+        } catch (err) {
+            return res.send(-1);
+        }
     } else {
         zlib.unzip(levelString, (err, buffer) => {
             if (err) { return res.send("-1"); }
 
             const raw_data = buffer.toString();
-            const response_data = analyze_level(level, raw_data);
-
-            return res.send(response_data);
+            try {
+                const response_data = analyze_level(level, raw_data);
+                return res.send(response_data);
+            } catch (err) {
+                return res.send(-1);
+            }
         });
     }
 }
