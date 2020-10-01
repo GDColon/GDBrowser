@@ -73,8 +73,8 @@ function analyze_level(app, level, rawData) {
 
         let keys = Object.keys(obj)
         keys.forEach((k, i) => {
-            if (init.values[k]) k = obj[k][0]
-            else if (properties[k]) obj[properties[k]] = obj[k]
+            if (k in init.values) k = obj[k][0]
+            else if (k in properties) obj[properties[k]] = obj[k]
             delete obj[k]
         })
 
@@ -110,18 +110,20 @@ function analyze_level(app, level, rawData) {
 
         if (id in misc_objects) {
             const name = misc_objects[id];
-
-            if (!miscCounts[name]) {
-                miscCounts[name] = [1, ids.misc[name][0]];
-            } else {
+            if (name in miscCounts) {
                 miscCounts[name][0] += 1;
+            } else {
+                miscCounts[name] = [1, ids.misc[name][0]];
             }
         }
 
         if (id in block_ids) {
             const name = block_ids[id];
-            if (!blockCounts[name]) blockCounts[name] = 1;
-            else blockCounts[name] += 1;
+            if (name in blockCounts) {
+                blockCounts[name] += 1;
+            } else {
+                blockCounts[name] = 1;
+            }
         }
 
         if (obj.x) { // sometimes the field doesn't exist
