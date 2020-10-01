@@ -34,8 +34,6 @@ function sortObj(obj, sortBy) {
 }
 
 function analyze_level(app, level, rawData) {
-    console.time("level analyze");
-
     let response = {};
 
     let blockCounts = {}
@@ -171,7 +169,6 @@ function analyze_level(app, level, rawData) {
     response.dataLength = rawData.length
     response.data = rawData
 
-    console.timeEnd("level analyze");
     return response;
 }
 
