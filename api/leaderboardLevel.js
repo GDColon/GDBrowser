@@ -29,8 +29,8 @@ module.exports = async (app, req, res) => {
         let keys = Object.keys(x)
         x.rank = x[6]
         x.username = x[1]
-        x.percent = x[3]
-        x.coins = x[13]
+        x.percent = +x[3]
+        x.coins = +x[13]
         x.playerID = x[2]
         x.date = x[42] + app.config.timestampSuffix
         keys.forEach(k => delete x[k])

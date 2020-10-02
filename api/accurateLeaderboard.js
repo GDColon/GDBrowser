@@ -5,10 +5,10 @@ const sheet = new GoogleSpreadsheet('1ADIJvAkL0XHGBDhO7PP9aQOuK3mPIKB2cVPbshuBBH
 let lastIndex = {"stars": 0, "coins": 0, "demons": 0}
 let caches = [{"stars": null, "coins": null, "demons": null}, {"stars": null, "coins": null, "demons": null}] // 0 for JSON, 1 for GD
 
-module.exports = async (app, req, res) => {
+module.exports = async (app, req, res, post) => {
 
       if (app.offline || !app.sheetsKey || app.endpoint != "http://boomlings.com/database/") return res.send([])
-      let gdMode = req.query.hasOwnProperty("gd")
+      let gdMode = post || req.query.hasOwnProperty("gd")
       let cache = caches[gdMode ? 1 : 0]
 
       let type = req.query.type ? req.query.type.toLowerCase() : 'stars'
@@ -40,12 +40,12 @@ module.exports = async (app, req, res) => {
             username: account[1],
             playerID: account[2],
             accountID: account[16],
-            stars: account[3],
-            demons: account[4],
-            cp: account[8],
-            coins: account[13],
-            usercoins: account[17],
-            diamonds: account[46],
+            stars: +account[3],
+            demons: +account[4],
+            cp: +account[8],
+            coins: +account[13],
+            usercoins: +account[17],
+            diamonds: +account[46],
             icon: [account[21], account[10], account[11], account[28] == "1" ? "2" : "0"]
           }
 

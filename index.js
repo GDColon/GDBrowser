@@ -102,6 +102,8 @@ app.post("/messages/:id", RL, async function(req, res) { app.run.fetchMessage(ap
 app.post("/deleteMessage", RL, function(req, res) { app.run.deleteMessage(app, req, res) })  
 app.post("/sendMessage", RL, function(req, res) { app.run.sendMessage(app, req, res) })  
 
+app.post("/accurateLeaderboard", function(req, res) { app.run.accurateLeaderboard(app, req, res, true) })
+
 
 // HTML
 

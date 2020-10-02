@@ -47,7 +47,7 @@ module.exports = async (app, req, res) => {
         let comment = {}
         comment.content = Buffer.from(x[2], 'base64').toString();
         comment.ID = x[6]
-        comment.likes = x[4]
+        comment.likes = +x[4]
         comment.date = (x[9] || "?") + app.config.timestampSuffix
         if (comment.content.endsWith("⍟") || comment.content.endsWith("☆")) {
           comment.content = comment.content.slice(0, -1)
@@ -61,7 +61,7 @@ module.exports = async (app, req, res) => {
           comment.accountID = y[16]
           comment.form = ['icon', 'ship', 'ball', 'ufo', 'wave', 'robot', 'spider'][Number(y[14])]
           comment.color = (comment.playerID == "16" ? "50,255,255" : x[12] || "255,255,255")
-          if (x[10] > 0) comment.percent = x[10]
+          if (x[10] > 0) comment.percent = +x[10]
           comment.moderator = +x[11] || 0
         }
 

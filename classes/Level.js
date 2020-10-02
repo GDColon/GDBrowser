@@ -15,11 +15,11 @@ class Level {
         this.authorID = levelInfo[6]
         this.accountID = author[2] || 0
         this.difficulty = difficulty[levelInfo[9]]
-        this.downloads = levelInfo[10]
-        this.likes = levelInfo[14]
+        this.downloads = +levelInfo[10]
+        this.likes = +levelInfo[14]
         this.disliked = levelInfo[14] < 0
         this.length = length[levelInfo[15]] || "XL"
-        this.stars = levelInfo[18]
+        this.stars = +levelInfo[18]
         this.orbs = orbs[levelInfo[18]]
         this.diamonds = levelInfo[18] < 2 ? 0 : parseInt(levelInfo[18]) + 2
         this.featured = levelInfo[19] > 0
@@ -27,19 +27,19 @@ class Level {
         this.gameVersion = levelInfo[13] > 17 ? (levelInfo[13] / 10).toFixed(1) : levelInfo[13] == 11 ? "1.8" : levelInfo[13] == 10 ? "1.7" : "Pre-1.7"
         if (levelInfo[28]) this.uploaded = levelInfo[28] + config.timestampSuffix
         if (levelInfo[29]) this.updated = levelInfo[29] + config.timestampSuffix
-        this.version = levelInfo[5];
+        this.version = +levelInfo[5];
         if (levelInfo[27]) this.password = levelInfo[27];
         this.copiedID = levelInfo[30]
         this.twoPlayer = levelInfo[31] > 0
         this.officialSong = levelInfo[12] != 0 ? parseInt(levelInfo[12]) + 1 : 0
-        this.customSong = levelInfo[35]
-        this.coins = levelInfo[37]
+        this.customSong = +levelInfo[35]
+        this.coins = +levelInfo[37]
         this.verifiedCoins = levelInfo[38] > 0
-        this.starsRequested = levelInfo[39]
+        this.starsRequested = +levelInfo[39]
         this.ldm = levelInfo[40] > 0
-        this.objects = levelInfo[45]
+        this.objects = +levelInfo[45]
         this.large = levelInfo[45] > 40000;
-        this.cp = (this.stars > 0) + this.featured + this.epic
+        this.cp = Number((this.stars > 0) + this.featured + this.epic)
 
         if (levelInfo[17] > 0) this.difficulty += ' Demon'
         if (this.difficulty == "Insane Demon") this.difficulty = "Extreme Demon"
@@ -50,9 +50,9 @@ class Level {
 
         if (this.password && this.password != 0) {
             let xor = new XOR();
-            let pass = config.xorPasswords ? xor.decrypt(this.password, 26364) : this.password;
+            let pass = config.xorPasswords ? +xor.decrypt(this.password, 26364) : this.password;
             if (pass.length > 1) this.password = pass.slice(1);
-            else this.password = pass;
+            else this.password = +pass;
         }
     }
 }

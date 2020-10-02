@@ -25,16 +25,16 @@ module.exports = async (app, req, res) => {
 
       scores.forEach(x => {
         let keys = Object.keys(x)
-        x.rank = x[6]
+        x.rank = +x[6]
         x.username = x[1]
         x.playerID = x[2]
         x.accountID = x[16]
-        x.stars = x[3]
-        x.demons = x[4]
-        x.cp = x[8]
-        x.coins = x[13]
-        x.usercoins = x[17]
-        x.diamonds = x[46]
+        x.stars = +x[3]
+        x.demons = +x[4]
+        x.cp = +x[8]
+        x.coins = +x[13]
+        x.usercoins = +x[17]
+        x.diamonds = +x[46]
         keys.forEach(k => delete x[k])
       }) 
       return res.send(scores)
