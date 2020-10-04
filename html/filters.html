@@ -116,7 +116,7 @@ let demons = []
 let demonMode = false;
 
 $('#userSearch').click(function() {
-	let query = encodeURIComponent($('#levelName').val())
+	let query = encodeURIComponent($('#levelName').val()).replace(/%2F/gi, "")
 	if (query) window.location.href = "./u/" + query
 })
 

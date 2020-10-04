@@ -46,7 +46,7 @@ module.exports = async (app, req, res, api, analyze) => {
       level.songName = song[2] || "Unknown"
       level.songAuthor = song[4] || "Unknown"
       level.songSize = (song[5] || "0") + "MB"
-      level.songID = song[1] || level.customSong
+      level.songID = song[1] || String(level.customSong)
     }
 
     else {

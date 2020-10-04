@@ -50,9 +50,9 @@ class Level {
 
         if (this.password && this.password != 0) {
             let xor = new XOR();
-            let pass = config.xorPasswords ? +xor.decrypt(this.password, 26364) : this.password;
+            let pass = config.xorPasswords ? xor.decrypt(this.password, 26364) : this.password;
             if (pass.length > 1) this.password = pass.slice(1);
-            else this.password = +pass;
+            else this.password = pass;
         }
     }
 }
