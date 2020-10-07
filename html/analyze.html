@@ -35,7 +35,7 @@
 			<h3 style="margin-top: -0.25%" id="hdText"></h3>
 		</div>
 
-		<h1 class="topMargin">Portal order</h1>
+		<h1 class="topMargin">Portal/Coin order</h1>
 		<div class="transparentBox analysis" id="portals" style="height: 23%"></div>
 		<div>
 			<div class="portalSetting"><h3><input checked type="checkbox" class="portalToggle" id="box1" portal="form"> <label for="box1" class="gdcheckbox gdButton portalButton"></label>Form Portals</h3></div>
@@ -45,6 +45,8 @@
 			<div class="portalSetting"><h3><input checked type="checkbox" class="portalToggle" id="box4" portal="mirror"><label for="box4" class="gdcheckbox gdButton portalButton"></label>Mirror Portals</h3></div>
 			<div class="portalSetting"><h3><input checked type="checkbox" class="portalToggle" id="box5" portal="dual"> <label for="box5" class="gdcheckbox gdButton portalButton"></label>Dual Portals</h3></div>
 			<div class="portalSetting"><h3><input checked type="checkbox" class="portalToggle" id="box6" portal="dupe"> <label for="box6" class="gdcheckbox gdButton portalButton"></label>Duplicates</h3></div>
+			<br><div style="height: 1.5%"></div>
+			<div class="portalSetting"><h3><input checked type="checkbox" class="portalToggle" id="box7" portal="coin"> <label for="box7" class="gdcheckbox gdButton portalButton"></label>Coins</h3></div>
 
 		</div>
 
@@ -130,7 +132,7 @@ function commafy(num) { return (+num || 0).toString().replace(/(\d)(?=(\d\d\d)+$
 
 function appendPortals() {
 	$('#portals').html("")
-	if (res.settings.gamemode && res.settings.gamemode != "cube" && !disabledPortals.includes('form')) $('#portals').append(`<div class="inline portalDiv"><img class="portalImage" src='../objects/portal-${res.settings.gamemode}.png'><h3>Start</h3></div><img class="divider portalImage" src="../assets/divider.png" style="margin: 1.3% 0.8%">`)
+	if (res.settings.gamemode && res.settings.gamemode != "cube" && !disabledPortals.includes('form')) $('#portals').append(`<div class="inline portalDiv"><img class="portalImage" src='../objects/${res.settings.gamemode != "coin" ? `portal-${res.settings.gamemode}` : "obj-coin"}.png'><h3>Start</h3></div><img class="divider portalImage" src="../assets/divider.png" style="margin: 1.3% 0.8%">`)
 	if (res.settings.startMini && !disabledPortals.includes('size')) $('#portals').append(`<div class="inline portalDiv"><img class="portalImage" src='../objects/portal-mini.png'><h3>Start</h3></div><img class="divider portalImage" src="../assets/divider.png" style="margin: 1.3% 0.8%">`)
 	if (res.settings.speed && res.settings.speed != "1x" && !disabledPortals.includes('speed')) $('#portals').append(`<div class="inline portalDiv"><img class="portalImage speedPortal" src='../objects/portal-${res.settings.speed}.png'><h3>Start</h3></div><img class="divider portalImage" src="../assets/divider.png" style="margin: 1.3% 0.8%">`)
 	if (res.settings.startDual && !disabledPortals.includes('dual')) $('#portals').append(`<div class="inline portalDiv"><img class="portalImage" src='../objects/portal-dual.png'><h3>Start</h3></div><img class="divider portalImage" src="../assets/divider.png" style="margin: 1.3% 0.8%">`)
@@ -211,6 +213,7 @@ appendPortals()
 		if (disabledPortals.includes('size')) portals = portals.filter(x => !sizePortals.includes(x[0]))
 		if (disabledPortals.includes('dual')) portals = portals.filter(x => !dualPortals.includes(x[0]))
 		if (disabledPortals.includes('mirror')) portals = portals.filter(x => !mirrorPortals.includes(x[0]))
+		if (disabledPortals.includes('coin')) portals = portals.filter(x => x[0] != "coin")
 
 		if (disabledPortals.includes('dupe')) {
 			portals.reverse().forEach((x, y) => {if (portals[y+1] && portals[y+1][0] == x[0]) portals[y][0] = null;})
