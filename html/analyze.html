@@ -216,7 +216,11 @@ appendPortals()
 		if (disabledPortals.includes('coin')) portals = portals.filter(x => x[0] != "coin")
 
 		if (disabledPortals.includes('dupe')) {
-			portals.reverse().forEach((x, y) => {if (portals[y+1] && portals[y+1][0] == x[0]) portals[y][0] = null;})
+			portals.reverse().forEach((x, y) => {
+				if (x[0] != "coin") {
+					if (portals[y+1] && portals[y+1][0] == x[0]) portals[y][0] = null;
+				}
+			})
 			portals = portals.reverse().filter(x => x[0] != null)
 		}
 
