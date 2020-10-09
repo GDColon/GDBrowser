@@ -49,7 +49,7 @@
 		</div>
 
 		<h1 class="topMargin2" id="coinText">Coin order</h1>
-		<div class="transparentBox analysis" id="coins" style="height: 23%"></div>
+		<div class="transparentBox analysis" id="coins"></div>
 
 		<h1 class="topMargin2" id="triggerText">Triggers</h1>
 		<div class="transparentBox analysis" id="triggers"></div>
@@ -154,7 +154,10 @@ function appendPortals() {
 
 appendPortals()
 
-	coinList.forEach((x, y) => {
+	if (res.coins.length == 0) {
+		$('#coinText').remove()
+		$('#coins').remove()
+	} else coinList.forEach((x, y) => {
 		$('#coins').append(`<div class="inline triggerDiv"><img height="50%" src='../objects/obj-coin.png'><h3 style="padding-top: 7%">${res.coins[y]}</h3></div>`)
 	})
 
