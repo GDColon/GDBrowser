@@ -28,6 +28,7 @@
 						<a class="header-link" href="#level">Levels</a>
 						<a class="header-link" href="#search">Searching</a>
 						<a class="header-link" href="#levelleaderboard">Level Leaderboards</a>
+						<a class="header-link" href="#analyze">Level Analysis</a> 
 					</div>
 				</div>
 				<div class="header-category">
@@ -50,7 +51,7 @@
 				<div class="header-category">
 					<div class="category-name">Misc</div>
 					<div class="category-content">
-						<a class="header-link" href="#analyze">Level Analysis</a> 
+						<a class="header-link" href="#objects">Objects</a> 
 						<a class="header-link" href="#icons">Icons</a> 
 					</div>
 				</div>
@@ -78,12 +79,13 @@
 				<p><a href="#search"><u>Searching</u></a> <i>/api/search/search-query</i></p>
 				<p><a href="#leaderboard"><u>Leaderboards</u></a> <i>/api/leaderboard</i></p>
 				<p><a href="#levelleaderboard"><u>Level Leaderboards</u></a> <i>/api/leaderboardLevel/levelID</i></p>
-				<p><a href="#comments"><u>Comments & Posts</u></a> <i>/api/comments/level-or-user-ID</i></p>
 				<p><a href="#analyze"><u>Level Analysis</u></a> <i>/api/analyze/levelID</i></p>
+				<p><a href="#comments"><u>Comments & Posts</u></a> <i>/api/comments/level-or-user-ID</i></p>
 				<p><a href="#commenting"><u>Commenting</u></a> <i>/postComment (POST)</i></p>
 				<p><a href="#profileposting"><u>Profile Posting</u></a> <i>/postProfileComment (POST)</i></p>
 				<p><a href="#messages"><u>Messages</u></a> <i>/messages (4 different POSTs)</i></p>
 				<p><a href="#liking"><u>Liking</u></a> <i>/like (POST)</i></p>
+				<p><a href="#objects"><u>Objects</u></a> <i>/objects/objectID</i></p>
 				<p><a href="#icons"><u>Icons</u></a> <i>/icon/username</i></p>
 			</quote>
 			<br>
@@ -414,6 +416,47 @@
 		<div class="seperator"></div>
 
 	</main>
+
+	<main>
+		<div id="analyze" class="anchor"></div>
+		<div class="main-block">
+			<h1>Level Analysis</h1>
+			<p>/api/analyze/levelID</p>
+
+			<p>Analyzes a level's data</p>
+			<p><sb>Level analysis is updated a lot so there may be changes in the future</sb></p>
+
+			<br>
+			<p class="reveal" onclick="$('#params-analyze').slideToggle(100)"><b>Parameters (0)</b></p>
+			<div class="subdiv" id="params-analyze">
+				<p>No parameters for this one!</p>
+			</div>
+
+			<br>
+			<p class="reveal" onclick="$('#response-analyze').slideToggle(100)"><b>Response (12)</b></p>
+			<div class="subdiv" id="response-analyze">
+				<p><b>Response is subject to change in the future</b></p>
+				<p>The API will return an array of each player with the following information:</p>
+				<p>level: Basic level info (name, ID, author, etc)</p>
+				<p>settings: The level's settings (song offset, starting form/speed, two player mode, font, etc)</p>
+				<p>portals: A string listing the order of all the portals in the level + their percent. Does not include starting form/speed</p>
+				<p>orbs: How many of each jump ring is in the level</p>
+				<p>triggers: How many of each trigger is in the level</p>
+				<p>blocks: How many of each block type is in the level</p>
+				<p>triggerGroups: How many of each group ID is in the level</p>
+				<p>misc: Amount of objects that aren't categorized above (glow, arrows, clouds, pickups, etc)</p>
+				<p>colors: The level's initial color channels. Contains channel, R, G, B, opacity, player color, blending, and copied channel</p>
+				<p>text: An array of all the text objects in a level. ([text, percent])</p>
+				<p>dataLength: How long the level data is (spoilers - very)</p>
+				<p>data: The decrypted data of the level. And it's freakin' huge</p>
+			</div>
+
+			<br>
+		</div>
+
+		<div class="seperator"></div>
+
+	</main>
 	<main>
 		<div id="comments" class="anchor"></div>
 		<div class="main-block">
@@ -471,47 +514,6 @@
 
 		</div>
 		<div class="seperator"></div>
-	</main>
-	
-	<main>
-		<div id="analyze" class="anchor"></div>
-		<div class="main-block">
-			<h1>Level Analysis</h1>
-			<p>/api/analyze/levelID</p>
-
-			<p>Analyzes a level's data</p>
-			<p><sb>Level analysis is updated a lot so there may be changes in the future</sb></p>
-
-			<br>
-			<p class="reveal" onclick="$('#params-analyze').slideToggle(100)"><b>Parameters (0)</b></p>
-			<div class="subdiv" id="params-analyze">
-				<p>No parameters for this one!</p>
-			</div>
-
-			<br>
-			<p class="reveal" onclick="$('#response-analyze').slideToggle(100)"><b>Response (12)</b></p>
-			<div class="subdiv" id="response-analyze">
-				<p><b>Response is subject to change in the future</b></p>
-				<p>The API will return an array of each player with the following information:</p>
-				<p>level: Basic level info (name, ID, author, etc)</p>
-				<p>settings: The level's settings (song offset, starting form/speed, two player mode, font, etc)</p>
-				<p>portals: A string listing the order of all the portals in the level + their percent. Does not include starting form/speed</p>
-				<p>orbs: How many of each jump ring is in the level</p>
-				<p>triggers: How many of each trigger is in the level</p>
-				<p>blocks: How many of each block type is in the level</p>
-				<p>triggerGroups: How many of each group ID is in the level</p>
-				<p>misc: Amount of objects that aren't categorized above (glow, arrows, clouds, pickups, etc)</p>
-				<p>colors: The level's initial color channels. Contains channel, R, G, B, opacity, player color, blending, and copied channel</p>
-				<p>text: An array of all the text objects in a level. ([text, percent])</p>
-				<p>dataLength: How long the level data is (spoilers - very)</p>
-				<p>data: The decrypted data of the level. And it's freakin' huge</p>
-			</div>
-
-			<br>
-		</div>
-
-		<div class="seperator"></div>
-
 	</main>
 
 	<main>
@@ -708,6 +710,49 @@
 			<div class="seperator"></div>
 		</main>
 
+	</main>
+
+	<main>
+		<div id="objects" class="anchor"></div>
+		<div class="main-block">
+			<h1>Objects</h1>
+			<p>/object/objectID</p>
+
+			<p>Gets a PNG of an object from Geometry Dash</p>
+			<p style="font-weight: bold">This one is still a WIP so some objects (like monsters) are not yet supported</p>
+			<p style="font-size:15px; margin-top:-7px">All the object IDs are documented in <a target="_blank" href="../58079690">this level</a></p>
+
+			<br>
+			<p class="reveal" onclick="$('#params-objects').slideToggle(100)"><b>Parameters (3)</b></p>
+			<div class="subdiv" id="params-objects">
+				<p>rotation: The rotation of the object (clockwise)</p>
+				<p>flipX: Mirrors the object horizontally</p>
+				<p>flipY: Mirrors the object vertically</p>
+			</div>
+
+			<br>
+			<p class="reveal" onclick="$('#response-objects').slideToggle(100)"><b>Response (1)</b></p>
+			<div class="subdiv" id="response-objects">
+				<p>A delicious PNG of the object!</p>
+			</div>
+			<br>
+			<p class="reveal" onclick="$('#request-objects').slideToggle(100)"><b>Examples</b></p>
+			<div class="subdiv" id="request-objects">
+				<p><b>Sample Icons</b></p>
+				<p><a target="_blank" style="font-weight:400" href="../object/1">/object/1</a> (the default block)</p>
+				<p><a target="_blank" style="font-weight:400" href="../object/660?rotation=90">/object/660?rotation=90</a> (the wave portal, rotated 90 degrees clockwise)</p>
+				<p><a target="_blank" style="font-weight:400" href="../object/1704?flipX">/object/1704?flipX</a> (a dash orb flipped horizontally)</p>
+			</div>
+
+			<br>
+		</div>
+
+		<div class="seperator"></div>
+
+	</main>
+
+	</main>
+
 	<main>
 		<div id="icons" class="anchor"></div>
 		<div class="main-block">
@@ -715,7 +760,6 @@
 			<p>/icon/username</p>
 
 			<p>Gets a player's GD icon, or builds a custom one (Sent as a PNG)</p>
-			<p style="font-size:15px; margin-top:-7px">This one isn't really part of the API, but dammit, my website my rules</p>
 
 			<br>
 			<p class="reveal" onclick="$('#params-icons').slideToggle(100)"><b>Parameters (9)</b></p>

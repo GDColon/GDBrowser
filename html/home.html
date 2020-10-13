@@ -79,14 +79,20 @@
 let page = 1
 $('#browserlogo').css('filter', `hue-rotate(${Math.floor(Math.random() * (330 - 60)) + 60}deg) saturate(${Math.floor(Math.random() * (150 - 100)) + 100}%)`)
 
+let xButtonPos = '43%'
+let lastPage
+
 function loadCredits() {
 	$('.subCredits').hide()
 	$('#credits' + page).show()
 	$('#credits').show()
+	if (page == lastPage) $('#closeCredits').css('height', '52%')
+	else $('#closeCredits').css('height', xButtonPos)
 }
 
 fetch(`./api/credits`).then(res => res.json()).then(res => {
 
+	lastPage = res.credits.length + 1
 	res.credits.forEach((x, y) => {
 		$('#credits').append(`<div id="credits${y+1}" class="subCredits" style="display: none;">
 			<div class="brownBox center supercenter" style="width: 80vh; height: 43%; padding-top: 1.5%; padding-bottom: 3.5%;">
@@ -103,22 +109,23 @@ fetch(`./api/credits`).then(res => res.json()).then(res => {
 		</div>`)
 	})
 
-	$('#credits').append(`<div id="credits${res.credits.length + 1}" class="subCredits" style="display: none;">
-			<div id="specialthanks" class="brownBox center supercenter" style="width: 80vh; height: 43%; padding-top: 1.5%; padding-bottom: 3.5%;">
+	$('#credits').append(`<div id="credits${lastPage}" class="subCredits" style="display: none;">
+			<div id="specialthanks" class="brownBox center supercenter" style="width: 80vh; height: 55%; padding-top: 1.5%; padding-bottom: 3.5%;">
 				<h1>Special Thanks!</h1><br>
 			</div>
 			<img class="gdButton" src="../assets/arrow-left.png" width="60vh" style="position: absolute; top: 45%; right: 75%" onclick="page -= 1; loadCredits()">
 		</div>`)
 
 	res.specialThanks.forEach((x, y) => {
+		n = x.split("/")
 		$('#specialthanks').append(`<div class="specialThanks">
-				<h2 class="gdButton smaller"><a href="./u/${x}">${x}</h2></a>
-				<img src="./icon/${x}" height=85%><br>
+				<h2 class="gdButton smaller"><a href="./u/${n[1] || n[0]}">${n[0]}</h2></a>
+				<img src="./icon/${n[1] || n[0]}" height=77%><br>
 				</div>`)
 	})
 
-	$('#credits').append(`<div class="center supercenter" style="width: 80vh; height: 43%; pointer-events: none;">
-	<img class="closeWindow gdButton" src="../assets/close.png" height="25%" style="position: absolute; top: -24%; left: -7vh; pointer-events: all;" onclick="$('#credits').hide(); page = 1;"></div>`)
+	$('#credits').append(`<div id="closeCredits" class="center supercenter" style="width: 80vh; height: ${xButtonPos}%; pointer-events: none;">
+	<img class="closeWindow gdButton" src="../assets/close.png" width="14%" style="position: absolute; top: -24%; left: -7vh; pointer-events: all;" onclick="$('#credits').hide(); page = 1;"></div>`)
 
 	$(document).keydown(function(k) {
 
@@ -128,7 +135,7 @@ fetch(`./api/credits`).then(res => res.json()).then(res => {
 		page -= 1; loadCredits();
 	}
 	
-	if (k.which == 39 && page < res.credits.length + 1) { //right
+	if (k.which == 39 && page < lastPage) { //right
 		page += 1; loadCredits();
 	}
 	

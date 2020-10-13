@@ -2,7 +2,7 @@ const zlib = require('zlib')
 const properties = require('../misc/objectProperties.json')
 const init = require('../misc/initialProperties.json')
 const colorStuff = require('../misc/colorProperties.json')
-const ids = require('../misc/objects.json')
+const ids = require('../misc/notableObjects.json')
 const blocks = require('../misc/blocks.json')
 
 module.exports = async (app, req, res, level) => {

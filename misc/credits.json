@@ -9,15 +9,6 @@
         },
 
         {
-            "header": "Additional Help",
-            "name": "101arrowz",
-            "ign": "genius991",
-            "youtube": ["https://www.youtube.com/channel/UCuloR4qLkF3QGw8WUHjcNuQ", "youtube"],
-            "twitter": ["https://twitter.com/arjunbarrett", "twitter"],
-            "github": ["https://github.com/101arrowz", "github"]
-        },
-
-        {
             "header": "Level Analyzing Help",
             "name": "Alten",
             "youtube": ["https://youtube.com/channel/UC9M8hLqh2yZIPSDvpyL7o8g", "youtube"],
@@ -74,6 +65,8 @@
         "ViPriN",
         "Cvolton",
         "Ucrash",
-        "zmxmx"
+        "zmxmx",
+        "101arrowz",
+        "Figment/FigmentBoy"
     ]
 }

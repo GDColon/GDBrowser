@@ -11,7 +11,7 @@ const app = express();
 app.offline = false  // set to true to go into "offline" mode (in case of ip ban from rob)
 app.secret = "Wmfd2893gb7" // lol
 
-app.config = require('./misc/gdpsConfig')  // tweak settings in this file if you're using a GDPS
+app.config = require('./gdpsConfig')  // tweak settings in this file if you're using a GDPS
 app.endpoint = app.config.endpoint  // boomlings.com/database/
 
 app.gdParams = function(obj={}) {
@@ -142,6 +142,7 @@ app.get("/api/search/:text", function(req, res) { app.run.search(app, req, res) 
 
 app.get("/icon", function(req, res) { res.redirect('/iconkit') })
 app.get("/iconkit/:text", function(req, res) { res.redirect('/icon/' + req.params.text) })
+app.get("/obj/:text", function(req, res) { res.redirect('/obj/' + req.params.text) })
 app.get("/leaderboards/:id", function(req, res) { res.redirect('/leaderboard/' + req.params.id) })
 app.get("/profile/:id", function(req, res) { res.redirect('/u/' + req.params.id) })
 app.get("/p/:id", function(req, res) { res.redirect('/u/' + req.params.id) })
@@ -160,6 +161,7 @@ app.get("/:id", function(req, res) { app.run.level(app, req, res) })
 
 app.get("/assets/sizecheck.js", function(req, res) { res.sendFile(__dirname + "/misc/sizecheck.js") }) 
 app.get("/icon/:text", function(req, res) { app.run.icon(app, req, res) })
+app.get("/object/:text", function(req, res) { app.run.object(app, req, res) })
 app.get('/api/icons', function(req, res) { 
   let sample = [JSON.stringify(sampleIcons[Math.floor(Math.random() * sampleIcons.length)].slice(1))]
   res.send(gdIcons.concat(sample)); 
