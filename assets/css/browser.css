@@ -668,7 +668,8 @@ input::-webkit-inner-spin-button {
     transform: translate(-3vh, -4.8vh);
     text-align: right;
     font-size: 1.8vh;
-    color: rgba(0, 0, 0, 0.5)
+    color: rgba(0, 0, 0, 0.5);
+    pointer-events: none;
 }
 
 .compactDate {
@@ -855,11 +856,10 @@ input::-webkit-inner-spin-button {
 }
 
 .analysis::-webkit-scrollbar, .levelCode::-webkit-scrollbar {
-    height: 8%;
     width: 1%;
     background: rgba(0, 0, 0, 0.1);
 }
-  
+
 .analysis::-webkit-scrollbar-thumb, .levelCode::-webkit-scrollbar-thumb {
     background: rgba(0, 0, 0, 0.3); 
     overflow: hidden;
@@ -875,6 +875,11 @@ input::-webkit-inner-spin-button {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     white-space: normal;
+}
+
+#colorDiv::-webkit-scrollbar, .levelCode::-webkit-scrollbar {
+    height: 8% !important;
+    width: unset !important;
 }
 
 .levelCode {
