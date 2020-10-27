@@ -3,6 +3,7 @@ const fs = require("fs")
 const timeout = require('connect-timeout')
 const compression = require('compression');
 const rateLimit = require("express-rate-limit");
+const { parse } = require("comment-json");
 
 // set to false if you're using gdbrowser locally, for obvious reasons
 let useRateLimiting = true
@@ -11,7 +12,7 @@ const app = express();
 app.offline = false  // set to true to go into "offline" mode (in case of ip ban from rob)
 app.secret = "Wmfd2893gb7" // lol
 
-app.config = require('./gdpsConfig')  // tweak settings in this file if you're using a GDPS
+app.config = parse(fs.readFileSync('./gdpsConfig.json').toString())  // tweak settings in this file if you're using a GDPS
 app.endpoint = app.config.endpoint  // boomlings.com/database/
 
 app.gdParams = function(obj={}) {
