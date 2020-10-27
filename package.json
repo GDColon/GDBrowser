@@ -6,6 +6,7 @@
   "private": true,
   "dependencies": {
     "canvas": "^2.6.1",
+    "comment-json": "^4.1.0",
     "compression": "^1.7.4",
     "connect-timeout": "^1.9.0",
     "express": "^4.17.1",
