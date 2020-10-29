@@ -13,14 +13,6 @@
 
 <div id="everything" style="overflow: auto;">
 
-	<div class="popup" id="infoDiv">
-		<div class="fancybox bounce center supercenter">
-			<h2 class="smaller center" style="font-size: 5.5vh">Leaderboard Info</h2>
-			<p class="bigger center" id="infoText" style="line-height: 5vh; margin-top: 1.5vh"></p>
-			<img src="../assets/ok.png" width=20%; class="gdButton center" onclick="$('.popup').hide()">
-		</div>
-	</div>
-
 	<div style="position:absolute; bottom: 0%; left: 0%; width: 100%">
 		<img class="cornerPiece" src="../assets/corner.png" width=7%;>
 	</div>
@@ -66,10 +58,9 @@
 <script>
 
 let loading = false;
-let lvlID = window.location.pathname.split('/')[2]
+let lvlID = Math.round(window.location.pathname.split('/')[2])
 
-if (!Number.isInteger(+lvlID) || lvlID > 99999999 || lvlID < -99999999) window.location.href = window.location.href.replace("leaderboard", "search")
-lvlID = Math.round(+lvlID)
+if (!lvlID || lvlID > 99999999 || lvlID < -99999999) window.location.href = window.location.href.replace("leaderboard", "search")
 
 function leaderboard() {
 
@@ -82,9 +73,10 @@ function leaderboard() {
 	fetch(`../api/level/${lvlID}`).then(lvl => lvl.json()).then(lvl => {
 		if (lvl == "-1") return $('#header').html("Nonexistent level " + lvlID)
 
+		document.title = "Leaderboards for " + lvl.name
 		$('#header').html(lvl.name)
-		$('#meta-title').attr('content',  "Leaderboards for " + lvl.name)
-		$('#meta-desc').attr('content',  'View the leaderboard for ' + lvl.name + ' by ' + lvl.author + '!')
+		$('#meta-title').attr('content', "Leaderboards for " + lvl.name)
+		$('#meta-desc').attr('content', 'View the leaderboard for ' + lvl.name + ' by ' + lvl.author + '!')
 	})
 	
 

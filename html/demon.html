@@ -1,0 +1,115 @@
+<head>
+	<title>Demon Leaderboard</title>
+	<meta charset="utf-8">
+	<link href="../css/browser.css" type="text/css" rel="stylesheet">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
+	<link rel="icon" href="../assets/trophy-gold.png">
+	<meta id="meta-title" property="og:title" content="Demon Leaderboard">
+	<meta id="meta-desc" property="og:description" content="View the victors of a very hard Geometry Dash level!">
+	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/assets/trophy-gold.png">
+</head>
+
+<body class="levelBG darkBG" onbeforeunload="saveUrl()">
+
+<div id="everything" style="overflow: auto;">
+
+	<div class="popup" id="infoDiv">
+		<div class="fancybox bounce center supercenter" style="width: 90vh">
+			<h2 class="smaller center" style="font-size: 5.5vh">Credits</h2>
+			<p class="bigger center" style="line-height: 5vh; margin-top: 1.5vh; margin-bottom: 2.5vh;">
+				<span style="color: orange">Demon rankings</span> made possible thanks to <a target="_blank" href="https://pointercrate.com"><span style="color:aqua; text-decoration: underline">Pointercrate</span></a>!
+				All demons and rankings are managed by their <span style="color: #4CDA5B">list staff</span>.
+			</p>
+			<p class="bigger center" style="margin-top: 1vh">
+				Usernames and icons may <span style="color: yellow">differ</span> from what is used in GD
+			</p>
+			<img src="../assets/ok.png" width=15%; class="gdButton center" onclick="$('.popup').hide()">
+		</div>
+	</div>
+
+	<div style="position:absolute; bottom: 0%; left: 0%; width: 100%">
+		<img class="cornerPiece grayscale" src="../assets/corner.png" width=7%;>
+	</div>
+
+	<div style="position:absolute; bottom: 0%; right: 0%; width: 100%; text-align: right;">
+		<img class="cornerPiece grayscale" src="../assets/corner.png" width=7%; style="transform: scaleX(-1)">
+	</div>
+
+	<div id="searchBox" class="supercenter dragscroll"; style="width: 124vh">
+		<div style="height: 4.5%"></div>
+	</div>
+	
+	<div class="epicbox supercenter gs" style="width: 126vh; height: 80%; pointer-events: none"></div>
+
+	<div class="center" style="position:absolute; top: 8%; left: 0%; right: 0%">
+		<h1 id="header"></h1>
+	</div>
+
+	<div style="position:absolute; top: 2%; left: 1.5%; width: 10%; height: 25%; pointer-events: none">
+		<img class="gdButton yesClick" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()">
+	</div>
+
+	<div class="supercenter" id="loading" style="height: 10%; top: 47%">
+		<img class="spin noSelect" src="../assets/loading.png" height="105%">
+	</div>
+
+	<div style="position:absolute; top: 3%; right: 2%; text-align: right; width: 20%;">
+		<a target="_blank" id="pointercrate"><img class="inline gdButton" src="../assets/demonButton.png" width="23%" style="margin-right: 4%" onclick="$('#infoDiv').show()"></a>
+		<img id="creditsButton" class="inline gdButton" src="../assets/credits.png" width="25%" onclick="$('#infoDiv').show()">
+	</div>
+
+</div>
+
+</body>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.plugins.min.js"></script>
+<script async type="text/javascript" src="../assets/sizecheck.js"></script>
+<script type="text/javascript" src="../assets/dragscroll.js"></script>
+<script>
+
+let demonID = Math.round(window.location.pathname.split('/')[2])
+
+if (!demonID || demonID > 250 || demonID < 1) window.location.href = "../../../"
+
+fetch(`https://pointercrate.com/api/v1/demons/${demonID}/`).then(res => res.json()).then(demonRes => {
+	let demon = demonRes.data
+	if (!demon.id) window.location.href = "../../../"
+
+	document.title = "Demon Leaderboard for " + demon.name
+	$('#header').html(`${demon.name} <span class="smallerer" style="vertical-align: middle">(#${demonID})</span>`)
+	$('#meta-title').attr('content', "Demon Leaderboard for " + demon.name)
+	$('#meta-desc').attr('content', 'View the challengers and victors of' + demon.name)
+	$('#pointercrate').attr('href', `https://pointercrate.com/demonlist/${demonID}`)
+
+	demon.records.forEach((x, y) => {
+
+	let shift = y >= 999 ? [0.5, 75] : y >= 99 ? [0.4, 60] : y >= 9 ? [0.2, 25] : [0, 10] 
+	let videoIcon = "site"
+	if (x.video && x.video.includes("youtube.com")) videoIcon = "youtube"
+	else if (x.video && x.video.includes("twitch.tv")) videoIcon = "twitch"
+
+	$('#searchBox').append(`<div class="searchresult leaderboardSlot" style="padding-left: 25.5vh; height: 15%">
+		<h2 class="small inline gdButton" style="margin-top: 1.5%; font-size: 6.5vh; margin-right: 3%;"><a href="../u/${x.player.name}">${x.player.name}</a></h2>
+		<h3 class="inline lessSpaced leaderboardStats" style="transform:translateY(-10%)">${x.progress}%</h3>
+	
+		<div class="center" style="position:absolute; transform:scale(0.82) translate(-28vh, -10vh); height: 10%; width: 12.5%;">
+			<div class="inline" style="width: 50%; margin: 0% 20% 0% 10%; transform:translateY(-15%)"><h2 class="inline center" style="transform:scale(${1-shift[0]}) translateX(-${shift[1]}%)">${y+1}</h2></div>
+			<img class="inline spaced lazyLoad" data-src="../icon/${x.player.name}" height="120%" style="margin-bottom: 0%; transform:scale(1.1)">
+		</div>
+
+		<div style="${!x.video ? "display: none; " : ""}position:absolute; width: 12.5%; height: 15%; right: 0%">
+			<a target="_blank" href="${x.video}">
+			<img class="gdButton inline spaced" src="../assets/${videoIcon}.png" height="80%" style="transform: translateY(-8.5vh)">
+			</a>
+		</div>
+
+	</div>`)
+
+	})
+
+	$('#loading').hide();
+	$('.lazyLoad').Lazy({ appendScroll: '#searchBox' });
+})
+
+</script>

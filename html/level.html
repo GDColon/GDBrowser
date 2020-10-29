@@ -18,7 +18,7 @@
 			<h2 class="smaller center" style="font-size: 5.5vh">Level Info</h2>
 			<p class="bigger center" id="levelInfo" style="line-height: 5vh; margin-top: 1.5vh;">
 				<span style="color:lime">[[NAME]]</span><br>
-				ID: <span style="color:yellow">[[ID]]</span>[[ORIGINALINFO]][[LOWDETAIL]][[PASS]][[UPLOAD]][[UPDATE]]
+				ID: <span style="color:yellow">[[ID]]</span>[[ORIGINALINFO]][[LOWDETAIL]][[PASS]][[UPLOAD]][[UPDATE]][[HACKED]]
 				<br>Version:  <span style="color:yellow">[[VERSION]]</span>
 				<br>GD Version:  <span style="color:yellow">[[GAMEVERSION]]</span>
 				[[OBJECTINFO]][[REQUESTED]]
@@ -132,7 +132,7 @@
 		<!-- <img class="gdButton sideButton" id="likeButton"  src="../assets/vote.png" onclick="$('#likeDiv').show()"><br> -->
 		<a href="./analyze/[[ID]]"><img class="gdButton sideButton" src="../assets/edit.png"></a><br>
 		<a href="./comments/[[ID]]"><img class="gdButton sideButton" src="../assets/comment.png"></a><br>
-		<a href="./leaderboard/[[ID]]"><img class="gdButton sideButton" src="../assets/leaderboard.png"></a><br>
+		<a href="./leaderboard/[[ID]]"><img id="leaderboardbtn" class="gdButton sideButton" src="../assets/leaderboard.png"></a><br>
 	</div>
 
 	<div style="position:absolute; top: 2%; left: 1.5%; width: 10%; height: 25%; pointer-events: none">
@@ -190,6 +190,7 @@ if (!'[[UPLOADED]]'.startsWith('[')) {
 	$('#levelInfo').html($('#levelInfo').html()
 	.replace('[[PASS]]', `<br>Password: <span style="color:orange">${'[[PASSWORD]]' == '0' ? "No copy" : '[[PASSWORD]]' == 1 ? "Free copy" : '[[PASSWORD]]'}</span>`)
 	.replace('[[LOWDETAIL]]', `<br>Low Detail: <span style="color:orange">${[[LDM]] ? "Yes" : "No"}</span>`)
+	.replace('[[HACKED]]', `<br>Extra String: <span style="color:orange">${'[[EXTRASTRING]]'.length} chars</span>`)
 	.replace('[[UPLOAD]]', '[[UPLOADED]]' == "0" ? "" : `<br>Uploaded: <span style="color:orange">[[UPLOADED]]</span>`)
 	.replace('[[UPDATE]]', '[[UPDATED]]' == "0" ? "" : `<br>Updated: <span style="color:orange">[[UPDATED]]</span>`))}
 
@@ -197,6 +198,7 @@ else {
 	$('#levelInfo').html($('#levelInfo').html()
 	.replace('[[PASS]]', "")
 	.replace('[[LOWDETAIL]]', "")
+	.replace('[[HACKED]]', "")
 	.replace('[[UPLOAD]]', "")
 	.replace('[[UPDATE]]', "") + 
 	`<br><a class="youCanClickThis" href="/[[ID]]?download"><span style="color:aqua">Download additional info</span></a>`
@@ -208,7 +210,10 @@ if ([[ORBS]] == 0) $('.orbs').hide()
 if ([[STARS]] == 0) $('.stars').hide()
 if ([[DIAMONDS]] == 0 || !'[[DEMONLIST]]'.startsWith("[")) $('.diamonds').hide()
 
-if (!'[[DEMONLIST]]'.startsWith("[")) $('.demonList').show()
+if (!'[[DEMONLIST]]'.startsWith("[")) {
+	$('.demonList').show()
+	$('#leaderboardbtn').attr('src', '../assets/demonleaderboard.png').parent().attr('href', '../demon/[[DEMONLIST]]')
+}
 else $('.demonList').remove()
 
 if ("[[SONGID]]".startsWith("Level")) {
@@ -224,14 +229,16 @@ if ([[COINS]] > 1) $("#coins").append(`<img class="squeeze" src="../assets/${coi
 if ([[COINS]] > 2) $("#coins").append(`<img class="squeeze" src="../assets/${coinColor}.png" height="5%">`)
 
 if ("[[ACCOUNTID]]" == "0") {
-		$("#authorName").addClass("green").addClass("unregistered")
-		$("#authorLink").attr('href', '/search/[[AUTHORID]]?user')
-	}
+	$("#authorName").addClass("green").addClass("unregistered")
+	$("#authorLink").attr('href', '/search/[[AUTHORID]]?user')
+}
 
-if (window.location.pathname == "/weekly") $('body').addClass('darkBG')
+if (window.location.pathname == "/weekly") {
+	$('body').addClass('darkBG')
+	$('.cornerPiece').addClass('grayscale')
+}
 
 $(window).on('load', function() {
-
 	if ($('#songname')[0].scrollWidth > $('#songBox')[0].scrollWidth) {
 		let overflow = ($('#songname')[0].scrollWidth - $('#songBox')[0].scrollWidth) * 0.007
 		if (overflow > 3) overflow = 3

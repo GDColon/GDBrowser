@@ -66,6 +66,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
             level.songID = "Level " + [parseInt(levelInfo[12]) + 1]
           }
 
+          level.extraString = levelInfo[36]
           level.data = levelInfo[4]
 
           if (analyze) return app.run.analyze(app, req, res, level)

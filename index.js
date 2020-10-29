@@ -1,7 +1,7 @@
 const express = require('express');
 const fs = require("fs")
-const timeout = require('connect-timeout')
 const compression = require('compression');
+const timeout = require('connect-timeout')
 const rateLimit = require("express-rate-limit");
 
 // set to false if you're using gdbrowser locally, for obvious reasons
@@ -38,7 +38,8 @@ app.use(timeout('30s'));
 app.use(haltOnTimedout)
 app.set('json spaces', 2)
 
-let directories = ["", "post", "messages"] //this can probably be automated but i'm lazy
+let directories = [""]
+fs.readdirSync('./api').filter(x => !x.includes(".")).forEach(x => directories.push(x))
 
 app.run = {}
 directories.forEach(d => {
@@ -102,7 +103,7 @@ app.post("/messages/:id", RL, async function(req, res) { app.run.fetchMessage(ap
 app.post("/deleteMessage", RL, function(req, res) { app.run.deleteMessage(app, req, res) })  
 app.post("/sendMessage", RL, function(req, res) { app.run.sendMessage(app, req, res) })  
 
-app.post("/accurateLeaderboard", function(req, res) { app.run.accurateLeaderboard(app, req, res, true) })
+app.post("/accurateLeaderboard", function(req, res) { app.run.accurate(app, req, res, true) })
 
 
 // HTML
@@ -115,6 +116,7 @@ app.get("/", function(req, res) {
 app.get("/analyze/:id", async function(req, res) { res.sendFile(__dirname + "/html/analyze.html") })
 app.get("/api", function(req, res) { res.sendFile(__dirname + "/html/api.html") })
 app.get("/comments/:id", function(req, res) { res.sendFile(__dirname + "/html/comments.html") })
+app.get("/demon/:id", function(req, res) { res.sendFile(__dirname + "/html/demon.html") })
 app.get("/gauntlets", function(req, res) { res.sendFile(__dirname + "/html/gauntlets.html") })
 app.get("/iconkit", function(req, res) { res.sendFile(__dirname + "/html/iconkit.html") })
 app.get("/leaderboard", function(req, res) { res.sendFile(__dirname + "/html/leaderboard.html") })
@@ -130,7 +132,7 @@ app.get("/search/:text", function(req, res) { res.sendFile(__dirname + "/html/se
 app.get("/api/analyze/:id", RL, async function(req, res) { app.run.level(app, req, res, api, true) })
 app.get("/api/comments/:id", function(req, res) { app.run.comments(app, req, res) })
 app.get("/api/credits", function(req, res) { res.send(require('./misc/credits.json')) })
-app.get("/api/leaderboard", function(req, res) { app.run[req.query.hasOwnProperty("accurate") ? "accurateLeaderboard" : "leaderboard"](app, req, res) })
+app.get("/api/leaderboard", function(req, res) { app.run[req.query.hasOwnProperty("accurate") ? "accurate" : "scores"](app, req, res) })
 app.get("/api/leaderboardLevel/:id", RL, function(req, res) { app.run.leaderboardLevel(app, req, res) })
 app.get("/api/level/:id", RL, async function(req, res) { app.run.level(app, req, res, api) })
 app.get("/api/mappacks", async function(req, res) { res.send(require('./misc/mapPacks.json')) })
@@ -149,6 +151,7 @@ app.get("/p/:id", function(req, res) { res.redirect('/u/' + req.params.id) })
 app.get("/l/:id", function(req, res) { res.redirect('/leaderboard/' + req.params.id) })
 app.get("/a/:id", function(req, res) { res.redirect('/analyze/' + req.params.id) })
 app.get("/c/:id", function(req, res) { res.redirect('/comments/' + req.params.id) })
+app.get("/d/:id", function(req, res) { res.redirect('/demon/' + req.params.id) })
 
 
 // API AND HTML

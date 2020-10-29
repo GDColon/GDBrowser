@@ -181,8 +181,6 @@ fetch('./api/icons').then(res => {
             $(this).children().not('#iconprogressbar').hide()})
 
             if ($(forms).html() == "") appendIcon(filterIcon(form), form)
-
-            if (form == "swing" && !beenThereDoneThat) {beenThereDoneThat = true; $('#swings').append("<p class='white'>Since the texture was ripped from GD Meltdown, there's no UHD version available.</p>")}
             
             $(forms).show()
         })
