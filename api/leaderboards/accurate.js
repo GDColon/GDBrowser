@@ -29,9 +29,7 @@ module.exports = async (app, req, res, post) => {
 
       idArray.forEach((x, y) => {
         
-        request.post(app.endpoint + 'getGJUserInfo20.php', {
-          form: app.gdParams({targetAccountID: x})
-        }, function (err, resp, body) {
+        request.post(app.endpoint + 'getGJUserInfo20.php', req.gdParams({targetAccountID: x}), function (err, resp, body) {
           if (err || !body || body == '-1') return res.send([])
 
           let account = app.parseResponse(body)

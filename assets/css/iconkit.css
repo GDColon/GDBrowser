@@ -291,7 +291,7 @@ input:focus, select:focus, textarea:focus, button:focus {
 }
 
 .iconSelected {
-  border-image: url('https://gdcolon.com/assets/gj_select.png') 10 stretch !important;
+  border-image: url('./../assets/select.png') 10 stretch !important;
 }
 
 .iconTabButton, .glowToggle, .copyForm {

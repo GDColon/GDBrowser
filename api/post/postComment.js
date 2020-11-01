@@ -24,9 +24,7 @@ module.exports = async (app, req, res) => {
 
   if (rateLimit[req.body.username]) return res.status(400).send(`Please wait ${getTime(rateLimit[req.body.username] + cooldown - Date.now())} seconds before posting another comment!`)
   
-  let params = app.gdParams({
-    percent: 0
-  })
+  let params = { percent: 0 }
 
   params.comment = Buffer.from(req.body.comment + (req.body.color ? "☆" : "")).toString('base64').replace(/\//g, '_').replace(/\+/g, "-")
   params.gjp = xor.encrypt(req.body.password, 37526)
@@ -42,10 +40,7 @@ module.exports = async (app, req, res) => {
   chk = xor.encrypt(chk, 29481)
   params.chk = chk
 
-  request.post(app.endpoint + 'uploadGJComment21.php', {
-    form: params,
-    headers: {'x-forwarded-for': req.headers['x-real-ip']} // prevent pesky ip bans
-  }, function (err, resp, body) {
+  request.post(app.endpoint + 'uploadGJComment21.php', req.gdParams(params), function (err, resp, body) {
     if (err) return res.status(400).send("The Geometry Dash servers returned an error! Perhaps they're down for maintenance")
     if (!body || body == "-1") return res.status(400).send("The Geometry Dash servers rejected your comment! Try again later, or make sure your username and password are entered correctly.")
     if (body.startsWith("temp")) {

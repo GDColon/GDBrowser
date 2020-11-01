@@ -14,7 +14,7 @@ module.exports = async (app, req, res) => {
       else amount = count;
     }
     
-    let filters = app.gdParams({
+    let filters = {
         str: req.params.text,
 
         diff: req.query.diff,
@@ -35,7 +35,7 @@ module.exports = async (app, req, res) => {
         customSong: req.query.hasOwnProperty("customSong") ? 1 : 0,
 
         type: req.query.type || 0,
-    })
+    }
 
     let foundPack = mapPacks[req.params.text.toLowerCase()]
     if (foundPack) filters.str = `${foundPack[0]},${foundPack[1]},${foundPack[2]}`;
@@ -66,10 +66,8 @@ module.exports = async (app, req, res) => {
     if (req.query.hasOwnProperty("creators")) filters.type = 12
 
     if (req.params.text == "*") delete filters.str
-
-
-    request.post(app.endpoint + 'getGJLevels21.php', {
-    form : filters}, async function(err, resp, body) {
+    
+    request.post(app.endpoint + 'getGJLevels21.php', req.gdParams(filters), async function(err, resp, body) {
     
     if (err || !body || body == '-1' || body.startsWith("<!")) return res.send("-1")
     let splitBody = body.split('#')

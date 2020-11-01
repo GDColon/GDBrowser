@@ -4,24 +4,16 @@ const compression = require('compression');
 const timeout = require('connect-timeout')
 const rateLimit = require("express-rate-limit");
 
-// set to false if you're using gdbrowser locally, for obvious reasons
-let useRateLimiting = true
-
 const app = express();
 app.offline = false  // set to true to go into "offline" mode (in case of ip ban from rob)
 app.secret = "Wmfd2893gb7" // lol
 
 app.config = require('./gdpsConfig')  // tweak settings in this file if you're using a GDPS
-app.endpoint = app.config.endpoint  // boomlings.com/database/
-
-app.gdParams = function(obj={}) {
-  Object.keys(app.config.params).forEach(x => { if (!obj[x]) obj[x] = app.config.params[x] })
-  return obj
-}
+app.endpoint = app.config.endpoint  // default is boomlings.com/database/
 
 const RL = rateLimit({
-  windowMs: useRateLimiting ? 5 * 60 * 1000 : 0,
-  max: useRateLimiting ? 100 : 0, // max requests per 5 minutes
+  windowMs: app.config.rateLimiting ? 5 * 60 * 1000 : 0,
+  max: app.config.rateLimiting ? 100 : 0, // max requests per 5 minutes
   message: "Rate limited ¯\\_(ツ)_/¯",
   keyGenerator: function(req) { return req.headers['x-real-ip'] },
   skip: function(req) { return ((req.url.includes("api/level") && !req.query.hasOwnProperty("download")) ? true : false) }
@@ -34,9 +26,17 @@ let sampleIcons = require('./misc/sampleIcons.json')
 app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(timeout('30s'));
-app.use(haltOnTimedout)
+app.use(timeout('20s'));
 app.set('json spaces', 2)
+
+app.use(function(req, res, next) {
+  req.gdParams = function(obj={}) {
+    Object.keys(app.config.params).forEach(x => { if (!obj[x]) obj[x] = app.config.params[x] })
+    let ip = req.headers['x-real-ip'] || req.headers['x-forwarded-for']
+    return {form: obj, headers: app.config.ipForwarding && ip ? {'x-forwarded-for': ip, 'x-real-ip': ip} : {}}
+  }
+  next()
+})
 
 let directories = [""]
 fs.readdirSync('./api').filter(x => !x.includes(".")).forEach(x => directories.push(x))
@@ -45,10 +45,6 @@ app.run = {}
 directories.forEach(d => {
   fs.readdirSync('./api/' + d).forEach(x => {if (x.includes('.')) app.run[x.split('.')[0]] = require('./api/' + d + "/" + x) })
 })
-
-function haltOnTimedout (req, res, next) {
-  if (!req.timedout) next()
-}
 
 try {
   const secrets = require("./misc/secretStuff.json")
@@ -175,5 +171,9 @@ app.get('*', function(req, res) {
   if (assets.some(x => req.path.startsWith("/" + x))) res.send("Looks like this file doesn't exist ¯\\_(ツ)_/¯<br>You can check out all of the assets on <a target='_blank' href='https://github.com/GDColon/GDBrowser/tree/master/assets'>GitHub</a>")
   else res.redirect('/search/404%20')
 });
+
+app.use(function (err, req, res, next) {
+  if (err && err.message == "Response timeout") res.status(500).send('Internal server error! (Timed out)')
+})
 
 app.listen(2000, () => console.log("Site online!"))

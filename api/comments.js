@@ -7,7 +7,7 @@ module.exports = async (app, req, res) => {
     let count = +req.query.count || 10
     if (count > 1000) count = 1000
 
-    let params = app.gdParams({
+    let params = req.gdParams({
         userID : req.params.id, 
         accountID : req.params.id, 
         levelID: req.params.id,
@@ -20,8 +20,7 @@ module.exports = async (app, req, res) => {
     if (req.query.type == "commentHistory") path = "getGJCommentHistory"
     else if (req.query.type == "profile") path = "getGJAccountComments20"
 
-    request.post(`${app.endpoint}${path}.php`, {
-    form : params}, async function(err, resp, body) { 
+    request.post(`${app.endpoint}${path}.php`, params, async function(err, resp, body) { 
 
       if (err || body == '-1' || !body) return res.send("-1")
 

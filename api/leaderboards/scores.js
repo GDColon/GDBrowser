@@ -11,13 +11,12 @@ module.exports = async (app, req, res) => {
       else amount = count;
     }
 
-    let params = app.gdParams({
+    let params = req.gdParams({
       count: amount,
       type: (req.query.hasOwnProperty("creator") || req.query.hasOwnProperty("creators")) ? "creators" : "top",
     })
 
-    request.post(app.endpoint + 'getGJScores20.php', {
-    form : params}, async function(err, resp, body) { 
+    request.post(app.endpoint + 'getGJScores20.php', params, async function(err, resp, body) { 
 
       if (err || body == '-1' || !body) return res.send("-1")
       scores = body.split('|').map(x => app.parseResponse(x)).filter(x => x[1])

@@ -11,15 +11,14 @@ module.exports = async (app, req, res) => {
       else amount = count;
     }
 
-    let params = app.gdParams({
+    let params = req.gdParams({
       levelID: req.params.id,
       accountID: app.id,
       gjp: app.gjp, 
       type: req.query.hasOwnProperty("week") ? "2" : "1",
     })
 
-    request.post(app.endpoint + 'getGJLevelScores211.php', {
-    form : params, headers: {'x-forwarded-for': req.headers['x-real-ip']}}, async function(err, resp, body) { 
+    request.post(app.endpoint + 'getGJLevelScores211.php', params, async function(err, resp, body) { 
 
       if (err || body == '-1' || !body) return res.send("-1")
       scores = body.split('|').map(x => app.parseResponse(x))

@@ -14,9 +14,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
   else if (levelID == "weekly") levelID = -2
   else levelID = levelID.replace(/[^0-9]/g, "")
 
-  request.post(app.endpoint + 'downloadGJLevel22.php', {
-    form: app.gdParams({ levelID })
-  }, async function (err, resp, body) {
+  request.post(app.endpoint + 'downloadGJLevel22.php', req.gdParams({ levelID }), async function (err, resp, body) {
 
     if (err || !body || body == '-1' || body.startsWith("<!")) {
       if (!api && levelID < 0) return res.redirect('/')
@@ -27,13 +25,9 @@ module.exports = async (app, req, res, api, ID, analyze) => {
     let levelInfo = app.parseResponse(body)
     let level = new Level(levelInfo)
 
-    request.post(app.endpoint + 'getGJUsers20.php', {
-      form: app.gdParams({ str: level.authorID })
-    }, function (err1, res1, b1) {
+    request.post(app.endpoint + 'getGJUsers20.php', req.gdParams({ str: level.authorID }), function (err1, res1, b1) {
       let gdSearchResult = app.parseResponse(b1)
-      request.post(app.endpoint + 'getGJUserInfo20.php', {
-        form: app.gdParams({ targetAccountID: gdSearchResult[16] })
-      }, function (err2, res2, b2) {
+      request.post(app.endpoint + 'getGJUserInfo20.php', req.gdParams({ targetAccountID: gdSearchResult[16] }), function (err2, res2, b2) {
         if (b2 != '-1') {
           let account = app.parseResponse(b2)
           level.author = account[1]
@@ -45,9 +39,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
           level.accountID = "0"
         }
 
-        request.post(app.endpoint + 'getGJSongInfo.php', {
-          form: app.gdParams({ songID: level.customSong })
-        }, async function (err, resp, songRes) {
+        request.post(app.endpoint + 'getGJSongInfo.php', req.gdParams({ songID: level.customSong }), async function (err, resp, songRes) {
 
           if (songRes != '-1') {
             let songData = app.parseResponse(songRes, '~|~')

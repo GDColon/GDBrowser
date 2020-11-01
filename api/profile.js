@@ -5,15 +5,11 @@ module.exports = async (app, req, res, api, getLevels) => {
 
   if (app.offline) return res.send("-1")
 
-  request.post(app.endpoint + 'getGJUsers20.php', {
-    form: app.gdParams({ str: getLevels || req.params.id })
-  }, function (err1, res1, b1) {
+  request.post(app.endpoint + 'getGJUsers20.php', req.gdParams({ str: getLevels || req.params.id }), function (err1, res1, b1) {
     
-    let searchResult = (req.query.hasOwnProperty("account") || err1 || b1 == '-1' ||  b1.startsWith("<!") || !b1) ? req.params.id : app.parseResponse(b1)[16]
+    let searchResult = ((!req.query.hasOwnProperty("player") && Number(req.params.id)) || err1 || b1 == '-1' ||  b1.startsWith("<!") || !b1) ? req.params.id : app.parseResponse(b1)[16]
 
-    request.post(app.endpoint + 'getGJUserInfo20.php', {
-      form: app.gdParams({ targetAccountID: searchResult })
-    }, function (err2, res2, body) {
+    request.post(app.endpoint + 'getGJUserInfo20.php', req.gdParams({ targetAccountID: searchResult }), function (err2, res2, body) {
 
       if (err2 || body == '-1' || !body) {
         if (!api) return res.redirect('/search/' + req.params.id)
