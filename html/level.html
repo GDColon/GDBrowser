@@ -17,7 +17,7 @@
 		<div class="fancybox bounce center supercenter">
 			<h2 class="smaller center" style="font-size: 5.5vh">Level Info</h2>
 			<p class="bigger center" id="levelInfo" style="line-height: 5vh; margin-top: 1.5vh;">
-				<span style="color:lime">[[NAME]]</span><br>
+				<span class="pre" style="color:lime">[[NAME]]</span><br>
 				ID: <span style="color:yellow">[[ID]]</span>[[ORIGINALINFO]][[LOWDETAIL]][[PASS]][[UPLOAD]][[UPDATE]][[HACKED]]
 				<br>Version:  <span style="color:yellow">[[VERSION]]</span>
 				<br>GD Version:  <span style="color:yellow">[[GAMEVERSION]]</span>
@@ -31,7 +31,7 @@
 		<div class="fancybox bounce center supercenter">
 			<h2 class="smaller center" style="font-size: 5.5vh">Saved!</h2>
 			<p class="bigger center" style="line-height: 5vh; margin-top: 1.5vh;">
-				<span style="color:yellow">[[NAME]]</span> has been added to your <a class="youCanClickThis2" style="color:lime" href="../search/levels?type=saved">saved levels</a> list.
+				<span class="pre" style="color:yellow">[[NAME]]</span> has been added to your <a class="youCanClickThis2" style="color:lime" href="../search/levels?type=saved">saved levels</a> list.
 			</p>
 			<img src="../assets/ok.png" width=20%; class="gdButton center" onclick="location.reload()">
 		</div>
@@ -76,18 +76,18 @@
 	</div>
 
 	<div class="center" style="width: 70%; margin: 1% auto">
-		<h1 style="transform: scale(1.2)">[[NAME]]</h1>
+		<h1 class="pre" style="transform: scale(1.2)">[[NAME]]</h1>
 	</div>
 
 	<div class="center" style="position:absolute; top: 9%; left: 0%; right: 0%; height: 5%;">
-		<h2 class="inline slightlySmaller normalCursor gdButton" id="authorName"><a class="linkButton" id="authorLink" href="../u/[[AUTHOR]]">By [[AUTHOR]]</a></h2>
+		<h2 class="pre inline slightlySmaller normalCursor gdButton" id="authorName"><a class="linkButton" id="authorLink" href="../u/[[AUTHOR]]">By [[AUTHOR]]</a></h2>
 		<h2 class="inline slightlySmaller normalCursor sideSpaceC">
 			<img class="inline valign" id="copiedBadge" style="height: 60%; cursor:help" src="../assets/copied.png" title="Level is a copy or a collaboration">
 			<img class="inline valign" id="largeBadge" style="height: 60%; margin-left: -7%; cursor:help" src="../assets/large.png" title="Contains more than 40,000 objects"></h2>
 	</div>
 
 	<div class="transparentBox center" style="position:absolute; bottom: 32%; left: 0; right: 0; width: 75vh; margin-left: auto; margin-right: auto">
-		<p style="padding: 0 5%; white-space:normal">[[DESCRIPTION]]</p>
+		<p class="pre" style="padding: 0 5%; white-space:normal">[[DESCRIPTION]]</p>
 	</div>
 
 	<div class="center valign" style="position:absolute; top: 10.5%; left: 27%; transform:scale(0.8); height: 100%; width: 20%">
@@ -112,8 +112,8 @@
 
 	<div class="brownBox" id="songBox" style="position:absolute; bottom: 4%; left: 0; right: 0; width: 85vh; height: 20%; margin-left: auto; margin-right: auto;">
 		<div style="margin-left: 0.5%">
-			<h1 class="slightlySmaller" id="songname">[[SONGNAME]]</h1>
-			<h2 class="smaller">By: [[SONGAUTHOR]] <a class="songLink" href="https://[[SONGAUTHOR]].newgrounds.com" target="_blank"><img class="gdButton valign" src="../assets/more.png" width="12%"></a></h2>
+			<h1 class="pre slightlySmaller" id="songname">[[SONGNAME]]</h1>
+			<h2 class="pre smaller">By: [[SONGAUTHOR]] <a class="songLink" href="https://[[SONGAUTHOR]].newgrounds.com" target="_blank"><img class="gdButton valign" src="../assets/more.png" width="12%"></a></h2>
 		</div>
 		<a class="songLink" href="https://www.newgrounds.com/audio/listen/[[SONGID]]" target="_blank"><img class="gdButton sideButton" src="../assets/playsong.png" style="position:absolute; right: 1%; top: 50%; width: 11%; height: auto;"></a>
 	</div>

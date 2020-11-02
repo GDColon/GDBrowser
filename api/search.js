@@ -8,9 +8,9 @@ module.exports = async (app, req, res) => {
     if (app.offline) return res.send("-1")
 
     let amount = 10;
-    let count = req.query.count ? parseInt(req.query.count) : null
+    let count = +req.query.count
     if (count && count > 0) {
-      if (count > 10) amount = 10
+      if (count > 100) amount = 100
       else amount = count;
     }
     
@@ -35,6 +35,7 @@ module.exports = async (app, req, res) => {
         customSong: req.query.hasOwnProperty("customSong") ? 1 : 0,
 
         type: req.query.type || 0,
+        count: amount
     }
 
     let foundPack = mapPacks[req.params.text.toLowerCase()]
@@ -66,19 +67,19 @@ module.exports = async (app, req, res) => {
     if (req.query.hasOwnProperty("creators")) filters.type = 12
 
     if (req.params.text == "*") delete filters.str
+    else if (req.query.hasOwnProperty("list")) filters.type = 10
     
     request.post(app.endpoint + 'getGJLevels21.php', req.gdParams(filters), async function(err, resp, body) {
     
     if (err || !body || body == '-1' || body.startsWith("<!")) return res.send("-1")
     let splitBody = body.split('#')
-    let preRes = splitBody[0].split('|', 10)
+    let preRes = splitBody[0].split('|')
     let authorList = {}
     let songList = {}
     let authors = splitBody[1].split('|')
     let songs = '~' + splitBody[2]; songs = songs.split('|~1~:').map(x => app.parseResponse(x + '|~1~', '~|~'))
     songs.forEach(x => {songList[x['~1']] = x['2']})
 
-    authors.splice(10, 999)
     authors.forEach(x => {
       if (x.startsWith('~')) return
       let arr = x.split(':')
@@ -87,7 +88,7 @@ module.exports = async (app, req, res) => {
     let levelArray = preRes.map(x => app.parseResponse(x)).filter(x => x[1])
     let parsedLevels = []
 
-    await levelArray.forEach(async (x, y) => {
+    levelArray.forEach(async (x, y) => {
 
         let level = new Level(x)
         let songSearch = songs.find(y => y['~1'] == x[35])
@@ -113,19 +114,29 @@ module.exports = async (app, req, res) => {
         //this is broken if you're not on page 0, blame robtop
         if (filters.page == 0 && y == 0) {
             let pages = splitBody[3].split(":");
-            level.results = +pages[0];
-            level.pages = +Math.ceil(pages[0] / 10);
 
-            if (filters.gauntlet || foundPack) {
+            if (filters.gauntlet) {  // gauntlet page stuff
                 level.results = levelArray.length 
                 level.pages = 1
             }
+
+            else if (filters.type == 10) {  //  custom page stuff
+                level.results = levelArray.length
+                level.pages = amount ? +Math.ceil(levelArray.length / amount) : 1
+            }
+
+            else {  // normal page stuff
+                level.results = +pages[0];
+                level.pages = +pages[0] == 9999 ? 1000 : +Math.ceil(pages[0] / amount);
+            }
+
         }
 
         parsedLevels[y] = level
     })
 
-    return res.send(parsedLevels.slice(0, amount))
+    if (filters.type == 10) parsedLevels = parsedLevels.slice((+filters.page) * amount, (+filters.page + 1) * amount)
+    return res.send(parsedLevels)
 
     })
 }

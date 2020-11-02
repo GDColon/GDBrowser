@@ -13,7 +13,7 @@ Obviously, GDBrowser isn't perfect when it comes to GD private servers, since bo
 
 You can tweak the endpoint (e.g. boomlings.com) in index.js
 
-You can also check out `/misc/gdpsConfig.js` to tweak some additional GDPS settings such as whether to decrypt level descriptions or if timestamps should end with "ago"
+You can also check out `gdpsConfig.js` to tweak some additional GDPS settings such as whether to decrypt level descriptions or if timestamps should end with "ago"
 
 GDPS compatibility is still a HUGE work in progress, so pull requests would be greatly appreciated if you manage to make any improvements! 
 

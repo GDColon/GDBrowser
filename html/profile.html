@@ -238,7 +238,7 @@ fetch(`../api/comments/[[ACCOUNTID]]?type=profile&page=${page}`).then(res => res
 				<div class="comment">
 					<h2>[[USERNAME]]</h2>
 					<div class="commentAlign">
-						<p class="commentText" style="color: rgb(${"[[USERNAME]]" == "RobTop" ? "50, 255, 255" : "[[MODERATOR]]" == "2" ? "75, 255, 75" : x.browserColor ? "255, 180, 255" : "255, 255, 255"})">${clean(x.content)}</p>
+						<p class="pre commentText" style="color: rgb(${"[[USERNAME]]" == "RobTop" ? "50, 255, 255" : "[[MODERATOR]]" == "2" ? "75, 255, 75" : x.browserColor ? "255, 180, 255" : "255, 255, 255"})">${clean(x.content)}</p>
 					</div>
 				</div>
 				<p class="commentDate">${x.date}</p>

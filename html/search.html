@@ -120,6 +120,8 @@ let gauntlet = url.searchParams.get('gauntlet')
 let mappack = url.searchParams.get('mappack')
 let userMode = url.searchParams.get('user')
 let type = url.searchParams.get('type')
+let list = url.searchParams.get('list')
+let count = url.searchParams.get('count')
 let loading = false;
 let gauntlets = ["Fire", "Ice", "Poison", "Shadow", "Lava", "Bonus", "Chaos", "Demon", "Time", "Crystal", "Magic", "Spike", "Monster", "Doom", "Death"]
 
@@ -129,7 +131,7 @@ let results = 0
 let legalPages = true
 let superSearch = ['*', '*?type=mostliked', '*?type=mostdownloaded', '*?type=recent'].includes(window.location.href.split('/')[4].toLowerCase())
 
-let searchFilters = `../api/search/${type == 'saved' ? JSON.parse(localStorage.getItem('saved') || '[]').reverse().toString() : accID || path}?page=[PAGE]${window.location.search.replace(/\?/g, "&").replace("page", "nope")}`
+let searchFilters = `../api/search/${type == 'saved' ? JSON.parse(localStorage.getItem('saved') || '[]').reverse().toString() : accID || path}?page=[PAGE]${count ? "" : "&count=10"}${window.location.search.replace(/\?/g, "&").replace("page", "nope")}`
 
 if (type == "followed") {
 	let followed = localStorage.followed ? JSON.parse(localStorage.followed) : []
@@ -179,9 +181,9 @@ function Append(firstLoad) {
 		}
 
 		$('#searchBox').append(`<div class="searchresult">
-			<h1 class="lessspaced">${x.name}</h1>
-			<h2 class="lessSpaced smaller inline gdButton ${hasAuthor ? "" : "green unregistered"}">${hasAuthor ? `<a href="../u/${x.author}">By ${x.author}</a>` : `<a href="../search/${x.authorID}?user">By ${x.author}</a>`}</h2><h2 class="inline" style="margin-left: 1.5%; transform:translateY(30%)"> ${x.copiedID == '0' ? "" : '<img class="valign sideSpace" src="../assets/copied.png" height="12%">'}${x.large ? '<img class="valign sideSpaceD" src="../assets/large.png" height="12%">' : ''}</h2>
-			<h3 class="lessSpaced ${x.customSong == 0 ? "blue" : "whatIfItWasPurple"}" style="overflow: hidden;">${x.songName.replace(/[^ -~]/g, "")}</h3>
+			<h1 class="lessspaced pre">${x.name}</h1>
+			<h2 class="lessSpaced pre smaller inline gdButton ${hasAuthor ? "" : "green unregistered"}">${hasAuthor ? `<a href="../u/${x.author}">By ${x.author}</a>` : `<a href="../search/${x.authorID}?user">By ${x.author}</a>`}</h2><h2 class="inline" style="margin-left: 1.5%; transform:translateY(30%)"> ${x.copiedID == '0' ? "" : '<img class="valign sideSpace" src="../assets/copied.png" height="12%">'}${x.large ? '<img class="valign sideSpaceD" src="../assets/large.png" height="12%">' : ''}</h2>
+			<h3 class="lessSpaced pre ${x.customSong == 0 ? "blue" : "whatIfItWasPurple"}" style="overflow: hidden;">${x.songName.replace(/[^ -~]/g, "")}</h3>
 			<h3 class="lessSpaced">
 				<img class="valign" src="../assets/time.png" height="14%"> ${x.length}
 				<img class="valign" src="../assets/download.png" height="14%"> ${x.downloads}
@@ -225,6 +227,7 @@ if (type == 6 || type == 'featured') $('#header').text("Featured")
 if (type == 7 || type == 'magic') $('#header').text("Magic Levels")
 if (type == 11 || type == 'awarded' || type == 'starred') $('#header').text("Awarded Levels")
 if (type == 16 || type == 'halloffame' || type == 'hof') $('#header').text("Hall of Fame")
+if (path != "*" && (type == 10 || list != null)) $('#header').text("List of Levels")
 if (type == 'followed') $('#header').text("Followed Creators")
 document.title = $('#header').text() || "Level Search"
 $('#meta-title').attr('content', $('#header').text() || "Level Search")

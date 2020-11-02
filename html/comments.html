@@ -258,7 +258,7 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 					<p class="commentPercent inline">${x.percent ? x.percent + "%" : ""}</p>
 
 					<div class="commentAlign">
-						<p class="commentText" style="color: rgb(${!history && x.playerID == lvl.authorID ? "255,255,75" : x.browserColor ? "255,180,255" : x.color})">${clean(x.content)}</p>
+						<p class="pre commentText" style="color: rgb(${!history && x.playerID == lvl.authorID ? "255,255,75" : x.browserColor ? "255,180,255" : x.color})">${clean(x.content)}</p>
 					</div>
 				</div>
 				<p class="commentDate" id="date-${x.ID}">${x.date}</p>
@@ -283,7 +283,7 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 					<p class="commentPercent inline">${x.percent ? x.percent + "%" : ""}</p>
 
 					<div class="commentAlign">
-						<p class="commentText" style="color: rgb(${!history && x.playerID == lvl.authorID ? "255,255,75" : x.browserColor ? "255,180,255" : x.color})">${clean(x.content)}</p>
+						<p class="pre commentText" style="color: rgb(${!history && x.playerID == lvl.authorID ? "255,255,75" : x.browserColor ? "255,180,255" : x.color})">${clean(x.content)}</p>
 					</div>
 				</div>
 				<p class="commentDate compactDate" id="date-${x.ID}">${x.date}</p>
