@@ -93,8 +93,6 @@ gdpsConfig.js - Tweak small settings for GDPS'es here, such as whether to decryp
 
 level.json - An array of the official GD tracks, and also difficulty face stuff for level searching
 
-mapPacks.json - The IDs for the levels in map packs. I can't believe I have to hardcode this
-
 secretStuff.json - GJP goes here, needed for level leaderboards. Not included in the repo for obvious reasons
 
 sizecheck.js - Excecuted on most pages, used for the 'page isn't wide enough' message, back button, and a few other things

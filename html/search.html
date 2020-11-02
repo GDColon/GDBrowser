@@ -117,7 +117,6 @@ let accID;
 let path = location.pathname.replace('/search/', "")
 let url = new URL(window.location.href)
 let gauntlet = url.searchParams.get('gauntlet')
-let mappack = url.searchParams.get('mappack')
 let userMode = url.searchParams.get('user')
 let type = url.searchParams.get('type')
 let list = url.searchParams.get('list')
@@ -152,6 +151,8 @@ function Append(firstLoad) {
 
 	fetch(searchFilters.replace("[PAGE]", page)).then(res => res.json()).then(res => {
 
+	if (res == '-1' || res.length == 0) { $('#loading').hide();  $('#pageUp').hide(); return loading = false }
+
 	if (firstLoad) {
 		pages = res[0].pages
 		results = res[0].results
@@ -164,10 +165,8 @@ function Append(firstLoad) {
 		$('#pagenum').text(`Page 1${pages ? ` of ${pages}` : ""}`)
 	}
 
-	if (res == '-1' || (pages && page >= pages) || (!pages && res.length < 9 && type != "recent")) $('#pageUp').hide()
+	if ((pages && page+1 >= pages) || (!pages && res.length < 9 && type != "recent")) $('#pageUp').hide()
 	else $('#pageUp').show()
-
-	if (res == '-1' || res.length == 0) { $('#loading').hide(); return loading = false }
 
 	res.forEach((x, y) => {
 		let hasAuthor = (x.accountID != "0")

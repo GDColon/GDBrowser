@@ -1,5 +1,4 @@
 const request = require('request')
-const mapPacks = require('../misc/mapPacks.json')
 const levels = require('../misc/level.json').music
 const Level = require('../classes/Level.js')
 
@@ -38,10 +37,7 @@ module.exports = async (app, req, res) => {
         count: amount
     }
 
-    let foundPack = mapPacks[req.params.text.toLowerCase()]
-    if (foundPack) filters.str = `${foundPack[0]},${foundPack[1]},${foundPack[2]}`;
-
-    if (req.query.gauntlet || req.query.hasOwnProperty("mappack") || req.query.type == "saved") filters.type = 10
+    if (req.query.gauntlet || req.query.hasOwnProperty("mappack") || req.query.hasOwnProperty("list") || req.query.type == "saved") filters.type = 10
 
     if (req.query.songID && filters.customSong == 0 && levels.find(x => req.query.songID.toLowerCase() == x[0].toLowerCase())) {
         filters.song = levels.findIndex(x => req.query.songID.toLowerCase() == x[0].toLowerCase())
@@ -67,7 +63,6 @@ module.exports = async (app, req, res) => {
     if (req.query.hasOwnProperty("creators")) filters.type = 12
 
     if (req.params.text == "*") delete filters.str
-    else if (req.query.hasOwnProperty("list")) filters.type = 10
     
     request.post(app.endpoint + 'getGJLevels21.php', req.gdParams(filters), async function(err, resp, body) {
     

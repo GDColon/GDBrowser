@@ -131,7 +131,7 @@ app.get("/api/credits", function(req, res) { res.send(require('./misc/credits.js
 app.get("/api/leaderboard", function(req, res) { app.run[req.query.hasOwnProperty("accurate") ? "accurate" : "scores"](app, req, res) })
 app.get("/api/leaderboardLevel/:id", RL, function(req, res) { app.run.leaderboardLevel(app, req, res) })
 app.get("/api/level/:id", RL, async function(req, res) { app.run.level(app, req, res, api) })
-app.get("/api/mappacks", async function(req, res) { res.send(require('./misc/mapPacks.json')) })
+app.get("/api/mappacks", async function(req, res) { app.run.mappack(app, req, res) })
 app.get("/api/profile/:id", function(req, res) { app.run.profile(app, req, res, api) })
 app.get("/api/search/:text", function(req, res) { app.run.search(app, req, res) })
  

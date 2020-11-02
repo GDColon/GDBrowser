@@ -12,10 +12,11 @@ module.exports = {
         binaryVersion: '35',
     },
 
-    rateLimiting: true, // Enables rate limiting to avoid api spam, feel free to disable for private use
-    ipForwarding: true, // Forwards 'x-real-ip' to the servers (requested by robtop)
+    rateLimiting: true, // Enables rate limiting to avoid api spam, feel free to disable for private use.
+    ipForwarding: true, // Forwards 'x-real-ip' to the servers. (requested by robtop)
     base64descriptions: true, // Are level descriptions encoded in Base64?
     xorPasswords: true, // Are level passwords XOR encrypted?
+    cacheMapPacks: true, // Caches map packs to speed up loading. Useful if they're rarely updated.
     timestampSuffix: " ago", // Suffix to add after timestamps, if any.
 
     // more settings soon

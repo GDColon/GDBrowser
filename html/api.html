@@ -27,6 +27,7 @@
 					<div class="category-content">
 						<a class="header-link" href="#level">Levels</a>
 						<a class="header-link" href="#search">Searching</a>
+						<a class="header-link" href="#mappacks">Map Packs</a>
 						<a class="header-link" href="#levelleaderboard">Level Leaderboards</a>
 					</div>
 				</div>
@@ -264,7 +265,7 @@
 				<p>creators: A comment seperated list of account IDs. Only levels by those players will be returned</p>
 
 				<br>
-				<p><b>Params that require anything</b> (e.g. ?mappack=yes or ?mappack)</p>
+				<p><b>Params that require anything</b> (e.g. ?featured=yes or ?featured)</p>
 				<p>list: Reads and returns a custom list of levels (search query should be a comma seperated list of IDs)</p>
 				<p>featured: Only return featured levels</p>
 				<p>original: Only return non-copied levels</p>
@@ -274,7 +275,6 @@
 				<p>starred: Only return levels with a star rating</p>
 				<p>noStar: Only return levels without a star rating</p>
 				<p>customSong: Reads the 'song' parameter as a custom song ID instead of an official one</p>
-				<p>mappack: Reads the search query as the name of a map pack and returns the 3 levels if pack exists</p>
 				<p>user: Reads the search query as a player's ID and returns their levels</p>
 
 				<br>
@@ -371,10 +371,57 @@
 		<div class="seperator"></div>
 
 	</main>
+
+	<main>
+		<div id="mappacks" class="anchor"></div>
+		<div class="main-block">
+			<h1>Map Packs</h1>
+			<p>/api/mappacks</p>
+
+			<p>Returns the list of map packs</p>
+
+			<br>
+			<p class="reveal" onclick="$('#params-mappacks').slideToggle(100)"><b>Parameters (0)</b></p>
+			<div class="subdiv" id="params-mappacks">
+				<p>No parameters for this one!</p>
+			</div>
+
+			<br>
+			<p class="reveal" onclick="$('#response-mappacks').slideToggle(100)"><b>Response (8)</b></p>
+			<div class="subdiv" id="response-mappacks">
+				<p>The API will return an array of each map pack with the following information:</p>
+				<p>id: The ID of the map</p>
+				<p>name: The name of the pack</p>
+				<p>levels: An array of level IDs in the map pack. Fetch with /search/ using the ?list parameter</p>
+				<p>stars: The amount of stars rewarded for completing the pack</p>
+				<p>coins: Basically the only reason people play map packs LOL</p>
+				<p>difficulty: The (usually inaccurate) difficulty face of the map pack</p>
+				<p>barColor: The RGB color of the pack's progress bar</p>
+				<p>textColor: The RGB color of the pack's name</p>
+			</div>
+
+			<br>
+			<p class="reveal" onclick="$('#request-mappacks').slideToggle(100)"><b>Example</b></p>
+			<div class="subdiv" id="request-mappacks">
+				<p><b>Example Request</b></p>
+				<p>/api/mappacks</p>
+
+				<br>
+				<p><b>Example Response</b></p>
+				<pre><p class="fetch" link="/api/mappacks">...</p></pre>
+			</div>
+
+			<br>
+		</div>
+
+		<div class="seperator"></div>
+
+	</main>
+
 	<main>
 		<div id="levelleaderboard" class="anchor"></div>
 		<div class="main-block">
-			<h1>Level Leaderboards</h1>
+			<h1>Level Leaderboards (usually broken)</h1>
 			<p>/api/leaderboardLevel/levelID</p>
 
 			<p>Returns the leaderboard for a level</p>
@@ -519,7 +566,7 @@
 	<main>
 			<div id="commenting" class="anchor"></div>
 			<div class="main-block">
-				<h1>Commenting</h1>
+				<h1>Commenting (usually broken)</h1>
 				<p>POST: /postComment</p>
 	
 				<p>Leaves a comment on a level. This one is a POST request!</p>
@@ -560,7 +607,7 @@
 		<main>
 			<div id="profileposting" class="anchor"></div>
 			<div class="main-block">
-				<h1>Profile Posting</h1>
+				<h1>Profile Posting (usually broken)</h1>
 				<p>POST: /postProfileComment</p>
 	
 				<p>Leaves a profile post. This one is a POST request!</p>
@@ -597,7 +644,7 @@
 		<main>
 			<div id="liking" class="anchor"></div>
 			<div class="main-block">
-				<h1>Liking</h1>
+				<h1>Liking (usually broken)</h1>
 				<p>POST: /like</p>
 	
 				<p>Likes/dislikes level, comment, or post. This one is a POST request!</p>
@@ -638,7 +685,7 @@
 		<main>
 			<div id="messages" class="anchor"></div>
 			<div class="main-block">
-				<h1>Messages</h1>
+				<h1>Messages (usually broken)</h1>
 				<p>POST:<br>
 				<b>/messages</b> (fetches messages, includes subject but not actual content. blame robtop)<br>
 				<b>/messages/messageID</b> (reads a message)<br>
