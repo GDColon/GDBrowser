@@ -28,6 +28,27 @@
 		</div>
 	</div>
 
+	<div id="customlist" class="popup">
+		<div class="brownBox bounce center supercenter" style="width: 100vh; height: 56%; padding-top: 0.3%; padding-bottom: 3.5%; padding-left: 1%">
+			<img class="gdButton" src="../assets/close.png" width="9%" style="position: absolute; top: -8.5%; left: -5.5vh" onclick="$('#filters').hide()">
+			<h1>Custom List</h1><br>
+			<p id="listInfo" style="margin-top: 1%; margin-bottom: 1.5%">Paste a <span style="color: yellow">comma-seperated</span> list of <span style="color: cyan">Level IDs</span> to create a custom list!</p>
+			<textarea id="listLevels" placeholder="18025697, 23189196, 27786218, 27728679, 25706351" style="margin-bottom: 2%; font-size: 2.5vh"></textarea>
+
+			<div class="inline" style="width: 60%">
+				<h1 class="smaller lessSpaced">List Name</h1>
+				<input id="listName" type="text" placeholder="Custom List" style="font-size: 4vh; height: 13%; width: 90%; text-align: center;" maxlength="32">
+			</div>
+			<div class="inline" style="width: 39%; margin-bottom: 3%">
+				<h1 class="smaller lessSpaced">Page Size</h1>
+				<input id="pageSize" type="number" value="10" style="font-size: 4vh; height: 13%; width: 45%; text-align: center;">
+			</div>
+
+			<a id="listLink"><img src="../assets/btn-submit.png" type="submit" height=12.5%; class="disabled gdButton" style="margin-left: 1%" id="createList"></a>
+
+		</div>
+	</div>
+
 	<div style="position:absolute; bottom: 0%; left: 0%; width: 100%">
 		<img class="cornerPiece" src="../assets/corner.png" width=7%;>
 	</div>
@@ -100,7 +121,8 @@
 	</div>
 
 	<div style="position:absolute; top: 2%; right: 1.5%; width: 10%; text-align: right">
-		<img class="gdButton" src="../assets/plus.png" width="60%" onclick="$('#filters').show()">
+		<img class="gdButton" style="margin-bottom: 15%" src="../assets/plus.png" width="60%" onclick="$('#filters').show()">
+		<img class="gdButton" src="../assets/listbutton.png" width="60%" onclick="$('#customlist').show()">
 	</div>
 
 </div>
@@ -114,6 +136,11 @@ let filters = []
 let minusCheck = []
 let demons = []
 let demonMode = false;
+
+function undupe(array) {
+  if (!Array.isArray(array)) return array
+  else return array.filter((x, y) => array.indexOf(x) == y)
+}
 
 $('#userSearch').click(function() {
 	let query = encodeURIComponent($('#levelName').val()).replace(/%2F/gi, "")
@@ -194,9 +221,40 @@ $('.lengthDiv').click(function() {
 })
 
 $(document).keydown(function(k) {
-	if (k.which == 13 && $('#filters').is(':hidden')) $('#searchBtn').trigger('click') //enter
+	if (k.which == 13) {
+		if (!$('#customlist').is(':hidden')) k.preventDefault();
+		else if ($('#filters').is(':hidden')) $('#searchBtn').trigger('click') //enter	
+	} 
 });
 
+$('#pageSize').on('input blur', function (event) {
+	var x = +$(this).val(); var max = 100; var min = 1
+	if (event.type == "input") { if (x > max || x < min) $(this).addClass('red'); else $(this).removeClass('red')}
+	else {
+		$(this).val(Math.max(Math.min(Math.floor(x), max), min));
+		$(this).removeClass('red')
+	}
+	$('#listLevels').trigger('input')
+})
 
+let listMsg = $('#listInfo').html()
+$('#listLevels, #listName').on('input blur', function (event) {
+	let levels = $('#listLevels').val().replace(/\n| /g, ",").split(",").map(x => x.replace(/[^0-9]/g, "")).filter(x => +x > 0 && +x < 100000000000)
+	levels = undupe(levels)
+
+	if (levels.length > 1 && levels.length <= 100) {
+		$('#listInfo').html(`A list of <span style='color: yellow'>${levels.length}</span> levels will be created.`)
+		$('#listLink').attr('href', `./${levels.join(",")}?list&count=${+$('#pageSize').val()}${$('#listName').val().length ? `&header=${encodeURIComponent($('#listName').val())}` : ""}`)
+		$('#createList').removeClass('disabled')
+	}
+
+	else {
+		$('#createList').addClass('disabled')
+		if (levels.length > 100) $('#listInfo').html('Custom lists have a max of 100 levels!')
+		else if (levels.length == 1) $('#listInfo').html("Please enter more than one level!")
+		else $('#listInfo').html(listMsg)
+	}
+
+})
 
 </script>

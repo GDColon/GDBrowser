@@ -218,7 +218,7 @@ textarea {
 
 textarea::-webkit-scrollbar {
     height: 8%;
-    width: 2.2%;
+    width: 1.5vh;
     background: #6d3c24;
 }
   
@@ -255,6 +255,11 @@ input[type=checkbox]:checked + label.gdcheckbox {
 textarea::placeholder {
     color: lightgray;
     font-size: 3vh;
+}
+
+#listLevels::placeholder {
+    color: rgba(211, 211, 211, 0.5);
+    font-size: 2.5vh;
 }
 
 input:focus, textarea:focus {
@@ -1075,6 +1080,10 @@ input::-webkit-inner-spin-button {
     background-position: 2vh;
     outline: 0.4vh solid black;
     outline-offset: -0.4vh;
+}
+
+.red {
+    color: #ff0000 !important;
 }
 
 .yellow {

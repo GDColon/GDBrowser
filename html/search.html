@@ -122,6 +122,7 @@ let userMode = url.searchParams.get('user')
 let type = url.searchParams.get('type')
 let list = url.searchParams.get('list')
 let count = url.searchParams.get('count')
+let header = url.searchParams.get('header')
 let loading = false;
 let gauntlets = ["Fire", "Ice", "Poison", "Shadow", "Lava", "Bonus", "Chaos", "Demon", "Time", "Crystal", "Magic", "Spike", "Monster", "Doom", "Death"]
 
@@ -151,19 +152,10 @@ function Append(firstLoad) {
 
 	fetch(searchFilters.replace("[PAGE]", page)).then(res => res.json()).then(res => {
 
-	if (res == '-1' || (res.length < 9 && type != "recent")) $('#pageUp').hide()
-	else $('#pageUp').show()
-
-	if (res == '-1' || res.length == 0) { $('#loading').hide(); return loading = false }
-
 	if (firstLoad) {
 		pages = res[0].pages
 		results = res[0].results
-		if (res.length < 9 && res.length > 0) {
-			pages = 1
-			results = res.length
-		}
-		else if (pages > 999 || pages < 1) {
+		if (pages > 999 || pages < 1) {
 			pages = null
 			if (!superSearch) $('#shuffle').addClass('grayscale')
 			else $('#shuffle').css('filter', 'hue-rotate(100deg)')
@@ -171,6 +163,11 @@ function Append(firstLoad) {
 		$('#shuffle').show()
 		$('#pagenum').text(`Page 1${pages ? ` of ${pages}` : ""}`)
 	}
+
+	if (res == '-1' || (pages && page >= pages) || (!pages && res.length < 9 && type != "recent")) $('#pageUp').hide()
+	else $('#pageUp').show()
+
+	if (res == '-1' || res.length == 0) { $('#loading').hide(); return loading = false }
 
 	res.forEach((x, y) => {
 		let hasAuthor = (x.accountID != "0")
@@ -219,19 +216,27 @@ $('#pageUp').click(function() {page += 1; if (!loading) Append()})
 $('#pageDown').click(function() {page -= 1; if (!loading) Append()})
 $('#pageJump').click(function() {if (loading) return; page = parseInt(($('#pageSelect').val() || 1) - 1); Append()})
 
-if (type == 1 || type == 'mostdownloaded') $('#header').text("Most Downloaded")
-if (type == 2 || type == 'mostliked') $('#header').text("Most Liked")
-if (type == 3 || type == 'trending') $('#header').text("Trending Levels")
-if (type == 4 || type == 'recent') $('#header').text("Recent Levels")
-if (type == 6 || type == 'featured') $('#header').text("Featured")
-if (type == 7 || type == 'magic') $('#header').text("Magic Levels")
-if (type == 11 || type == 'awarded' || type == 'starred') $('#header').text("Awarded Levels")
-if (type == 16 || type == 'halloffame' || type == 'hof') $('#header').text("Hall of Fame")
-if (path != "*" && (type == 10 || list != null)) $('#header').text("List of Levels")
-if (type == 'followed') $('#header').text("Followed Creators")
-document.title = $('#header').text() || "Level Search"
-$('#meta-title').attr('content', $('#header').text() || "Level Search")
-if ($('#header').text()) $('#meta-desc').attr('content',  `View Geometry Dash's ${$('#header').text()}${$('#header').text() == "Hall of Fame" ? "" : "list"}!`)
+if (header) {
+	header = header.slice(0, 32) || "Level Search"
+	$('#header').text(header)
+	document.title = header
+}
+
+else {
+	if (type == 1 || type == 'mostdownloaded') $('#header').text("Most Downloaded")
+	if (type == 2 || type == 'mostliked') $('#header').text("Most Liked")
+	if (type == 3 || type == 'trending') $('#header').text("Trending Levels")
+	if (type == 4 || type == 'recent') $('#header').text("Recent Levels")
+	if (type == 6 || type == 'featured') $('#header').text("Featured")
+	if (type == 7 || type == 'magic') $('#header').text("Magic Levels")
+	if (type == 11 || type == 'awarded' || type == 'starred') $('#header').text("Awarded Levels")
+	if (type == 16 || type == 'halloffame' || type == 'hof') $('#header').text("Hall of Fame")
+	if (path != "*" && (type == 10 || list != null)) $('#header').text("Custom List")
+	if (type == 'followed') $('#header').text("Followed Creators")
+	document.title = $('#header').text() || "Level Search"
+	$('#meta-title').attr('content', $('#header').text() || "Level Search")
+	if ($('#header').text()) $('#meta-desc').attr('content',  `View Geometry Dash's ${$('#header').text()}${$('#header').text() == "Hall of Fame" ? "" : "list"}!`)
+}
 
 if (type == 'saved') {
 	$('#header').text("Saved Levels")
@@ -288,10 +293,11 @@ $('#shuffle').click(function() {
 	}
 	else if (pages) {
 		let random = {}
+		let pageCount = +count || 10
 		randomResult = Math.floor(Math.random() * (results)) + 1
-		randomPage = Math.ceil(randomResult / 10)
-		randomIndex = randomResult % 10
-		if (randomIndex == 0) randomIndex = 10
+		randomPage = Math.ceil(randomResult / pageCount)
+		randomIndex = randomResult % pageCount
+		if (randomIndex == 0) randomIndex = pageCount
 		$('#searchBox').html('<div style="height: 4.5%"></div>')
 		$('#loading').show()
 		fetch(searchFilters.replace('[PAGE]', randomPage-1)).then(res => res.json()).then(res => {
