@@ -228,7 +228,7 @@ $(document).keydown(function(k) {
 });
 
 $('#pageSize').on('input blur', function (event) {
-	var x = +$(this).val(); var max = 100; var min = 1
+	var x = +$(this).val(); var max = 250; var min = 1
 	if (event.type == "input") { if (x > max || x < min) $(this).addClass('red'); else $(this).removeClass('red')}
 	else {
 		$(this).val(Math.max(Math.min(Math.floor(x), max), min));

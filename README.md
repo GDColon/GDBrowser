@@ -11,9 +11,7 @@ Just make sure to give credit, obviously. Via the bottom of the homepage, the cr
 
 Obviously, GDBrowser isn't perfect when it comes to GD private servers, since both requests and responses might be a bit different. Or a LOT, as I learned.
 
-You can tweak the endpoint (e.g. boomlings.com) in index.js
-
-You can also check out `gdpsConfig.js` to tweak some additional GDPS settings such as whether to decrypt level descriptions or if timestamps should end with "ago"
+You can also check out `settings.js` to tweak some additional settings (mainly GDPS related) such as whether to cache things or if timestamps should end with "ago"
 
 GDPS compatibility is still a HUGE work in progress, so pull requests would be greatly appreciated if you manage to make any improvements! 
 
@@ -89,11 +87,11 @@ colors.json - The colors for generating icons
 
 credits.json - Credits! (shown on the homepage)
 
-gdpsConfig.js - Tweak small settings for GDPS'es here, such as whether to decrypt level descriptions or if timestamps should end with "ago"
-
 level.json - An array of the official GD tracks, and also difficulty face stuff for level searching
 
 secretStuff.json - GJP goes here, needed for level leaderboards. Not included in the repo for obvious reasons
+
+settings.js - Tweak small settings here, mainly for local use or GDPS'es
 
 sizecheck.js - Excecuted on most pages, used for the 'page isn't wide enough' message, back button, and a few other things
 

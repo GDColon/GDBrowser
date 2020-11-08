@@ -1,7 +1,6 @@
 const request = require('request')
 const Jimp = require('jimp');
 const fs = require('fs');
-const path = require('path');
 const icons = require('../icons/gameSheet.json');
 const colors = require('../misc/colors.json');
 const forms = require('../icons/forms.json')
@@ -25,9 +24,7 @@ let cache = {};
 
 module.exports = async (app, req, res) => {
 
-  function buildIcon(account) {
-
-      if (!account) account = []
+  function buildIcon(account=[], usercode) {
 
       let { form, ind } = forms[req.query.form] || {};
       form = form || 'player';
@@ -37,10 +34,6 @@ module.exports = async (app, req, res) => {
       let col1 = req.query.col1 || account[10] || 0;
       let col2 = req.query.col2 || account[11] || 3;
       let outline = req.query.glow || account[28] || "0";
-
-      // meant for debugging robot/spider offsets, but i'll leave it in anyways
-      let glowOffset = (req.query.off || "").split(",").map(x => Number(x))
-      if (!glowOffset.some(x => x != 0)) glowOffset = []
 
       let topless = form == "bird" && req.query.topless
       let autoSize = req.query.size == "auto"
@@ -65,8 +58,6 @@ module.exports = async (app, req, res) => {
       if (!fs.existsSync(fromIcons(icon)) || (isSpecial && !fs.existsSync(fromIcons(genImageName('02'))))) {
         iconID = '01';
         setBaseIcons();
-        // Condition on next line should never be satisfied but you never know!
-        if (!fs.existsSync(fromIcons(icon))) return res.sendFile(path.join(__dirname, '../assets/unknownIcon.png'))
       }
 
       let ex = fromIcons(extra)
@@ -80,11 +71,7 @@ module.exports = async (app, req, res) => {
 
       let iconCode = `${req.query.form == "cursed" ? "cursed" : form}${topless ? "top" : ""}-${iconID}-${col1}-${col2}-${col3 || "x"}-${outline ? 1 : 0}` 
 
-      if (!sizeParam && !glowOffset.length && cache[iconCode]) {
-        clearTimeout(cache[iconCode].timeoutID);
-        cache[iconCode].timeoutID = setTimeout(function() {delete cache[iconCode]}, 1800000);
-        return res.end(cache[iconCode].value);
-      }
+      if (!sizeParam && cache[iconCode]) return res.end(cache[iconCode].value)
 
       let useExtra = false
 
@@ -93,7 +80,7 @@ module.exports = async (app, req, res) => {
       let offset = icons[glow].spriteOffset.map(minusOrigOffset);
       let robotLeg1, robotLeg2, robotLeg3, robotLeg3b, robotLeg2b, robotLeg1b, robotLeg1c;
       let robotOffset1, robotOffset2, robotOffset3, robotOffset1b, robotOffset2b, robotOffset3b;
-      let robotGlow1, robotGlow2, robotGlow3
+      let robotGlow1, robotGlow2, robotGlow3, glowOffset
       let ufoTop, ufoOffset, ufoCoords, ufoSprite
       let extrabit, offset2, size2;
 
@@ -112,7 +99,7 @@ module.exports = async (app, req, res) => {
         robotLeg2 = new Jimp(fromIcons(legs[1])); robotGlow2 = new Jimp(fromIcons(glows[1]))
         robotLeg3 = new Jimp(fromIcons(legs[2])); robotGlow3 = new Jimp(fromIcons(glows[2]))
 
-        if (!glowOffset.length) glowOffset = offsets[form][+iconID] || []
+        glowOffset = offsets[form][+iconID] || []
       }
 
       Jimp.read(fromIcons(glow)).then(async function (image) {
@@ -294,11 +281,9 @@ module.exports = async (app, req, res) => {
               img.resize(imgSize, Jimp.AUTO)
             }
             img.getBuffer(Jimp.AUTO, (err, buffer) => {
-              if (!sizeParam && !glowOffset.length) {
-                cache[iconCode] = {
-                  value: buffer,
-                  timeoutID: setTimeout(function() {delete cache[iconCode]}, 1800000)
-                }
+              if (!sizeParam) {
+                cache[iconCode] = { value: buffer, timeoutID: setTimeout(function() {delete cache[iconCode]}, 10000000) }   // 3 hour cache
+                if (usercode) cache[usercode] = { value: buffer, timeoutID: setTimeout(function() {delete cache[usercode]}, 300000) }  // 5 min cache for player icons
               }
               return res.end(buffer, 'base64')
             })
@@ -355,19 +340,31 @@ module.exports = async (app, req, res) => {
     }
 
     let username = req.params.text
-    let result = []
+    let userCode;
 
-    if (app.offline || req.query.hasOwnProperty("noUser") || req.query.hasOwnProperty("nouser") || username == "icon") return buildIcon()
     res.contentType('image/png');
+    if (app.offline || req.query.hasOwnProperty("noUser") || req.query.hasOwnProperty("nouser") || username == "icon") return buildIcon()
+
+    else if (app.config.cachePlayerIcons && !Object.keys(req.query).length || Object.keys(req.query).length == 1 && req.query.form) {
+      userCode = `u-${username.toLowerCase()}-${forms[req.query.form] ? req.query.form : 'cube'}`
+      if (cache[userCode]) return res.end(cache[userCode].value)
+    }
+
+    let accountMode = !req.query.hasOwnProperty("player") && Number(req.params.id)
+    let foundID = app.accountCache[username.toLowerCase()]
+    let skipRequest = accountMode || foundID
   
-    request.post(app.endpoint + 'getGJUsers20.php', req.gdParams({ str: username }), function (err1, res1, body1) {
-      if (err1 || !body1 || body1 == "-1") return buildIcon()
-      else result = app.parseResponse(body1);
+    // skip request by causing fake error lmao
+    request.post(skipRequest ? "" : app.endpoint + 'getGJUsers20.php', skipRequest ? {} : req.gdParams({ str: username }), function (err1, res1, body1) {
+
+      let result = foundID ? foundID[0] : (accountMode || err1 || !body1 || body1 == "-1" || body1.startsWith("<!")) ? username : app.parseResponse(body1)[16];
   
-      request.post(app.endpoint + 'getGJUserInfo20.php', req.gdParams({ targetAccountID: result[16] }), function (err2, res2, body2) {
+      request.post(app.endpoint + 'getGJUserInfo20.php', req.gdParams({ targetAccountID: result }), function (err2, res2, body2) {
   
-        if (!err2 && body2 && body2 != '-1') return buildIcon(app.parseResponse(body2));
-        else return buildIcon()
+        if (err2 || !body2 || body2 == '-1' || body2.startsWith("<!")) return buildIcon();
+        let iconData = app.parseResponse(body2)
+        if (!foundID && app.config.cacheAccountIDs) app.accountCache[username.toLowerCase()] = [iconData[16], iconData[2]]
+        return buildIcon(iconData, userCode);
 
     })
   });

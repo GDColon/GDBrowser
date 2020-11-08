@@ -9,7 +9,7 @@ module.exports = async (app, req, res) => {
     let amount = 10;
     let count = +req.query.count
     if (count && count > 0) {
-      if (count > 100) amount = 100
+      if (count > 500) amount = 500
       else amount = count;
     }
     
@@ -56,8 +56,10 @@ module.exports = async (app, req, res) => {
     }
 
     if (req.query.hasOwnProperty("user")) {
+        let accountCheck = app.accountCache[filters.str.toLowerCase()]
         filters.type = 5
-        if (!req.params.text.match(/^[0-9]*$/)) return app.run.profile(app, req, res, null, req.params.text)
+        if (accountCheck) filters.str = accountCheck[1]
+        else if (!filters.str.match(/^[0-9]*$/)) return app.run.profile(app, req, res, null, req.params.text)
     } 
 
     if (req.query.hasOwnProperty("creators")) filters.type = 12

@@ -1,5 +1,5 @@
 const XOR = require(__dirname + "/../classes/XOR");
-const config = require(__dirname + "/../gdpsConfig");
+const config = require(__dirname + "/../settings");
 
 let orbs = [0, 0, 50, 75, 125, 175, 225, 275, 350, 425, 500]
 let length = ['Tiny', 'Short', 'Medium', 'Long', 'XL']

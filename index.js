@@ -3,20 +3,32 @@ const fs = require("fs")
 const compression = require('compression');
 const timeout = require('connect-timeout')
 const rateLimit = require("express-rate-limit");
-
 const app = express();
+
 app.offline = false  // set to true to go into "offline" mode (in case of ip ban from rob)
 app.secret = "Wmfd2893gb7" // lol
-
-app.config = require('./gdpsConfig')  // tweak settings in this file if you're using a GDPS
+app.config = require('./settings')  // tweak settings in this file if you're using a GDPS
 app.endpoint = app.config.endpoint  // default is boomlings.com/database/
+app.accountCache = {} // account IDs are cached here to shave off requests to getgjusers
+
+let rlMessage = "Rate limited ¯\\_(ツ)_/¯<br><br>Please do not spam my servers with a crazy amount of requests. It slows things down on my end and stresses RobTop's servers just as much." +
+" If you really want to send a zillion requests for whatever reason, please download the GDBrowser repository locally - or even just send the request directly to the GD servers.<br><br>" +
+"This kind of spam usually leads to GDBrowser getting IP banned by RobTop, and every time that happens I have to start making the rate limit even stricter. Please don't be the reason for that.<br><br>" +
+"(also, keep in mind that most endpoints have a ?count parameter that let you fetch a LOT more stuff in just one request)"
 
 const RL = rateLimit({
   windowMs: app.config.rateLimiting ? 5 * 60 * 1000 : 0,
   max: app.config.rateLimiting ? 100 : 0, // max requests per 5 minutes
-  message: "Rate limited ¯\\_(ツ)_/¯",
-  keyGenerator: function(req) { return req.headers['x-real-ip'] },
+  message: rlMessage,
+  keyGenerator: function(req) { return req.headers['x-real-ip'] || req.headers['x-forwarded-for'] },
   skip: function(req) { return ((req.url.includes("api/level") && !req.query.hasOwnProperty("download")) ? true : false) }
+})
+
+const RL2 = rateLimit({
+  windowMs: app.config.rateLimiting ? 2 * 60 * 1000 : 0,
+  max: app.config.rateLimiting ? 200 : 0, // max requests per 1 minute
+  message: rlMessage,
+  keyGenerator: function(req) { return req.headers['x-real-ip'] || req.headers['x-forwarded-for'] }
 })
 
 let api = true;
@@ -126,14 +138,14 @@ app.get("/search/:text", function(req, res) { res.sendFile(__dirname + "/html/se
 // API
 
 app.get("/api/analyze/:id", RL, async function(req, res) { app.run.level(app, req, res, api, true) })
-app.get("/api/comments/:id", function(req, res) { app.run.comments(app, req, res) })
+app.get("/api/comments/:id", RL2, function(req, res) { app.run.comments(app, req, res) })
 app.get("/api/credits", function(req, res) { res.send(require('./misc/credits.json')) })
 app.get("/api/leaderboard", function(req, res) { app.run[req.query.hasOwnProperty("accurate") ? "accurate" : "scores"](app, req, res) })
-app.get("/api/leaderboardLevel/:id", RL, function(req, res) { app.run.leaderboardLevel(app, req, res) })
+app.get("/api/leaderboardLevel/:id", RL2, function(req, res) { app.run.leaderboardLevel(app, req, res) })
 app.get("/api/level/:id", RL, async function(req, res) { app.run.level(app, req, res, api) })
 app.get("/api/mappacks", async function(req, res) { app.run.mappack(app, req, res) })
-app.get("/api/profile/:id", function(req, res) { app.run.profile(app, req, res, api) })
-app.get("/api/search/:text", function(req, res) { app.run.search(app, req, res) })
+app.get("/api/profile/:id", RL2, function(req, res) { app.run.profile(app, req, res, api) })
+app.get("/api/search/:text", RL2, function(req, res) { app.run.search(app, req, res) })
  
 
 // REDIRECTS

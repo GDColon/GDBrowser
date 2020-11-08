@@ -26,7 +26,7 @@
 
         {
             "header": "Demon List",
-            "name": "stadust1971",
+            "name": "stadust",
             "ign": "stardust1971",
             "youtube": ["https://youtube.com/user/stardust19710", "youtube"],
             "twitter": ["https://twitter.com/stadust1971", "twitter"],
@@ -35,7 +35,8 @@
 
         {
             "header": "API Help",
-            "name": "SMJSGaming",
+            "name": "SMJS",
+            "ign": "SMJSGaming",
             "youtube": ["https://youtube.com/channel/UCwEsWDs9kGN2vvoiNTJKdaQ", "youtube"],
             "twitter": ["https://instagram.com/smjs_gaming", "instagram"],
             "github": ["https://github.com/SMJSGaming", "github"]
@@ -55,7 +56,7 @@
             "name": "RobTop",
             "youtube": ["https://youtube.com/channel/UCz_yk8mDSAnxJq0ar66L4sw", "youtube"],
             "twitter": ["https://twitter.com/RobTopGames", "twitter"],
-            "github": ["https://www.facebook.com/geometrydash", "facebook"]
+            "github": ["https://twitch.tv/RobTopGames", "twitch"]
         }
     ],
 
@@ -67,6 +68,7 @@
         "Ucrash",
         "zmxmx",
         "101arrowz",
-        "Figment/FigmentBoy"
+        "Figment/FigmentBoy",
+        "Wylie/TheWylieMaster"
     ]
 }
