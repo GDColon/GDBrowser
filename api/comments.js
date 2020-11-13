@@ -58,10 +58,16 @@ module.exports = async (app, req, res) => {
           comment.levelID = x[1] || req.params.id
           comment.playerID = x[3]
           comment.accountID = y[16]
-          comment.form = ['icon', 'ship', 'ball', 'ufo', 'wave', 'robot', 'spider'][Number(y[14])]
           comment.color = (comment.playerID == "16" ? "50,255,255" : x[12] || "255,255,255")
           if (x[10] > 0) comment.percent = +x[10]
           comment.moderator = +x[11] || 0
+          comment.icon = {
+            form: ['icon', 'ship', 'ball', 'ufo', 'wave', 'robot', 'spider'][+y[14]],
+            icon: +y[9],
+            col1: +y[10],
+            col2: +y[11],
+            glow: +y[15] > 0
+          }
         }
 
         if (i == 0 && req.query.type != "commentHistory") {

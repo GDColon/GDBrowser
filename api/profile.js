@@ -29,7 +29,6 @@ module.exports = async (app, req, res, api, getLevels) => {
       let account = app.parseResponse(body)
       
       if (!foundID && app.config.cacheAccountIDs) app.accountCache[username.toLowerCase()] = [account[16], account[2]]
-      else console.log(app.accountCache)
 
       let userData = {
           username: account[1],

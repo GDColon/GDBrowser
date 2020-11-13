@@ -38,7 +38,7 @@ module.exports = async (app, req, res) => {
       let topless = form == "bird" && req.query.topless
       let autoSize = req.query.size == "auto"
       let sizeParam = autoSize || (req.query.size && !isNaN(req.query.size))
-      if (outline == "0") outline = false;
+      if (outline == "0" || outline == "false") outline = false;
 
       if (iconID && iconID.toString().length == 1) iconID = "0" + iconID;
 

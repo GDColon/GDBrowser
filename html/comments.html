@@ -251,7 +251,7 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 		commentHTML = !compact ? `
 			<div class="commentBG ${bgCol}">
 				<div class="comment" commentID="${x.ID}">
-					<img class="inline" src="../icon/${userLink}?form=${x.form}" height=21% style="margin-right: 0.8%">
+					<img class="inline" src="../icon/icon?form=${x.icon.form}&icon=${x.icon.icon}&col1=${x.icon.col1}&col2=${x.icon.col2}&glow=${x.icon.glow}&size=auto" height=21% style="margin-right: 0.8%">
 					<a href=../${x.accountID == "0" ? `search/${x.playerID}?user` : `../u/${userLink}`}>
 					<h2 class="inline gdButton ${x.accountID == "0" ? "green unregistered" : ""}">${userName}</h2></a>
 					${modNumber > 0 ? `<img class="inline" src="../assets/mod${modNumber == 2 ? "-elder" : ""}.png" height=18% style="margin-left: 0.6%;">` : ""}
@@ -276,7 +276,7 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 			:  `
 			<div class="commentBG compactBG ${bgCol}">
 				<div class="comment compact" commentID="${x.ID}">
-					<img class="inline" src="../icon/${userLink}?form=${x.form}" height=21% style="margin-right: 0.8%">
+					<img class="inline" src="../icon/icon?form=${x.icon.form}&icon=${x.icon.icon}&col1=${x.icon.col1}&col2=${x.icon.col2}&glow=${x.icon.glow}&size=auto" height=21% style="margin-right: 0.8%">
 					<a href=../${x.accountID == "0" ? `search/${x.playerID}?user` : `../u/${userLink}`}>
 					<h2 class="inline gdButton ${x.accountID == "0" ? "green unregistered" : ""}">${userName}</h2></a>
 					${modNumber > 0 ? `<img class="inline" src="../assets/mod${modNumber == 2 ? "-elder" : ""}.png" height=18% style="margin-left: 0.6%;">` : ""}
@@ -368,7 +368,7 @@ $('#autoMode').click(function() {
 		document.title = "[LIVE] " + document.title
 		$('#liveText').show()
 		$('#autoMode').attr('src', `../assets/stopbutton.png`)
-		interval = setInterval(function() { appendComments(true) }, 2000)
+		interval = setInterval(function() { appendComments(true) }, 3000)
 	}
 	else {
 		document.title = document.title.slice(6)

@@ -98,7 +98,7 @@ function leaderboard() {
 		
 			<div class="center" style="position:absolute; transform:scale(0.82) translate(-28vh, -10vh); height: 10%; width: 12.5%;">
 				<div class="inline" style="width: 50%; margin: 0% 20% 0% 10%; transform:translateY(-15%)"><h2 class="inline center" style="transform:scale(${1-shift[0]}) translateX(-${shift[1]}%)">${x.rank}</h2></div>
-				<img class="inline spaced lazyLoad" data-src="../icon/${x.username}" height="120%" style="margin-bottom: 0%; transform:scale(1.1)">
+				<img class="inline spaced lazyLoad" data-src="../icon/icon?form=${x.icon.form}&icon=${x.icon.icon}&col1=${x.icon.col1}&col2=${x.icon.col2}&glow=${x.icon.glow}&size=auto" height="120%" style="margin-bottom: 0%; transform:scale(1.1)">
 			</div>
 
 			<div class="center" style="position:absolute; height: 10%; width: 12.5%;">
@@ -109,12 +109,10 @@ function leaderboard() {
 		</div>`)
 		})
 
+		$('.lazyLoad').Lazy({ appendScroll: '#searchBox' });
 		$('#searchBox').append('<div style="height: 4.5%"></div>')
 		loading = false;
 		$('#loading').hide();
-		$('.lazyLoad').Lazy({
-			appendScroll: '#searchBox'
-		});
 	})
 
 }

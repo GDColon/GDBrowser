@@ -1,11 +1,13 @@
-const request = require('request')
-const {GoogleSpreadsheet} = require('google-spreadsheet');
-const sheet = new GoogleSpreadsheet('1ADIJvAkL0XHGBDhO7PP9aQOuK3mPIKB2cVPbshuBBHc'); // accurate leaderboard spreadsheet
+// const request = require('request')
+// const {GoogleSpreadsheet} = require('google-spreadsheet');
+// const sheet = new GoogleSpreadsheet('1ADIJvAkL0XHGBDhO7PP9aQOuK3mPIKB2cVPbshuBBHc'); // accurate leaderboard spreadsheet
 
-let lastIndex = {"stars": 0, "coins": 0, "demons": 0}
-let caches = [{"stars": null, "coins": null, "demons": null}, {"stars": null, "coins": null, "demons": null}] // 0 for JSON, 1 for GD
+// let lastIndex = {"stars": 0, "coins": 0, "demons": 0}
+// let caches = [{"stars": null, "coins": null, "demons": null}, {"stars": null, "coins": null, "demons": null}] // 0 for JSON, 1 for GD
 
 module.exports = async (app, req, res, post) => {
+
+      return res.send([])  // this really do be a bruh moment
 
       if (app.offline || !app.sheetsKey || app.endpoint != "http://boomlings.com/database/") return res.send([])
       let gdMode = post || req.query.hasOwnProperty("gd")

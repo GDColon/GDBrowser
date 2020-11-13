@@ -32,6 +32,13 @@ module.exports = async (app, req, res) => {
         x.coins = +x[13]
         x.playerID = x[2]
         x.date = x[42] + app.config.timestampSuffix
+        x.icon = {
+          form: ['icon', 'ship', 'ball', 'ufo', 'wave', 'robot', 'spider'][+x[14]],
+          icon: +x[9],
+          col1: +x[10],
+          col2: +x[11],
+          glow: +x[15] > 0
+        }
         keys.forEach(k => delete x[k])
       }) 
 

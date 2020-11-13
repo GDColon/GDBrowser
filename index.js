@@ -87,7 +87,7 @@ app.clean = function(text) {if (!text || typeof text != "string") return text; e
 
 // ASSETS
 
-let assets = ['css', 'assets', 'blocks', 'deatheffects', 'difficulty', 'gauntlets', 'gdicon', 'iconkitbuttons', 'levelstyle', 'objects']
+let assets = ['css', 'assets', 'blocks', 'deatheffects', 'difficulty', 'gauntlets', 'gdicon', 'iconkitbuttons', 'levelstyle', 'objects', 'trophies']
 app.use('/css', express.static(__dirname + '/assets/css'));
 app.use('/assets', express.static(__dirname + '/assets', {maxAge: "7d"}));
 app.use('/blocks', express.static(__dirname + '/assets/blocks', {maxAge: "7d"}));
@@ -98,6 +98,7 @@ app.use('/gdicon', express.static(__dirname + '/icons/iconkit', {maxAge: "7d"}))
 app.use('/iconkitbuttons', express.static(__dirname + '/assets/iconkitbuttons', {maxAge: "7d"}));
 app.use('/levelstyle', express.static(__dirname + '/assets/initial', {maxAge: "7d"}));
 app.use('/objects', express.static(__dirname + '/assets/objects', {maxAge: "7d"}));
+app.use('/trophies', express.static(__dirname + '/assets/trophies', {maxAge: "7d"}));
 
 
 // POST REQUESTS
