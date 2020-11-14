@@ -1,6 +1,7 @@
 const {GoogleSpreadsheet} = require('google-spreadsheet');
 const sheet = new GoogleSpreadsheet('1ADIJvAkL0XHGBDhO7PP9aQOuK3mPIKB2cVPbshuBBHc'); // accurate leaderboard spreadsheet
 
+let forms = ['cube', 'ship', 'ball', 'ufo', 'wave', 'robot', 'spider']
 let lastIndex = {"stars": 0, "coins": 0, "demons": 0}
 let caches = [{"stars": null, "coins": null, "demons": null}, {"stars": null, "coins": null, "demons": null}] // 0 for JSON, 1 for GD
 
@@ -22,7 +23,7 @@ module.exports = async (app, req, res, post) => {
       let leaderboard = JSON.parse(tab.getCell(1, type == "demons" ? 2 : type == "coins" ? 1 : 0).value)
 
       let gdFormatting = ""
-      leaderboard.forEach(x => gdFormatting += `1:${x.username}:2:${x.playerID}:13:${x.coins}:17:${x.usercoins}:6:${x.rank}:9:1:10:10:11:14:14:0:15:0:16:${x.accountID}:3:${x.stars}:8:${x.cp}:46:${x.diamonds}:4:${x.demons}|`)
+      leaderboard.forEach(x => gdFormatting += `1:${x.username}:2:${x.playerID}:13:${x.coins}:17:${x.usercoins}:6:${x.rank}:9:${x.icon.icon}:10:${x.icon.col1}:11:${x.icon.col2}:14:${forms.indexOf(x.icon.form)}:15:${x.icon.glow ? 2 : 0}:16:${x.accountID}:3:${x.stars}:8:${x.cp}:46:${x.diamonds}:4:${x.demons}|`)
       caches[0][type] = JSON.stringify(leaderboard)
       caches[1][type] = gdFormatting
       lastIndex[type] = Date.now()
