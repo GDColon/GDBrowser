@@ -1106,6 +1106,14 @@ input::-webkit-inner-spin-button {
     color: #27CEFA;
 }
 
+.brightblue {
+    color: #bbffff
+}
+
+.brightred {
+    color: #ffaaaa;
+}
+
 .grayscale {
     filter: grayscale(100%) brightness(0.7);
 }

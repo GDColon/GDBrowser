@@ -86,9 +86,9 @@
 			<span id="stars">[[STARS]]</span> <img class="valign" src="../assets/star.png" style="cursor: help" title="Stars">
 			<span id="diamonds">[[DIAMONDS]]</span> <img class="valign" src="../assets/diamond.png" style="cursor: help" title="Diamonds">
 			<span id="coins">[[COINS]]</span> <img class="valign" src="../assets/coin.png" style="cursor: help" title="Secret Coins">
-			[[USERCOINS]] <img class="valign"src="../assets/silvercoin.png" style="cursor: help" title="User Coins">
-			[[DEMONS]] <img class="valign"src="../assets/demon.png" style="cursor: help" title="Demons">
-			[[CP]] <img class="valign" src="../assets/cp.png" style="cursor: help" title="Creator Points">
+			<span id="usercoins">[[USERCOINS]]</span> <img class="valign"src="../assets/silvercoin.png" style="cursor: help" title="User Coins">
+			<span id="demons">[[DEMONS]]</span> <img class="valign"src="../assets/demon.png" style="cursor: help" title="Demons">
+			<span id="creatorpoints" style="display: none"><span id="cp">[[CP]]</span> <img class="valign" src="../assets/cp.png" style="cursor: help" title="Creator Points"></span>
 		</h3>
 
 		<div class="lightBox center" id="iconsDiv" style="margin: 2% auto; width: 105vh">
@@ -159,7 +159,6 @@ let messageText = 'Your <span style="color: yellow">Geometry Dash password</span
 $('#message').html(messageText)
 $('#likeMessage').html(messageText.replace("profile posts", "liking posts").replace("postProfileComment", "like"))
 
-$('#collectibles').html($('#collectibles').html().split('	0 <img class="valign" src="../assets/cp')[0])
 $('#modBadge[[MODERATOR]]').show()
 $('#globalrank[[RANK]]').hide()
 
@@ -180,6 +179,14 @@ $('#followOn').click(function() {
 	$('#followOff').show()
 	$('#followOn').hide()
 })
+
+if ([[DIAMONDS]] >= 65535) $('#diamonds').addClass('blue')
+if ([[COINS]] >= 149) $('#coins').addClass('yellow')
+if ([[STARS]] >= 100000) $('#stars').addClass('yellow')
+if ([[DEMONS]] >= 1000) $('#demons').addClass('brightred')
+if ([[USERCOINS]] >= 10000) $('#usercoins').addClass('brightblue')
+if ([[CP]] >= 100) $('#cp').addClass('yellow')
+if ([[CP]] > 0) $('#creatorpoints').show()
 
 if (`[[YOUTUBE]]` != "null") $('#youtube').show()
 if (`[[TWITTER]]` != "null") $('#twitter').show()
@@ -268,10 +275,6 @@ $('#content').on('input', function() {
 	let remaining = 180-$('#content').val().length
 	$('#charcount').text(remaining)
 })
-
-if ([[DIAMONDS]] >= 65535) $('#diamonds').addClass('blue')
-if ([[COINS]] >= 149) $('#coins').addClass('yellow')
-if ([[STARS]] >= 100000) $('#stars').addClass('yellow')
 
 $('#submitComment').click(function () {
 	let comment = $('#content').val()
