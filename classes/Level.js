@@ -6,7 +6,7 @@ let length = ['Tiny', 'Short', 'Medium', 'Long', 'XL']
 let difficulty = { 0: 'Unrated', 10: 'Easy', 20: 'Normal', 30: 'Hard', 40: 'Harder', 50: 'Insane' }
 
 class Level {
-    constructor(levelInfo, author = []) {
+    constructor(levelInfo, download, author = []) {
         if (!levelInfo[2]) return;
         this.name = levelInfo[2];
         this.id = levelInfo[1];
@@ -27,8 +27,9 @@ class Level {
         this.gameVersion = levelInfo[13] > 17 ? (levelInfo[13] / 10).toFixed(1) : levelInfo[13] == 11 ? "1.8" : levelInfo[13] == 10 ? "1.7" : "Pre-1.7"
         if (levelInfo[28]) this.uploaded = levelInfo[28] + config.timestampSuffix
         if (levelInfo[29]) this.updated = levelInfo[29] + config.timestampSuffix
-        this.version = +levelInfo[5];
+        if (download) { this.editorTime = +levelInfo[46] || 0; this.totalEditorTime = +levelInfo[47] || 0 }
         if (levelInfo[27]) this.password = levelInfo[27];
+        this.version = +levelInfo[5];
         this.copiedID = levelInfo[30]
         this.twoPlayer = levelInfo[31] > 0
         this.officialSong = levelInfo[12] != 0 ? parseInt(levelInfo[12]) + 1 : 0

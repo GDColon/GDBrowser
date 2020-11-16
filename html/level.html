@@ -18,7 +18,7 @@
 			<h2 class="smaller center" style="font-size: 5.5vh">Level Info</h2>
 			<p class="bigger center" id="levelInfo" style="line-height: 5vh; margin-top: 1.5vh;">
 				<span class="pre" style="color:lime">[[NAME]]</span><br>
-				ID: <span style="color:yellow">[[ID]]</span>[[ORIGINALINFO]][[LOWDETAIL]][[PASS]][[UPLOAD]][[UPDATE]][[HACKED]]
+				ID: <span style="color:yellow">[[ID]]</span>[[ORIGINALINFO]][[LOWDETAIL]][[PASS]][[UPLOAD]][[UPDATE]][[TIME1]][[TIME2]][[EXTRA]]
 				<br>Version:  <span style="color:yellow">[[VERSION]]</span>
 				<br>GD Version:  <span style="color:yellow">[[GAMEVERSION]]</span>
 				[[OBJECTINFO]][[REQUESTED]]
@@ -154,6 +154,12 @@
 let messageText = 'Your <span style="color: yellow">Geometry Dash password</span> will <span style="color: lime">not be stored</span> anywhere on the site, both <span style="color:rgb(113, 234, 255)">locally and server-side.</span> You can view the code used for liking a level <a class="menuLink" target="_blank" href="https://github.com/GDColon/GDBrowser/blob/master/api/post/like.js">here</a>.'
 $('#message').html(messageText)
 
+function colonize(num) {
+	let date = new Date(0)
+	date.setSeconds(+num)
+	return date.toISOString().split("T")[1].split(".")[0]
+}
+
 if (window.location.href.endsWith('?download')) $('#infoDiv').show()
 
 		let copyMessages = ["ID copied to clipboard", "ID copied x[C]!", "ID copied again!", "ID copied once more!", "ID clipboard to copied!", "ID copied yet again!", "As you wish", "Copy that!", "This one actually works", "You can't play levels, son", "Keep it coming", "Click again, I dare you", "C-C-C-C-COPIED!",
@@ -190,7 +196,9 @@ if (!'[[UPLOADED]]'.startsWith('[')) {
 	$('#levelInfo').html($('#levelInfo').html()
 	.replace('[[PASS]]', `<br>Password: <span style="color:orange">${'[[PASSWORD]]' == '0' ? "No copy" : '[[PASSWORD]]' == 1 ? "Free copy" : '[[PASSWORD]]'}</span>`)
 	.replace('[[LOWDETAIL]]', `<br>Low Detail: <span style="color:orange">${[[LDM]] ? "Yes" : "No"}</span>`)
-	.replace('[[HACKED]]', `<br>Extra String: <span style="color:orange">${'[[EXTRASTRING]]'.length} chars</span>`)
+	.replace('[[TIME1]]', [[EDITORTIME]] == 0 ? "" : `<br>Editor Time: <span style="color:lightgreen">${colonize([[EDITORTIME]])}</span>`)
+	.replace('[[TIME2]]', [[TOTALEDITORTIME]] == 0 ? "" : `<br>Editor Time (+copies): <span style="color:lightgreen">${colonize([[TOTALEDITORTIME]])}</span>`)
+	.replace('[[EXTRA]]', `<br>Extra String: <span style="color:lightgreen">${'[[EXTRASTRING]]'.length} chars</span>`)
 	.replace('[[UPLOAD]]', '[[UPLOADED]]' == "0" ? "" : `<br>Uploaded: <span style="color:orange">[[UPLOADED]]</span>`)
 	.replace('[[UPDATE]]', '[[UPDATED]]' == "0" ? "" : `<br>Updated: <span style="color:orange">[[UPDATED]]</span>`))}
 
@@ -198,7 +206,9 @@ else {
 	$('#levelInfo').html($('#levelInfo').html()
 	.replace('[[PASS]]', "")
 	.replace('[[LOWDETAIL]]', "")
-	.replace('[[HACKED]]', "")
+	.replace('[[EXTRA]]', "")
+	.replace('[[TIME1]]', "")
+	.replace('[[TIME2]]', "")
 	.replace('[[UPLOAD]]', "")
 	.replace('[[UPDATE]]', "") + 
 	`<br><a class="youCanClickThis" href="/[[ID]]?download"><span style="color:aqua">Download additional info</span></a>`

@@ -23,7 +23,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
     }
 
     let levelInfo = app.parseResponse(body)
-    let level = new Level(levelInfo)
+    let level = new Level(levelInfo, true)
 
     request.post(app.endpoint + 'getGJUsers20.php', req.gdParams({ str: level.authorID }), function (err1, res1, b1) {
       let gdSearchResult = app.parseResponse(b1)

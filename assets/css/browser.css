@@ -381,6 +381,11 @@ input::-webkit-inner-spin-button {
     margin-left: 25%;
 }
 
+.downloadInfo {
+    width: 40vh;
+    display: inline-block;
+}
+
 .diffDiv {
     display: inline-block;
     width: 10%;
@@ -1096,6 +1101,10 @@ input::-webkit-inner-spin-button {
 
 .green {
     color: rgb(85, 204, 55);
+}
+
+.lightgreen {
+    color: #4CDA5B
 }
 
 .whatIfItWasPurple {
