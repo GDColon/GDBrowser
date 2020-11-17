@@ -1,0 +1,80 @@
+<head>
+	<title>Boomlings Leaderboard</title>
+	<meta charset="utf-8">
+	<link href="../css/boomlings.css" type="text/css" rel="stylesheet">
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script>
+	<script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-135255146-3');</script>
+	<link rel="icon" href="../assets/boomlings/red.png">
+	<meta id="meta-title" property="og:title" content="Boomlings Leaderboard">
+	<meta id="meta-desc" property="og:description" content='"Never ask me for anything ever again." - Masahiro Sakurai (probably)'>
+	<meta id="meta-image" name="og:image" itemprop="image" content="../assets/boomlings/red.png">
+</head>
+
+<body class="levelBG" onbeforeunload="saveUrl()">
+
+	<div id="everything" style="overflow: auto;">
+
+		<h2>Boomlings Leaderboard</h2>
+
+		<div id="boomerbox" class="supercenter dragscroll"></div>
+
+		<div id="borderbox" class="supercenter dragscroll"></div>
+
+		<div class="supercenter" id="loading" style="height: 10%; top: 47%; display: none;">
+			<img class="spin noSelect" src="../assets/loading.png" height="105%">
+		</div>
+
+		<div style="position:absolute; top: 2%; left: 1.5%; width: 10%; height: 25%; pointer-events: none">
+			<img class="gdButton yesClick" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()">
+		</div>
+
+		<div style="position:absolute; bottom: 0%; left: 0%; width: 100%">
+			<img class="cornerPiece" src="../assets/corner.png" width=7%;>
+		</div>
+	
+		<div style="position:absolute; bottom: 0%; right: 0%; width: 100%; text-align: right;">
+			<img class="cornerPiece" src="../assets/corner.png" width=7%; style="transform: scaleX(-1)">
+		</div>
+
+	</div>
+
+</body>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
+<script type="text/javascript" src="../assets/sizecheck.js"></script>
+<script type="text/javascript" src="../assets/dragscroll.js"></script>
+<script>
+
+	$('#boomerbox').html('')
+	$('#loading').show()
+
+	fetch(`../api/boomlings`).then(res => res.json()).then(res => {
+
+		$('#boomerbox').html('')
+		$('.ranking').remove()
+
+		res.forEach((x, y) => {
+
+			$('#boomerbox').append(`<div class="inline leaderboardSlot">
+			<div class="flex" style="width: 7vh; height: 100%"><h1 class="rankNumber" style="width: inherit">${x.rank}</h1></div>
+			<img src="../assets/boomlings/icons/${x.boomling}.png" style="width: 12vh; align-self: center">
+	
+			<p class="flex username" style="width: 48%">${x.name}</p>
+
+			<div class="flex" style="width: 22%">
+				<h1 class="level">Level ${x.level}<br><span class="score">${x.score}</span>
+					<img class="powerup inline" height="20%" src="../assets/boomlings/powerups/${x.powerups[0]}.png">` +
+				`<img class="powerup inline" height="20%" src="../assets/boomlings/powerups/${x.powerups[1]}.png">` +
+				`<img class="powerup inline" height="20%" src="../assets/boomlings/powerups/${x.powerups[2]}.png">
+				</h1>
+			</div>
+
+			<img src="../assets/boomlings/levels/${x.boomlingLevel}.png" style="width: 6.5%; align-self: center">
+			</div>`)
+		})
+
+		$('#boomerbox').append('<div style="height: 4.5%"></div>')
+		$('#loading').hide();
+	})
+
+</script>

@@ -381,11 +381,6 @@ input::-webkit-inner-spin-button {
     margin-left: 25%;
 }
 
-.downloadInfo {
-    width: 40vh;
-    display: inline-block;
-}
-
 .diffDiv {
     display: inline-block;
     width: 10%;
@@ -729,6 +724,24 @@ input::-webkit-inner-spin-button {
 .leaderboardStats img {
     transform: translate(-20%, -7%);
     height: 22%;
+}
+
+#boomling {
+    transform: rotate(350deg);
+    cursor: pointer;
+    user-select: none;
+    transition-duration: 0.06s;
+    transition-timing-function: ease-in-out;
+}
+
+#boomling:hover {
+    transform: rotate(355deg) scale(1.1) translate(-4%, -6%);
+    cursor: pointer;
+    user-select: none;
+}
+
+#boomling:active {
+    transform: rotate(355deg) scale(1.2) translate(-4%, -6%);
 }
 
 #collectibles img:first-child, #collectibles img:last-child {

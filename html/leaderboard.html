@@ -33,11 +33,12 @@
 	</div>
 
 	<div style="position:absolute; bottom: 0%; left: 0%; width: 100%">
-		<img class="cornerPiece" src="../assets/corner.png" width=7%;>
+		<img class="cornerPiece noClick" src="../assets/corner.png" width=7%;>
 	</div>
 
 	<div style="position:absolute; bottom: 0%; right: 0%; width: 100%; text-align: right;">
-		<img class="cornerPiece" src="../assets/corner.png" width=7%; style="transform: scaleX(-1)">
+		<a title="Boomlings Leaderboard?????" href="../boomlings"><img id="boomling" style="position: absolute; width: 6%; top: 2%; right: 1%"></a>
+		<img class="cornerPiece noClick" src="../assets/corner.png" width=7%; style="transform: scaleX(-1)">
 	</div>
 
 	<div id="searchBox" class="supercenter dragscroll">
@@ -77,6 +78,7 @@
 let sort = "stars"
 let useTrophies = false
 let trophies = [1, 3, 10, 25, 50, 75, 100]
+let colors = ["red", "orange", "yellow", "green", "teal", "blue", "pink"]
 
 let top250Text = 
 `The <g>Top 250<> leaderboard contains the <g>top 250 players<>, sorted by <y>star<> value. However, due to <o>hackers<> flooding the leaderboard, this leaderboard has been <b>frozen<> for well over 2 years and displays <o>very outdated information<>.`
@@ -98,7 +100,6 @@ function infoText(text) {
 }
 
 infoText(accurateText)
-
 
 function leaderboard(val) {
 
@@ -150,6 +151,8 @@ function leaderboard(val) {
 
 	let type = "accurate"
 	leaderboard(type)
+
+	$('#boomling').attr('src', `../assets/boomlings/${colors[Math.floor(Math.random() * colors.length)]}.png`)
 
 	$(document).on('click', '.sortButton', function () {
 		if ($('#loading').is(":visible")) return

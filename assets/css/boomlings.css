@@ -1,0 +1,204 @@
+@font-face {
+	font-family: Kaine;
+	src: url(../assets/Kaine.ttf)
+}
+
+body {
+	margin: 0;
+	height: 100vh;
+	overflow: hidden;
+	background: #000
+}
+
+.levelBG {
+	background-image: linear-gradient(#0065fd, #002e73);
+	height: 100vh;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed
+}
+
+.noSelect, img {
+	user-select: none
+}
+
+.cornerPiece {
+	position: sticky
+}
+
+.supercenter {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%)
+}
+
+.rankNumber {
+	font-size: 5vh;
+	text-align: center;
+	text-shadow: -0.2vh -0.2vh 0vh #000, 0.2vh -0.2vh 0vh #000, -0.2vh 0.2vh 0vh #000, 0.2vh 0.2vh 0vh #000;
+}
+
+.username {
+	font-size: 6vh;
+	font-family: helvetica, arial;
+	margin-left: 1%;
+	margin: 0 0 0 2%;
+}
+
+.level {
+	font-size: 3.8vh;
+	text-shadow: -0.18vh -0.18vh 0vh #000, 0.18vh -0.18vh 0vh #000, -0.18vh 0.18vh 0vh #000, 0.18vh 0.18vh 0vh #000;
+}
+
+.score {
+	font-size: 2.5vh;
+	text-shadow: -0.15vh -0.15vh 0vh #000, 0.15vh -0.15vh 0vh #000, -0.15vh 0.15vh 0vh #000, 0.15vh 0.15vh 0vh #000;
+}
+
+.powerup {
+	margin-right: 2.5%;
+}
+
+.inline {
+	display: inline-block
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+}
+
+
+.center {
+    text-align: center;
+    max-width: 100%;
+}
+
+#everything {
+	width: 100%;
+	height: 100%
+}
+
+p {
+	font-family: aller, helvetica, arial;
+	color: #fff;
+    font-size: 2.9vh;
+	word-break: break-word;
+}
+
+h1 {
+	font-weight: 400;
+	margin: 0 0;
+	font-size: 8vh;
+	font-family: Kaine;
+	color: #ffc800;
+	letter-spacing: .02em;
+	text-shadow: -0.25vh -0.25vh 0vh #000, 0.25vh -0.25vh 0vh #000, -0.25vh 0.25vh 0vh #000, 0.25vh 0.25vh 0vh #000;
+}
+
+h2 {
+    font-weight: normal;
+    margin: 1.8% 0 0 0;
+    font-size: 7.5vh;
+    font-family: Pusab, Arial;
+    color: rgb(255, 200, 0);
+	letter-spacing: 0.02em;
+	text-align: center;
+    text-shadow: -0.275vh -0.275vh 0vh #000, 0.275vh -0.275vh 0vh #000, -0.275vh 0.275vh 0vh #000, 0.275vh 0.275vh 0vh #000, 0.5vh 0.5vh 0vh rgba(0,0,0,0.4);
+}
+
+.gdButton {
+	cursor: pointer;
+	z-index: 1;
+	user-select: none;
+	pointer-events: all;
+	transition-duration: 70ms;
+	transition-timing-function: ease-in-out
+}
+
+.gdButton:active {
+	transform: scale(1.08)
+}
+
+#scoreTabs {
+	position: absolute;
+	text-align: center;
+	top: 2.45%;
+	width: 100%;
+	margin-left: -13.5vh
+}
+
+#boomerbox, #borderbox {
+	background-color: #ad734c;
+	width: 110vh;
+	height: 75%;
+	overflow-y: auto;
+	overflow-x: hidden;
+	margin-top: 1%
+}
+
+#borderbox {
+	border: 1.6vh solid;
+	border-image: url('./../assets/boomlings/border.png') 10% round;
+	border-radius: 3vh;
+	width: 110vh;
+	height: 75%;
+	background-color: transparent;
+	pointer-events: none;
+	border-image-slice: 85 77;
+    border-image-width: 5vh;
+}
+
+#boomerbox::-webkit-scrollbar {
+	display: none
+}
+
+.leaderboardSlot {
+	height: 14%;
+	width: 100%;
+	background-color: #a1582c;
+	margin: auto;
+	border-bottom: .18vh rgba(0, 0, 0, .4) solid;
+	padding-left: 2vh;
+	white-space: nowrap;
+	display: flex;
+}
+
+.leaderboardSlot:nth-child(odd) {
+	background-color: #c1743f
+}
+
+.spin {
+	-webkit-animation: spin 2s linear infinite;
+	-moz-animation: spin 2s linear infinite;
+	animation: spin 2s linear infinite;
+	mix-blend-mode: luminosity
+}
+
+.brownBox {
+    border: 2.5vh solid transparent;
+    border-radius: 3vh;
+    background-color: #995533;
+    border-image: url('./../assets/brownbox.png') 10% round;
+}
+
+@-moz-keyframes spin {
+	100% {
+		-moz-transform: rotate(360deg)
+	}
+}
+
+@-webkit-keyframes spin {
+	100% {
+		-webkit-transform: rotate(360deg)
+	}
+}
+
+@keyframes spin {
+	100% {
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg)
+	}
+}

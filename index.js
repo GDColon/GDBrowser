@@ -6,7 +6,6 @@ const rateLimit = require("express-rate-limit");
 const app = express();
 
 app.offline = false  // set to true to go into "offline" mode (in case of ip ban from rob)
-app.secret = "Wmfd2893gb7" // lol
 app.config = require('./settings')  // tweak settings in this file if you're using a GDPS
 app.endpoint = app.config.endpoint  // default is boomlings.com/database/
 app.accountCache = {} // account IDs are cached here to shave off requests to getgjusers
@@ -87,10 +86,11 @@ app.clean = function(text) {if (!text || typeof text != "string") return text; e
 
 // ASSETS
 
-let assets = ['css', 'assets', 'blocks', 'deatheffects', 'difficulty', 'gauntlets', 'gdicon', 'iconkitbuttons', 'levelstyle', 'objects', 'trophies']
+let assets = ['css', 'assets', 'blocks', 'boomlings', 'deatheffects', 'difficulty', 'gauntlets', 'gdicon', 'iconkitbuttons', 'levelstyle', 'objects', 'trophies']
 app.use('/css', express.static(__dirname + '/assets/css'));
 app.use('/assets', express.static(__dirname + '/assets', {maxAge: "7d"}));
 app.use('/blocks', express.static(__dirname + '/assets/blocks', {maxAge: "7d"}));
+app.use('/boomlings', express.static(__dirname + '/assets/boomlings', {maxAge: "7d"}));
 app.use('/deatheffects', express.static(__dirname + '/assets/deatheffects', {maxAge: "7d"}));
 app.use('/difficulty', express.static(__dirname + '/assets/gdfaces', {maxAge: "7d"}));
 app.use('/gauntlets', express.static(__dirname + '/assets/gauntlets', {maxAge: "7d"}));
@@ -124,6 +124,7 @@ app.get("/", function(req, res) {
 
 app.get("/analyze/:id", async function(req, res) { res.sendFile(__dirname + "/html/analyze.html") })
 app.get("/api", function(req, res) { res.sendFile(__dirname + "/html/api.html") })
+app.get("/boomlings", function(req, res) { res.sendFile(__dirname + "/html/boomlings.html") })
 app.get("/comments/:id", function(req, res) { res.sendFile(__dirname + "/html/comments.html") })
 app.get("/demon/:id", function(req, res) { res.sendFile(__dirname + "/html/demon.html") })
 app.get("/gauntlets", function(req, res) { res.sendFile(__dirname + "/html/gauntlets.html") })
@@ -139,6 +140,7 @@ app.get("/search/:text", function(req, res) { res.sendFile(__dirname + "/html/se
 // API
 
 app.get("/api/analyze/:id", RL, async function(req, res) { app.run.level(app, req, res, api, true) })
+app.get("/api/boomlings", function(req, res) { app.run.boomlings(app, req, res) })
 app.get("/api/comments/:id", RL2, function(req, res) { app.run.comments(app, req, res) })
 app.get("/api/credits", function(req, res) { res.send(require('./misc/credits.json')) })
 app.get("/api/leaderboard", function(req, res) { app.run[req.query.hasOwnProperty("accurate") ? "accurate" : "scores"](app, req, res) })
