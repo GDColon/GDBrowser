@@ -1,5 +1,5 @@
 <head>
-	<title>Level Search</title>
+	<title id="tabTitle">Level Search</title>
 	<meta charset="utf-8">
 	<link href="../css/browser.css" type="text/css" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
@@ -253,7 +253,14 @@ if (gauntlet) {
 	$('#meta-desc').attr('content',  `View the 5 levels in the ${(gauntlets[parseInt(gauntlet) - 1] || "Unknown") + " Gauntlet"}!`)
 }
 
-if (!$('#header').text() && typeof userMode != "string") $('#header').text(path == "*" ? "Online Levels" : decodeURIComponent(path))
+if (!$('#header').text() && typeof userMode != "string") {
+	if (path != "*") {
+		$('#header').text(decodeURIComponent(path))
+		$('#tabTitle').text(decodeURIComponent(path) + " - Level Search")
+	} else
+		$('#header').text("Online Levels")
+}
+
 
 $('.closeWindow').click(function() {$(".popup").attr('style', 'display: none;')})
 
