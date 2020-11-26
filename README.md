@@ -83,8 +83,6 @@ objects.json - IDs for portals, orbs, triggers, and misc stuff
 
 **Not for level analysis**
 
-colors.json - The colors for generating icons
-
 credits.json - Credits! (shown on the homepage)
 
 level.json - An array of the official GD tracks, and also difficulty face stuff for level searching

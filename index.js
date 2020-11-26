@@ -31,8 +31,12 @@ const RL2 = rateLimit({
 })
 
 let api = true;
-let gdIcons = fs.readdirSync('./icons/iconkit')
+let gdIcons = fs.readdirSync('./icons/preview')
 let sampleIcons = require('./misc/sampleIcons.json')
+let colorList = require('./icons/colors.json')
+let forms = { "player": "cube", "bird": "ufo", "dart": "wave" }
+let whiteIcons = fs.readdirSync('./icons').filter(x => x.endsWith("extra_001.png")).map(function (x) { let xh = x.split("_"); return [xh[1] == "ball" ? "ball" : forms[xh[0]] || xh[0], +xh[xh[1] == "ball" ? 2 : 1]]})
+let colorOrder = [0, 1, 2, 3, 16, 4, 5, 6, 13, 7, 8, 9, 29, 10, 14, 11, 12, 17, 18, 15, 27, 32, 28, 38, 20, 33, 21, 34, 22, 39, 23, 35, 24, 36, 25, 37, 30, 26, 31, 19]
 
 app.use(compression());
 app.use(express.json());
@@ -94,7 +98,7 @@ app.use('/boomlings', express.static(__dirname + '/assets/boomlings', {maxAge: "
 app.use('/deatheffects', express.static(__dirname + '/assets/deatheffects', {maxAge: "7d"}));
 app.use('/difficulty', express.static(__dirname + '/assets/gdfaces', {maxAge: "7d"}));
 app.use('/gauntlets', express.static(__dirname + '/assets/gauntlets', {maxAge: "7d"}));
-app.use('/gdicon', express.static(__dirname + '/icons/iconkit', {maxAge: "7d"}));
+app.use('/previewicon', express.static(__dirname + '/icons/preview', {maxAge: "7d"}));
 app.use('/iconkitbuttons', express.static(__dirname + '/assets/iconkitbuttons', {maxAge: "7d"}));
 app.use('/levelstyle', express.static(__dirname + '/assets/initial', {maxAge: "7d"}));
 app.use('/objects', express.static(__dirname + '/assets/objects', {maxAge: "7d"}));
@@ -178,7 +182,7 @@ app.get("/icon/:text", function(req, res) { app.run.icon(app, req, res) })
 app.get("/object/:text", function(req, res) { app.run.object(app, req, res) })
 app.get('/api/icons', function(req, res) { 
   let sample = [JSON.stringify(sampleIcons[Math.floor(Math.random() * sampleIcons.length)].slice(1))]
-  res.send(gdIcons.concat(sample)); 
+  res.send({icons: gdIcons, colors: colorList, colorOrder, whiteIcons, sample}); 
 });
 
 app.get('*', function(req, res) {

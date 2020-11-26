@@ -2,10 +2,12 @@ const request = require('request')
 const Jimp = require('jimp');
 const fs = require('fs');
 const icons = require('../icons/gameSheet.json');
-const colors = require('../misc/colors.json');
+const colors = require('../icons/colors.json');
 const forms = require('../icons/forms.json')
 const offsets = require('../icons/offsets.json');
 
+let hexRegex = /^[A-Fa-f0-9]{6}$/
+function hexConvert(hex) { hex = hex.replace('#', ''); return {r: '0x' + hex[0] + hex[1] | 0, g: '0x' + hex[2] + hex[3] | 0, b: '0x' + hex[4] + hex[5] | 0}; }
 function recolor(img, col) {
   return img.scan(0, 0, img.bitmap.width, img.bitmap.height, function (x, y, idx) {
     if (img.bitmap.data.slice(idx, idx+3).every(function(val) {return val >= 20 && val <= 255})) { // If it's not "black, i.e. we want to recolor it"
@@ -33,6 +35,8 @@ module.exports = async (app, req, res) => {
       let iconID = req.query.icon || account[ind] || 1;
       let col1 = req.query.col1 || account[10] || 0;
       let col2 = req.query.col2 || account[11] || 3;
+      let colG = req.query.colG || req.query.colg
+      let colW = req.query.colW || req.query.colw || req.query.col3
       let outline = req.query.glow || account[28] || "0";
 
       let topless = form == "bird" && req.query.topless
@@ -42,10 +46,8 @@ module.exports = async (app, req, res) => {
 
       if (iconID && iconID.toString().length == 1) iconID = "0" + iconID;
 
-      if (col1 == 15) outline = true;
-      function genImageName(...args) {
-        return genFileName(form, iconID, ...args);
-      }
+      function genImageName(...args) { return genFileName(form, iconID, ...args) }
+
       let icon, glow, extra;
       function setBaseIcons() {
         icon = genImageName(isSpecial && '01');
@@ -63,13 +65,22 @@ module.exports = async (app, req, res) => {
       let ex = fromIcons(extra)
       let hasExtra = fs.existsSync(ex)
 
-      if (!colors[col1]) col1 = 0
-      if (!colors[col2]) col2 = 3
+      let cols = [col1, col2, colG, colW]
+      cols.forEach(col => {
+        if (!col) return
+        col = col.toString()
+        if (col.match(hexRegex)) colors[col.toLowerCase()] = hexConvert(col)
+      })
 
-      let col3 = req.query.col3
-      if (col3 && (!hasExtra || !colors[col3] || col3 == "12")) col3 = null
+      if (!colors[col1] || isNaN(colors[col1].r)) col1 = colors[+col1] ? +col1 : 0
+      if (!colors[col2] || isNaN(colors[col2].r)) col2 = colors[+col2] ? +col2 : 3
+      if (!colors[colG] || isNaN(colors[colG].r)) colG = colors[+colG] ? +colG : null
+      if (!colors[colW] || isNaN(colors[colW].r)) colW = colors[+colW] ? +colW : null
+      if (colW && (!hasExtra || colW == 12)) colW = null
 
-      let iconCode = `${req.query.form == "cursed" ? "cursed" : form}${topless ? "top" : ""}-${iconID}-${col1}-${col2}-${col3 || "x"}-${outline ? 1 : 0}` 
+      if (col1 == 15 || col1 == "000000") outline = true;
+
+      let iconCode = `${req.query.form == "cursed" ? "cursed" : form}${topless ? "top" : ""}-${iconID}-${col1}-${col2}-${colG || "x"}-${colW || "x"}-${outline ? 1 : 0}` 
 
       if (!sizeParam && cache[iconCode]) return res.end(cache[iconCode].value)
 
@@ -114,7 +125,7 @@ module.exports = async (app, req, res) => {
           offset2 = extrabit.spriteOffset.map(minusOrigOffset);
           size2 = extrabit.spriteSize;
           extra = new Jimp(eb);
-          if (col3) await Jimp.read(eb).then(e => { extra = recolor(e, col3) })
+          if (colW) await Jimp.read(eb).then(e => { extra = recolor(e, colW) })
           useExtra = true
         }
 
@@ -300,8 +311,8 @@ module.exports = async (app, req, res) => {
                 , canvas = Canvas.createCanvas(finalSize[0] + 10, finalSize[1] + 10)
                 , ctx = canvas.getContext('2d');
 
-              if (col2 == 15) col2 = col1;
-              if (col1 == 15 && col2 == 15) col2 = 12;
+              if (!colG) colG = (col2 == 15 || col2 == "000000" ? col1 : col2)
+              if (colG == 15 || colG == "000000") colG = 12
 
               const img = new Image()
               img.onload = () => {
@@ -311,7 +322,7 @@ module.exports = async (app, req, res) => {
                 for (; i < dArr.length; i += 2) ctx.drawImage(img, x + dArr[i] * s, y + dArr[i + 1] * s);
 
                 ctx.globalCompositeOperation = "source-in";
-                ctx.fillStyle = `rgba(${colors[col2].r}, ${colors[col2].g}, ${colors[col2].b}, 1})`;
+                ctx.fillStyle = `rgba(${colors[colG].r}, ${colors[colG].g}, ${colors[colG].b}, 1})`;
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 ctx.globalCompositeOperation = "source-over";
                 ctx.imageSmoothingEnabled = false;

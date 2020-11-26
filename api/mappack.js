@@ -8,7 +8,7 @@ module.exports = async (app, req, res) => {
   if (app.offline) return res.send("-1")
   else if (app.config.cacheMapPacks && cache.data != null && cache.indexed + 20000000 > Date.now()) return res.send(cache.data)   // 6 hour cache
 
-  request.post(app.endpoint + 'getGJMapPacks21.php', req.gdParams({ count: 100 }), function (err, resp, body) {
+  request.post(app.endpoint + 'getGJMapPacks21.php', req.gdParams({ count: 200 }), function (err, resp, body) {
 
     if (err || !body || body == '-1' || body.startsWith("<!")) return res.send("-1")
 

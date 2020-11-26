@@ -29,9 +29,9 @@ module.exports = async (app, req, res, api, getLevels) => {
       let account = app.parseResponse(body)
       
       if (!foundID && app.config.cacheAccountIDs) app.accountCache[username.toLowerCase()] = [account[16], account[2]]
-
+      
       let userData = {
-          username: account[1],
+          username: account[1] || "[MISSINGNO.]",
           playerID: account[2],
           accountID: account[16],
           rank: +account[30],
@@ -57,7 +57,7 @@ module.exports = async (app, req, res, api, getLevels) => {
           spider: +account[43],
           col1: +account[10],
           col2: +account[11],
-          deathEffect: +account[48],
+          deathEffect: +account[48] || 1,
           glow: account[28] == "1",
       }
   

@@ -1,7 +1,5 @@
-@font-face {
-	font-family: Kaine;
-	src: url(../assets/Kaine.ttf)
-}
+@font-face { font-family: Pusab; src: url('./../assets/Pusab.ttf') }
+@font-face { font-family: Kaine; src: url('./../assets/boomlings/Kaine.ttf') }
 
 body {
 	margin: 0;
