@@ -36,7 +36,7 @@ let sampleIcons = require('./misc/sampleIcons.json')
 let colorList = require('./icons/colors.json')
 let forms = { "player": "cube", "bird": "ufo", "dart": "wave" }
 let whiteIcons = fs.readdirSync('./icons').filter(x => x.endsWith("extra_001.png")).map(function (x) { let xh = x.split("_"); return [xh[1] == "ball" ? "ball" : forms[xh[0]] || xh[0], +xh[xh[1] == "ball" ? 2 : 1]]})
-let colorOrder = [0, 1, 2, 3, 16, 4, 5, 6, 13, 7, 8, 9, 29, 10, 14, 11, 12, 17, 18, 15, 27, 32, 28, 38, 20, 33, 21, 34, 22, 39, 23, 35, 24, 36, 25, 37, 30, 26, 31, 19]
+let colorOrder = [0, 1, 2, 3, 16, 4, 5, 6, 13, 7, 8, 9, 29, 10, 14, 11, 12, 17, 18, 15, 27, 32, 28, 38, 20, 33, 21, 34, 22, 39, 23, 35, 24, 36, 25, 37, 30, 26, 31, 19, 40, 41]
 
 app.use(compression());
 app.use(express.json());

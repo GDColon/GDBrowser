@@ -229,6 +229,8 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 	res.forEach((x, index) => {
 
 		$(`#date-${x.ID}`).html(x.date)
+		$(`#likes-${x.ID}`).html(x.likes)
+		$(`#thumb-${x.ID}`).attr('style', x.likes < 0 ? 'transform: translateY(25%); margin-right: 0.4%' : '').attr('src', `../assets/${x.likes < 0 ? "dis" : ""}like.png`)
 		if ($(`.comment[commentID=${x.ID}]`).length) return // auto mode, ignore duplicates
 
 		let bgCol = index % 2 ? "evenComment" : "oddComment"
@@ -265,9 +267,9 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 				<div class="commentLikes">
 					${history ? `<h3 style="margin-right: 1.5vh; pointer-events: all;" class="gold inline"><a href="../${x.levelID}">(${x.levelID})</a></h3>` : ""}
 					<div class="inline gdButton likeComment" commentID="${x.ID}" ${x.levelID ? `levelID="${x.levelID}"` : ""}">
-						<img class="inline gdButton" ${x.likes < 0 ? "style='transform: translateY(25%); margin-right: 0.4%'" : ""} src="../assets/${x.likes < 0 ? "dis" : ""}like.png" height=20%>
+						<img id="thumb-${x.ID}" class="inline gdButton" ${x.likes < 0 ? "style='transform: translateY(25%); margin-right: 0.4%'" : ""} src="../assets/${x.likes < 0 ? "dis" : ""}like.png" height=20%>
 					</div>
-					<h3 class="inline">${x.likes}</h3>
+					<h3 id="likes-${x.ID}" class="inline">${x.likes}</h3>
 				</div>
 			</div>` 
 			
@@ -290,9 +292,9 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 				<div class="commentLikes">
 					${history ? `<h3 style="margin-right: 0.5vh; pointer-events: all;" class="gold inline"><a href="../${x.levelID}">(${x.levelID})</a></h3>` : ""}
 					<div class="inline gdButton likeComment" commentID="${x.ID}"${x.levelID ? `levelID="${x.levelID}"` : ""}>
-						<img class="inline" ${x.likes < 0 ? "style='transform: translateY(15%); margin-right: 0.4%'" : ""} src="../assets/${x.likes < 0 ? "dis" : ""}like.png" height=27%>
+						<img id="thumb-${x.ID}" class="inline" ${x.likes < 0 ? "style='transform: translateY(15%); margin-right: 0.4%'" : ""} src="../assets/${x.likes < 0 ? "dis" : ""}like.png" height=27%>
 					</div>
-					<h3 class="inline">${x.likes}</h3>
+					<h3 id="likes-${x.ID}" class="inline">${x.likes}</h3>
 				</div>
 			</div>`
 

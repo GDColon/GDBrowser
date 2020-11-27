@@ -343,20 +343,20 @@ fetch('./api/icons').then(res => {
 
     $("#cp2").on('input change', function() {
         picking[1] = true; colorBG(2, $(this).val(), true);
-        $(".color1").removeClass("iconSelected"); $("#done").show()
+        $(".color2").removeClass("iconSelected"); $("#done").show()
     })
 
     $("#cpG").on('input change', function() {
         picking[2] = true; colorBG('G', $(this).val(), true);
-        $(".color1").removeClass("iconSelected"); $("#done").show()
+        $(".colorG").removeClass("iconSelected"); $("#done").show()
     })
 
     $("#cpW").on('input change', function() {
         picking[3] = true; colorBG('W', $(this).val(), true);
-        $(".color1").removeClass("iconSelected"); $("#done").show()
+        $(".colorW").removeClass("iconSelected"); $("#done").show()
     })
 
-    $("#done").click(function() {
+    $("#done img").click(function() {
         $("#done").hide()
         if (picking[0]) selectedCol1 = $('#cp1').val().slice(1)
         if (picking[1]) selectedCol2 = $('#cp2').val().slice(1)
