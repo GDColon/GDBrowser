@@ -46,10 +46,14 @@
 	</div>
 	
 	<div class="leaderboardBox supercenter gs" style="width: 120vh; height: 80%; pointer-events: none">
-		<div id="sortDiv" style="position: relative; right: 10.5%; top: 10.5%; width: 0.1%">
-			<img class="gdButton sortButton" style="margin-bottom: 1vh" sort="stars" src="../assets/sort-stars-on.png" height="11%">
-			<img class="gdButton sortButton" style="margin-bottom: 1vh" sort="coins"  src="../assets/sort-coins.png" height="11%">
-			<img class="gdButton sortButton" style="margin-bottom: 1vh" sort="demons"  src="../assets/sort-demons.png" height="11%">
+		<div class="sortDiv" style="position: relative; left: 100%; transform: translateX(4.5vh); top: 12%; width: 0.1%">
+			<img class="gdButton" id="modSort" style="margin-bottom: 1vh" title="Moderators" src="../assets/sort-mod.png" height="11%">
+		</div>
+		<div class="sortDiv" style="position: relative; right: 10.5%; top: 0%; width: 0.1%">
+			<img class="gdButton sortButton" style="margin-bottom: 1vh" sort="stars" title="Most stars" src="../assets/sort-stars-on.png" height="11%" id="starSort">
+			<img class="gdButton sortButton" style="margin-bottom: 1vh" sort="coins" title="Most coins" src="../assets/sort-coins.png" height="11%">
+			<img class="gdButton sortButton" style="margin-bottom: 1vh" sort="demons" title="Most demons" src="../assets/sort-demons.png" height="11%">
+			<img class="gdButton sortButton" style="margin-bottom: 1vh; display: none" sort="cp" title="Most creator points" src="../assets/sort-cp.png" height="11%" id="cpSort">
 		</div>
 	</div>
 
@@ -64,7 +68,6 @@
 	<div class="supercenter" id="loading" style="height: 10%; top: 47%; display: none;">
 		<img class="spin noSelect" src="../assets/loading.png" height="105%">
 	</div>
-
 </div>
 
 </body>
@@ -77,6 +80,7 @@
 
 let sort = "stars"
 let useTrophies = false
+let modMode = false
 let trophies = [1, 3, 10, 25, 50, 75, 100]
 let colors = ["red", "orange", "yellow", "green", "teal", "blue", "pink"]
 
@@ -106,15 +110,18 @@ function leaderboard(val) {
 	$('#searchBox').html(`<div style="height: 4.5%"></div>`)
 	$('#loading').show()
 
-	fetch(`../api/leaderboard?count=250&${val}&type=${sort}`).then(res => res.json()).then(res => {
+	fetch(`../api/leaderboard?count=250&${val}&type=${sort}${modMode ? "&mod=1" : ""}`).then(res => res.json()).then(res => {
 
 		$('#searchBox').html(`<div style="height: 4.5%"></div>`)
 		$('.ranking').remove()
 
+		if (modMode && sort == "cp") res = res.sort(function(a, b){return b.cp - a.cp});
+
 		if (val == type && res != -1 && res.length) res.forEach((x, y) => {
 
 		$('#searchBox').append(`<div class="searchresult leaderboardSlot">
-			<h2 class="small inline gdButton" style="margin-top: 1.5%"><a href="../u/${x.username}">${x.username}</a></h2>
+			${x.moderator ? `<img title="${x.moderator == 2 ? "Elder " : ""}Moderator" src="../assets/mod${x.moderator == 2 ? "-elder" : ""}.png" style="height: 30%; cursor: help; padding-right: 1.6%; transform: translateY(0.7vh)">` : ""}
+			<h2 class="small inline gdButton" style="margin-top: 1.5%${x.moderator == 2 ? "; color: #FF9977;" : ""}"><a href="../u/${x.username}">${x.username}</a></h2>
 			<h3 class="inline sideSpace${x.stars >= 100000 ? " yellow" : ""}" style="font-size: 4.5vh">${x.stars} <img class="valign" src="../assets/star.png"
 					style="cursor: help; height: 19%; transform: translate(-25%, -10%);" title="Stars"></h3>
 		
@@ -128,10 +135,10 @@ function leaderboard(val) {
 		
 			<div class="center ranking" style="position:absolute; transform:scale(0.82) translate(-20.7vh, -20vh); height: 10%; width: 12.5%;">
 
-				${useTrophies && type == "accurate" ? `<img class="spaced" src="./trophies/${trophies.findIndex(z => x.rank <= z) + 1}.png" height="150%" style="margin-bottom: 0%; transform:scale(1.1)">` : 
+				${useTrophies && type == "accurate" ? `<img class="spaced" src="./trophies/${trophies.findIndex(z => y+1 <= z) + 1}.png" height="150%" style="margin-bottom: 0%; transform:scale(1.1)">` : 
 				`<img class="spaced lazyLoad" data-src="./icon/icon?form=${x.icon.form}&icon=${x.icon.icon}&col1=${x.icon.col1}&col2=${x.icon.col2}&glow=${x.icon.glow}&size=auto" height="150%" style="margin-bottom: 0%; transform:scale(1.1)">`}
 				
-				<h2 class="small" style="margin-top: 2%">${x.rank}</h2>
+				<h2 class="small" style="margin-top: 2%">${y+1}</h2>
 			</div>
 		</div>`)
 		})
@@ -172,7 +179,7 @@ function leaderboard(val) {
 		$('#accurateTabOff').show()
 		$('#creatorTabOff').show()
 		infoText(top250Text)
-		$('#sortDiv').hide()
+		$('.sortDiv').hide()
 	})
 
 	$('#accurateTabOff').click(function() {
@@ -184,7 +191,7 @@ function leaderboard(val) {
 		$('#accurateTabOn').show()
 		$('#creatorTabOff').show()
 		infoText(accurateText)
-		$('#sortDiv').show()
+		$('.sortDiv').show()
 	})
 
 	$('#creatorTabOff').click(function() {
@@ -196,8 +203,16 @@ function leaderboard(val) {
 		$('#accurateTabOff').show()
 		$('#creatorTabOn').show()
 		infoText(creatorText)
-		$('#sortDiv').hide()
+		$('.sortDiv').hide()
 	});
+
+	$('#modSort').click(function() {
+		modMode = !modMode
+		$(this).attr('src', `../assets/sort-mod${modMode ? "-on" : ""}.png`)
+		if (modMode) { $('#cpSort').show() }
+		else { $('#cpSort').hide(); if (sort == "cp") $('#starSort').trigger('click') }
+		leaderboard(type)
+	})
 
 
 </script>

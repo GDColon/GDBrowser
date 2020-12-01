@@ -78,7 +78,7 @@ module.exports = async (app, req, res) => {
       if (!colors[colW] || isNaN(colors[colW].r)) colW = colors[+colW] ? +colW : null
       if (colW && (!hasExtra || colW == 12)) colW = null
 
-      if (col1 == 15 || col1 == "000000") outline = true;
+      if (col1 == 15 || col1 === "000000") outline = true;
 
       let iconCode = `${req.query.form == "cursed" ? "cursed" : form}${topless ? "top" : ""}-${iconID}-${col1}-${col2}-${colG || "x"}-${colW || "x"}-${outline ? 1 : 0}` 
 

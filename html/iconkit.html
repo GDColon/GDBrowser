@@ -6,7 +6,7 @@
     <meta property="og:description" content="Build and save your very own Geometry Dash icons, right from the internet!">
     <meta property="og:title" content="Geometry Dash Online Icon Kit">
     <meta property="og:type" content="website">
-    <meta name="og:image" itemprop="image" content="../iconkitbuttons/iconkit.png">
+    <meta name="og:image" itemprop="image" content="https://gdbrowser.com/iconkitbuttons/iconkit.png">
     <meta name="theme-color" content="#CCFF55">
     <link rel="icon" href="../assets/icon.png">
     </link>
@@ -146,7 +146,7 @@ forms.forEach(form => {$("#iconKitParent").append(`<div id="${form}s"></div>`)})
 
 function generateIcon() {
 
-    if (enableGlow == 1 || selectedCol1 == 15) { $('#colG').show(); $('#ccG').show() }
+    if (enableGlow == 1 || selectedCol1 == 15 || selectedCol1 == "000000") { $('#colG').show(); $('#ccG').show() }
     else { $('#colG').hide(); $('#ccG').hide(); }
     colorSplit()
 
@@ -184,11 +184,13 @@ fetch('./api/icons').then(res => {
             let colTypes = [1, 2, "G", "W"]
             colTypes.forEach(x => $(`#col${x}`).html(""))
             iconStuff.colorOrder.forEach(function (p, n) {
-            if (iconSettings.includes("sort")) p = n;
-            colTypes.forEach(c => {
-                $(`#col${c}`).append(`<button col=${p} class="blankButton color${c}" title="Color ${p}" id="col${c}-${p}"><img src="../previewicon/color_${p}.png" width=50px></button>`)
+                if (iconSettings.includes("sort")) p = n;
+                colTypes.forEach(c => {
+                    $(`#col${c}`).append(`<button col=${p} class="blankButton color${c}" title="Color ${p}" id="col${c}-${p}"><img src="../previewicon/color_${p}.png" width=50px></button>`)
+                })
             })
-        })}
+            $('#col1').append("<span style='min-width: 10px'></span>")
+        }
 
         loadColors()
         let cubes = filterIcon('cube');
@@ -204,8 +206,6 @@ fetch('./api/icons').then(res => {
             appendIcon(cubes, "cube")
             $(`[num="${sample[0]}"][form="cube"]`).addClass('iconSelected');
         })
-
-       $('#col1').append("<span style='min-width: 10px'></span>")
 
         $(`.color1[col="${sample[1]}"]`).addClass('iconSelected');
         $(`.color2[col="${sample[2]}"]`).addClass('iconSelected');
