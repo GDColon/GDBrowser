@@ -11,7 +11,7 @@ Just make sure to give credit, obviously. Via the bottom of the homepage, the cr
 
 Obviously, GDBrowser isn't perfect when it comes to GD private servers, since both requests and responses might be a bit different. Or a LOT, as I learned.
 
-You can also check out `settings.js` to tweak some additional settings (mainly GDPS related) such as whether to cache things or if timestamps should end with "ago"
+You can also check out `settings.js` to tweak some additional settings (mainly GDPS related) such as whether to cache things or if timestamps should end with "ago".
 
 GDPS compatibility is still a HUGE work in progress, so pull requests would be greatly appreciated if you manage to make any improvements! 
 
@@ -33,11 +33,11 @@ Assets! Assets everywhere!
 
 All the GD stuff was ripped straight from the GD spritesheets via [Absolute's texture splitter hack](https://youtu.be/pYQgIyNhow8). If you want a nice categorized version, [I've done all the dirty work for you.](https://www.mediafire.com/file/4d99bw1zhwcl507/textures.zip/file)
 
-/blocks, /objects and /initial are used for the analysis page. I just put them in seperate folders for extra neatness.
+- /blocks, /objects and /initial are used for the analysis page. I just put them in seperate folders for extra neatness.
 
-/gdfaces holds all the difficulty faces
+- /gdfaces holds all the difficulty faces
 
-/css has the CSS stuff. They're in a special folder so browsers won't cache them (in case of updates)
+- /css has the CSS stuff. They're in a special folder so browsers won't cache them (in case of updates)
 
 Figure out what /gauntlets and /iconkitbuttons have.
 
@@ -55,7 +55,7 @@ XOR.js encrypts/decrypts stuff like GD passwords. I stole the code from somewher
 ## HTML
 The HTML files! Nothing too fancy, since it can all be seen directly from gdbrowser. Note that profile.html and level.html have [[VARIABLES]] (name, id, etc) replaced by the server when they're sent.
 
-comingsoon.html was used while the site was still in development, I just left it in there as a nice little throwback
+comingsoon.html was used while the site was still in development, I just left it in there as a nice little throwback.
 
 ## Icons
 It's GJ_Gamesheet02 but split into a much more intimidating cluster of a million files. These icons are put together and colored in the monstrosity that is icon.js 
@@ -69,29 +69,29 @@ forms.json is a list of the different icon forms, their ingame filenames, and th
 ## Misc
 Inevitable misc folder
 
-**For level analysis**
+### For level analysis
 
-blocks.json - The object IDs in the different 'families' of blocks
+- blocks.json - The object IDs in the different 'families' of blocks
 
-colorProperties.json - Color channel cheatsheet
+- colorProperties.json - Color channel cheatsheet
 
-initialProperties.json - Level settings cheatsheet
+- initialProperties.json - Level settings cheatsheet
 
-objectProperties.json - Object property cheatsheet. Low budget version of [AlFas' one](https://github.com/gd-edit/GDAPI/blob/5a338c317b10ba0cb30d6175360c997a8a72502f/GDAPI/GDAPI/Enumerations/GeometryDash/ObjectParameter.cs)
+- objectProperties.json - Object property cheatsheet. Low budget version of [AlFas' one](https://github.com/gd-edit/GDAPI/blob/5a338c317b10ba0cb30d6175360c997a8a72502f/GDAPI/GDAPI/Enumerations/GeometryDash/ObjectParameter.cs)
 
-objects.json - IDs for portals, orbs, triggers, and misc stuff
+- objects.json - IDs for portals, orbs, triggers, and misc stuff
 
-**Not for level analysis**
+### Not for level analysis
 
-credits.json - Credits! (shown on the homepage)
+- credits.json - Credits! (shown on the homepage)
 
-level.json - An array of the official GD tracks, and also difficulty face stuff for level searching
+- level.json - An array of the official GD tracks, and also difficulty face stuff for level searching
 
-secretStuff.json - GJP goes here, needed for level leaderboards. Not included in the repo for obvious reasons
+- secretStuff.json - GJP goes here, needed for level leaderboards. Not included in the repo for obvious reasons
 
-settings.js - Tweak small settings here, mainly for local use or GDPS'es
+- settings.js - Tweak small settings here, mainly for local use or GDPS'es
 
-sizecheck.js - Excecuted on most pages, used for the 'page isn't wide enough' message, back button, and a few other things
+- sizecheck.js - Excecuted on most pages, used for the 'page isn't wide enough' message, back button, and a few other things
 
 ---
 
