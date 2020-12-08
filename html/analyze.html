@@ -229,7 +229,7 @@ appendPortals()
 		$('#levelCode').html('<p>Loading...</p>')
 
 	window.setTimeout(function () { //small delay so "loading" message appears
-		$('#levelCode').html(`<p class="codeFont">${clean(res.data)}</p>`)}, 50);
+		$('#levelCode').html(`<p class="codeFont">${clean(res.data).replace(/\n/g, "<br>")}</p>`)}, 50);
 		$('#levelCode').focus().select()
 	})
 

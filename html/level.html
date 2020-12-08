@@ -83,7 +83,9 @@
 		<h2 class="pre inline slightlySmaller normalCursor gdButton" id="authorName"><a class="linkButton" id="authorLink" href="../u/[[AUTHOR]]">By [[AUTHOR]]</a></h2>
 		<h2 class="inline slightlySmaller normalCursor sideSpaceC">
 			<img class="inline valign" id="copiedBadge" style="height: 60%; cursor:help" src="../assets/copied.png" title="Level is a copy or a collaboration">
-			<img class="inline valign" id="largeBadge" style="height: 60%; margin-left: -7%; cursor:help" src="../assets/large.png" title="Contains more than 40,000 objects"></h2>
+			<img class="inline valign" id="largeBadge" style="height: 60%; margin-left: -7%; cursor:help" src="../assets/large.png" title="Contains more than 40,000 objects"></h2><br>
+		<img class="inline spaced dailyLevel" id="dailyIcon" style="height:90%; display: none; margin-right: 0.5%; margin-top: 0.5%; vertical-align: middle;">
+		<h1 class="inline smallerer spaced dailyLevel" style="display: none; margin: 0 0 0 0">#[[DAILYNUMBER]]</h1>
 	</div>
 
 	<div class="transparentBox center" style="position:absolute; bottom: 32%; left: 0; right: 0; width: 75vh; margin-left: auto; margin-right: auto">
@@ -221,6 +223,12 @@ if ([[DIAMONDS]] == 0 || !'[[DEMONLIST]]'.startsWith("[")) $('.diamonds').hide()
 if (!'[[DEMONLIST]]'.startsWith("[")) {
 	$('.demonList').show()
 	$('#leaderboardbtn').attr('src', '../assets/demonleaderboard.png').parent().attr('href', '../demon/[[DEMONLIST]]')
+}
+else $('.demonList').remove()
+
+if (!'[[DAILYNUMBER]]'.startsWith("[")) {
+	$('.dailyLevel').show()
+	$('#dailyIcon').attr('src', `../assets/crown-${'[[WEEKLY]]'.startsWith("[") ? "daily" : "weekly"}.png`)
 }
 else $('.demonList').remove()
 

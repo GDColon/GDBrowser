@@ -112,11 +112,9 @@
 			</div>
 
 			<br>
-			<p class="reveal" onclick="$('#response-level').slideToggle(100);"><b>Response (38)</b></p>
+			<p class="reveal" onclick="$('#response-level').slideToggle(100);"><b>Response (44)</b></p>
 			<div class="subdiv" id="response-level">
-				<p class="br">*Values that require a download are in
-					<span style="color:red">red</span>
-				</p>
+				<p class="br">*Values that require a download are in <span style="color:red">red</span></p>
 				<p>name: The name of the level</p>
 				<p>id: The ID of the level</p>
 				<p>description: The description</p>
@@ -157,7 +155,9 @@
 				<p class="red">editorTime: The amount of seconds spent in the editor</p>
 				<p class="red">totalEditorTime: The amount of seconds spent in the editor, including time from the level it was copied from</p>
 				<p class="red">ldm: If the level contains a checkbox for Low Detail Mode</p>
-				<p class="red">extraString: An unknown string which most likely contains info on how the level was verified</p>
+				<p class="red">dailyNumber: Which daily/weekly the level is (e.g. 1000th daily level)</p>
+				<p class="red">weekly: If dailyNumber represents the weekly demon rather than the daily level</p>
+				<p class="red">extraString: An unknown data string</p>
 				<p class="red">data: The actual data of the level, compressed with GZIP</p>
 			</div>
 
@@ -329,13 +329,15 @@
 			<p>Returns the top player, creator, and accurate leaderboards</p>
 
 			<br>
-			<p class="reveal" onclick="$('#params-leaderboard').slideToggle(100)"><b>Parameters (5)</b></p>
+			<p class="reveal" onclick="$('#params-leaderboard').slideToggle(100)"><b>Parameters (6)</b></p>
 			<div class="subdiv" id="params-leaderboard">
+				<p class="br">*Values that only work with the accurate leaderboard are in <span style="color:red">red</span></p>
 				<p>count: The amount of players to list (default is 100, max is 5000, does not work with accurate leaderboard)</p>
 				<p>creator: Fetches the creator leaderboard</p>
 				<p>accurate: Fetches the accurate leaderboard</p>
-				<p>type: Accurate leaderboard only - the type of stat to sort by (stars, coins, or demons)</p>
-				<p>gd: Accurate leaderboard only - formats the leaderboard using GD's number:value syntax (for use in GD)</p>
+				<p class="red">type: The type of stat to sort by (stars, coins, or demons)</p>
+				<p class="red">mod: Restricts the leaderboard to GD mods only</p>
+				<p class="red">gd: Formats the leaderboard using GD's number:value syntax (for use in GD)</p>
 			</div>
 
 			<br>

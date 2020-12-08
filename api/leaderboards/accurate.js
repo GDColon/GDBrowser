@@ -7,7 +7,7 @@ let caches = [{"stars": null, "coins": null, "demons": null}, {"stars": null, "c
 
 module.exports = async (app, req, res, post) => {
 
-      if (app.offline || !app.sheetsKey || app.endpoint != "http://boomlings.com/database/") return res.send([])
+      if (!app.sheetsKey || app.endpoint != "http://boomlings.com/database/") return res.send([])
       let gdMode = post || req.query.hasOwnProperty("gd")
       let modMode = !gdMode && req.query.hasOwnProperty("mod")
       let cache = caches[gdMode ? 2 : modMode ? 1 : 0]
