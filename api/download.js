@@ -17,7 +17,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
   request.post(app.endpoint + 'downloadGJLevel22.php', req.gdParams({ levelID }), async function (err, resp, body) {
 
     if (err || !body || body == '-1' || body.startsWith("<!")) {
-      if (!api && levelID < 0) return res.redirect('/')
+      if (!api && levelID < 0) return res.redirect(`/?daily=${levelID * -1}`)
       if (!api) return res.redirect('search/' + req.params.id)
       else return res.send("-1")
     }
