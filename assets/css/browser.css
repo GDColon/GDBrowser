@@ -166,7 +166,7 @@ h2 {
     text-shadow: -0.275vh -0.275vh 0vh #000, 0.275vh -0.275vh 0vh #000, -0.275vh 0.275vh 0vh #000, 0.275vh 0.275vh 0vh #000, 0.5vh 0.5vh 0vh rgba(0,0,0,0.4);
 }
 
-h3, input[type=text], input[type=password], input[type=number] {
+h3, input[type=text], input[type=password], input[type=number], .h3Size {
     font-weight: normal;
     margin: 0 0;
     font-size: 3.5vh;

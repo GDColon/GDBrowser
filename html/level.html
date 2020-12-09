@@ -84,8 +84,8 @@
 		<h2 class="inline slightlySmaller normalCursor sideSpaceC">
 			<img class="inline valign" id="copiedBadge" style="height: 60%; cursor:help" src="../assets/copied.png" title="Level is a copy or a collaboration">
 			<img class="inline valign" id="largeBadge" style="height: 60%; margin-left: -7%; cursor:help" src="../assets/large.png" title="Contains more than 40,000 objects"></h2><br>
-		<img class="inline spaced dailyLevel" id="dailyIcon" style="height:90%; display: none; margin-right: 0.5%; margin-top: 0.5%; vertical-align: middle;">
-		<h1 class="inline smallerer spaced dailyLevel" style="display: none; margin: 0 0 0 0">#[[DAILYNUMBER]]</h1>
+		<img class="inline spaced dailyLevel" id="dailyIcon" style="height:90%; display: none; margin-right: 0.5%; margin-top: 0.4%; vertical-align: middle;">
+		<h1 class="inline smallerer spaced dailyLevel" style="display: none; margin: 0 0 0 0">#[[DAILYNUMBER]]<span style="font-size: 2.5vh; vertical-align: middle;" class="h3Size" id="dailyTime"></span></h1>
 	</div>
 
 	<div class="transparentBox center" style="position:absolute; bottom: 32%; left: 0; right: 0; width: 75vh; margin-left: auto; margin-right: auto">
@@ -156,8 +156,14 @@
 let messageText = 'Your <span style="color: yellow">Geometry Dash password</span> will <span style="color: lime">not be stored</span> anywhere on the site, both <span style="color:rgb(113, 234, 255)">locally and server-side.</span> You can view the code used for liking a level <a class="menuLink" target="_blank" href="https://github.com/GDColon/GDBrowser/blob/master/api/post/like.js">here</a>.'
 $('#message').html(messageText)
 
-function colonize(secs) {
-    return [Math.floor(+secs / 3600), Math.floor(+secs / 60) % 60, +secs % 60].map(v => v < 10 ? "0" + v : v).filter((v,i) => v !== "00" || i > 0).join(":")
+function colonize(secs, timeUp) {
+	if (secs < 0) {
+		if (timeUp) return "Time's up!"
+		else secs = 0
+	}
+	let days = Math.floor(secs / 86400)
+	if (days) secs -= days * 86400
+    return `${days ? `${days}d + ` : ""}${[Math.floor(+secs / 3600), Math.floor(+secs / 60) % 60, +secs % 60].map(v => v < 10 ? "0" + v : v).filter((v,i) => v !== "00" || i > 0).join(":")}`
 }
 
 if (window.location.href.endsWith('?download')) $('#infoDiv').show()
@@ -168,6 +174,7 @@ if (window.location.href.endsWith('?download')) $('#infoDiv').show()
 		let copies = 0
 		let animated = false;
 		let freeze = false;
+		let dailyTime = Number('[[NEXTDAILY]]') || null
 
 		$('#playButton').click(function () {
 			if (!($('#copied').is(':animated')) && !animated) {
@@ -227,10 +234,17 @@ if (!'[[DEMONLIST]]'.startsWith("[")) {
 else $('.demonList').remove()
 
 if (!'[[DAILYNUMBER]]'.startsWith("[")) {
-	$('.dailyLevel').show()
+	$('#dailyTime').html(` (${colonize(dailyTime, true)})`)
 	$('#dailyIcon').attr('src', `../assets/crown-${'[[WEEKLY]]'.startsWith("[") ? "daily" : "weekly"}.png`)
+	$('.dailyLevel').show()
+
+	setInterval(() => {
+		dailyTime -= 1
+		$('#dailyTime').html(` (${colonize(dailyTime, true)})`)
+	}, 1000);
+
 }
-else $('.demonList').remove()
+else $('.dailyLevel').remove()
 
 if ("[[SONGID]]".startsWith("Level")) {
 	$('#songInfo').text('[[SONGID]]')

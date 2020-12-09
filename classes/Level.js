@@ -38,8 +38,8 @@ class Level {
         this.verifiedCoins = levelInfo[38] > 0
         this.starsRequested = +levelInfo[39]
         this.ldm = levelInfo[40] > 0
-        if (+levelInfo[41]) this.dailyNumber = (+levelInfo[41] > 100000 ? +levelInfo[41] - 100000 : +levelInfo[41])
         if (+levelInfo[41] > 100000) this.weekly = true
+        if (+levelInfo[41]) { this.dailyNumber = (+levelInfo[41] > 100000 ? +levelInfo[41] - 100000 : +levelInfo[41]); this.nextDaily = null; this.nextDailyTimestamp = null }
         this.objects = +levelInfo[45]
         this.large = levelInfo[45] > 40000;
         this.cp = Number((this.stars > 0) + this.featured + this.epic)
