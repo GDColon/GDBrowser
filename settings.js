@@ -2,6 +2,8 @@
 // This isn't a JSON because you can't leave comments on them, ew
 
 module.exports = {
+    
+    port: 2000, // Port to host website on
 
     endpoint: "http://boomlings.com/database/", // Server endpoint to send requests to
 
