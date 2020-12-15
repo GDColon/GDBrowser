@@ -195,4 +195,4 @@ app.use(function (err, req, res, next) {
   if (err && err.message == "Response timeout") res.status(500).send('Internal server error! (Timed out)')
 })
 
-app.listen(2000, () => console.log("Site online!"))
+app.listen(app.config.port, () => console.log(`Site online on port ${app.config.port}`))
