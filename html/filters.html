@@ -1,7 +1,7 @@
 <head>
 	<title>Level Search</title>
 	<meta charset="utf-8">
-	<link href="../css/browser.css" type="text/css" rel="stylesheet">
+	<link href="../assets/css/browser.css" type="text/css" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
 	<link rel="icon" href="../assets/coin.png">
 	<meta id="meta-title" property="og:title" content="Level Search">
@@ -88,23 +88,29 @@
 	</div>
 
 	<div id="difficulties" class="transparentBox center" style="width: 115vh; height: 12%; margin: 0.5% auto 1% auto; padding-top: 1%; padding-bottom: 1%;">
-		<div class="diffDiv gdButton" diff="-1"><img src="../difficulty/unrated.png"><h3 class="mini">N/A</h3></div>
-		<div class="diffDiv gdButton" diff=1><img src="../difficulty/easy.png"><h3 class="mini">Easy</h3></div>
-		<div class="diffDiv gdButton" diff=2><img src="../difficulty/normal.png"><h3 class="mini">Normal</h3></div>
-		<div class="diffDiv gdButton" diff=3><img src="../difficulty/hard.png"><h3 class="mini">Hard</h3></div>
-		<div class="diffDiv gdButton" diff=4><img src="../difficulty/harder.png"><h3 class="mini">Harder</h3></div>
-		<div class="diffDiv gdButton" diff=5><img src="../difficulty/insane.png"><h3 class="mini">Insane</h3></div>
-		<div class="diffDiv gdButton" id="demonBtn" diff=-2><img src="../difficulty/demon.png" style="width: 85%"><h3 class="mini">Demon</h3></div>
-		<div class="diffDiv gdButton" diff=-3><img src="../difficulty/auto.png"><h3 class="mini">Auto</h3></div>
+		<div class="diffDiv gdButton" diff="-1"><img src="../assets/difficulties/unrated.png"><h3 class="mini">N/A</h3></div>
+		<div class="diffDiv gdButton" diff=1><img src="../assets/difficulties/easy.png"><h3 class="mini">Easy</h3></div>
+		<div class="diffDiv gdButton" diff=2><img src="../assets/difficulties/normal.png"><h3 class="mini">Normal</h3></div>
+		<div class="diffDiv gdButton" diff=3><img src="../assets/difficulties/hard.png"><h3 class="mini">Hard</h3></div>
+		<div class="diffDiv gdButton" diff=4><img src="../assets/difficulties/harder.png"><h3 class="mini">Harder</h3></div>
+		<div class="diffDiv gdButton" diff=5><img src="../assets/difficulties/insane.png"><h3 class="mini">Insane</h3></div>
+
+		<!-- <div class="diffDiv gdButton" id="demonBtn" diff=-2><img src="../assets/difficulties/demon.png" style="width: 85%"><h3 class="mini">Demon</h3></div> -->
+
+		<div class="diffDiv gdButton" style="filter: brightness(100%)" id="demonBtn" diff=-2><img class="darkDiff" src="../assets/difficulties/demon.png" style="width: 85%"><h3 class="darkDiff mini">Demon</h3>
+		<img src="../assets/exclamation.png" style="position: absolute; width: 19%; left: 86%; bottom: 68%"></div>
+
+		<div class="diffDiv gdButton" diff=-3><img src="../assets/difficulties/auto.png"><h3 class="mini">Auto</h3></div>
 	</div>
 
-	<div id="demons" class="transparentBox" style="display: none; width: 115vh; height: 12%; margin: 0.5% auto 1% auto; padding-top: 0.7%; padding-bottom: 1.3%;">
-		<div class="diffDiv gdButton demonDiff" diff=1 style="margin-left: 3.5%"><img src="../difficulty/demon-easy.png" style="width: 90%"><h3 class="mini center">Easy</h3></div>
-		<div class="diffDiv gdButton demonDiff" diff=2><img src="../difficulty/demon-medium.png" style="width: 90%"><h3 class="mini center smallTextWoo">Medium</h3></div>
-		<div class="diffDiv gdButton demonDiff" diff=3><img src="../difficulty/demon-hard.png" style="width: 90%"><h3 class="mini center">Hard</h3></div>
-		<div class="diffDiv gdButton demonDiff" diff=4><img src="../difficulty/demon-insane.png" style="width: 95%"><h3 class="mini center smallTextWoo">Insane</h3></div>
-		<div class="diffDiv gdButton demonDiff" diff=5><img src="../difficulty/demon-extreme.png" style="width: 100%"><h3 class="mini center smallTextWoo">Extreme</h3></div>
-		<div class="diffDiv gdButton goBack" diff=-2 style="margin-left: 2.3%; filter: none"><img src="../difficulty/demon.png" style="width: 85%"><h3 class="mini">Demon</h3></div>
+	<div id="demons" class="transparentBox" style="display: none; width: 115vh; height: 12%; margin: 0.5% auto 1% auto; padding-top: 0.6%; padding-bottom: 1.4%;">
+		<div class="diffDiv gdButton demonDiff" diff=1 style="margin-left: 3.5%"><img src="../assets/difficulties/demon-easy.png" style="width: 90%"><h3 class="mini center">Easy</h3></div>
+		<div class="diffDiv gdButton demonDiff" diff=2><img src="../assets/difficulties/demon-medium.png" style="width: 90%"><h3 class="mini center smallTextWoo">Medium</h3></div>
+		<div class="diffDiv gdButton demonDiff" diff=3><img src="../assets/difficulties/demon-hard.png" style="width: 90%"><h3 class="mini center">Hard</h3></div>
+		<div class="diffDiv gdButton demonDiff" diff=4><img src="../assets/difficulties/demon-insane.png" style="width: 95%"><h3 class="mini center smallTextWoo">Insane</h3></div>
+		<div class="diffDiv gdButton demonDiff" diff=5><img src="../assets/difficulties/demon-extreme.png" style="width: 100%"><h3 class="mini center smallTextWoo">Extreme</h3></div>
+		<div class="diffDiv gdButton goBack" diff=-2 style="margin-left: 2.3%; filter: none"><img src="../assets/difficulties/demon.png" style="width: 90%"><h3 class="mini">Demon</h3></div>
+		<a href="./search/*?type=demonlist"><div class="gdButton diffDiv" style="filter: none"><img src="../assets/trophy2.png" style="width: 95%"><h3 class="yellow mini center">List</h3></div></a>
 	</div>
 
 	<div class="transparentBox center" style="width: 115vh; height: 6%; margin: 0.5% auto 1% auto; padding-top: 1%; padding-bottom: 0.5%;">
@@ -129,7 +135,7 @@
 
 </body>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script async type="text/javascript" src="../assets/sizecheck.js"></script>
+<script async type="text/javascript" src="../sizecheck.js"></script>
 <script>
 
 let filters = []

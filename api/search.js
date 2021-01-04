@@ -1,10 +1,22 @@
 const request = require('request')
 const levels = require('../misc/level.json').music
 const Level = require('../classes/Level.js')
+let demonList = {list: [], lastUpdated: 0}
 
 module.exports = async (app, req, res) => {
 
     if (app.offline) return res.send("-1")
+
+    let demonMode = req.query.hasOwnProperty("demonlist") || req.query.hasOwnProperty("demonList") || req.query.type == "demonlist" || req.query.type == "demonList"
+    if (demonMode) {
+        if (!demonList.list.length || demonList.lastUpdated + 600000 < Date.now()) {  // 10 minute cache
+            return request.get('http://www.pointercrate.com/api/v2/demons/listed/?limit=100', function (err, resp, list) {
+                if (err) return res.send("-1")
+                demonList = {list: JSON.parse(list).map(x => x.level_id), lastUpdated: Date.now()}
+                return app.run.search(app, req, res)
+            })
+        }
+    }
 
     let amount = 10;
     let count = +req.query.count
@@ -37,22 +49,24 @@ module.exports = async (app, req, res) => {
         count: amount
     }
 
-    if (req.query.gauntlet || req.query.hasOwnProperty("mappack") || req.query.hasOwnProperty("list") || req.query.type == "saved") filters.type = 10
-
     if (req.query.songID && filters.customSong == 0 && levels.find(x => req.query.songID.toLowerCase() == x[0].toLowerCase())) {
         filters.song = levels.findIndex(x => req.query.songID.toLowerCase() == x[0].toLowerCase())
     }
 
     if (req.query.type) {
         let filterCheck = req.query.type.toLowerCase()
-        if (filterCheck == 'mostdownloaded') filters.type = 1
-        if (filterCheck == 'mostliked') filters.type = 2
-        if (filterCheck == 'trending') filters.type = 3
-        if (filterCheck == 'recent') filters.type = 4
-        if (filterCheck == 'featured') filters.type = 6
-        if (filterCheck == 'magic') filters.type = 7
-        if (filterCheck == 'awarded' || filterCheck == 'starred') filters.type = 11
-        if (filterCheck == 'halloffame' || filterCheck == 'hof') filters.type = 16
+        switch(filterCheck) {
+            case 'mostdownloaded': filters.type = 1; break;
+            case 'mostliked': filters.type = 2; break;
+            case 'trending': filters.type = 3; break;
+            case 'recent': filters.type = 4; break;
+            case 'featured': filters.type = 6; break;
+            case 'magic': filters.type = 7; break;
+            case 'awarded': filters.type = 11; break;
+            case 'starred': filters.type = 11; break;
+            case 'halloffame': filters.type = 16; break;
+            case 'hof': filters.type = 16; break;
+        }
     }
 
     if (req.query.hasOwnProperty("user")) {
@@ -65,6 +79,15 @@ module.exports = async (app, req, res) => {
     if (req.query.hasOwnProperty("creators")) filters.type = 12
 
     if (req.params.text == "*") delete filters.str
+
+    let listSize = 10
+    if (demonMode || req.query.gauntlet || ["mappack", "list", "saved"].some(x => req.query.hasOwnProperty(x))) {
+        filters.type = 10
+        filters.str = demonMode ? demonList.list : filters.str.split(",")
+        listSize = filters.str.length
+        filters.str = filters.str.slice(filters.page*amount, filters.page*amount + amount).join()
+        filters.page = 0
+    }
     
     request.post(app.endpoint + 'getGJLevels21.php', req.gdParams(filters), async function(err, resp, body) {
     
@@ -118,8 +141,8 @@ module.exports = async (app, req, res) => {
             }
 
             else if (filters.type == 10) {  //  custom page stuff
-                level.results = levelArray.length
-                level.pages = amount ? +Math.ceil(levelArray.length / amount) : 1
+                level.results = listSize
+                level.pages = +Math.ceil(listSize / (amount || 10))
             }
 
             else {  // normal page stuff

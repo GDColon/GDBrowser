@@ -3,14 +3,14 @@
 <head>
 	<title>GD Level Browser API</title>
 	<meta charset="utf-8">
-	<link rel="icon" href="../difficulty/auto.png">
+	<link rel="icon" href="../assets/difficulties/auto.png">
 	<link href="../assets/css/api.css" type="text/css" rel="stylesheet">
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,600,700,800&display=swap" rel="stylesheet">
 	
 	<meta id="meta-title" property="og:title" content="GDBrowser API">
     <meta id="meta-desc" property="og:description" content="It's basically the Geometry Dash API, but not terrible!">
-	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/difficulty/auto.png">
+	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/assets/difficulties/auto.png">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -112,9 +112,9 @@
 			</div>
 
 			<br>
-			<p class="reveal" onclick="$('#response-level').slideToggle(100);"><b>Response (44)</b></p>
+			<p class="reveal" onclick="$('#response-level').slideToggle(100);"><b>Response (46)</b></p>
 			<div class="subdiv" id="response-level">
-				<p class="br">*Values that require a download are in <span style="color:red">red</span></p>
+				<p class="br">*Values that require a download are in <span style="color:red">red</span> and values that only work with daily/weekly levels are <span style="color:#00abee">blue</span></p>
 				<p>name: The name of the level</p>
 				<p>id: The ID of the level</p>
 				<p>description: The description</p>
@@ -143,7 +143,7 @@
 				<p>objects: The number of objects in the level. This was added in a recent version of GD, so older levels will simply return 0</p>
 				<p>large: Whether the level is considered "large" (more than 40k objects)</p>
 				<p>cp: How many creator points the level is worth (1 for star rating, 1 for feature, and 1 for epic rating)</p>
-				<p>difficultyFace: The URL of the difficulty face image for this level. Plug it into gdbrowser.com/difficulty/{difficultyFace}.png</p>
+				<p>difficultyFace: The URL of the difficulty face image for this level. Plug it into gdbrowser.com/assets/difficulties/{difficultyFace}.png</p>
 				<p>songName: The name of the song used for the level</p>
 				<p>songAuthor: The name of the author of said song</p>
 				<p>songSize: The size of the song in megabytes, if a custom song was used</p>
@@ -152,11 +152,13 @@
 				<p class="red">uploaded: Time since the level was uploaded (sent as "x days/weeks/months" ago, since it's all the API sends)</p>
 				<p class="red">updated: Time since the level was last updated</p>
 				<p class="red">password: The password to copy the level. 0 means the level isn't copyable and 1 means it's free to copy</p>
-				<p class="red">editorTime: The amount of seconds spent in the editor</p>
+				<p class="red">editorTime: The amount of seconds spent in the editor (currently only works when using GDBrowser locally)</p>
 				<p class="red">totalEditorTime: The amount of seconds spent in the editor, including time from the level it was copied from</p>
 				<p class="red">ldm: If the level contains a checkbox for Low Detail Mode</p>
-				<p class="red">dailyNumber: Which daily/weekly the level is (e.g. 1000th daily level)</p>
-				<p class="red">weekly: If dailyNumber represents the weekly demon rather than the daily level</p>
+				<p class="blue">weekly: If the values below represent the weekly demon rather than the daily level</p>
+				<p class="blue">dailyNumber: Which daily/weekly the level is (e.g. 1000th daily level)</p>
+				<p class="blue">nextDaily: The amount of seconds until the daily/weekly level expires</p>
+				<p class="blue">nextDailyTimestamp: The Unix timestamp for when the daily/weekly level expires</p>
 				<p class="red">extraString: An unknown data string</p>
 				<p class="red">data: The actual data of the level, compressed with GZIP</p>
 			</div>
@@ -814,7 +816,7 @@
 	</main>
 
 	<footer>
-		<p>API made by <a href="https://twitter.com/TheRealGDColon">GD Colon</a>. Webpage design by <a href="http://gducrash.tk">GD Ucrash</a><br><br>
+		<p>API made by <a href="https://twitter.com/TheRealGDColon">GD Colon</a>. Webpage design by <a href="https://twitter.com/GDUcrash">GD Ucrash</a><br><br>
 		Good job man, this looks really nice -Colon</p>
 	</footer>
 </body>

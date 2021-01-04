@@ -1,5 +1,5 @@
-@font-face { font-family: Pusab; src: url('./../assets/Pusab.ttf') }
-@font-face { font-family: Kaine; src: url('./../assets/boomlings/Kaine.ttf') }
+@font-face { font-family: Pusab; src: url('../../assets/Pusab.ttf') }
+@font-face { font-family: Kaine; src: url('../../assets/boomlings/Kaine.ttf') }
 
 body {
 	margin: 0;
@@ -139,7 +139,7 @@ h2 {
 
 #borderbox {
 	border: 1.6vh solid;
-	border-image: url('./../assets/boomlings/border.png') 10% round;
+	border-image: url('../../assets/boomlings/border.png') 10% round;
 	border-radius: 3vh;
 	width: 110vh;
 	height: 75%;
@@ -179,7 +179,7 @@ h2 {
     border: 2.5vh solid transparent;
     border-radius: 3vh;
     background-color: #995533;
-    border-image: url('./../assets/brownbox.png') 10% round;
+    border-image: url('../../assets/brownbox.png') 10% round;
 }
 
 @-moz-keyframes spin {

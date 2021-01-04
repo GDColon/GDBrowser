@@ -1,7 +1,7 @@
 <head>
 	<title>Leaderboard</title>
 	<meta charset="utf-8">
-	<link href="../css/browser.css" type="text/css" rel="stylesheet">
+	<link href="../assets/css/browser.css" type="text/css" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
 	<link rel="icon" href="../assets/trophy.png">
 	<meta id="meta-title" property="og:title" content="Leaderboards">
@@ -74,8 +74,8 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.plugins.min.js"></script>
-<script async type="text/javascript" src="../assets/sizecheck.js"></script>
-<script type="text/javascript" src="../assets/dragscroll.js"></script>
+<script async type="text/javascript" src="../sizecheck.js"></script>
+<script type="text/javascript" src="../dragscroll.js"></script>
 <script>
 
 let sort = "stars"
@@ -135,7 +135,7 @@ function leaderboard(val) {
 		
 			<div class="center ranking" style="position:absolute; transform:scale(0.82) translate(-20.7vh, -20vh); height: 10%; width: 12.5%;">
 
-				${useTrophies && type == "accurate" ? `<img class="spaced" src="./trophies/${trophies.findIndex(z => y+1 <= z) + 1}.png" height="150%" style="margin-bottom: 0%; transform:scale(1.1)">` : 
+				${useTrophies && type == "accurate" ? `<img class="spaced" src="./assets/trophies/${trophies.findIndex(z => y+1 <= z) + 1}.png" height="150%" style="margin-bottom: 0%; transform:scale(1.1)">` : 
 				`<img class="spaced lazyLoad" data-src="./icon/icon?form=${x.icon.form}&icon=${x.icon.icon}&col1=${x.icon.col1}&col2=${x.icon.col2}&glow=${x.icon.glow}&size=auto" height="150%" style="margin-bottom: 0%; transform:scale(1.1)">`}
 				
 				<h2 class="small" style="margin-top: 2%">${y+1}</h2>

@@ -1,0 +1,57 @@
+<head>
+	<title>> {NAME}</title>
+	<meta charset="utf-8">
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script>
+	<script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-135255146-3');</script>
+	<link rel="icon" href="../assets/folder.png">
+	<meta name="robots" content="noindex">
+	<meta id="meta-desc" property="og:description" content='i only upload high quality geometry dash asset rips'>
+
+	<style>
+		body {
+			background-image: linear-gradient(#2b2b2b, #171717) !important;
+			margin-left: 12px;
+		}
+
+		a:link { color: rgb(0, 200, 255) }
+		a:visited { color: rgb(130, 140, 255) }
+
+		div {
+			max-width: 3500px;
+		}
+
+		h1, p  {
+			color: white;
+			font-family: aller, helvetica, arial;
+			font-weight: normal;
+		}
+
+		.name {
+			width: 300px;
+			display: inline-block;
+			margin: 0 5 4 5;
+			font-family: aller, helvetica, arial;
+			font-size: 20px;
+		}
+	</style>
+</head>
+
+<body>
+
+<h1 id="listing" style="margin: 15 0 15 0; text-decoration: underline;"></h1>
+<div id="directories" style="margin-bottom: 20px">
+	<div class="name">⏪ <a href="../">Back</a></div></div>
+<div id="filenames"></div></body>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+
+let data = `{DATA}`
+if (!window.location.pathname.endsWith('/')) window.location.pathname += "/"
+let path = window.location.pathname.slice(0, -1)
+data = JSON.parse(data)
+$('#listing').html(`Listing for ${path}`)
+data.files.forEach(x => $('#filenames').append(`<div class="name"><a href="./${x}">${x}</a></div>`))
+data.directories.forEach(x => $('#directories').append(`<div class="name">📁 <a href="./${x}">${x}</a></div>`))
+
+</script>

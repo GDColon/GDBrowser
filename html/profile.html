@@ -1,7 +1,7 @@
 <head>
 	<title>[[USERNAME]]'s Profile</title>
 	<meta charset="utf-8">
-	<link href="../css/browser.css" type="text/css" rel="stylesheet">
+	<link href="../assets/css/browser.css" type="text/css" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
 	<link rel="icon" href="../icon/[[USERNAME]]">
 	<meta id="meta-title" property="og:title" content="[[USERNAME]]'s profile">
@@ -99,7 +99,7 @@
 			<img src="../icon/icon?form=wave&icon=[[WAVE]]&col1=[[COL1]]&col2=[[COL2]]&glow=[[GLOW]]" title="Wave [[WAVE]]" style="height: 7%">
 			<img src="../icon/icon?form=robot&icon=[[ROBOT]]&col1=[[COL1]]&col2=[[COL2]]&glow=[[GLOW]]" title="Robot [[ROBOT]]" >
 			<img src="../icon/icon?form=spider&icon=[[SPIDER]]&col1=[[COL1]]&col2=[[COL2]]&glow=[[GLOW]]" title="Spider [[SPIDER]]">
-			<img src="../deatheffects/[[DEATHEFFECT]].png" title="Death Effect [[DEATHEFFECT]]" id="deatheffect">
+			<img src="../assets/deatheffects/[[DEATHEFFECT]].png" title="Death Effect [[DEATHEFFECT]]" id="deatheffect">
 		</div>
 
 		<div class="lightBox center dragscroll" id="statusDiv" style="margin: 2% auto; width: 105vh; height: 35vh; background-color: #BE6F3F">
@@ -148,8 +148,8 @@
 
 </body>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script async type="text/javascript" src="../assets/sizecheck.js"></script>
-<script type="text/javascript" src="../assets/dragscroll.js"></script>
+<script async type="text/javascript" src="../sizecheck.js"></script>
+<script type="text/javascript" src="../dragscroll.js"></script>
 
 <script>
 
@@ -191,7 +191,6 @@ if ([[CP]] > 0) $('#creatorpoints').show()
 if (`[[YOUTUBE]]` != "null") $('#youtube').show()
 if (`[[TWITTER]]` != "null") $('#twitter').show()
 if (`[[TWITCH]]` != "null")  $('#twitch').show()
-if (`[[DEATHEFFECT]]` == "undefined") $('#deatheffect').hide()
 
 let messages = "[[MESSAGES]]"
 let commenthistory = "[[COMMENTHISTORY]]"

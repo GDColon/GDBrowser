@@ -1,7 +1,7 @@
 <head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
     <title>Online Icon Kit</title>
-    <link href="../css/iconkit.css?v=1" type="text/css" rel="stylesheet">
+    <link href="../assets/css/iconkit.css?v=1" type="text/css" rel="stylesheet">
     <meta name="viewport" content="width=1024">
     <meta property="og:description" content="Build and save your very own Geometry Dash icons, right from the internet!">
     <meta property="og:title" content="Geometry Dash Online Icon Kit">
@@ -46,10 +46,10 @@
 
     <hr id="gdfloor">
     <div id="menuButtons" style="height: 65px; margin: 0 0 8 0;">
-        <button class="blankButton menuButton" id="customColors" title="Settings" onclick="$('#settings').show()"><img src="../iconkitbuttons/cog.png" width=60px></button>
-        <button class="blankButton menuButton" id="downloadIcon" title="Download icon"><a id="downloadLink" download="cube_1.png" href=""><img src="../iconkitbuttons/save.png" width=60px></a></button>
-        <button class="blankButton menuButton" id="getUserIcon" title="Get player icon"><img src="../iconkitbuttons/steal.png" width=60px></button>
-        <button class="blankButton menuButton" id="randomIcon" title="Random Icon"><img src="../iconkitbuttons/shuffle.png" width=60px></button>
+        <button class="blankButton menuButton" id="customColors" title="Settings" onclick="$('#settings').show()"><img src="../assets/iconkitbuttons/cog.png" width=60px></button>
+        <button class="blankButton menuButton" id="downloadIcon" title="Download icon"><a id="downloadLink" download="cube_1.png" href=""><img src="../assets/iconkitbuttons/save.png" width=60px></a></button>
+        <button class="blankButton menuButton" id="getUserIcon" title="Get player icon"><img src="../assets/iconkitbuttons/steal.png" width=60px></button>
+        <button class="blankButton menuButton" id="randomIcon" title="Random Icon"><img src="../assets/iconkitbuttons/shuffle.png" width=60px></button>
         </div>
         <div id="iconTabs"></div><br>
         <div id="iconKitParent" class="iconKit">
@@ -137,10 +137,10 @@ function colorSplit() {
 }
 
 forms.forEach(form => {
-    $("#iconTabs").append(`<button form="${form}" class="blankButton iconTabButton"><img src="../iconkitbuttons/${form}_off.png" width=50px></button>`)
-    $("#copyForms").append(`<button form="${form}" class="blankButton copyForm"><img src="../iconkitbuttons/${form}_off.png" width=50px></button>`)
+    $("#iconTabs").append(`<button form="${form}" class="blankButton iconTabButton"><img src="../assets/iconkitbuttons/${form}_off.png" width=50px></button>`)
+    $("#copyForms").append(`<button form="${form}" class="blankButton copyForm"><img src="../assets/iconkitbuttons/${form}_off.png" width=50px></button>`)
 })
-$("#iconTabs").append(`<button title="Glow" class="blankButton glowToggle" id="glowbtn"><img id="glow" src="../iconkitbuttons/streak_off.png" width=50px></button>`)
+$("#iconTabs").append(`<button title="Glow" class="blankButton glowToggle" id="glowbtn"><img id="glow" src="../assets/iconkitbuttons/streak_off.png" width=50px></button>`)
 
 forms.forEach(form => {$("#iconKitParent").append(`<div id="${form}s"></div>`)})
 
@@ -172,7 +172,7 @@ fetch('./api/icons').then(res => {
 
             form.forEach(function (i, p) {
             if (p != 0 && p % 12 == 0) $('#' + formName + 's').append('<br>')
-            $('#' + formName + 's').append(`<button num="${p + 1}" form="${formName}" class="blankButton iconButton" id="${formName}-${p + 1}"><img src="../previewicon/${i}" width="50px" title="${capitalize(formName)} ${formName == "cube" && p+1 == form.length ? 0 : p + 1}"></button>`)})
+            $('#' + formName + 's').append(`<button num="${p + 1}" form="${formName}" class="blankButton iconButton" id="${formName}-${p + 1}"><img src="../assets/previewicons/${i}" width="50px" title="${capitalize(formName)} ${formName == "cube" && p+1 == form.length ? 0 : p + 1}"></button>`)})
             $('#' + formName + 's').imagesLoaded(function() {}).progress(function() {
                 imagesLoaded += 1;
                 totalLoaded = imagesLoaded / $('#' + formName + 's').find('img').length * 100
@@ -186,7 +186,7 @@ fetch('./api/icons').then(res => {
             iconStuff.colorOrder.forEach(function (p, n) {
                 if (iconSettings.includes("sort")) p = n;
                 colTypes.forEach(c => {
-                    $(`#col${c}`).append(`<button col=${p} class="blankButton color${c}" title="Color ${p}" id="col${c}-${p}"><img src="../previewicon/color_${p}.png" width=50px></button>`)
+                    $(`#col${c}`).append(`<button col=${p} class="blankButton color${c}" title="Color ${p}" id="col${c}-${p}"><img src="../assets/previewicons/color_${p}.png" width=50px></button>`)
                 })
             })
             $('#col1').append("<span style='min-width: 10px'></span>")
@@ -251,7 +251,7 @@ fetch('./api/icons').then(res => {
             selectedColW = null
             enableGlow = randInt(0, 2) == 1 ? 1 : 0   // 1 in 3 chance of glow
 
-            $('#glow').attr('src', '../iconkitbuttons/streak_off.png')
+            $('#glow').attr('src', '../assets/iconkitbuttons/streak_off.png')
 
             $(`.iconTabButton[form=${selectedForm}]`).trigger('click')
             $(`#${selectedForm}-${selectedIcon}`).trigger('click')
@@ -413,7 +413,7 @@ fetch('./api/icons').then(res => {
         $("#result").hide()
         $("#result").attr('src', iconURL).attr('download',  `${user}_${formCopy}.png`)
         $("#downloadLink").attr('href', iconURL).attr('download',  `${user}_${formCopy}.png`)
-        $('#glow').attr('src', '../iconkitbuttons/streak_off.png')
+        $('#glow').attr('src', '../assets/iconkitbuttons/streak_off.png')
         enableGlow = 0
 
         fetch('../api/profile/' + user).then(res => res.json())

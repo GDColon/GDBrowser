@@ -1,12 +1,12 @@
 <head>
 	<title>[[NAME]] ([[ID]])</title>
 	<meta charset="utf-8">
-	<link href="../css/browser.css" type="text/css" rel="stylesheet">
+	<link href="../assets/css/browser.css" type="text/css" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
-	<link rel="icon" href="../difficulty/[[DIFFICULTYFACE]].png">
+	<link rel="icon" href="../assets/difficulties/[[DIFFICULTYFACE]].png">
 	<meta id="meta-title" property="og:title" content="[[NAME]] by [[AUTHOR]]">
 	<meta id="meta-desc" property="og:description" content="ID: [[ID]] | Stars: [[STARS]] | Difficulty: [[DIFFICULTY]] | Downloads: [[DOWNLOADS]] | Likes: [[LIKES]] | Length: [[LENGTH]] | Song: [[SONGNAME]] ([[SONGID]])">
-	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/difficulty/[[DIFFICULTYFACE]].png">
+	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/assets/difficulties/[[DIFFICULTYFACE]].png">
 </head>
 
 <body class="levelBG" onbeforeunload="saveUrl()">
@@ -93,7 +93,7 @@
 	</div>
 
 	<div class="center valign" style="position:absolute; top: 10.5%; left: 27%; transform:scale(0.8); height: 100%; width: 20%">
-		<img class="spaced" src="../difficulty/[[DIFFICULTYFACE]].png" height="15%" style="margin-bottom: 0%">
+		<img class="spaced" src="../assets/difficulties/[[DIFFICULTYFACE]].png" height="15%" style="margin-bottom: 0%">
 		<h1 class="smaller" id="difficultytext" style="transform:scale(0.9);">[[DIFFICULTY]]</h1>
 		<h1 class="smaller inline stars" style="transform:scale(0.9)">[[STARS]]</h1> <img class="inline stars" src="../assets/star.png" height=4%; style="transform:translateY(-12%)"><br class="stars">
 		<h1 class="smaller inline diamonds" style="transform:scale(0.9)">[[DIAMONDS]]</h1> <img class="inline diamonds" src="../assets/diamond.png" height=4%; style="transform:translateY(-12%)">
@@ -150,7 +150,7 @@
 
 </body>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script async type="text/javascript" src="../assets/sizecheck.js"></script>
+<script async type="text/javascript" src="../sizecheck.js"></script>
 <script>
 
 let messageText = 'Your <span style="color: yellow">Geometry Dash password</span> will <span style="color: lime">not be stored</span> anywhere on the site, both <span style="color:rgb(113, 234, 255)">locally and server-side.</span> You can view the code used for liking a level <a class="menuLink" target="_blank" href="https://github.com/GDColon/GDBrowser/blob/master/api/post/like.js">here</a>.'
@@ -234,14 +234,17 @@ if (!'[[DEMONLIST]]'.startsWith("[")) {
 else $('.demonList').remove()
 
 if (!'[[DAILYNUMBER]]'.startsWith("[")) {
-	$('#dailyTime').html(` (${colonize(dailyTime, true)})`)
 	$('#dailyIcon').attr('src', `../assets/crown-${'[[WEEKLY]]'.startsWith("[") ? "daily" : "weekly"}.png`)
 	$('.dailyLevel').show()
 
-	setInterval(() => {
-		dailyTime -= 1
+	if (dailyTime) {
 		$('#dailyTime').html(` (${colonize(dailyTime, true)})`)
-	}, 1000);
+		setInterval(() => {
+			dailyTime -= 1
+			$('#dailyTime').html(` (${colonize(dailyTime, true)})`)
+		}, 1000);
+	}
+
 
 }
 else $('.dailyLevel').remove()

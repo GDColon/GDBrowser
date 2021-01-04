@@ -1,7 +1,7 @@
 <head>
 	<title>Map Packs</title>
 	<meta charset="utf-8">
-	<link href="../css/browser.css" type="text/css" rel="stylesheet">
+	<link href="../assets/css/browser.css" type="text/css" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
 	<link rel="icon" href="../assets/folder.png">
 	<meta id="meta-title" property="og:title" content="Map Packs">
@@ -28,7 +28,7 @@
 </div>
 </body>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script async type="text/javascript" src="../assets/sizecheck.js"></script>
+<script async type="text/javascript" src="../sizecheck.js"></script>
 <script>
 
 fetch('../api/mappacks').then(res => res.json()).then(packs => {
@@ -36,7 +36,7 @@ fetch('../api/mappacks').then(res => res.json()).then(packs => {
 		$('#packList').append(`
 			<div class="mappack">
 			<a href="../search/${x.levels.join(",")}?list&header=${encodeURIComponent(x.name)}">
-			<img src="../difficulty/${x.difficulty}.png" width="42%"><br>
+			<img src="../assets/difficulties/${x.difficulty}.png" width="42%"><br>
 			<h3 class="gauntletText"">${x.name.replace("Pack", "<br>Pack")}<br>
 			<span style="color: rgb(${x.textColor})">${x.stars}</span><img class="valign" src="../assets/star.png" style="cursor: help; width: 14%; margin-left: 2%; transform: translateY(-10%);" title="Stars">
 			<span style="color: rgb(${x.barColor})">${x.coins}</span><img class="valign" src="../assets/coin.png" style="cursor: help; width: 14%; margin-left: 2%; transform: translateY(-10%);" title="Secret Coins">

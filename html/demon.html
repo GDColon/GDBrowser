@@ -1,7 +1,7 @@
 <head>
 	<title>Demon Leaderboard</title>
 	<meta charset="utf-8">
-	<link href="../css/browser.css" type="text/css" rel="stylesheet">
+	<link href="../assets/css/browser.css" type="text/css" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
 	<link rel="icon" href="../assets/trophy-demon.png">
 	<meta id="meta-title" property="og:title" content="Demon Leaderboard">
@@ -70,19 +70,20 @@
 
 </body>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script async type="text/javascript" src="../assets/sizecheck.js"></script>
-<script type="text/javascript" src="../assets/dragscroll.js"></script>
+<script async type="text/javascript" src="../sizecheck.js"></script>
+<script type="text/javascript" src="../dragscroll.js"></script>
 <script>
 
-let trophies = [1, 5, 10, 25, 50, 100, 250]
+let max = 250
+let trophies = [1, 5, 10, 25, 50, 100, max]
 
 let demonID = Math.round(window.location.pathname.split('/')[2])
-if (!demonID || demonID > 250 || demonID < 1) window.location.href = "../../../"
+if (!demonID || demonID > max || demonID < 1) window.location.href = "../../../"
 
 if (demonID > 1) $('#pageDown').attr('href', `./${demonID - 1}`)
 else $('#pageDown').hide()
 
-if (demonID < 250) $('#pageUp').attr('href', `./${demonID + 1}`)
+if (demonID < max) $('#pageUp').attr('href', `./${demonID + 1}`)
 else $('#pageUp').hide()
 
 fetch(`https://pointercrate.com/api/v1/demons/${demonID}/`).then(res => res.json()).then(demonRes => {
@@ -108,7 +109,7 @@ fetch(`https://pointercrate.com/api/v1/demons/${demonID}/`).then(res => res.json
 	
 		<div class="center" style="position:absolute; transform:scale(0.82) translate(-28vh, -10vh); height: 10%; width: 12.5%;">
 			<div class="inline" style="width: 50%; margin: 0% 20% 0% 10%; transform:translateY(-15%)"><h2 class="inline center" style="transform:scale(${1-shift[0]}) translateX(-${shift[1]}%)">${y+1}</h2></div>
-			<img class="inline spaced" src="../trophies/${trophies.findIndex(z => y+1 <= z) + 1}.png" height="120%" style="margin-bottom: 0%; transform:scale(1.1)">
+			<img class="inline spaced" src="../assets/trophies/${trophies.findIndex(z => y+1 <= z) + 1}.png" height="120%" style="margin-bottom: 0%; transform:scale(1.1)">
 		</div>
 
 		<div style="${!x.video ? "display: none; " : ""}position:absolute; width: 12.5%; height: 15%; right: 0%">
@@ -125,8 +126,8 @@ fetch(`https://pointercrate.com/api/v1/demons/${demonID}/`).then(res => res.json
 })
 
 $(document).keydown(function(k) {
-    if (k.which == 37) window.location.href = $('#pageDown').attr('href')	// left
-	if (k.which == 39) window.location.href = $('#pageUp').attr('href')		// right
+    if (k.which == 37 && demonID > 1) window.location.href = $('#pageDown').attr('href')	// left
+	if (k.which == 39 && demonID < max) window.location.href = $('#pageUp').attr('href')		// right
 });
 
 </script>

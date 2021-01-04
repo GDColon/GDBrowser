@@ -1,12 +1,12 @@
 <head>
 	<title id="tabTitle">Level Search</title>
 	<meta charset="utf-8">
-	<link href="../css/browser.css" type="text/css" rel="stylesheet">
+	<link href="../assets/css/browser.css" type="text/css" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
 	<link rel="icon" href="../assets/coin.png">
 	<meta id="meta-title" property="og:title" content="Level Search">
 	<meta id="meta-desc" property="og:description" content="Search for Geometry Dash levels, and filter by length, difficulty, song + more!">
-	<meta id="meta-image" name="og:image" itemprop="image" content="../assets/dragscroll.js">
+	<meta id="meta-image" name="og:image" itemprop="image" content="../dragscroll.js">
 </head>
 
 <body class="levelBG" onbeforeunload="saveUrl()">
@@ -106,7 +106,7 @@
 
 </body>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script async type="text/javascript" src="../assets/sizecheck.js"></script>
+<script async type="text/javascript" src="../sizecheck.js"></script>
 <script type="text/javascript" src="https://asvd.github.io/dragscroll/dragscroll.js"></script>
 <script>
 
@@ -122,10 +122,11 @@ let type = url.searchParams.get('type')
 let list = url.searchParams.get('list')
 let count = url.searchParams.get('count')
 let header = url.searchParams.get('header')
+let demonList = ["demonList", "demonlist"].some(x => typeof url.searchParams.get(x) == "string" || type == x)
 let loading = false;
 let gauntlets = ["Fire", "Ice", "Poison", "Shadow", "Lava", "Bonus", "Chaos", "Demon", "Time", "Crystal", "Magic", "Spike", "Monster", "Doom", "Death"]
 
-let page = 0
+let page = Math.max(1, url.searchParams.get('page')) - 1
 let pages = 0
 let results = 0
 let legalPages = true
@@ -162,7 +163,7 @@ function Append(firstLoad) {
 			else $('#shuffle').css('filter', 'hue-rotate(100deg)')
 		}
 		$('#shuffle').show()
-		$('#pagenum').text(`Page 1${pages ? ` of ${pages}` : ""}`)
+		$('#pagenum').text(`Page ${page + 1}${pages ? ` of ${pages}` : ""}`)
 	}
 
 	if ((pages && page+1 >= pages) || (!pages && res.length < 9 && type != "recent")) $('#pageUp').hide()
@@ -170,6 +171,7 @@ function Append(firstLoad) {
 
 	res.forEach((x, y) => {
 		let hasAuthor = (x.accountID != "0")
+		if (demonList) x.demonID = (res.length * page) + y + 1
 		if (y == 0 && (type == 5 || typeof userMode == 'string')) {
 			$('#header').text(((x.author == "-" ? "Someone" : x.author)) + (x.author.toLowerCase().endsWith('s') ? "'" : "'s") + " levels")
 			document.title = $('#header').text()
@@ -188,17 +190,22 @@ function Append(firstLoad) {
 			</h3>
 		
 			<div class="center" style="position:absolute; top: ${6.5 + (y * 33.5) + (x.coins == 0 ? 2.5 : 0)}%; left: 4.4%; transform:scale(0.82); height: 10%; width: 12.5%;">
-				<img class="spaced" id="dFace" src="../difficulty/${x.difficultyFace}.png" height="150%" style="margin-bottom: 0%; ${x.epic ? 'transform:scale(1.2)' : x.featured ? 'transform:scale(1.1)' : ''}">
+				<img class="spaced" id="dFace" src="../assets/difficulties/${x.difficultyFace}.png" height="150%" style="margin-bottom: 0%; ${x.epic ? 'transform:scale(1.2)' : x.featured ? 'transform:scale(1.1)' : ''}">
 				<h3>${x.difficulty.includes('Demon') ? "Demon" : x.difficulty}</h3>
-				${x.stars != 0 ? `<h3>${x.stars}<img class="valign sideSpaceB" src="../assets/star.png" height="35%" style="transform:translateY(-8%)"></h3>` : ""}
+				${x.stars != 0 && !demonList ? `<h3>${x.stars}<img class="valign sideSpaceB" src="../assets/star.png" height="35%" style="transform:translateY(-8%)"></h3>` : ""}
+
+				${demonList ? `<h3 class="yellow">#${x.demonID}</h3>` : ""}
+
 				<div id="coins" style="margin-top: 3%">
 					${x.coins > 0 ? `<img src="../assets/${x.verifiedCoins ? 'silver' : 'brown'}coin.png" height="50%">` : ""}
 					${x.coins > 1 ? `<img src="../assets/${x.verifiedCoins ? 'silver' : 'brown'}coin.png" height="50%" class="squeezeB">` : ""}
 					${x.coins > 2 ? `<img src="../assets/${x.verifiedCoins ? 'silver' : 'brown'}coin.png" height="50%" class="squeezeB">` : ""}
 				</div>
 			</div>
-			<div class="center" style="position:absolute; top: ${15 + (y * 33.5)}%; right: 7%; height: 10%">
-				<a href="../${x.id}""><img class="valign gdButton" src="../assets/view.png" height="105%"></a>
+			<div class="center" style="position:absolute; right: 7%; transform:translateY(-${demonList ? 19.5 : 16.25}vh); height: 10%">
+				<a title="View level" href="../${x.id}""><img style="margin-bottom: 4.5%" class="valign gdButton" src="../assets/view.png" height="105%"></a>
+				${demonList ? `<br><a title="View leaderboard" href="../demon/${x.demonID}""><img class="valign gdButton" src="../assets/trophyButton.png" height="110%"></a>
+				<a title="View on Pointercrate" href="https://pointercrate.com/demonlist/${x.demonID}" target=_blank><img class="valign gdButton" src="../assets/demonButton.png" height="110%"></a>` : "" }
 			</div>
 		</div>`)
 	})
@@ -251,6 +258,14 @@ if (gauntlet) {
 	$('#header').text((gauntlets[parseInt(gauntlet) - 1] || "Unknown") + " Gauntlet")
 	$('#meta-title').attr('content', (gauntlets[parseInt(gauntlet) - 1] || "Unknown") + " Gauntlet")
 	$('#meta-desc').attr('content',  `View the 5 levels in the ${(gauntlets[parseInt(gauntlet) - 1] || "Unknown") + " Gauntlet"}!`)
+}
+
+if (demonList) {
+	$('body').addClass('darkBG')
+	$('.cornerPiece').addClass('grayscale')
+	$('#header').text("Demon List")
+	$('#meta-title').attr('content', "Demon List")
+	$('#meta-desc').attr('content',  "View the hardest demons in Geometry Dash!")
 }
 
 if (!$('#header').text() && typeof userMode != "string") {

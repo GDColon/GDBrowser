@@ -31,10 +31,11 @@ const RL2 = rateLimit({
 })
 
 let api = true;
-let gdIcons = fs.readdirSync('./icons/preview')
+let gdIcons = fs.readdirSync('./assets/previewicons')
 let sampleIcons = require('./misc/sampleIcons.json')
 let colorList = require('./icons/colors.json')
 let forms = { "player": "cube", "bird": "ufo", "dart": "wave" }
+let assetPage = fs.readFileSync('./html/assets.html', 'utf8')
 let whiteIcons = fs.readdirSync('./icons').filter(x => x.endsWith("extra_001.png")).map(function (x) { let xh = x.split("_"); return [xh[1] == "ball" ? "ball" : forms[xh[0]] || xh[0], +xh[xh[1] == "ball" ? 2 : 1]]})
 let colorOrder = [0, 1, 2, 3, 16, 4, 5, 6, 13, 7, 8, 9, 29, 10, 14, 11, 12, 17, 18, 15, 27, 32, 28, 38, 20, 33, 21, 34, 22, 39, 23, 35, 24, 36, 25, 37, 30, 26, 31, 19, 40, 41]
 
@@ -90,19 +91,32 @@ app.clean = function(text) {if (!text || typeof text != "string") return text; e
 
 // ASSETS
 
-let assets = ['css', 'assets', 'blocks', 'boomlings', 'deatheffects', 'difficulty', 'gauntlets', 'gdicon', 'iconkitbuttons', 'levelstyle', 'objects', 'trophies']
-app.use('/css', express.static(__dirname + '/assets/css'));
 app.use('/assets', express.static(__dirname + '/assets', {maxAge: "7d"}));
-app.use('/blocks', express.static(__dirname + '/assets/blocks', {maxAge: "7d"}));
-app.use('/boomlings', express.static(__dirname + '/assets/boomlings', {maxAge: "7d"}));
-app.use('/deatheffects', express.static(__dirname + '/assets/deatheffects', {maxAge: "7d"}));
-app.use('/difficulty', express.static(__dirname + '/assets/gdfaces', {maxAge: "7d"}));
-app.use('/gauntlets', express.static(__dirname + '/assets/gauntlets', {maxAge: "7d"}));
-app.use('/previewicon', express.static(__dirname + '/icons/preview', {maxAge: "7d"}));
-app.use('/iconkitbuttons', express.static(__dirname + '/assets/iconkitbuttons', {maxAge: "7d"}));
-app.use('/levelstyle', express.static(__dirname + '/assets/initial', {maxAge: "7d"}));
-app.use('/objects', express.static(__dirname + '/assets/objects', {maxAge: "7d"}));
-app.use('/trophies', express.static(__dirname + '/assets/trophies', {maxAge: "7d"}));
+app.use('/assets/css', express.static(__dirname + '/assets/css')); // override maxAge
+
+app.get("/sizecheck.js", function(req, res) { res.sendFile(__dirname + "/misc/sizecheck.js") })
+app.get("/dragscroll.js", function(req, res) { res.sendFile(__dirname + "/misc/dragscroll.js") })
+
+app.get("/assets/:dir*?", function(req, res) {
+  let main = (req.params.dir || "").toLowerCase()
+  let dir = main + (req.params[0] || "").toLowerCase()
+
+  if (dir.includes('.') || !req.path.endsWith("/")) {
+    if (!req.params[0]) main = ""
+    if (req.params.dir == "deatheffects") return res.sendFile(__dirname + "/assets/deatheffects/0.png")
+    return res.send(`<p style="font-size: 20px; font-family: aller, helvetica, arial">Looks like this file doesn't exist ¯\\_(ツ)_/¯<br><a href='/assets/${main}'>View directory listing for <b>/assets/${main}</b></a></p>`)
+  }
+
+  let path = `./assets/${dir}`
+  let files = []
+  if (fs.existsSync(path)) { files = fs.readdirSync(path) }
+
+  assetPage = fs.readFileSync('./html/assets.html', 'utf8')
+  // remember to remove this
+
+  let assetData = JSON.stringify({files: files.filter(x => x.includes('.')), directories: files.filter(x => !x.includes('.'))})
+  res.send(assetPage.replace('{NAME}', dir || "assets").replace('{DATA}', assetData))
+})
 
 
 // POST REQUESTS
@@ -177,9 +191,7 @@ app.get("/:id", function(req, res) { app.run.level(app, req, res) })
 
 // MISC
 
-app.get("/assets/sizecheck.js", function(req, res) { res.sendFile(__dirname + "/misc/sizecheck.js") }) 
 app.get("/icon/:text", function(req, res) { app.run.icon(app, req, res) })
-app.get("/object/:text", function(req, res) { app.run.object(app, req, res) })
 app.get('/api/icons', function(req, res) { 
   let sample = [JSON.stringify(sampleIcons[Math.floor(Math.random() * sampleIcons.length)].slice(1))]
   res.send({icons: gdIcons, colors: colorList, colorOrder, whiteIcons, sample}); 
@@ -187,7 +199,6 @@ app.get('/api/icons', function(req, res) {
 
 app.get('*', function(req, res) {
   if (req.path.startsWith('/api')) res.send('-1')
-  if (assets.some(x => req.path.startsWith("/" + x))) res.send("Looks like this file doesn't exist ¯\\_(ツ)_/¯<br>You can check out all of the assets on <a target='_blank' href='https://github.com/GDColon/GDBrowser/tree/master/assets'>GitHub</a>")
   else res.redirect('/search/404%20')
 });
 
@@ -195,4 +206,4 @@ app.use(function (err, req, res, next) {
   if (err && err.message == "Response timeout") res.status(500).send('Internal server error! (Timed out)')
 })
 
-app.listen(app.config.port, () => console.log(`Site online on port ${app.config.port}`))
+app.listen(app.config.port, () => console.log(`Site online! (port ${app.config.port})`))
