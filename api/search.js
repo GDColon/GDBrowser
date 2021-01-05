@@ -111,18 +111,17 @@ module.exports = async (app, req, res) => {
     levelArray.forEach(async (x, y) => {
 
         let level = new Level(x)
-        let songSearch = songs.find(y => y['~1'] == x[35])
+        let songSearch = songs.find(y => y['~1'] == x[35]) || []
 
         level.author = authorList[x[6]] ? authorList[x[6]][0] : "-";
         level.accountID = authorList[x[6]] ? authorList[x[6]][1] : "0";
 
-        if (songSearch) {
+        if (level.customSong) {
             level.songName = app.clean(songSearch[2] || "Unknown")
             level.songAuthor = songSearch[4] || "Unknown"
             level.songSize = (songSearch[5] || "0") + "MB"
             level.songID = songSearch[1] || level.customSong
         }
-   
         else {
             let foundSong = require('../misc/level.json').music[parseInt(x[12]) + 1] || {"null": true}
             level.songName =  foundSong[0] || "Unknown"

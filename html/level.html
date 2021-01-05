@@ -261,7 +261,7 @@ if ("[[SONGID]]".startsWith("Level")) {
 	$('.songLink').hide()}
 else $('#checkSong').show()
 
-if ("[[INVALIDSONG]]" == "true") $('.songLink').hide()
+if ("[[SONGAUTHOR]]" == "Unknown" || "[[INVALIDSONG]]" == "true") $('.songLink').hide()
 if ("[[DISLIKED]]" == "true") $('#likeImg').attr('src', '../assets/dislike.png').css('transform', 'translateY(20%)')
 
 let coinColor = [[VERIFIEDCOINS]] ? "silvercoin" : "browncoin"

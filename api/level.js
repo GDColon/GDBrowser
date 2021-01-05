@@ -37,7 +37,7 @@ module.exports = async (app, req, res, api, analyze) => {
     let levelInfo = app.parseResponse(preRes[0])
     let level = new Level(levelInfo, false, author)
 
-    if (song[2]) {
+    if (level.customSong) {
       level.songName = song[2] || "Unknown"
       level.songAuthor = song[4] || "Unknown"
       level.songSize = (song[5] || "0") + "MB"
