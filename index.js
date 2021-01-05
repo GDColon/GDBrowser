@@ -167,6 +167,7 @@ app.get("/api/level/:id", RL, async function(req, res) { app.run.level(app, req,
 app.get("/api/mappacks", async function(req, res) { app.run.mappack(app, req, res) })
 app.get("/api/profile/:id", RL2, function(req, res) { app.run.profile(app, req, res, api) })
 app.get("/api/search/:text", RL2, function(req, res) { app.run.search(app, req, res) })
+app.get("/api/song/:song", function(req, res){ app.run.song(app, req, res) })
  
 
 // REDIRECTS

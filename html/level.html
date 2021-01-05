@@ -115,7 +115,14 @@
 	<div class="brownBox" id="songBox" style="position:absolute; bottom: 4%; left: 0; right: 0; width: 85vh; height: 20%; margin-left: auto; margin-right: auto;">
 		<div style="margin-left: 0.5%">
 			<h1 class="pre slightlySmaller" id="songname">[[SONGNAME]]</h1>
-			<h2 class="pre smaller">By: [[SONGAUTHOR]] <a class="songLink" href="https://[[SONGAUTHOR]].newgrounds.com" target="_blank"><img class="gdButton valign" src="../assets/more.png" width="12%"></a></h2>
+			<h2 class="pre smaller">By: [[SONGAUTHOR]]<!--
+			--><img id="scout" title="Artist is scouted" style="display: none; cursor: help; margin-left: 1.5%; filter: hue-rotate(-55deg);" class="valign" src="../assets/check.png" width="5%"><!--
+			--><img id="whitelist" title="Artist is whitelisted" style="display: none; cursor: help" class="valign" src="../assets/check.png" width="5%"><!--
+			--> <a class="songLink" href="https://[[SONGAUTHOR]].newgrounds.com" target="_blank"><img class="gdButton valign" src="../assets/more.png" width="12%"></a></h2>
+			<img id="checkSong" style="display: none; margin-top: 1%" class="gdButton valign" src="../assets/btn-check.png" width="16%">
+			<h3 id="songLoading" style="display: none; margin-top: 0.5%;">Loading...</h3>
+			<h3 id="songAllowed" style="display: none; margin-top: 0.5%; color: lime">Song is allowed for use</h3>
+			<h3 id="songNotAllowed" style="display: none; margin-top: 0.5%; color: red">Song is not allowed for use</h3>
 		</div>
 		<a class="songLink" href="https://www.newgrounds.com/audio/listen/[[SONGID]]" target="_blank"><img class="gdButton sideButton" src="../assets/playsong.png" style="position:absolute; right: 1%; top: 50%; width: 11%; height: auto;"></a>
 	</div>
@@ -252,6 +259,7 @@ else $('.dailyLevel').remove()
 if ("[[SONGID]]".startsWith("Level")) {
 	$('#songInfo').text('[[SONGID]]')
 	$('.songLink').hide()}
+else $('#checkSong').show()
 
 if ("[[INVALIDSONG]]" == "true") $('.songLink').hide()
 if ("[[DISLIKED]]" == "true") $('#likeImg').attr('src', '../assets/dislike.png').css('transform', 'translateY(20%)')
@@ -296,6 +304,25 @@ function deleteLevel() {
   location.reload()
   freeze = true;
 }
+
+$('#checkSong').click(function() {
+	$('#checkSong').hide()
+	$('#songLoading').show()
+	fetch(`../api/song/[[SONGID]]`).then(res => res.json()).then(info => {
+		$('#songLoading').hide()
+		$(info.song.allowed ? '#songAllowed' : '#songNotAllowed').show()
+		if (!info.artist.scouted) {
+			$('#scout').attr('src', '../assets/x.png')
+			$('#scout').attr('title', $('#scout').attr('title').replace('is ', 'is NOT '))
+			$('#scout').css('filter', 'saturate(0.4)')
+		}
+		if (!info.artist.whitelisted) {
+			$('#whitelist').attr('src', '../assets/x.png')
+			$('#whitelist').attr('title', $('#whitelist').attr('title').replace('is ', 'is NOT '))
+		}
+		$('#scout').show(); $('#whitelist').show()
+	})
+})
 
 // let like;
 // let likedLevels = localStorage.likedLevels ? JSON.parse(localStorage.likedLevels) : []

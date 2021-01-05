@@ -52,6 +52,7 @@
 					<div class="category-name">Misc</div>
 					<div class="category-content">
 						<a class="header-link" href="#analyze">Level Analysis</a> 
+						<a class="header-link" href="#artist">Song Verification</a> 
 						<a class="header-link" href="#icons">Icons</a> 
 					</div>
 				</div>
@@ -529,47 +530,6 @@
 		</div>
 		<div class="seperator"></div>
 	</main>
-	
-	<main>
-		<div id="analyze" class="anchor"></div>
-		<div class="main-block">
-			<h1>Level Analysis</h1>
-			<p>/api/analyze/levelID</p>
-
-			<p>Analyzes a level's data</p>
-			<p><sb>Level analysis is updated a lot so there may be changes in the future</sb></p>
-
-			<br>
-			<p class="reveal" onclick="$('#params-analyze').slideToggle(100)"><b>Parameters (0)</b></p>
-			<div class="subdiv" id="params-analyze">
-				<p>No parameters for this one!</p>
-			</div>
-
-			<br>
-			<p class="reveal" onclick="$('#response-analyze').slideToggle(100)"><b>Response (12)</b></p>
-			<div class="subdiv" id="response-analyze">
-				<p><b>Response is subject to change in the future</b></p>
-				<p>The API will return an array of each player with the following information:</p>
-				<p>level: Basic level info (name, ID, author, etc)</p>
-				<p>settings: The level's settings (song offset, starting form/speed, two player mode, font, etc)</p>
-				<p>portals: A string listing the order of all the portals in the level + their percent. Does not include starting form/speed</p>
-				<p>orbs: How many of each jump ring is in the level</p>
-				<p>triggers: How many of each trigger is in the level</p>
-				<p>blocks: How many of each block type is in the level</p>
-				<p>triggerGroups: How many of each group ID is in the level</p>
-				<p>misc: Amount of objects that aren't categorized above (glow, arrows, clouds, pickups, etc)</p>
-				<p>colors: The level's initial color channels. Contains channel, R, G, B, opacity, player color, blending, and copied channel</p>
-				<p>text: An array of all the text objects in a level. ([text, percent])</p>
-				<p>dataLength: How long the level data is (spoilers - very)</p>
-				<p>data: The decrypted data of the level. And it's freakin' huge</p>
-			</div>
-
-			<br>
-		</div>
-
-		<div class="seperator"></div>
-
-	</main>
 
 	<main>
 			<div id="commenting" class="anchor"></div>
@@ -764,6 +724,83 @@
 			</div>
 			<div class="seperator"></div>
 		</main>
+
+	<main>
+		<div id="artist" class="anchor"></div>
+		<div class="main-block">
+			<h1>Song Verification</h1>
+			<p>/api/song/songID</p>
+
+			<p>Checks if a song is allowed for use</p>
+			<p>For a song to be useable, the artist must be scouted on Newgrounds and the song must be enabled for external use.
+			<br>If the song was published after March 2017, the artist must also be whitelisted by a GD moderator.</p>
+
+			<br>
+			<p class="reveal" onclick="$('#params-analyze').slideToggle(100)"><b>Parameters (0)</b></p>
+			<div class="subdiv" id="params-analyze">
+				<p>No parameters for this one!</p>
+			</div>
+
+			<br>
+			<p class="reveal" onclick="$('#response-analyze').slideToggle(100)"><b>Response (8)</b></p>
+			<div class="subdiv" id="response-analyze">
+				<p>error: Appears if the GD servers rejected the request or not</p>
+				<p>exists: If the provided song exists on Newgrounds</p>
+				<p>artist.name: The name of the artist</p>
+				<p>artist.scouted: If the artist was scouted by a Newgrounds member</p>
+				<p>artist.whitelisted: If the artist was whitelisted by a Geometry Dash moderator</p>
+				<p>song.name: The name of the song</p>
+				<p>song.externalUse: If the song is allowed for external use</p>
+				<p>song.allowed: If the song is allowed for use in GD</p>
+			</div>
+
+			<br>
+		</div>
+
+		<div class="seperator"></div>
+
+	</main>
+
+	<main>
+		<div id="analyze" class="anchor"></div>
+		<div class="main-block">
+			<h1>Level Analysis</h1>
+			<p>/api/analyze/levelID</p>
+
+			<p>Analyzes a level's data</p>
+			<p><sb>Level analysis is updated a lot so there may be changes in the future</sb></p>
+
+			<br>
+			<p class="reveal" onclick="$('#params-analyze').slideToggle(100)"><b>Parameters (0)</b></p>
+			<div class="subdiv" id="params-analyze">
+				<p>No parameters for this one!</p>
+			</div>
+
+			<br>
+			<p class="reveal" onclick="$('#response-analyze').slideToggle(100)"><b>Response (12)</b></p>
+			<div class="subdiv" id="response-analyze">
+				<p><b>Response is subject to change in the future</b></p>
+				<p>The API will return an array of each player with the following information:</p>
+				<p>level: Basic level info (name, ID, author, etc)</p>
+				<p>settings: The level's settings (song offset, starting form/speed, two player mode, font, etc)</p>
+				<p>portals: A string listing the order of all the portals in the level + their percent. Does not include starting form/speed</p>
+				<p>orbs: How many of each jump ring is in the level</p>
+				<p>triggers: How many of each trigger is in the level</p>
+				<p>blocks: How many of each block type is in the level</p>
+				<p>triggerGroups: How many of each group ID is in the level</p>
+				<p>misc: Amount of objects that aren't categorized above (glow, arrows, clouds, pickups, etc)</p>
+				<p>colors: The level's initial color channels. Contains channel, R, G, B, opacity, player color, blending, and copied channel</p>
+				<p>text: An array of all the text objects in a level. ([text, percent])</p>
+				<p>dataLength: How long the level data is (spoilers - very)</p>
+				<p>data: The decrypted data of the level. And it's freakin' huge</p>
+			</div>
+
+			<br>
+		</div>
+
+		<div class="seperator"></div>
+
+	</main>
 
 	<main>
 		<div id="icons" class="anchor"></div>
