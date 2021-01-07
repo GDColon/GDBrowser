@@ -267,16 +267,16 @@
 			if (!res || res == "-1") { $('.postbutton').show(); return $('#message').text("The username you provided doesn't exist!") }
 			else accountID = res.accountID
 
-			$.post("../messages", { password, accountID, count: true })
-				.done(count => {
-					$('#msgCount').html(`Loading <span style="color: yellow">${count}</span> unread messages...`)
-					$('#access').hide()
-					$('#loading').show()
+			// $.post("../messages", { password, accountID, count: true })
+			// 	.done(count => {
+			// 		$('#msgCount').html(`Loading <span style="color: yellow">${count}</span> unread messages...`)
+			// 		$('#access').hide()
+			// 		$('#loading').show()
 
 					$.post("../messages", { password, accountID })
 						.done(msgs => {
 							messages = msgs
-							$('#loading').hide()
+							$('#access').hide()
 							appendMessages()
 							$('#messages').show()
 
@@ -299,8 +299,8 @@
 								})
 							}
 
-						})
-						.fail(e => { $('#loadingicon').hide(); $('#msgCount').text(e.responseText.includes("DOCTYPE") ? "Something went wrong..." : e.responseText) })
+						// })
+						// .fail(e => { $('#loadingicon').hide(); $('#msgCount').text(e.responseText.includes("DOCTYPE") ? "Something went wrong..." : e.responseText) })
 
 				})
 				.fail(e => { $('.postbutton').show(); $('#message').text(e.responseText.includes("DOCTYPE") ? "Something went wrong..." : e.responseText) })
