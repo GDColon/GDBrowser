@@ -17,7 +17,8 @@ module.exports = async (app, req, res, api) => {
 
   request.post(app.endpoint + 'getGJMessages20.php', params, async function (err, resp, body) {
 
-    if (err || body == '-1' || body == '-2' || !body) return res.status(400).send("Error fetching messages! Messages get blocked a lot so try again later, or make sure your username and password are entered correctly. (this is not an issue with gdbrowser)")
+    if (err || body == '-1' || body == '-2' || !body) return res.status(400).send(`Error fetching messages! Messages get blocked a lot so try again later, or make sure your username and password are entered correctly. Last worked: ${app.timeSince()} ago.`)
+    else app.trackSuccess()
 
     let messages = body.split("|").map(msg => app.parseResponse(msg))
     let messageArray = []

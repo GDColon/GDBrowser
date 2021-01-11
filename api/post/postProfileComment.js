@@ -27,7 +27,8 @@ module.exports = async (app, req, res) => {
 
   request.post(app.endpoint + 'uploadGJAccComment20.php', req.gdParams(params), function (err, resp, body) {
     if (err) return res.status(400).send("The Geometry Dash servers returned an error! Perhaps they're down for maintenance")
-    if (!body || body == "-1") return res.status(400).send("The Geometry Dash servers rejected your profile post! Try again later, or make sure your username and password are entered correctly.")
+    else if (!body || body == "-1") return res.status(400).send(`The Geometry Dash servers rejected your profile post! Try again later, or make sure your username and password are entered correctly. Try again later, or make sure your username and password are entered correctly. Last worked: ${app.timeSince()} ago.`)
+    else app.trackSuccess()
     res.status(200).send(`Comment posted to ${params.userName} with ID ${body}`)
   })
 }

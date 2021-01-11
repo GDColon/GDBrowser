@@ -11,15 +11,12 @@ module.exports = async (app, req, res) => {
       else amount = count;
     }
 
-    let params = req.gdParams({
-      count: amount,
-      type: "top",
-    })
+    let params = {count: amount, type: "top"}
 
-    if (["creators", "creator", "cp"].some(x => req.query.hasOwnProperty(x) || req.query.type == x)) type = "creators"
-    else if (["week", "weekly"].some(x => req.query.hasOwnProperty(x) || req.query.type == x)) type = "weekly" // i think GDPS'es use this
+    if (["creators", "creator", "cp"].some(x => req.query.hasOwnProperty(x) || req.query.type == x)) params.type = "creators"
+    else if (["week", "weekly"].some(x => req.query.hasOwnProperty(x) || req.query.type == x)) params.type = "weekly" // i think GDPS'es use this
 
-    request.post(app.endpoint + 'getGJScores20.php', params, async function(err, resp, body) { 
+    request.post(app.endpoint + 'getGJScores20.php', req.gdParams(params), async function(err, resp, body) { 
 
       if (err || body == '-1' || !body) return res.send("-1")
       scores = body.split('|').map(x => app.parseResponse(x)).filter(x => x[1])

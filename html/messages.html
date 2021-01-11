@@ -83,16 +83,21 @@
 					<p class="bigger center" style="line-height: 6vh; margin-top: 1.5vh;">
 						Are you sure you want to <span style="color: #F05C5C">delete</span> this message?
 					</p>
-					<img src="../assets/btn-cancel.png" height=29%; class="gdButton center"
-						onclick="$('#confirmDelete').hide()">
-					<img src="../assets/btn-delete.png" height=29%; id="deleteCurrentMessage"
-						class="gdButton center sideSpaceB">
+					<img src="../assets/btn-cancel.png" height=29%; class="gdButton center" onclick="$('#confirmDelete').hide()">
+					<img src="../assets/btn-delete.png" height=29%; id="deleteCurrentMessage" class="gdButton center sideSpaceB">
 				</div>
 
 				<div id="deleting" style="display: none">
 					<h2 class="smaller center" style="font-size: 5.5vh">Delete</h2>
 					<p class="bigger center" style="line-height: 6vh; margin-top: 1.5vh;">Deleting message...</p>
 					<img src="../assets/loading.png" class="spin noSelect" style="height: 35%; margin-top: -2%">
+				</div>
+
+				<div id="delete-error" style="display: none;">
+					<img class="gdButton" src="../assets/close.png" style="width: 15%; position: absolute; top: -17.5%; left: -5.5vh" onclick="$('#delete-error').hide(); $('#confirmDelete').hide(); $('#preDelete').show()">
+					<img src="../assets/exclamation.png" style="height: 40%">
+					<p class="bigger" style="margin-bottom: 0%; margin-top: 2.5%">Something went wrong!</p>
+					<p id="delError" style="font-size: 2.4vh; margin-top: 1%"></p>
 				</div>
 			</div>
 		</div>
@@ -117,6 +122,13 @@
 							class="selectedAmount"></span>...</p>
 					<img src="../assets/loading.png" class="spin noSelect" style="height: 35%; margin-top: -2%">
 				</div>
+
+				<div id="bd-error" style="display: none;">
+					<img class="gdButton" src="../assets/close.png" style="width: 15%; position: absolute; top: -17.5%; left: -5.5vh" onclick="$('#bd-error').hide(); $('#bulkDelete').hide(); $('#preBulkDelete').show()">
+					<img src="../assets/exclamation.png" style="height: 40%">
+					<p class="bigger" style="margin-bottom: 0%; margin-top: 2.5%">Something went wrong!</p>
+					<p id="bdError" style="font-size: 2.4vh; margin-top: 1%"></p>
+				</div>
 			</div>
 		</div>
 
@@ -135,8 +147,7 @@
 					</div>
 					<div id="messageOptions">
 						<img class="gdButton" style="width: 8%" title="Reply" src="../assets/reply.png" id="replyButton">
-						<img class="gdButton" style="width: 8%" title="Delete" src="../assets/trash.png"
-							onclick="$('#confirmDelete').show()">
+						<img class="gdButton" style="width: 8%" title="Delete" src="../assets/trash.png" id="deleteButton" onclick="$('#confirmDelete').show()">
 					</div>
 				</div>
 			</div>
@@ -280,7 +291,7 @@
 							appendMessages()
 							$('#messages').show()
 
-							let targetUser = window.location.search.match(/\?sendTo=(.+)/)
+							let targetUser = window.location.search.match(/(\?|&)sendTo=(.+)/)
 							if (targetUser) {
 								targetUser = decodeURIComponent(targetUser[1])
 								fetch(`../api/profile/${targetUser}`).then(res => res.json()).then(res => { 
@@ -317,7 +328,7 @@
 			.done(msgs => {
 				messages = msgs
 				appendMessages()
-			})
+			}).fail(e => { $('#msgList').html("") })
 	}
 
 	$(document).on('click', '.hitbox', function (x) {
@@ -343,8 +354,12 @@
 		authorID = $(this).attr('authorID')
 		let subject = $(this).find('h3:first')
 		subject.html(subject.html().replace('<span style="color:#00E600">!</span>', "")) //lazy way to mark as read
+
+		$('#theMfMessage').attr('style', '')
 		$('#messageSubject').attr('style', `color: ${$(this).attr('browserColor') ? 'rgb(120, 200, 255)' : "white"}`).text(subject.text())
 		$('#messageAuthor').html($(this).find('.gdButton').html())
+		$('#replyButton').hide()
+		$('#deleteButton').hide()
 		$('#messageBody').text('').hide()
 		$('#messageLoad').show()
 		$('#selectedMessage').show()
@@ -356,6 +371,8 @@
 		if (cache[messageID]) {
 			$('#messageBody').attr('style', `color: ${cache[messageID][1] ? 'rgb(255, 140, 255)' : "white"}`).text(cache[messageID][0]).show()
 			$('#messageLoad').hide()
+			$('#replyButton').show()
+			$('#deleteButton').show()
 		}
 
 		else $.post("../messages/" + messageID, { password, accountID })
@@ -365,6 +382,8 @@
 				function loadMsg() {
 					$('#messageBody').attr('style', `color: ${msg.browserColor ? 'rgb(255, 140, 255)' : "white"}`).text(msg.content).show()
 					$('#messageLoad').hide()
+					$('#replyButton').show()
+				$('#deleteButton').show()
 				}
 
 				if (!messageStatus[msg.accountID]) fetch(`../api/profile/${msg.author}`).then(res => res.json()).then(res => { 
@@ -374,6 +393,13 @@
 				else {
 					loadMsg()
 				}
+			})
+			.fail(e => { 
+				$('#messageAuthor').html('&nbsp;')
+				$('#messageSubject').html('&nbsp;')
+				$('#messageLoad').hide() 
+				$('#messageBody').html(e.responseText).show()
+				$('#theMfMessage').attr('style', 'background-color: rgba(0, 0, 0, 0)')
 			})
 	})
 
@@ -391,6 +417,11 @@
 				$('#confirmDelete').hide()
 				$('#preDelete').show()
 				$('#deleting').hide()
+			})
+			.fail(e => { 
+				$('#deleting').hide()
+				$('#delete-error').show()
+				$('#delError').html(e.responseText)
 			})
 	})
 
@@ -418,8 +449,13 @@
 				}
 				allowEsc = true
 				$('#bulkDelete').hide()
-				$('#preBulkDelete').show()
 				$('#bulkDeleting').hide()
+				$('#preBulkDelete').show()
+			})
+			.fail(e => { 
+				$('#bulkDeleting').hide()
+				$('#bd-error').show()
+				$('#bdError').html(e.responseText)
 			})
 	})
 

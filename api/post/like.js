@@ -34,7 +34,8 @@ module.exports = async (app, req, res) => {
 
   request.post(app.endpoint + 'likeGJItem211.php', req.gdParams(params), function (err, resp, body) {
     if (err) return res.status(400).send("The Geometry Dash servers returned an error! Perhaps they're down for maintenance")
-    if (!body || body == "-1") return res.status(400).send("The Geometry Dash servers rejected your vote! Make sure your username and password are entered correctly.")
+    if (!body || body == "-1") return res.status(400).send(`The Geometry Dash servers rejected your vote! Try again later, or make sure your username and password are entered correctly. Last worked: ${app.timeSince()} ago.`)
+    else app.trackSuccess()
     res.status(200).send((params.like == 1 ? 'Successfully liked!' : 'Successfully disliked!') + " (this will only take effect if this is your first time doing so)")
   })
 }

@@ -1,0 +1,2576 @@
+[
+  {
+    "id": "level01a",
+    "game": "gd",
+    "name": "Stereo Bump",
+    "rewardType": "color1",
+    "rewardID": 4,
+    "description": "Complete \"Stereo Madness\" in Practice mode",
+    "achievedDescription": "Completed \"Stereo Madness\" in Practice mode"
+  },
+  {
+    "id": "level01b",
+    "game": "gd",
+    "name": "Stereo Madness!",
+    "rewardType": "cube",
+    "rewardID": 5,
+    "description": "Complete \"Stereo Madness\" in Normal mode",
+    "achievedDescription": "Completed \"Stereo Madness\" in Normal mode"
+  },
+  {
+    "id": "level02a",
+    "game": "gd",
+    "name": "On my way",
+    "rewardType": "color1",
+    "rewardID": 5,
+    "description": "Complete \"Back On Track\" in Practice mode",
+    "achievedDescription": "Completed \"Back On Track\" in Practice mode"
+  },
+  {
+    "id": "level02b",
+    "game": "gd",
+    "name": "Back On Track!",
+    "rewardType": "cube",
+    "rewardID": 6,
+    "description": "Complete \"Back On Track\" in Normal mode",
+    "achievedDescription": "Completed \"Back On Track\" in Normal mode"
+  },
+  {
+    "id": "level03a",
+    "game": "gd",
+    "name": "Polarbear",
+    "rewardType": "color1",
+    "rewardID": 6,
+    "description": "Complete \"Polargeist\" in Practice mode",
+    "achievedDescription": "Completed \"Polargeist\" in Practice mode"
+  },
+  {
+    "id": "level03b",
+    "game": "gd",
+    "name": "Polargeist!",
+    "rewardType": "cube",
+    "rewardID": 7,
+    "description": "Complete \"Polargeist\" in Normal mode",
+    "achievedDescription": "Completed \"Polargeist\" in Normal mode"
+  },
+  {
+    "id": "level04a",
+    "game": "gd",
+    "name": "Dehydrated",
+    "rewardType": "color1",
+    "rewardID": 7,
+    "description": "Complete \"Dry Out\" in Practice mode",
+    "achievedDescription": "Completed \"Dry Out\" in Practice mode"
+  },
+  {
+    "id": "level04b",
+    "game": "gd",
+    "name": "Dry Out!",
+    "rewardType": "cube",
+    "rewardID": 8,
+    "description": "Complete \"Dry Out\" in Normal mode",
+    "achievedDescription": "Completed \"Dry Out\" in Normal mode"
+  },
+  {
+    "id": "level05a",
+    "game": "gd",
+    "name": "All your base...",
+    "rewardType": "color1",
+    "rewardID": 8,
+    "description": "Complete \"Base After Base\" in Practice mode",
+    "achievedDescription": "Completed \"Base After Base\" in Practice mode"
+  },
+  {
+    "id": "level05b",
+    "game": "gd",
+    "name": "Base After Base!",
+    "rewardType": "cube",
+    "rewardID": 9,
+    "description": "Complete \"Base After Base\" in Normal mode",
+    "achievedDescription": "Completed \"Base After Base\" in Normal mode"
+  },
+  {
+    "id": "level06a",
+    "game": "gd",
+    "name": "Hold on",
+    "rewardType": "color1",
+    "rewardID": 9,
+    "description": "Complete \"Cant Let Go\" in Practice mode",
+    "achievedDescription": "Completed \"Cant Let Go\" in Practice mode"
+  },
+  {
+    "id": "level06b",
+    "game": "gd",
+    "name": "Cant Let Go!",
+    "rewardType": "cube",
+    "rewardID": 10,
+    "description": "Complete \"Cant Let Go\" in Normal mode",
+    "achievedDescription": "Completed \"Cant Let Go\" in Normal mode"
+  },
+  {
+    "id": "level07a",
+    "game": "gd",
+    "name": "Hop Hop...",
+    "rewardType": "color1",
+    "rewardID": 10,
+    "description": "Complete \"Jumper\" in Practice mode",
+    "achievedDescription": "Completed \"Jumper\" in Practice mode"
+  },
+  {
+    "id": "level07b",
+    "game": "gd",
+    "name": "Jumper!",
+    "rewardType": "cube",
+    "rewardID": 11,
+    "description": "Complete \"Jumper\" in Normal mode",
+    "achievedDescription": "Completed \"Jumper\" in Normal mode"
+  },
+  {
+    "id": "level08a",
+    "game": "gd",
+    "name": "Tick Tock",
+    "rewardType": "color1",
+    "rewardID": 12,
+    "description": "Complete \"Time Machine\" in Practice mode",
+    "achievedDescription": "Completed \"Time Machine\" in Practice mode"
+  },
+  {
+    "id": "level08b",
+    "game": "gd",
+    "name": "Time Machine!",
+    "rewardType": "cube",
+    "rewardID": 14,
+    "description": "Complete \"Time Machine\" in Normal mode",
+    "achievedDescription": "Completed \"Time Machine\" in Normal mode"
+  },
+  {
+    "id": "level09a",
+    "game": "gd",
+    "name": "Loops",
+    "rewardType": "cube",
+    "rewardID": 15,
+    "description": "Complete \"Cycles\" in Practice mode",
+    "achievedDescription": "Completed \"Cycles\" in Practice mode"
+  },
+  {
+    "id": "level09b",
+    "game": "gd",
+    "name": "Cycles!",
+    "rewardType": "cube",
+    "rewardID": 16,
+    "description": "Complete \"Cycles\" in Normal mode",
+    "achievedDescription": "Completed \"Cycles\" in Normal mode"
+  },
+  {
+    "id": "level10a",
+    "game": "gd",
+    "name": "yStep",
+    "rewardType": "cube",
+    "rewardID": 17,
+    "description": "Complete \"xStep\" in Practice mode",
+    "achievedDescription": "Completed \"xStep\" in Practice mode"
+  },
+  {
+    "id": "level10b",
+    "game": "gd",
+    "name": "xStep!",
+    "rewardType": "cube",
+    "rewardID": 18,
+    "description": "Complete \"xStep\" in Normal mode",
+    "achievedDescription": "Completed \"xStep\" in Normal mode"
+  },
+  {
+    "id": "level11a",
+    "game": "gd",
+    "name": "Funky",
+    "rewardType": "color1",
+    "rewardID": 13,
+    "description": "Complete \"Clutterfunk\" in Practice mode",
+    "achievedDescription": "Completed \"Clutterfunk\" in Practice mode"
+  },
+  {
+    "id": "level11b",
+    "game": "gd",
+    "name": "Clutterfunk!",
+    "rewardType": "ship",
+    "rewardID": 2,
+    "description": "Complete \"Clutterfunk\" in Normal mode",
+    "achievedDescription": "Completed \"Clutterfunk\" in Normal mode"
+  },
+  {
+    "id": "level12a",
+    "game": "gd",
+    "name": "Theory of Something",
+    "rewardType": "color1",
+    "rewardID": 14,
+    "description": "Complete \"Theory of Everything\" in Practice mode",
+    "achievedDescription": "Completed \"Theory of Everything\" in Practice mode"
+  },
+  {
+    "id": "level12b",
+    "game": "gd",
+    "name": "Theory of Everything!",
+    "rewardType": "cube",
+    "rewardID": 27,
+    "description": "Complete \"Theory of Everything\" in Normal mode",
+    "achievedDescription": "Completed \"Theory of Everything\" in Normal mode"
+  },
+  {
+    "id": "level13a",
+    "game": "gd",
+    "name": "Electro Time",
+    "rewardType": "color1",
+    "rewardID": 16,
+    "description": "Complete \"Electroman Adventures\" in Practice mode",
+    "achievedDescription": "Completed \"Electroman Adventures\" in Practice mode"
+  },
+  {
+    "id": "level13b",
+    "game": "gd",
+    "name": "Electroman Adventures!",
+    "rewardType": "ship",
+    "rewardID": 9,
+    "description": "Complete \"Electroman Adventures\" in Normal mode",
+    "achievedDescription": "Completed \"Electroman Adventures\" in Normal mode"
+  },
+  {
+    "id": "level14a",
+    "game": "gd",
+    "name": "Clubbin",
+    "rewardType": "ufo",
+    "rewardID": 2,
+    "description": "Complete \"Clubstep\" in Practice mode",
+    "achievedDescription": "Completed \"Clubstep\" in Practice mode"
+  },
+  {
+    "id": "level14b",
+    "game": "gd",
+    "name": "Clubstep!",
+    "rewardType": "color2",
+    "rewardID": 15,
+    "description": "Complete \"Clubstep\" in Normal mode",
+    "achievedDescription": "Completed \"Clubstep\" in Normal mode"
+  },
+  {
+    "id": "level15a",
+    "game": "gd",
+    "name": "Electromaniac",
+    "rewardType": "color1",
+    "rewardID": 17,
+    "description": "Complete \"Electrodynamix\" in Practice mode",
+    "achievedDescription": "Completed \"Electrodynamix\" in Practice mode"
+  },
+  {
+    "id": "level15b",
+    "game": "gd",
+    "name": "Electrodynamix!",
+    "rewardType": "cube",
+    "rewardID": 35,
+    "description": "Complete \"Electrodynamix\" in Normal mode",
+    "achievedDescription": "Completed \"Electrodynamix\" in Normal mode"
+  },
+  {
+    "id": "level16a",
+    "game": "gd",
+    "name": "Hexagonest",
+    "rewardType": "color1",
+    "rewardID": 18,
+    "description": "Complete \"Hexagon Force\" in Practice mode",
+    "achievedDescription": "Completed \"Hexagon Force\" in Practice mode"
+  },
+  {
+    "id": "level16b",
+    "game": "gd",
+    "name": "Hexagon Force!",
+    "rewardType": "cube",
+    "rewardID": 42,
+    "description": "Complete \"Hexagon Force\" in Normal mode",
+    "achievedDescription": "Completed \"Hexagon Force\" in Normal mode"
+  },
+  {
+    "id": "level17a",
+    "game": "gd",
+    "name": "Blast Power",
+    "rewardType": "color1",
+    "rewardID": 20,
+    "description": "Complete \"Blast Processing\" in Practice mode",
+    "achievedDescription": "Completed \"Blast Processing\" in Practice mode"
+  },
+  {
+    "id": "level17b",
+    "game": "gd",
+    "name": "Blast Processing!",
+    "rewardType": "cube",
+    "rewardID": 44,
+    "description": "Complete \"Blast Processing\" in Normal mode",
+    "achievedDescription": "Completed \"Blast Processing\" in Normal mode"
+  },
+  {
+    "id": "level18a",
+    "game": "gd",
+    "name": "Second Theory",
+    "rewardType": "color1",
+    "rewardID": 21,
+    "description": "Complete \"Theory of Everything 2\" in Practice mode",
+    "achievedDescription": "Completed \"Theory of Everything 2\" in Practice mode"
+  },
+  {
+    "id": "level18b",
+    "game": "gd",
+    "name": "Theory of Everything 2!",
+    "rewardType": "cube",
+    "rewardID": 45,
+    "description": "Complete \"Theory of Everything 2\" in Normal mode",
+    "achievedDescription": "Completed \"Theory of Everything 2\" in Normal mode"
+  },
+  {
+    "id": "level19a",
+    "game": "gd",
+    "name": "Geometry Warrior",
+    "rewardType": "color1",
+    "rewardID": 24,
+    "description": "Complete \"Geometrical Dominator\" in Practice mode",
+    "achievedDescription": "Completed \"Geometrical Dominator\" in Practice mode"
+  },
+  {
+    "id": "level19b",
+    "game": "gd",
+    "name": "Geometrical Dominator!",
+    "rewardType": "robot",
+    "rewardID": 3,
+    "description": "Complete \"Geometrical Dominator\" in Normal mode",
+    "achievedDescription": "Completed \"Geometrical Dominator\" in Normal mode"
+  },
+  {
+    "id": "level20a",
+    "game": "gd",
+    "name": "Living Open",
+    "rewardType": "color1",
+    "rewardID": 25,
+    "description": "Complete \"Deadlocked\" in Practice mode",
+    "achievedDescription": "Completed \"Deadlocked\" in Practice mode"
+  },
+  {
+    "id": "level20b",
+    "game": "gd",
+    "name": "Deadlocked!",
+    "rewardType": "robot",
+    "rewardID": 5,
+    "description": "Complete \"Deadlocked\" in Normal mode",
+    "achievedDescription": "Completed \"Deadlocked\" in Normal mode"
+  },
+  {
+    "id": "level21a",
+    "game": "gd",
+    "name": "Fingerdash",
+    "rewardType": "color1",
+    "rewardID": 29,
+    "description": "Complete \"Fingerdash\" in Practice mode",
+    "achievedDescription": "Completed \"Fingerdash\" in Practice mode"
+  },
+  {
+    "id": "level21b",
+    "game": "gd",
+    "name": "Fingerdash!",
+    "rewardType": "cube",
+    "rewardID": 74,
+    "description": "Complete \"Fingerdash\" in Normal mode",
+    "achievedDescription": "Completed \"Fingerdash\" in Normal mode"
+  },
+  {
+    "id": "demon01",
+    "game": "gd",
+    "name": "Reflex Champion",
+    "rewardType": "cube",
+    "rewardID": 19,
+    "description": "Complete a Demon difficulty level in Normal mode",
+    "achievedDescription": "Completed a Demon difficulty level in Normal mode"
+  },
+  {
+    "id": "demon02",
+    "game": "gd",
+    "name": "Demon Chaser",
+    "rewardType": "cube",
+    "rewardID": 20,
+    "description": "Complete 2 Demon difficulty levels in Normal mode",
+    "achievedDescription": "Completed 2 Demon difficulty levels in Normal mode"
+  },
+  {
+    "id": "demon03",
+    "game": "gd",
+    "name": "The One",
+    "rewardType": "cube",
+    "rewardID": 21,
+    "description": "Complete 3 Demon difficulty levels in Normal mode",
+    "achievedDescription": "Completed 3 Demon difficulty levels in Normal mode"
+  },
+  {
+    "id": "demon04",
+    "game": "gd",
+    "name": "Demon Master",
+    "rewardType": "cube",
+    "rewardID": 22,
+    "description": "Complete 4 Demon difficulty levels in Normal mode",
+    "achievedDescription": "Completed 4 Demon difficulty levels in Normal mode"
+  },
+  {
+    "id": "demon05",
+    "game": "gd",
+    "name": "Demonic Guardian",
+    "rewardType": "ship",
+    "rewardID": 3,
+    "description": "Complete 5 Demon difficulty levels in Normal mode",
+    "achievedDescription": "Completed 5 Demon difficulty levels in Normal mode"
+  },
+  {
+    "id": "demon06",
+    "game": "gd",
+    "name": "Demonic Overmind",
+    "rewardType": "ship",
+    "rewardID": 6,
+    "description": "Complete 10 Demon difficulty levels in Normal mode",
+    "achievedDescription": "Completed 10 Demon difficulty levels in Normal mode"
+  },
+  {
+    "id": "demon07",
+    "game": "gd",
+    "name": "Master of Timing",
+    "rewardType": "ship",
+    "rewardID": 8,
+    "description": "Complete 15 Demon difficulty levels in Normal mode",
+    "achievedDescription": "Completed 15 Demon difficulty levels in Normal mode"
+  },
+  {
+    "id": "demon08",
+    "game": "gd",
+    "name": "Unstoppable!",
+    "rewardType": "ball",
+    "rewardID": 5,
+    "description": "Complete 20 Demon difficulty levels in Normal mode",
+    "achievedDescription": "Completed 20 Demon difficulty levels in Normal mode"
+  },
+  {
+    "id": "demon09",
+    "game": "gd",
+    "name": "Demolicious!",
+    "rewardType": "cube",
+    "rewardID": 37,
+    "description": "Complete 30 Demon difficulty levels in Normal mode",
+    "achievedDescription": "Completed 30 Demon difficulty levels in Normal mode"
+  },
+  {
+    "id": "demon10",
+    "game": "gd",
+    "name": "Give me a CHALLENGE!",
+    "rewardType": "ball",
+    "rewardID": 10,
+    "description": "Complete 40 Demon difficulty levels in Normal mode",
+    "achievedDescription": "Completed 40 Demon difficulty levels in Normal mode"
+  },
+  {
+    "id": "demon11",
+    "game": "gd",
+    "name": "Grim Reaper",
+    "rewardType": "ufo",
+    "rewardID": 15,
+    "description": "Complete 50 Demon difficulty levels in Normal mode",
+    "achievedDescription": "Completed 50 Demon difficulty levels in Normal mode"
+  },
+  {
+    "id": "demon12",
+    "game": "gd",
+    "name": "You fear nothing",
+    "rewardType": "ship",
+    "rewardID": 35,
+    "description": "Complete 60 Demon difficulty levels in Normal mode",
+    "achievedDescription": "Completed 60 Demon difficulty levels in Normal mode"
+  },
+  {
+    "id": "demoncoin01",
+    "game": "gd",
+    "name": "Ultimate Clubstep",
+    "rewardType": "ufo",
+    "rewardID": 14,
+    "description": "Collect all 3 coins on Clubstep",
+    "achievedDescription": "Collected all 3 coins on Clubstep"
+  },
+  {
+    "id": "demoncoin02",
+    "game": "gd",
+    "name": "Ultimate TOE2",
+    "rewardType": "cube",
+    "rewardID": 60,
+    "description": "Collect all 3 coins on Theory of Everything 2",
+    "achievedDescription": "Collected all 3 coins on Theory of Everything 2"
+  },
+  {
+    "id": "demoncoin03",
+    "game": "gd",
+    "name": "Ultimate Deadlocked",
+    "rewardType": "cube",
+    "rewardID": 59,
+    "description": "Collect all 3 coins on Deadlocked",
+    "achievedDescription": "Collected all 3 coins on Deadlocked"
+  },
+  {
+    "id": "stars01",
+    "game": "gd",
+    "name": "Oh, Shiny!",
+    "rewardType": "cube",
+    "rewardID": 23,
+    "description": "Collect 100 stars",
+    "achievedDescription": "Collected 100 stars"
+  },
+  {
+    "id": "stars02",
+    "game": "gd",
+    "name": "More stars!",
+    "rewardType": "cube",
+    "rewardID": 24,
+    "description": "Collect 200 stars",
+    "achievedDescription": "Collected 200 stars"
+  },
+  {
+    "id": "stars03",
+    "game": "gd",
+    "name": "Star Maniac",
+    "rewardType": "cube",
+    "rewardID": 25,
+    "description": "Collect 300 stars",
+    "achievedDescription": "Collected 300 stars"
+  },
+  {
+    "id": "stars04",
+    "game": "gd",
+    "name": "Master Collector",
+    "rewardType": "cube",
+    "rewardID": 26,
+    "description": "Collect 400 stars",
+    "achievedDescription": "Collected 400 stars"
+  },
+  {
+    "id": "stars05",
+    "game": "gd",
+    "name": "Epic Collector",
+    "rewardType": "ship",
+    "rewardID": 4,
+    "description": "Collect 500 stars",
+    "achievedDescription": "Collected 500 stars"
+  },
+  {
+    "id": "stars06",
+    "game": "gd",
+    "name": "Epic Master Collector",
+    "rewardType": "ship",
+    "rewardID": 5,
+    "description": "Collect 600 stars",
+    "achievedDescription": "Collected 600 stars"
+  },
+  {
+    "id": "stars07",
+    "game": "gd",
+    "name": "Star Factory",
+    "rewardType": "ship",
+    "rewardID": 7,
+    "description": "Collect 700 stars",
+    "achievedDescription": "Collected 700 stars"
+  },
+  {
+    "id": "stars08",
+    "game": "gd",
+    "name": "Starshine",
+    "rewardType": "cube",
+    "rewardID": 28,
+    "description": "Collect 800 stars",
+    "achievedDescription": "Collected 800 stars"
+  },
+  {
+    "id": "stars09",
+    "game": "gd",
+    "name": "All MINE!",
+    "rewardType": "cube",
+    "rewardID": 29,
+    "description": "Collect 900 stars",
+    "achievedDescription": "Collected 900 stars"
+  },
+  {
+    "id": "stars10",
+    "game": "gd",
+    "name": "MORE SHINY!!!",
+    "rewardType": "cube",
+    "rewardID": 30,
+    "description": "Collect 1000 stars",
+    "achievedDescription": "Collected 1000 stars"
+  },
+  {
+    "id": "stars11",
+    "game": "gd",
+    "name": "Was that all of them?",
+    "rewardType": "ship",
+    "rewardID": 18,
+    "description": "Collect 1500 stars",
+    "achievedDescription": "Collected 1500 stars"
+  },
+  {
+    "id": "stars12",
+    "game": "gd",
+    "name": "Knock knock. Who's there? STARS!",
+    "rewardType": "ball",
+    "rewardID": 9,
+    "description": "Collect 2000 stars",
+    "achievedDescription": "Collected 2000 stars"
+  },
+  {
+    "id": "stars13",
+    "game": "gd",
+    "name": "These are pretty warm...",
+    "rewardType": "wave",
+    "rewardID": 12,
+    "description": "Collect 2500 stars",
+    "achievedDescription": "Collected 2500 stars"
+  },
+  {
+    "id": "stars14",
+    "game": "gd",
+    "name": "They are REALLY warm!",
+    "rewardType": "cube",
+    "rewardID": 61,
+    "description": "Collect 3000 stars",
+    "achievedDescription": "Collected 3000 stars"
+  },
+  {
+    "id": "stars15",
+    "game": "gd",
+    "name": "IT BURNS!!",
+    "rewardType": "ship",
+    "rewardID": 19,
+    "description": "Collect 3500 stars",
+    "achievedDescription": "Collected 3500 stars"
+  },
+  {
+    "id": "stars16",
+    "game": "gd",
+    "name": "GAAAAAAAAAH!",
+    "rewardType": "wave",
+    "rewardID": 9,
+    "description": "Collect 4000 stars",
+    "achievedDescription": "Collected 4000 stars"
+  },
+  {
+    "id": "stars17",
+    "game": "gd",
+    "name": "More star achievements?",
+    "rewardType": "wave",
+    "rewardID": 15,
+    "description": "Collect 4500 stars",
+    "achievedDescription": "Collected 4500 stars"
+  },
+  {
+    "id": "stars18",
+    "game": "gd",
+    "name": "You want me to collect 5000!?",
+    "rewardType": "color1",
+    "rewardID": 28,
+    "description": "Collect 5000 stars",
+    "achievedDescription": "Collected 5000 stars"
+  },
+  {
+    "id": "stars19",
+    "game": "gd",
+    "name": "I should sell these",
+    "rewardType": "cube",
+    "rewardID": 82,
+    "description": "Collect 5500 stars",
+    "achievedDescription": "Collected 5500 stars"
+  },
+  {
+    "id": "stars20",
+    "game": "gd",
+    "name": "Why so many?",
+    "rewardType": "ball",
+    "rewardID": 27,
+    "description": "Collect 6000 stars",
+    "achievedDescription": "Collected 6000 stars"
+  },
+  {
+    "id": "stars21",
+    "game": "gd",
+    "name": "No stars for you!",
+    "rewardType": "color1",
+    "rewardID": 34,
+    "description": "Collect 6500 stars",
+    "achievedDescription": "Collected 6500 stars"
+  },
+  {
+    "id": "stars22",
+    "game": "gd",
+    "name": "All stars are my stars",
+    "rewardType": "ship",
+    "rewardID": 30,
+    "description": "Collect 7000 stars",
+    "achievedDescription": "Collected 7000 stars"
+  },
+  {
+    "id": "stars23",
+    "game": "gd",
+    "name": "This is the last star achievement",
+    "rewardType": "cube",
+    "rewardID": 100,
+    "description": "Collect 7500 stars",
+    "achievedDescription": "Collected 7500 stars"
+  },
+  {
+    "id": "stars24",
+    "game": "gd",
+    "name": "Just kidding, there are more",
+    "rewardType": "spider",
+    "rewardID": 4,
+    "description": "Collect 8000 stars",
+    "achievedDescription": "Collected 8000 stars"
+  },
+  {
+    "id": "stars25",
+    "game": "gd",
+    "name": "I think I got all the stars",
+    "rewardType": "cube",
+    "rewardID": 83,
+    "description": "Collect 9000 stars",
+    "achievedDescription": "Collected 9000 stars"
+  },
+  {
+    "id": "stars26",
+    "game": "gd",
+    "name": "Nope, found more over there",
+    "rewardType": "robot",
+    "rewardID": 8,
+    "description": "Collect 10000 stars",
+    "achievedDescription": "Collected 10000 stars"
+  },
+  {
+    "id": "coins01",
+    "game": "gd",
+    "name": "Coins?!",
+    "rewardType": "cube",
+    "rewardID": 31,
+    "description": "Collect 5 Secret Coins",
+    "achievedDescription": "Collected 5 Secret Coins"
+  },
+  {
+    "id": "coins02",
+    "game": "gd",
+    "name": "Maybe behind that block?",
+    "rewardType": "ball",
+    "rewardID": 2,
+    "description": "Collect 10 Secret Coins",
+    "achievedDescription": "Collected 10 Secret Coins"
+  },
+  {
+    "id": "coins03",
+    "game": "gd",
+    "name": "I.. Need... MORE!",
+    "rewardType": "color2",
+    "rewardID": 16,
+    "description": "Collect 15 Secret Coins",
+    "achievedDescription": "Collected 15 Secret Coins"
+  },
+  {
+    "id": "coins04",
+    "game": "gd",
+    "name": "We wants it!",
+    "rewardType": "ufo",
+    "rewardID": 3,
+    "description": "Collect 20 Secret Coins",
+    "achievedDescription": "Collected 20 Secret Coins"
+  },
+  {
+    "id": "coins05",
+    "game": "gd",
+    "name": "We needs it!",
+    "rewardType": "cube",
+    "rewardID": 32,
+    "description": "Collect 25 Secret Coins",
+    "achievedDescription": "Collected 25 Secret Coins"
+  },
+  {
+    "id": "coins06",
+    "game": "gd",
+    "name": "Must have the precious",
+    "rewardType": "color1",
+    "rewardID": 15,
+    "description": "Collect 30 Secret Coins",
+    "achievedDescription": "Collected 30 Secret Coins"
+  },
+  {
+    "id": "coins07",
+    "game": "gd",
+    "name": "They stole it from us!",
+    "rewardType": "ball",
+    "rewardID": 3,
+    "description": "Collect 35 Secret Coins",
+    "achievedDescription": "Collected 35 Secret Coins"
+  },
+  {
+    "id": "coins08",
+    "game": "gd",
+    "name": "Where is it?! Where is it?!",
+    "rewardType": "cube",
+    "rewardID": 34,
+    "description": "Collect 40 Secret Coins",
+    "achievedDescription": "Collected 40 Secret Coins"
+  },
+  {
+    "id": "coins09",
+    "game": "gd",
+    "name": "Thief, thief, thief!",
+    "rewardType": "ufo",
+    "rewardID": 4,
+    "description": "Collect 45 Secret Coins",
+    "achievedDescription": "Collected 45 Secret Coins"
+  },
+  {
+    "id": "coins10",
+    "game": "gd",
+    "name": "My Precious...",
+    "rewardType": "ball",
+    "rewardID": 4,
+    "description": "Collect 50 Secret Coins",
+    "achievedDescription": "Collected 50 Secret Coins"
+  },
+  {
+    "id": "coins11",
+    "game": "gd",
+    "name": "There's more!?",
+    "rewardType": "ship",
+    "rewardID": 14,
+    "description": "Collect 55 Secret Coins",
+    "achievedDescription": "Collected 55 Secret Coins"
+  },
+  {
+    "id": "coins12",
+    "game": "gd",
+    "name": "Found it under a rock!",
+    "rewardType": "cube",
+    "rewardID": 38,
+    "description": "Collect 60 Secret Coins",
+    "achievedDescription": "Collected 60 Secret Coins"
+  },
+  {
+    "id": "coins13",
+    "game": "gd",
+    "name": "Not so secret",
+    "rewardType": "ufo",
+    "rewardID": 6,
+    "description": "Collect 65 Secret Coins",
+    "achievedDescription": "Collected 65 Secret Coins"
+  },
+  {
+    "id": "coins14",
+    "game": "gd",
+    "name": "Nothing is secret!",
+    "rewardType": "ball",
+    "rewardID": 6,
+    "description": "Collect 70 Secret Coins",
+    "achievedDescription": "Collected 70 Secret Coins"
+  },
+  {
+    "id": "coins15",
+    "game": "gd",
+    "name": "Finders Keepers!",
+    "rewardType": "ship",
+    "rewardID": 12,
+    "description": "Collect 75 Secret Coins",
+    "achievedDescription": "Collected 75 Secret Coins"
+  },
+  {
+    "id": "coins16",
+    "game": "gd",
+    "name": "The Golden Rule",
+    "rewardType": "ufo",
+    "rewardID": 7,
+    "description": "Collect 80 Secret Coins",
+    "achievedDescription": "Collected 80 Secret Coins"
+  },
+  {
+    "id": "coins17",
+    "game": "gd",
+    "name": "Robin Hood",
+    "rewardType": "ufo",
+    "rewardID": 8,
+    "description": "Collect 85 Secret Coins",
+    "achievedDescription": "Collected 85 Secret Coins"
+  },
+  {
+    "id": "coins18",
+    "game": "gd",
+    "name": "The Finder",
+    "rewardType": "ship",
+    "rewardID": 16,
+    "description": "Collect 90 Secret Coins",
+    "achievedDescription": "Collected 90 Secret Coins"
+  },
+  {
+    "id": "coins19",
+    "game": "gd",
+    "name": "Tax Collector",
+    "rewardType": "cube",
+    "rewardID": 43,
+    "description": "Collect 95 Secret Coins",
+    "achievedDescription": "Collected 95 Secret Coins"
+  },
+  {
+    "id": "coins20",
+    "game": "gd",
+    "name": "The King's Vault",
+    "rewardType": "ufo",
+    "rewardID": 9,
+    "description": "Collect 100 Secret Coins",
+    "achievedDescription": "Collected 100 Secret Coins"
+  },
+  {
+    "id": "coins21",
+    "game": "gd",
+    "name": "These are pretty heavy",
+    "rewardType": "ball",
+    "rewardID": 14,
+    "description": "Collect 105 Secret Coins",
+    "achievedDescription": "Collected 105 Secret Coins"
+  },
+  {
+    "id": "coins22",
+    "game": "gd",
+    "name": "Where do I even put this?",
+    "rewardType": "cube",
+    "rewardID": 56,
+    "description": "Collect 110 Secret Coins",
+    "achievedDescription": "Collected 110 Secret Coins"
+  },
+  {
+    "id": "coins23",
+    "game": "gd",
+    "name": "Seriously, enough!",
+    "rewardType": "ship",
+    "rewardID": 24,
+    "description": "Collect 115 Secret Coins",
+    "achievedDescription": "Collected 115 Secret Coins"
+  },
+  {
+    "id": "coins24",
+    "game": "gd",
+    "name": "Leave some for the rest of us!",
+    "rewardType": "ufo",
+    "rewardID": 18,
+    "description": "Collect 120 Secret Coins",
+    "achievedDescription": "Collected 120 Secret Coins"
+  },
+  {
+    "id": "coins25",
+    "game": "gd",
+    "name": "Insatiable Greed",
+    "rewardType": "cube",
+    "rewardID": 88,
+    "description": "Collect 130 Secret Coins",
+    "achievedDescription": "Collected 130 Secret Coins"
+  },
+  {
+    "id": "usercoins01",
+    "game": "gd",
+    "name": "What are those!?",
+    "rewardType": "wave",
+    "rewardID": 2,
+    "description": "Collect 1 User Coins",
+    "achievedDescription": "Collected your first user coin!"
+  },
+  {
+    "id": "usercoins02",
+    "game": "gd",
+    "name": "The journey begins...",
+    "rewardType": "cube",
+    "rewardID": 49,
+    "description": "Collect 10 User Coins",
+    "achievedDescription": "Collected 10 User Coins"
+  },
+  {
+    "id": "usercoins03",
+    "game": "gd",
+    "name": "I can't stop!",
+    "rewardType": "wave",
+    "rewardID": 4,
+    "description": "Collect 20 User Coins",
+    "achievedDescription": "Collected 20 User Coins"
+  },
+  {
+    "id": "usercoins04",
+    "game": "gd",
+    "name": "Mom, get the camera!!!",
+    "rewardType": "ship",
+    "rewardID": 25,
+    "description": "Collected 30 User Coins",
+    "achievedDescription": "Collected 30 User Coins"
+  },
+  {
+    "id": "usercoins05",
+    "game": "gd",
+    "name": "I feel rich!",
+    "rewardType": "ball",
+    "rewardID": 16,
+    "description": "Collected 40 User Coins",
+    "achievedDescription": "Collected 40 User Coins"
+  },
+  {
+    "id": "usercoins06",
+    "game": "gd",
+    "name": "What to buy...",
+    "rewardType": "ufo",
+    "rewardID": 13,
+    "description": "Collect 50 User Coins",
+    "achievedDescription": "Collected 50 User Coins"
+  },
+  {
+    "id": "usercoins07",
+    "game": "gd",
+    "name": "i'll get that for you",
+    "rewardType": "cube",
+    "rewardID": 53,
+    "description": "Collect 60 User Coins",
+    "achievedDescription": "Collected 60 User Coins"
+  },
+  {
+    "id": "usercoins08",
+    "game": "gd",
+    "name": "Piece of cake",
+    "rewardType": "wave",
+    "rewardID": 6,
+    "description": "Collect 70 User Coins",
+    "achievedDescription": "Collected 70 User Coins"
+  },
+  {
+    "id": "usercoins09",
+    "game": "gd",
+    "name": "We're gonna need a bigger boat",
+    "rewardType": "ship",
+    "rewardID": 23,
+    "description": "Collect 80 User Coins",
+    "achievedDescription": "Collected 80 User Coins"
+  },
+  {
+    "id": "usercoins10",
+    "game": "gd",
+    "name": "Got coins?",
+    "rewardType": "ball",
+    "rewardID": 17,
+    "description": "Collect 90 User Coins",
+    "achievedDescription": "Collected 90 User Coins"
+  },
+  {
+    "id": "usercoins11",
+    "game": "gd",
+    "name": "So... greed much?",
+    "rewardType": "robot",
+    "rewardID": 6,
+    "description": "Collect 100 User Coins",
+    "achievedDescription": "Collected 100 User Coins"
+  },
+  {
+    "id": "usercoins12",
+    "game": "gd",
+    "name": "MAX COINS!",
+    "rewardType": "cube",
+    "rewardID": 54,
+    "description": "Collected 110 User Coins",
+    "achievedDescription": "Collected 110 User Coins"
+  },
+  {
+    "id": "usercoins13",
+    "game": "gd",
+    "name": "Just kidding...",
+    "rewardType": "wave",
+    "rewardID": 7,
+    "description": "Collect 120 User Coins",
+    "achievedDescription": "Collected 120 User Coins"
+  },
+  {
+    "id": "usercoins14",
+    "game": "gd",
+    "name": "I think there's one left",
+    "rewardType": "ship",
+    "rewardID": 21,
+    "description": "Collect 130 User Coins",
+    "achievedDescription": "Collected 130 User Coins"
+  },
+  {
+    "id": "usercoins15",
+    "game": "gd",
+    "name": "Where did you get those?",
+    "rewardType": "ball",
+    "rewardID": 11,
+    "description": "Collect 140 User Coins",
+    "achievedDescription": "Collected 140 User Coins"
+  },
+  {
+    "id": "usercoins16",
+    "game": "gd",
+    "name": "So many shinies...",
+    "rewardType": "cube",
+    "rewardID": 52,
+    "description": "Collect 150 User Coins",
+    "achievedDescription": "Collected 150 User Coins"
+  },
+  {
+    "id": "usercoins17",
+    "game": "gd",
+    "name": "Power level increasing",
+    "rewardType": "ufo",
+    "rewardID": 17,
+    "description": "Collect 160 User Coins",
+    "achievedDescription": "Collected 160 User Coins"
+  },
+  {
+    "id": "usercoins18",
+    "game": "gd",
+    "name": "Ultra mega coin catcher",
+    "rewardType": "wave",
+    "rewardID": 10,
+    "description": "Collect 170 User Coins",
+    "achievedDescription": "Collected 170 User Coins"
+  },
+  {
+    "id": "usercoins19",
+    "game": "gd",
+    "name": "Something that rhymes with coin",
+    "rewardType": "ship",
+    "rewardID": 22,
+    "description": "Collect 180 User Coins",
+    "achievedDescription": "Collected 180 User Coins"
+  },
+  {
+    "id": "usercoins20",
+    "game": "gd",
+    "name": "Will you ever be satisfied?",
+    "rewardType": "ball",
+    "rewardID": 18,
+    "description": "Collect 190 User Coins",
+    "achievedDescription": "Collected 190 User Coins"
+  },
+  {
+    "id": "usercoins21",
+    "game": "gd",
+    "name": "Level up! Ultra Greedy...",
+    "rewardType": "robot",
+    "rewardID": 4,
+    "description": "Collect 200 User Coins",
+    "achievedDescription": "Collected 200 User Coins"
+  },
+  {
+    "id": "usercoins22",
+    "game": "gd",
+    "name": "Something funny about coins",
+    "rewardType": "cube",
+    "rewardID": 99,
+    "description": "Collect 225 User Coins",
+    "achievedDescription": "Collected 225 User Coins"
+  },
+  {
+    "id": "usercoins23",
+    "game": "gd",
+    "name": "Who makes these?",
+    "rewardType": "color1",
+    "rewardID": 30,
+    "description": "Collect 250 User Coins",
+    "achievedDescription": "Collected 250 User Coins"
+  },
+  {
+    "id": "usercoins24",
+    "game": "gd",
+    "name": "More coins, give reward",
+    "rewardType": "spider",
+    "rewardID": 8,
+    "description": "Collect 300 User Coins",
+    "achievedDescription": "Collected 300 User Coins"
+  },
+  {
+    "id": "usercoins25",
+    "game": "gd",
+    "name": "Much coin, very wow",
+    "rewardType": "color1",
+    "rewardID": 32,
+    "description": "Collect 350 User Coins",
+    "achievedDescription": "Collected 350 User Coins"
+  },
+  {
+    "id": "usercoins26",
+    "game": "gd",
+    "name": "Who has this many coins?",
+    "rewardType": "ball",
+    "rewardID": 29,
+    "description": "Collect 425 User Coins",
+    "achievedDescription": "Collected 425 User Coins"
+  },
+  {
+    "id": "usercoins27",
+    "game": "gd",
+    "name": "Enough is enough",
+    "rewardType": "cube",
+    "rewardID": 93,
+    "description": "Collect 500 User Coins",
+    "achievedDescription": "Collected 500 User Coins"
+  },
+  {
+    "id": "usercoins28",
+    "game": "gd",
+    "name": "Stop collecting coins",
+    "rewardType": "wave",
+    "rewardID": 22,
+    "description": "Collect 600 User Coins",
+    "achievedDescription": "Collected 600 User Coins"
+  },
+  {
+    "id": "usercoins29",
+    "game": "gd",
+    "name": "Y u take all coin?",
+    "rewardType": "robot",
+    "rewardID": 15,
+    "description": "Collect 700 User Coins",
+    "achievedDescription": "Collected 700 User Coins"
+  },
+  {
+    "id": "usercoins30",
+    "game": "gd",
+    "name": "Can I have some?",
+    "rewardType": "ship",
+    "rewardID": 33,
+    "description": "Collect 800 User Coins",
+    "achievedDescription": "Collected 800 User Coins"
+  },
+  {
+    "id": "usercoins31",
+    "game": "gd",
+    "name": "Congratulations, you have them all!",
+    "rewardType": "ball",
+    "rewardID": 28,
+    "description": "Collect 900 User Coins",
+    "achievedDescription": "Collected 900 User Coins"
+  },
+  {
+    "id": "usercoins32",
+    "game": "gd",
+    "name": "You have them all again! :O",
+    "rewardType": "ufo",
+    "rewardID": 28,
+    "description": "Collect 1000 User Coins",
+    "achievedDescription": "Collected 1000 User Coins"
+  },
+  {
+    "id": "mappacks01",
+    "game": "gd",
+    "name": "Jump, Forrest, jump",
+    "rewardType": "cube",
+    "rewardID": 33,
+    "description": "Complete a Map Pack",
+    "achievedDescription": "Completed a Map Pack"
+  },
+  {
+    "id": "mappacks02",
+    "game": "gd",
+    "name": "Failure is not an option",
+    "rewardType": "ship",
+    "rewardID": 10,
+    "description": "Complete 5 Map Packs",
+    "achievedDescription": "Completed 5 Map Packs"
+  },
+  {
+    "id": "mappacks03",
+    "game": "gd",
+    "name": "Map Packer",
+    "rewardType": "trail",
+    "rewardID": 2,
+    "description": "Complete 10 Map Packs",
+    "achievedDescription": "Completed 10 Map Packs"
+  },
+  {
+    "id": "mappacks04",
+    "game": "gd",
+    "name": "Pack it up",
+    "rewardType": "ship",
+    "rewardID": 11,
+    "description": "Complete 15 Map Packs",
+    "achievedDescription": "Completed 15 Map Packs"
+  },
+  {
+    "id": "mappacks05",
+    "game": "gd",
+    "name": "Package Complete",
+    "rewardType": "ball",
+    "rewardID": 7,
+    "description": "Complete 20 Map Packs",
+    "achievedDescription": "Completed 20 Map Packs"
+  },
+  {
+    "id": "mappacks06",
+    "game": "gd",
+    "name": "You pack, I complete",
+    "rewardType": "ball",
+    "rewardID": 8,
+    "description": "Complete 25 Map Packs",
+    "achievedDescription": "Completed 25 Map Packs"
+  },
+  {
+    "id": "mappacks07",
+    "game": "gd",
+    "name": "I R Unstoppable!",
+    "rewardType": "ufo",
+    "rewardID": 10,
+    "description": "Complete 30 Map Packs",
+    "achievedDescription": "Completed 30 Map Packs"
+  },
+  {
+    "id": "mappacks08",
+    "game": "gd",
+    "name": "Hah, you call that a pack?",
+    "rewardType": "cube",
+    "rewardID": 58,
+    "description": "Complete 35 Map Packs",
+    "achievedDescription": "Completed 35 Map Packs"
+  },
+  {
+    "id": "mappacks09",
+    "game": "gd",
+    "name": "40, not bad...",
+    "rewardType": "ball",
+    "rewardID": 15,
+    "description": "Complete 40 Map Packs",
+    "achievedDescription": "Completed 40 Map Packs"
+  },
+  {
+    "id": "mappacks10",
+    "game": "gd",
+    "name": "Ha! What now?",
+    "rewardType": "wave",
+    "rewardID": 11,
+    "description": "Complete 45 Map Packs",
+    "achievedDescription": "Completed 45 Map Packs"
+  },
+  {
+    "id": "diamonds01",
+    "game": "gd",
+    "name": "New shinies!?!",
+    "rewardType": "color1",
+    "rewardID": 31,
+    "description": "Collect 100 Diamonds",
+    "achievedDescription": "Collected 100 Diamonds"
+  },
+  {
+    "id": "diamonds02",
+    "game": "gd",
+    "name": "Sparkle sparkle",
+    "rewardType": "cube",
+    "rewardID": 87,
+    "description": "Collect 250 Diamonds",
+    "achievedDescription": "Collected 250 Diamonds"
+  },
+  {
+    "id": "diamonds03",
+    "game": "gd",
+    "name": "This is addictive",
+    "rewardType": "robot",
+    "rewardID": 11,
+    "description": "Collect 500 Diamonds",
+    "achievedDescription": "Collected 500 Diamonds"
+  },
+  {
+    "id": "diamonds04",
+    "game": "gd",
+    "name": "DIAMONDS",
+    "rewardType": "color1",
+    "rewardID": 38,
+    "description": "Collect 1000 Diamonds",
+    "achievedDescription": "Collected 1000 Diamonds"
+  },
+  {
+    "id": "diamonds05",
+    "game": "gd",
+    "name": "Can't stop my shine",
+    "rewardType": "wave",
+    "rewardID": 19,
+    "description": "Collect 1500 Diamonds",
+    "achievedDescription": "Collected 1500 Diamonds"
+  },
+  {
+    "id": "diamonds06",
+    "game": "gd",
+    "name": "One for you, ten for me",
+    "rewardType": "cube",
+    "rewardID": 101,
+    "description": "Collect 2000 Diamonds",
+    "achievedDescription": "Collected 2000 Diamonds"
+  },
+  {
+    "id": "diamonds07",
+    "game": "gd",
+    "name": "How many can I carry?",
+    "rewardType": "ship",
+    "rewardID": 32,
+    "description": "Collect 2500 Diamonds",
+    "achievedDescription": "Collected 2500 Diamonds"
+  },
+  {
+    "id": "diamonds08",
+    "game": "gd",
+    "name": "House of Diamonds",
+    "rewardType": "ufo",
+    "rewardID": 24,
+    "description": "Collect 3000 Diamonds",
+    "achievedDescription": "Collected 3000 Diamonds"
+  },
+  {
+    "id": "diamonds09",
+    "game": "gd",
+    "name": "Diamond Castle",
+    "rewardType": "wave",
+    "rewardID": 17,
+    "description": "Collect 4000 Diamonds",
+    "achievedDescription": "Collected 4000 Diamonds"
+  },
+  {
+    "id": "diamonds10",
+    "game": "gd",
+    "name": "Diamond Master",
+    "rewardType": "deathEffect",
+    "rewardID": 10,
+    "description": "Collect 5000 Diamonds",
+    "achievedDescription": "Collected 5000 Diamonds"
+  },
+  {
+    "id": "custom01",
+    "game": "gd",
+    "name": "Challenger",
+    "rewardType": "color1",
+    "rewardID": 11,
+    "description": "Complete a user created level in Normal mode",
+    "achievedDescription": "Completed a user created level in Normal mode"
+  },
+  {
+    "id": "custom02",
+    "game": "gd",
+    "name": "Master",
+    "rewardType": "cube",
+    "rewardID": 12,
+    "description": "Complete 10 user created levels in Normal mode",
+    "achievedDescription": "Completed 10 user created levels in Normal mode"
+  },
+  {
+    "id": "custom03",
+    "game": "gd",
+    "name": "The Gamer",
+    "rewardType": "cube",
+    "rewardID": 36,
+    "description": "Complete 50 user created levels in Normal mode",
+    "achievedDescription": "Completed 50 user created levels in Normal mode"
+  },
+  {
+    "id": "custom04",
+    "game": "gd",
+    "name": "Geometrician",
+    "rewardType": "ship",
+    "rewardID": 13,
+    "description": "Complete 100 user created levels in Normal mode",
+    "achievedDescription": "Completed 100 user created levels in Normal mode"
+  },
+  {
+    "id": "custom05",
+    "game": "gd",
+    "name": "Spike dodger",
+    "rewardType": "color1",
+    "rewardID": 19,
+    "description": "Complete 200 user created levels in Normal mode",
+    "achievedDescription": "Completed 200 user created levels in Normal mode"
+  },
+  {
+    "id": "custom06",
+    "game": "gd",
+    "name": "No match for me!",
+    "rewardType": "cube",
+    "rewardID": 40,
+    "description": "Complete 300 user created levels in Normal mode",
+    "achievedDescription": "Completed 300 user created levels in Normal mode"
+  },
+  {
+    "id": "custom07",
+    "game": "gd",
+    "name": "Bring me their heads!",
+    "rewardType": "ship",
+    "rewardID": 15,
+    "description": "Complete 500 user created levels in Normal mode",
+    "achievedDescription": "Completed 500 user created levels in Normal mode"
+  },
+  {
+    "id": "custom08",
+    "game": "gd",
+    "name": "Tonight, we dine in GEOMETRY DASH!",
+    "rewardType": "ship",
+    "rewardID": 17,
+    "description": "Complete 1000 user created levels in Normal mode",
+    "achievedDescription": "Completed 1000 user created levels in Normal mode"
+  },
+  {
+    "id": "rate",
+    "game": "gd",
+    "name": "Supporter",
+    "rewardType": "cube",
+    "rewardID": 13,
+    "description": "Have fun :)",
+    "achievedDescription": "You are playing \"Geometry Dash\", thanks!"
+  },
+  {
+    "id": "jump01",
+    "game": "gd",
+    "name": "Bounce",
+    "rewardType": "color2",
+    "rewardID": 6,
+    "description": "Jump 1000 times",
+    "achievedDescription": "Jumped 1000 times"
+  },
+  {
+    "id": "jump02",
+    "game": "gd",
+    "name": "I like jumping",
+    "rewardType": "color2",
+    "rewardID": 12,
+    "description": "Jump 10000 times",
+    "achievedDescription": "Jumped 10000 times"
+  },
+  {
+    "id": "jump03",
+    "game": "gd",
+    "name": "You jump like a pro!",
+    "rewardType": "color2",
+    "rewardID": 13,
+    "description": "Jump 20000 times",
+    "achievedDescription": "Jumped 20000 times"
+  },
+  {
+    "id": "jump04",
+    "game": "gd",
+    "name": "Hop Hop Hop",
+    "rewardType": "ufo",
+    "rewardID": 5,
+    "description": "Jump 50000 times",
+    "achievedDescription": "Jumped 50000 times"
+  },
+  {
+    "id": "jump05",
+    "game": "gd",
+    "name": "Can't stop jumping!!!",
+    "rewardType": "ball",
+    "rewardID": 13,
+    "description": "Jump 50000 times",
+    "achievedDescription": "Jumped 100000 times"
+  },
+  {
+    "id": "attempt01",
+    "game": "gd",
+    "name": "Trial and error",
+    "rewardType": "color2",
+    "rewardID": 7,
+    "description": "Do 100 attempts",
+    "achievedDescription": "Did 100 attempts"
+  },
+  {
+    "id": "attempt02",
+    "game": "gd",
+    "name": "Crash Tester",
+    "rewardType": "color2",
+    "rewardID": 8,
+    "description": "Do 500 attempts",
+    "achievedDescription": "Did 500 attempts"
+  },
+  {
+    "id": "attempt03",
+    "game": "gd",
+    "name": "You Shall Not Pass!",
+    "rewardType": "color2",
+    "rewardID": 15,
+    "description": "Do 2000 attempts",
+    "achievedDescription": "Did 2000 attempts"
+  },
+  {
+    "id": "attempt04",
+    "game": "gd",
+    "name": "Ouch...",
+    "rewardType": "color2",
+    "rewardID": 17,
+    "description": "Do 10000 attempts",
+    "achievedDescription": "Did 10000 attempts"
+  },
+  {
+    "id": "attempt05",
+    "game": "gd",
+    "name": "That hurts!",
+    "rewardType": "wave",
+    "rewardID": 3,
+    "description": "Do 20000 attempts",
+    "achievedDescription": "Did 20000 attempts"
+  },
+  {
+    "id": "like",
+    "game": "gd",
+    "name": "Helper",
+    "rewardType": "color2",
+    "rewardID": 8,
+    "description": "Like an online level",
+    "achievedDescription": "Liked an online level"
+  },
+  {
+    "id": "like02",
+    "game": "gd",
+    "name": "Cleric",
+    "rewardType": "color2",
+    "rewardID": 23,
+    "description": "Like or Dislike 100 online levels",
+    "achievedDescription": "Liked or Disliked 100 online levels"
+  },
+  {
+    "id": "like02b",
+    "game": "gd",
+    "name": "Watcher",
+    "rewardType": "color1",
+    "rewardID": 26,
+    "description": "Like or Dislike 500 online levels",
+    "achievedDescription": "Liked or Disliked 500 online levels"
+  },
+  {
+    "id": "like03",
+    "game": "gd",
+    "name": "Spymaster",
+    "rewardType": "color1",
+    "rewardID": 22,
+    "description": "Like or Dislike 1000 online levels",
+    "achievedDescription": "Liked or Disliked 1000 online levels"
+  },
+  {
+    "id": "like04",
+    "game": "gd",
+    "name": "The Happy One",
+    "rewardType": "trail",
+    "rewardID": 3,
+    "description": "Like or Dislike 2000 online levels",
+    "achievedDescription": "Liked or Disliked 2000 online levels"
+  },
+  {
+    "id": "rateDiff",
+    "game": "gd",
+    "name": "Guide",
+    "rewardType": "color2",
+    "rewardID": 9,
+    "description": "Rate the stars of an online level",
+    "achievedDescription": "Rated the stars of an online level"
+  },
+  {
+    "id": "rateDiff02",
+    "game": "gd",
+    "name": "Visionary",
+    "rewardType": "color2",
+    "rewardID": 22,
+    "description": "Rate the stars of 100 online levels",
+    "achievedDescription": "Rated the stars of 100 online levels"
+  },
+  {
+    "id": "rateDiff02b",
+    "game": "gd",
+    "name": "Organizer",
+    "rewardType": "wave",
+    "rewardID": 5,
+    "description": "Rate the stars of 500 online levels",
+    "achievedDescription": "Rated the stars of 500 online levels"
+  },
+  {
+    "id": "rateDiff03",
+    "game": "gd",
+    "name": "Guiding Light",
+    "rewardType": "color1",
+    "rewardID": 23,
+    "description": "Rate the stars of 1000 online levels",
+    "achievedDescription": "Rated the stars of 1000 online levels"
+  },
+  {
+    "id": "rateDiff04",
+    "game": "gd",
+    "name": "Justice!",
+    "rewardType": "cube",
+    "rewardID": 57,
+    "description": "Rate the stars of 2000 online levels",
+    "achievedDescription": "Rated the stars of 2000 online levels"
+  },
+  {
+    "id": "followCreator",
+    "game": "gd",
+    "name": "Geometry Dash is Love",
+    "rewardType": "color2",
+    "rewardID": 25,
+    "description": "Follow a creator",
+    "achievedDescription": "Followed a creator!"
+  },
+  {
+    "id": "followCreator02",
+    "game": "gd",
+    "name": "Geometry Dasher",
+    "rewardType": "color2",
+    "rewardID": 24,
+    "description": "Follow 10 creators",
+    "achievedDescription": "Followed 10 creators!"
+  },
+  {
+    "id": "friends01",
+    "game": "gd",
+    "name": "No longer lonely",
+    "rewardType": "color2",
+    "rewardID": 26,
+    "description": "Add a friend",
+    "achievedDescription": "You added a friend!"
+  },
+  {
+    "id": "friends02",
+    "game": "gd",
+    "name": "I'm popular!",
+    "rewardType": "color1",
+    "rewardID": 27,
+    "description": "Add 10 friends",
+    "achievedDescription": "You added 10 friends!"
+  },
+  {
+    "id": "submit",
+    "game": "gd",
+    "name": "Creator",
+    "rewardType": "color2",
+    "rewardID": 10,
+    "description": "Create and submit a custom level",
+    "achievedDescription": "Created and submitted a custom level"
+  },
+  {
+    "id": "creator01",
+    "game": "gd",
+    "name": "Geometry Creator",
+    "rewardType": "cube",
+    "rewardID": 46,
+    "description": "Get 100 likes on a created level",
+    "achievedDescription": "Got 100 likes on a created level"
+  },
+  {
+    "id": "creator02",
+    "game": "gd",
+    "name": "Geometry Star",
+    "rewardType": "ufo",
+    "rewardID": 16,
+    "description": "Get a star rated level",
+    "achievedDescription": "Got a star rated level"
+  },
+  {
+    "id": "creator03",
+    "game": "gd",
+    "name": "Geometry Mechanic",
+    "rewardType": "cube",
+    "rewardID": 63,
+    "description": "Get 50 likes on a created level",
+    "achievedDescription": "Got 50 likes on a created level"
+  },
+  {
+    "id": "moreGames",
+    "game": "gd",
+    "name": "RobTop Gamer",
+    "rewardType": "color2",
+    "rewardID": 4,
+    "description": "Tap the More Games button!",
+    "achievedDescription": "Looked at more RobTop Games"
+  },
+  {
+    "id": "facebook",
+    "game": "gd",
+    "name": "Number one fan!",
+    "rewardType": "color2",
+    "rewardID": 14,
+    "description": "Like Geometry Dash on Facebook",
+    "achievedDescription": "Liked Geometry Dash on Facebook"
+  },
+  {
+    "id": "youtube",
+    "game": "gd",
+    "name": "GeometryTube",
+    "rewardType": "color2",
+    "rewardID": 21,
+    "description": "Subscribe to RobTop Games on YouTube",
+    "achievedDescription": "Subscribed to RobTop Games on YouTube"
+  },
+  {
+    "id": "twitter",
+    "game": "gd",
+    "name": "Geometry Bird!",
+    "rewardType": "color2",
+    "rewardID": 31,
+    "description": "Follow RobTop Games on Twitter",
+    "achievedDescription": "Followed RobTop Games on Twitter"
+  },
+  {
+    "id": "special01",
+    "game": "gd",
+    "name": "So close",
+    "rewardType": "color2",
+    "rewardID": 18,
+    "description": "Crash at over 95% on a main level in normal mode",
+    "achievedDescription": "Crashed at over 95%"
+  },
+  {
+    "id": "secret01",
+    "game": "gd",
+    "name": "Rampage!",
+    "rewardType": "color2",
+    "rewardID": 20,
+    "description": "A secret is required",
+    "achievedDescription": "Destroyed a player"
+  },
+  {
+    "id": "secret02",
+    "game": "gd",
+    "name": "Dominating!",
+    "rewardType": "cube",
+    "rewardID": 41,
+    "description": "A secret is required",
+    "achievedDescription": "Destroyed 50 players"
+  },
+  {
+    "id": "secret02b",
+    "game": "gd",
+    "name": "Ultrakill!",
+    "rewardType": "color2",
+    "rewardID": 28,
+    "description": "A secret is required",
+    "achievedDescription": "Destroyed 100 players"
+  },
+  {
+    "id": "secret03",
+    "game": "gd",
+    "name": "Godlike!",
+    "rewardType": "cube",
+    "rewardID": 39,
+    "description": "A secret is required",
+    "achievedDescription": "Destroyed 200 players"
+  },
+  {
+    "id": "secret03b",
+    "game": "gd",
+    "name": "Wickedsick!",
+    "rewardType": "ball",
+    "rewardID": 12,
+    "description": "A secret is required",
+    "achievedDescription": "Destroyed 500 players"
+  },
+  {
+    "id": "secret04",
+    "game": "gd",
+    "name": "Master Detective",
+    "rewardType": "color2",
+    "rewardID": 21,
+    "description": "A hidden treasure is required",
+    "achievedDescription": "Found the hidden coin"
+  },
+  {
+    "id": "secret05",
+    "game": "gd",
+    "name": "Oh no...",
+    "rewardType": "cube",
+    "rewardID": 62,
+    "description": "A secret is required",
+    "achievedDescription": "Found the secret"
+  },
+  {
+    "id": "secret06",
+    "game": "gd",
+    "name": "Thief!",
+    "rewardType": "misc",
+    "rewardID": -1,
+    "description": "A secret is required",
+    "achievedDescription": "Stole the Vault Keepers coin"
+  },
+  {
+    "id": "secret07",
+    "game": "gd",
+    "name": "Thief! Thief!",
+    "rewardType": "cube",
+    "rewardID": 51,
+    "description": "A secret is required",
+    "achievedDescription": "Stole the Vault Keepers icon"
+  },
+  {
+    "id": "secret08",
+    "game": "gd",
+    "name": "Decrypter",
+    "rewardType": "ufo",
+    "rewardID": 11,
+    "description": "A secret is required",
+    "achievedDescription": "Found the secret"
+  },
+  {
+    "id": "secret09",
+    "game": "gd",
+    "name": "The Unknown",
+    "rewardType": "robot",
+    "rewardID": 2,
+    "description": "A secret is required",
+    "achievedDescription": "Found the secret"
+  },
+  {
+    "id": "secret10",
+    "game": "gd",
+    "name": "The Unseen",
+    "rewardType": "wave",
+    "rewardID": 8,
+    "description": "A secret is required",
+    "achievedDescription": "Found the secret"
+  },
+  {
+    "id": "secret11",
+    "game": "gd",
+    "name": "Catch them all!",
+    "rewardType": "cube",
+    "rewardID": 55,
+    "description": "A secret is required",
+    "achievedDescription": "Found the secret"
+  },
+  {
+    "id": "secret12",
+    "game": "gd",
+    "name": "Nice shot!",
+    "rewardType": "cube",
+    "rewardID": 50,
+    "description": "A secret is required",
+    "achievedDescription": "Found the secret"
+  },
+  {
+    "id": "secret13",
+    "game": "gd",
+    "name": "Revealing...",
+    "rewardType": "ship",
+    "rewardID": 20,
+    "description": "A secret is required",
+    "achievedDescription": "Found the secret"
+  },
+  {
+    "id": "secret14",
+    "game": "gd",
+    "name": "Third eye open...",
+    "rewardType": "ufo",
+    "rewardID": 12,
+    "description": "A secret is required",
+    "achievedDescription": "Found the secret"
+  },
+  {
+    "id": "secret15",
+    "game": "gd",
+    "name": "Very clever...",
+    "rewardType": "trail",
+    "rewardID": 4,
+    "description": "A secret is required",
+    "achievedDescription": "Found the secret"
+  },
+  {
+    "id": "secret16",
+    "game": "gd",
+    "name": "Doomed us all!",
+    "rewardType": "wave",
+    "rewardID": 13,
+    "description": "A secret is required",
+    "achievedDescription": "Found the secret"
+  },
+  {
+    "id": "secret17",
+    "game": "gd",
+    "name": "Nothing is hidden",
+    "rewardType": "cube",
+    "rewardID": 64,
+    "description": "A secret is required",
+    "achievedDescription": "Found the secret"
+  },
+  {
+    "id": "v2.secret01",
+    "game": "gd",
+    "name": "Ultimate Energy",
+    "rewardType": "cube",
+    "rewardID": 80,
+    "description": "A secret is required",
+    "achievedDescription": "Found the secret"
+  },
+  {
+    "id": "v2.secret02",
+    "game": "gd",
+    "name": "Uber Hacker",
+    "rewardType": "cube",
+    "rewardID": 78,
+    "description": "A secret is required",
+    "achievedDescription": "Found the secret"
+  },
+  {
+    "id": "v2.secret03",
+    "game": "gd",
+    "name": "Cold as Ice",
+    "rewardType": "misc",
+    "rewardID": -1,
+    "description": "A secret is required",
+    "achievedDescription": "Found the secret"
+  },
+  {
+    "id": "v2.secret04",
+    "game": "gd",
+    "name": "Sneaky Sneak",
+    "rewardType": "cube",
+    "rewardID": 81,
+    "description": "A secret is required",
+    "achievedDescription": "Found the secret"
+  },
+  {
+    "id": "v2.secret05",
+    "game": "gd",
+    "name": "I can count!",
+    "rewardType": "cube",
+    "rewardID": 76,
+    "description": "A secret is required",
+    "achievedDescription": "Found the secret"
+  },
+  {
+    "id": "v2.secret06",
+    "game": "gd",
+    "name": "Cant be fooled",
+    "rewardType": "cube",
+    "rewardID": 108,
+    "description": "A secret is required",
+    "achievedDescription": "Found the secret"
+  },
+  {
+    "id": "v2.secret07",
+    "game": "gd",
+    "name": "Paintbucket",
+    "rewardType": "color1",
+    "rewardID": 37,
+    "description": "A secret is required",
+    "achievedDescription": "Found the secret"
+  },
+  {
+    "id": "v2.secret08",
+    "game": "gd",
+    "name": "Burnt Chicken",
+    "rewardType": "color2",
+    "rewardID": 33,
+    "description": "A secret is required",
+    "achievedDescription": "Found the secret"
+  },
+  {
+    "id": "v3.secret01",
+    "game": "gd",
+    "name": "Gatekeepers Riddle",
+    "rewardType": "cube",
+    "rewardID": 91,
+    "description": "A secret is required",
+    "achievedDescription": "Found the secret"
+  },
+  {
+    "id": "v3.secret02",
+    "game": "gd",
+    "name": "Gatekeepers Query",
+    "rewardType": "cube",
+    "rewardID": 89,
+    "description": "A secret is required",
+    "achievedDescription": "Found the secret"
+  },
+  {
+    "id": "v3.secret03",
+    "game": "gd",
+    "name": "Gatekeepers Code",
+    "rewardType": "color2",
+    "rewardID": 38,
+    "description": "A secret is required",
+    "achievedDescription": "Found the secret"
+  },
+  {
+    "id": "v3.secret04",
+    "game": "gd",
+    "name": "Gatekeepers Curse",
+    "rewardType": "cube",
+    "rewardID": 90,
+    "description": "A secret is required",
+    "achievedDescription": "Found the secret"
+  },
+  {
+    "id": "v3.secret05",
+    "game": "gd",
+    "name": "Gatekeepers Vision",
+    "rewardType": "wave",
+    "rewardID": 23,
+    "description": "A secret is required",
+    "achievedDescription": "Found the secret"
+  },
+  {
+    "id": "steam01",
+    "game": "gd",
+    "name": "Steamrolling!",
+    "rewardType": "cube",
+    "rewardID": 47,
+    "description": "Complete level 1-3 in Normal mode (Steam Exclusive)",
+    "achievedDescription": "Completed level 1-3 in Normal mode (Steam Exclusive)"
+  },
+  {
+    "id": "steam02",
+    "game": "gd",
+    "name": "SteamStep!",
+    "rewardType": "cube",
+    "rewardID": 48,
+    "description": "Complete \"Clubstep\" in Normal mode (Steam Exclusive Bonus)",
+    "achievedDescription": "Completed \"Clubstep\" in Normal mode (Steam Exclusive Bonus)"
+  },
+  {
+    "id": "shardFire01",
+    "game": "gd",
+    "name": "Fire Recruit",
+    "rewardType": "cube",
+    "rewardID": 95,
+    "description": "Collect 5 Fire Shards",
+    "achievedDescription": "Collected 5 Fire Shards"
+  },
+  {
+    "id": "shardFire02",
+    "game": "gd",
+    "name": "Fire Apprentice",
+    "rewardType": "ball",
+    "rewardID": 24,
+    "description": "Collect 15 Fire Shards",
+    "achievedDescription": "Collected 15 Fire Shards"
+  },
+  {
+    "id": "shardFire03",
+    "game": "gd",
+    "name": "Fire Guardian",
+    "rewardType": "robot",
+    "rewardID": 9,
+    "description": "Collect 35 Fire Shards",
+    "achievedDescription": "Collected 35 Fire Shards"
+  },
+  {
+    "id": "shardFire04",
+    "game": "gd",
+    "name": "Fire Champion",
+    "rewardType": "ship",
+    "rewardID": 29,
+    "description": "Collect 65 Fire Shards",
+    "achievedDescription": "Collected 65 Fire Shards"
+  },
+  {
+    "id": "shardFire05",
+    "game": "gd",
+    "name": "Fire Master",
+    "rewardType": "deathEffect",
+    "rewardID": 2,
+    "description": "Collect 100 Fire Shards",
+    "achievedDescription": "Collected 100 Fire Shards"
+  },
+  {
+    "id": "shardIce01",
+    "game": "gd",
+    "name": "Ice Recruit",
+    "rewardType": "cube",
+    "rewardID": 84,
+    "description": "Collect 5 Ice Shards",
+    "achievedDescription": "Collected 5 Ice Shards"
+  },
+  {
+    "id": "shardIce02",
+    "game": "gd",
+    "name": "Ice Apprentice",
+    "rewardType": "ball",
+    "rewardID": 26,
+    "description": "Collect 15 Ice Shards",
+    "achievedDescription": "Collected 15 Ice Shards"
+  },
+  {
+    "id": "shardIce03",
+    "game": "gd",
+    "name": "Ice Guardian",
+    "rewardType": "spider",
+    "rewardID": 6,
+    "description": "Collect 35 Ice Shards",
+    "achievedDescription": "Collected 35 Ice Shards"
+  },
+  {
+    "id": "shardIce04",
+    "game": "gd",
+    "name": "Ice Champion",
+    "rewardType": "ship",
+    "rewardID": 31,
+    "description": "Collect 65 Ice Shards",
+    "achievedDescription": "Collected 65 Ice Shards"
+  },
+  {
+    "id": "shardIce05",
+    "game": "gd",
+    "name": "Ice Master",
+    "rewardType": "deathEffect",
+    "rewardID": 9,
+    "description": "Collect 100 Ice Shards",
+    "achievedDescription": "Collected 100 Ice Shards"
+  },
+  {
+    "id": "shardPoison01",
+    "game": "gd",
+    "name": "Poison Recruit",
+    "rewardType": "ball",
+    "rewardID": 22,
+    "description": "Collect 5 Poison Shards",
+    "achievedDescription": "Collected 5 Poison Shards"
+  },
+  {
+    "id": "shardPoison02",
+    "game": "gd",
+    "name": "Poison Apprentice",
+    "rewardType": "ufo",
+    "rewardID": 20,
+    "description": "Collect 15 Poison Shards",
+    "achievedDescription": "Collected 15 Poison Shards"
+  },
+  {
+    "id": "shardPoison03",
+    "game": "gd",
+    "name": "Poison Guardian",
+    "rewardType": "cube",
+    "rewardID": 105,
+    "description": "Collect 35 Poison Shards",
+    "achievedDescription": "Collected 35 Poison Shards"
+  },
+  {
+    "id": "shardPoison04",
+    "game": "gd",
+    "name": "Poison Champion",
+    "rewardType": "spider",
+    "rewardID": 5,
+    "description": "Collect 65 Poison Shards",
+    "achievedDescription": "Collected 65 Poison Shards"
+  },
+  {
+    "id": "shardPoison05",
+    "game": "gd",
+    "name": "Poison Master",
+    "rewardType": "deathEffect",
+    "rewardID": 4,
+    "description": "Collect 100 Poison Shards",
+    "achievedDescription": "Collected 100 Poison Shards"
+  },
+  {
+    "id": "shardShadow01",
+    "game": "gd",
+    "name": "Shadow Recruit",
+    "rewardType": "wave",
+    "rewardID": 20,
+    "description": "Collect 5 Shadow Shards",
+    "achievedDescription": "Collected 5 Shadow Shards"
+  },
+  {
+    "id": "shardShadow02",
+    "game": "gd",
+    "name": "Shadow Apprentice",
+    "rewardType": "ship",
+    "rewardID": 28,
+    "description": "Collect 15 Shadow Shards",
+    "achievedDescription": "Collected 15 Shadow Shards"
+  },
+  {
+    "id": "shardShadow03",
+    "game": "gd",
+    "name": "Shadow Guardian",
+    "rewardType": "ufo",
+    "rewardID": 26,
+    "description": "Collect 35 Shadow Shards",
+    "achievedDescription": "Collected 35 Shadow Shards"
+  },
+  {
+    "id": "shardShadow04",
+    "game": "gd",
+    "name": "Shadow Champion",
+    "rewardType": "robot",
+    "rewardID": 17,
+    "description": "Collect 65 Shadow Shards",
+    "achievedDescription": "Collected 65 Shadow Shards"
+  },
+  {
+    "id": "shardShadow05",
+    "game": "gd",
+    "name": "Shadow Master",
+    "rewardType": "deathEffect",
+    "rewardID": 5,
+    "description": "Collect 100 Shadow Shards",
+    "achievedDescription": "Collected 100 Shadow Shards"
+  },
+  {
+    "id": "shardLava01",
+    "game": "gd",
+    "name": "Lava Recruit",
+    "rewardType": "wave",
+    "rewardID": 14,
+    "description": "Collect 5 Lava Shards",
+    "achievedDescription": "Collected 5 Lava Shards"
+  },
+  {
+    "id": "shardLava02",
+    "game": "gd",
+    "name": "Lava Apprentice",
+    "rewardType": "cube",
+    "rewardID": 92,
+    "description": "Collect 15 Lava Shards",
+    "achievedDescription": "Collected 15 Lava Shards"
+  },
+  {
+    "id": "shardLava03",
+    "game": "gd",
+    "name": "Lava Guardian",
+    "rewardType": "robot",
+    "rewardID": 7,
+    "description": "Collect 35 Lava Shards",
+    "achievedDescription": "Collected 35 Lava Shards"
+  },
+  {
+    "id": "shardLava04",
+    "game": "gd",
+    "name": "Lava Champion",
+    "rewardType": "spider",
+    "rewardID": 9,
+    "description": "Collect 65 Lava Shards",
+    "achievedDescription": "Collected 65 Lava Shards"
+  },
+  {
+    "id": "shardLava05",
+    "game": "gd",
+    "name": "Lava Master",
+    "rewardType": "deathEffect",
+    "rewardID": 6,
+    "description": "Collect 100 Lava Shards",
+    "achievedDescription": "Collected 100 Lava Shards"
+  },
+  {
+    "id": "shardBonus01",
+    "game": "gd",
+    "name": "Bonus Recruit",
+    "rewardType": "cube",
+    "rewardID": 98,
+    "description": "Collect 5 of each shard",
+    "achievedDescription": "Collected 5 of each shard"
+  },
+  {
+    "id": "shardBonus02",
+    "game": "gd",
+    "name": "Bonus Apprentice",
+    "rewardType": "ufo",
+    "rewardID": 22,
+    "description": "Collect 15 of each shard",
+    "achievedDescription": "Collected 15 of each shard"
+  },
+  {
+    "id": "shardBonus03",
+    "game": "gd",
+    "name": "Bonus Guardian",
+    "rewardType": "ship",
+    "rewardID": 34,
+    "description": "Collect 35 of each shard",
+    "achievedDescription": "Collected 35 of each shard"
+  },
+  {
+    "id": "shardBonus04",
+    "game": "gd",
+    "name": "Bonus Champion",
+    "rewardType": "robot",
+    "rewardID": 13,
+    "description": "Collect 65 of each shard",
+    "achievedDescription": "Collected 65 of each shard"
+  },
+  {
+    "id": "shardBonus05",
+    "game": "gd",
+    "name": "Bonus Master",
+    "rewardType": "deathEffect",
+    "rewardID": 7,
+    "description": "Collect 100 of each shard",
+    "achievedDescription": "Collected 100 of each shard"
+  },
+  {
+    "id": "world.level001b",
+    "game": "world",
+    "name": "So it begins...",
+    "rewardType": "color1",
+    "rewardID": 4,
+    "description": "Complete \"Payload\" in Normal mode",
+    "achievedDescription": "Completed \"Payload\" in Normal mode"
+  },
+  {
+    "id": "world.level002b",
+    "game": "world",
+    "name": "Impressive...",
+    "rewardType": "color1",
+    "rewardID": 5,
+    "description": "Complete \"Beast Mode\" in Normal mode",
+    "achievedDescription": "Completed \"Beast Mode\" in Normal mode"
+  },
+  {
+    "id": "world.level003b",
+    "game": "world",
+    "name": "It gets worse...",
+    "rewardType": "color1",
+    "rewardID": 6,
+    "description": "Complete \"Machina\" in Normal mode",
+    "achievedDescription": "Completed \"Machina\" in Normal mode"
+  },
+  {
+    "id": "world.level004b",
+    "game": "world",
+    "name": "You got this!",
+    "rewardType": "color1",
+    "rewardID": 7,
+    "description": "Complete \"Years\" in Normal mode",
+    "achievedDescription": "Completed \"Years\" in Normal mode"
+  },
+  {
+    "id": "world.level005b",
+    "game": "world",
+    "name": "Get to the front!",
+    "rewardType": "cube",
+    "rewardID": 72,
+    "description": "Complete \"Frontlines\" in Normal mode",
+    "achievedDescription": "Completed \"Frontlines\" in Normal mode"
+  },
+  {
+    "id": "world.level006b",
+    "game": "world",
+    "name": "That was spooky",
+    "rewardType": "color1",
+    "rewardID": 9,
+    "description": "Complete \"Space Pirates\" in Normal mode",
+    "achievedDescription": "Completed \"Space Pirates\" in Normal mode"
+  },
+  {
+    "id": "world.level007b",
+    "game": "world",
+    "name": "Striker!",
+    "rewardType": "color1",
+    "rewardID": 10,
+    "description": "Complete \"Striker\" in Normal mode",
+    "achievedDescription": "Completed \"Striker\" in Normal mode"
+  },
+  {
+    "id": "world.level008b",
+    "game": "world",
+    "name": "Member?",
+    "rewardType": "color1",
+    "rewardID": 12,
+    "description": "Complete \"Embers\" in Normal mode",
+    "achievedDescription": "Completed \"Embers\" in Normal mode"
+  },
+  {
+    "id": "world.level009b",
+    "game": "world",
+    "name": "Round One!",
+    "rewardType": "color1",
+    "rewardID": 13,
+    "description": "Complete \"Round 1\" in Normal mode",
+    "achievedDescription": "Completed \"Round 1\" in Normal mode"
+  },
+  {
+    "id": "world.level010b",
+    "game": "world",
+    "name": "MOOOONSTER!",
+    "rewardType": "cube",
+    "rewardID": 75,
+    "description": "Complete \"Monster Dance Off\" in Normal mode",
+    "achievedDescription": "Completed \"Monster Dance Off\" in Normal mode"
+  },
+  {
+    "id": "mdlevel01a",
+    "game": "meltdown",
+    "name": "Yarrr!",
+    "rewardType": "color1",
+    "rewardID": 5,
+    "description": "Complete \"The Seven Seas\" in Practice mode",
+    "achievedDescription": "Completed \"The Seven Seas\" in Practice mode"
+  },
+  {
+    "id": "mdlevel01b",
+    "game": "meltdown",
+    "name": "The Seven Seas!",
+    "rewardType": "cube",
+    "rewardID": 65,
+    "description": "Complete \"The Seven Seas\" in Normal mode",
+    "achievedDescription": "Completed \"The Seven Seas\" in Normal mode"
+  },
+  {
+    "id": "mdlevel02a",
+    "game": "meltdown",
+    "name": "Lost Viking",
+    "rewardType": "color1",
+    "rewardID": 8,
+    "description": "Complete \"Viking Arena\" in Practice mode",
+    "achievedDescription": "Completed \"Viking Arena\" in Practice mode"
+  },
+  {
+    "id": "mdlevel02b",
+    "game": "meltdown",
+    "name": "Viking Arena!",
+    "rewardType": "cube",
+    "rewardID": 67,
+    "description": "Complete \"Viking Arena\" in Normal mode",
+    "achievedDescription": "Completed \"Viking Arena\" in Normal mode"
+  },
+  {
+    "id": "mdlevel03a",
+    "game": "meltdown",
+    "name": "Grounded Robots",
+    "rewardType": "color1",
+    "rewardID": 7,
+    "description": "Complete \"Airborne Robots\" in Practice mode",
+    "achievedDescription": "Completed \"Airborne Robots\" in Practice mode"
+  },
+  {
+    "id": "mdlevel03b",
+    "game": "meltdown",
+    "name": "Airborne Robots!",
+    "rewardType": "cube",
+    "rewardID": 69,
+    "description": "Complete \"Airborne Robots\" in Normal mode",
+    "achievedDescription": "Completed \"Airborne Robots\" in Normal mode"
+  },
+  {
+    "id": "mdcoin01",
+    "game": "meltdown",
+    "name": "Ultimate Seven Seas",
+    "rewardType": "cube",
+    "rewardID": 66,
+    "description": "Collect all 3 coins on The Seven Seas",
+    "achievedDescription": "Collected all 3 coins on The Seven Seas"
+  },
+  {
+    "id": "mdcoin02",
+    "game": "meltdown",
+    "name": "Ultimate Viking Arena",
+    "rewardType": "cube",
+    "rewardID": 68,
+    "description": "Collect all 3 coins on Viking Arena",
+    "achievedDescription": "Collected all 3 coins on Viking Arena"
+  },
+  {
+    "id": "mdcoin03",
+    "game": "meltdown",
+    "name": "Ultimate Airborne Robots",
+    "rewardType": "cube",
+    "rewardID": 70,
+    "description": "Collect all 3 coins on Airborne Robots",
+    "achievedDescription": "Collected all 3 coins on Airborne Robots"
+  },
+  {
+    "id": "mdrate",
+    "game": "meltdown",
+    "name": "Meltdown Supporter!",
+    "rewardType": "cube",
+    "rewardID": 71,
+    "description": "Rate \"Geometry Dash Meltdown\" and let us know what you think",
+    "achievedDescription": "Rated \"Geometry Dash Meltdown\", thanks!"
+  }
+]

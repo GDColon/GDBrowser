@@ -20,9 +20,10 @@ module.exports = async (app, req, res) => {
 
     request.post(app.endpoint + 'getGJLevelScores211.php', params, async function(err, resp, body) { 
 
-      if (err || body == '-1' || !body) return res.send("-1")
+      if (err || body == -1 || !body) return res.send("-1")
       scores = body.split('|').map(x => app.parseResponse(x))
       if (!(scores.filter(x => x[1]).length)) return res.send("-1")
+      else app.trackSuccess()
 
       scores.forEach(x => {
         let keys = Object.keys(x)

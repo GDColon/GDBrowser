@@ -15,7 +15,8 @@ module.exports = async (app, req, res, api) => {
 
   request.post(app.endpoint + 'downloadGJMessage20.php', params, async function (err, resp, body) {
 
-    if (err || body == '-1' || !body) return res.status(400).send("Error fetching message!")
+    if (err || body == '-1' || !body) return res.status(400).send(`Error fetching message! Try again later, or make sure your username and password are entered correctly. Last worked: ${app.timeSince()} ago.`)
+    else app.trackSuccess()
 
     let x = app.parseResponse(body)
     let msg = {}

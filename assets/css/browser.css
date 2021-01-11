@@ -1101,6 +1101,59 @@ input::-webkit-inner-spin-button {
     outline-offset: -0.4vh;
 }
 
+.flex {
+    display: flex;
+}
+
+.flex img {
+    align-self: center;
+}
+
+.colorCircle {
+    border: 3.75px solid black;
+    border-radius: 420px;
+}
+
+.typeFilter {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 0.75% 0.75%;
+    border-radius: 0.5vh;
+}
+
+.typeFilter.achDeselected, .gameFilter.achDeselected {
+    filter: brightness(30%) saturate(50%);
+}
+
+.rewardFilter.achDeselected {
+    filter: brightness(60%);
+}
+
+.typeFilter.achDeselected {
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+.labelHover {
+    color: yellow;
+    transform: scale(0.8);
+}
+
+.achSelect {
+    cursor: pointer;
+    z-index: 1;
+    user-select: none;
+    pointer-events: all;
+}
+
+.achSelect:active {
+    transform: scale(1.04);
+}
+
+.hidey {
+    opacity: 0%;
+    pointer-events: none;
+    transition-duration: 0s !important;
+}
+
 .red {
     color: #ff0000 !important;
 }

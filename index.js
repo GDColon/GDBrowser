@@ -9,6 +9,7 @@ app.offline = false  // set to true to go into "offline" mode (in case of ip ban
 app.config = require('./settings')  // tweak settings in this file if you're using a GDPS
 app.endpoint = app.config.endpoint  // default is boomlings.com/database/
 app.accountCache = {} // account IDs are cached here to shave off requests to getgjusers
+app.lastSuccess = null // timestamp of the last time a gjp request was accepted my the servers
 
 let rlMessage = "Rate limited ¯\\_(ツ)_/¯<br><br>Please do not spam my servers with a crazy amount of requests. It slows things down on my end and stresses RobTop's servers just as much." +
 " If you really want to send a zillion requests for whatever reason, please download the GDBrowser repository locally - or even just send the request directly to the GD servers.<br><br>" +
@@ -33,6 +34,8 @@ const RL2 = rateLimit({
 let api = true;
 let gdIcons = fs.readdirSync('./assets/previewicons')
 let sampleIcons = require('./misc/sampleIcons.json')
+let achievements = require('./misc/achievements.json')
+let achievementTypes = require('./misc/achievementTypes.json')
 let colorList = require('./icons/colors.json')
 let forms = { "player": "cube", "bird": "ufo", "dart": "wave" }
 let assetPage = fs.readFileSync('./html/assets.html', 'utf8')
@@ -56,6 +59,19 @@ app.use(function(req, res, next) {
 
 let directories = [""]
 fs.readdirSync('./api').filter(x => !x.includes(".")).forEach(x => directories.push(x))
+
+app.trackSuccess = function() {
+  // made this a function in case i wanna do more stuff in the future
+  app.lastSuccess = Date.now()
+}
+
+app.timeSince = function(time=app.lastSuccess) {
+  if (!time) return "[unknown]"
+  let secsPassed = Math.floor((Date.now() - time) / 1000)
+  let minsPassed = Math.floor(secsPassed / 60)
+  secsPassed -= 60 * minsPassed;
+  return `${minsPassed}m ${secsPassed}s`
+}
 
 app.run = {}
 directories.forEach(d => {
@@ -103,7 +119,7 @@ app.get("/assets/:dir*?", function(req, res) {
 
   if (dir.includes('.') || !req.path.endsWith("/")) {
     if (!req.params[0]) main = ""
-    if (req.params.dir == "deatheffects") return res.sendFile(__dirname + "/assets/deatheffects/0.png")
+    if (req.params.dir == "deatheffects" || req.params.dir == "trails") return res.sendFile(__dirname + "/assets/deatheffects/0.png")
     return res.send(`<p style="font-size: 20px; font-family: aller, helvetica, arial">Looks like this file doesn't exist ¯\\_(ツ)_/¯<br><a href='/assets/${main}'>View directory listing for <b>/assets/${main}</b></a></p>`)
   }
 
@@ -140,6 +156,7 @@ app.get("/", function(req, res) {
   else res.sendFile(__dirname + "/html/home.html")
 })   
 
+app.get("/achievements", function(req, res) { res.sendFile(__dirname + "/html/achievements.html") })
 app.get("/analyze/:id", async function(req, res) { res.sendFile(__dirname + "/html/analyze.html") })
 app.get("/api", function(req, res) { res.sendFile(__dirname + "/html/api.html") })
 app.get("/boomlings", function(req, res) { res.sendFile(__dirname + "/html/boomlings.html") })
@@ -193,6 +210,7 @@ app.get("/:id", function(req, res) { app.run.level(app, req, res) })
 // MISC
 
 app.get("/icon/:text", function(req, res) { app.run.icon(app, req, res) })
+app.get("/api/achievements", function(req, res) { res.send({achievements, types: achievementTypes, colors: colorList }) })
 app.get('/api/icons', function(req, res) { 
   let sample = [JSON.stringify(sampleIcons[Math.floor(Math.random() * sampleIcons.length)].slice(1))]
   res.send({icons: gdIcons, colors: colorList, colorOrder, whiteIcons, sample}); 
