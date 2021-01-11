@@ -1,7 +1,7 @@
 <head>
 	<title>Achievements</title>
 	<meta charset="utf-8">
-	<link href="../assets/css/browser.css" type="text/css" rel="stylesheet">
+	<link href="../assets/css/browser.css?" type="text/css" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
 	<link rel="icon" href="../assets/trophies/1.png">
 	<meta id="meta-title" property="og:title" content="Achievements">
@@ -111,7 +111,7 @@ function append(reset=true) {
 		$('#searchBox').append(`<div class="flex searchresult leaderboardSlot" style="height: 18%; width: 92%; padding-left: 3%; padding-top: 0%">
 			<div class="flex" style="width: 8%; margin-right: 2%"><img src="${iconImg}></div>
 			<div>
-				<h2 title="geometry.ach.${x.id}" smaller inline" style="font-size: 4.5vh; margin-top: 1vh; color: ${gameColors[x.game] || "default"}">${x.name}</h2>
+				<h2 title="${x.trueID}" smaller inline" style="font-size: 4.5vh; margin-top: 1vh; color: ${gameColors[x.game] || "default"}">${x.name}</h2>
 				<p style="margin-top: 2vh; color:${completed ? "yellow" : "white"}">${completed ? x.achievedDescription : x.description}</p>
 			</div>
 		</div>`)

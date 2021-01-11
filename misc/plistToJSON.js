@@ -52,10 +52,13 @@ if (exportName == "achievements") {  // hardcoded shit starts here!
       rewardType: rewardTypes[reward[0]] || reward[0] || "misc",
       rewardID: +reward[1] || -1,
       description: final[k].unachievedDescription,
-      achievedDescription: final[k].achievedDescription
+      achievedDescription: final[k].achievedDescription,
+      trueID: k
     }
     Object.keys(games).forEach(x => {
       if (k.startsWith(achString + x)) achObj.game = games[x]
+      if (k == achString + "rate") achObj.id = "rating"
+      if (achObj.id.includes("demoncoin")) achObj.id = achObj.id.replace("demoncoin", "ultimatedemon")
     })
     achArray.push(achObj)
   }

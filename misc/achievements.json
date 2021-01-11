@@ -6,7 +6,8 @@
     "rewardType": "color1",
     "rewardID": 4,
     "description": "Complete \"Stereo Madness\" in Practice mode",
-    "achievedDescription": "Completed \"Stereo Madness\" in Practice mode"
+    "achievedDescription": "Completed \"Stereo Madness\" in Practice mode",
+    "trueID": "geometry.ach.level01a"
   },
   {
     "id": "level01b",
@@ -15,7 +16,8 @@
     "rewardType": "cube",
     "rewardID": 5,
     "description": "Complete \"Stereo Madness\" in Normal mode",
-    "achievedDescription": "Completed \"Stereo Madness\" in Normal mode"
+    "achievedDescription": "Completed \"Stereo Madness\" in Normal mode",
+    "trueID": "geometry.ach.level01b"
   },
   {
     "id": "level02a",
@@ -24,7 +26,8 @@
     "rewardType": "color1",
     "rewardID": 5,
     "description": "Complete \"Back On Track\" in Practice mode",
-    "achievedDescription": "Completed \"Back On Track\" in Practice mode"
+    "achievedDescription": "Completed \"Back On Track\" in Practice mode",
+    "trueID": "geometry.ach.level02a"
   },
   {
     "id": "level02b",
@@ -33,7 +36,8 @@
     "rewardType": "cube",
     "rewardID": 6,
     "description": "Complete \"Back On Track\" in Normal mode",
-    "achievedDescription": "Completed \"Back On Track\" in Normal mode"
+    "achievedDescription": "Completed \"Back On Track\" in Normal mode",
+    "trueID": "geometry.ach.level02b"
   },
   {
     "id": "level03a",
@@ -42,7 +46,8 @@
     "rewardType": "color1",
     "rewardID": 6,
     "description": "Complete \"Polargeist\" in Practice mode",
-    "achievedDescription": "Completed \"Polargeist\" in Practice mode"
+    "achievedDescription": "Completed \"Polargeist\" in Practice mode",
+    "trueID": "geometry.ach.level03a"
   },
   {
     "id": "level03b",
@@ -51,7 +56,8 @@
     "rewardType": "cube",
     "rewardID": 7,
     "description": "Complete \"Polargeist\" in Normal mode",
-    "achievedDescription": "Completed \"Polargeist\" in Normal mode"
+    "achievedDescription": "Completed \"Polargeist\" in Normal mode",
+    "trueID": "geometry.ach.level03b"
   },
   {
     "id": "level04a",
@@ -60,7 +66,8 @@
     "rewardType": "color1",
     "rewardID": 7,
     "description": "Complete \"Dry Out\" in Practice mode",
-    "achievedDescription": "Completed \"Dry Out\" in Practice mode"
+    "achievedDescription": "Completed \"Dry Out\" in Practice mode",
+    "trueID": "geometry.ach.level04a"
   },
   {
     "id": "level04b",
@@ -69,7 +76,8 @@
     "rewardType": "cube",
     "rewardID": 8,
     "description": "Complete \"Dry Out\" in Normal mode",
-    "achievedDescription": "Completed \"Dry Out\" in Normal mode"
+    "achievedDescription": "Completed \"Dry Out\" in Normal mode",
+    "trueID": "geometry.ach.level04b"
   },
   {
     "id": "level05a",
@@ -78,7 +86,8 @@
     "rewardType": "color1",
     "rewardID": 8,
     "description": "Complete \"Base After Base\" in Practice mode",
-    "achievedDescription": "Completed \"Base After Base\" in Practice mode"
+    "achievedDescription": "Completed \"Base After Base\" in Practice mode",
+    "trueID": "geometry.ach.level05a"
   },
   {
     "id": "level05b",
@@ -87,7 +96,8 @@
     "rewardType": "cube",
     "rewardID": 9,
     "description": "Complete \"Base After Base\" in Normal mode",
-    "achievedDescription": "Completed \"Base After Base\" in Normal mode"
+    "achievedDescription": "Completed \"Base After Base\" in Normal mode",
+    "trueID": "geometry.ach.level05b"
   },
   {
     "id": "level06a",
@@ -96,7 +106,8 @@
     "rewardType": "color1",
     "rewardID": 9,
     "description": "Complete \"Cant Let Go\" in Practice mode",
-    "achievedDescription": "Completed \"Cant Let Go\" in Practice mode"
+    "achievedDescription": "Completed \"Cant Let Go\" in Practice mode",
+    "trueID": "geometry.ach.level06a"
   },
   {
     "id": "level06b",
@@ -105,7 +116,8 @@
     "rewardType": "cube",
     "rewardID": 10,
     "description": "Complete \"Cant Let Go\" in Normal mode",
-    "achievedDescription": "Completed \"Cant Let Go\" in Normal mode"
+    "achievedDescription": "Completed \"Cant Let Go\" in Normal mode",
+    "trueID": "geometry.ach.level06b"
   },
   {
     "id": "level07a",
@@ -114,7 +126,8 @@
     "rewardType": "color1",
     "rewardID": 10,
     "description": "Complete \"Jumper\" in Practice mode",
-    "achievedDescription": "Completed \"Jumper\" in Practice mode"
+    "achievedDescription": "Completed \"Jumper\" in Practice mode",
+    "trueID": "geometry.ach.level07a"
   },
   {
     "id": "level07b",
@@ -123,7 +136,8 @@
     "rewardType": "cube",
     "rewardID": 11,
     "description": "Complete \"Jumper\" in Normal mode",
-    "achievedDescription": "Completed \"Jumper\" in Normal mode"
+    "achievedDescription": "Completed \"Jumper\" in Normal mode",
+    "trueID": "geometry.ach.level07b"
   },
   {
     "id": "level08a",
@@ -132,7 +146,8 @@
     "rewardType": "color1",
     "rewardID": 12,
     "description": "Complete \"Time Machine\" in Practice mode",
-    "achievedDescription": "Completed \"Time Machine\" in Practice mode"
+    "achievedDescription": "Completed \"Time Machine\" in Practice mode",
+    "trueID": "geometry.ach.level08a"
   },
   {
     "id": "level08b",
@@ -141,7 +156,8 @@
     "rewardType": "cube",
     "rewardID": 14,
     "description": "Complete \"Time Machine\" in Normal mode",
-    "achievedDescription": "Completed \"Time Machine\" in Normal mode"
+    "achievedDescription": "Completed \"Time Machine\" in Normal mode",
+    "trueID": "geometry.ach.level08b"
   },
   {
     "id": "level09a",
@@ -150,7 +166,8 @@
     "rewardType": "cube",
     "rewardID": 15,
     "description": "Complete \"Cycles\" in Practice mode",
-    "achievedDescription": "Completed \"Cycles\" in Practice mode"
+    "achievedDescription": "Completed \"Cycles\" in Practice mode",
+    "trueID": "geometry.ach.level09a"
   },
   {
     "id": "level09b",
@@ -159,7 +176,8 @@
     "rewardType": "cube",
     "rewardID": 16,
     "description": "Complete \"Cycles\" in Normal mode",
-    "achievedDescription": "Completed \"Cycles\" in Normal mode"
+    "achievedDescription": "Completed \"Cycles\" in Normal mode",
+    "trueID": "geometry.ach.level09b"
   },
   {
     "id": "level10a",
@@ -168,7 +186,8 @@
     "rewardType": "cube",
     "rewardID": 17,
     "description": "Complete \"xStep\" in Practice mode",
-    "achievedDescription": "Completed \"xStep\" in Practice mode"
+    "achievedDescription": "Completed \"xStep\" in Practice mode",
+    "trueID": "geometry.ach.level10a"
   },
   {
     "id": "level10b",
@@ -177,7 +196,8 @@
     "rewardType": "cube",
     "rewardID": 18,
     "description": "Complete \"xStep\" in Normal mode",
-    "achievedDescription": "Completed \"xStep\" in Normal mode"
+    "achievedDescription": "Completed \"xStep\" in Normal mode",
+    "trueID": "geometry.ach.level10b"
   },
   {
     "id": "level11a",
@@ -186,7 +206,8 @@
     "rewardType": "color1",
     "rewardID": 13,
     "description": "Complete \"Clutterfunk\" in Practice mode",
-    "achievedDescription": "Completed \"Clutterfunk\" in Practice mode"
+    "achievedDescription": "Completed \"Clutterfunk\" in Practice mode",
+    "trueID": "geometry.ach.level11a"
   },
   {
     "id": "level11b",
@@ -195,7 +216,8 @@
     "rewardType": "ship",
     "rewardID": 2,
     "description": "Complete \"Clutterfunk\" in Normal mode",
-    "achievedDescription": "Completed \"Clutterfunk\" in Normal mode"
+    "achievedDescription": "Completed \"Clutterfunk\" in Normal mode",
+    "trueID": "geometry.ach.level11b"
   },
   {
     "id": "level12a",
@@ -204,7 +226,8 @@
     "rewardType": "color1",
     "rewardID": 14,
     "description": "Complete \"Theory of Everything\" in Practice mode",
-    "achievedDescription": "Completed \"Theory of Everything\" in Practice mode"
+    "achievedDescription": "Completed \"Theory of Everything\" in Practice mode",
+    "trueID": "geometry.ach.level12a"
   },
   {
     "id": "level12b",
@@ -213,7 +236,8 @@
     "rewardType": "cube",
     "rewardID": 27,
     "description": "Complete \"Theory of Everything\" in Normal mode",
-    "achievedDescription": "Completed \"Theory of Everything\" in Normal mode"
+    "achievedDescription": "Completed \"Theory of Everything\" in Normal mode",
+    "trueID": "geometry.ach.level12b"
   },
   {
     "id": "level13a",
@@ -222,7 +246,8 @@
     "rewardType": "color1",
     "rewardID": 16,
     "description": "Complete \"Electroman Adventures\" in Practice mode",
-    "achievedDescription": "Completed \"Electroman Adventures\" in Practice mode"
+    "achievedDescription": "Completed \"Electroman Adventures\" in Practice mode",
+    "trueID": "geometry.ach.level13a"
   },
   {
     "id": "level13b",
@@ -231,7 +256,8 @@
     "rewardType": "ship",
     "rewardID": 9,
     "description": "Complete \"Electroman Adventures\" in Normal mode",
-    "achievedDescription": "Completed \"Electroman Adventures\" in Normal mode"
+    "achievedDescription": "Completed \"Electroman Adventures\" in Normal mode",
+    "trueID": "geometry.ach.level13b"
   },
   {
     "id": "level14a",
@@ -240,7 +266,8 @@
     "rewardType": "ufo",
     "rewardID": 2,
     "description": "Complete \"Clubstep\" in Practice mode",
-    "achievedDescription": "Completed \"Clubstep\" in Practice mode"
+    "achievedDescription": "Completed \"Clubstep\" in Practice mode",
+    "trueID": "geometry.ach.level14a"
   },
   {
     "id": "level14b",
@@ -249,7 +276,8 @@
     "rewardType": "color2",
     "rewardID": 15,
     "description": "Complete \"Clubstep\" in Normal mode",
-    "achievedDescription": "Completed \"Clubstep\" in Normal mode"
+    "achievedDescription": "Completed \"Clubstep\" in Normal mode",
+    "trueID": "geometry.ach.level14b"
   },
   {
     "id": "level15a",
@@ -258,7 +286,8 @@
     "rewardType": "color1",
     "rewardID": 17,
     "description": "Complete \"Electrodynamix\" in Practice mode",
-    "achievedDescription": "Completed \"Electrodynamix\" in Practice mode"
+    "achievedDescription": "Completed \"Electrodynamix\" in Practice mode",
+    "trueID": "geometry.ach.level15a"
   },
   {
     "id": "level15b",
@@ -267,7 +296,8 @@
     "rewardType": "cube",
     "rewardID": 35,
     "description": "Complete \"Electrodynamix\" in Normal mode",
-    "achievedDescription": "Completed \"Electrodynamix\" in Normal mode"
+    "achievedDescription": "Completed \"Electrodynamix\" in Normal mode",
+    "trueID": "geometry.ach.level15b"
   },
   {
     "id": "level16a",
@@ -276,7 +306,8 @@
     "rewardType": "color1",
     "rewardID": 18,
     "description": "Complete \"Hexagon Force\" in Practice mode",
-    "achievedDescription": "Completed \"Hexagon Force\" in Practice mode"
+    "achievedDescription": "Completed \"Hexagon Force\" in Practice mode",
+    "trueID": "geometry.ach.level16a"
   },
   {
     "id": "level16b",
@@ -285,7 +316,8 @@
     "rewardType": "cube",
     "rewardID": 42,
     "description": "Complete \"Hexagon Force\" in Normal mode",
-    "achievedDescription": "Completed \"Hexagon Force\" in Normal mode"
+    "achievedDescription": "Completed \"Hexagon Force\" in Normal mode",
+    "trueID": "geometry.ach.level16b"
   },
   {
     "id": "level17a",
@@ -294,7 +326,8 @@
     "rewardType": "color1",
     "rewardID": 20,
     "description": "Complete \"Blast Processing\" in Practice mode",
-    "achievedDescription": "Completed \"Blast Processing\" in Practice mode"
+    "achievedDescription": "Completed \"Blast Processing\" in Practice mode",
+    "trueID": "geometry.ach.level17a"
   },
   {
     "id": "level17b",
@@ -303,7 +336,8 @@
     "rewardType": "cube",
     "rewardID": 44,
     "description": "Complete \"Blast Processing\" in Normal mode",
-    "achievedDescription": "Completed \"Blast Processing\" in Normal mode"
+    "achievedDescription": "Completed \"Blast Processing\" in Normal mode",
+    "trueID": "geometry.ach.level17b"
   },
   {
     "id": "level18a",
@@ -312,7 +346,8 @@
     "rewardType": "color1",
     "rewardID": 21,
     "description": "Complete \"Theory of Everything 2\" in Practice mode",
-    "achievedDescription": "Completed \"Theory of Everything 2\" in Practice mode"
+    "achievedDescription": "Completed \"Theory of Everything 2\" in Practice mode",
+    "trueID": "geometry.ach.level18a"
   },
   {
     "id": "level18b",
@@ -321,7 +356,8 @@
     "rewardType": "cube",
     "rewardID": 45,
     "description": "Complete \"Theory of Everything 2\" in Normal mode",
-    "achievedDescription": "Completed \"Theory of Everything 2\" in Normal mode"
+    "achievedDescription": "Completed \"Theory of Everything 2\" in Normal mode",
+    "trueID": "geometry.ach.level18b"
   },
   {
     "id": "level19a",
@@ -330,7 +366,8 @@
     "rewardType": "color1",
     "rewardID": 24,
     "description": "Complete \"Geometrical Dominator\" in Practice mode",
-    "achievedDescription": "Completed \"Geometrical Dominator\" in Practice mode"
+    "achievedDescription": "Completed \"Geometrical Dominator\" in Practice mode",
+    "trueID": "geometry.ach.level19a"
   },
   {
     "id": "level19b",
@@ -339,7 +376,8 @@
     "rewardType": "robot",
     "rewardID": 3,
     "description": "Complete \"Geometrical Dominator\" in Normal mode",
-    "achievedDescription": "Completed \"Geometrical Dominator\" in Normal mode"
+    "achievedDescription": "Completed \"Geometrical Dominator\" in Normal mode",
+    "trueID": "geometry.ach.level19b"
   },
   {
     "id": "level20a",
@@ -348,7 +386,8 @@
     "rewardType": "color1",
     "rewardID": 25,
     "description": "Complete \"Deadlocked\" in Practice mode",
-    "achievedDescription": "Completed \"Deadlocked\" in Practice mode"
+    "achievedDescription": "Completed \"Deadlocked\" in Practice mode",
+    "trueID": "geometry.ach.level20a"
   },
   {
     "id": "level20b",
@@ -357,7 +396,8 @@
     "rewardType": "robot",
     "rewardID": 5,
     "description": "Complete \"Deadlocked\" in Normal mode",
-    "achievedDescription": "Completed \"Deadlocked\" in Normal mode"
+    "achievedDescription": "Completed \"Deadlocked\" in Normal mode",
+    "trueID": "geometry.ach.level20b"
   },
   {
     "id": "level21a",
@@ -366,7 +406,8 @@
     "rewardType": "color1",
     "rewardID": 29,
     "description": "Complete \"Fingerdash\" in Practice mode",
-    "achievedDescription": "Completed \"Fingerdash\" in Practice mode"
+    "achievedDescription": "Completed \"Fingerdash\" in Practice mode",
+    "trueID": "geometry.ach.level21a"
   },
   {
     "id": "level21b",
@@ -375,7 +416,8 @@
     "rewardType": "cube",
     "rewardID": 74,
     "description": "Complete \"Fingerdash\" in Normal mode",
-    "achievedDescription": "Completed \"Fingerdash\" in Normal mode"
+    "achievedDescription": "Completed \"Fingerdash\" in Normal mode",
+    "trueID": "geometry.ach.level21b"
   },
   {
     "id": "demon01",
@@ -384,7 +426,8 @@
     "rewardType": "cube",
     "rewardID": 19,
     "description": "Complete a Demon difficulty level in Normal mode",
-    "achievedDescription": "Completed a Demon difficulty level in Normal mode"
+    "achievedDescription": "Completed a Demon difficulty level in Normal mode",
+    "trueID": "geometry.ach.demon01"
   },
   {
     "id": "demon02",
@@ -393,7 +436,8 @@
     "rewardType": "cube",
     "rewardID": 20,
     "description": "Complete 2 Demon difficulty levels in Normal mode",
-    "achievedDescription": "Completed 2 Demon difficulty levels in Normal mode"
+    "achievedDescription": "Completed 2 Demon difficulty levels in Normal mode",
+    "trueID": "geometry.ach.demon02"
   },
   {
     "id": "demon03",
@@ -402,7 +446,8 @@
     "rewardType": "cube",
     "rewardID": 21,
     "description": "Complete 3 Demon difficulty levels in Normal mode",
-    "achievedDescription": "Completed 3 Demon difficulty levels in Normal mode"
+    "achievedDescription": "Completed 3 Demon difficulty levels in Normal mode",
+    "trueID": "geometry.ach.demon03"
   },
   {
     "id": "demon04",
@@ -411,7 +456,8 @@
     "rewardType": "cube",
     "rewardID": 22,
     "description": "Complete 4 Demon difficulty levels in Normal mode",
-    "achievedDescription": "Completed 4 Demon difficulty levels in Normal mode"
+    "achievedDescription": "Completed 4 Demon difficulty levels in Normal mode",
+    "trueID": "geometry.ach.demon04"
   },
   {
     "id": "demon05",
@@ -420,7 +466,8 @@
     "rewardType": "ship",
     "rewardID": 3,
     "description": "Complete 5 Demon difficulty levels in Normal mode",
-    "achievedDescription": "Completed 5 Demon difficulty levels in Normal mode"
+    "achievedDescription": "Completed 5 Demon difficulty levels in Normal mode",
+    "trueID": "geometry.ach.demon05"
   },
   {
     "id": "demon06",
@@ -429,7 +476,8 @@
     "rewardType": "ship",
     "rewardID": 6,
     "description": "Complete 10 Demon difficulty levels in Normal mode",
-    "achievedDescription": "Completed 10 Demon difficulty levels in Normal mode"
+    "achievedDescription": "Completed 10 Demon difficulty levels in Normal mode",
+    "trueID": "geometry.ach.demon06"
   },
   {
     "id": "demon07",
@@ -438,7 +486,8 @@
     "rewardType": "ship",
     "rewardID": 8,
     "description": "Complete 15 Demon difficulty levels in Normal mode",
-    "achievedDescription": "Completed 15 Demon difficulty levels in Normal mode"
+    "achievedDescription": "Completed 15 Demon difficulty levels in Normal mode",
+    "trueID": "geometry.ach.demon07"
   },
   {
     "id": "demon08",
@@ -447,7 +496,8 @@
     "rewardType": "ball",
     "rewardID": 5,
     "description": "Complete 20 Demon difficulty levels in Normal mode",
-    "achievedDescription": "Completed 20 Demon difficulty levels in Normal mode"
+    "achievedDescription": "Completed 20 Demon difficulty levels in Normal mode",
+    "trueID": "geometry.ach.demon08"
   },
   {
     "id": "demon09",
@@ -456,7 +506,8 @@
     "rewardType": "cube",
     "rewardID": 37,
     "description": "Complete 30 Demon difficulty levels in Normal mode",
-    "achievedDescription": "Completed 30 Demon difficulty levels in Normal mode"
+    "achievedDescription": "Completed 30 Demon difficulty levels in Normal mode",
+    "trueID": "geometry.ach.demon09"
   },
   {
     "id": "demon10",
@@ -465,7 +516,8 @@
     "rewardType": "ball",
     "rewardID": 10,
     "description": "Complete 40 Demon difficulty levels in Normal mode",
-    "achievedDescription": "Completed 40 Demon difficulty levels in Normal mode"
+    "achievedDescription": "Completed 40 Demon difficulty levels in Normal mode",
+    "trueID": "geometry.ach.demon10"
   },
   {
     "id": "demon11",
@@ -474,7 +526,8 @@
     "rewardType": "ufo",
     "rewardID": 15,
     "description": "Complete 50 Demon difficulty levels in Normal mode",
-    "achievedDescription": "Completed 50 Demon difficulty levels in Normal mode"
+    "achievedDescription": "Completed 50 Demon difficulty levels in Normal mode",
+    "trueID": "geometry.ach.demon11"
   },
   {
     "id": "demon12",
@@ -483,34 +536,38 @@
     "rewardType": "ship",
     "rewardID": 35,
     "description": "Complete 60 Demon difficulty levels in Normal mode",
-    "achievedDescription": "Completed 60 Demon difficulty levels in Normal mode"
+    "achievedDescription": "Completed 60 Demon difficulty levels in Normal mode",
+    "trueID": "geometry.ach.demon12"
   },
   {
-    "id": "demoncoin01",
+    "id": "ultimatedemon01",
     "game": "gd",
     "name": "Ultimate Clubstep",
     "rewardType": "ufo",
     "rewardID": 14,
     "description": "Collect all 3 coins on Clubstep",
-    "achievedDescription": "Collected all 3 coins on Clubstep"
+    "achievedDescription": "Collected all 3 coins on Clubstep",
+    "trueID": "geometry.ach.demoncoin01"
   },
   {
-    "id": "demoncoin02",
+    "id": "ultimatedemon02",
     "game": "gd",
     "name": "Ultimate TOE2",
     "rewardType": "cube",
     "rewardID": 60,
     "description": "Collect all 3 coins on Theory of Everything 2",
-    "achievedDescription": "Collected all 3 coins on Theory of Everything 2"
+    "achievedDescription": "Collected all 3 coins on Theory of Everything 2",
+    "trueID": "geometry.ach.demoncoin02"
   },
   {
-    "id": "demoncoin03",
+    "id": "ultimatedemon03",
     "game": "gd",
     "name": "Ultimate Deadlocked",
     "rewardType": "cube",
     "rewardID": 59,
     "description": "Collect all 3 coins on Deadlocked",
-    "achievedDescription": "Collected all 3 coins on Deadlocked"
+    "achievedDescription": "Collected all 3 coins on Deadlocked",
+    "trueID": "geometry.ach.demoncoin03"
   },
   {
     "id": "stars01",
@@ -519,7 +576,8 @@
     "rewardType": "cube",
     "rewardID": 23,
     "description": "Collect 100 stars",
-    "achievedDescription": "Collected 100 stars"
+    "achievedDescription": "Collected 100 stars",
+    "trueID": "geometry.ach.stars01"
   },
   {
     "id": "stars02",
@@ -528,7 +586,8 @@
     "rewardType": "cube",
     "rewardID": 24,
     "description": "Collect 200 stars",
-    "achievedDescription": "Collected 200 stars"
+    "achievedDescription": "Collected 200 stars",
+    "trueID": "geometry.ach.stars02"
   },
   {
     "id": "stars03",
@@ -537,7 +596,8 @@
     "rewardType": "cube",
     "rewardID": 25,
     "description": "Collect 300 stars",
-    "achievedDescription": "Collected 300 stars"
+    "achievedDescription": "Collected 300 stars",
+    "trueID": "geometry.ach.stars03"
   },
   {
     "id": "stars04",
@@ -546,7 +606,8 @@
     "rewardType": "cube",
     "rewardID": 26,
     "description": "Collect 400 stars",
-    "achievedDescription": "Collected 400 stars"
+    "achievedDescription": "Collected 400 stars",
+    "trueID": "geometry.ach.stars04"
   },
   {
     "id": "stars05",
@@ -555,7 +616,8 @@
     "rewardType": "ship",
     "rewardID": 4,
     "description": "Collect 500 stars",
-    "achievedDescription": "Collected 500 stars"
+    "achievedDescription": "Collected 500 stars",
+    "trueID": "geometry.ach.stars05"
   },
   {
     "id": "stars06",
@@ -564,7 +626,8 @@
     "rewardType": "ship",
     "rewardID": 5,
     "description": "Collect 600 stars",
-    "achievedDescription": "Collected 600 stars"
+    "achievedDescription": "Collected 600 stars",
+    "trueID": "geometry.ach.stars06"
   },
   {
     "id": "stars07",
@@ -573,7 +636,8 @@
     "rewardType": "ship",
     "rewardID": 7,
     "description": "Collect 700 stars",
-    "achievedDescription": "Collected 700 stars"
+    "achievedDescription": "Collected 700 stars",
+    "trueID": "geometry.ach.stars07"
   },
   {
     "id": "stars08",
@@ -582,7 +646,8 @@
     "rewardType": "cube",
     "rewardID": 28,
     "description": "Collect 800 stars",
-    "achievedDescription": "Collected 800 stars"
+    "achievedDescription": "Collected 800 stars",
+    "trueID": "geometry.ach.stars08"
   },
   {
     "id": "stars09",
@@ -591,7 +656,8 @@
     "rewardType": "cube",
     "rewardID": 29,
     "description": "Collect 900 stars",
-    "achievedDescription": "Collected 900 stars"
+    "achievedDescription": "Collected 900 stars",
+    "trueID": "geometry.ach.stars09"
   },
   {
     "id": "stars10",
@@ -600,7 +666,8 @@
     "rewardType": "cube",
     "rewardID": 30,
     "description": "Collect 1000 stars",
-    "achievedDescription": "Collected 1000 stars"
+    "achievedDescription": "Collected 1000 stars",
+    "trueID": "geometry.ach.stars10"
   },
   {
     "id": "stars11",
@@ -609,7 +676,8 @@
     "rewardType": "ship",
     "rewardID": 18,
     "description": "Collect 1500 stars",
-    "achievedDescription": "Collected 1500 stars"
+    "achievedDescription": "Collected 1500 stars",
+    "trueID": "geometry.ach.stars11"
   },
   {
     "id": "stars12",
@@ -618,7 +686,8 @@
     "rewardType": "ball",
     "rewardID": 9,
     "description": "Collect 2000 stars",
-    "achievedDescription": "Collected 2000 stars"
+    "achievedDescription": "Collected 2000 stars",
+    "trueID": "geometry.ach.stars12"
   },
   {
     "id": "stars13",
@@ -627,7 +696,8 @@
     "rewardType": "wave",
     "rewardID": 12,
     "description": "Collect 2500 stars",
-    "achievedDescription": "Collected 2500 stars"
+    "achievedDescription": "Collected 2500 stars",
+    "trueID": "geometry.ach.stars13"
   },
   {
     "id": "stars14",
@@ -636,7 +706,8 @@
     "rewardType": "cube",
     "rewardID": 61,
     "description": "Collect 3000 stars",
-    "achievedDescription": "Collected 3000 stars"
+    "achievedDescription": "Collected 3000 stars",
+    "trueID": "geometry.ach.stars14"
   },
   {
     "id": "stars15",
@@ -645,7 +716,8 @@
     "rewardType": "ship",
     "rewardID": 19,
     "description": "Collect 3500 stars",
-    "achievedDescription": "Collected 3500 stars"
+    "achievedDescription": "Collected 3500 stars",
+    "trueID": "geometry.ach.stars15"
   },
   {
     "id": "stars16",
@@ -654,7 +726,8 @@
     "rewardType": "wave",
     "rewardID": 9,
     "description": "Collect 4000 stars",
-    "achievedDescription": "Collected 4000 stars"
+    "achievedDescription": "Collected 4000 stars",
+    "trueID": "geometry.ach.stars16"
   },
   {
     "id": "stars17",
@@ -663,7 +736,8 @@
     "rewardType": "wave",
     "rewardID": 15,
     "description": "Collect 4500 stars",
-    "achievedDescription": "Collected 4500 stars"
+    "achievedDescription": "Collected 4500 stars",
+    "trueID": "geometry.ach.stars17"
   },
   {
     "id": "stars18",
@@ -672,7 +746,8 @@
     "rewardType": "color1",
     "rewardID": 28,
     "description": "Collect 5000 stars",
-    "achievedDescription": "Collected 5000 stars"
+    "achievedDescription": "Collected 5000 stars",
+    "trueID": "geometry.ach.stars18"
   },
   {
     "id": "stars19",
@@ -681,7 +756,8 @@
     "rewardType": "cube",
     "rewardID": 82,
     "description": "Collect 5500 stars",
-    "achievedDescription": "Collected 5500 stars"
+    "achievedDescription": "Collected 5500 stars",
+    "trueID": "geometry.ach.stars19"
   },
   {
     "id": "stars20",
@@ -690,7 +766,8 @@
     "rewardType": "ball",
     "rewardID": 27,
     "description": "Collect 6000 stars",
-    "achievedDescription": "Collected 6000 stars"
+    "achievedDescription": "Collected 6000 stars",
+    "trueID": "geometry.ach.stars20"
   },
   {
     "id": "stars21",
@@ -699,7 +776,8 @@
     "rewardType": "color1",
     "rewardID": 34,
     "description": "Collect 6500 stars",
-    "achievedDescription": "Collected 6500 stars"
+    "achievedDescription": "Collected 6500 stars",
+    "trueID": "geometry.ach.stars21"
   },
   {
     "id": "stars22",
@@ -708,7 +786,8 @@
     "rewardType": "ship",
     "rewardID": 30,
     "description": "Collect 7000 stars",
-    "achievedDescription": "Collected 7000 stars"
+    "achievedDescription": "Collected 7000 stars",
+    "trueID": "geometry.ach.stars22"
   },
   {
     "id": "stars23",
@@ -717,7 +796,8 @@
     "rewardType": "cube",
     "rewardID": 100,
     "description": "Collect 7500 stars",
-    "achievedDescription": "Collected 7500 stars"
+    "achievedDescription": "Collected 7500 stars",
+    "trueID": "geometry.ach.stars23"
   },
   {
     "id": "stars24",
@@ -726,7 +806,8 @@
     "rewardType": "spider",
     "rewardID": 4,
     "description": "Collect 8000 stars",
-    "achievedDescription": "Collected 8000 stars"
+    "achievedDescription": "Collected 8000 stars",
+    "trueID": "geometry.ach.stars24"
   },
   {
     "id": "stars25",
@@ -735,7 +816,8 @@
     "rewardType": "cube",
     "rewardID": 83,
     "description": "Collect 9000 stars",
-    "achievedDescription": "Collected 9000 stars"
+    "achievedDescription": "Collected 9000 stars",
+    "trueID": "geometry.ach.stars25"
   },
   {
     "id": "stars26",
@@ -744,7 +826,8 @@
     "rewardType": "robot",
     "rewardID": 8,
     "description": "Collect 10000 stars",
-    "achievedDescription": "Collected 10000 stars"
+    "achievedDescription": "Collected 10000 stars",
+    "trueID": "geometry.ach.stars26"
   },
   {
     "id": "coins01",
@@ -753,7 +836,8 @@
     "rewardType": "cube",
     "rewardID": 31,
     "description": "Collect 5 Secret Coins",
-    "achievedDescription": "Collected 5 Secret Coins"
+    "achievedDescription": "Collected 5 Secret Coins",
+    "trueID": "geometry.ach.coins01"
   },
   {
     "id": "coins02",
@@ -762,7 +846,8 @@
     "rewardType": "ball",
     "rewardID": 2,
     "description": "Collect 10 Secret Coins",
-    "achievedDescription": "Collected 10 Secret Coins"
+    "achievedDescription": "Collected 10 Secret Coins",
+    "trueID": "geometry.ach.coins02"
   },
   {
     "id": "coins03",
@@ -771,7 +856,8 @@
     "rewardType": "color2",
     "rewardID": 16,
     "description": "Collect 15 Secret Coins",
-    "achievedDescription": "Collected 15 Secret Coins"
+    "achievedDescription": "Collected 15 Secret Coins",
+    "trueID": "geometry.ach.coins03"
   },
   {
     "id": "coins04",
@@ -780,7 +866,8 @@
     "rewardType": "ufo",
     "rewardID": 3,
     "description": "Collect 20 Secret Coins",
-    "achievedDescription": "Collected 20 Secret Coins"
+    "achievedDescription": "Collected 20 Secret Coins",
+    "trueID": "geometry.ach.coins04"
   },
   {
     "id": "coins05",
@@ -789,7 +876,8 @@
     "rewardType": "cube",
     "rewardID": 32,
     "description": "Collect 25 Secret Coins",
-    "achievedDescription": "Collected 25 Secret Coins"
+    "achievedDescription": "Collected 25 Secret Coins",
+    "trueID": "geometry.ach.coins05"
   },
   {
     "id": "coins06",
@@ -798,7 +886,8 @@
     "rewardType": "color1",
     "rewardID": 15,
     "description": "Collect 30 Secret Coins",
-    "achievedDescription": "Collected 30 Secret Coins"
+    "achievedDescription": "Collected 30 Secret Coins",
+    "trueID": "geometry.ach.coins06"
   },
   {
     "id": "coins07",
@@ -807,7 +896,8 @@
     "rewardType": "ball",
     "rewardID": 3,
     "description": "Collect 35 Secret Coins",
-    "achievedDescription": "Collected 35 Secret Coins"
+    "achievedDescription": "Collected 35 Secret Coins",
+    "trueID": "geometry.ach.coins07"
   },
   {
     "id": "coins08",
@@ -816,7 +906,8 @@
     "rewardType": "cube",
     "rewardID": 34,
     "description": "Collect 40 Secret Coins",
-    "achievedDescription": "Collected 40 Secret Coins"
+    "achievedDescription": "Collected 40 Secret Coins",
+    "trueID": "geometry.ach.coins08"
   },
   {
     "id": "coins09",
@@ -825,7 +916,8 @@
     "rewardType": "ufo",
     "rewardID": 4,
     "description": "Collect 45 Secret Coins",
-    "achievedDescription": "Collected 45 Secret Coins"
+    "achievedDescription": "Collected 45 Secret Coins",
+    "trueID": "geometry.ach.coins09"
   },
   {
     "id": "coins10",
@@ -834,7 +926,8 @@
     "rewardType": "ball",
     "rewardID": 4,
     "description": "Collect 50 Secret Coins",
-    "achievedDescription": "Collected 50 Secret Coins"
+    "achievedDescription": "Collected 50 Secret Coins",
+    "trueID": "geometry.ach.coins10"
   },
   {
     "id": "coins11",
@@ -843,7 +936,8 @@
     "rewardType": "ship",
     "rewardID": 14,
     "description": "Collect 55 Secret Coins",
-    "achievedDescription": "Collected 55 Secret Coins"
+    "achievedDescription": "Collected 55 Secret Coins",
+    "trueID": "geometry.ach.coins11"
   },
   {
     "id": "coins12",
@@ -852,7 +946,8 @@
     "rewardType": "cube",
     "rewardID": 38,
     "description": "Collect 60 Secret Coins",
-    "achievedDescription": "Collected 60 Secret Coins"
+    "achievedDescription": "Collected 60 Secret Coins",
+    "trueID": "geometry.ach.coins12"
   },
   {
     "id": "coins13",
@@ -861,7 +956,8 @@
     "rewardType": "ufo",
     "rewardID": 6,
     "description": "Collect 65 Secret Coins",
-    "achievedDescription": "Collected 65 Secret Coins"
+    "achievedDescription": "Collected 65 Secret Coins",
+    "trueID": "geometry.ach.coins13"
   },
   {
     "id": "coins14",
@@ -870,7 +966,8 @@
     "rewardType": "ball",
     "rewardID": 6,
     "description": "Collect 70 Secret Coins",
-    "achievedDescription": "Collected 70 Secret Coins"
+    "achievedDescription": "Collected 70 Secret Coins",
+    "trueID": "geometry.ach.coins14"
   },
   {
     "id": "coins15",
@@ -879,7 +976,8 @@
     "rewardType": "ship",
     "rewardID": 12,
     "description": "Collect 75 Secret Coins",
-    "achievedDescription": "Collected 75 Secret Coins"
+    "achievedDescription": "Collected 75 Secret Coins",
+    "trueID": "geometry.ach.coins15"
   },
   {
     "id": "coins16",
@@ -888,7 +986,8 @@
     "rewardType": "ufo",
     "rewardID": 7,
     "description": "Collect 80 Secret Coins",
-    "achievedDescription": "Collected 80 Secret Coins"
+    "achievedDescription": "Collected 80 Secret Coins",
+    "trueID": "geometry.ach.coins16"
   },
   {
     "id": "coins17",
@@ -897,7 +996,8 @@
     "rewardType": "ufo",
     "rewardID": 8,
     "description": "Collect 85 Secret Coins",
-    "achievedDescription": "Collected 85 Secret Coins"
+    "achievedDescription": "Collected 85 Secret Coins",
+    "trueID": "geometry.ach.coins17"
   },
   {
     "id": "coins18",
@@ -906,7 +1006,8 @@
     "rewardType": "ship",
     "rewardID": 16,
     "description": "Collect 90 Secret Coins",
-    "achievedDescription": "Collected 90 Secret Coins"
+    "achievedDescription": "Collected 90 Secret Coins",
+    "trueID": "geometry.ach.coins18"
   },
   {
     "id": "coins19",
@@ -915,7 +1016,8 @@
     "rewardType": "cube",
     "rewardID": 43,
     "description": "Collect 95 Secret Coins",
-    "achievedDescription": "Collected 95 Secret Coins"
+    "achievedDescription": "Collected 95 Secret Coins",
+    "trueID": "geometry.ach.coins19"
   },
   {
     "id": "coins20",
@@ -924,7 +1026,8 @@
     "rewardType": "ufo",
     "rewardID": 9,
     "description": "Collect 100 Secret Coins",
-    "achievedDescription": "Collected 100 Secret Coins"
+    "achievedDescription": "Collected 100 Secret Coins",
+    "trueID": "geometry.ach.coins20"
   },
   {
     "id": "coins21",
@@ -933,7 +1036,8 @@
     "rewardType": "ball",
     "rewardID": 14,
     "description": "Collect 105 Secret Coins",
-    "achievedDescription": "Collected 105 Secret Coins"
+    "achievedDescription": "Collected 105 Secret Coins",
+    "trueID": "geometry.ach.coins21"
   },
   {
     "id": "coins22",
@@ -942,7 +1046,8 @@
     "rewardType": "cube",
     "rewardID": 56,
     "description": "Collect 110 Secret Coins",
-    "achievedDescription": "Collected 110 Secret Coins"
+    "achievedDescription": "Collected 110 Secret Coins",
+    "trueID": "geometry.ach.coins22"
   },
   {
     "id": "coins23",
@@ -951,7 +1056,8 @@
     "rewardType": "ship",
     "rewardID": 24,
     "description": "Collect 115 Secret Coins",
-    "achievedDescription": "Collected 115 Secret Coins"
+    "achievedDescription": "Collected 115 Secret Coins",
+    "trueID": "geometry.ach.coins23"
   },
   {
     "id": "coins24",
@@ -960,7 +1066,8 @@
     "rewardType": "ufo",
     "rewardID": 18,
     "description": "Collect 120 Secret Coins",
-    "achievedDescription": "Collected 120 Secret Coins"
+    "achievedDescription": "Collected 120 Secret Coins",
+    "trueID": "geometry.ach.coins24"
   },
   {
     "id": "coins25",
@@ -969,7 +1076,8 @@
     "rewardType": "cube",
     "rewardID": 88,
     "description": "Collect 130 Secret Coins",
-    "achievedDescription": "Collected 130 Secret Coins"
+    "achievedDescription": "Collected 130 Secret Coins",
+    "trueID": "geometry.ach.coins25"
   },
   {
     "id": "usercoins01",
@@ -978,7 +1086,8 @@
     "rewardType": "wave",
     "rewardID": 2,
     "description": "Collect 1 User Coins",
-    "achievedDescription": "Collected your first user coin!"
+    "achievedDescription": "Collected your first user coin!",
+    "trueID": "geometry.ach.usercoins01"
   },
   {
     "id": "usercoins02",
@@ -987,7 +1096,8 @@
     "rewardType": "cube",
     "rewardID": 49,
     "description": "Collect 10 User Coins",
-    "achievedDescription": "Collected 10 User Coins"
+    "achievedDescription": "Collected 10 User Coins",
+    "trueID": "geometry.ach.usercoins02"
   },
   {
     "id": "usercoins03",
@@ -996,7 +1106,8 @@
     "rewardType": "wave",
     "rewardID": 4,
     "description": "Collect 20 User Coins",
-    "achievedDescription": "Collected 20 User Coins"
+    "achievedDescription": "Collected 20 User Coins",
+    "trueID": "geometry.ach.usercoins03"
   },
   {
     "id": "usercoins04",
@@ -1005,7 +1116,8 @@
     "rewardType": "ship",
     "rewardID": 25,
     "description": "Collected 30 User Coins",
-    "achievedDescription": "Collected 30 User Coins"
+    "achievedDescription": "Collected 30 User Coins",
+    "trueID": "geometry.ach.usercoins04"
   },
   {
     "id": "usercoins05",
@@ -1014,7 +1126,8 @@
     "rewardType": "ball",
     "rewardID": 16,
     "description": "Collected 40 User Coins",
-    "achievedDescription": "Collected 40 User Coins"
+    "achievedDescription": "Collected 40 User Coins",
+    "trueID": "geometry.ach.usercoins05"
   },
   {
     "id": "usercoins06",
@@ -1023,7 +1136,8 @@
     "rewardType": "ufo",
     "rewardID": 13,
     "description": "Collect 50 User Coins",
-    "achievedDescription": "Collected 50 User Coins"
+    "achievedDescription": "Collected 50 User Coins",
+    "trueID": "geometry.ach.usercoins06"
   },
   {
     "id": "usercoins07",
@@ -1032,7 +1146,8 @@
     "rewardType": "cube",
     "rewardID": 53,
     "description": "Collect 60 User Coins",
-    "achievedDescription": "Collected 60 User Coins"
+    "achievedDescription": "Collected 60 User Coins",
+    "trueID": "geometry.ach.usercoins07"
   },
   {
     "id": "usercoins08",
@@ -1041,7 +1156,8 @@
     "rewardType": "wave",
     "rewardID": 6,
     "description": "Collect 70 User Coins",
-    "achievedDescription": "Collected 70 User Coins"
+    "achievedDescription": "Collected 70 User Coins",
+    "trueID": "geometry.ach.usercoins08"
   },
   {
     "id": "usercoins09",
@@ -1050,7 +1166,8 @@
     "rewardType": "ship",
     "rewardID": 23,
     "description": "Collect 80 User Coins",
-    "achievedDescription": "Collected 80 User Coins"
+    "achievedDescription": "Collected 80 User Coins",
+    "trueID": "geometry.ach.usercoins09"
   },
   {
     "id": "usercoins10",
@@ -1059,7 +1176,8 @@
     "rewardType": "ball",
     "rewardID": 17,
     "description": "Collect 90 User Coins",
-    "achievedDescription": "Collected 90 User Coins"
+    "achievedDescription": "Collected 90 User Coins",
+    "trueID": "geometry.ach.usercoins10"
   },
   {
     "id": "usercoins11",
@@ -1068,7 +1186,8 @@
     "rewardType": "robot",
     "rewardID": 6,
     "description": "Collect 100 User Coins",
-    "achievedDescription": "Collected 100 User Coins"
+    "achievedDescription": "Collected 100 User Coins",
+    "trueID": "geometry.ach.usercoins11"
   },
   {
     "id": "usercoins12",
@@ -1077,7 +1196,8 @@
     "rewardType": "cube",
     "rewardID": 54,
     "description": "Collected 110 User Coins",
-    "achievedDescription": "Collected 110 User Coins"
+    "achievedDescription": "Collected 110 User Coins",
+    "trueID": "geometry.ach.usercoins12"
   },
   {
     "id": "usercoins13",
@@ -1086,7 +1206,8 @@
     "rewardType": "wave",
     "rewardID": 7,
     "description": "Collect 120 User Coins",
-    "achievedDescription": "Collected 120 User Coins"
+    "achievedDescription": "Collected 120 User Coins",
+    "trueID": "geometry.ach.usercoins13"
   },
   {
     "id": "usercoins14",
@@ -1095,7 +1216,8 @@
     "rewardType": "ship",
     "rewardID": 21,
     "description": "Collect 130 User Coins",
-    "achievedDescription": "Collected 130 User Coins"
+    "achievedDescription": "Collected 130 User Coins",
+    "trueID": "geometry.ach.usercoins14"
   },
   {
     "id": "usercoins15",
@@ -1104,7 +1226,8 @@
     "rewardType": "ball",
     "rewardID": 11,
     "description": "Collect 140 User Coins",
-    "achievedDescription": "Collected 140 User Coins"
+    "achievedDescription": "Collected 140 User Coins",
+    "trueID": "geometry.ach.usercoins15"
   },
   {
     "id": "usercoins16",
@@ -1113,7 +1236,8 @@
     "rewardType": "cube",
     "rewardID": 52,
     "description": "Collect 150 User Coins",
-    "achievedDescription": "Collected 150 User Coins"
+    "achievedDescription": "Collected 150 User Coins",
+    "trueID": "geometry.ach.usercoins16"
   },
   {
     "id": "usercoins17",
@@ -1122,7 +1246,8 @@
     "rewardType": "ufo",
     "rewardID": 17,
     "description": "Collect 160 User Coins",
-    "achievedDescription": "Collected 160 User Coins"
+    "achievedDescription": "Collected 160 User Coins",
+    "trueID": "geometry.ach.usercoins17"
   },
   {
     "id": "usercoins18",
@@ -1131,7 +1256,8 @@
     "rewardType": "wave",
     "rewardID": 10,
     "description": "Collect 170 User Coins",
-    "achievedDescription": "Collected 170 User Coins"
+    "achievedDescription": "Collected 170 User Coins",
+    "trueID": "geometry.ach.usercoins18"
   },
   {
     "id": "usercoins19",
@@ -1140,7 +1266,8 @@
     "rewardType": "ship",
     "rewardID": 22,
     "description": "Collect 180 User Coins",
-    "achievedDescription": "Collected 180 User Coins"
+    "achievedDescription": "Collected 180 User Coins",
+    "trueID": "geometry.ach.usercoins19"
   },
   {
     "id": "usercoins20",
@@ -1149,7 +1276,8 @@
     "rewardType": "ball",
     "rewardID": 18,
     "description": "Collect 190 User Coins",
-    "achievedDescription": "Collected 190 User Coins"
+    "achievedDescription": "Collected 190 User Coins",
+    "trueID": "geometry.ach.usercoins20"
   },
   {
     "id": "usercoins21",
@@ -1158,7 +1286,8 @@
     "rewardType": "robot",
     "rewardID": 4,
     "description": "Collect 200 User Coins",
-    "achievedDescription": "Collected 200 User Coins"
+    "achievedDescription": "Collected 200 User Coins",
+    "trueID": "geometry.ach.usercoins21"
   },
   {
     "id": "usercoins22",
@@ -1167,7 +1296,8 @@
     "rewardType": "cube",
     "rewardID": 99,
     "description": "Collect 225 User Coins",
-    "achievedDescription": "Collected 225 User Coins"
+    "achievedDescription": "Collected 225 User Coins",
+    "trueID": "geometry.ach.usercoins22"
   },
   {
     "id": "usercoins23",
@@ -1176,7 +1306,8 @@
     "rewardType": "color1",
     "rewardID": 30,
     "description": "Collect 250 User Coins",
-    "achievedDescription": "Collected 250 User Coins"
+    "achievedDescription": "Collected 250 User Coins",
+    "trueID": "geometry.ach.usercoins23"
   },
   {
     "id": "usercoins24",
@@ -1185,7 +1316,8 @@
     "rewardType": "spider",
     "rewardID": 8,
     "description": "Collect 300 User Coins",
-    "achievedDescription": "Collected 300 User Coins"
+    "achievedDescription": "Collected 300 User Coins",
+    "trueID": "geometry.ach.usercoins24"
   },
   {
     "id": "usercoins25",
@@ -1194,7 +1326,8 @@
     "rewardType": "color1",
     "rewardID": 32,
     "description": "Collect 350 User Coins",
-    "achievedDescription": "Collected 350 User Coins"
+    "achievedDescription": "Collected 350 User Coins",
+    "trueID": "geometry.ach.usercoins25"
   },
   {
     "id": "usercoins26",
@@ -1203,7 +1336,8 @@
     "rewardType": "ball",
     "rewardID": 29,
     "description": "Collect 425 User Coins",
-    "achievedDescription": "Collected 425 User Coins"
+    "achievedDescription": "Collected 425 User Coins",
+    "trueID": "geometry.ach.usercoins26"
   },
   {
     "id": "usercoins27",
@@ -1212,7 +1346,8 @@
     "rewardType": "cube",
     "rewardID": 93,
     "description": "Collect 500 User Coins",
-    "achievedDescription": "Collected 500 User Coins"
+    "achievedDescription": "Collected 500 User Coins",
+    "trueID": "geometry.ach.usercoins27"
   },
   {
     "id": "usercoins28",
@@ -1221,7 +1356,8 @@
     "rewardType": "wave",
     "rewardID": 22,
     "description": "Collect 600 User Coins",
-    "achievedDescription": "Collected 600 User Coins"
+    "achievedDescription": "Collected 600 User Coins",
+    "trueID": "geometry.ach.usercoins28"
   },
   {
     "id": "usercoins29",
@@ -1230,7 +1366,8 @@
     "rewardType": "robot",
     "rewardID": 15,
     "description": "Collect 700 User Coins",
-    "achievedDescription": "Collected 700 User Coins"
+    "achievedDescription": "Collected 700 User Coins",
+    "trueID": "geometry.ach.usercoins29"
   },
   {
     "id": "usercoins30",
@@ -1239,7 +1376,8 @@
     "rewardType": "ship",
     "rewardID": 33,
     "description": "Collect 800 User Coins",
-    "achievedDescription": "Collected 800 User Coins"
+    "achievedDescription": "Collected 800 User Coins",
+    "trueID": "geometry.ach.usercoins30"
   },
   {
     "id": "usercoins31",
@@ -1248,7 +1386,8 @@
     "rewardType": "ball",
     "rewardID": 28,
     "description": "Collect 900 User Coins",
-    "achievedDescription": "Collected 900 User Coins"
+    "achievedDescription": "Collected 900 User Coins",
+    "trueID": "geometry.ach.usercoins31"
   },
   {
     "id": "usercoins32",
@@ -1257,7 +1396,8 @@
     "rewardType": "ufo",
     "rewardID": 28,
     "description": "Collect 1000 User Coins",
-    "achievedDescription": "Collected 1000 User Coins"
+    "achievedDescription": "Collected 1000 User Coins",
+    "trueID": "geometry.ach.usercoins32"
   },
   {
     "id": "mappacks01",
@@ -1266,7 +1406,8 @@
     "rewardType": "cube",
     "rewardID": 33,
     "description": "Complete a Map Pack",
-    "achievedDescription": "Completed a Map Pack"
+    "achievedDescription": "Completed a Map Pack",
+    "trueID": "geometry.ach.mappacks01"
   },
   {
     "id": "mappacks02",
@@ -1275,7 +1416,8 @@
     "rewardType": "ship",
     "rewardID": 10,
     "description": "Complete 5 Map Packs",
-    "achievedDescription": "Completed 5 Map Packs"
+    "achievedDescription": "Completed 5 Map Packs",
+    "trueID": "geometry.ach.mappacks02"
   },
   {
     "id": "mappacks03",
@@ -1284,7 +1426,8 @@
     "rewardType": "trail",
     "rewardID": 2,
     "description": "Complete 10 Map Packs",
-    "achievedDescription": "Completed 10 Map Packs"
+    "achievedDescription": "Completed 10 Map Packs",
+    "trueID": "geometry.ach.mappacks03"
   },
   {
     "id": "mappacks04",
@@ -1293,7 +1436,8 @@
     "rewardType": "ship",
     "rewardID": 11,
     "description": "Complete 15 Map Packs",
-    "achievedDescription": "Completed 15 Map Packs"
+    "achievedDescription": "Completed 15 Map Packs",
+    "trueID": "geometry.ach.mappacks04"
   },
   {
     "id": "mappacks05",
@@ -1302,7 +1446,8 @@
     "rewardType": "ball",
     "rewardID": 7,
     "description": "Complete 20 Map Packs",
-    "achievedDescription": "Completed 20 Map Packs"
+    "achievedDescription": "Completed 20 Map Packs",
+    "trueID": "geometry.ach.mappacks05"
   },
   {
     "id": "mappacks06",
@@ -1311,7 +1456,8 @@
     "rewardType": "ball",
     "rewardID": 8,
     "description": "Complete 25 Map Packs",
-    "achievedDescription": "Completed 25 Map Packs"
+    "achievedDescription": "Completed 25 Map Packs",
+    "trueID": "geometry.ach.mappacks06"
   },
   {
     "id": "mappacks07",
@@ -1320,7 +1466,8 @@
     "rewardType": "ufo",
     "rewardID": 10,
     "description": "Complete 30 Map Packs",
-    "achievedDescription": "Completed 30 Map Packs"
+    "achievedDescription": "Completed 30 Map Packs",
+    "trueID": "geometry.ach.mappacks07"
   },
   {
     "id": "mappacks08",
@@ -1329,7 +1476,8 @@
     "rewardType": "cube",
     "rewardID": 58,
     "description": "Complete 35 Map Packs",
-    "achievedDescription": "Completed 35 Map Packs"
+    "achievedDescription": "Completed 35 Map Packs",
+    "trueID": "geometry.ach.mappacks08"
   },
   {
     "id": "mappacks09",
@@ -1338,7 +1486,8 @@
     "rewardType": "ball",
     "rewardID": 15,
     "description": "Complete 40 Map Packs",
-    "achievedDescription": "Completed 40 Map Packs"
+    "achievedDescription": "Completed 40 Map Packs",
+    "trueID": "geometry.ach.mappacks09"
   },
   {
     "id": "mappacks10",
@@ -1347,7 +1496,8 @@
     "rewardType": "wave",
     "rewardID": 11,
     "description": "Complete 45 Map Packs",
-    "achievedDescription": "Completed 45 Map Packs"
+    "achievedDescription": "Completed 45 Map Packs",
+    "trueID": "geometry.ach.mappacks10"
   },
   {
     "id": "diamonds01",
@@ -1356,7 +1506,8 @@
     "rewardType": "color1",
     "rewardID": 31,
     "description": "Collect 100 Diamonds",
-    "achievedDescription": "Collected 100 Diamonds"
+    "achievedDescription": "Collected 100 Diamonds",
+    "trueID": "geometry.ach.diamonds01"
   },
   {
     "id": "diamonds02",
@@ -1365,7 +1516,8 @@
     "rewardType": "cube",
     "rewardID": 87,
     "description": "Collect 250 Diamonds",
-    "achievedDescription": "Collected 250 Diamonds"
+    "achievedDescription": "Collected 250 Diamonds",
+    "trueID": "geometry.ach.diamonds02"
   },
   {
     "id": "diamonds03",
@@ -1374,7 +1526,8 @@
     "rewardType": "robot",
     "rewardID": 11,
     "description": "Collect 500 Diamonds",
-    "achievedDescription": "Collected 500 Diamonds"
+    "achievedDescription": "Collected 500 Diamonds",
+    "trueID": "geometry.ach.diamonds03"
   },
   {
     "id": "diamonds04",
@@ -1383,7 +1536,8 @@
     "rewardType": "color1",
     "rewardID": 38,
     "description": "Collect 1000 Diamonds",
-    "achievedDescription": "Collected 1000 Diamonds"
+    "achievedDescription": "Collected 1000 Diamonds",
+    "trueID": "geometry.ach.diamonds04"
   },
   {
     "id": "diamonds05",
@@ -1392,7 +1546,8 @@
     "rewardType": "wave",
     "rewardID": 19,
     "description": "Collect 1500 Diamonds",
-    "achievedDescription": "Collected 1500 Diamonds"
+    "achievedDescription": "Collected 1500 Diamonds",
+    "trueID": "geometry.ach.diamonds05"
   },
   {
     "id": "diamonds06",
@@ -1401,7 +1556,8 @@
     "rewardType": "cube",
     "rewardID": 101,
     "description": "Collect 2000 Diamonds",
-    "achievedDescription": "Collected 2000 Diamonds"
+    "achievedDescription": "Collected 2000 Diamonds",
+    "trueID": "geometry.ach.diamonds06"
   },
   {
     "id": "diamonds07",
@@ -1410,7 +1566,8 @@
     "rewardType": "ship",
     "rewardID": 32,
     "description": "Collect 2500 Diamonds",
-    "achievedDescription": "Collected 2500 Diamonds"
+    "achievedDescription": "Collected 2500 Diamonds",
+    "trueID": "geometry.ach.diamonds07"
   },
   {
     "id": "diamonds08",
@@ -1419,7 +1576,8 @@
     "rewardType": "ufo",
     "rewardID": 24,
     "description": "Collect 3000 Diamonds",
-    "achievedDescription": "Collected 3000 Diamonds"
+    "achievedDescription": "Collected 3000 Diamonds",
+    "trueID": "geometry.ach.diamonds08"
   },
   {
     "id": "diamonds09",
@@ -1428,7 +1586,8 @@
     "rewardType": "wave",
     "rewardID": 17,
     "description": "Collect 4000 Diamonds",
-    "achievedDescription": "Collected 4000 Diamonds"
+    "achievedDescription": "Collected 4000 Diamonds",
+    "trueID": "geometry.ach.diamonds09"
   },
   {
     "id": "diamonds10",
@@ -1437,7 +1596,8 @@
     "rewardType": "deathEffect",
     "rewardID": 10,
     "description": "Collect 5000 Diamonds",
-    "achievedDescription": "Collected 5000 Diamonds"
+    "achievedDescription": "Collected 5000 Diamonds",
+    "trueID": "geometry.ach.diamonds10"
   },
   {
     "id": "custom01",
@@ -1446,7 +1606,8 @@
     "rewardType": "color1",
     "rewardID": 11,
     "description": "Complete a user created level in Normal mode",
-    "achievedDescription": "Completed a user created level in Normal mode"
+    "achievedDescription": "Completed a user created level in Normal mode",
+    "trueID": "geometry.ach.custom01"
   },
   {
     "id": "custom02",
@@ -1455,7 +1616,8 @@
     "rewardType": "cube",
     "rewardID": 12,
     "description": "Complete 10 user created levels in Normal mode",
-    "achievedDescription": "Completed 10 user created levels in Normal mode"
+    "achievedDescription": "Completed 10 user created levels in Normal mode",
+    "trueID": "geometry.ach.custom02"
   },
   {
     "id": "custom03",
@@ -1464,7 +1626,8 @@
     "rewardType": "cube",
     "rewardID": 36,
     "description": "Complete 50 user created levels in Normal mode",
-    "achievedDescription": "Completed 50 user created levels in Normal mode"
+    "achievedDescription": "Completed 50 user created levels in Normal mode",
+    "trueID": "geometry.ach.custom03"
   },
   {
     "id": "custom04",
@@ -1473,7 +1636,8 @@
     "rewardType": "ship",
     "rewardID": 13,
     "description": "Complete 100 user created levels in Normal mode",
-    "achievedDescription": "Completed 100 user created levels in Normal mode"
+    "achievedDescription": "Completed 100 user created levels in Normal mode",
+    "trueID": "geometry.ach.custom04"
   },
   {
     "id": "custom05",
@@ -1482,7 +1646,8 @@
     "rewardType": "color1",
     "rewardID": 19,
     "description": "Complete 200 user created levels in Normal mode",
-    "achievedDescription": "Completed 200 user created levels in Normal mode"
+    "achievedDescription": "Completed 200 user created levels in Normal mode",
+    "trueID": "geometry.ach.custom05"
   },
   {
     "id": "custom06",
@@ -1491,7 +1656,8 @@
     "rewardType": "cube",
     "rewardID": 40,
     "description": "Complete 300 user created levels in Normal mode",
-    "achievedDescription": "Completed 300 user created levels in Normal mode"
+    "achievedDescription": "Completed 300 user created levels in Normal mode",
+    "trueID": "geometry.ach.custom06"
   },
   {
     "id": "custom07",
@@ -1500,7 +1666,8 @@
     "rewardType": "ship",
     "rewardID": 15,
     "description": "Complete 500 user created levels in Normal mode",
-    "achievedDescription": "Completed 500 user created levels in Normal mode"
+    "achievedDescription": "Completed 500 user created levels in Normal mode",
+    "trueID": "geometry.ach.custom07"
   },
   {
     "id": "custom08",
@@ -1509,16 +1676,18 @@
     "rewardType": "ship",
     "rewardID": 17,
     "description": "Complete 1000 user created levels in Normal mode",
-    "achievedDescription": "Completed 1000 user created levels in Normal mode"
+    "achievedDescription": "Completed 1000 user created levels in Normal mode",
+    "trueID": "geometry.ach.custom08"
   },
   {
-    "id": "rate",
+    "id": "rating",
     "game": "gd",
     "name": "Supporter",
     "rewardType": "cube",
     "rewardID": 13,
     "description": "Have fun :)",
-    "achievedDescription": "You are playing \"Geometry Dash\", thanks!"
+    "achievedDescription": "You are playing \"Geometry Dash\", thanks!",
+    "trueID": "geometry.ach.rate"
   },
   {
     "id": "jump01",
@@ -1527,7 +1696,8 @@
     "rewardType": "color2",
     "rewardID": 6,
     "description": "Jump 1000 times",
-    "achievedDescription": "Jumped 1000 times"
+    "achievedDescription": "Jumped 1000 times",
+    "trueID": "geometry.ach.jump01"
   },
   {
     "id": "jump02",
@@ -1536,7 +1706,8 @@
     "rewardType": "color2",
     "rewardID": 12,
     "description": "Jump 10000 times",
-    "achievedDescription": "Jumped 10000 times"
+    "achievedDescription": "Jumped 10000 times",
+    "trueID": "geometry.ach.jump02"
   },
   {
     "id": "jump03",
@@ -1545,7 +1716,8 @@
     "rewardType": "color2",
     "rewardID": 13,
     "description": "Jump 20000 times",
-    "achievedDescription": "Jumped 20000 times"
+    "achievedDescription": "Jumped 20000 times",
+    "trueID": "geometry.ach.jump03"
   },
   {
     "id": "jump04",
@@ -1554,7 +1726,8 @@
     "rewardType": "ufo",
     "rewardID": 5,
     "description": "Jump 50000 times",
-    "achievedDescription": "Jumped 50000 times"
+    "achievedDescription": "Jumped 50000 times",
+    "trueID": "geometry.ach.jump04"
   },
   {
     "id": "jump05",
@@ -1563,7 +1736,8 @@
     "rewardType": "ball",
     "rewardID": 13,
     "description": "Jump 50000 times",
-    "achievedDescription": "Jumped 100000 times"
+    "achievedDescription": "Jumped 100000 times",
+    "trueID": "geometry.ach.jump05"
   },
   {
     "id": "attempt01",
@@ -1572,7 +1746,8 @@
     "rewardType": "color2",
     "rewardID": 7,
     "description": "Do 100 attempts",
-    "achievedDescription": "Did 100 attempts"
+    "achievedDescription": "Did 100 attempts",
+    "trueID": "geometry.ach.attempt01"
   },
   {
     "id": "attempt02",
@@ -1581,7 +1756,8 @@
     "rewardType": "color2",
     "rewardID": 8,
     "description": "Do 500 attempts",
-    "achievedDescription": "Did 500 attempts"
+    "achievedDescription": "Did 500 attempts",
+    "trueID": "geometry.ach.attempt02"
   },
   {
     "id": "attempt03",
@@ -1590,7 +1766,8 @@
     "rewardType": "color2",
     "rewardID": 15,
     "description": "Do 2000 attempts",
-    "achievedDescription": "Did 2000 attempts"
+    "achievedDescription": "Did 2000 attempts",
+    "trueID": "geometry.ach.attempt03"
   },
   {
     "id": "attempt04",
@@ -1599,7 +1776,8 @@
     "rewardType": "color2",
     "rewardID": 17,
     "description": "Do 10000 attempts",
-    "achievedDescription": "Did 10000 attempts"
+    "achievedDescription": "Did 10000 attempts",
+    "trueID": "geometry.ach.attempt04"
   },
   {
     "id": "attempt05",
@@ -1608,7 +1786,8 @@
     "rewardType": "wave",
     "rewardID": 3,
     "description": "Do 20000 attempts",
-    "achievedDescription": "Did 20000 attempts"
+    "achievedDescription": "Did 20000 attempts",
+    "trueID": "geometry.ach.attempt05"
   },
   {
     "id": "like",
@@ -1617,7 +1796,8 @@
     "rewardType": "color2",
     "rewardID": 8,
     "description": "Like an online level",
-    "achievedDescription": "Liked an online level"
+    "achievedDescription": "Liked an online level",
+    "trueID": "geometry.ach.like"
   },
   {
     "id": "like02",
@@ -1626,7 +1806,8 @@
     "rewardType": "color2",
     "rewardID": 23,
     "description": "Like or Dislike 100 online levels",
-    "achievedDescription": "Liked or Disliked 100 online levels"
+    "achievedDescription": "Liked or Disliked 100 online levels",
+    "trueID": "geometry.ach.like02"
   },
   {
     "id": "like02b",
@@ -1635,7 +1816,8 @@
     "rewardType": "color1",
     "rewardID": 26,
     "description": "Like or Dislike 500 online levels",
-    "achievedDescription": "Liked or Disliked 500 online levels"
+    "achievedDescription": "Liked or Disliked 500 online levels",
+    "trueID": "geometry.ach.like02b"
   },
   {
     "id": "like03",
@@ -1644,7 +1826,8 @@
     "rewardType": "color1",
     "rewardID": 22,
     "description": "Like or Dislike 1000 online levels",
-    "achievedDescription": "Liked or Disliked 1000 online levels"
+    "achievedDescription": "Liked or Disliked 1000 online levels",
+    "trueID": "geometry.ach.like03"
   },
   {
     "id": "like04",
@@ -1653,7 +1836,8 @@
     "rewardType": "trail",
     "rewardID": 3,
     "description": "Like or Dislike 2000 online levels",
-    "achievedDescription": "Liked or Disliked 2000 online levels"
+    "achievedDescription": "Liked or Disliked 2000 online levels",
+    "trueID": "geometry.ach.like04"
   },
   {
     "id": "rateDiff",
@@ -1662,7 +1846,8 @@
     "rewardType": "color2",
     "rewardID": 9,
     "description": "Rate the stars of an online level",
-    "achievedDescription": "Rated the stars of an online level"
+    "achievedDescription": "Rated the stars of an online level",
+    "trueID": "geometry.ach.rateDiff"
   },
   {
     "id": "rateDiff02",
@@ -1671,7 +1856,8 @@
     "rewardType": "color2",
     "rewardID": 22,
     "description": "Rate the stars of 100 online levels",
-    "achievedDescription": "Rated the stars of 100 online levels"
+    "achievedDescription": "Rated the stars of 100 online levels",
+    "trueID": "geometry.ach.rateDiff02"
   },
   {
     "id": "rateDiff02b",
@@ -1680,7 +1866,8 @@
     "rewardType": "wave",
     "rewardID": 5,
     "description": "Rate the stars of 500 online levels",
-    "achievedDescription": "Rated the stars of 500 online levels"
+    "achievedDescription": "Rated the stars of 500 online levels",
+    "trueID": "geometry.ach.rateDiff02b"
   },
   {
     "id": "rateDiff03",
@@ -1689,7 +1876,8 @@
     "rewardType": "color1",
     "rewardID": 23,
     "description": "Rate the stars of 1000 online levels",
-    "achievedDescription": "Rated the stars of 1000 online levels"
+    "achievedDescription": "Rated the stars of 1000 online levels",
+    "trueID": "geometry.ach.rateDiff03"
   },
   {
     "id": "rateDiff04",
@@ -1698,7 +1886,8 @@
     "rewardType": "cube",
     "rewardID": 57,
     "description": "Rate the stars of 2000 online levels",
-    "achievedDescription": "Rated the stars of 2000 online levels"
+    "achievedDescription": "Rated the stars of 2000 online levels",
+    "trueID": "geometry.ach.rateDiff04"
   },
   {
     "id": "followCreator",
@@ -1707,7 +1896,8 @@
     "rewardType": "color2",
     "rewardID": 25,
     "description": "Follow a creator",
-    "achievedDescription": "Followed a creator!"
+    "achievedDescription": "Followed a creator!",
+    "trueID": "geometry.ach.followCreator"
   },
   {
     "id": "followCreator02",
@@ -1716,7 +1906,8 @@
     "rewardType": "color2",
     "rewardID": 24,
     "description": "Follow 10 creators",
-    "achievedDescription": "Followed 10 creators!"
+    "achievedDescription": "Followed 10 creators!",
+    "trueID": "geometry.ach.followCreator02"
   },
   {
     "id": "friends01",
@@ -1725,7 +1916,8 @@
     "rewardType": "color2",
     "rewardID": 26,
     "description": "Add a friend",
-    "achievedDescription": "You added a friend!"
+    "achievedDescription": "You added a friend!",
+    "trueID": "geometry.ach.friends01"
   },
   {
     "id": "friends02",
@@ -1734,7 +1926,8 @@
     "rewardType": "color1",
     "rewardID": 27,
     "description": "Add 10 friends",
-    "achievedDescription": "You added 10 friends!"
+    "achievedDescription": "You added 10 friends!",
+    "trueID": "geometry.ach.friends02"
   },
   {
     "id": "submit",
@@ -1743,7 +1936,8 @@
     "rewardType": "color2",
     "rewardID": 10,
     "description": "Create and submit a custom level",
-    "achievedDescription": "Created and submitted a custom level"
+    "achievedDescription": "Created and submitted a custom level",
+    "trueID": "geometry.ach.submit"
   },
   {
     "id": "creator01",
@@ -1752,7 +1946,8 @@
     "rewardType": "cube",
     "rewardID": 46,
     "description": "Get 100 likes on a created level",
-    "achievedDescription": "Got 100 likes on a created level"
+    "achievedDescription": "Got 100 likes on a created level",
+    "trueID": "geometry.ach.creator01"
   },
   {
     "id": "creator02",
@@ -1761,7 +1956,8 @@
     "rewardType": "ufo",
     "rewardID": 16,
     "description": "Get a star rated level",
-    "achievedDescription": "Got a star rated level"
+    "achievedDescription": "Got a star rated level",
+    "trueID": "geometry.ach.creator02"
   },
   {
     "id": "creator03",
@@ -1770,7 +1966,8 @@
     "rewardType": "cube",
     "rewardID": 63,
     "description": "Get 50 likes on a created level",
-    "achievedDescription": "Got 50 likes on a created level"
+    "achievedDescription": "Got 50 likes on a created level",
+    "trueID": "geometry.ach.creator03"
   },
   {
     "id": "moreGames",
@@ -1779,7 +1976,8 @@
     "rewardType": "color2",
     "rewardID": 4,
     "description": "Tap the More Games button!",
-    "achievedDescription": "Looked at more RobTop Games"
+    "achievedDescription": "Looked at more RobTop Games",
+    "trueID": "geometry.ach.moreGames"
   },
   {
     "id": "facebook",
@@ -1788,7 +1986,8 @@
     "rewardType": "color2",
     "rewardID": 14,
     "description": "Like Geometry Dash on Facebook",
-    "achievedDescription": "Liked Geometry Dash on Facebook"
+    "achievedDescription": "Liked Geometry Dash on Facebook",
+    "trueID": "geometry.ach.facebook"
   },
   {
     "id": "youtube",
@@ -1797,7 +1996,8 @@
     "rewardType": "color2",
     "rewardID": 21,
     "description": "Subscribe to RobTop Games on YouTube",
-    "achievedDescription": "Subscribed to RobTop Games on YouTube"
+    "achievedDescription": "Subscribed to RobTop Games on YouTube",
+    "trueID": "geometry.ach.youtube"
   },
   {
     "id": "twitter",
@@ -1806,7 +2006,8 @@
     "rewardType": "color2",
     "rewardID": 31,
     "description": "Follow RobTop Games on Twitter",
-    "achievedDescription": "Followed RobTop Games on Twitter"
+    "achievedDescription": "Followed RobTop Games on Twitter",
+    "trueID": "geometry.ach.twitter"
   },
   {
     "id": "special01",
@@ -1815,7 +2016,8 @@
     "rewardType": "color2",
     "rewardID": 18,
     "description": "Crash at over 95% on a main level in normal mode",
-    "achievedDescription": "Crashed at over 95%"
+    "achievedDescription": "Crashed at over 95%",
+    "trueID": "geometry.ach.special01"
   },
   {
     "id": "secret01",
@@ -1824,7 +2026,8 @@
     "rewardType": "color2",
     "rewardID": 20,
     "description": "A secret is required",
-    "achievedDescription": "Destroyed a player"
+    "achievedDescription": "Destroyed a player",
+    "trueID": "geometry.ach.secret01"
   },
   {
     "id": "secret02",
@@ -1833,7 +2036,8 @@
     "rewardType": "cube",
     "rewardID": 41,
     "description": "A secret is required",
-    "achievedDescription": "Destroyed 50 players"
+    "achievedDescription": "Destroyed 50 players",
+    "trueID": "geometry.ach.secret02"
   },
   {
     "id": "secret02b",
@@ -1842,7 +2046,8 @@
     "rewardType": "color2",
     "rewardID": 28,
     "description": "A secret is required",
-    "achievedDescription": "Destroyed 100 players"
+    "achievedDescription": "Destroyed 100 players",
+    "trueID": "geometry.ach.secret02b"
   },
   {
     "id": "secret03",
@@ -1851,7 +2056,8 @@
     "rewardType": "cube",
     "rewardID": 39,
     "description": "A secret is required",
-    "achievedDescription": "Destroyed 200 players"
+    "achievedDescription": "Destroyed 200 players",
+    "trueID": "geometry.ach.secret03"
   },
   {
     "id": "secret03b",
@@ -1860,7 +2066,8 @@
     "rewardType": "ball",
     "rewardID": 12,
     "description": "A secret is required",
-    "achievedDescription": "Destroyed 500 players"
+    "achievedDescription": "Destroyed 500 players",
+    "trueID": "geometry.ach.secret03b"
   },
   {
     "id": "secret04",
@@ -1869,7 +2076,8 @@
     "rewardType": "color2",
     "rewardID": 21,
     "description": "A hidden treasure is required",
-    "achievedDescription": "Found the hidden coin"
+    "achievedDescription": "Found the hidden coin",
+    "trueID": "geometry.ach.secret04"
   },
   {
     "id": "secret05",
@@ -1878,7 +2086,8 @@
     "rewardType": "cube",
     "rewardID": 62,
     "description": "A secret is required",
-    "achievedDescription": "Found the secret"
+    "achievedDescription": "Found the secret",
+    "trueID": "geometry.ach.secret05"
   },
   {
     "id": "secret06",
@@ -1887,7 +2096,8 @@
     "rewardType": "misc",
     "rewardID": -1,
     "description": "A secret is required",
-    "achievedDescription": "Stole the Vault Keepers coin"
+    "achievedDescription": "Stole the Vault Keepers coin",
+    "trueID": "geometry.ach.secret06"
   },
   {
     "id": "secret07",
@@ -1896,7 +2106,8 @@
     "rewardType": "cube",
     "rewardID": 51,
     "description": "A secret is required",
-    "achievedDescription": "Stole the Vault Keepers icon"
+    "achievedDescription": "Stole the Vault Keepers icon",
+    "trueID": "geometry.ach.secret07"
   },
   {
     "id": "secret08",
@@ -1905,7 +2116,8 @@
     "rewardType": "ufo",
     "rewardID": 11,
     "description": "A secret is required",
-    "achievedDescription": "Found the secret"
+    "achievedDescription": "Found the secret",
+    "trueID": "geometry.ach.secret08"
   },
   {
     "id": "secret09",
@@ -1914,7 +2126,8 @@
     "rewardType": "robot",
     "rewardID": 2,
     "description": "A secret is required",
-    "achievedDescription": "Found the secret"
+    "achievedDescription": "Found the secret",
+    "trueID": "geometry.ach.secret09"
   },
   {
     "id": "secret10",
@@ -1923,7 +2136,8 @@
     "rewardType": "wave",
     "rewardID": 8,
     "description": "A secret is required",
-    "achievedDescription": "Found the secret"
+    "achievedDescription": "Found the secret",
+    "trueID": "geometry.ach.secret10"
   },
   {
     "id": "secret11",
@@ -1932,7 +2146,8 @@
     "rewardType": "cube",
     "rewardID": 55,
     "description": "A secret is required",
-    "achievedDescription": "Found the secret"
+    "achievedDescription": "Found the secret",
+    "trueID": "geometry.ach.secret11"
   },
   {
     "id": "secret12",
@@ -1941,7 +2156,8 @@
     "rewardType": "cube",
     "rewardID": 50,
     "description": "A secret is required",
-    "achievedDescription": "Found the secret"
+    "achievedDescription": "Found the secret",
+    "trueID": "geometry.ach.secret12"
   },
   {
     "id": "secret13",
@@ -1950,7 +2166,8 @@
     "rewardType": "ship",
     "rewardID": 20,
     "description": "A secret is required",
-    "achievedDescription": "Found the secret"
+    "achievedDescription": "Found the secret",
+    "trueID": "geometry.ach.secret13"
   },
   {
     "id": "secret14",
@@ -1959,7 +2176,8 @@
     "rewardType": "ufo",
     "rewardID": 12,
     "description": "A secret is required",
-    "achievedDescription": "Found the secret"
+    "achievedDescription": "Found the secret",
+    "trueID": "geometry.ach.secret14"
   },
   {
     "id": "secret15",
@@ -1968,7 +2186,8 @@
     "rewardType": "trail",
     "rewardID": 4,
     "description": "A secret is required",
-    "achievedDescription": "Found the secret"
+    "achievedDescription": "Found the secret",
+    "trueID": "geometry.ach.secret15"
   },
   {
     "id": "secret16",
@@ -1977,7 +2196,8 @@
     "rewardType": "wave",
     "rewardID": 13,
     "description": "A secret is required",
-    "achievedDescription": "Found the secret"
+    "achievedDescription": "Found the secret",
+    "trueID": "geometry.ach.secret16"
   },
   {
     "id": "secret17",
@@ -1986,7 +2206,8 @@
     "rewardType": "cube",
     "rewardID": 64,
     "description": "A secret is required",
-    "achievedDescription": "Found the secret"
+    "achievedDescription": "Found the secret",
+    "trueID": "geometry.ach.secret17"
   },
   {
     "id": "v2.secret01",
@@ -1995,7 +2216,8 @@
     "rewardType": "cube",
     "rewardID": 80,
     "description": "A secret is required",
-    "achievedDescription": "Found the secret"
+    "achievedDescription": "Found the secret",
+    "trueID": "geometry.ach.v2.secret01"
   },
   {
     "id": "v2.secret02",
@@ -2004,7 +2226,8 @@
     "rewardType": "cube",
     "rewardID": 78,
     "description": "A secret is required",
-    "achievedDescription": "Found the secret"
+    "achievedDescription": "Found the secret",
+    "trueID": "geometry.ach.v2.secret02"
   },
   {
     "id": "v2.secret03",
@@ -2013,7 +2236,8 @@
     "rewardType": "misc",
     "rewardID": -1,
     "description": "A secret is required",
-    "achievedDescription": "Found the secret"
+    "achievedDescription": "Found the secret",
+    "trueID": "geometry.ach.v2.secret03"
   },
   {
     "id": "v2.secret04",
@@ -2022,7 +2246,8 @@
     "rewardType": "cube",
     "rewardID": 81,
     "description": "A secret is required",
-    "achievedDescription": "Found the secret"
+    "achievedDescription": "Found the secret",
+    "trueID": "geometry.ach.v2.secret04"
   },
   {
     "id": "v2.secret05",
@@ -2031,7 +2256,8 @@
     "rewardType": "cube",
     "rewardID": 76,
     "description": "A secret is required",
-    "achievedDescription": "Found the secret"
+    "achievedDescription": "Found the secret",
+    "trueID": "geometry.ach.v2.secret05"
   },
   {
     "id": "v2.secret06",
@@ -2040,7 +2266,8 @@
     "rewardType": "cube",
     "rewardID": 108,
     "description": "A secret is required",
-    "achievedDescription": "Found the secret"
+    "achievedDescription": "Found the secret",
+    "trueID": "geometry.ach.v2.secret06"
   },
   {
     "id": "v2.secret07",
@@ -2049,7 +2276,8 @@
     "rewardType": "color1",
     "rewardID": 37,
     "description": "A secret is required",
-    "achievedDescription": "Found the secret"
+    "achievedDescription": "Found the secret",
+    "trueID": "geometry.ach.v2.secret07"
   },
   {
     "id": "v2.secret08",
@@ -2058,7 +2286,8 @@
     "rewardType": "color2",
     "rewardID": 33,
     "description": "A secret is required",
-    "achievedDescription": "Found the secret"
+    "achievedDescription": "Found the secret",
+    "trueID": "geometry.ach.v2.secret08"
   },
   {
     "id": "v3.secret01",
@@ -2067,7 +2296,8 @@
     "rewardType": "cube",
     "rewardID": 91,
     "description": "A secret is required",
-    "achievedDescription": "Found the secret"
+    "achievedDescription": "Found the secret",
+    "trueID": "geometry.ach.v3.secret01"
   },
   {
     "id": "v3.secret02",
@@ -2076,7 +2306,8 @@
     "rewardType": "cube",
     "rewardID": 89,
     "description": "A secret is required",
-    "achievedDescription": "Found the secret"
+    "achievedDescription": "Found the secret",
+    "trueID": "geometry.ach.v3.secret02"
   },
   {
     "id": "v3.secret03",
@@ -2085,7 +2316,8 @@
     "rewardType": "color2",
     "rewardID": 38,
     "description": "A secret is required",
-    "achievedDescription": "Found the secret"
+    "achievedDescription": "Found the secret",
+    "trueID": "geometry.ach.v3.secret03"
   },
   {
     "id": "v3.secret04",
@@ -2094,7 +2326,8 @@
     "rewardType": "cube",
     "rewardID": 90,
     "description": "A secret is required",
-    "achievedDescription": "Found the secret"
+    "achievedDescription": "Found the secret",
+    "trueID": "geometry.ach.v3.secret04"
   },
   {
     "id": "v3.secret05",
@@ -2103,7 +2336,8 @@
     "rewardType": "wave",
     "rewardID": 23,
     "description": "A secret is required",
-    "achievedDescription": "Found the secret"
+    "achievedDescription": "Found the secret",
+    "trueID": "geometry.ach.v3.secret05"
   },
   {
     "id": "steam01",
@@ -2112,7 +2346,8 @@
     "rewardType": "cube",
     "rewardID": 47,
     "description": "Complete level 1-3 in Normal mode (Steam Exclusive)",
-    "achievedDescription": "Completed level 1-3 in Normal mode (Steam Exclusive)"
+    "achievedDescription": "Completed level 1-3 in Normal mode (Steam Exclusive)",
+    "trueID": "geometry.ach.steam01"
   },
   {
     "id": "steam02",
@@ -2121,7 +2356,8 @@
     "rewardType": "cube",
     "rewardID": 48,
     "description": "Complete \"Clubstep\" in Normal mode (Steam Exclusive Bonus)",
-    "achievedDescription": "Completed \"Clubstep\" in Normal mode (Steam Exclusive Bonus)"
+    "achievedDescription": "Completed \"Clubstep\" in Normal mode (Steam Exclusive Bonus)",
+    "trueID": "geometry.ach.steam02"
   },
   {
     "id": "shardFire01",
@@ -2130,7 +2366,8 @@
     "rewardType": "cube",
     "rewardID": 95,
     "description": "Collect 5 Fire Shards",
-    "achievedDescription": "Collected 5 Fire Shards"
+    "achievedDescription": "Collected 5 Fire Shards",
+    "trueID": "geometry.ach.shardFire01"
   },
   {
     "id": "shardFire02",
@@ -2139,7 +2376,8 @@
     "rewardType": "ball",
     "rewardID": 24,
     "description": "Collect 15 Fire Shards",
-    "achievedDescription": "Collected 15 Fire Shards"
+    "achievedDescription": "Collected 15 Fire Shards",
+    "trueID": "geometry.ach.shardFire02"
   },
   {
     "id": "shardFire03",
@@ -2148,7 +2386,8 @@
     "rewardType": "robot",
     "rewardID": 9,
     "description": "Collect 35 Fire Shards",
-    "achievedDescription": "Collected 35 Fire Shards"
+    "achievedDescription": "Collected 35 Fire Shards",
+    "trueID": "geometry.ach.shardFire03"
   },
   {
     "id": "shardFire04",
@@ -2157,7 +2396,8 @@
     "rewardType": "ship",
     "rewardID": 29,
     "description": "Collect 65 Fire Shards",
-    "achievedDescription": "Collected 65 Fire Shards"
+    "achievedDescription": "Collected 65 Fire Shards",
+    "trueID": "geometry.ach.shardFire04"
   },
   {
     "id": "shardFire05",
@@ -2166,7 +2406,8 @@
     "rewardType": "deathEffect",
     "rewardID": 2,
     "description": "Collect 100 Fire Shards",
-    "achievedDescription": "Collected 100 Fire Shards"
+    "achievedDescription": "Collected 100 Fire Shards",
+    "trueID": "geometry.ach.shardFire05"
   },
   {
     "id": "shardIce01",
@@ -2175,7 +2416,8 @@
     "rewardType": "cube",
     "rewardID": 84,
     "description": "Collect 5 Ice Shards",
-    "achievedDescription": "Collected 5 Ice Shards"
+    "achievedDescription": "Collected 5 Ice Shards",
+    "trueID": "geometry.ach.shardIce01"
   },
   {
     "id": "shardIce02",
@@ -2184,7 +2426,8 @@
     "rewardType": "ball",
     "rewardID": 26,
     "description": "Collect 15 Ice Shards",
-    "achievedDescription": "Collected 15 Ice Shards"
+    "achievedDescription": "Collected 15 Ice Shards",
+    "trueID": "geometry.ach.shardIce02"
   },
   {
     "id": "shardIce03",
@@ -2193,7 +2436,8 @@
     "rewardType": "spider",
     "rewardID": 6,
     "description": "Collect 35 Ice Shards",
-    "achievedDescription": "Collected 35 Ice Shards"
+    "achievedDescription": "Collected 35 Ice Shards",
+    "trueID": "geometry.ach.shardIce03"
   },
   {
     "id": "shardIce04",
@@ -2202,7 +2446,8 @@
     "rewardType": "ship",
     "rewardID": 31,
     "description": "Collect 65 Ice Shards",
-    "achievedDescription": "Collected 65 Ice Shards"
+    "achievedDescription": "Collected 65 Ice Shards",
+    "trueID": "geometry.ach.shardIce04"
   },
   {
     "id": "shardIce05",
@@ -2211,7 +2456,8 @@
     "rewardType": "deathEffect",
     "rewardID": 9,
     "description": "Collect 100 Ice Shards",
-    "achievedDescription": "Collected 100 Ice Shards"
+    "achievedDescription": "Collected 100 Ice Shards",
+    "trueID": "geometry.ach.shardIce05"
   },
   {
     "id": "shardPoison01",
@@ -2220,7 +2466,8 @@
     "rewardType": "ball",
     "rewardID": 22,
     "description": "Collect 5 Poison Shards",
-    "achievedDescription": "Collected 5 Poison Shards"
+    "achievedDescription": "Collected 5 Poison Shards",
+    "trueID": "geometry.ach.shardPoison01"
   },
   {
     "id": "shardPoison02",
@@ -2229,7 +2476,8 @@
     "rewardType": "ufo",
     "rewardID": 20,
     "description": "Collect 15 Poison Shards",
-    "achievedDescription": "Collected 15 Poison Shards"
+    "achievedDescription": "Collected 15 Poison Shards",
+    "trueID": "geometry.ach.shardPoison02"
   },
   {
     "id": "shardPoison03",
@@ -2238,7 +2486,8 @@
     "rewardType": "cube",
     "rewardID": 105,
     "description": "Collect 35 Poison Shards",
-    "achievedDescription": "Collected 35 Poison Shards"
+    "achievedDescription": "Collected 35 Poison Shards",
+    "trueID": "geometry.ach.shardPoison03"
   },
   {
     "id": "shardPoison04",
@@ -2247,7 +2496,8 @@
     "rewardType": "spider",
     "rewardID": 5,
     "description": "Collect 65 Poison Shards",
-    "achievedDescription": "Collected 65 Poison Shards"
+    "achievedDescription": "Collected 65 Poison Shards",
+    "trueID": "geometry.ach.shardPoison04"
   },
   {
     "id": "shardPoison05",
@@ -2256,7 +2506,8 @@
     "rewardType": "deathEffect",
     "rewardID": 4,
     "description": "Collect 100 Poison Shards",
-    "achievedDescription": "Collected 100 Poison Shards"
+    "achievedDescription": "Collected 100 Poison Shards",
+    "trueID": "geometry.ach.shardPoison05"
   },
   {
     "id": "shardShadow01",
@@ -2265,7 +2516,8 @@
     "rewardType": "wave",
     "rewardID": 20,
     "description": "Collect 5 Shadow Shards",
-    "achievedDescription": "Collected 5 Shadow Shards"
+    "achievedDescription": "Collected 5 Shadow Shards",
+    "trueID": "geometry.ach.shardShadow01"
   },
   {
     "id": "shardShadow02",
@@ -2274,7 +2526,8 @@
     "rewardType": "ship",
     "rewardID": 28,
     "description": "Collect 15 Shadow Shards",
-    "achievedDescription": "Collected 15 Shadow Shards"
+    "achievedDescription": "Collected 15 Shadow Shards",
+    "trueID": "geometry.ach.shardShadow02"
   },
   {
     "id": "shardShadow03",
@@ -2283,7 +2536,8 @@
     "rewardType": "ufo",
     "rewardID": 26,
     "description": "Collect 35 Shadow Shards",
-    "achievedDescription": "Collected 35 Shadow Shards"
+    "achievedDescription": "Collected 35 Shadow Shards",
+    "trueID": "geometry.ach.shardShadow03"
   },
   {
     "id": "shardShadow04",
@@ -2292,7 +2546,8 @@
     "rewardType": "robot",
     "rewardID": 17,
     "description": "Collect 65 Shadow Shards",
-    "achievedDescription": "Collected 65 Shadow Shards"
+    "achievedDescription": "Collected 65 Shadow Shards",
+    "trueID": "geometry.ach.shardShadow04"
   },
   {
     "id": "shardShadow05",
@@ -2301,7 +2556,8 @@
     "rewardType": "deathEffect",
     "rewardID": 5,
     "description": "Collect 100 Shadow Shards",
-    "achievedDescription": "Collected 100 Shadow Shards"
+    "achievedDescription": "Collected 100 Shadow Shards",
+    "trueID": "geometry.ach.shardShadow05"
   },
   {
     "id": "shardLava01",
@@ -2310,7 +2566,8 @@
     "rewardType": "wave",
     "rewardID": 14,
     "description": "Collect 5 Lava Shards",
-    "achievedDescription": "Collected 5 Lava Shards"
+    "achievedDescription": "Collected 5 Lava Shards",
+    "trueID": "geometry.ach.shardLava01"
   },
   {
     "id": "shardLava02",
@@ -2319,7 +2576,8 @@
     "rewardType": "cube",
     "rewardID": 92,
     "description": "Collect 15 Lava Shards",
-    "achievedDescription": "Collected 15 Lava Shards"
+    "achievedDescription": "Collected 15 Lava Shards",
+    "trueID": "geometry.ach.shardLava02"
   },
   {
     "id": "shardLava03",
@@ -2328,7 +2586,8 @@
     "rewardType": "robot",
     "rewardID": 7,
     "description": "Collect 35 Lava Shards",
-    "achievedDescription": "Collected 35 Lava Shards"
+    "achievedDescription": "Collected 35 Lava Shards",
+    "trueID": "geometry.ach.shardLava03"
   },
   {
     "id": "shardLava04",
@@ -2337,7 +2596,8 @@
     "rewardType": "spider",
     "rewardID": 9,
     "description": "Collect 65 Lava Shards",
-    "achievedDescription": "Collected 65 Lava Shards"
+    "achievedDescription": "Collected 65 Lava Shards",
+    "trueID": "geometry.ach.shardLava04"
   },
   {
     "id": "shardLava05",
@@ -2346,7 +2606,8 @@
     "rewardType": "deathEffect",
     "rewardID": 6,
     "description": "Collect 100 Lava Shards",
-    "achievedDescription": "Collected 100 Lava Shards"
+    "achievedDescription": "Collected 100 Lava Shards",
+    "trueID": "geometry.ach.shardLava05"
   },
   {
     "id": "shardBonus01",
@@ -2355,7 +2616,8 @@
     "rewardType": "cube",
     "rewardID": 98,
     "description": "Collect 5 of each shard",
-    "achievedDescription": "Collected 5 of each shard"
+    "achievedDescription": "Collected 5 of each shard",
+    "trueID": "geometry.ach.shardBonus01"
   },
   {
     "id": "shardBonus02",
@@ -2364,7 +2626,8 @@
     "rewardType": "ufo",
     "rewardID": 22,
     "description": "Collect 15 of each shard",
-    "achievedDescription": "Collected 15 of each shard"
+    "achievedDescription": "Collected 15 of each shard",
+    "trueID": "geometry.ach.shardBonus02"
   },
   {
     "id": "shardBonus03",
@@ -2373,7 +2636,8 @@
     "rewardType": "ship",
     "rewardID": 34,
     "description": "Collect 35 of each shard",
-    "achievedDescription": "Collected 35 of each shard"
+    "achievedDescription": "Collected 35 of each shard",
+    "trueID": "geometry.ach.shardBonus03"
   },
   {
     "id": "shardBonus04",
@@ -2382,7 +2646,8 @@
     "rewardType": "robot",
     "rewardID": 13,
     "description": "Collect 65 of each shard",
-    "achievedDescription": "Collected 65 of each shard"
+    "achievedDescription": "Collected 65 of each shard",
+    "trueID": "geometry.ach.shardBonus04"
   },
   {
     "id": "shardBonus05",
@@ -2391,7 +2656,8 @@
     "rewardType": "deathEffect",
     "rewardID": 7,
     "description": "Collect 100 of each shard",
-    "achievedDescription": "Collected 100 of each shard"
+    "achievedDescription": "Collected 100 of each shard",
+    "trueID": "geometry.ach.shardBonus05"
   },
   {
     "id": "world.level001b",
@@ -2400,7 +2666,8 @@
     "rewardType": "color1",
     "rewardID": 4,
     "description": "Complete \"Payload\" in Normal mode",
-    "achievedDescription": "Completed \"Payload\" in Normal mode"
+    "achievedDescription": "Completed \"Payload\" in Normal mode",
+    "trueID": "geometry.ach.world.level001b"
   },
   {
     "id": "world.level002b",
@@ -2409,7 +2676,8 @@
     "rewardType": "color1",
     "rewardID": 5,
     "description": "Complete \"Beast Mode\" in Normal mode",
-    "achievedDescription": "Completed \"Beast Mode\" in Normal mode"
+    "achievedDescription": "Completed \"Beast Mode\" in Normal mode",
+    "trueID": "geometry.ach.world.level002b"
   },
   {
     "id": "world.level003b",
@@ -2418,7 +2686,8 @@
     "rewardType": "color1",
     "rewardID": 6,
     "description": "Complete \"Machina\" in Normal mode",
-    "achievedDescription": "Completed \"Machina\" in Normal mode"
+    "achievedDescription": "Completed \"Machina\" in Normal mode",
+    "trueID": "geometry.ach.world.level003b"
   },
   {
     "id": "world.level004b",
@@ -2427,7 +2696,8 @@
     "rewardType": "color1",
     "rewardID": 7,
     "description": "Complete \"Years\" in Normal mode",
-    "achievedDescription": "Completed \"Years\" in Normal mode"
+    "achievedDescription": "Completed \"Years\" in Normal mode",
+    "trueID": "geometry.ach.world.level004b"
   },
   {
     "id": "world.level005b",
@@ -2436,7 +2706,8 @@
     "rewardType": "cube",
     "rewardID": 72,
     "description": "Complete \"Frontlines\" in Normal mode",
-    "achievedDescription": "Completed \"Frontlines\" in Normal mode"
+    "achievedDescription": "Completed \"Frontlines\" in Normal mode",
+    "trueID": "geometry.ach.world.level005b"
   },
   {
     "id": "world.level006b",
@@ -2445,7 +2716,8 @@
     "rewardType": "color1",
     "rewardID": 9,
     "description": "Complete \"Space Pirates\" in Normal mode",
-    "achievedDescription": "Completed \"Space Pirates\" in Normal mode"
+    "achievedDescription": "Completed \"Space Pirates\" in Normal mode",
+    "trueID": "geometry.ach.world.level006b"
   },
   {
     "id": "world.level007b",
@@ -2454,7 +2726,8 @@
     "rewardType": "color1",
     "rewardID": 10,
     "description": "Complete \"Striker\" in Normal mode",
-    "achievedDescription": "Completed \"Striker\" in Normal mode"
+    "achievedDescription": "Completed \"Striker\" in Normal mode",
+    "trueID": "geometry.ach.world.level007b"
   },
   {
     "id": "world.level008b",
@@ -2463,7 +2736,8 @@
     "rewardType": "color1",
     "rewardID": 12,
     "description": "Complete \"Embers\" in Normal mode",
-    "achievedDescription": "Completed \"Embers\" in Normal mode"
+    "achievedDescription": "Completed \"Embers\" in Normal mode",
+    "trueID": "geometry.ach.world.level008b"
   },
   {
     "id": "world.level009b",
@@ -2472,7 +2746,8 @@
     "rewardType": "color1",
     "rewardID": 13,
     "description": "Complete \"Round 1\" in Normal mode",
-    "achievedDescription": "Completed \"Round 1\" in Normal mode"
+    "achievedDescription": "Completed \"Round 1\" in Normal mode",
+    "trueID": "geometry.ach.world.level009b"
   },
   {
     "id": "world.level010b",
@@ -2481,7 +2756,8 @@
     "rewardType": "cube",
     "rewardID": 75,
     "description": "Complete \"Monster Dance Off\" in Normal mode",
-    "achievedDescription": "Completed \"Monster Dance Off\" in Normal mode"
+    "achievedDescription": "Completed \"Monster Dance Off\" in Normal mode",
+    "trueID": "geometry.ach.world.level010b"
   },
   {
     "id": "mdlevel01a",
@@ -2490,7 +2766,8 @@
     "rewardType": "color1",
     "rewardID": 5,
     "description": "Complete \"The Seven Seas\" in Practice mode",
-    "achievedDescription": "Completed \"The Seven Seas\" in Practice mode"
+    "achievedDescription": "Completed \"The Seven Seas\" in Practice mode",
+    "trueID": "geometry.ach.mdlevel01a"
   },
   {
     "id": "mdlevel01b",
@@ -2499,7 +2776,8 @@
     "rewardType": "cube",
     "rewardID": 65,
     "description": "Complete \"The Seven Seas\" in Normal mode",
-    "achievedDescription": "Completed \"The Seven Seas\" in Normal mode"
+    "achievedDescription": "Completed \"The Seven Seas\" in Normal mode",
+    "trueID": "geometry.ach.mdlevel01b"
   },
   {
     "id": "mdlevel02a",
@@ -2508,7 +2786,8 @@
     "rewardType": "color1",
     "rewardID": 8,
     "description": "Complete \"Viking Arena\" in Practice mode",
-    "achievedDescription": "Completed \"Viking Arena\" in Practice mode"
+    "achievedDescription": "Completed \"Viking Arena\" in Practice mode",
+    "trueID": "geometry.ach.mdlevel02a"
   },
   {
     "id": "mdlevel02b",
@@ -2517,7 +2796,8 @@
     "rewardType": "cube",
     "rewardID": 67,
     "description": "Complete \"Viking Arena\" in Normal mode",
-    "achievedDescription": "Completed \"Viking Arena\" in Normal mode"
+    "achievedDescription": "Completed \"Viking Arena\" in Normal mode",
+    "trueID": "geometry.ach.mdlevel02b"
   },
   {
     "id": "mdlevel03a",
@@ -2526,7 +2806,8 @@
     "rewardType": "color1",
     "rewardID": 7,
     "description": "Complete \"Airborne Robots\" in Practice mode",
-    "achievedDescription": "Completed \"Airborne Robots\" in Practice mode"
+    "achievedDescription": "Completed \"Airborne Robots\" in Practice mode",
+    "trueID": "geometry.ach.mdlevel03a"
   },
   {
     "id": "mdlevel03b",
@@ -2535,7 +2816,8 @@
     "rewardType": "cube",
     "rewardID": 69,
     "description": "Complete \"Airborne Robots\" in Normal mode",
-    "achievedDescription": "Completed \"Airborne Robots\" in Normal mode"
+    "achievedDescription": "Completed \"Airborne Robots\" in Normal mode",
+    "trueID": "geometry.ach.mdlevel03b"
   },
   {
     "id": "mdcoin01",
@@ -2544,7 +2826,8 @@
     "rewardType": "cube",
     "rewardID": 66,
     "description": "Collect all 3 coins on The Seven Seas",
-    "achievedDescription": "Collected all 3 coins on The Seven Seas"
+    "achievedDescription": "Collected all 3 coins on The Seven Seas",
+    "trueID": "geometry.ach.mdcoin01"
   },
   {
     "id": "mdcoin02",
@@ -2553,7 +2836,8 @@
     "rewardType": "cube",
     "rewardID": 68,
     "description": "Collect all 3 coins on Viking Arena",
-    "achievedDescription": "Collected all 3 coins on Viking Arena"
+    "achievedDescription": "Collected all 3 coins on Viking Arena",
+    "trueID": "geometry.ach.mdcoin02"
   },
   {
     "id": "mdcoin03",
@@ -2562,7 +2846,8 @@
     "rewardType": "cube",
     "rewardID": 70,
     "description": "Collect all 3 coins on Airborne Robots",
-    "achievedDescription": "Collected all 3 coins on Airborne Robots"
+    "achievedDescription": "Collected all 3 coins on Airborne Robots",
+    "trueID": "geometry.ach.mdcoin03"
   },
   {
     "id": "mdrate",
@@ -2571,6 +2856,7 @@
     "rewardType": "cube",
     "rewardID": 71,
     "description": "Rate \"Geometry Dash Meltdown\" and let us know what you think",
-    "achievedDescription": "Rated \"Geometry Dash Meltdown\", thanks!"
+    "achievedDescription": "Rated \"Geometry Dash Meltdown\", thanks!",
+    "trueID": "geometry.ach.mdrate"
   }
 ]
