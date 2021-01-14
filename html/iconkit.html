@@ -164,6 +164,8 @@ fetch('./api/icons').then(res => {
     return (res.json())})
     .then(iconStuff => {
 
+        let miniIcon = iconStuff.icons.filter(x => x.startsWith("cube")).length
+
         function filterIcon(name) { return iconStuff.icons.filter(x => x.startsWith(name)).sort(function (a,b) {return a.replace(/[^0-9]/g, "") - b.replace(/[^0-9]/g, "");})}
 
         function appendIcon(form, formName) {
@@ -292,7 +294,7 @@ fetch('./api/icons').then(res => {
         $(this).addClass('iconSelected');
         selectedIcon = $(this).attr('num');
         selectedForm = $(this).attr('form');
-        if (selectedIcon == 143) selectedIcon = 0;
+        if (selectedIcon == miniIcon) selectedIcon = 0;
 
         if (iconStuff.whiteIcons.find(x => x[1] == selectedIcon && x[0] == selectedForm)) { $('#colW').show(); $('#ccW').show() }
         else { $('#colW').hide(); $('#ccW').hide(); $(`#colW-12`).trigger('click') }

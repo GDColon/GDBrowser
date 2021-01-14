@@ -1587,6 +1587,66 @@
     "spriteOffset": [0, 0],
     "spriteSize": [88, 90]
   },
+  "player_143_001.png": {
+    "spriteOffset":[0,0],
+    "spriteSize":[120,120]
+  },  
+  "player_143_2_001.png": {
+    "spriteOffset":[0,0],
+    "spriteSize":[92,88]
+  },  
+  "player_144_001.png": {
+    "spriteOffset":[0,0],
+    "spriteSize":[120,120]
+  },  
+  "player_144_2_001.png": {
+    "spriteOffset":[0,0],
+    "spriteSize":[88,88]
+  },  
+  "player_145_001.png": {
+    "spriteOffset":[0,0],
+    "spriteSize":[120,120]
+  },  
+  "player_145_2_001.png": {
+    "spriteOffset":[0,0],
+    "spriteSize":[108,108]
+  },  
+  "player_145_extra_001.png": {
+    "spriteOffset":[0,-2],
+    "spriteSize":[88,68]
+  },  
+  "player_146_001.png": {
+    "spriteOffset":[0,0],
+    "spriteSize":[120,120]
+  },  
+  "player_146_2_001.png": {
+    "spriteOffset":[0,-18],
+    "spriteSize":[92,52]
+  },  
+  "player_146_extra_001.png": {
+    "spriteOffset":[0,24],
+    "spriteSize":[92,36]
+  },  
+  "player_147_001.png": {
+    "spriteOffset":[0,0],
+    "spriteSize":[120,120]
+  },  
+  "player_147_2_001.png": {
+    "spriteOffset":[0,0],
+    "spriteSize":[104,112]
+  },  
+  "player_148_001.png": {
+    "spriteOffset":[0,0],
+    "spriteSize":[128,120]
+  },  
+  "player_148_2_001.png": {
+    "spriteOffset":[0,4],
+    "spriteSize":[108,100]
+  },  
+  "player_148_extra_001.png": {
+    "spriteOffset":[0,-8],
+    "spriteSize":[84,16]
+  },
   "player_14_001.png": {
     "spriteOffset": [0, 0],
     "spriteSize": [121, 120]
