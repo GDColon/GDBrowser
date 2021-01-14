@@ -36,6 +36,7 @@ let gdIcons = fs.readdirSync('./assets/previewicons')
 let sampleIcons = require('./misc/sampleIcons.json')
 let achievements = require('./misc/achievements.json')
 let achievementTypes = require('./misc/achievementTypes.json')
+let shopIcons = require('./misc/shops.json')
 let colorList = require('./icons/colors.json')
 let forms = { "player": "cube", "bird": "ufo", "dart": "wave" }
 let assetPage = fs.readFileSync('./html/assets.html', 'utf8')
@@ -210,7 +211,7 @@ app.get("/:id", function(req, res) { app.run.level(app, req, res) })
 // MISC
 
 app.get("/icon/:text", function(req, res) { app.run.icon(app, req, res) })
-app.get("/api/achievements", function(req, res) { res.send({achievements, types: achievementTypes, colors: colorList }) })
+app.get("/api/achievements", function(req, res) { res.send({achievements, types: achievementTypes, shopIcons, colors: colorList }) })
 app.get('/api/icons', function(req, res) { 
   let sample = [JSON.stringify(sampleIcons[Math.floor(Math.random() * sampleIcons.length)].slice(1))]
   res.send({icons: gdIcons, colors: colorList, colorOrder, whiteIcons, sample}); 

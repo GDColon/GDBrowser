@@ -404,6 +404,12 @@ input:focus, select:focus, textarea:focus, button:focus {
   background: transparent;
 }
 
+.iconHover {
+  transform: scale(1.075);
+  background-color: rgb(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
 .popup {
   position: fixed; 
   display: none; 

@@ -38,6 +38,7 @@
 	</div>
 
     <img id="iconkitlogo" src="../assets/iconkit.png" height=50px; style="margin: 7px 0;"><br>
+    <h2 style="margin: 5 auto 0 auto; display: none" id="howto"><span style='color: #aaaaaa'>(hover over an icon for info)</span></h2>
 
     <div id="iconbox" style="min-height: 145px; display: inline-flex">
         <img id="loading" src="../assets/loading.png" class="spin" height=85px; style="display: flex; align-self: center">
@@ -50,9 +51,10 @@
         <button class="blankButton menuButton" id="downloadIcon" title="Download icon"><a id="downloadLink" download="cube_1.png" href=""><img src="../assets/iconkitbuttons/save.png" width=60px></a></button>
         <button class="blankButton menuButton" id="getUserIcon" title="Get player icon"><img src="../assets/iconkitbuttons/steal.png" width=60px></button>
         <button class="blankButton menuButton" id="randomIcon" title="Random Icon"><img src="../assets/iconkitbuttons/shuffle.png" width=60px></button>
+        <button class="blankButton menuButton" id="unlockIcon" title="Unlock details"><img id="lock" src="../assets/iconkitbuttons/unlock.png" width=60px></button>
         </div>
         <div id="iconTabs"></div><br>
-        <div id="iconKitParent" class="iconKit">
+        <div id="iconKitParent" class="iconKit noDarken">
             <div id="iconprogressbar">
                 <div id="iconloading"></div>
             </div>
@@ -112,6 +114,11 @@ let enableGlow = 0
 
 let imagesLoaded = 0
 let totalLoaded = 0
+
+let shops = ["", "Scratch's ", "community "]
+let achievements = []
+let shopIcons = []
+let unlockMode = false
 
 if (mobile) $('#logo').attr('width', '80%');
 
@@ -188,7 +195,7 @@ fetch('./api/icons').then(res => {
             iconStuff.colorOrder.forEach(function (p, n) {
                 if (iconSettings.includes("sort")) p = n;
                 colTypes.forEach(c => {
-                    $(`#col${c}`).append(`<button col=${p} class="blankButton color${c}" title="Color ${p}" id="col${c}-${p}"><img src="../assets/previewicons/color_${p}.png" width=50px></button>`)
+                    $(`#col${c}`).append(`<button col=${p} colType=color${c} class="blankButton color${c}" title="Color ${p}" id="col${c}-${p}"><img src="../assets/previewicons/color_${p}.png" width=50px></button>`)
                 })
             })
             $('#col1').append("<span style='min-width: 10px'></span>")
@@ -234,8 +241,7 @@ fetch('./api/icons').then(res => {
             var img = $(this).children().first()
             img.attr('src', img.attr('src').replace('_off', '_on'));
 
-            $('#iconKitParent').each(function(x, y) {
-            $(this).children().not('#iconprogressbar').hide()})
+            $('#iconKitParent').each(function(x, y) { $(this).children().not('#iconprogressbar').hide() })
 
             if ($(forms).html() == "") appendIcon(filterIcon(form), form)
             
@@ -400,6 +406,49 @@ fetch('./api/icons').then(res => {
         if (iconSettings.includes("square")) $("#result").addClass("squareIcon")
         else $("#result").removeClass("squareIcon")
         localStorage.iconkit = checkedSettings.join(",")
+    })
+
+    $('#unlockIcon').click(function() {
+        if (!achievements.length) { 
+            fetch('./api/achievements').then(res => { res.json().then(x => {
+                achievements = x.achievements
+                shopIcons = x.shopIcons
+                unlockMode = true
+                $('#lock').attr('src', $('#lock').attr('src').replace('.png', '_on.png'));
+                $('#howto').show();
+            })})
+        }
+        else {
+            unlockMode = !unlockMode
+            if (unlockMode) { $('#lock').attr('src', $('#lock').attr('src').replace('.png', '_on.png')); $('#howto').show() }
+            else { $('#lock').attr('src', $('#lock').attr('src').replace('_on.png', '.png')); $('#howto').hide() }
+        }
+    })
+
+    
+    $(document).on('mouseover', '.iconButton, .color1, .color2', function () {
+        if (unlockMode && achievements.length) {
+            $(this).addClass('iconHover')
+            let form = $(this).attr('form') || $(this).attr('colType')
+            let iconNumber = $(this).attr('num') || $(this).attr('col')
+
+            if (iconNumber == 1 || ((form == "cube") && iconNumber <= 4) || ((form.startsWith('color')) && iconNumber <= 3)) return $('#howto').html("Always unlocked")
+            else if (iconNumber == miniIcon && form == "cube") return $('#howto').html("Legacy mini icon, enable in GD settings")
+            else if (iconNumber == 13 && form == "cube") return $('#howto').html("Click lock on icon kit")
+
+
+            let foundAch = achievements.find(x => x.rewardType == form && x.rewardID == +iconNumber)
+            let foundMerch = shopIcons.find(x => x.type == form && x.icon == +iconNumber)
+
+            if (foundAch) $('#howto').html(foundAch.description.replace("Demon difficulty", "Demon"))
+            else if (foundMerch) $('#howto').html(`Purchase in ${shops[foundMerch.shop]}shop for <span style="color: aqua">${foundMerch.price}</span> orbs`)
+            else $('#howto').html("<span style='color: #aaaaaa'>(no info available)</span>")
+        }
+    })
+
+    $(document).on('mouseleave', '.iconButton, .color1, .color2', function () {
+        $(this).removeClass('iconHover')
+        $('#howto').html("<span style='color: #aaaaaa'>(hover over an icon for info)</span>")
     })
 })
 
