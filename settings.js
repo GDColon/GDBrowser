@@ -4,7 +4,7 @@
 module.exports = {
     
     port: 2000, // Port to host website on
-    endpoint: "http://boomlings.com/database/", // Server endpoint to send requests to
+    endpoint: "http://boomlings.com/database/", // Server endpoint to send requests to, must end with a slash
 
     params: {   // Always send this stuff to the servers
         secret: 'Wmfd2893gb7',
@@ -22,5 +22,8 @@ module.exports = {
     base64descriptions: true, // Are level descriptions encoded in Base64?
     xorPasswords: true, // Are level passwords XOR encrypted?
     timestampSuffix: " ago", // Suffix to add after timestamps, if any.
+    substitutions: {    // Any parameters that are renamed on the GDPS should be listed here, e.g. { levelID: "abcde" }
+        // levelID: "oiuyhxp4w9I"
+    }
 
 }

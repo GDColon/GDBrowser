@@ -90,14 +90,14 @@ module.exports = async (app, req, res) => {
     }
     
     request.post(app.endpoint + 'getGJLevels21.php', req.gdParams(filters), async function(err, resp, body) {
-    
+
     if (err || !body || body == '-1' || body.startsWith("<!")) return res.send("-1")
     let splitBody = body.split('#')
     let preRes = splitBody[0].split('|')
     let authorList = {}
     let songList = {}
     let authors = splitBody[1].split('|')
-    let songs = '~' + splitBody[2]; songs = songs.split('|~1~:').map(x => app.parseResponse(x + '|~1~', '~|~'))
+    let songs = '~' + splitBody[2]; songs = songs.split(':').map(x => app.parseResponse(x, '~|~'))
     songs.forEach(x => {songList[x['~1']] = x['2']})
 
     authors.forEach(x => {

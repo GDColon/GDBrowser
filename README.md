@@ -57,7 +57,7 @@ forms.json is a list of the different icon forms, their ingame filenames, and th
 ## Misc
 Inevitable misc folder
 
-**For level analysis**
+**Level Analysis Stuff (in a separate folder)**
 
 blocks.json - The object IDs in the different 'families' of blocks
 
@@ -69,7 +69,11 @@ objectProperties.json - Object property cheatsheet. Low budget version of [AlFas
 
 objects.json - IDs for portals, orbs, triggers, and misc stuff
 
-**Not for level analysis**
+**Everything Else**
+
+achievements.json - List of all GD/meltdown/subzero/etc achievements. `parseAchievementPlist.js` automatically creates this file
+
+achievementTypes.json - An object containing different categories of achievements (stars, shards, vault, etc) and how to identify them
 
 colors.json - List of icon colors in RGB format
 
@@ -79,11 +83,15 @@ dragscroll.js - Used on several pages for drag scrolling
 
 level.json - An array of the official GD tracks, and also difficulty face stuff for level searching
 
+parseAchievementPlist.js - A script that reads GD's achievement .plist files and converts it into achievements.json
+
 sampleIcons.json - A pool of icons, one of which will randomly appear when visiting the icon kit. Syntax is [Name, ID, Col1, Col2, Glow],
 
 secretStuff.json - GJP goes here, needed for level leaderboards. Not included in the repo for obvious reasons
 
 settings.js - Tweak small settings here, mainly for local use or GDPS'es
+
+shops.js - A hardcoded list of all the shop icons in GD
 
 sizecheck.js - Excecuted on most pages. Used for the 'page isn't wide enough' message, back button, and a few other things
 

@@ -1,9 +1,9 @@
 const zlib = require('zlib')
-const properties = require('../misc/objectProperties.json')
-const init = require('../misc/initialProperties.json')
-const colorStuff = require('../misc/colorProperties.json')
-const ids = require('../misc/objects.json')
-const blocks = require('../misc/blocks.json')
+const blocks = require('../misc/analysis/blocks.json')
+const colorStuff = require('../misc/analysis/colorProperties.json')
+const init = require('../misc/analysis/initialProperties.json')
+const properties = require('../misc/analysis/objectProperties.json')
+const ids = require('../misc/analysis/objects.json')
 
 module.exports = async (app, req, res, level) => {
     let unencrypted = level.data.startsWith('kS') // some gdps'es don't encrypt level data

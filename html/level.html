@@ -209,7 +209,7 @@ $('#levelInfo').html($('#levelInfo').html()
 
 if (!'[[UPLOADED]]'.startsWith('[')) {
 	$('#levelInfo').html($('#levelInfo').html()
-	.replace('[[PASS]]', `<br>Password: <span style="color:orange">${'[[PASSWORD]]' == '0' ? "No copy" : '[[PASSWORD]]' == 1 ? "Free copy" : '[[PASSWORD]]'}</span>`)
+	.replace('[[PASS]]', `<br>Password: <span style="color:orange">${'[[PASSWORD]]' == '0' || '[[PASSWORD]]'.startsWith("[") ? "No copy" : '[[PASSWORD]]' == 1 ? "Free copy" : '[[PASSWORD]]'}</span>`)
 	.replace('[[LOWDETAIL]]', `<br>Low Detail: <span style="color:orange">${[[LDM]] ? "Yes" : "No"}</span>`)
 	.replace('[[TIME1]]', [[EDITORTIME]] == 0 ? "" : `<br>Editor Time: <span style="color:lightgreen">${colonize([[EDITORTIME]])}</span>`)
 	.replace('[[TIME2]]', [[TOTALEDITORTIME]] == 0 ? "" : `<br>Editor Time (+copies): <span style="color:lightgreen">${colonize([[TOTALEDITORTIME]])}</span>`)

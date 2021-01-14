@@ -53,7 +53,11 @@ app.use(function(req, res, next) {
   req.gdParams = function(obj={}) {
     Object.keys(app.config.params).forEach(x => { if (!obj[x]) obj[x] = app.config.params[x] })
     let ip = req.headers['x-real-ip'] || req.headers['x-forwarded-for']
-    return {form: obj, headers: app.config.ipForwarding && ip ? {'x-forwarded-for': ip, 'x-real-ip': ip} : {}}
+    let params = {form: obj, headers: app.config.ipForwarding && ip ? {'x-forwarded-for': ip, 'x-real-ip': ip} : {}}
+    for (let sub in app.config.substitutions) {
+      if (params.form[sub]) { params.form[app.config.substitutions[sub]] = params.form[sub]; delete params.form[sub] }
+    }
+    return params
   }
   next()
 })
@@ -96,6 +100,7 @@ catch(e) {
 
 app.parseResponse = function (responseBody, splitter) {
   if (!responseBody || responseBody == "-1") return {};
+  if (responseBody.startsWith("\nWarning:")) responseBody = responseBody.split("\n").slice(2).join("\n") // GDPS'es are wild
   let response = responseBody.split('#')[0].split(splitter || ':');
   let res = {};
   for (let i = 0; i < response.length; i += 2) {

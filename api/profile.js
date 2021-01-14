@@ -10,10 +10,10 @@ module.exports = async (app, req, res, api, getLevels) => {
   let skipRequest = accountMode || foundID
 
   // if you're searching by account id, an intentional error is caused to skip the first request to the gd servers. see i pulled a sneaky on ya. (fuck callbacks man)
-  request.post(skipRequest ? "" : app.endpoint + 'getGJUsers20.php', skipRequest ? {} : req.gdParams({ str: username }), function (err1, res1, b1) {
-  
-    let searchResult = foundID ? foundID[0] : (accountMode || err1 || b1 == '-1' || b1.startsWith("<!") || !b1) ? req.params.id : app.parseResponse(b1)[16]
-    
+  request.post(skipRequest ? "" : app.endpoint + 'getGJUsers20.php', skipRequest ? {} : req.gdParams({ str: username, page: 0 }), function (err1, res1, b1) {
+
+    let searchResult = foundID ? foundID[0] : (accountMode || err1 || b1 == '-1' || b1.startsWith("<!") || !b1) ? req.params.id : app.parseResponse(b1.split("|")[0])[16]
+
     if (getLevels) {
       req.params.text = foundID ? foundID[1] : app.parseResponse(b1)[2]
       return app.run.search(app, req, res)
