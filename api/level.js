@@ -24,7 +24,7 @@ module.exports = async (app, req, res, api, analyze) => {
 
   request.post(app.endpoint + 'getGJLevels21.php', req.gdParams({ str: levelID, type: 0 }), async function (err, resp, body) {
 
-    if (err || !body || body == '-1' || body.startsWith("<!")) {
+    if (err || !body || body == '-1' || body.startsWith("<!") || body.startsWith("##")) {
       if (!api) return res.redirect('search/' + req.params.id)
       else return res.send("-1")
     }
@@ -51,6 +51,8 @@ module.exports = async (app, req, res, api, analyze) => {
       level.songSize = "0MB"
       level.songID = "Level " + [parseInt(levelInfo[12]) + 1]
     }
+
+    if (app.isGDPS) level.gdps = true
 
     function sendLevel() {
 

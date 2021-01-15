@@ -118,14 +118,14 @@
 			<h2 class="pre smaller">By: [[SONGAUTHOR]]<!--
 			--><img id="scout" title="Artist is scouted" style="display: none; cursor: help; margin-left: 1.5%; filter: hue-rotate(-55deg);" class="artistIcon valign" src="../assets/check.png" width="5%"><!--
 			--><img id="whitelist" title="Artist is whitelisted" style="display: none; cursor: help" class="artistIcon valign" src="../assets/check.png" width="5%"><!--
-			--> <a class="songLink" href="https://[[SONGAUTHOR]].newgrounds.com" target="_blank"><img class="gdButton valign" src="../assets/more.png" width="12%"></a></h2>
+			--> <a class="songLink" href="https://[[SONGAUTHOR]].newgrounds.com" target="_blank"><img id="moreSongs" class="gdButton valign" src="../assets/more.png" width="12%"></a></h2>
 			<img id="checkSong" style="display: none; margin-top: 1%" class="gdButton valign" src="../assets/btn-check.png" width="16%">
 			<h3 id="songLoading" style="display: none; margin-top: 0.5%;">Loading...</h3>
 			<h3 id="songAllowed" style="display: none; margin-top: 0.5%; color: lime">Song is allowed for use</h3>
 			<h3 id="songNotAllowed" style="display: none; margin-top: 0.5%; color: red">Song is not allowed for use</h3>
 			<h3 id="artistInfo" style="display: none; margin-top: 0.5%"></h3>
 		</div>
-		<a class="songLink" href="https://www.newgrounds.com/audio/listen/[[SONGID]]" target="_blank"><img class="gdButton sideButton" src="../assets/playsong.png" style="position:absolute; right: 1%; top: 50%; width: 11%; height: auto;"></a>
+		<a class="songLink" href="https://www.newgrounds.com/audio/listen/[[SONGID]]" target="_blank"><img class="gdButton sideButton" id="playSong" src="../assets/playsong.png" style="position:absolute; right: 1%; top: 50%; width: 11%; height: auto;"></a>
 	</div>
 
 	<div class="center" style="position:absolute; bottom: 5%; left: 0; right: 0">
@@ -252,14 +252,17 @@ if (!'[[DAILYNUMBER]]'.startsWith("[")) {
 			$('#dailyTime').html(` (${colonize(dailyTime, true)})`)
 		}, 1000);
 	}
-
-
 }
 else $('.dailyLevel').remove()
 
 if ("[[SONGID]]".startsWith("Level")) {
 	$('#songInfo').text('[[SONGID]]')
-	$('.songLink').hide()}
+	$('.songLink').hide()
+}
+else if ("[[GDPS]]" == "true") {
+	$('#playSong').hide()
+	$('#moreSongs').hide()
+} 
 else $('#checkSong').show()
 
 if ("[[SONGAUTHOR]]" == "Unknown" || "[[INVALIDSONG]]" == "true") $('.songLink').hide()

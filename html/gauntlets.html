@@ -33,16 +33,17 @@
 <script async type="text/javascript" src="../sizecheck.js"></script>
 <script>
 
-let gauntlets = ["Fire", "Ice", "Poison", "Shadow", "Lava", "Bonus", "Chaos", "Demon", "Time", "Crystal", "Magic", "Spike", "Monster", "Doom", "Death"]
+let gauntletNames = ["Fire", "Ice", "Poison", "Shadow", "Lava", "Bonus", "Chaos", "Demon", "Time", "Crystal", "Magic", "Spike", "Monster", "Doom", "Death"]
 
-gauntlets.forEach((x, y) => {
-
-$('#gauntletList').append(`
+fetch('../api/gauntlets').then(res => res.json()).then(gauntlets => {
+	gauntlets.forEach((x, y) => {
+		let name = gauntletNames[x.id - 1]
+		$('#gauntletList').append(`
 			<div class="gauntlet">
-			<a href="../search/level?gauntlet=${y + 1}">
-			<img src="../assets/gauntlets/${x.toLowerCase()}.png" height="300%"><br>
-			<h3 class="gauntletText"">${x}<br>Gauntlet</h3></div></a>`)
-})
-
+			<a href="../search/*?gauntlet=${x.id}">
+			<img src="../assets/gauntlets/${name.toLowerCase()}.png" height="300%"><br>
+			<h3 class="gauntletText"">${name}<br>Gauntlet</h3></div></a>`)
+		})
+});
 
 </script>

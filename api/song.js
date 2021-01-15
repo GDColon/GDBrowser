@@ -8,7 +8,7 @@ module.exports = async (app, req, res) => {
 
     let songID = req.params.song
     
-    request.post(app.endpoint + 'testSong.php?songID=' + songID, req.gdParams(), async function(err, resp, body) {
+    request.post('http://boomlings.com/database/testSong.php?songID=' + songID, req.gdParams(), async function(err, resp, body) {
     if (err || !body || body == '-1' || body.startsWith("<!")) return res.send(info)
 
     request.post(app.endpoint + 'getGJSongInfo.php', req.gdParams({songID: songID}), async function(err2, resp, songAllowed) {

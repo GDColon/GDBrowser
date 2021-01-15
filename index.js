@@ -78,6 +78,8 @@ app.timeSince = function(time=app.lastSuccess) {
   return `${minsPassed}m ${secsPassed}s`
 }
 
+app.isGDPS = app.endpoint != "http://boomlings.com/database/"
+
 app.run = {}
 directories.forEach(d => {
   fs.readdirSync('./api/' + d).forEach(x => {if (x.includes('.')) app.run[x.split('.')[0]] = require('./api/' + d + "/" + x) })
@@ -100,16 +102,17 @@ catch(e) {
 
 app.parseResponse = function (responseBody, splitter) {
   if (!responseBody || responseBody == "-1") return {};
-  if (responseBody.startsWith("\nWarning:")) responseBody = responseBody.split("\n").slice(2).join("\n") // GDPS'es are wild
+  if (responseBody.startsWith("\nWarning:")) responseBody = responseBody.split("\n").slice(2).join("\n").trim() // GDPS'es are wild
+  if (responseBody.startsWith("<br />")) responseBody = responseBody.split("<br />").slice(2).join("<br />").trim() // Seriously screw this
   let response = responseBody.split('#')[0].split(splitter || ':');
   let res = {};
   for (let i = 0; i < response.length; i += 2) {
   res[response[i]] = response[i + 1]}
-  return res  }
+  return res  
+}
 
 //xss bad
 app.clean = function(text) {if (!text || typeof text != "string") return text; else return text.replace(/&/g, "&#38;").replace(/</g, "&#60;").replace(/>/g, "&#62;").replace(/=/g, "&#61;").replace(/"/g, "&#34;").replace(/'/g, "&#39;")}
-
 
 // ASSETS
 
@@ -184,10 +187,11 @@ app.get("/api/analyze/:id", RL, async function(req, res) { app.run.level(app, re
 app.get("/api/boomlings", function(req, res) { app.run.boomlings(app, req, res) })
 app.get("/api/comments/:id", RL2, function(req, res) { app.run.comments(app, req, res) })
 app.get("/api/credits", function(req, res) { res.send(require('./misc/credits.json')) })
+app.get("/api/gauntlets", async function(req, res) { app.run.gauntlets(app, req, res) })
 app.get("/api/leaderboard", function(req, res) { app.run[req.query.hasOwnProperty("accurate") ? "accurate" : "scores"](app, req, res) })
 app.get("/api/leaderboardLevel/:id", RL2, function(req, res) { app.run.leaderboardLevel(app, req, res) })
 app.get("/api/level/:id", RL, async function(req, res) { app.run.level(app, req, res, api) })
-app.get("/api/mappacks", async function(req, res) { app.run.mappack(app, req, res) })
+app.get("/api/mappacks", async function(req, res) { app.run.mappacks(app, req, res) })
 app.get("/api/profile/:id", RL2, function(req, res) { app.run.profile(app, req, res, api) })
 app.get("/api/search/:text", RL2, function(req, res) { app.run.search(app, req, res) })
 app.get("/api/song/:song", function(req, res){ app.run.song(app, req, res) })

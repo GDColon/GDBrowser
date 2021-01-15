@@ -16,8 +16,8 @@ module.exports = async (app, req, res) => {
 
     let mappacks = packs.map(x => ({    // "packs.map()" laugh now please
       id: +x[1],
-      name: x[2],
       levels: x[3].split(","),
+      name: x[2],
       stars: +x[4],
       coins: +x[5],
       difficulty: difficulties[+x[6]],

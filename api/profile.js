@@ -11,7 +11,6 @@ module.exports = async (app, req, res, api, getLevels) => {
 
   // if you're searching by account id, an intentional error is caused to skip the first request to the gd servers. see i pulled a sneaky on ya. (fuck callbacks man)
   request.post(skipRequest ? "" : app.endpoint + 'getGJUsers20.php', skipRequest ? {} : req.gdParams({ str: username, page: 0 }), function (err1, res1, b1) {
-
     let searchResult = foundID ? foundID[0] : (accountMode || err1 || b1 == '-1' || b1.startsWith("<!") || !b1) ? req.params.id : app.parseResponse(b1.split("|")[0])[16]
 
     if (getLevels) {
@@ -20,7 +19,6 @@ module.exports = async (app, req, res, api, getLevels) => {
     }
 
     request.post(app.endpoint + 'getGJUserInfo20.php', req.gdParams({ targetAccountID: searchResult }), function (err2, res2, body) {
-
       if (err2 || body == '-1' || !body) {
         if (!api) return res.redirect('/search/' + req.params.id)
         else return res.send("-1")
@@ -59,6 +57,10 @@ module.exports = async (app, req, res, api, getLevels) => {
           col2: +account[11],
           deathEffect: +account[48] || 1,
           glow: account[28] == "1",
+      }
+
+      if (app.isGDPS) {
+        if (userData.icon == 0 && !userData.accountID && userData.username.toLowerCase() == "undefined") userData.username = "[MISSINGNO.]"
       }
   
       if (api) return res.send(userData)

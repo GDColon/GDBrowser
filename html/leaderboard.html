@@ -112,12 +112,19 @@ function leaderboard(val) {
 
 	fetch(`../api/leaderboard?count=250&${val}&type=${sort}${modMode ? "&mod=1" : ""}`).then(res => res.json()).then(res => {
 
+		if (type == "accurate" && res == "-2") {  // for GDPS'es
+			$('#accurateTabOn').remove()
+			$('#accurateTabOff').remove()
+			$('#scoreTabs').css('margin-left', '-29vh')
+			return $('#topTabOff').trigger('click')
+		}
+
 		$('#searchBox').html(`<div style="height: 4.5%"></div>`)
 		$('.ranking').remove()
 
 		if (modMode && sort == "cp") res = res.sort(function(a, b){return b.cp - a.cp});
 
-		if (val == type && res != -1 && res.length) res.forEach((x, y) => {
+		if (val == type && res != -1 && res != -2 && res.length) res.forEach((x, y) => {
 
 		$('#searchBox').append(`<div class="searchresult leaderboardSlot">
 			${x.moderator ? `<img title="${x.moderator == 2 ? "Elder " : ""}Moderator" src="../assets/mod${x.moderator == 2 ? "-elder" : ""}.png" style="height: 30%; cursor: help; padding-right: 1.6%; transform: translateY(0.7vh)">` : ""}
@@ -126,7 +133,7 @@ function leaderboard(val) {
 					style="cursor: help; height: 19%; transform: translate(-25%, -10%);" title="Stars"></h3>
 		
 			<h3 class="lessSpaced leaderboardStats">
-				<span${x.diamonds >= 65535 ? " class='blue'>~" : ">"}${x.diamonds}</span> <img class="valign" src="../assets/diamond.png" style="cursor: help" title="Diamonds">
+				<span${x.diamonds >= 65535 ? ` class='blue'>${type == "accurate" ? "~" : ""}` : ">"}${x.diamonds}</span> <img class="valign" src="../assets/diamond.png" style="cursor: help" title="Diamonds">
 				<span${x.coins >= 149 ? " class='yellow'" : ""}>${x.coins}</span> <img class="valign" src="../assets/coin.png" style="cursor: help" title="Secret Coins">
 				<span${x.usercoins >= 10000 ? " class='brightblue'" : ""}>${x.usercoins}</span> <img class="valign" src="../assets/silvercoin.png" style="cursor: help" title="User Coins">
 				<span${x.demons >= 1000 ? " class='brightred'" : ""}>${x.demons}</span> <img class="valign" src="../assets/demon.png" style="cursor: help" title="Demons">

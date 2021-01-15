@@ -175,7 +175,7 @@ $('#followOff').click(function() {
 
 $('#followOn').click(function() {
 	followed = localStorage.followed ? JSON.parse(localStorage.followed) : []
-	localStorage.followed = JSON.stringify(followed.filter(x => x != [[ACCOUNTID]]))
+	localStorage.followed = JSON.stringify(followed.filter(x => x != '[[ACCOUNTID]]'))
 	$('#followOff').show()
 	$('#followOn').hide()
 })

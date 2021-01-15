@@ -28,6 +28,10 @@ module.exports = async (app, req, res) => {
   request.post(app.endpoint + 'uploadGJAccComment20.php', req.gdParams(params), function (err, resp, body) {
     if (err) return res.status(400).send("The Geometry Dash servers returned an error! Perhaps they're down for maintenance")
     else if (!body || body == "-1") return res.status(400).send(`The Geometry Dash servers rejected your profile post! Try again later, or make sure your username and password are entered correctly. Try again later, or make sure your username and password are entered correctly. Last worked: ${app.timeSince()} ago.`)
+    if (body.startsWith("temp")) {
+      let banStuff = body.split("_")
+      return res.status(400).send(`You have been banned from commenting for ${(parseInt(banStuff[1]) / 86400).toFixed(0)} days. Reason: ${banStuff[2] || "None"}`)
+    }
     else app.trackSuccess()
     res.status(200).send(`Comment posted to ${params.userName} with ID ${body}`)
   })

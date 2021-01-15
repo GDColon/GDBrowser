@@ -57,6 +57,8 @@ class Level {
             if (pass.length > 1) this.password = pass.slice(1);
             else this.password = pass;
         }
+
+        if (this.editorTime == 1 && this.totalEditorTime == 2) { this.editorTime = 0; this.totalEditorTime = 0 } // remove GDPS default values
     }
 }
 

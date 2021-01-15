@@ -9,6 +9,7 @@ module.exports = async (app, req, res) => {
 
     let demonMode = req.query.hasOwnProperty("demonlist") || req.query.hasOwnProperty("demonList") || req.query.type == "demonlist" || req.query.type == "demonList"
     if (demonMode) {
+        if (app.isGDPS) return res.send('-1')
         if (!demonList.list.length || demonList.lastUpdated + 600000 < Date.now()) {  // 10 minute cache
             return request.get('http://www.pointercrate.com/api/v2/demons/listed/?limit=100', function (err, resp, list) {
                 if (err) return res.send("-1")
@@ -78,8 +79,6 @@ module.exports = async (app, req, res) => {
 
     if (req.query.hasOwnProperty("creators")) filters.type = 12
 
-    if (req.params.text == "*") delete filters.str
-
     let listSize = 10
     if (demonMode || req.query.gauntlet || ["mappack", "list", "saved"].some(x => req.query.hasOwnProperty(x))) {
         filters.type = 10
@@ -88,74 +87,76 @@ module.exports = async (app, req, res) => {
         filters.str = filters.str.slice(filters.page*amount, filters.page*amount + amount).join()
         filters.page = 0
     }
+
+    if (req.params.text == "*") delete filters.str
     
     request.post(app.endpoint + 'getGJLevels21.php', req.gdParams(filters), async function(err, resp, body) {
 
-    if (err || !body || body == '-1' || body.startsWith("<!")) return res.send("-1")
-    let splitBody = body.split('#')
-    let preRes = splitBody[0].split('|')
-    let authorList = {}
-    let songList = {}
-    let authors = splitBody[1].split('|')
-    let songs = '~' + splitBody[2]; songs = songs.split(':').map(x => app.parseResponse(x, '~|~'))
-    songs.forEach(x => {songList[x['~1']] = x['2']})
+        if (err || !body || body == '-1' || body.startsWith("<!")) return res.send("-1")
+        let splitBody = body.split('#')
+        let preRes = splitBody[0].split('|')
+        let authorList = {}
+        let songList = {}
+        let authors = splitBody[1].split('|')
+        let songs = '~' + splitBody[2]; songs = songs.split(':').map(x => app.parseResponse(x, '~|~'))
+        songs.forEach(x => {songList[x['~1']] = x['2']})
 
-    authors.forEach(x => {
-      if (x.startsWith('~')) return
-      let arr = x.split(':')
-      authorList[arr[0]] = [arr[1], arr[2]]})
+        authors.forEach(x => {
+        if (x.startsWith('~')) return
+        let arr = x.split(':')
+        authorList[arr[0]] = [arr[1], arr[2]]})
 
-    let levelArray = preRes.map(x => app.parseResponse(x)).filter(x => x[1])
-    let parsedLevels = []
+        let levelArray = preRes.map(x => app.parseResponse(x)).filter(x => x[1])
+        let parsedLevels = []
 
-    levelArray.forEach(async (x, y) => {
+        levelArray.forEach(async (x, y) => {
 
-        let level = new Level(x)
-        let songSearch = songs.find(y => y['~1'] == x[35]) || []
+            let level = new Level(x)
+            let songSearch = songs.find(y => y['~1'] == x[35]) || []
 
-        level.author = authorList[x[6]] ? authorList[x[6]][0] : "-";
-        level.accountID = authorList[x[6]] ? authorList[x[6]][1] : "0";
+            level.author = authorList[x[6]] ? authorList[x[6]][0] : "-";
+            level.accountID = authorList[x[6]] ? authorList[x[6]][1] : "0";
 
-        if (level.customSong) {
-            level.songName = app.clean(songSearch[2] || "Unknown")
-            level.songAuthor = songSearch[4] || "Unknown"
-            level.songSize = (songSearch[5] || "0") + "MB"
-            level.songID = songSearch[1] || level.customSong
-        }
-        else {
-            let foundSong = require('../misc/level.json').music[parseInt(x[12]) + 1] || {"null": true}
-            level.songName =  foundSong[0] || "Unknown"
-            level.songAuthor = foundSong[1] || "Unknown"
-            level.songSize = "0MB"
-            level.songID = "Level " + [parseInt(x[12]) + 1]
-        }
-
-        //this is broken if you're not on page 0, blame robtop
-        if (filters.page == 0 && y == 0) {
-            let pages = splitBody[3].split(":");
-
-            if (filters.gauntlet) {  // gauntlet page stuff
-                level.results = levelArray.length 
-                level.pages = 1
+            if (level.customSong) {
+                level.songName = app.clean(songSearch[2] || "Unknown")
+                level.songAuthor = songSearch[4] || "Unknown"
+                level.songSize = (songSearch[5] || "0") + "MB"
+                level.songID = songSearch[1] || level.customSong
+            }
+            else {
+                let foundSong = require('../misc/level.json').music[parseInt(x[12]) + 1] || {"null": true}
+                level.songName =  foundSong[0] || "Unknown"
+                level.songAuthor = foundSong[1] || "Unknown"
+                level.songSize = "0MB"
+                level.songID = "Level " + [parseInt(x[12]) + 1]
             }
 
-            else if (filters.type == 10) {  //  custom page stuff
-                level.results = listSize
-                level.pages = +Math.ceil(listSize / (amount || 10))
+            //this is broken if you're not on page 0, blame robtop
+            if (filters.page == 0 && y == 0) {
+                let pages = splitBody[3].split(":");
+
+                if (filters.gauntlet) {  // gauntlet page stuff
+                    level.results = levelArray.length 
+                    level.pages = 1
+                }
+
+                else if (filters.type == 10) {  //  custom page stuff
+                    level.results = listSize
+                    level.pages = +Math.ceil(listSize / (amount || 10))
+                }
+
+                else {  // normal page stuff
+                    level.results = +pages[0];
+                    level.pages = +pages[0] == 9999 ? 1000 : +Math.ceil(pages[0] / amount);
+                }
+
             }
 
-            else {  // normal page stuff
-                level.results = +pages[0];
-                level.pages = +pages[0] == 9999 ? 1000 : +Math.ceil(pages[0] / amount);
-            }
+            parsedLevels[y] = level
+        })
 
-        }
-
-        parsedLevels[y] = level
-    })
-
-    if (filters.type == 10) parsedLevels = parsedLevels.slice((+filters.page) * amount, (+filters.page + 1) * amount)
-    return res.send(parsedLevels)
+        if (filters.type == 10) parsedLevels = parsedLevels.slice((+filters.page) * amount, (+filters.page + 1) * amount)
+        return res.send(parsedLevels)
 
     })
 }
