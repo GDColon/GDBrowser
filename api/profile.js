@@ -6,12 +6,21 @@ module.exports = async (app, req, res, api, getLevels) => {
   if (app.offline) return res.send("-1")
   let username = getLevels || req.params.id
   let accountMode = !req.query.hasOwnProperty("player") && Number(req.params.id)
-  let foundID = app.accountCache[username.toLowerCase()]
+  let foundID = app.accountCache[app.GDPSName + username.toLowerCase()]
   let skipRequest = accountMode || foundID
+  let searchResult;
 
   // if you're searching by account id, an intentional error is caused to skip the first request to the gd servers. see i pulled a sneaky on ya. (fuck callbacks man)
   request.post(skipRequest ? "" : app.endpoint + 'getGJUsers20.php', skipRequest ? {} : req.gdParams({ str: username, page: 0 }), function (err1, res1, b1) {
-    let searchResult = foundID ? foundID[0] : (accountMode || err1 || b1 == '-1' || b1.startsWith("<!") || !b1) ? req.params.id : app.parseResponse(b1.split("|")[0])[16]
+    
+    if (foundID) searchResult = foundID[0]
+    else if (accountMode || err1 || b1 == '-1' || b1.startsWith("<!") || !b1) searchResult = req.params.id
+    else if (!app.isGDPS) searchResult = app.parseResponse(b1.split("|")[0])[16]
+    else {  // GDPS's return multiple users, GD no longer does this
+     let userResults = b1.split("|").map(x => app.parseResponse(x))
+     searchResult = userResults.find(x => x[1].toLowerCase() == username.toLowerCase() || x[2] == username) || ""
+     if (searchResult) searchResult = searchResult[16]
+    }
 
     if (getLevels) {
       req.params.text = foundID ? foundID[1] : app.parseResponse(b1)[2]
@@ -19,14 +28,16 @@ module.exports = async (app, req, res, api, getLevels) => {
     }
 
     request.post(app.endpoint + 'getGJUserInfo20.php', req.gdParams({ targetAccountID: searchResult }), function (err2, res2, body) {
-      if (err2 || body == '-1' || !body) {
+
+      let account = app.parseResponse(body || "")
+      let dumbGDPSError = app.isGDPS && !account[16] || account[1].toLowerCase() == "undefined"
+      
+      if (err2 || body == '-1' || !body || dumbGDPSError) {
         if (!api) return res.redirect('/search/' + req.params.id)
         else return res.send("-1")
       }
-
-      let account = app.parseResponse(body)
       
-      if (!foundID && app.config.cacheAccountIDs) app.accountCache[username.toLowerCase()] = [account[16], account[2]]
+      if (!foundID && app.config.cacheAccountIDs) app.accountCache[app.GDPSName + username.toLowerCase()] = [account[16], account[2]]
       
       let userData = {
           username: account[1] || "[MISSINGNO.]",
@@ -57,10 +68,6 @@ module.exports = async (app, req, res, api, getLevels) => {
           col2: +account[11],
           deathEffect: +account[48] || 1,
           glow: account[28] == "1",
-      }
-
-      if (app.isGDPS) {
-        if (userData.icon == 0 && !userData.accountID && userData.username.toLowerCase() == "undefined") userData.username = "[MISSINGNO.]"
       }
   
       if (api) return res.send(userData)

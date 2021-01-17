@@ -19,9 +19,9 @@ module.exports = {
     ipForwarding: true, // Forwards 'x-real-ip' to the servers. (requested by robtop)
 
     // GDPS Related (feel free to drop a PR if you're able to make gdbrowser work better with gdps'es <3)
+    timestampSuffix: " ago", // Suffix to add after timestamps, if any.
     base64descriptions: true, // Are level descriptions encoded in Base64?
     xorPasswords: true, // Are level passwords XOR encrypted?
-    timestampSuffix: " ago", // Suffix to add after timestamps, if any.
     substitutions: {    // Any parameters that are renamed on the GDPS should be listed here, e.g. { levelID: "abcde" }
         // levelID: "oiuyhxp4w9I"
     }

@@ -50,12 +50,15 @@ app.use(timeout('20s'));
 app.set('json spaces', 2)
 
 app.use(function(req, res, next) {
-  req.gdParams = function(obj={}) {
+  req.gdParams = function(obj={}, substitute=true) {
     Object.keys(app.config.params).forEach(x => { if (!obj[x]) obj[x] = app.config.params[x] })
     let ip = req.headers['x-real-ip'] || req.headers['x-forwarded-for']
     let params = {form: obj, headers: app.config.ipForwarding && ip ? {'x-forwarded-for': ip, 'x-real-ip': ip} : {}}
-    for (let sub in app.config.substitutions) {
-      if (params.form[sub]) { params.form[app.config.substitutions[sub]] = params.form[sub]; delete params.form[sub] }
+
+    if (substitute) { // GDPS substitutions in settings.js
+      for (let sub in app.config.substitutions) {
+        if (params.form[sub]) { params.form[app.config.substitutions[sub]] = params.form[sub]; delete params.form[sub] }
+      }
     }
     return params
   }
@@ -79,6 +82,7 @@ app.timeSince = function(time=app.lastSuccess) {
 }
 
 app.isGDPS = app.endpoint != "http://boomlings.com/database/"
+app.GDPSName = (app.isGDPS ? app.endpoint.split("/")[2] : "")
 
 app.run = {}
 directories.forEach(d => {

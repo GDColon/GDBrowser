@@ -1,3 +1,7 @@
+// this file is a potential candidate for worst code on github
+// i advise you to turn back now
+// seriously, it's not too late
+
 const request = require('request')
 const Jimp = require('jimp');
 const fs = require('fs');
@@ -274,7 +278,9 @@ module.exports = async (app, req, res) => {
             ic.composite(robotLeg1, 100 + (iconSize[0] / 2) - (robotOffset1[2]) + robotOffset1[0] + 7, (iconSize[1] / 2) - (robotOffset1[3]) - robotOffset1[1] + 70)
           }
 
-          if (useExtra) ic.composite(extra, imgOff + (iconSize[0] / 2) - (size2[0] / 2) + offset2[0], (iconSize[1] / 2) - (size2[1] / 2) - offset2[1] + (form == "bird" && !req.query.topless ? 300 - iconSize[1] : 0))
+          // every now and then jimp does a fucky wucky uwu and this line errors. seems to be an issue with the lib itself :v
+          try { if (useExtra) ic.composite(extra, imgOff + (iconSize[0] / 2) - (size2[0] / 2) + offset2[0], (iconSize[1] / 2) - (size2[1] / 2) - offset2[1] + (form == "bird" && !req.query.topless ? 300 - iconSize[1] : 0)) }
+          catch(e) {}
 
           let finalSize = [ic.bitmap.width, ic.bitmap.height]
 
@@ -352,29 +358,31 @@ module.exports = async (app, req, res) => {
 
     let username = req.params.text
     let userCode;
-
     res.contentType('image/png');
+
     if (app.offline || req.query.hasOwnProperty("noUser") || req.query.hasOwnProperty("nouser") || username == "icon") return buildIcon()
 
-    else if (app.config.cachePlayerIcons && !Object.keys(req.query).length || Object.keys(req.query).length == 1 && req.query.form) {
-      userCode = `u-${username.toLowerCase()}-${forms[req.query.form] ? req.query.form : 'cube'}`
+    else if (app.config.cachePlayerIcons && !Object.keys(req.query).filter(x => !["form", "forceGD"].includes(x)).length) {
+      userCode = `${app.GDPSName}u-${username.toLowerCase()}-${forms[req.query.form] ? req.query.form : 'cube'}`
       if (cache[userCode]) return res.end(cache[userCode].value)
     }
 
     let accountMode = !req.query.hasOwnProperty("player") && Number(req.params.id)
-    let foundID = app.accountCache[username.toLowerCase()]
+    let foundID = app.accountCache[app.GDPSName + username.toLowerCase()]
     let skipRequest = accountMode || foundID
+    let forceGD = req.query.hasOwnProperty("forceGD") // forces request to be made on boomlings.com
+    let endpoint = forceGD ? "http://boomlings.com/database/" : app.endpoint
   
     // skip request by causing fake error lmao
-    request.post(skipRequest ? "" : app.endpoint + 'getGJUsers20.php', skipRequest ? {} : req.gdParams({ str: username }), function (err1, res1, body1) {
+    request.post(skipRequest ? "" : endpoint + 'getGJUsers20.php', skipRequest ? {} : req.gdParams({ str: username }, !forceGD), function (err1, res1, body1) {
 
       let result = foundID ? foundID[0] : (accountMode || err1 || !body1 || body1 == "-1" || body1.startsWith("<!")) ? username : app.parseResponse(body1)[16];
   
-      request.post(app.endpoint + 'getGJUserInfo20.php', req.gdParams({ targetAccountID: result }), function (err2, res2, body2) {
+      request.post(endpoint + 'getGJUserInfo20.php', req.gdParams({ targetAccountID: result }, !forceGD), function (err2, res2, body2) {
   
         if (err2 || !body2 || body2 == '-1' || body2.startsWith("<!")) return buildIcon();
         let iconData = app.parseResponse(body2)
-        if (!foundID && app.config.cacheAccountIDs) app.accountCache[username.toLowerCase()] = [iconData[16], iconData[2]]
+        if (!foundID && !forceGD && app.config.cacheAccountIDs) app.accountCache[app.GDPSName + username.toLowerCase()] = [iconData[16], iconData[2]]
         return buildIcon(iconData, userCode);
 
     })

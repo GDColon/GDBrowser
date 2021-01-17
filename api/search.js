@@ -11,10 +11,13 @@ module.exports = async (app, req, res) => {
     if (demonMode) {
         if (app.isGDPS) return res.send('-1')
         if (!demonList.list.length || demonList.lastUpdated + 600000 < Date.now()) {  // 10 minute cache
-            return request.get('http://www.pointercrate.com/api/v2/demons/listed/?limit=100', function (err, resp, list) {
-                if (err) return res.send("-1")
-                demonList = {list: JSON.parse(list).map(x => x.level_id), lastUpdated: Date.now()}
-                return app.run.search(app, req, res)
+            return request.get('http://www.pointercrate.com/api/v2/demons/listed/?limit=100', function (err1, resp1, list1) {
+                if (err1) return res.send("-1")
+                else return request.get('http://www.pointercrate.com/api/v2/demons/listed/?limit=100&after=100', function (err2, resp2, list2) {
+                    if (err2) return res.send("-1")
+                    demonList = {list: JSON.parse(list1).concat(JSON.parse(list2)).map(x => x.level_id), lastUpdated: Date.now()}
+                    return app.run.search(app, req, res)
+                })
             })
         }
     }
@@ -71,7 +74,7 @@ module.exports = async (app, req, res) => {
     }
 
     if (req.query.hasOwnProperty("user")) {
-        let accountCheck = app.accountCache[filters.str.toLowerCase()]
+        let accountCheck = app.accountCache[app.GDPSName + filters.str.toLowerCase()]
         filters.type = 5
         if (accountCheck) filters.str = accountCheck[1]
         else if (!filters.str.match(/^[0-9]*$/)) return app.run.profile(app, req, res, null, req.params.text)
@@ -88,7 +91,7 @@ module.exports = async (app, req, res) => {
         filters.page = 0
     }
 
-    if (req.params.text == "*") delete filters.str
+    if (filters.str == "*") delete filters.str
     
     request.post(app.endpoint + 'getGJLevels21.php', req.gdParams(filters), async function(err, resp, body) {
 
