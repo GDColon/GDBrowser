@@ -22,7 +22,7 @@ module.exports = async (app, req, res, api) => {
     msg.author = x[6]
     msg.subject = Buffer.from(x[4], "base64").toString().replace(/^Re: ☆/, "Re: ")
     msg.content = app.xor.decrypt(x[5], 14251)
-    msg.date = x[7] + (req.timestampSuffix || "")
+    msg.date = x[7] + req.timestampSuffix
     if (msg.subject.endsWith("☆") || msg.subject.startsWith("☆")) {
       if (msg.subject.endsWith("☆")) msg.subject = msg.subject.slice(0, -1)
       else msg.subject = msg.subject.slice(1)

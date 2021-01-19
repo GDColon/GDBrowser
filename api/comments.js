@@ -45,7 +45,7 @@ module.exports = async (app, req, res) => {
         comment.content = Buffer.from(x[2], 'base64').toString();
         comment.ID = x[6]
         comment.likes = +x[4]
-        comment.date = (x[9] || "?") + (req.timestampSuffix || "")
+        comment.date = (x[9] || "?") + req.timestampSuffix
         if (comment.content.endsWith("⍟") || comment.content.endsWith("☆")) {
           comment.content = comment.content.slice(0, -1)
           comment.browserColor = true 

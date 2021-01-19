@@ -26,7 +26,7 @@ module.exports = async (app, req, res, api) => {
       msg.accountID = x[2]
       msg.author = x[6]
       msg.subject = Buffer.from(x[4], "base64").toString().replace(/^Re: ☆/, "Re: ")
-      msg.date = x[7] + (req.timestampSuffix || "")
+      msg.date = x[7] + req.timestampSuffix
       msg.unread = x[8] != "1"
       if (msg.subject.endsWith("☆") || msg.subject.startsWith("☆")) {
         if (msg.subject.endsWith("☆")) msg.subject = msg.subject.slice(0, -1)

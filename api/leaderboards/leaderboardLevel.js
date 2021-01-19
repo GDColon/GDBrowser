@@ -30,7 +30,7 @@ module.exports = async (app, req, res) => {
         x.percent = +x[3]
         x.coins = +x[13]
         x.playerID = x[2]
-        x.date = x[42] + (req.timestampSuffix || "")
+        x.date = x[42] + req.timestampSuffix
         x.icon = {
           form: ['icon', 'ship', 'ball', 'ufo', 'wave', 'robot', 'spider'][+x[14]],
           icon: +x[9],

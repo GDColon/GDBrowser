@@ -69,6 +69,7 @@ app.use(async function(req, res, next) {
   req.offline = req.server.offline
   req.endpoint = req.server.endpoint
   req.onePointNine = req.server.onePointNine
+  req.timestampSuffix = req.server.timestampSuffix || ""
   req.id = req.server.id || "gd"
   req.isGDPS = req.server.endpoint != "http://boomlings.com/database/"
 
@@ -216,6 +217,7 @@ app.get("/", function(req, res) {
       if (req.server.downloadsDisabled) {
         downloadDisabled.forEach(x => { html = html.replace(`menu-${x}`, 'menuDisabled') })
         html = html.replace('id="dl" style="display: none', 'style="display: block')
+        .replace('No active <span id="noLevel">daily</span> level!', '[Blocked by RobTop]')
       }
       return res.send(html)
     })
