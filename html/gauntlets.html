@@ -21,6 +21,8 @@
 		<img src="../assets/gauntlets.png" width="50%">
 	</div>
 
+	<img id="loading" style="margin-top: 1%" class="spin noSelect" src="../assets/loading.png" height="12%">
+
 	<div id="gauntletList">
 		<br>
 	</div>
@@ -30,12 +32,13 @@
 </div>
 </body>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script async type="text/javascript" src="../sizecheck.js"></script>
+<script type="text/javascript" src="../sizecheck.js?"></script>
 <script>
 
 let gauntletNames = ["Fire", "Ice", "Poison", "Shadow", "Lava", "Bonus", "Chaos", "Demon", "Time", "Crystal", "Magic", "Spike", "Monster", "Doom", "Death"]
 
 fetch('../api/gauntlets').then(res => res.json()).then(gauntlets => {
+	$('#loading').hide()
 	gauntlets.forEach((x, y) => {
 		let name = gauntletNames[x.id - 1]
 		$('#gauntletList').append(`

@@ -3,7 +3,7 @@ const fs = require('fs')
 const Level = require('../classes/Level.js')
 module.exports = async (app, req, res, api, ID, analyze) => {
 
-  if (app.offline) {
+  if (req.offline) {
     if (!api && levelID < 0) return res.redirect('/')
     if (!api) return res.redirect('search/' + req.params.id)
     else return res.send("-1")
@@ -14,9 +14,9 @@ module.exports = async (app, req, res, api, ID, analyze) => {
   else if (levelID == "weekly") levelID = -2
   else levelID = levelID.replace(/[^0-9]/g, "")
 
-  request.post(app.endpoint + 'downloadGJLevel22.php', req.gdParams({ levelID }), async function (err, resp, body) {
+  req.gdRequest('downloadGJLevel22', { levelID }, function (err, resp, body) {
 
-    if (err || !body || body == '-1' || body.startsWith("<!")) {
+    if (err || !body || body == '-1' || body.startsWith("<")) {
       if (!api && levelID < 0) return res.redirect(`/?daily=${levelID * -1}`)
       if (!api) return res.redirect('search/' + req.params.id)
       else return res.send("-1")
@@ -25,21 +25,24 @@ module.exports = async (app, req, res, api, ID, analyze) => {
     let authorData = body.split("#")[3]  // daily/weekly only, most likely
 
     let levelInfo = app.parseResponse(body)
-    let level = new Level(levelInfo, true)
+    let level = new Level(levelInfo, req.server, true)
 
-    request.post(authorData ? "" : app.endpoint + 'getGJUsers20.php', authorData ? {} : req.gdParams({ str: level.authorID }), function (err1, res1, b1) {
+    let foundID = app.accountCache[Object.keys(app.accountCache).find(x => app.accountCache[x][1] == level.authorID)]
+    if (foundID) foundID = foundID.filter(x => x != level.authorID)
+
+    req.gdRequest(authorData ? "" : 'getGJUsers20', { str: level.authorID }, function (err1, res1, b1) {
       let gdSearchResult = authorData ? "" : app.parseResponse(b1)
-      request.post(authorData ? "" : app.endpoint + 'getGJUserInfo20.php', authorData ? {} : req.gdParams({ targetAccountID: gdSearchResult[16] }), function (err2, res2, b2) {
+      req.gdRequest(authorData ? "" : 'getGJUserInfo20', { targetAccountID: gdSearchResult[16] }, function (err2, res2, b2) {
 
-        if (err2 && authorData) {
-          let authorInfo = authorData.split(":")
-          level.author = authorInfo[1]
-          level.accountID = authorInfo[0]
+        if (err2 && (foundID || authorData)) {
+          let authorInfo = foundID || authorData.split(":")
+          level.author = authorInfo[1] || "-"
+          level.accountID = authorInfo[0].includes(",") ? "0" : authorInfo[0]
         }
 
         else if (!err && b2 != '-1') {
           let account = app.parseResponse(b2)
-          level.author = account[1]
+          level.author = account[1] || "-"
           level.accountID = gdSearchResult[16]
         }
 
@@ -48,7 +51,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
           level.accountID = "0"
         }
 
-        request.post(app.endpoint + 'getGJSongInfo.php', req.gdParams({ songID: level.customSong }), async function (err, resp, songRes) {
+        req.gdRequest('getGJSongInfo', { songID: level.customSong }, function (err, resp, songRes) {
 
           if (!err && songRes != '-1') {
             let songData = app.parseResponse(songRes, '~|~')
@@ -71,7 +74,12 @@ module.exports = async (app, req, res, api, ID, analyze) => {
           level.data = levelInfo[4]
 
           if (analyze) return app.run.analyze(app, req, res, level)
-          if (app.isGDPS) level.gdps = true
+
+          if (req.isGDPS) level.gdps = (req.onePointNine ? "1.9/" : "") + req.endpoint
+          if (req.onePointNine) {
+            level.orbs = 0
+            level.diamonds = 0
+          }
 
           function sendLevel() {
             if (api) return res.send(level)
@@ -88,7 +96,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
           }
 
           if (levelID < 0) {
-            request.post(app.endpoint + 'getGJDailyLevel.php', req.gdParams({ weekly: levelID == -2 ? "1" : "0" }), async function (err, resp, dailyInfo) {
+            req.gdRequest('getGJDailyLevel', { weekly: levelID == -2 ? "1" : "0" }, function (err, resp, dailyInfo) {
               if (err || dailyInfo == -1) return sendLevel()
               let dailyTime = dailyInfo.split("|")[1]
               level.nextDaily = +dailyTime
@@ -97,7 +105,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
             })  
           }
 
-          else if (level.difficulty == "Extreme Demon") {
+          else if (!level.gdps && level.difficulty == "Extreme Demon") {
             request.get('https://www.pointercrate.com/api/v2/demons/?name=' + level.name.trim(), function (err, resp, demonList) {
                 if (err) return sendLevel()
                 let demon = JSON.parse(demonList)

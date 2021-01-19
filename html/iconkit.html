@@ -15,8 +15,9 @@
 <div class="center hidden"><br>
 
     <div class="popup" id="steal">
-        <div class="brownbox bounce center supercenter" style="height: 350px; width: 700px">
-			<h1 class="center gold" style="margin-top: 10px">Copy Icon</h1>
+        <div id="stealBox" class="brownbox bounce center supercenter" style="height: 340px; width: 700px">
+            <h1 class="center gold" style="margin-top: 10px">Copy Icon</h1>
+            <p id="copyFrom" class="white" style="font-size: 24px; margin: 10px auto 5px auto"></p>
             <input type="text" name="gdbrowser" id="playerName" autocomplete="off" placeholder="Username" maxlength="32" style="height: 58px; width: 90%; text-align: center; margin-top: 25px; margin-bottom: 5px;">
             <div id="copyForms"></div>
             <img src="../assets/ok.png" height=55px; class="postButton gdButton center" style="margin-top: 30px" id="fetchUser">
@@ -172,6 +173,12 @@ fetch('./api/icons').then(res => {
     .then(iconStuff => {
 
         let miniIcon = iconStuff.icons.filter(x => x.startsWith("cube")).length
+
+        if (iconStuff.noCopy) $('#getUserIcon').remove()
+        else if (iconStuff.server) {
+            $('#copyFrom').html(`Copying from the <span style="color: yellow">${iconStuff.server}</span> servers`)
+            $('#stealBox').css('height', '385px')
+        }
 
         function filterIcon(name) { return iconStuff.icons.filter(x => x.startsWith(name)).sort(function (a,b) {return a.replace(/[^0-9]/g, "") - b.replace(/[^0-9]/g, "");})}
 
@@ -470,6 +477,7 @@ fetch('./api/icons').then(res => {
 
         fetch('../api/profile/' + user).then(res => res.json())
         .then(info => {
+            if (info == "-1") return
             $(`#${formCopy}-${info[formCopy == "cube" ? "icon" : formCopy] || 1}`).trigger('click')
             $(`#col1-${info.col1}`).trigger('click')
             $(`#col2-${info.col2}`).trigger('click')

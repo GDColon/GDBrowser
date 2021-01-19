@@ -80,7 +80,7 @@
 		<br>
 		<img src="../assets/btn-awarded.png" height="27%" class="valign gdButton levelSearch" search="awarded">
 		<img src="../assets/btn-featured.png" height="27%" class="valign gdButton levelSearch" search="featured" style="margin: 0% 2%">
-		<img src="../assets/btn-followed.png" height="27%" class="valign gdButton levelSearch" search="followed">
+		<img src="../assets/btn-followed.png" height="27%" id="followedSearch" class="valign gdButton levelSearch" search="followed">
 	</div>
 
 	<div class="center">
@@ -95,10 +95,10 @@
 		<div class="diffDiv gdButton" diff=4><img src="../assets/difficulties/harder.png"><h3 class="mini">Harder</h3></div>
 		<div class="diffDiv gdButton" diff=5><img src="../assets/difficulties/insane.png"><h3 class="mini">Insane</h3></div>
 
-		<!-- <div class="diffDiv gdButton" id="demonBtn" diff=-2><img src="../assets/difficulties/demon.png" style="width: 85%"><h3 class="mini">Demon</h3></div> -->
+		<div class="diffDiv gdButton" id="demonBtn" diff=-2><img src="../assets/difficulties/demon.png" style="width: 85%"><h3 class="mini">Demon</h3></div>
 
-		<div class="diffDiv gdButton" style="filter: brightness(100%)" id="demonBtn" diff=-2><img class="darkDiff" src="../assets/difficulties/demon.png" style="width: 85%"><h3 class="darkDiff mini">Demon</h3>
-		<img src="../assets/exclamation.png" style="position: absolute; width: 19%; left: 86%; bottom: 68%"></div>
+		<!-- <div class="diffDiv gdButton" style="filter: brightness(100%)" id="demonBtn" diff=-2><img class="darkDiff" src="../assets/difficulties/demon.png" style="width: 85%"><h3 class="darkDiff mini">Demon</h3> -->
+		<!-- <img src="../assets/exclamation.png" style="position: absolute; width: 19%; left: 86%; bottom: 68%"></div> -->
 
 		<div class="diffDiv gdButton" diff=-3><img src="../assets/difficulties/auto.png"><h3 class="mini">Auto</h3></div>
 	</div>
@@ -110,7 +110,7 @@
 		<div class="diffDiv gdButton demonDiff" diff=4><img src="../assets/difficulties/demon-insane.png" style="width: 95%"><h3 class="mini center smallTextWoo">Insane</h3></div>
 		<div class="diffDiv gdButton demonDiff" diff=5><img src="../assets/difficulties/demon-extreme.png" style="width: 100%"><h3 class="mini center smallTextWoo">Extreme</h3></div>
 		<div class="diffDiv gdButton goBack" diff=-2 style="margin-left: 2.3%; filter: none"><img src="../assets/difficulties/demon.png" style="width: 90%"><h3 class="mini">Demon</h3></div>
-		<a href="./search/*?type=demonlist"><div class="gdButton diffDiv" style="filter: none"><img src="../assets/trophy2.png" style="width: 95%"><h3 class="yellow mini center">List</h3></div></a>
+		<a id="demonList" href="./search/*?type=demonlist"><div class="gdButton diffDiv" style="filter: none"><img src="../assets/trophy2.png" style="width: 95%"><h3 class="yellow mini center">List</h3></div></a>
 	</div>
 
 	<div class="transparentBox center" style="width: 115vh; height: 6%; margin: 0.5% auto 1% auto; padding-top: 1%; padding-bottom: 0.5%;">
@@ -135,7 +135,7 @@
 
 </body>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script async type="text/javascript" src="../sizecheck.js"></script>
+<script type="text/javascript" src="../sizecheck.js?"></script>
 <script>
 
 let filters = []
@@ -261,6 +261,16 @@ $('#listLevels, #listName').on('input blur', function (event) {
 		else $('#listInfo').html(listMsg)
 	}
 
+})
+
+// some gdps magic
+Fetch(`../api/gdps`).then(res => {
+	if (onePointNine) {
+		$('#userSearch').hide()
+		$('#followedSearch').addClass('menuDisabled')
+		$('#levelName').css('width', '76%')
+	}
+	if (gdps) $('#demonList').hide()
 })
 
 </script>

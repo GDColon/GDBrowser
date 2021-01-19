@@ -24,6 +24,10 @@ body {
     background-image: linear-gradient(#4B0062, #22002D) !important;
 }
 
+.purpleBG {
+    background-image: linear-gradient(#6E00FD, #330074) !important;
+}
+
 img, .noSelect {
     user-select: none;
 }
@@ -197,7 +201,7 @@ input[type=text], input[type=password], input[type=number] {
     font-size: 5vh;
 }
 
-input[type=checkbox] {
+input[type=checkbox], .changeDaWorld {
     display: none;
 }
 
@@ -539,7 +543,7 @@ input::-webkit-inner-spin-button {
 }
 
 .mappack h3, .gauntlet h3 {
-    font-size: 40px
+    font-size: 35px
 }
 
 .mappack {
@@ -804,10 +808,6 @@ input::-webkit-inner-spin-button {
 .gdMessage:hover {
     border: 0.6vh solid rgba(0, 0, 0, 0.5);
 }
-
-/* .gdMessage:active {
-    box-shadow: inset 0px 0px 400px 400px rgba(0, 0, 0, .1);
-} */
 
 .messageInput {
     font-size: 3.5vh;
@@ -1146,6 +1146,20 @@ input::-webkit-inner-spin-button {
 
 .achSelect:active {
     transform: scale(1.04);
+}
+
+.gdpslogo {
+    margin-bottom: 0%;
+    border-radius: 10%;
+    filter: drop-shadow(0.5vh 0.5vh 0.15vh rgba(0, 0, 0, 0.6)) 
+}
+
+.menuDisabled, .downloadDisabled {
+    filter: opacity(50%);
+}
+
+.downloadDisabled {
+    text-decoration: line-through;
 }
 
 .hidey {

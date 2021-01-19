@@ -1,33 +1,43 @@
-const request = require('request')
-const difficulties = ["unrated", "easy", "normal", "hard", "harder", "insane", "demon"]
-
-let cache = {data: null, indexed: 0}
+let difficulties = ["auto", "easy", "normal", "hard", "harder", "insane", "demon", "demon-easy", "demon-medium", "demon-insane", "demon-extreme"]
+let cache = {}
 
 module.exports = async (app, req, res) => {
 
-  if (app.offline) return res.send("-1")
-  else if (app.config.cacheMapPacks && cache.data != null && cache.indexed + 20000000 > Date.now()) return res.send(cache.data)   // 6 hour cache
+  if (req.offline) return res.send("-1")
+  
+  let cached = cache[req.id]
+  if (app.config.cacheMapPacks && cached && cached.data && cached.indexed + 5000000 > Date.now()) return res.send(cached.data)   // 1.5 hour cache
+  let params = { count: 250, page: 0 }
+  let packs = []
 
-  request.post(app.endpoint + 'getGJMapPacks21.php', req.gdParams({ count: 200 }), function (err, resp, body) {
+  function mapPackLoop() {
+    req.gdRequest('getGJMapPacks21', params, function (err, resp, body) {
 
-    if (err || !body || body == '-1' || body.startsWith("<!")) return res.send("-1")
+      if (err || !body || body == '-1' || body.startsWith("<")) return res.send("-1")
 
-    let packs = body.split('#')[0].split('|').map(x => app.parseResponse(x)).filter(x => x[2])
+      let newPacks = body.split('#')[0].split('|').map(x => app.parseResponse(x)).filter(x => x[2])
+      packs = packs.concat(newPacks)
 
-    let mappacks = packs.map(x => ({    // "packs.map()" laugh now please
-      id: +x[1],
-      levels: x[3].split(","),
-      name: x[2],
-      stars: +x[4],
-      coins: +x[5],
-      difficulty: difficulties[+x[6]],
-      barColor: x[7],
-      textColor: x[8]
-    }))
+      // not all GDPS'es support the count param, which means recursion time!!!
+      if (newPacks.length == 10) {
+        params.page++
+        return mapPackLoop()
+      }
+      
+      let mappacks = packs.map(x => ({    // "packs.map()" laugh now please
+        id: +x[1],
+        levels: x[3].split(","),
+        name: x[2],
+        stars: +x[4],
+        coins: +x[5],
+        difficulty: difficulties[+x[6]] || "unrated",
+        barColor: x[7],
+        textColor: x[8]
+      }))
 
-    if (app.config.cacheMapPacks) cache = {data: mappacks, indexed: Date.now()}
-    return res.send(mappacks)
-
-  })
-    
+      if (app.config.cacheMapPacks) cache[req.id] = {data: mappacks, indexed: Date.now()}
+      return res.send(mappacks)
+    })
+  }
+  mapPackLoop()
 }

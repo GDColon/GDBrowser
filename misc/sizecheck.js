@@ -34,7 +34,22 @@ function backButton() {
 	else window.location.href = "../../../../../"
 }
 
+let gdps = null
+let onePointNine = false
+
+function Fetch(link) {
+	return new Promise(function (res, rej) {
+		fetch(link).then(resp => {
+			if (!resp.ok) return rej(resp)
+			gdps = resp.headers.get('gdps')
+			if (gdps && gdps.startsWith('1.9/')) { onePointNine = true; gdps = gdps.slice(4) }
+			resp.json().then(res)
+		}).catch(rej)
+	})
+}
+
 let allowEsc = true;
+
 $(document).keydown(function(k) {
 	if (k.keyCode == 27) { //esc
 		if (!allowEsc) return

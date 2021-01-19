@@ -140,7 +140,7 @@
 		<img class="gdButton sideButton" id="saveButton" src="../assets/plus.png" onclick="$('#saveDiv').show(); saveLevel()"><br>
 		<img class="gdButton sideButton" id="infoButton"  src="../assets/info.png" onclick="$('#infoDiv').show()"><br>
 		<!-- <img class="gdButton sideButton" id="likeButton"  src="../assets/vote.png" onclick="$('#likeDiv').show()"><br> -->
-		<a href="./analyze/[[ID]]"><img class="gdButton sideButton" src="../assets/edit.png"></a><br>
+		<a href="./analyze/[[ID]]"><img id="analyzeBtn" class="gdButton sideButton" src="../assets/edit.png"></a><br>
 		<a href="./comments/[[ID]]"><img class="gdButton sideButton" src="../assets/comment.png"></a><br>
 		<a href="./leaderboard/[[ID]]"><img id="leaderboardbtn" class="gdButton sideButton" src="../assets/leaderboard.png"></a><br>
 	</div>
@@ -158,7 +158,7 @@
 
 </body>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script async type="text/javascript" src="../sizecheck.js"></script>
+<script type="text/javascript" src="../sizecheck.js?"></script>
 <script>
 
 let messageText = 'Your <span style="color: yellow">Geometry Dash password</span> will <span style="color: lime">not be stored</span> anywhere on the site, both <span style="color:rgb(113, 234, 255)">locally and server-side.</span> You can view the code used for liking a level <a class="menuLink" target="_blank" href="https://github.com/GDColon/GDBrowser/blob/master/api/post/like.js">here</a>.'
@@ -226,7 +226,7 @@ else {
 	.replace('[[TIME2]]', "")
 	.replace('[[UPLOAD]]', "")
 	.replace('[[UPDATE]]', "") + 
-	`<br><a class="youCanClickThis" href="/[[ID]]?download"><span style="color:aqua">Download additional info</span></a>`
+	`<br><a id="additional" class="youCanClickThis" href="/[[ID]]?download"><span style="color:aqua">Download additional info</span></a>`
 	)}
 
 if (![[LARGE]]) $('#largeBadge').hide()
@@ -259,11 +259,14 @@ if ("[[SONGID]]".startsWith("Level")) {
 	$('#songInfo').text('[[SONGID]]')
 	$('.songLink').hide()
 }
-else if ("[[GDPS]]" == "true") {
+else $('#checkSong').show()
+
+if (!"[[GDPS]]".startsWith("[")) {
 	$('#playSong').hide()
 	$('#moreSongs').hide()
+	$('#leaderboardbtn').hide()
+	$('#checkSong').remove()
 } 
-else $('#checkSong').show()
 
 if ("[[SONGAUTHOR]]" == "Unknown" || "[[INVALIDSONG]]" == "true") $('.songLink').hide()
 if ("[[DISLIKED]]" == "true") $('#likeImg').attr('src', '../assets/dislike.png').css('transform', 'translateY(20%)')
@@ -272,6 +275,8 @@ let coinColor = [[VERIFIEDCOINS]] ? "silvercoin" : "browncoin"
 if ([[COINS]] > 0) $("#coins").append(`<img src="../assets/${coinColor}.png" height="5%">`)
 if ([[COINS]] > 1) $("#coins").append(`<img class="squeeze" src="../assets/${coinColor}.png" height="5%">`)
 if ([[COINS]] > 2) $("#coins").append(`<img class="squeeze" src="../assets/${coinColor}.png" height="5%">`)
+
+if ("[[GDPS]]".startsWith("1.9/")) $("#authorLink").attr('href', '/search/[[AUTHORID]]?user')
 
 if ("[[ACCOUNTID]]" == "0") {
 	$("#authorName").addClass("green").addClass("unregistered")

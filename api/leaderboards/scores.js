@@ -1,8 +1,6 @@
-const request = require('request')
-
 module.exports = async (app, req, res) => {
 
-   if (app.offline) return res.send("-1")
+   if (req.offline) return res.send("-1")
 
     let amount = 100;
     let count = req.query.count ? parseInt(req.query.count) : null
@@ -14,9 +12,9 @@ module.exports = async (app, req, res) => {
     let params = {count: amount, type: "top"}
 
     if (["creators", "creator", "cp"].some(x => req.query.hasOwnProperty(x) || req.query.type == x)) params.type = "creators"
-    else if (["week", "weekly"].some(x => req.query.hasOwnProperty(x) || req.query.type == x)) params.type = "weekly" // i think GDPS'es use this
+    else if (["week", "weekly"].some(x => req.query.hasOwnProperty(x) || req.query.type == x)) params.type = "week" // i think GDPS'es use this
 
-    request.post(app.endpoint + 'getGJScores20.php', req.gdParams(params), async function(err, resp, body) { 
+    req.gdRequest('getGJScores20', params, function(err, resp, body) { 
 
       if (err || body == '-1' || !body) return res.send("-1")
       scores = body.split('|').map(x => app.parseResponse(x)).filter(x => x[1])
@@ -39,7 +37,7 @@ module.exports = async (app, req, res) => {
           icon: +x[9],
           col1: +x[10],
           col2: +x[11],
-          glow: +x[15] > 0
+          glow: +x[15] > 1
         }
         keys.forEach(k => delete x[k])
       }) 

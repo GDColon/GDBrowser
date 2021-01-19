@@ -4,15 +4,15 @@ module.exports = async (app, req, res) => {
 
     let info = {error: true, exists: false, artist: { name: "", scouted: false, whitelisted: false }, song: { name: "", externalUse: false, allowed: false } }
 
-    if (app.offline) return res.send(info)
+    if (req.offline) return res.send(info)
 
     let songID = req.params.song
     
-    request.post('http://boomlings.com/database/testSong.php?songID=' + songID, req.gdParams(), async function(err, resp, body) {
-    if (err || !body || body == '-1' || body.startsWith("<!")) return res.send(info)
+    request.post('http://boomlings.com/database/testSong.php?songID=' + songID, req.gdParams(), function(err, resp, body) {
+    if (err || !body || body == '-1' || body.startsWith("<")) return res.send(info)
 
-    request.post(app.endpoint + 'getGJSongInfo.php', req.gdParams({songID: songID}), async function(err2, resp, songAllowed) {
-        if (err2 || !songAllowed || songAllowed < 0 || body.startsWith("<!")) return res.send(info)
+    req.gdRequest('getGJSongInfo', {songID: songID}, function(err2, resp, songAllowed) {
+        if (err2 || !songAllowed || songAllowed < 0 || body.startsWith("<")) return res.send(info)
 
         let artistInfo = body.split(/<\/?br>/)
         info.artist.name = artistInfo[0].split(": ")[1]

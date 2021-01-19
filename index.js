@@ -1,15 +1,13 @@
 const express = require('express');
-const fs = require("fs")
+const request = require('request');
 const compression = require('compression');
-const timeout = require('connect-timeout')
+const timeout = require('connect-timeout');
 const rateLimit = require("express-rate-limit");
+const fs = require("fs");
 const app = express();
 
-app.offline = false  // set to true to go into "offline" mode (in case of ip ban from rob)
-app.config = require('./settings')  // tweak settings in this file if you're using a GDPS
-app.endpoint = app.config.endpoint  // default is boomlings.com/database/
-app.accountCache = {} // account IDs are cached here to shave off requests to getgjusers
-app.lastSuccess = null // timestamp of the last time a gjp request was accepted my the servers
+app.config = require('./settings.js')
+app.servers = require('./servers.json')
 
 let rlMessage = "Rate limited ¯\\_(ツ)_/¯<br><br>Please do not spam my servers with a crazy amount of requests. It slows things down on my end and stresses RobTop's servers just as much." +
 " If you really want to send a zillion requests for whatever reason, please download the GDBrowser repository locally - or even just send the request directly to the GD servers.<br><br>" +
@@ -31,58 +29,94 @@ const RL2 = rateLimit({
   keyGenerator: function(req) { return req.headers['x-real-ip'] || req.headers['x-forwarded-for'] }
 })
 
-let api = true;
-let gdIcons = fs.readdirSync('./assets/previewicons')
+let forms = { "player": "cube", "bird": "ufo", "dart": "wave" }
+let colorOrder = [0, 1, 2, 3, 16, 4, 5, 6, 13, 7, 8, 9, 29, 10, 14, 11, 12, 17, 18, 15, 27, 32, 28, 38, 20, 33, 21, 34, 22, 39, 23, 35, 24, 36, 25, 37, 30, 26, 31, 19, 40, 41]
+
+let XOR = require('./classes/XOR.js');
 let sampleIcons = require('./misc/sampleIcons.json')
 let achievements = require('./misc/achievements.json')
 let achievementTypes = require('./misc/achievementTypes.json')
 let shopIcons = require('./misc/shops.json')
 let colorList = require('./icons/colors.json')
-let forms = { "player": "cube", "bird": "ufo", "dart": "wave" }
+
+let gdIcons = fs.readdirSync('./assets/previewicons')
 let assetPage = fs.readFileSync('./html/assets.html', 'utf8')
 let whiteIcons = fs.readdirSync('./icons').filter(x => x.endsWith("extra_001.png")).map(function (x) { let xh = x.split("_"); return [xh[1] == "ball" ? "ball" : forms[xh[0]] || xh[0], +xh[xh[1] == "ball" ? 2 : 1]]})
-let colorOrder = [0, 1, 2, 3, 16, 4, 5, 6, 13, 7, 8, 9, 29, 10, 14, 11, 12, 17, 18, 15, 27, 32, 28, 38, 20, 33, 21, 34, 22, 39, 23, 35, 24, 36, 25, 37, 30, 26, 31, 19, 40, 41]
 
+app.accountCache = {}
+app.lastSuccess = {}
+app.actuallyWorked = {}
+
+app.servers.forEach(x => {
+  app.accountCache[x.id || "gd"] = {}
+  app.lastSuccess[x.id || "gd"] = Date.now()
+})
+
+app.set('json spaces', 2)
 app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(timeout('20s'));
-app.set('json spaces', 2)
 
-app.use(function(req, res, next) {
+app.use(async function(req, res, next) {
+
+  let subdomains = req.subdomains.map(x => x.toLowerCase())
+  if (!subdomains.length) subdomains = [""]
+  req.server = app.servers.find(x => subdomains.includes(x.id.toLowerCase()))
+  if (subdomains.length > 1 || !req.server) return res.redirect("http://" + req.get('host').split(".").slice(subdomains.length).join(".") + req.originalUrl)
+
+  // literally just for convenience
+  req.offline = req.server.offline
+  req.endpoint = req.server.endpoint
+  req.onePointNine = req.server.onePointNine
+  req.id = req.server.id || "gd"
+  req.isGDPS = req.server.endpoint != "http://boomlings.com/database/"
+
+  if (req.isGDPS) res.set("gdps", (req.onePointNine ? "1.9/" : "") + req.id)
+
   req.gdParams = function(obj={}, substitute=true) {
     Object.keys(app.config.params).forEach(x => { if (!obj[x]) obj[x] = app.config.params[x] })
+    Object.keys(req.server.extraParams || {}).forEach(x => { if (!obj[x]) obj[x] = req.server.extraParams[x] })
     let ip = req.headers['x-real-ip'] || req.headers['x-forwarded-for']
     let params = {form: obj, headers: app.config.ipForwarding && ip ? {'x-forwarded-for': ip, 'x-real-ip': ip} : {}}
 
     if (substitute) { // GDPS substitutions in settings.js
-      for (let sub in app.config.substitutions) {
-        if (params.form[sub]) { params.form[app.config.substitutions[sub]] = params.form[sub]; delete params.form[sub] }
+      for (let ss in req.server.substitutions) {
+        if (params.form[ss]) { params.form[req.server.substitutions[ss]] = params.form[ss]; delete params.form[ss] }
       }
     }
     return params
   }
+
+  req.gdRequest = function(target, params={}, cb=function(){}) {
+    if (!target) return cb(true)
+    target = req.server.overrides ? (req.server.overrides[target] || target) : target
+    let parameters = params.headers ? params : req.gdParams(params)
+    let endpoint = req.endpoint
+    if (params.forceGD || (params.form && params.form.forceGD)) endpoint = "http://boomlings.com/database/"
+    request.post(endpoint + target + '.php', parameters, function(err, res, body) {
+      return cb(err, res, body)
+    })
+  }
+
   next()
 })
 
 let directories = [""]
 fs.readdirSync('./api').filter(x => !x.includes(".")).forEach(x => directories.push(x))
 
-app.trackSuccess = function() {
-  // made this a function in case i wanna do more stuff in the future
-  app.lastSuccess = Date.now()
+app.trackSuccess = function(id) {
+  app.lastSuccess[id] = Date.now()
+  if (!app.actuallyWorked[id]) app.actuallyWorked[id] = true
 }
 
-app.timeSince = function(time=app.lastSuccess) {
-  if (!time) return "[unknown]"
+app.timeSince = function(id, time) {
+  if (!time) time = app.lastSuccess[id]
   let secsPassed = Math.floor((Date.now() - time) / 1000)
   let minsPassed = Math.floor(secsPassed / 60)
   secsPassed -= 60 * minsPassed;
-  return `${minsPassed}m ${secsPassed}s`
+  return `${app.actuallyWorked[id] ? "" : "~"}${minsPassed}m ${secsPassed}s`
 }
-
-app.isGDPS = app.endpoint != "http://boomlings.com/database/"
-app.GDPSName = (app.isGDPS ? app.endpoint.split("/")[2] : "")
 
 app.run = {}
 directories.forEach(d => {
@@ -115,6 +149,8 @@ app.parseResponse = function (responseBody, splitter) {
   return res  
 }
 
+app.xor = new XOR()
+
 //xss bad
 app.clean = function(text) {if (!text || typeof text != "string") return text; else return text.replace(/&/g, "&#38;").replace(/</g, "&#60;").replace(/>/g, "&#62;").replace(/=/g, "&#61;").replace(/"/g, "&#34;").replace(/'/g, "&#39;")}
 
@@ -141,8 +177,6 @@ app.get("/assets/:dir*?", function(req, res) {
   if (fs.existsSync(path)) { files = fs.readdirSync(path) }
 
   assetPage = fs.readFileSync('./html/assets.html', 'utf8')
-  // remember to remove this
-
   let assetData = JSON.stringify({files: files.filter(x => x.includes('.')), directories: files.filter(x => !x.includes('.'))})
   res.send(assetPage.replace('{NAME}', dir || "assets").replace('{DATA}', assetData))
 })
@@ -154,28 +188,48 @@ app.post("/like", RL, function(req, res) { app.run.like(app, req, res) })
 app.post("/postComment", RL, function(req, res) { app.run.postComment(app, req, res) })  
 app.post("/postProfileComment", RL, function(req, res) { app.run.postProfileComment(app, req, res) })  
 
-app.post("/messages", RL, async function(req, res) { app.run.getMessages(app, req, res) })
-app.post("/messages/:id", RL, async function(req, res) { app.run.fetchMessage(app, req, res) })
+app.post("/messages", RL, function(req, res) { app.run.getMessages(app, req, res) })
+app.post("/messages/:id", RL, function(req, res) { app.run.fetchMessage(app, req, res) })
 app.post("/deleteMessage", RL, function(req, res) { app.run.deleteMessage(app, req, res) })  
 app.post("/sendMessage", RL, function(req, res) { app.run.sendMessage(app, req, res) })  
 
 app.post("/accurateLeaderboard", function(req, res) { app.run.accurate(app, req, res, true) })
 
-
 // HTML
 
+let onePointNineDisabled = ['daily', 'weekly', 'gauntlets', 'messages']
+let downloadDisabled = ['daily', 'weekly']
+let gdpsHide = ['achievements', 'messages']
+
 app.get("/", function(req, res) { 
-  if (app.offline && !req.query.hasOwnProperty("home")) res.sendFile(__dirname + "/html/offline.html")
-  else res.sendFile(__dirname + "/html/home.html")
+  if (req.offline && !req.query.hasOwnProperty("home")) res.sendFile(__dirname + "/html/offline.html")
+  else {
+    fs.readFile('./html/home.html', 'utf8', function (err, data) {
+      let html = data;
+      if (req.isGDPS) {
+        html = html.replace('"levelBG"', '"levelBG purpleBG"')
+        .replace(/Geometry Dash Browser!/g, req.server.name + " Browser!")
+        .replace("/assets/gdlogo", `/assets/gdps/${req.id}_logo`)
+        gdpsHide.forEach(x => { html = html.replace(`menu-${x}`, 'changeDaWorld') })
+      }
+      if (req.onePointNine) onePointNineDisabled.forEach(x => { html = html.replace(`menu-${x}`, 'menuDisabled') })
+      if (req.server.downloadsDisabled) {
+        downloadDisabled.forEach(x => { html = html.replace(`menu-${x}`, 'menuDisabled') })
+        html = html.replace('id="dl" style="display: none', 'style="display: block')
+      }
+      return res.send(html)
+    })
+  }
 })   
 
 app.get("/achievements", function(req, res) { res.sendFile(__dirname + "/html/achievements.html") })
-app.get("/analyze/:id", async function(req, res) { res.sendFile(__dirname + "/html/analyze.html") })
+app.get("/analyze/:id", function(req, res) { res.sendFile(__dirname + "/html/analyze.html") })
 app.get("/api", function(req, res) { res.sendFile(__dirname + "/html/api.html") })
 app.get("/boomlings", function(req, res) { res.sendFile(__dirname + "/html/boomlings.html") })
 app.get("/comments/:id", function(req, res) { res.sendFile(__dirname + "/html/comments.html") })
 app.get("/demon/:id", function(req, res) { res.sendFile(__dirname + "/html/demon.html") })
 app.get("/gauntlets", function(req, res) { res.sendFile(__dirname + "/html/gauntlets.html") })
+app.get("/gdps", function(req, res) { res.sendFile(__dirname + "/html/gdps.html") })
 app.get("/iconkit", function(req, res) { res.sendFile(__dirname + "/html/iconkit.html") })
 app.get("/leaderboard", function(req, res) { res.sendFile(__dirname + "/html/leaderboard.html") })
 app.get("/leaderboard/:text", function(req, res) { res.sendFile(__dirname + "/html/levelboard.html") })
@@ -187,16 +241,16 @@ app.get("/search/:text", function(req, res) { res.sendFile(__dirname + "/html/se
 
 // API
 
-app.get("/api/analyze/:id", RL, async function(req, res) { app.run.level(app, req, res, api, true) })
+app.get("/api/analyze/:id", RL, function(req, res) { app.run.level(app, req, res, true, true) })
 app.get("/api/boomlings", function(req, res) { app.run.boomlings(app, req, res) })
 app.get("/api/comments/:id", RL2, function(req, res) { app.run.comments(app, req, res) })
 app.get("/api/credits", function(req, res) { res.send(require('./misc/credits.json')) })
-app.get("/api/gauntlets", async function(req, res) { app.run.gauntlets(app, req, res) })
+app.get("/api/gauntlets", function(req, res) { app.run.gauntlets(app, req, res) })
 app.get("/api/leaderboard", function(req, res) { app.run[req.query.hasOwnProperty("accurate") ? "accurate" : "scores"](app, req, res) })
 app.get("/api/leaderboardLevel/:id", RL2, function(req, res) { app.run.leaderboardLevel(app, req, res) })
-app.get("/api/level/:id", RL, async function(req, res) { app.run.level(app, req, res, api) })
-app.get("/api/mappacks", async function(req, res) { app.run.mappacks(app, req, res) })
-app.get("/api/profile/:id", RL2, function(req, res) { app.run.profile(app, req, res, api) })
+app.get("/api/level/:id", RL, function(req, res) { app.run.level(app, req, res, true) })
+app.get("/api/mappacks", function(req, res) { app.run.mappacks(app, req, res) })
+app.get("/api/profile/:id", RL2, function(req, res) { app.run.profile(app, req, res, true) })
 app.get("/api/search/:text", RL2, function(req, res) { app.run.search(app, req, res) })
 app.get("/api/song/:song", function(req, res){ app.run.song(app, req, res) })
  
@@ -224,10 +278,12 @@ app.get("/:id", function(req, res) { app.run.level(app, req, res) })
 // MISC
 
 app.get("/icon/:text", function(req, res) { app.run.icon(app, req, res) })
+app.get("/api/gdps", function(req, res) { res.send(app.servers) })
 app.get("/api/achievements", function(req, res) { res.send({achievements, types: achievementTypes, shopIcons, colors: colorList }) })
 app.get('/api/icons', function(req, res) { 
   let sample = [JSON.stringify(sampleIcons[Math.floor(Math.random() * sampleIcons.length)].slice(1))]
-  res.send({icons: gdIcons, colors: colorList, colorOrder, whiteIcons, sample}); 
+  let iconserver = req.isGDPS ? req.server.name : undefined
+  res.send({icons: gdIcons, colors: colorList, colorOrder, whiteIcons, server: iconserver, noCopy: req.onePointNine, sample}); 
 });
 
 app.get('*', function(req, res) {

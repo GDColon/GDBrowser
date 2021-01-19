@@ -1,8 +1,6 @@
-const request = require('request')
-
 module.exports = async (app, req, res) => {
 
-    if (app.offline) return res.send("-1")
+    if (req.offline) return res.send("-1")
 
     let count = +req.query.count || 10
     if (count > 1000) count = 1000
@@ -20,7 +18,7 @@ module.exports = async (app, req, res) => {
     if (req.query.type == "commentHistory") path = "getGJCommentHistory"
     else if (req.query.type == "profile") path = "getGJAccountComments20"
 
-    request.post(`${app.endpoint}${path}.php`, params, async function(err, resp, body) { 
+    req.gdRequest(path, params, function(err, resp, body) { 
 
       if (err || body == '-1' || !body) return res.send("-1")
 
@@ -47,7 +45,7 @@ module.exports = async (app, req, res) => {
         comment.content = Buffer.from(x[2], 'base64').toString();
         comment.ID = x[6]
         comment.likes = +x[4]
-        comment.date = (x[9] || "?") + app.config.timestampSuffix
+        comment.date = (x[9] || "?") + (req.timestampSuffix || "")
         if (comment.content.endsWith("⍟") || comment.content.endsWith("☆")) {
           comment.content = comment.content.slice(0, -1)
           comment.browserColor = true 
@@ -63,10 +61,10 @@ module.exports = async (app, req, res) => {
           comment.moderator = +x[11] || 0
           comment.icon = {
             form: ['icon', 'ship', 'ball', 'ufo', 'wave', 'robot', 'spider'][+y[14]],
-            icon: +y[9],
+            icon: +y[9] || 1,
             col1: +y[10],
             col2: +y[11],
-            glow: +y[15] > 0
+            glow: +y[15] > 1
           }
         }
 

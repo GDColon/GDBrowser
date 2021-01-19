@@ -5,11 +5,11 @@ let demonList = {list: [], lastUpdated: 0}
 
 module.exports = async (app, req, res) => {
 
-    if (app.offline) return res.send("-1")
+    if (req.offline) return res.send("-1")
 
     let demonMode = req.query.hasOwnProperty("demonlist") || req.query.hasOwnProperty("demonList") || req.query.type == "demonlist" || req.query.type == "demonList"
     if (demonMode) {
-        if (app.isGDPS) return res.send('-1')
+        if (req.isGDPS) return res.send('-1')
         if (!demonList.list.length || demonList.lastUpdated + 600000 < Date.now()) {  // 10 minute cache
             return request.get('http://www.pointercrate.com/api/v2/demons/listed/?limit=100', function (err1, resp1, list1) {
                 if (err1) return res.send("-1")
@@ -23,7 +23,7 @@ module.exports = async (app, req, res) => {
     }
 
     let amount = 10;
-    let count = +req.query.count
+    let count = req.isGDPS ? 10 : +req.query.count
     if (count && count > 0) {
       if (count > 500) amount = 500
       else amount = count;
@@ -74,7 +74,7 @@ module.exports = async (app, req, res) => {
     }
 
     if (req.query.hasOwnProperty("user")) {
-        let accountCheck = app.accountCache[app.GDPSName + filters.str.toLowerCase()]
+        let accountCheck = app.accountCache[req.id][filters.str.toLowerCase()]
         filters.type = 5
         if (accountCheck) filters.str = accountCheck[1]
         else if (!filters.str.match(/^[0-9]*$/)) return app.run.profile(app, req, res, null, req.params.text)
@@ -83,7 +83,7 @@ module.exports = async (app, req, res) => {
     if (req.query.hasOwnProperty("creators")) filters.type = 12
 
     let listSize = 10
-    if (demonMode || req.query.gauntlet || ["mappack", "list", "saved"].some(x => req.query.hasOwnProperty(x))) {
+    if (demonMode || req.query.gauntlet || req.query.type == "saved" || ["mappack", "list", "saved"].some(x => req.query.hasOwnProperty(x))) {
         filters.type = 10
         filters.str = demonMode ? demonList.list : filters.str.split(",")
         listSize = filters.str.length
@@ -93,9 +93,9 @@ module.exports = async (app, req, res) => {
 
     if (filters.str == "*") delete filters.str
     
-    request.post(app.endpoint + 'getGJLevels21.php', req.gdParams(filters), async function(err, resp, body) {
+    req.gdRequest('getGJLevels21', req.gdParams(filters), function(err, resp, body) {
 
-        if (err || !body || body == '-1' || body.startsWith("<!")) return res.send("-1")
+        if (err || !body || body == '-1' || body.startsWith("<")) return res.send("-1")
         let splitBody = body.split('#')
         let preRes = splitBody[0].split('|')
         let authorList = {}
@@ -112,9 +112,9 @@ module.exports = async (app, req, res) => {
         let levelArray = preRes.map(x => app.parseResponse(x)).filter(x => x[1])
         let parsedLevels = []
 
-        levelArray.forEach(async (x, y) => {
+        levelArray.forEach((x, y) => {
 
-            let level = new Level(x)
+            let level = new Level(x, req.server)
             let songSearch = songs.find(y => y['~1'] == x[35]) || []
 
             level.author = authorList[x[6]] ? authorList[x[6]][0] : "-";
@@ -133,6 +133,13 @@ module.exports = async (app, req, res) => {
                 level.songSize = "0MB"
                 level.songID = "Level " + [parseInt(x[12]) + 1]
             }
+
+            if (req.onePointNine) {
+                level.orbs = 0
+                level.diamonds = 0
+            }
+
+            if (level.author != "-" && app.config.cacheAccountIDs) app.accountCache[req.id][level.author.toLowerCase()] = [level.accountID, level.authorID, level.author]
 
             //this is broken if you're not on page 0, blame robtop
             if (filters.page == 0 && y == 0) {

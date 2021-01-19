@@ -1,7 +1,3 @@
-const request = require('request')
-const XOR = require('../../classes/XOR.js');
-const xor = new XOR();
-
 module.exports = async (app, req, res, api) => {
 
   if (req.body.count) return app.run.countMessages(app, req, res)
@@ -10,15 +6,15 @@ module.exports = async (app, req, res, api) => {
 
   let params = req.gdParams({
     accountID: req.body.accountID,
-    gjp: xor.encrypt(req.body.password, 37526),
+    gjp: app.xor.encrypt(req.body.password, 37526),
     page: req.body.page || 0,
     getSent: req.query.sent ? 1 : 0
   })
 
-  request.post(app.endpoint + 'getGJMessages20.php', params, async function (err, resp, body) {
+  req.gdRequest('getGJMessages20', params, function (err, resp, body) {
 
-    if (err || body == '-1' || body == '-2' || !body) return res.status(400).send(`Error fetching messages! Messages get blocked a lot so try again later, or make sure your username and password are entered correctly. Last worked: ${app.timeSince()} ago.`)
-    else app.trackSuccess()
+    if (err || body == -1 || body == -2 || !body) return res.status(400).send(`Error fetching messages! Messages get blocked a lot so try again later, or make sure your username and password are entered correctly. Last worked: ${app.timeSince(req.id)} ago.`)
+    else app.trackSuccess(req.id)
 
     let messages = body.split("|").map(msg => app.parseResponse(msg))
     let messageArray = []
@@ -30,7 +26,7 @@ module.exports = async (app, req, res, api) => {
       msg.accountID = x[2]
       msg.author = x[6]
       msg.subject = Buffer.from(x[4], "base64").toString().replace(/^Re: ☆/, "Re: ")
-      msg.date = x[7] + app.config.timestampSuffix
+      msg.date = x[7] + (req.timestampSuffix || "")
       msg.unread = x[8] != "1"
       if (msg.subject.endsWith("☆") || msg.subject.startsWith("☆")) {
         if (msg.subject.endsWith("☆")) msg.subject = msg.subject.slice(0, -1)

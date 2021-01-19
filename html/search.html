@@ -106,7 +106,7 @@
 
 </body>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script async type="text/javascript" src="../sizecheck.js"></script>
+<script type="text/javascript" src="../sizecheck.js?"></script>
 <script type="text/javascript" src="https://asvd.github.io/dragscroll/dragscroll.js"></script>
 <script>
 
@@ -150,7 +150,7 @@ function Append(firstLoad) {
 	if (page == 0) $('#pageDown').hide()
 	else $('#pageDown').show()
 
-	fetch(searchFilters.replace("[PAGE]", page)).then(res => res.json()).then(res => {
+	Fetch(searchFilters.replace("[PAGE]", page)).then(res => {
 
 	if (res == '-1' || res.length == 0) { $('#loading').hide();  $('#pageUp').hide(); return loading = false }
 
@@ -171,8 +171,9 @@ function Append(firstLoad) {
 
 	res.forEach((x, y) => {
 		let hasAuthor = (x.accountID != "0")
+		let userSearch = (type == 5 || typeof userMode == 'string')
 		if (demonList) x.demonID = (res.length * page) + y + 1
-		if (y == 0 && (type == 5 || typeof userMode == 'string')) {
+		if (y == 0 && userSearch) {
 			$('#header').text(((x.author == "-" ? "Someone" : x.author)) + (x.author.toLowerCase().endsWith('s') ? "'" : "'s") + " levels")
 			document.title = $('#header').text()
 			accID = x.authorID
@@ -182,7 +183,7 @@ function Append(firstLoad) {
 		if (!filteredSong) filteredSong = x.songName
 		$('#searchBox').append(`<div class="searchresult">
 			<h1 class="lessspaced pre">${x.name}</h1>
-			<h2 class="lessSpaced pre smaller inline gdButton ${hasAuthor ? "" : "green unregistered"}">${hasAuthor ? `<a href="../u/${x.author}">By ${x.author}</a>` : `<a href="../search/${x.authorID}?user">By ${x.author}</a>`}</h2><h2 class="inline" style="margin-left: 1.5%; transform:translateY(30%)"> ${x.copiedID == '0' ? "" : '<img class="valign sideSpace" src="../assets/copied.png" height="12%">'}${x.large ? '<img class="valign sideSpaceD" src="../assets/large.png" height="12%">' : ''}</h2>
+			<h2 class="lessSpaced pre smaller inline gdButton ${hasAuthor ? "" : "green unregistered"}">${hasAuthor && !onePointNine ? `<a href="../u/${x.author}">By ${x.author}</a>` : `<a ${userSearch ? "" : `href="../search/${x.authorID}?user"`}>By ${x.author}</a>`}</h2><h2 class="inline" style="margin-left: 1.5%; transform:translateY(30%)"> ${x.copiedID == '0' ? "" : '<img class="valign sideSpace" src="../assets/copied.png" height="12%">'}${x.large ? '<img class="valign sideSpaceD" src="../assets/large.png" height="12%">' : ''}</h2>
 			<h3 class="lessSpaced pre ${x.customSong == 0 ? "blue" : "whatIfItWasPurple"}" style="overflow: hidden; max-height: 19%">${filteredSong}</h3>
 			<h3 class="lessSpaced">
 				<img class="valign" src="../assets/time.png" height="14%"> ${x.length}

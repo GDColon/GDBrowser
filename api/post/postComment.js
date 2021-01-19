@@ -1,6 +1,3 @@
-const request = require('request')
-const XOR = require('../../classes/XOR.js');
-const xor = new XOR();
 const crypto = require('crypto')
 function sha1(data) { return crypto.createHash("sha1").update(data, "binary").digest("hex"); }
 
@@ -27,7 +24,7 @@ module.exports = async (app, req, res) => {
   let params = { percent: 0 }
 
   params.comment = Buffer.from(req.body.comment + (req.body.color ? "☆" : "")).toString('base64').replace(/\//g, '_').replace(/\+/g, "-")
-  params.gjp = xor.encrypt(req.body.password, 37526)
+  params.gjp = app.xor.encrypt(req.body.password, 37526)
   params.levelID = req.body.levelID.toString()
   params.accountID = req.body.accountID.toString()
   params.userName = req.body.username
@@ -37,19 +34,19 @@ module.exports = async (app, req, res) => {
 
   let chk = params.userName + params.comment + params.levelID + params.percent + "0xPT6iUrtws0J"
   chk = sha1(chk)
-  chk = xor.encrypt(chk, 29481)
+  chk = app.xor.encrypt(chk, 29481)
   params.chk = chk
 
-  request.post(app.endpoint + 'uploadGJComment21.php', req.gdParams(params), function (err, resp, body) {
+  req.gdRequest('uploadGJComment21', params, function (err, resp, body) {
     if (err) return res.status(400).send("The Geometry Dash servers returned an error! Perhaps they're down for maintenance")
-    if (!body || body == "-1") return res.status(400).send(`The Geometry Dash servers rejected your comment! Try again later, or make sure your username and password are entered correctly. Last worked: ${app.timeSince()} ago.`)
+    if (!body || body == -1) return res.status(400).send(`The Geometry Dash servers rejected your comment! Try again later, or make sure your username and password are entered correctly. Last worked: ${app.timeSince(req.id)} ago.`)
     if (body.startsWith("temp")) {
       let banStuff = body.split("_")
       return res.status(400).send(`You have been banned from commenting for ${(parseInt(banStuff[1]) / 86400).toFixed(0)} days. Reason: ${banStuff[2] || "None"}`)
     }
 
     res.status(200).send(`Comment posted to level ${params.levelID} with ID ${body}`)
-    app.trackSuccess()
+    app.trackSuccess(req.id)
     rateLimit[req.body.username] = Date.now();
     setTimeout(() => {delete rateLimit[req.body.username]; }, cooldown);
   })

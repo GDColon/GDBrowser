@@ -1,6 +1,3 @@
-const request = require('request')
-const XOR = require('../../classes/XOR.js');
-const xor = new XOR();
 const crypto = require('crypto')
 function sha1(data) { return crypto.createHash("sha1").update(data, "binary").digest("hex"); }
 
@@ -16,23 +13,23 @@ module.exports = async (app, req, res) => {
   let params = { cType: '1' }
 
   params.comment = Buffer.from(req.body.comment.slice(0, 190) + (req.body.color ? "☆" : "")).toString('base64').replace(/\//g, '_').replace(/\+/g, "-")
-  params.gjp = xor.encrypt(req.body.password, 37526)
+  params.gjp = app.xor.encrypt(req.body.password, 37526)
   params.accountID = req.body.accountID.toString()
   params.userName = req.body.username
 
   let chk = params.userName + params.comment + "1xPT6iUrtws0J"
   chk = sha1(chk)
-  chk = xor.encrypt(chk, 29481)
+  chk = app.xor.encrypt(chk, 29481)
   params.chk = chk
 
-  request.post(app.endpoint + 'uploadGJAccComment20.php', req.gdParams(params), function (err, resp, body) {
+  req.gdRequest('uploadGJAccComment20', params, function (err, resp, body) {
     if (err) return res.status(400).send("The Geometry Dash servers returned an error! Perhaps they're down for maintenance")
-    else if (!body || body == "-1") return res.status(400).send(`The Geometry Dash servers rejected your profile post! Try again later, or make sure your username and password are entered correctly. Try again later, or make sure your username and password are entered correctly. Last worked: ${app.timeSince()} ago.`)
+    else if (!body || body == -1) return res.status(400).send(`The Geometry Dash servers rejected your profile post! Try again later, or make sure your username and password are entered correctly. Try again later, or make sure your username and password are entered correctly. Last worked: ${app.timeSince(req.id)} ago.`)
     if (body.startsWith("temp")) {
       let banStuff = body.split("_")
       return res.status(400).send(`You have been banned from commenting for ${(parseInt(banStuff[1]) / 86400).toFixed(0)} days. Reason: ${banStuff[2] || "None"}`)
     }
-    else app.trackSuccess()
+    else app.trackSuccess(req.id)
     res.status(200).send(`Comment posted to ${params.userName} with ID ${body}`)
   })
 }

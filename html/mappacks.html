@@ -17,6 +17,8 @@
 		<h1 style="transform:scale(1.2)">Map Packs</h1>
 	</div>
 
+	<img id="loading" style="margin-top: 1%" class="spin noSelect" src="../assets/loading.png" height="12%">
+
 	<div id="packList">
 		<br>
 	</div>
@@ -28,10 +30,11 @@
 </div>
 </body>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script async type="text/javascript" src="../sizecheck.js"></script>
+<script type="text/javascript" src="../sizecheck.js?"></script>
 <script>
 
 fetch('../api/mappacks').then(res => res.json()).then(packs => {
+	$('#loading').hide()
 	packs.forEach(x => {
 		$('#packList').append(`
 			<div class="mappack">

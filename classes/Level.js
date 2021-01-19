@@ -1,16 +1,15 @@
 const XOR = require(__dirname + "/../classes/XOR");
-const config = require(__dirname + "/../settings");
 
 let orbs = [0, 0, 50, 75, 125, 175, 225, 275, 350, 425, 500]
 let length = ['Tiny', 'Short', 'Medium', 'Long', 'XL']
 let difficulty = { 0: 'Unrated', 10: 'Easy', 20: 'Normal', 30: 'Hard', 40: 'Harder', 50: 'Insane' }
 
 class Level {
-    constructor(levelInfo, download, author = []) {
+    constructor(levelInfo, server, download, author = []) {
         if (!levelInfo[2]) return;
         this.name = levelInfo[2];
         this.id = levelInfo[1];
-        this.description = (config.base64descriptions ? Buffer.from(levelInfo[3], "base64").toString() : levelInfo[3]) || "(No description provided)";
+        this.description = Buffer.from(levelInfo[3], "base64").toString() || "(No description provided)";
         this.author = author[1] || "-"
         this.authorID = levelInfo[6]
         this.accountID = author[2] || 0
@@ -20,13 +19,13 @@ class Level {
         this.disliked = levelInfo[14] < 0
         this.length = length[levelInfo[15]] || "XL"
         this.stars = +levelInfo[18]
-        this.orbs = orbs[levelInfo[18]]
+        this.orbs = orbs[levelInfo[18]] || 0
         this.diamonds = levelInfo[18] < 2 ? 0 : parseInt(levelInfo[18]) + 2
         this.featured = levelInfo[19] > 0
         this.epic = levelInfo[42] > 0
         this.gameVersion = levelInfo[13] > 17 ? (levelInfo[13] / 10).toFixed(1) : levelInfo[13] == 11 ? "1.8" : levelInfo[13] == 10 ? "1.7" : "Pre-1.7"
-        if (levelInfo[28]) this.uploaded = levelInfo[28] + config.timestampSuffix
-        if (levelInfo[29]) this.updated = levelInfo[29] + config.timestampSuffix
+        if (levelInfo[28]) this.uploaded = levelInfo[28] + (server.timestampSuffix || "")
+        if (levelInfo[29]) this.updated = levelInfo[29] + (server.timestampSuffix || "")
         if (download) { this.editorTime = +levelInfo[46] || 0; this.totalEditorTime = +levelInfo[47] || 0 }
         if (levelInfo[27]) this.password = levelInfo[27];
         this.version = +levelInfo[5];
@@ -53,7 +52,7 @@ class Level {
 
         if (this.password && this.password != 0) {
             let xor = new XOR();
-            let pass = config.xorPasswords ? xor.decrypt(this.password, 26364) : this.password;
+            let pass = xor.decrypt(this.password, 26364);
             if (pass.length > 1) this.password = pass.slice(1);
             else this.password = pass;
         }

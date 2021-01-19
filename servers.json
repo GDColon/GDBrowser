@@ -1,0 +1,60 @@
+[
+  {
+    "name": "Geometry Dash",
+    "link": "https://store.steampowered.com/app/322170/Geometry_Dash/",
+    "author": "RobTop",
+    "authorLink": "https://www.youtube.com/channel/UCz_yk8mDSAnxJq0ar66L4sw",
+    "id": "",
+    "endpoint": "http://boomlings.com/database/",
+    "timestampSuffix": " ago",
+    "downloadsDisabled": true
+  },
+  
+  {
+    "name": "2.2 Unlocked",
+    "link": "https://smjs.eu/gd/unlock/database/dashboard/",
+    "author": "SMJS",
+    "authorLink": "https://www.youtube.com/channel/UClXb1w9vSL3Z0V-mUbudOnw",
+    "id": "22unlocked",
+    "endpoint": "http://smjs.eu/gd/unlock/database/",
+    "substitutions": {
+      "levelID": "oereoIE",
+      "accountID": "BddpvouKE",
+      "targetAccountID": "targetBddpvouKE"
+    }
+  },
+
+  {
+    "name": "1.9 GDPS",
+    "link": "https://absolllute.com/gdps/",
+    "author": "Absolute",
+    "authorLink": "https://www.youtube.com/channel/UCpdDW0ZdzoRzioT4eTfn-yw",
+    "id": "19gdps",
+    "endpoint": "http://absolllute.com/gdps/gdapi/",
+    "onePointNine": true,
+    "weeklyLeaderboard": true,
+    "overrides": {
+      "getGJMapPacks21": "getGJMapPacks",
+      "getGJScores20": "getGJScores",
+      "getGJComments21": "getGJComments"
+    }
+  },
+
+  {
+    "name": "XGDPS",
+    "link": "http://xcggdpsserver.xyz/",
+    "author": "XcreatorGoal",
+    "authorLink": "https://www.youtube.com/channel/UC33L-Y8asG7gju6f-4-Cl2g",
+    "id": "xgdps",
+    "endpoint": "http://xcggdpsserver.xyz/database/"
+  },
+
+  {
+    "name": "WGDPS",
+    "link": "http://wyliegdps02.7m.pl/",
+    "author": "Wylie",
+    "authorLink": "https://www.youtube.com/channel/UCG5I4-KAW3Kwzam4svLJWBA",
+    "id": "wgdps",
+    "endpoint": "http://wyliegdps02.7m.pl/database/"
+  }
+]

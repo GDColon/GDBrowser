@@ -2,7 +2,6 @@
 // i advise you to turn back now
 // seriously, it's not too late
 
-const request = require('request')
 const Jimp = require('jimp');
 const fs = require('fs');
 const icons = require('../icons/gameSheet.json');
@@ -360,29 +359,28 @@ module.exports = async (app, req, res) => {
     let userCode;
     res.contentType('image/png');
 
-    if (app.offline || req.query.hasOwnProperty("noUser") || req.query.hasOwnProperty("nouser") || username == "icon") return buildIcon()
+    if (req.offline || req.query.hasOwnProperty("noUser") || req.query.hasOwnProperty("nouser") || username == "icon") return buildIcon()
 
     else if (app.config.cachePlayerIcons && !Object.keys(req.query).filter(x => !["form", "forceGD"].includes(x)).length) {
-      userCode = `${app.GDPSName}u-${username.toLowerCase()}-${forms[req.query.form] ? req.query.form : 'cube'}`
+      userCode = `${req.id}u-${username.toLowerCase()}-${forms[req.query.form] ? req.query.form : 'cube'}`
       if (cache[userCode]) return res.end(cache[userCode].value)
     }
 
     let accountMode = !req.query.hasOwnProperty("player") && Number(req.params.id)
-    let foundID = app.accountCache[app.GDPSName + username.toLowerCase()]
+    let foundID = app.accountCache[req.id][username.toLowerCase()]
     let skipRequest = accountMode || foundID
-    let forceGD = req.query.hasOwnProperty("forceGD") // forces request to be made on boomlings.com
-    let endpoint = forceGD ? "http://boomlings.com/database/" : app.endpoint
+    let forceGD = req.query.hasOwnProperty("forceGD")
   
     // skip request by causing fake error lmao
-    request.post(skipRequest ? "" : endpoint + 'getGJUsers20.php', skipRequest ? {} : req.gdParams({ str: username }, !forceGD), function (err1, res1, body1) {
+    req.gdRequest(skipRequest ? "" : 'getGJUsers20', skipRequest ? {} : req.gdParams({ str: username, forceGD }, !forceGD), function (err1, res1, body1) {
 
-      let result = foundID ? foundID[0] : (accountMode || err1 || !body1 || body1 == "-1" || body1.startsWith("<!")) ? username : app.parseResponse(body1)[16];
+      let result = foundID ? foundID[0] : (accountMode || err1 || !body1 || body1 == "-1" || body1.startsWith("<")) ? username : app.parseResponse(body1)[16];
   
-      request.post(endpoint + 'getGJUserInfo20.php', req.gdParams({ targetAccountID: result }, !forceGD), function (err2, res2, body2) {
+      req.gdRequest('getGJUserInfo20', req.gdParams({ targetAccountID: result, forceGD }, !forceGD), function (err2, res2, body2) {
   
-        if (err2 || !body2 || body2 == '-1' || body2.startsWith("<!")) return buildIcon();
+        if (err2 || !body2 || body2 == '-1' || body2.startsWith("<")) return buildIcon();
         let iconData = app.parseResponse(body2)
-        if (!foundID && !forceGD && app.config.cacheAccountIDs) app.accountCache[app.GDPSName + username.toLowerCase()] = [iconData[16], iconData[2]]
+        if (!foundID && !forceGD && app.config.cacheAccountIDs) app.accountCache[req.id][username.toLowerCase()] = [iconData[16], iconData[2], iconData[1]]
         return buildIcon(iconData, userCode);
 
     })

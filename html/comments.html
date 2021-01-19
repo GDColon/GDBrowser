@@ -128,7 +128,7 @@
 
 </body>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script async type="text/javascript" src="../sizecheck.js"></script>
+<script type="text/javascript" src="../sizecheck.js?"></script>
 <script type="text/javascript" src="../dragscroll.js"></script>
 <script>
 
@@ -158,7 +158,12 @@ function clean(text) {return text.replace(/&/g, "&#38;").replace(/</g, "&#60;").
 
 $('#compactMode').attr('src', `../assets/compact-${compact ? "on" : "off"}.png`)
 
-fetch(target).then(res => res.json()).then(lvl => {
+Fetch(target).then(lvl => {
+
+	if (gdps) {
+		$('#leaveComment').hide()
+		$('#postComment').remove()
+	}
 
 	if (history) {
 
@@ -445,6 +450,7 @@ let likeCount, likeImg;
 let likedComments;
 
 $(document).on('click', '.likeComment', function(cmnt) {
+	if (gdps) return
 	commentID = $(this).attr('commentID')
 
 	likedComments = localStorage.likedComments ? JSON.parse(localStorage.likedComments) : []
