@@ -454,7 +454,7 @@ input::-webkit-inner-spin-button {
 }
 
 .gdButton:active {
-    transform: scale(1.08);
+    animation: bounceButton 0.25s ease-in-out forwards;
 }
 
 .likeButton {
