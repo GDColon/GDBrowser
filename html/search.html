@@ -132,6 +132,7 @@ let results = 0
 let legalPages = true
 let superSearch = ['*', '*?type=mostliked', '*?type=mostdownloaded', '*?type=recent'].includes(window.location.href.split('/')[4].toLowerCase())
 
+let demonListLink = "https://pointercrate.com/"
 let searchFilters = `../api/search/${type == 'saved' ? JSON.parse(localStorage.getItem('saved') || '[]').reverse().toString() : accID || path}?page=[PAGE]${count ? "" : "&count=10"}${window.location.search.replace(/\?/g, "&").replace("page", "nope")}`
 
 if (type == "followed") {
@@ -169,21 +170,25 @@ function Append(firstLoad) {
 	if ((pages && page+1 >= pages) || (!pages && res.length < 9 && type != "recent")) $('#pageUp').hide()
 	else $('#pageUp').show()
 
+	if (demonList) {
+		demonListLink = res[0].demonList
+		res = res.sort(function(a, b){return a.demonPosition - b.demonPosition});
+	}
+
 	res.forEach((x, y) => {
 		let hasAuthor = (x.accountID != "0")
 		let userSearch = (type == 5 || typeof userMode == 'string')
-		if (demonList) x.demonID = (res.length * page) + y + 1
 		if (y == 0 && userSearch) {
 			$('#header').text(((x.author == "-" ? "Someone" : x.author)) + (x.author.toLowerCase().endsWith('s') ? "'" : "'s") + " levels")
 			document.title = $('#header').text()
-			accID = x.authorID
+			accID = x.playerID
 		}
 
 		let filteredSong = x.songName.replace(/[^ -~]/g, "")
 		if (!filteredSong) filteredSong = x.songName
 		$('#searchBox').append(`<div class="searchresult">
 			<h1 class="lessspaced pre">${x.name}</h1>
-			<h2 class="lessSpaced pre smaller inline gdButton ${hasAuthor ? "" : "green unregistered"}">${hasAuthor && !onePointNine ? `<a href="../u/${x.author}">By ${x.author}</a>` : `<a ${userSearch ? "" : `href="../search/${x.authorID}?user"`}>By ${x.author}</a>`}</h2><h2 class="inline" style="margin-left: 1.5%; transform:translateY(30%)"> ${x.copiedID == '0' ? "" : '<img class="valign sideSpace" src="../assets/copied.png" height="12%">'}${x.large ? '<img class="valign sideSpaceD" src="../assets/large.png" height="12%">' : ''}</h2>
+			<h2 class="lessSpaced pre smaller inline gdButton ${hasAuthor ? "" : "green unregistered"}">${hasAuthor && !onePointNine ? `<a href="../u/${x.author}">By ${x.author}</a>` : `<a ${userSearch ? "" : `href="../search/${x.playerID}?user"`}>By ${x.author}</a>`}</h2><h2 class="inline" style="margin-left: 1.5%; transform:translateY(30%)"> ${x.copiedID == '0' ? "" : '<img class="valign sideSpace" src="../assets/copied.png" height="12%">'}${x.large ? '<img class="valign sideSpaceD" src="../assets/large.png" height="12%">' : ''}</h2>
 			<h3 class="lessSpaced pre ${x.customSong == 0 ? "blue" : "whatIfItWasPurple"}" style="overflow: hidden; max-height: 19%">${filteredSong}</h3>
 			<h3 class="lessSpaced">
 				<img class="valign" src="../assets/time.png" height="14%"> ${x.length}
@@ -197,7 +202,7 @@ function Append(firstLoad) {
 				<h3>${x.difficulty.includes('Demon') ? "Demon" : x.difficulty}</h3>
 				${x.stars != 0 && !demonList ? `<h3>${x.stars}<img class="valign sideSpaceB" src="../assets/star.png" height="35%" style="transform:translateY(-8%)"></h3>` : ""}
 
-				${demonList ? `<h3 class="yellow">#${x.demonID}</h3>` : ""}
+				${demonList ? `<h3 class="yellow">#${x.demonPosition}</h3>` : ""}
 
 				<div id="coins" style="margin-top: 3%">
 					${x.coins > 0 ? `<img src="../assets/${x.verifiedCoins ? 'silver' : 'brown'}coin.png" height="50%">` : ""}
@@ -207,8 +212,8 @@ function Append(firstLoad) {
 			</div>
 			<div class="center" style="position:absolute; right: 7%; transform:translateY(-${demonList ? 19.5 : 16.25}vh); height: 10%">
 				<a title="View level" href="../${x.id}""><img style="margin-bottom: 4.5%" class="valign gdButton" src="../assets/view.png" height="105%"></a>
-				${demonList ? `<br><a title="View leaderboard" href="../demon/${x.demonID}""><img class="valign gdButton" src="../assets/trophyButton.png" height="110%"></a>
-				<a title="View on Pointercrate" href="https://pointercrate.com/demonlist/${x.demonID}" target=_blank><img class="valign gdButton" src="../assets/demonButton.png" height="110%"></a>` : "" }
+				${demonList ? `<br><a title="View leaderboard" href="../demon/${x.demonPosition}""><img class="valign gdButton" src="../assets/trophyButton.png" height="110%"></a>
+				<a title="View on Pointercrate" href="${demonListLink}demonlist/${x.demonPosition}" target=_blank><img class="valign gdButton" src="../assets/demonButton.png" height="110%"></a>` : "" }
 			</div>
 		</div>`)
 	})

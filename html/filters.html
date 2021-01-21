@@ -110,7 +110,7 @@
 		<div class="diffDiv gdButton demonDiff" diff=4><img src="../assets/difficulties/demon-insane.png" style="width: 95%"><h3 class="mini center smallTextWoo">Insane</h3></div>
 		<div class="diffDiv gdButton demonDiff" diff=5><img src="../assets/difficulties/demon-extreme.png" style="width: 100%"><h3 class="mini center smallTextWoo">Extreme</h3></div>
 		<div class="diffDiv gdButton goBack" diff=-2 style="margin-left: 2.3%; filter: none"><img src="../assets/difficulties/demon.png" style="width: 90%"><h3 class="mini">Demon</h3></div>
-		<a id="demonList" href="./search/*?type=demonlist"><div class="gdButton diffDiv" style="filter: none"><img src="../assets/trophy2.png" style="width: 95%"><h3 class="yellow mini center">List</h3></div></a>
+		<a id="demonList" style="display: none" href="./search/*?type=demonlist"><div class="gdButton diffDiv" style="filter: none"><img src="../assets/trophy2.png" style="width: 95%"><h3 class="yellow mini center">List</h3></div></a>
 	</div>
 
 	<div class="transparentBox center" style="width: 115vh; height: 6%; margin: 0.5% auto 1% auto; padding-top: 1%; padding-bottom: 0.5%;">
@@ -264,13 +264,13 @@ $('#listLevels, #listName').on('input blur', function (event) {
 })
 
 // some gdps magic
-Fetch(`../api/gdps`).then(res => {
+Fetch(`../api/gdps?current=1`).then(res => {
 	if (onePointNine) {
 		$('#userSearch').hide()
 		$('#followedSearch').addClass('menuDisabled')
 		$('#levelName').css('width', '76%')
 	}
-	if (gdps) $('#demonList').hide()
+	if (res.demonList) $('#demonList').show()
 })
 
 </script>

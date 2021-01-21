@@ -1243,7 +1243,7 @@ input::-webkit-inner-spin-button {
         transform-origin:left top
     }
 }
-@keyframes bounceButton {
+@keyframes menuBounce {
     0% {
         transform: scale(1);
     }
@@ -1255,5 +1255,19 @@ input::-webkit-inner-spin-button {
     }
     100% {
         transform: scale(1.2);
+    }
+}
+@keyframes bounceButton {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.12);
+    }
+    75% {
+        transform: scale(1.06);
+    }
+    100% {
+        transform: scale(1.1);
     }
 }

@@ -5,7 +5,7 @@ module.exports = async (app, req, res, api, getLevels) => {
   if (req.offline) return res.send("-1")
   let username = getLevels || req.params.id
   let accountMode = !req.query.hasOwnProperty("player") && Number(req.params.id)
-  let foundID = app.accountCache[req.id][username.toLowerCase()]
+  let foundID = app.userCache(req.id, username)
   let skipRequest = accountMode || foundID
   let searchResult;
 
@@ -36,7 +36,7 @@ module.exports = async (app, req, res, api, getLevels) => {
         else return res.send("-1")
       }
       
-      if (!foundID && app.config.cacheAccountIDs) app.accountCache[req.id][username.toLowerCase()] = [account[16], account[2], account[1]]
+      if (!foundID) app.userCache(req.id, account[16], account[2], account[1])
       
       let userData = {
           username: account[1] || "[MISSINGNO.]",

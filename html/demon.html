@@ -78,7 +78,7 @@ let max = 250
 let trophies = [1, 5, 10, 25, 50, 100, max]
 
 let demonID = Math.round(window.location.pathname.split('/')[2])
-if (!demonID || demonID > max || demonID < 1) window.location.href = "../../../"
+let illegal = (!demonID || demonID > max || demonID < 1) 
 
 if (demonID > 1) $('#pageDown').attr('href', `./${demonID - 1}`)
 else $('#pageDown').hide()
@@ -86,7 +86,10 @@ else $('#pageDown').hide()
 if (demonID < max) $('#pageUp').attr('href', `./${demonID + 1}`)
 else $('#pageUp').hide()
 
-fetch(`https://pointercrate.com/api/v1/demons/${demonID}/`).then(res => res.json()).then(demonRes => {
+Fetch(`../api/gdps?current=1`).then(server => {
+if (illegal || !server.demonList) return $('#loading').hide();
+
+fetch(`${server.demonList}api/v1/demons/${demonID}/`).then(res => res.json()).then(demonRes => {
 	let demon = demonRes.data
 	if (!demon.id) window.location.href = "../../../"
 
@@ -94,7 +97,7 @@ fetch(`https://pointercrate.com/api/v1/demons/${demonID}/`).then(res => res.json
 	$('#header').html(`${demon.name} <span class="smallerer" style="vertical-align: middle">(#${demonID})</span>`)
 	$('#meta-title').attr('content', "Demon Leaderboard for " + demon.name)
 	$('#meta-desc').attr('content', 'View the challengers and victors of' + demon.name)
-	$('#pointercrate').attr('href', `https://pointercrate.com/demonlist/${demonID}`)
+	$('#pointercrate').attr('href', `${server.demonList}demonlist/${demonID}`)
 
 	demon.records.forEach((x, y) => {
 
@@ -123,6 +126,8 @@ fetch(`https://pointercrate.com/api/v1/demons/${demonID}/`).then(res => res.json
 	})
 
 	$('#loading').hide();
+}).catch(e => $('#loading').hide())
+
 })
 
 $(document).keydown(function(k) {

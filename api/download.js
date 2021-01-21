@@ -27,10 +27,10 @@ module.exports = async (app, req, res, api, ID, analyze) => {
     let levelInfo = app.parseResponse(body)
     let level = new Level(levelInfo, req.server, true)
 
-    let foundID = app.accountCache[Object.keys(app.accountCache).find(x => app.accountCache[x][1] == level.authorID)]
-    if (foundID) foundID = foundID.filter(x => x != level.authorID)
+    let foundID = app.accountCache[Object.keys(app.accountCache).find(x => app.accountCache[x][1] == level.playerID)]
+    if (foundID) foundID = foundID.filter(x => x != level.playerID)
 
-    req.gdRequest(authorData ? "" : 'getGJUsers20', { str: level.authorID }, function (err1, res1, b1) {
+    req.gdRequest(authorData ? "" : 'getGJUsers20', { str: level.playerID }, function (err1, res1, b1) {
       let gdSearchResult = authorData ? "" : app.parseResponse(b1)
       req.gdRequest(authorData ? "" : 'getGJUserInfo20', { targetAccountID: gdSearchResult[16] }, function (err2, res2, b2) {
 
@@ -50,6 +50,8 @@ module.exports = async (app, req, res, api, ID, analyze) => {
           level.author = "-"
           level.accountID = "0"
         }
+
+        if (level.author != "-") app.userCache(req.id, level.accountID, level.playerID, level.author)
 
         req.gdRequest('getGJSongInfo', { songID: level.customSong }, function (err, resp, songRes) {
 
@@ -105,8 +107,8 @@ module.exports = async (app, req, res, api, ID, analyze) => {
             })  
           }
 
-          else if (!level.gdps && level.difficulty == "Extreme Demon") {
-            request.get('https://www.pointercrate.com/api/v2/demons/?name=' + level.name.trim(), function (err, resp, demonList) {
+          else if (req.server.demonList && level.difficulty == "Extreme Demon") {
+            request.get(req.server.demonList + 'api/v2/demons/?name=' + level.name.trim(), function (err, resp, demonList) {
                 if (err) return sendLevel()
                 let demon = JSON.parse(demonList)
                 if (demon[0] && demon[0].position) level.demonList = demon[0].position

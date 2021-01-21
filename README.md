@@ -58,17 +58,17 @@ There's also a few optional values for fine-tuning. I'll add more over time
 
 [string] **timestampSuffix:** A string to append at the end of timestamps. Vanilla GD uses " ago" 
 
+[string] **demonList:** The URL of the server's Demon List API, if it has one (e.g. `http://pointercrate.com/` - make sure it ends with a slash!)
+
 [bool] **downloadsDisabled:** (Greys out all forms of downloading on the frontend (daily, weekly, analysis, etc). I love you too RobTop <3
 
 [bool] **onePointNine:** Makes a bunch of fancy changes to better fit 1.9 servers. (removes orbs/diamonds, hides some pointless buttons, etc)
 
 [bool] **weeklyLeaderboard:** Enables the lost but not forgotten Weekly Leaderboard, for servers that still milk it
 
-[object] **substitutions:** A list of parameter substitutions, because some servers 
-rename/obfuscate them. (e.g. `{ "levelID": "oiuyhxp4w9I" }`)
+[object] **substitutions:** A list of parameter substitutions, because some servers rename/obfuscate them. (e.g. `{ "levelID": "oiuyhxp4w9I" }`)
 
-[object] **overrides:** A list of endpoint substitutions, because some servers 
-use renamed or older versions. (e.g. `{ "getGJLevels21": "dorabaeChooseLevel42" }`)
+[object] **overrides:** A list of endpoint substitutions, because some servers use renamed or older versions. (e.g. `{ "getGJLevels21": "dorabaeChooseLevel42" }`)
 
   
 
@@ -77,6 +77,7 @@ use renamed or older versions. (e.g. `{ "getGJLevels21": "dorabaeChooseLevel42" 
   
 
 GDBrowser has a lot of folders. [citation needed]
+
 I pride myself in keeping my files neat, without doing the whole `src/main/data/stuff/code/homework/newfolder/util/actualcode` garbage 
 
   

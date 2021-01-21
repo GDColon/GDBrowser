@@ -40,6 +40,7 @@ module.exports = async (app, req, res) => {
           glow: +x[15] > 1
         }
         keys.forEach(k => delete x[k])
+        app.userCache(req.id, x.accountID, x.playerID, x.username)
       }) 
       return res.send(scores)
       })

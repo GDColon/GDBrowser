@@ -367,7 +367,7 @@ module.exports = async (app, req, res) => {
     }
 
     let accountMode = !req.query.hasOwnProperty("player") && Number(req.params.id)
-    let foundID = app.accountCache[req.id][username.toLowerCase()]
+    let foundID = app.userCache(req.id, username)
     let skipRequest = accountMode || foundID
     let forceGD = req.query.hasOwnProperty("forceGD")
   
@@ -380,7 +380,7 @@ module.exports = async (app, req, res) => {
   
         if (err2 || !body2 || body2 == '-1' || body2.startsWith("<")) return buildIcon();
         let iconData = app.parseResponse(body2)
-        if (!foundID && !forceGD && app.config.cacheAccountIDs) app.accountCache[req.id][username.toLowerCase()] = [iconData[16], iconData[2], iconData[1]]
+        if (!foundID && !forceGD) app.userCache(req.id, iconData[16], iconData[2], iconData[1])
         return buildIcon(iconData, userCode);
 
     })

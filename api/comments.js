@@ -66,6 +66,7 @@ module.exports = async (app, req, res) => {
             col2: +y[11],
             glow: +y[15] > 1
           }
+          app.userCache(req.id, comment.accountID, comment.playerID, comment.username)
         }
 
         if (i == 0 && req.query.type != "commentHistory") {

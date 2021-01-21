@@ -222,7 +222,7 @@
 	let password;
 	let page = 0;
 	let messageID = 0;
-	let authorID = 0;
+	let playerID = 0;
 	let messages = [];
 	let messageStatus = {};
 	let cache = {};
@@ -247,7 +247,7 @@
 		$('#msgList').html('')
 		messages.forEach((x, y) => {
 			$('#msgList').append(`
-			<div messageID=${x.id} authorID="${x.accountID}" ${x.browserColor ? 'browserColor="true" ' : ""}class="commentBG gdMessage">
+			<div messageID=${x.id} playerID="${x.accountID}" ${x.browserColor ? 'browserColor="true" ' : ""}class="commentBG gdMessage">
 				<h3 style="color: ${x.browserColor ? 'rgb(120, 200, 255)' : 'white'}; font-size: ${x.subject.length > 35 ? "3" : x.subject.length > 30 ? "3.5" : x.subject.length > 25 ? "3.75" : "4"}vh">${x.subject}${x.unread ? " <span style='color:#00E600'>!</span>" : ""}</h3>
 				<h3 class="gold gdButton msgAuthor hitbox fit"><a href="../u/${x.author}" target="_blank">From: ${x.author}</a></h3>
 				<p class="msgDate">${x.date}</p>
@@ -298,7 +298,7 @@
 									if (res == "-1" || !res) return;
 									$('#replyAuthor').html(`<a href="../u/${res.username}" target="_blank">To: ${res.username}</a>`)
 									messageStatus[res.accountID] = [res.messages, res.username]
-									authorID = res.accountID
+									playerID = res.accountID
 									if (res.messages == "all") $('#messageStatus').html(`<span style="color:yellow">${res.username}</span> has messages <span style="color:lime">enabled</span>`)
 									else if (res.messages == "friends") $('#messageStatus').html(`<span style="color:yellow">${res.username}</span> has messages set to <span style="color:orange">friends only</span>`)
 									else {
@@ -351,7 +351,7 @@
 
 	$(document).on('click', '.gdMessage', function () {
 		messageID = $(this).attr('messageID')
-		authorID = $(this).attr('authorID')
+		playerID = $(this).attr('playerID')
 		let subject = $(this).find('h3:first')
 		subject.html(subject.html().replace('<span style="color:#00E600">!</span>', "")) //lazy way to mark as read
 
@@ -460,9 +460,9 @@
 	})
 
 	$('#replyButton').click(function() {
-		if (!messageStatus[authorID]) return;
-		let status = messageStatus[authorID][0]
-		let name = messageStatus[authorID][1]
+		if (!messageStatus[playerID]) return;
+		let status = messageStatus[playerID][0]
+		let name = messageStatus[playerID][1]
 		$('#postMessage').removeClass('grayscale')
 		if (status == "all") $('#messageStatus').html(`<span style="color:yellow">${name}</span> has messages <span style="color:lime">enabled</span>`)
 		else if (status == "friends") $('#messageStatus').html(`<span style="color:yellow">${name}</span> has messages set to <span style="color:orange">friends only</span>`)
@@ -477,14 +477,14 @@
 	$('#postMessage').click(function () {
 		let subject = $('#postSubject').val()
 		let message = $('#postContent').val()
-		if (!subject || !message || !messageStatus[authorID] || messageStatus[authorID][0] == "off") return;
+		if (!subject || !message || !messageStatus[playerID] || messageStatus[playerID][0] == "off") return;
 		allowEsc = false
 		$('#reply-loading').show()
 		$('#reply-sent').hide()
 		$('#reply-error').hide()
 		$('#postingMessage').show()
 
-		$.post("../sendMessage/", { password, accountID, subject, message, targetID: authorID, color: true })
+		$.post("../sendMessage/", { password, accountID, subject, message, targetID: playerID, color: true })
 			.done(msg => {
 				$('#reply-loading').hide()
 				$('#reply-sent').show()

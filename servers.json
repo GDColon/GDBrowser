@@ -7,7 +7,8 @@
     "id": "",
     "endpoint": "http://boomlings.com/database/",
     "timestampSuffix": " ago",
-    "downloadsDisabled": true
+    "downloadsDisabled": true,
+    "demonList": "https://pointercrate.com/"
   },
   
   {
@@ -33,6 +34,7 @@
     "endpoint": "http://absolllute.com/gdps/gdapi/",
     "onePointNine": true,
     "weeklyLeaderboard": true,
+    "demonList": "https://pointercrate.xyze.dev/",
     "overrides": {
       "getGJMapPacks21": "getGJMapPacks",
       "getGJScores20": "getGJScores",
@@ -56,5 +58,14 @@
     "authorLink": "https://www.youtube.com/channel/UCG5I4-KAW3Kwzam4svLJWBA",
     "id": "wgdps",
     "endpoint": "http://wyliegdps02.7m.pl/database/"
+  },
+
+  {
+    "name": "CnekGDPS",
+    "link": "cnekgdps.7m.pl/index.html/",
+    "author": "Cnek",
+    "authorLink": "https://www.youtube.com/channel/UCDgrf89BjVyrUYSxFIDxafw",
+    "id": "cnekgdps",
+    "endpoint": "http://cnekgdps.7m.pl/cnekgdpsdtb/"
   }
 ]

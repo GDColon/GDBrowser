@@ -1,7 +1,8 @@
 const request = require('request')
 const levels = require('../misc/level.json').music
 const Level = require('../classes/Level.js')
-let demonList = {list: [], lastUpdated: 0}
+let demonList = {}
+// list: [], lastUpdated: 0
 
 module.exports = async (app, req, res) => {
 
@@ -9,13 +10,14 @@ module.exports = async (app, req, res) => {
 
     let demonMode = req.query.hasOwnProperty("demonlist") || req.query.hasOwnProperty("demonList") || req.query.type == "demonlist" || req.query.type == "demonList"
     if (demonMode) {
-        if (req.isGDPS) return res.send('-1')
-        if (!demonList.list.length || demonList.lastUpdated + 600000 < Date.now()) {  // 10 minute cache
-            return request.get('http://www.pointercrate.com/api/v2/demons/listed/?limit=100', function (err1, resp1, list1) {
+        if (!req.server.demonList) return res.send('-1')
+        let dList = demonList[req.id]
+        if (!dList || !dList.list.length || dList.lastUpdated + 600000 < Date.now()) {  // 10 minute cache
+            return request.get(req.server.demonList + 'api/v2/demons/listed/?limit=100', function (err1, resp1, list1) {
                 if (err1) return res.send("-1")
-                else return request.get('http://www.pointercrate.com/api/v2/demons/listed/?limit=100&after=100', function (err2, resp2, list2) {
+                else return request.get(req.server.demonList + 'api/v2/demons/listed/?limit=100&after=100', function (err2, resp2, list2) {
                     if (err2) return res.send("-1")
-                    demonList = {list: JSON.parse(list1).concat(JSON.parse(list2)).map(x => x.level_id), lastUpdated: Date.now()}
+                    demonList[req.id] = {list: JSON.parse(list1).concat(JSON.parse(list2)).map(x => String(x.level_id)), lastUpdated: Date.now()}
                     return app.run.search(app, req, res)
                 })
             })
@@ -74,7 +76,7 @@ module.exports = async (app, req, res) => {
     }
 
     if (req.query.hasOwnProperty("user")) {
-        let accountCheck = app.accountCache[req.id][filters.str.toLowerCase()]
+        let accountCheck = app.userCache(req.id, filters.str)
         filters.type = 5
         if (accountCheck) filters.str = accountCheck[1]
         else if (!filters.str.match(/^[0-9]*$/)) return app.run.profile(app, req, res, null, req.params.text)
@@ -85,7 +87,7 @@ module.exports = async (app, req, res) => {
     let listSize = 10
     if (demonMode || req.query.gauntlet || req.query.type == "saved" || ["mappack", "list", "saved"].some(x => req.query.hasOwnProperty(x))) {
         filters.type = 10
-        filters.str = demonMode ? demonList.list : filters.str.split(",")
+        filters.str = demonMode ? demonList[req.id].list : filters.str.split(",")
         listSize = filters.str.length
         filters.str = filters.str.slice(filters.page*amount, filters.page*amount + amount).join()
         filters.page = 0
@@ -139,7 +141,12 @@ module.exports = async (app, req, res) => {
                 level.diamonds = 0
             }
 
-            if (level.author != "-" && app.config.cacheAccountIDs) app.accountCache[req.id][level.author.toLowerCase()] = [level.accountID, level.authorID, level.author]
+            if (demonMode) {
+                if (!y) level.demonList = req.server.demonList
+                level.demonPosition = demonList[req.id].list.indexOf(level.id) + 1
+            }
+
+            if (level.author != "-" && app.config.cacheAccountIDs) app.userCache(req.id, level.accountID, level.playerID, level.author)
 
             //this is broken if you're not on page 0, blame robtop
             if (filters.page == 0 && y == 0) {

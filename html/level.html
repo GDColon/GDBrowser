@@ -276,11 +276,11 @@ if ([[COINS]] > 0) $("#coins").append(`<img src="../assets/${coinColor}.png" hei
 if ([[COINS]] > 1) $("#coins").append(`<img class="squeeze" src="../assets/${coinColor}.png" height="5%">`)
 if ([[COINS]] > 2) $("#coins").append(`<img class="squeeze" src="../assets/${coinColor}.png" height="5%">`)
 
-if ("[[GDPS]]".startsWith("1.9/")) $("#authorLink").attr('href', '/search/[[AUTHORID]]?user')
+if ("[[GDPS]]".startsWith("1.9/")) $("#authorLink").attr('href', '/search/[[PLAYERID]]?user')
 
 if ("[[ACCOUNTID]]" == "0") {
 	$("#authorName").addClass("green").addClass("unregistered")
-	$("#authorLink").attr('href', '/search/[[AUTHORID]]?user')
+	$("#authorLink").attr('href', '/search/[[PLAYERID]]?user')
 }
 
 if (window.location.pathname == "/weekly") {

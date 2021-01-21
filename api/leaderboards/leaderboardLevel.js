@@ -30,6 +30,7 @@ module.exports = async (app, req, res) => {
         x.percent = +x[3]
         x.coins = +x[13]
         x.playerID = x[2]
+        x.accountID = x[16]
         x.date = x[42] + req.timestampSuffix
         x.icon = {
           form: ['icon', 'ship', 'ball', 'ufo', 'wave', 'robot', 'spider'][+x[14]],
@@ -39,6 +40,7 @@ module.exports = async (app, req, res) => {
           glow: +x[15] > 1
         }
         keys.forEach(k => delete x[k])
+        app.userCache(req.id, x.accountID, x.playerID, x.username)
       }) 
 
       return res.send(scores.slice(0, amount))

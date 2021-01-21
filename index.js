@@ -119,6 +119,14 @@ app.timeSince = function(id, time) {
   return `${app.actuallyWorked[id] ? "" : "~"}${minsPassed}m ${secsPassed}s`
 }
 
+app.userCache = function(id, accountID, playerID, name) {
+  if (!app.config.cacheAccountIDs) return
+  if (!playerID) return app.accountCache[id][accountID.toLowerCase()]
+  let cacheStuff = [accountID, playerID, name]
+  app.accountCache[id][name.toLowerCase()] = cacheStuff
+  return cacheStuff
+}
+
 app.run = {}
 directories.forEach(d => {
   fs.readdirSync('./api/' + d).forEach(x => {if (x.includes('.')) app.run[x.split('.')[0]] = require('./api/' + d + "/" + x) })
@@ -280,7 +288,8 @@ app.get("/:id", function(req, res) { app.run.level(app, req, res) })
 // MISC
 
 app.get("/icon/:text", function(req, res) { app.run.icon(app, req, res) })
-app.get("/api/gdps", function(req, res) { res.send(app.servers) })
+app.get("/api/userCache", function(req, res) { res.send(app.accountCache) })
+app.get("/api/gdps", function(req, res) { res.send(req.query.hasOwnProperty("current") ? req.server : app.servers) })
 app.get("/api/achievements", function(req, res) { res.send({achievements, types: achievementTypes, shopIcons, colors: colorList }) })
 app.get('/api/icons', function(req, res) { 
   let sample = [JSON.stringify(sampleIcons[Math.floor(Math.random() * sampleIcons.length)].slice(1))]

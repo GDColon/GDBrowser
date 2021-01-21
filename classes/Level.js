@@ -11,7 +11,7 @@ class Level {
         this.id = levelInfo[1];
         this.description = Buffer.from(levelInfo[3], "base64").toString() || "(No description provided)";
         this.author = author[1] || "-"
-        this.authorID = levelInfo[6]
+        this.playerID = levelInfo[6]
         this.accountID = author[2] || 0
         this.difficulty = difficulty[levelInfo[9]]
         this.downloads = +levelInfo[10]

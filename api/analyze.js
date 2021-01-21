@@ -145,7 +145,7 @@ function analyze_level(level, rawData) {
     }
 
     response.level = {
-        name: level.name, id: level.id, author: level.author, authorID: level.authorID, accountID: level.accountID, large: level.large
+        name: level.name, id: level.id, author: level.author, playerID: level.playerID, accountID: level.accountID, large: level.large
     }
 
     response.objects = data.length - 2
