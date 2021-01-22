@@ -36,7 +36,7 @@ module.exports = async (app, req, res) => {
         demonFilter: req.query.demonFilter,
         page: req.query.page || 0,
         gauntlet: req.query.gauntlet || 0,
-        len: req.query.length,
+        len: req.query.length || "-",
         song: req.query.songID,
         followed: req.query.creators,
 
