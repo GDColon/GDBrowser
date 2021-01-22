@@ -3,6 +3,7 @@ const XOR = require(__dirname + "/../classes/XOR");
 let orbs = [0, 0, 50, 75, 125, 175, 225, 275, 350, 425, 500]
 let length = ['Tiny', 'Short', 'Medium', 'Long', 'XL']
 let difficulty = { 0: 'Unrated', 10: 'Easy', 20: 'Normal', 30: 'Hard', 40: 'Harder', 50: 'Insane' }
+let demonTypes = { 3: "Easy", 4: "Medium", 5: "Insane", 6: "Extreme" }
 
 class Level {
     constructor(levelInfo, server, download, author = []) {
@@ -43,11 +44,8 @@ class Level {
         this.large = levelInfo[45] > 40000;
         this.cp = Number((this.stars > 0) + this.featured + this.epic)
 
-        if (levelInfo[17] > 0) this.difficulty += ' Demon'
-        if (this.difficulty == "Insane Demon") this.difficulty = "Extreme Demon"
-        else if (this.difficulty == "Harder Demon") this.difficulty = "Insane Demon"
-        else if (this.difficulty == "Normal Demon") this.difficulty = "Medium Demon"
-        else if (levelInfo[25] > 0) this.difficulty = 'Auto';
+        if (levelInfo[17] > 0) this.difficulty = (demonTypes[levelInfo[43]] || "Hard") + " Demon"
+        if (levelInfo[25] > 0) this.difficulty = 'Auto'
         this.difficultyFace = `${levelInfo[17] != 1 ? this.difficulty.toLowerCase() : `demon-${this.difficulty.toLowerCase().split(' ')[0]}`}${this.epic ? '-epic' : `${this.featured ? '-featured' : ''}`}`
 
         if (this.password && this.password != 0) {
@@ -55,6 +53,15 @@ class Level {
             let pass = xor.decrypt(this.password, 26364);
             if (pass.length > 1) this.password = pass.slice(1);
             else this.password = pass;
+        }
+
+        if (server.onePointNine) {
+            this.orbs = 0
+            this.diamonds = 0
+            if (this.difficultyFace.startsWith('demon')) {
+                this.difficulty = "Demon"
+                this.difficultyFace = this.difficultyFace.replace(/demon-.+?($|-)(.+)?/, "demon$1$2")
+            }
         }
 
         if (this.editorTime == 1 && this.totalEditorTime == 2) { this.editorTime = 0; this.totalEditorTime = 0 } // remove GDPS default values

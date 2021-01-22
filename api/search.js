@@ -136,11 +136,6 @@ module.exports = async (app, req, res) => {
                 level.songID = "Level " + [parseInt(x[12]) + 1]
             }
 
-            if (req.onePointNine) {
-                level.orbs = 0
-                level.diamonds = 0
-            }
-
             if (demonMode) {
                 if (!y) level.demonList = req.server.demonList
                 level.demonPosition = demonList[req.id].list.indexOf(level.id) + 1

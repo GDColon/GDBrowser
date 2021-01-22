@@ -62,10 +62,10 @@
 
   {
     "name": "CnekGDPS",
-    "link": "cnekgdps.7m.pl/index.html/",
+    "link": "http://cnekgdps.7m.pl/index.html/",
     "author": "Cnek",
     "authorLink": "https://www.youtube.com/channel/UCDgrf89BjVyrUYSxFIDxafw",
-    "id": "cnekgdps",
+    "id": "cnek",
     "endpoint": "http://cnekgdps.7m.pl/cnekgdpsdtb/"
   }
 ]

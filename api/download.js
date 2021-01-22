@@ -77,12 +77,6 @@ module.exports = async (app, req, res, api, ID, analyze) => {
 
           if (analyze) return app.run.analyze(app, req, res, level)
 
-          if (req.isGDPS) level.gdps = (req.onePointNine ? "1.9/" : "") + req.endpoint
-          if (req.onePointNine) {
-            level.orbs = 0
-            level.diamonds = 0
-          }
-
           function sendLevel() {
             if (api) return res.send(level)
 

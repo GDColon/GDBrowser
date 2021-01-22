@@ -52,12 +52,6 @@ module.exports = async (app, req, res, api, analyze) => {
 
     if (level.author != "-") app.userCache(req.id, level.accountID, level.playerID, level.author)
 
-    if (req.isGDPS) level.gdps = (req.onePointNine ? "1.9/" : "") + req.endpoint
-    if (req.onePointNine) {
-      level.orbs = 0
-      level.diamonds = 0
-    }
-
     function sendLevel() {
 
       if (api) return res.send(level)

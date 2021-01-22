@@ -7,6 +7,7 @@
 	<meta id="meta-title" property="og:title" content="[[USERNAME]]'s profile">
 	<meta id="meta-desc" property="og:description" content="Stars: [[STARS]] | Diamonds: [[DIAMONDS]] | Coins: [[COINS]] | User Coins: [[USERCOINS]] | Demons: [[DEMONS]] | CP: [[CP]]">
 	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/icon/[[USERNAME]]">
+	<meta name="twitter:card" content="summary">
 </head>
 
 <body class="levelBG" onbeforeunload="saveUrl()">
@@ -75,10 +76,15 @@
 
 	<div class="brownBox center supercenter" style="width: 135vh; height: 82%; margin-top: -0.7%">
 
+		<div id="globalrank0" style="position: absolute; left: 0.3%; top: 1.5%; width: 18%; text-align: left">
+			<p style="margin: 0;"><img src="../assets/trophy.png" class="inline valign" width="22%" style="cursor: help" title="Global Rank"> [[RANK]]</p>
+		</div>
+
 		<h1 class="veryBig inline">
-			<img class="inline valign" id="modBadge1" style="display: none; height: 7%; margin-right: -6%; cursor:help" src="../assets/mod.png" title="[[USERNAME]] is a moderator!">	
-			<img class="inline valign" id="modBadge2" style="display: none; height: 7%; margin-right: -6%; cursor:help" src="../assets/mod-elder.png" title="[[USERNAME]] is an elder moderator!">	
-			[[USERNAME]]
+			<img class="inline valign" id="modBadge1" style="display: none; height: 7%; cursor:help" src="../assets/mod.png" title="[[USERNAME]] is a moderator!"><!--
+			--><img class="inline valign" id="modBadge2" style="display: none; height: 7%; cursor:help" src="../assets/mod-elder.png" title="[[USERNAME]] is an elder moderator!"><!--
+			--><img class="inline valign" id="modBadge3" style="display: none; height: 7%; cursor:help" src="../assets/mod-extra.png" title="[[USERNAME]] is a custom moderator! (tier [[MODERATOR]])"><!--	
+			--><span style="margin-left: 1.25%">[[USERNAME]]</span>
 		</h1>
 		
 		<hr style="margin-bottom: 2%">
@@ -126,10 +132,6 @@
 			<a id="twitch"  style="display: none" target="_blank" href="https://twitch.tv/[[TWITCH]]"><img src="../assets/twitch.png" class="gdButton socialButton"></a>
 		</div>
 
-		<div id="globalrank0" style="position: absolute; left: 0.3%; top: 1.5%; width: 25%; text-align: left">
-			<p style="margin: 0;"><img src="../assets/trophy.png" class="inline valign" width="18%" style="cursor: help" title="Global Rank"> [[RANK]]</p>
-		</div>
-
 		<div class="supercenter" id="pageDown" style="left: 5%; top: 65%; height: 10%; display: none;">
 			<img class="gdButton" src="../assets/arrow-left.png" height="95%" onclick="page -= 1; appendComments()">
 		</div>
@@ -160,6 +162,7 @@ $('#message').html(messageText)
 $('#likeMessage').html(messageText.replace("profile posts", "liking posts").replace("postProfileComment", "like"))
 
 $('#modBadge[[MODERATOR]]').show()
+if ("[[MODERATOR]]" > 3) $('#modBadge3').show()
 $('#globalrank[[RANK]]').hide()
 
 let followed = localStorage.followed ? JSON.parse(localStorage.followed) : []
