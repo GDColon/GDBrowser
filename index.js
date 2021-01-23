@@ -178,6 +178,8 @@ app.get("/assets/:dir*?", function(req, res) {
   if (dir.includes('.') || !req.path.endsWith("/")) {
     if (!req.params[0]) main = ""
     if (req.params.dir == "deatheffects" || req.params.dir == "trails") return res.sendFile(__dirname + "/assets/deatheffects/0.png")
+    else if (req.params.dir == "gdps" && req.params[0].endsWith("_icon.png")) return res.sendFile(__dirname + "/assets/gdps/unknown_icon.png")
+    else if (req.params.dir == "gdps" && req.params[0].endsWith("_logo.png")) return res.sendFile(__dirname + "/assets/gdps/unknown_logo.png")
     return res.send(`<p style="font-size: 20px; font-family: aller, helvetica, arial">Looks like this file doesn't exist ¯\\_(ツ)_/¯<br><a href='/assets/${main}'>View directory listing for <b>/assets/${main}</b></a></p>`)
   }
 

@@ -5,12 +5,12 @@
   cursor: pointer;
   z-index: 1;
   user-select: none;
+  transition-duration: 0.07s;
+  transition-timing-function: ease-in-out;
 }
 
 .gdButton:active {
-  transition-duration: 0.07s;
-  transition-timing-function: ease-in-out;
-  transform: scale(1.08);
+  animation: bounceButton 0.25s ease-in-out forwards;
 }
 
 body {
@@ -513,6 +513,21 @@ input[type=checkbox]:checked + label.gdcheckbox {
   100% {
       transform: scale(1) translate(-50%, -50%);
       transform-origin:left top
+  }
+}
+
+@keyframes bounceButton {
+  0% {
+      transform: scale(1);
+  }
+  50% {
+      transform: scale(1.12);
+  }
+  75% {
+      transform: scale(1.06);
+  }
+  100% {
+      transform: scale(1.1);
   }
 }
 

@@ -262,7 +262,7 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 					<img class="inline" src="../icon/icon?form=${x.icon.form}&icon=${x.icon.icon}&col1=${x.icon.col1}&col2=${x.icon.col2}&glow=${x.icon.glow}&size=auto" height=21% style="margin-right: 0.8%">
 					<a href=../${x.accountID == "0" ? `search/${x.playerID}?user` : `../u/${userLink}`}>
 					<h2 class="inline gdButton ${x.accountID == "0" ? "green unregistered" : ""}">${userName}</h2></a>
-					${modNumber > 0 ? `<img class="inline" src="../assets/mod${modNumber == 2 ? "-elder" : ""}.png" height=18% style="margin-left: 0.6%;">` : ""}
+					${modNumber > 0 ? `<img class="inline" src="../assets/mod${modNumber > 2 ? "-extra" : modNumber == 2 ? "-elder" : ""}.png" height=18% style="margin-left: 0.6%;">` : ""}
 					<p class="commentPercent inline">${x.percent ? x.percent + "%" : ""}</p>
 
 					<div class="commentAlign">
@@ -287,7 +287,7 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 					<img class="inline" src="../icon/icon?form=${x.icon.form}&icon=${x.icon.icon}&col1=${x.icon.col1}&col2=${x.icon.col2}&glow=${x.icon.glow}&size=auto" height=21% style="margin-right: 0.8%">
 					<a href=../${x.accountID == "0" ? `search/${x.playerID}?user` : `../u/${userLink}`}>
 					<h2 class="inline gdButton ${x.accountID == "0" ? "green unregistered" : ""}">${userName}</h2></a>
-					${modNumber > 0 ? `<img class="inline" src="../assets/mod${modNumber == 2 ? "-elder" : ""}.png" height=18% style="margin-left: 0.6%;">` : ""}
+					${modNumber > 0 ? `<img class="inline" src="../assets/mod${modNumber > 2 ? "-extra" : modNumber == 2 ? "-elder" : ""}.png" height=18% style="margin-left: 0.6%;">` : ""}
 					<p class="commentPercent inline">${x.percent ? x.percent + "%" : ""}</p>
 
 					<div class="commentAlign">

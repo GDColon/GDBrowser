@@ -50,6 +50,7 @@ module.exports = async (app, req, res, api, analyze) => {
       level.songID = "Level " + [parseInt(levelInfo[12]) + 1]
     }
 
+    if (req.isGDPS) level.gdps = (req.onePointNine ? "1.9/" : "") + req.endpoint
     if (level.author != "-") app.userCache(req.id, level.accountID, level.playerID, level.author)
 
     function sendLevel() {

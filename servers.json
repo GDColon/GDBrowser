@@ -61,11 +61,31 @@
   },
 
   {
+    "name": "1.6 GDPS",
+    "link": "https://discord.gg/eGWMmyk",
+    "author": "Cylyrii",
+    "authorLink": "https://www.youtube.com/channel/UCY-D_PGmZtR9HTeczwBxbrw",
+    "id": "16gdps",
+    "endpoint": "http://wayveyx.x10.mx/gdps/garlic/",
+    "onePointNine": true,
+    "weeklyLeaderboard": true
+  },
+
+  {
     "name": "CnekGDPS",
     "link": "http://cnekgdps.7m.pl/index.html/",
     "author": "Cnek",
     "authorLink": "https://www.youtube.com/channel/UCDgrf89BjVyrUYSxFIDxafw",
     "id": "cnek",
     "endpoint": "http://cnekgdps.7m.pl/cnekgdpsdtb/"
+  },
+
+  {
+    "name": "RealistikGDPS",
+    "link": "http://rgdps.ussr.pl/",
+    "author": "RealistikDash",
+    "authorLink": "https://www.youtube.com/c/RealistikDash",
+    "id": "rgdps",
+    "endpoint": "http://rgdps.ussr.pl/gdpsdatabase/"
   }
 ]

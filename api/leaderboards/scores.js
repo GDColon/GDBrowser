@@ -12,7 +12,7 @@ module.exports = async (app, req, res) => {
     let params = {count: amount, type: "top"}
 
     if (["creators", "creator", "cp"].some(x => req.query.hasOwnProperty(x) || req.query.type == x)) params.type = "creators"
-    else if (["week", "weekly"].some(x => req.query.hasOwnProperty(x) || req.query.type == x)) params.type = "week" // i think GDPS'es use this
+    else if (["week", "weekly"].some(x => req.query.hasOwnProperty(x) || req.query.type == x)) params.type = "week"
 
     req.gdRequest('getGJScores20', params, function(err, resp, body) { 
 
@@ -34,7 +34,7 @@ module.exports = async (app, req, res) => {
         x.diamonds = +x[46]
         x.icon = {
           form: ['icon', 'ship', 'ball', 'ufo', 'wave', 'robot', 'spider'][+x[14]],
-          icon: +x[9],
+          icon: +x[9] || 1,
           col1: +x[10],
           col2: +x[11],
           glow: +x[15] > 1

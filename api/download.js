@@ -27,7 +27,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
     let levelInfo = app.parseResponse(body)
     let level = new Level(levelInfo, req.server, true)
 
-    let foundID = app.accountCache[Object.keys(app.accountCache).find(x => app.accountCache[x][1] == level.playerID)]
+    let foundID = app.accountCache[req.id][Object.keys(app.accountCache[req.id]).find(x => app.accountCache[req.id][x][1] == level.playerID)]
     if (foundID) foundID = foundID.filter(x => x != level.playerID)
 
     req.gdRequest(authorData ? "" : 'getGJUsers20', { str: level.playerID }, function (err1, res1, b1) {
@@ -74,6 +74,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
 
           level.extraString = levelInfo[36]
           level.data = levelInfo[4]
+          if (req.isGDPS) level.gdps = (req.onePointNine ? "1.9/" : "") + req.endpoint
 
           if (analyze) return app.run.analyze(app, req, res, level)
 

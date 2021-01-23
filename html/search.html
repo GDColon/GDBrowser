@@ -180,7 +180,7 @@ function Append(firstLoad) {
 		let hasAuthor = (x.accountID != "0")
 		let userSearch = (type == 5 || typeof userMode == 'string')
 		if (y == 0 && userSearch) {
-			$('#header').text(((x.author == "-" ? "Someone" : x.author)) + (x.author.toLowerCase().endsWith('s') ? "'" : "'s") + " levels")
+			$('#header').text(((!x.author || x.author == "-" ? "Someone" : x.author)) + (x.author.toLowerCase().endsWith('s') ? "'" : "'s") + " levels")
 			document.title = $('#header').text()
 			accID = x.playerID
 		}
@@ -189,7 +189,7 @@ function Append(firstLoad) {
 		if (!filteredSong) filteredSong = x.songName
 		$('#searchBox').append(`<div class="searchresult">
 			<h1 class="lessspaced pre">${x.name}</h1>
-			<h2 class="lessSpaced pre smaller inline gdButton ${hasAuthor ? "" : "green unregistered"}">${hasAuthor && !onePointNine ? `<a href="../u/${x.author}">By ${x.author}</a>` : `<a ${userSearch ? "" : `href="../search/${x.playerID}?user"`}>By ${x.author}</a>`}</h2><h2 class="inline" style="margin-left: 1.5%; transform:translateY(30%)"> ${x.copiedID == '0' ? "" : '<img class="valign sideSpace" src="../assets/copied.png" height="12%">'}${x.large ? '<img class="valign sideSpaceD" src="../assets/large.png" height="12%">' : ''}</h2>
+			<h2 class="lessSpaced pre smaller inline gdButton ${hasAuthor ? "" : "green unregistered"}">${hasAuthor && !onePointNine ? `<a href="../u/${x.author}">By ${x.author || "-"}</a>` : `<a ${userSearch ? "" : `href="../search/${x.playerID}?user"`}>By ${x.author || "-"}</a>`}</h2><h2 class="inline" style="margin-left: 1.5%; transform:translateY(30%)"> ${x.copiedID == '0' ? "" : '<img class="valign sideSpace" src="../assets/copied.png" height="12%">'}${x.large ? '<img class="valign sideSpaceD" src="../assets/large.png" height="12%">' : ''}</h2>
 			<h3 class="lessSpaced pre ${x.customSong == 0 ? "blue" : "whatIfItWasPurple"}" style="overflow: hidden; max-height: 19%">${filteredSong}</h3>
 			<h3 class="lessSpaced">
 				<img class="valign" src="../assets/time.png" height="14%"> ${x.length}
