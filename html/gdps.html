@@ -60,6 +60,7 @@
 <script type="text/javascript" src="../dragscroll.js"></script>
 <script>
 
+let localhost = window.location.hostname == "localhost"
 let host = window.location.host.split(".").slice(-2).join(".")
 Fetch('../api/gdps').then(servers => {
 
@@ -75,7 +76,7 @@ Fetch('../api/gdps').then(servers => {
 			</div>
 			
 			<div class="center" style="position:absolute; right: 7%; transform:translateY(-150%); height: 10%">
-				<a href="http://${x.id || ""}${x.id ? "." : ""}${host}"><img style="margin-bottom: 4.5%" class="valign gdButton" src="../assets/view.png" height="105%"></a>
+				<a href="http://${x.id || ""}${localhost ? ".x." : ""}${x.id ? "." : ""}${host}"><img style="margin-bottom: 4.5%" class="valign gdButton" src="../assets/view.png" height="105%"></a>
 			</div>
 		</div>`)
 	})

@@ -81,15 +81,6 @@
   },
 
   {
-    "name": "RealistikGDPS",
-    "link": "http://rgdps.ussr.pl/",
-    "author": "RealistikDash",
-    "authorLink": "https://www.youtube.com/c/RealistikDash",
-    "id": "rgdps",
-    "endpoint": "http://rgdps.ussr.pl/gdpsdatabase/"
-  },
-
-  {
     "name": "Geometry Dash Gravity",
     "link": "https://discord.gg/qpUJgBC",
     "author": "Sai",
@@ -99,11 +90,29 @@
   },
 
   {
+    "name": "RealistikGDPS",
+    "link": "http://rgdps.ussr.pl/",
+    "author": "RealistikDash",
+    "authorLink": "https://www.youtube.com/c/RealistikDash",
+    "id": "rgdps",
+    "endpoint": "http://rgdps.ussr.pl/gdpsdatabase/"
+  },
+
+  {
     "name": "Supreme GDPS",
     "link": "https://discord.gg/pAU42pbREb",
     "author": "Mr.Scatman7",
     "authorLink": "https://youtube.com/c/MrScatman7",
     "id": "supreme",
     "endpoint": "http://gdps.mathieuar.fr/supreme1/"
+  },
+
+  {
+    "name": "Resurrection GDPS",
+    "link": "http://gdpsresu.000webhostapp.com/",
+    "author": "Switchstep",
+    "authorLink": "https://www.youtube.com/channel/UCg9HipnGYtfwIax4bLTTzUQ",
+    "id": "resurrection",
+    "endpoint": "http://gdpsresu.000webhostapp.com/"
   }
 ]
