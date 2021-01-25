@@ -122,6 +122,10 @@ img, .noSelect {
     cursor: default;
 }
 
+.help {
+    cursor: help;
+}
+
 .outOfOrder, .darkDiff {
     filter: brightness(50%);
 }

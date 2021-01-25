@@ -87,5 +87,23 @@
     "authorLink": "https://www.youtube.com/c/RealistikDash",
     "id": "rgdps",
     "endpoint": "http://rgdps.ussr.pl/gdpsdatabase/"
+  },
+
+  {
+    "name": "Geometry Dash Gravity",
+    "link": "https://discord.gg/qpUJgBC",
+    "author": "Sai",
+    "authorLink": "https://youtube.com/channel/UCvYEPVUVVLDhwfHCzgVdIIg",
+    "id": "gravity",
+    "endpoint": "http://gravity4.000webhostapp.com/"
+  },
+
+  {
+    "name": "Supreme GDPS",
+    "link": "https://discord.gg/pAU42pbREb",
+    "author": "Mr.Scatman7",
+    "authorLink": "https://youtube.com/c/MrScatman7",
+    "id": "supreme",
+    "endpoint": "http://gdps.mathieuar.fr/supreme1/"
   }
 ]

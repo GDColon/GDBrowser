@@ -1,7 +1,7 @@
 <head>
 	<title id="tabTitle">Level Search</title>
 	<meta charset="utf-8">
-	<link href="../assets/css/browser.css?" type="text/css" rel="stylesheet">
+	<link href="../assets/css/browser.css" type="text/css" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
 	<link rel="icon" href="../assets/coin.png">
 	<meta id="meta-title" property="og:title" content="Level Search">
@@ -75,11 +75,11 @@
 		<h2 class="smaller" style="font-size: 4.5vh" id="pagenum"></h2>
 	</div>
 
-	<div style="text-align: right; position:absolute; top: 7.5%; right: 2%; height: 12%;">
+	<div title="Jump to page" style="text-align: right; position:absolute; top: 7.5%; right: 2%; height: 12%;">
 		<img src="../assets/magnify.png" height="60%" class="gdButton" style="margin-top: 5%" onclick="$('#pageDiv').show(); $('#pageSelect').focus().select()">
 	</div>
 
-	<div id="shuffle" style="display: none; text-align: right; position:absolute; top: 7.5%; right: 6.5%; height: 12%;">
+	<div id="shuffle" title="Random level" style="display: none; text-align: right; position:absolute; top: 7.5%; right: 6.5%; height: 12%;">
 		<img src="../assets/random.png" height="60%" class="gdButton" style="margin-top: 5%">
 	</div>
 
@@ -136,6 +136,8 @@ let superSearch = ['*', '*?type=mostliked', '*?type=mostdownloaded', '*?type=rec
 let demonListLink = "https://pointercrate.com/"
 let searchFilters = `../api/search/${type == 'saved' ? JSON.parse(localStorage.getItem('saved') || '[]').reverse().toString() : accID || path}?page=[PAGE]${count ? "" : "&count=10"}${window.location.search.replace(/\?/g, "&").replace("page", "nope")}`
 
+function clean(text) {return text.toString().replace(/&/g, "&#38;").replace(/</g, "&#60;").replace(/>/g, "&#62;").replace(/=/g, "&#61;").replace(/"/g, "&#34;").replace(/'/g, "&#39;")}
+
 if (type == "followed") {
 	let followed = localStorage.followed ? JSON.parse(localStorage.followed) : []
 	searchFilters += ("&creators=" + followed.join()) 
@@ -185,30 +187,31 @@ function Append(firstLoad) {
 			accID = x.playerID
 		}
 
+		let noLink = gdps || !x.customSong
 		let filteredSong = x.songName.replace(/[^ -~]/g, "")
 		if (!filteredSong) filteredSong = x.songName
-		$('#searchBox').append(`<div class="searchresult">
-			<h1 class="lessspaced pre">${x.name}</h1>
-			<h2 class="lessSpaced pre smaller inline gdButton ${hasAuthor ? "" : "green unregistered"}">${hasAuthor && !onePointNine ? `<a href="../u/${x.author}">By ${x.author || "-"}</a>` : `<a ${userSearch ? "" : `href="../search/${x.playerID}?user"`}>By ${x.author || "-"}</a>`}</h2><h2 class="inline" style="margin-left: 1.5%; transform:translateY(30%)"> ${x.copiedID == '0' ? "" : '<img class="valign sideSpace" src="../assets/copied.png" height="12%">'}${x.large ? '<img class="valign sideSpaceD" src="../assets/large.png" height="12%">' : ''}</h2>
-			<h3 class="lessSpaced pre ${x.customSong == 0 ? "blue" : "whatIfItWasPurple"}" style="overflow: hidden; max-height: 19%">${filteredSong}</h3>
-			<h3 class="lessSpaced">
-				<img class="valign" src="../assets/time.png" height="14%"> ${x.length}
-				<img class="valign" src="../assets/download.png" height="14%"> ${x.downloads}
-				<img class="valign" src="../assets/${x.disliked ? 'dis' : ''}like.png" height="14%"> ${x.likes}
-				${x.orbs != 0 ? `<img class="valign" src="../assets/orbs.png" height="14%"> ${x.orbs}` : ""}
+		$('#searchBox').append(`<div class="searchresult" title="${clean(x.description)}">
+			<h1 class="help lessspaced pre" title="${x.name} (${x.id})" style="width: fit-content; padding-right: 1%">${x.name}</h1>
+			<h2 class="lessSpaced pre smaller inline gdButton help ${hasAuthor ? "" : "green unregistered"}" title="Account ID: ${x.accountID}\nPlayer ID: ${x.playerID}">${hasAuthor && !onePointNine ? `<a href="../u/${x.author}">By ${x.author || "-"}</a>` : `<a ${userSearch ? "" : `href="../search/${x.playerID}?user"`}>By ${x.author || "-"}</a>`}</h2><h2 class="inline" style="margin-left: 1.5%; transform:translateY(30%)"> ${x.copiedID == '0' ? "" : `<a target="_blank" href="../${x.copiedID}"><img class="gdButton valign sideSpace" title="Original: ${x.copiedID}" src="../assets/copied.png" height="12%"></a>`}${x.large ? `<img class="help valign sideSpaceD" title="${x.objects}${x.objects == 65535 ? "+" : ""} objects" src="../assets/large.png" height="12%">` : ''}</h2>
+			<h3 class="lessSpaced help ${noLink ? "" : 'gdButton '}pre ${x.customSong == 0 ? "blue" : "whatIfItWasPurple"}" title="${filteredSong} by ${x.songAuthor} (${x.songID})" style="overflow: hidden; max-height: 19%; width: fit-content">${noLink ? filteredSong : `<a target="_blank" style="width: fit-content" href="https://www.newgrounds.com/audio/listen/${x.songID}">${filteredSong}</a>`}</h3>
+			<h3 class="lessSpaced" style="width: fit-content" title="">
+				<img class="help valign" title="Length" src="../assets/time.png" height="14%"> ${x.length}
+				<img class="help valign" title="Downloads" src="../assets/download.png" height="14%"> ${x.downloads}
+				<img class="help valign" title="Likes" src="../assets/${x.disliked ? 'dis' : ''}like.png" height="14%"> ${x.likes}
+				${x.orbs != 0 ? `<img class="help valign" title="Mana Orbs" src="../assets/orbs.png" height="14%"> ${x.orbs}` : ""}
 			</h3>
 		
 			<div class="center" style="position:absolute; top: ${6.5 + (y * 33.5) + (x.coins == 0 ? 2.5 : 0)}%; left: 4.4%; transform:scale(0.82); height: 10%; width: 12.5%;">
-				<img class="spaced" id="dFace" src="../assets/difficulties/${x.difficultyFace}.png" height="150%" style="margin-bottom: 0%; ${x.epic ? 'transform:scale(1.2)' : x.featured ? 'transform:scale(1.1)' : ''}">
-				<h3>${x.difficulty.includes('Demon') ? "Demon" : x.difficulty}</h3>
-				${x.stars != 0 && !demonList ? `<h3>${x.stars}<img class="valign sideSpaceB" src="../assets/star.png" height="35%" style="transform:translateY(-8%)"></h3>` : ""}
+				<img class="help spaced" id="dFace" title="${x.difficulty}${x.epic ? " (Epic)" : x.featured ? " (Featured)" : ""}" src="../assets/difficulties/${x.difficultyFace}.png" height="150%" style="margin-bottom: 0%; ${x.epic ? 'transform:scale(1.2)' : x.featured ? 'transform:scale(1.1)' : ''}">
+				<h3 title="">${x.difficulty.includes('Demon') ? "Demon" : x.difficulty}</h3>
+				${x.stars != 0 && !demonList ? `<h3 class="help" title="${x.stars} star${x.stars == 1 ? "" : "s"}${x.starsRequested ? ` (${x.starsRequested} requested)` : ""}">${x.stars}<img class="valign sideSpaceB" src="../assets/star.png" height="35%" style="transform:translateY(-8%)"></h3>` : ""}
 
-				${demonList ? `<h3 class="yellow">#${x.demonPosition}</h3>` : ""}
+				${demonList ? `<h3 class="help yellow" title="Ranked #${x.demonPosition} on the Demon List">#${x.demonPosition}</h3>` : ""}
 
-				<div id="coins" style="margin-top: 3%">
-					${x.coins > 0 ? `<img src="../assets/${x.verifiedCoins ? 'silver' : 'brown'}coin.png" height="50%">` : ""}
-					${x.coins > 1 ? `<img src="../assets/${x.verifiedCoins ? 'silver' : 'brown'}coin.png" height="50%" class="squeezeB">` : ""}
-					${x.coins > 2 ? `<img src="../assets/${x.verifiedCoins ? 'silver' : 'brown'}coin.png" height="50%" class="squeezeB">` : ""}
+				<div id="coins" style="margin-top: 3%" title="${x.coins} user coin${x.coins == 1 ? "" : "s"} (${x.verifiedCoins ? "" : "un"}verified)">
+					${x.coins > 0 ? `<img src="../assets/${x.verifiedCoins ? 'silver' : 'brown'}coin.png" height="50%" class="help">` : ""}
+					${x.coins > 1 ? `<img src="../assets/${x.verifiedCoins ? 'silver' : 'brown'}coin.png" height="50%" class="help squeezeB">` : ""}
+					${x.coins > 2 ? `<img src="../assets/${x.verifiedCoins ? 'silver' : 'brown'}coin.png" height="50%" class="help squeezeB">` : ""}
 				</div>
 			</div>
 			<div class="center" style="position:absolute; right: 7%; transform:translateY(-${demonList ? 19.5 : 16.25}vh); height: 10%">
