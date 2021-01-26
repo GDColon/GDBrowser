@@ -169,7 +169,7 @@
 					<img src="../assets/btn-cancel.png" height=10%; class="gdButton center"
 						onclick="$('textarea').val(''); $('#sendMessage').hide()">
 					<img src="../assets/btn-submit.png" height=10%; id="postMessage" class="gdButton center sideSpaceB">
-					<img src="../assets/refresh.png" style="height: 10%; position: absolute; right: 0%"
+					<img src="../assets/trash.png" style="height: 10%; position: absolute; right: 0%"
 						onclick="$('#postContent').val('');" class="gdButton center sideSpaceB">
 				</div>
 			</div>
@@ -294,7 +294,7 @@
 
 							let targetUser = window.location.search.match(/(\?|&)sendTo=(.+)/)
 							if (targetUser) {
-								targetUser = decodeURIComponent(targetUser[1])
+								targetUser = decodeURIComponent(targetUser[2])
 								fetch(`../api/profile/${targetUser}`).then(res => res.json()).then(res => { 
 									if (res == "-1" || !res) return;
 									$('#replyAuthor').html(`<a href="../u/${res.username}" target="_blank">To: ${res.username}</a>`)

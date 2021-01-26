@@ -61,6 +61,16 @@
   },
 
   {
+    "name": "ClarifyGDPS",
+    "link": "https://clarifygdps.com/",
+    "author": "Jouca",
+    "authorLink": "https://www.youtube.com/channel/UCXE8HB-B4tqvI0ibjXSJ52A",
+    "id": "clarify",
+    "endpoint": "http://joucagdpss.clarifygdps.com/",
+    "timestampSuffix": " ago"
+  },
+
+  {
     "name": "1.6 GDPS",
     "link": "https://discord.gg/eGWMmyk",
     "author": "Cylyrii",
@@ -105,6 +115,15 @@
     "authorLink": "https://youtube.com/c/MrScatman7",
     "id": "supreme",
     "endpoint": "http://gdps.mathieuar.fr/supreme1/"
+  },
+
+  {
+    "name": "GD Multiverse",
+    "link": "https://discord.gg/rJtAky72xE",
+    "author": "Nonixgames",
+    "authorLink": "https://youtube.com/c/Nonixgames",
+    "id": "multiverse",
+    "endpoint": "http://gdpsnoni.000webhostapp.com/"
   },
 
   {

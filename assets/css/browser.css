@@ -606,6 +606,7 @@ input::-webkit-inner-spin-button {
     padding-left: 18vh;
     padding-top: 1vh;
     white-space: nowrap;
+    overflow-x: hidden;
 }
 
 .searchResult:nth-child(odd) {
