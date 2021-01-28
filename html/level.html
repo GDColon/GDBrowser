@@ -263,8 +263,10 @@ if ("[[SONGID]]".startsWith("Level")) {
 else $('#checkSong').show()
 
 if (!"[[GDPS]]".startsWith("[")) {
-	$('#playSong').hide()
-	$('#moreSongs').hide()
+	if (!("[[SONGLINK]]").match(/^https?:\/\/\audio\.ngfiles\.com\//)) {
+		$('#playSong').hide()
+		$('#moreSongs').hide()
+	}
 	$('#leaderboardbtn').hide()
 	$('#checkSong').remove()
 } 

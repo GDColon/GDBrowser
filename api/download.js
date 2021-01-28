@@ -61,6 +61,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
             level.songAuthor = songData[4] || "Unknown"
             level.songSize = (songData[5] || "0") + "MB"
             level.songID = songData[1] || String(level.customSong)
+            if (songData[10]) level.songLink = decodeURIComponent(songData[10])
             if (!songData[2]) level.invalidSong = true
           }
 

@@ -127,6 +127,7 @@ module.exports = async (app, req, res) => {
                 level.songAuthor = songSearch[4] || "Unknown"
                 level.songSize = (songSearch[5] || "0") + "MB"
                 level.songID = songSearch[1] || level.customSong
+                if (songSearch[10]) level.songLink = decodeURIComponent(songSearch[10])
             }
             else {
                 let foundSong = require('../misc/level.json').music[parseInt(x[12]) + 1] || {"null": true}
