@@ -297,7 +297,7 @@ app.get("/api/achievements", function(req, res) { res.send({achievements, types:
 app.get('/api/icons', function(req, res) { 
   let sample = [JSON.stringify(sampleIcons[Math.floor(Math.random() * sampleIcons.length)].slice(1))]
   let iconserver = req.isGDPS ? req.server.name : undefined
-  res.send({icons: gdIcons, colors: colorList, colorOrder, whiteIcons, server: iconserver, noCopy: req.onePointNine, sample}); 
+  res.send({icons: gdIcons, colors: colorList, colorOrder, whiteIcons, server: iconserver, noCopy: req.onePointNine || req.offline, sample}); 
 });
 
 app.get('*', function(req, res) {
