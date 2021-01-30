@@ -2,7 +2,11 @@ const fs = require('fs')
 
 module.exports = async (app, req, res, api, getLevels) => {
 
-  if (req.offline) return res.send("-1")
+  if (req.offline) {
+    if (!api) return res.redirect('/search/' + req.params.id)
+    else return res.send("-1")
+  }
+  
   let username = getLevels || req.params.id
   let accountMode = !req.query.hasOwnProperty("player") && Number(req.params.id)
   let foundID = app.userCache(req.id, username)
