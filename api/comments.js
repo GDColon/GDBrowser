@@ -5,20 +5,20 @@ module.exports = async (app, req, res) => {
     let count = +req.query.count || 10
     if (count > 1000) count = 1000
 
-    let params = req.gdParams({
+    let params = {
         userID : req.params.id, 
         accountID : req.params.id, 
         levelID: req.params.id,
         page: +req.query.page || 0,
         count,
         mode: req.query.hasOwnProperty("top") ? "1" : "0",
-    })
+    }
 
     let path = "getGJComments21"
-    if (req.query.type == "commentHistory") path = "getGJCommentHistory"
+    if (req.query.type == "commentHistory") { path = "getGJCommentHistory"; delete params.levelID }
     else if (req.query.type == "profile") path = "getGJAccountComments20"
 
-    req.gdRequest(path, params, function(err, resp, body) { 
+    req.gdRequest(path, req.gdParams(params), function(err, resp, body) { 
 
       if (err || body == '-1' || !body) return res.send("-1")
 
