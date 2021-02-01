@@ -1,6 +1,7 @@
 const request = require('request')
 const fs = require('fs')
 const Level = require('../classes/Level.js')
+
 module.exports = async (app, req, res, api, ID, analyze) => {
 
   if (req.offline) {
@@ -55,24 +56,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
 
         req.gdRequest('getGJSongInfo', { songID: level.customSong }, function (err, resp, songRes) {
 
-          if (!err && songRes != '-1') {
-            let songData = app.parseResponse(songRes, '~|~')
-            level.songName = songData[2] || "Unknown"
-            level.songAuthor = songData[4] || "Unknown"
-            level.songSize = (songData[5] || "0") + "MB"
-            level.songID = songData[1] || String(level.customSong)
-            if (songData[10]) level.songLink = decodeURIComponent(songData[10])
-            if (!songData[2]) level.invalidSong = true
-          }
-
-          else {
-            let foundSong = require('../misc/level.json').music[parseInt(levelInfo[12]) + 1] || { "null": true }
-            level.songName = foundSong[0] || "Unknown"
-            level.songAuthor = foundSong[1] || "Unknown"
-            level.songSize = "0MB"
-            level.songID = "Level " + [parseInt(levelInfo[12]) + 1]
-          }
-
+          level = level.getSongInfo(app.parseResponse(songRes, '~|~'))
           level.extraString = levelInfo[36]
           level.data = levelInfo[4]
           if (req.isGDPS) level.gdps = (req.onePointNine ? "1.9/" : "") + req.endpoint

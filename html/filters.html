@@ -23,9 +23,17 @@
 			<div style="margin-bottom: 6%"><h1><input type="checkbox" id="box-nostar" url="&noStar"><label for="box-nostar" class="gdcheckbox gdButton"></label>No Star</h1></div>
 			<div><h1><input type="checkbox" id="box-original" url="&original"><label for="box-original" class="gdcheckbox gdButton"></label>Original</h1></div>
 			<div><h1><input type="checkbox" id="box-2player" url="&twoPlayer"><label for="box-2player" class="gdcheckbox gdButton"></label>2-Player</h1></div>
-			<div style="margin-bottom: 9%"><h1><input type="checkbox" id="box-coins" url="&coins"><label for="box-coins" class="gdcheckbox gdButton"></label>Coins</h1></div>
+			<div style="margin-bottom: 5%"><h1><input type="checkbox" id="box-coins" url="&coins"><label for="box-coins" class="gdcheckbox gdButton"></label>Coins</h1></div>
 			<h1 class="smallerer lessSpaced">Song</h1>
-			<input id="songID" type="text" placeholder="Song ID or Level Name" style="height: 15%; width: 70%; text-align: center;" maxlength="22">
+			<img id="normalSong" class="gdButton inline gray" style="margin-right: 0.5%" src="../assets/song-normal.png" height="8%">
+			<img id="customSong" class="gdButton inline" style="margin-left: 0.5%" src="../assets/song-custom.png" height="8%">
+			<br>
+			<input id="songID" type="number" placeholder="Custom Song ID" style="height: 15%; width: 70%; text-align: center; margin-top: 2%" maxlength="22">
+			<div id="songSelect" style="width: 100%; display: none; margin-top: 3%; text-align: center">
+				<img style="width: 4%" id="songDown" class="gdButton inline valign songChange" jump="-1" src="../assets/whitearrow-left.png">
+				<h1 class="inline valign smallerer center" id="songName" style="min-width: 60%"></h1>
+				<img style="width: 4%" id="songUp" class="gdButton inline valign songChange" jump="1" id="nextSong" src="../assets/whitearrow-right.png">
+			</div>
 		</div>
 	</div>
 
@@ -139,10 +147,14 @@
 <script type="text/javascript" src="../sizecheck.js?"></script>
 <script>
 
+
+$('#filters').show()
 let filters = []
 let minusCheck = []
 let demons = []
-let demonMode = false;
+let demonMode = false
+let customSong = true
+let officialSong = 1
 
 function undupe(array) {
   if (!Array.isArray(array)) return array
@@ -180,14 +192,18 @@ $('.levelSearch').click(function() {
 
 	// === SONG === //
 
-	if ($('#songID').val()) {
+	let selectedOfficial = customSong ? null : officialSong
+	let selectedCustom = customSong && $('#songID').val() ? $('#songID').val() : null
+	let selectedSong = selectedCustom || selectedOfficial
 
-	url += "&songID=" + $('#songID').val()
-	if (/^\d+$/.test($('#songID').val())) url += "&customSong"
+	if (selectedSong) {
+		url += "&songID=" + selectedSong
+		if (customSong) url += "&customSong"
 	}
 
-	if (url.endsWith('?type=0')) url = url.slice(0, -7)
+	// === FINISHING UP === //
 
+	if (url.endsWith('?type=0')) url = url.slice(0, -7)
 	window.location.href = url.replace(/\?type=0&/, "?")
 
 })
@@ -264,14 +280,46 @@ $('#listLevels, #listName').on('input blur', function (event) {
 
 })
 
-// some gdps magic
-Fetch(`../api/gdps?current=1`).then(res => {
+$('#normalSong').click(function() {
+	customSong = false
+	$('#customSong').addClass('gray')
+	$('#normalSong').removeClass('gray')
+	$('#songSelect').show()
+	$('#songID').hide()
+})
+
+$('#customSong').click(function() {
+	customSong = true
+	$('#normalSong').addClass('gray')
+	$('#customSong').removeClass('gray')
+	$('#songID').show()
+	$('#songSelect').hide()
+})
+
+Fetch(`../api/music`).then(music => {
+
+	$('#songName').html("1: " + music[1][0])
+
+	$(document).on('click', '.songChange', function () { 
+		officialSong += Number($(this).attr('jump'))
+		if (officialSong < 1) officialSong = 1
+		$('#songName').html(`${officialSong}: ${music[officialSong] ? music[officialSong][0] : officialSong == 69 ? "Nice" : "Unknown"}`)
+	})
+
+	$(document).keydown(function(k) {
+		if (customSong) return;
+		if (k.which == 37) $('#songDown').trigger('click')   // left
+		if (k.which == 39) $('#songUp').trigger('click')     // right
+	});
+
 	if (onePointNine) {
 		$('#userSearch').hide()
 		$('#followedSearch').addClass('menuDisabled')
 		$('#levelName').css('width', '76%')
 	}
-	if (res.demonList) $('#demonList').show()
+
+	if (gdps) Fetch(`../api/gdps?current=1`).then(res => { if (res.demonList) $('#demonList').show() })
+	else $('#demonList').show()
 })
 
 </script>

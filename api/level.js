@@ -33,23 +33,7 @@ module.exports = async (app, req, res, api, analyze) => {
     song = app.parseResponse(song, '~|~')
 
     let levelInfo = app.parseResponse(preRes[0])
-    let level = new Level(levelInfo, req.server, false, author)
-
-    if (level.customSong) {
-      level.songName = song[2] || "Unknown"
-      level.songAuthor = song[4] || "Unknown"
-      level.songSize = (song[5] || "0") + "MB"
-      level.songID = song[1] || String(level.customSong)
-      if (song[10]) level.songLink = decodeURIComponent(song[10])
-    }
-
-    else {
-      let foundSong = require('../misc/level.json').music[parseInt(levelInfo[12]) + 1] || { "null": true }
-      level.songName = foundSong[0] || "Unknown"
-      level.songAuthor = foundSong[1] || "Unknown"
-      level.songSize = "0MB"
-      level.songID = "Level " + [parseInt(levelInfo[12]) + 1]
-    }
+    let level = new Level(levelInfo, req.server, false, author).getSongInfo(song)
 
     if (req.isGDPS) level.gdps = (req.onePointNine ? "1.9/" : "") + req.endpoint
     if (level.author != "-") app.userCache(req.id, level.accountID, level.playerID, level.author)

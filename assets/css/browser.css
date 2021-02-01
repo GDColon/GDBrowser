@@ -1213,6 +1213,10 @@ input::-webkit-inner-spin-button {
     color: #ffaaaa;
 }
 
+.gray {
+    filter: grayscale(100%);
+}
+
 .grayscale {
     filter: grayscale(100%) brightness(0.7);
 }

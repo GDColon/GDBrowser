@@ -215,7 +215,7 @@ dragscroll.js - Used on several pages for drag scrolling
 
   
 
-level.json - An array of the official GD tracks, and also difficulty face stuff for level searching
+music.json - An array of the official GD tracks (name, artist)
 
   
 

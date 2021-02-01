@@ -90,6 +90,15 @@
   },
 
   {
+    "name": "Zombie Dash",
+    "link": "http://zombiedashoficial.ddns.net/",
+    "author": "Ghost Power 13",
+    "authorLink": "https://www.youtube.com/channel/UCC_S4bHTIGVJiCfZsKU15Gw",
+    "id": "zombiedash",
+    "endpoint": "http://zombiedashoficial.ddns.net/"
+  },
+
+  {
     "name": "Geometry Dash Gravity",
     "link": "https://discord.gg/qpUJgBC",
     "author": "Sai",

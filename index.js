@@ -38,6 +38,7 @@ let achievements = require('./misc/achievements.json')
 let achievementTypes = require('./misc/achievementTypes.json')
 let shopIcons = require('./misc/shops.json')
 let colorList = require('./icons/colors.json')
+let music = require('./misc/music.json')
 
 let gdIcons = fs.readdirSync('./assets/previewicons')
 let assetPage = fs.readFileSync('./html/assets.html', 'utf8')
@@ -74,6 +75,7 @@ app.use(async function(req, res, next) {
   req.isGDPS = req.server.endpoint != "http://boomlings.com/database/"
 
   if (req.isGDPS) res.set("gdps", (req.onePointNine ? "1.9/" : "") + req.id)
+  if (req.query.online > 0) req.offline = false
 
   req.gdParams = function(obj={}, substitute=true) {
     Object.keys(app.config.params).forEach(x => { if (!obj[x]) obj[x] = app.config.params[x] })
@@ -213,7 +215,7 @@ let downloadDisabled = ['daily', 'weekly']
 let gdpsHide = ['achievements', 'messages']
 
 app.get("/", function(req, res) { 
-  if (req.offline && !req.query.hasOwnProperty("home")) res.sendFile(__dirname + "/html/offline.html")
+  if (req.query.hasOwnProperty("offline") || (req.offline && !req.query.hasOwnProperty("home"))) res.sendFile(__dirname + "/html/offline.html")
   else {
     fs.readFile('./html/home.html', 'utf8', function (err, data) {
       let html = data;
@@ -294,6 +296,7 @@ app.get("/icon/:text", function(req, res) { app.run.icon(app, req, res) })
 app.get("/api/userCache", function(req, res) { res.send(app.accountCache) })
 app.get("/api/gdps", function(req, res) { res.send(req.query.hasOwnProperty("current") ? req.server : app.servers) })
 app.get("/api/achievements", function(req, res) { res.send({achievements, types: achievementTypes, shopIcons, colors: colorList }) })
+app.get("/api/music", function(req, res) { res.send(music) })
 app.get('/api/icons', function(req, res) { 
   let sample = [JSON.stringify(sampleIcons[Math.floor(Math.random() * sampleIcons.length)].slice(1))]
   let iconserver = req.isGDPS ? req.server.name : undefined

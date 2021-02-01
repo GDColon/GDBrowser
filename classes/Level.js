@@ -1,4 +1,5 @@
 const XOR = require(__dirname + "/../classes/XOR");
+const music = require(__dirname + "/../misc/music.json");
 
 let orbs = [0, 0, 50, 75, 125, 175, 225, 275, 350, 425, 500]
 let length = ['Tiny', 'Short', 'Medium', 'Long', 'XL']
@@ -32,7 +33,7 @@ class Level {
         this.version = +levelInfo[5];
         this.copiedID = levelInfo[30]
         this.twoPlayer = levelInfo[31] > 0
-        this.officialSong = levelInfo[12] != 0 ? parseInt(levelInfo[12]) + 1 : 0
+        this.officialSong = +levelInfo[35] ? 0 : parseInt(levelInfo[12]) + 1
         this.customSong = +levelInfo[35]
         this.coins = +levelInfo[37]
         this.verifiedCoins = levelInfo[38] > 0
@@ -65,6 +66,25 @@ class Level {
         }
 
         if (this.editorTime == 1 && this.totalEditorTime == 2) { this.editorTime = 0; this.totalEditorTime = 0 } // remove GDPS default values
+    }
+
+    getSongInfo(songInfo) {
+        if (this.customSong) {
+            this.songName = songInfo[2] || "Unknown"
+            this.songAuthor = songInfo[4] || "Unknown"
+            this.songSize = (songInfo[5] || "0") + "MB"
+            this.songID = songInfo[1] || this.customSong
+            if (songInfo[10]) this.songLink = decodeURIComponent(songInfo[10])
+        }
+        else {
+            let foundSong = music[this.officialSong] || {"null": true}
+            this.songName =  foundSong[0] || "Unknown"
+            this.songAuthor = foundSong[1] || "Unknown"
+            this.songSize = "0MB"
+            this.songID = "Level " + this.officialSong
+        }
+        
+        return this
     }
 }
 

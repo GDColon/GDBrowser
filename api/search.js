@@ -1,5 +1,5 @@
 const request = require('request')
-const levels = require('../misc/level.json').music
+const music = require('../misc/music.json')
 const Level = require('../classes/Level.js')
 let demonList = {}
 // list: [], lastUpdated: 0
@@ -55,10 +55,6 @@ module.exports = async (app, req, res) => {
         count: amount
     }
 
-    if (req.query.songID && filters.customSong == 0 && levels.find(x => req.query.songID.toLowerCase() == x[0].toLowerCase())) {
-        filters.song = levels.findIndex(x => req.query.songID.toLowerCase() == x[0].toLowerCase())
-    }
-
     if (req.query.type) {
         let filterCheck = req.query.type.toLowerCase()
         switch(filterCheck) {
@@ -94,7 +90,6 @@ module.exports = async (app, req, res) => {
     }
 
     if (filters.str == "*") delete filters.str
-    
     req.gdRequest('getGJLevels21', req.gdParams(filters), function(err, resp, body) {
 
         if (err || !body || body == '-1' || body.startsWith("<")) return res.send("-1")
@@ -116,26 +111,11 @@ module.exports = async (app, req, res) => {
 
         levelArray.forEach((x, y) => {
 
-            let level = new Level(x, req.server)
             let songSearch = songs.find(y => y['~1'] == x[35]) || []
 
+            let level = new Level(x, req.server).getSongInfo(songSearch)
             level.author = authorList[x[6]] ? authorList[x[6]][0] : "-";
             level.accountID = authorList[x[6]] ? authorList[x[6]][1] : "0";
-
-            if (level.customSong) {
-                level.songName = app.clean(songSearch[2] || "Unknown")
-                level.songAuthor = songSearch[4] || "Unknown"
-                level.songSize = (songSearch[5] || "0") + "MB"
-                level.songID = songSearch[1] || level.customSong
-                if (songSearch[10]) level.songLink = decodeURIComponent(songSearch[10])
-            }
-            else {
-                let foundSong = require('../misc/level.json').music[parseInt(x[12]) + 1] || {"null": true}
-                level.songName =  foundSong[0] || "Unknown"
-                level.songAuthor = foundSong[1] || "Unknown"
-                level.songSize = "0MB"
-                level.songID = "Level " + [parseInt(x[12]) + 1]
-            }
 
             if (demonMode) {
                 if (!y) level.demonList = req.server.demonList
