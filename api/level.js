@@ -51,7 +51,7 @@ module.exports = async (app, req, res, api, analyze) => {
           let regex = new RegExp(`\\[\\[${x.toUpperCase()}\\]\\]`, "g")
           html = html.replace(regex, app.clean(level[x]))
         })
-        if (req.server.downloadsDisabled) html = html.replace('id="additional" class="', 'class="downloadDisabled ')
+        if (req.server.downloadsDisabled) html = html.replace('id="additional" class="', 'id="additional" class="downloadDisabled ')
           .replace('analyzeBtn"', 'analyzeBtn" style="filter: opacity(30%)"')
         return res.send(html)
       })

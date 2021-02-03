@@ -89,7 +89,9 @@ module.exports = async (app, req, res) => {
         filters.page = 0
     }
 
+    if (req.isGDPS && filters.diff && !filters.len) filters.len = "-"
     if (filters.str == "*") delete filters.str
+
     req.gdRequest('getGJLevels21', req.gdParams(filters), function(err, resp, body) {
 
         if (err || !body || body == '-1' || body.startsWith("<")) return res.send("-1")

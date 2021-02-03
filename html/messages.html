@@ -136,14 +136,11 @@
 		<div id="selectedMessage" class="popup">
 			<div class="bounce center supercenter" style="height: 70%; width: 115vh">
 				<div class="bluebox center supercenter" style="width: 100%; height: 100%">
-					<img class="gdButton" src="../assets/close.png" width="9%"
-						style="position: absolute; top: -7.5%; left: -6.5vh" onclick="$('#selectedMessage').hide()">
-					<h1 id="messageSubject" class="smaller center"
-						style="font-size: 5.5vh; min-height: 9%; margin-top: 1%"></h1>
+					<img class="gdButton" src="../assets/close.png" width="9%" style="position: absolute; top: -7.5%; left: -6.5vh" onclick="$('#selectedMessage').hide()">
+					<h1 id="messageSubject" class="smaller center" style="font-size: 5.5vh; min-height: 9%; margin-top: 1%"></h1>
 					<h3 id="messageAuthor" class="gold center gauntletText gdButton"></h3>
 					<div class="transparentBox center" id="theMfMessage">
-						<img id="messageLoad" src="../assets/loading.png" class="spin noSelect"
-							style="width: 10%; margin-top: 15%">
+						<img id="messageLoad" src="../assets/loading.png" class="spin noSelect" style="width: 10%; margin-top: 15%">
 						<p id="messageBody"></p>
 					</div>
 					<div id="messageOptions">
@@ -357,7 +354,7 @@
 		subject.html(subject.html().replace('<span style="color:#00E600">!</span>', "")) //lazy way to mark as read
 
 		$('#theMfMessage').attr('style', '')
-		$('#messageSubject').attr('style', `color: ${$(this).attr('browserColor') ? 'rgb(120, 200, 255)' : "white"}`).text(subject.text())
+		$('#messageSubject').attr('style', `color: ${$(this).attr('browserColor') ? 'rgb(120, 200, 255)' : "white"}`).html(subject.text().trim().length ? subject.text() : "&nbsp;")
 		$('#messageAuthor').html($(this).find('.gdButton').html())
 		$('#replyButton').hide()
 		$('#deleteButton').hide()

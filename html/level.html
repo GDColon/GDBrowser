@@ -34,7 +34,7 @@
 			<p class="bigger center" style="line-height: 5vh; margin-top: 1.5vh;">
 				<span class="pre" style="color:yellow">[[NAME]]</span> has been added to your <a class="youCanClickThis2" style="color:lime" href="../search/levels?type=saved">saved levels</a> list.
 			</p>
-			<img src="../assets/ok.png" width=20%; class="gdButton center" onclick="location.reload()">
+			<img src="../assets/ok.png" width=20%; class="gdButton center" onclick="savedLevel()">
 		</div>
 	</div>
 
@@ -46,6 +46,16 @@
 			</p>
 			<img src="../assets/btn-no.png" height=25%; class="gdButton center closeWindow">
 			<img src="../assets/btn-yes.png" height=25%; class="gdButton center sideSpaceB" onclick="deleteLevel()">
+		</div>
+	</div>
+
+	<div class="popup" id="analyzeDisabled">
+		<div class="fancybox bounce center supercenter" style="width: 75vh">
+			<h2 class="smaller center" style="font-size: 5.5vh">Level Analysis</h2>
+			<p class="bigger center" style="line-height: 5vh; margin-top: 1.5vh;">
+				<span class="pre" style="color:yellow">Level analysis</span> is currently <span style="color: red">blocked</span> by RobTop. We don't know when or if it will be re-enabled.<br><a class="youCanClickThis" style="color:aqua" href="./analyze/[[ID]]">(click to try anyways)</a>
+			</p>
+			<img src="../assets/ok.png" width=20%; class="gdButton center" onclick="$('.popup').hide()">
 		</div>
 	</div>
 
@@ -120,13 +130,13 @@
 			--><img id="scout" title="Artist is scouted" style="display: none; margin-left: 1.5%; filter: hue-rotate(-55deg);" class="help artistIcon valign" src="../assets/check.png" width="5%"><!--
 			--><img id="whitelist" title="Artist is whitelisted" style="display: none" class="help artistIcon valign" src="../assets/check.png" width="5%"><!--
 			--> <a class="songLink" href="https://[[SONGAUTHOR]].newgrounds.com" target="_blank"><img id="moreSongs" class="gdButton valign" src="../assets/more.png" width="12%"></a></h2>
-			<img id="checkSong" style="display: none; margin-top: 1%" class="gdButton valign" src="../assets/btn-check.png" width="16%">
+			<img id="checkSong" style="display: none; margin-top: 1%" title="Check song verification" class="gdButton valign" src="../assets/btn-check.png" width="16%">
 			<h3 id="songLoading" style="display: none; margin-top: 0.5%;">Loading...</h3>
 			<h3 id="songAllowed" style="display: none; margin-top: 0.5%; color: lime">Song is allowed for use</h3>
 			<h3 id="songNotAllowed" style="display: none; margin-top: 0.5%; color: red">Song is not allowed for use</h3>
 			<h3 id="artistInfo" style="display: none; margin-top: 0.5%"></h3>
 		</div>
-		<a class="songLink" href="https://www.newgrounds.com/audio/listen/[[SONGID]]" target="_blank"><img class="gdButton sideButton" id="playSong" src="../assets/playsong.png" style="position:absolute; right: 1%; top: 50%; width: 11%; height: auto;"></a>
+		<a class="songLink" href="https://www.newgrounds.com/audio/listen/[[SONGID]]" target="_blank"><img class="gdButton sideButton" title="Play Song" id="playSong" src="../assets/playsong.png" style="position:absolute; right: 1%; top: 50%; width: 11%; height: auto;"></a>
 	</div>
 
 	<div class="center" style="position:absolute; bottom: 5%; left: 0; right: 0">
@@ -138,12 +148,12 @@
 	</div>
 
 	<div class="levelButtons" style="position:absolute; top: 46%; right: 3.5%; transform: translateY(-50%); height: 75%;">
-		<img class="gdButton sideButton" id="saveButton" src="../assets/plus.png" onclick="$('#saveDiv').show(); saveLevel()"><br>
-		<img class="gdButton sideButton" id="infoButton"  src="../assets/info.png" onclick="$('#infoDiv').show()"><br>
-		<!-- <img class="gdButton sideButton" id="likeButton"  src="../assets/vote.png" onclick="$('#likeDiv').show()"><br> -->
-		<a href="./analyze/[[ID]]"><img id="analyzeBtn" class="gdButton sideButton" src="../assets/edit.png"></a><br>
-		<a href="./comments/[[ID]]"><img class="gdButton sideButton" src="../assets/comment.png"></a><br>
-		<a href="./leaderboard/[[ID]]"><img id="leaderboardbtn" class="gdButton sideButton" src="../assets/leaderboard.png"></a><br>
+		<img class="gdButton sideButton" title="Save level" id="saveButton" src="../assets/plus.png" onclick="$('#saveDiv').show(); saveLevel()"><br>
+		<img class="gdButton sideButton" title="Level Info" id="infoButton"  src="../assets/info.png" onclick="$('#infoDiv').show()"><br>
+		<!-- <img class="gdButton sideButton" title="Rate Level" id="likeButton"  src="../assets/vote.png" onclick="$('#likeDiv').show()"><br> -->
+		<a href="./analyze/[[ID]]" id="analyzeLink"><img id="analyzeBtn" title="Analyze Level" class="gdButton sideButton" src="../assets/edit.png"></a><br>
+		<a href="./comments/[[ID]]"><img class="gdButton sideButton" title="View Comments" src="../assets/comment.png"></a><br>
+		<a href="./leaderboard/[[ID]]"><img id="leaderboardbtn" title="View Leaderboard" class="gdButton sideButton" src="../assets/leaderboard.png"></a><br>
 	</div>
 
 	<div style="position:absolute; top: 2%; left: 1.5%; width: 10%; height: 25%; pointer-events: none">
@@ -274,6 +284,13 @@ if (!"[[GDPS]]".startsWith("[")) {
 if ("[[SONGAUTHOR]]" == "Unknown" || "[[INVALIDSONG]]" == "true") $('.songLink').hide()
 if ("[[DISLIKED]]" == "true") $('#likeImg').attr('src', '../assets/dislike.png').css('transform', 'translateY(20%)')
 
+if ($("#additional").hasClass('downloadDisabled')) {
+	$('#analyzeLink').removeAttr('href')
+	$('#analyzeBtn').click(function() {
+		$('#analyzeDisabled').show()
+	})
+}
+
 let coinColor = [[VERIFIEDCOINS]] ? "silvercoin" : "browncoin"
 if ([[COINS]] > 0) $("#coins").append(`<img src="../assets/${coinColor}.png" height="5%">`)
 if ([[COINS]] > 1) $("#coins").append(`<img class="squeeze" src="../assets/${coinColor}.png" height="5%">`)
@@ -301,20 +318,23 @@ $(window).on('load', function() {
 
 let savedLevels = JSON.parse(localStorage.getItem('saved') || '[]');
 let deleteMode = false;
-if (savedLevels.includes('[[ID]]')) {
-	$('#saveButton').attr('src', '../assets/delete.png').attr('onclick', '$("#deleteDiv").show()')
-}
+if (savedLevels.includes('[[ID]]')) $('#saveButton').attr('src', '../assets/delete.png').attr('onclick', '$("#deleteDiv").show()')
 
 function saveLevel() {
   savedLevels.push('[[ID]]');
   localStorage.setItem('saved', JSON.stringify(savedLevels));
 }
 
+function savedLevel() {
+	$('#saveButton').attr('src', '../assets/delete.png').attr('onclick', '$("#deleteDiv").show()')
+	$('.popup').hide()
+}
+
 function deleteLevel() {
   savedLevels = savedLevels.filter(function(el) {return el != '[[ID]]'})
   localStorage.setItem('saved', JSON.stringify(savedLevels));
-  location.reload()
-  freeze = true;
+  $('#saveButton').attr('src', '../assets/plus.png').attr('onclick', '$("#saveDiv").show(); saveLevel()')
+  $('.popup').hide()
 }
 
 $('#checkSong').click(function() {
