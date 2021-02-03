@@ -1,7 +1,7 @@
 <head>
 	<title>Comments</title>
 	<meta charset="utf-8">
-	<link href="../assets/css/browser.css?" type="text/css" rel="stylesheet">
+	<link href="../assets/css/browser.css?v=2" type="text/css" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
 	<link rel="icon" href="../assets/like.png">
 	<meta id="meta-title" property="og:title" content="Level Comments">
@@ -134,7 +134,7 @@
 <script>
 
 let {mode, compact} = JSON.parse(localStorage.getItem('commentPreset') || '{"mode": "top", "compact": true}')
-let messageText = 'Your <span style="color: yellow">Geometry Dash password</span> will <span style="color: lime">not be stored</span> anywhere on the site, both <span style="color:rgb(113, 234, 255)">locally and server-side.</span> You can view the code used for posting a comment <a class="menuLink" target="_blank" href="https://github.com/GDColon/GDBrowser/blob/master/api/post/postComment.js">here</a>.'
+let messageText = 'Your <cy>Geometry Dash password</cy> will <cg>not be stored</cg> anywhere on the site, both <ca>locally and server-side.</ca> You can view the code used for posting a comment <a class="menuLink" target="_blank" href="https://github.com/GDColon/GDBrowser/blob/master/api/post/postComment.js">here</a>.'
 $('#message').html(messageText)
 $('#likeMessage').html(messageText.replace("posting", "liking").replace("postComment", "like"))
 

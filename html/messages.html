@@ -1,7 +1,7 @@
 <head>
 	<title>Messages</title>
 	<meta charset="utf-8">
-	<link href="../assets/css/browser.css?" type="text/css" rel="stylesheet">
+	<link href="../assets/css/browser.css?v=2" type="text/css" rel="stylesheet">
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script>
 	<script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-135255146-3');</script>
 	<link rel="icon" href="../assets/messages.png">
@@ -82,7 +82,7 @@
 				<div id="preDelete">
 					<h2 class="smaller center" style="font-size: 5.5vh">Delete</h2>
 					<p class="bigger center" style="line-height: 6vh; margin-top: 1.5vh;">
-						Are you sure you want to <span style="color: #F05C5C">delete</span> this message?
+						Are you sure you want to <cr>delete</cr> this message?
 					</p>
 					<img src="../assets/btn-cancel-green.png" height=29%; class="gdButton center" onclick="$('#confirmDelete').hide()">
 					<img src="../assets/btn-delete.png" height=29%; id="deleteCurrentMessage" class="gdButton center sideSpaceB">
@@ -108,7 +108,7 @@
 				<div id="preBulkDelete">
 					<h2 class="smaller center" style="font-size: 5.5vh">Bulk Delete</h2>
 					<p class="bigger center" style="line-height: 6vh; margin-top: 1.5vh;">
-						Are you sure you want to <span style="color: #F05C5C">delete</span> <span class="selectedAmount"
+						Are you sure you want to <cr>delete</cr> <span class="selectedAmount"
 							style="color: yelow"></span>?
 					</p>
 					<img src="../assets/btn-cancel-green.png" height=29%; class="gdButton center"
@@ -226,7 +226,7 @@
 	let cache = {};
 	let loading = false;
 
-	let messageText = 'Your <span style="color: yellow">Geometry Dash password</span> will <span style="color: lime">not be stored</span> anywhere on the site, both <span style="color:rgb(113, 234, 255)">locally and server-side.</span> For security, it will be <span style="color:yellow">forgotten</span> when you exit this page.'
+	let messageText = 'Your <cy>Geometry Dash password</cy> will <cg>not be stored</cg> anywhere on the site, both <ca>locally and server-side.</ca> For security, it will be <cy>forgotten</cy> when you exit this page.'
 	$('#message').html(messageText)
 
 	function appendMessages(dontCheckPages) {
@@ -246,7 +246,7 @@
 		messages.forEach((x, y) => {
 			$('#msgList').append(`
 			<div messageID=${x.id} playerID="${x.accountID}" ${x.browserColor ? 'browserColor="true" ' : ""}class="commentBG gdMessage">
-				<h3 style="color: ${x.browserColor ? 'rgb(120, 200, 255)' : 'white'}; font-size: ${x.subject.length > 35 ? "3" : x.subject.length > 30 ? "3.5" : x.subject.length > 25 ? "3.75" : "4"}vh">${x.subject}${x.unread ? " <span style='color:#00E600'>!</span>" : ""}</h3>
+				<h3 style="color: ${x.browserColor ? 'rgb(120, 200, 255)' : 'white'}; font-size: ${x.subject.length > 35 ? "3" : x.subject.length > 30 ? "3.5" : x.subject.length > 25 ? "3.75" : "4"}vh">${x.subject}${x.unread ? " <cg>!</cg>" : ""}</h3>
 				<h3 class="gold gdButton msgAuthor hitbox fit"><a href="../u/${x.author}" target="_blank">From: ${x.author}</a></h3>
 				<p class="msgDate">${x.date}</p>
 				<div class="labelButton hitbox">
@@ -278,7 +278,7 @@
 
 			// $.post("../messages", { password, accountID, count: true })
 			// 	.done(count => {
-			// 		$('#msgCount').html(`Loading <span style="color: yellow">${count}</span> unread messages...`)
+			// 		$('#msgCount').html(`Loading <cy>${count}</cy> unread messages...`)
 			// 		$('#access').hide()
 			// 		$('#loading').show()
 
@@ -297,10 +297,10 @@
 									$('#replyAuthor').html(`<a href="../u/${res.username}" target="_blank">To: ${res.username}</a>`)
 									messageStatus[res.accountID] = [res.messages, res.username]
 									playerID = res.accountID
-									if (res.messages == "all") $('#messageStatus').html(`<span style="color:yellow">${res.username}</span> has messages <span style="color:lime">enabled</span>`)
-									else if (res.messages == "friends") $('#messageStatus').html(`<span style="color:yellow">${res.username}</span> has messages set to <span style="color:orange">friends only</span>`)
+									if (res.messages == "all") $('#messageStatus').html(`<cy>${res.username}</cy> has messages <cg>enabled</cg>`)
+									else if (res.messages == "friends") $('#messageStatus').html(`<cy>${res.username}</cy> has messages set to <co>friends only</co>`)
 									else {
-										$('#messageStatus').html(`<span style="color:yellow">${res.username}</span> has messages <span style="color:#F05C5C">disabled</span>`)
+										$('#messageStatus').html(`<cy>${res.username}</cy> has messages <cr>disabled</cr>`)
 										$('#postMessage').addClass('grayscale')
 									}
 									$('#sendMessage').show()
@@ -351,7 +351,7 @@
 		messageID = $(this).attr('messageID')
 		playerID = $(this).attr('playerID')
 		let subject = $(this).find('h3:first')
-		subject.html(subject.html().replace('<span style="color:#00E600">!</span>', "")) //lazy way to mark as read
+		subject.html(subject.html().replace('<cg>!</cg>', "")) //lazy way to mark as read
 
 		$('#theMfMessage').attr('style', '')
 		$('#messageSubject').attr('style', `color: ${$(this).attr('browserColor') ? 'rgb(120, 200, 255)' : "white"}`).html(subject.text().trim().length ? subject.text() : "&nbsp;")
@@ -462,10 +462,10 @@
 		let status = messageStatus[playerID][0]
 		let name = messageStatus[playerID][1]
 		$('#postMessage').removeClass('grayscale')
-		if (status == "all") $('#messageStatus').html(`<span style="color:yellow">${name}</span> has messages <span style="color:lime">enabled</span>`)
-		else if (status == "friends") $('#messageStatus').html(`<span style="color:yellow">${name}</span> has messages set to <span style="color:orange">friends only</span>`)
+		if (status == "all") $('#messageStatus').html(`<cy>${name}</cy> has messages <cg>enabled</cg>`)
+		else if (status == "friends") $('#messageStatus').html(`<cy>${name}</cy> has messages set to <co>friends only</co>`)
 		else {
-			$('#messageStatus').html(`<span style="color:yellow">${name}</span> has messages <span style="color:#F05C5C">disabled</span>`)
+			$('#messageStatus').html(`<cy>${name}</cy> has messages <cr>disabled</cr>`)
 			$('#postMessage').addClass('grayscale')
 		}
 		$('#sendreply').text("Send Reply")

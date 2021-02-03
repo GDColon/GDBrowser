@@ -177,7 +177,7 @@ fetch('./api/icons').then(res => {
 
         if (iconStuff.noCopy) $('#getUserIcon').remove()
         else if (iconStuff.server) {
-            $('#copyFrom').html(`Copying from the <span style="color: yellow">${iconStuff.server}</span> servers`)
+            $('#copyFrom').html(`Copying from the <cy>${iconStuff.server}</cy> servers`)
             $('#stealBox').css('height', '385px')
         }
 
@@ -450,7 +450,7 @@ fetch('./api/icons').then(res => {
             let foundMerch = shopIcons.find(x => x.type == form && x.icon == +iconNumber)
 
             if (foundAch) $('#howto').html(foundAch.description.replace("Demon difficulty", "Demon"))
-            else if (foundMerch) $('#howto').html(`Purchase in ${shops[foundMerch.shop]}shop for <span style="color: aqua">${foundMerch.price}</span> orbs`)
+            else if (foundMerch) $('#howto').html(`Purchase in ${shops[foundMerch.shop]}shop for <ca>${foundMerch.price}</ca> orbs`)
             else $('#howto').html("<span style='color: #aaaaaa'>(no info available)</span>")
         }
     })

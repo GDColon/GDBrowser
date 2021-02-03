@@ -1,7 +1,7 @@
 <head>
 	<title>Level Search</title>
 	<meta charset="utf-8">
-	<link href="../assets/css/browser.css" type="text/css" rel="stylesheet">
+	<link href="../assets/css/browser.css?v=2"text/css" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
 	<link rel="icon" href="../assets/coin.png">
 	<meta id="meta-title" property="og:title" content="Level Search">
@@ -41,7 +41,7 @@
 		<div class="brownBox bounce center supercenter" style="width: 100vh; height: 56%; padding-top: 0.3%; padding-bottom: 3.5%; padding-left: 1%">
 			<img class="gdButton" src="../assets/close.png" width="9%" style="position: absolute; top: -8.5%; left: -5.5vh" onclick="$('#customlist').hide()">
 			<h1>Custom List</h1><br>
-			<p id="listInfo" style="margin-top: 1%; margin-bottom: 1.5%">Paste a <span style="color: yellow">comma-seperated</span> list of <span style="color: cyan">Level IDs</span> to create a custom list!</p>
+			<p id="listInfo" style="margin-top: 1%; margin-bottom: 1.5%">Paste a <cy>comma-separated</cy> list of <ca>Level IDs</ca> to create a custom list!</p>
 			<textarea id="listLevels" placeholder="18025697, 23189196, 27786218, 27728679, 25706351" style="margin-bottom: 2%; font-size: 2.5vh"></textarea>
 
 			<div class="inline" style="width: 60%">
@@ -264,7 +264,7 @@ $('#listLevels, #listName').on('input blur', function (event) {
 	levels = undupe(levels)
 
 	if (levels.length > 1 && levels.length <= 100) {
-		$('#listInfo').html(`A list of <span style='color: yellow'>${levels.length}</span> levels will be created.`)
+		$('#listInfo').html(`A list of <cy>${levels.length}</cy> levels will be created.`)
 		$('#listLink').attr('href', `../search/${levels.join(",")}?list&count=${+$('#pageSize').val()}${$('#listName').val().length ? `&header=${encodeURIComponent($('#listName').val())}` : ""}`)
 		$('#createList').removeClass('disabled')
 	}

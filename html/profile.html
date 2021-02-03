@@ -1,7 +1,7 @@
 <head>
 	<title>[[USERNAME]]'s Profile</title>
 	<meta charset="utf-8">
-	<link href="../assets/css/browser.css" type="text/css" rel="stylesheet">
+	<link href="../assets/css/browser.css?v=2"text/css" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
 	<link rel="icon" href="../icon/[[USERNAME]]">
 	<meta id="meta-title" property="og:title" content="[[USERNAME]]'s profile">
@@ -157,7 +157,7 @@
 
 function clean(text) {return text.replace(/&/g, "&#38;").replace(/</g, "&#60;").replace(/>/g, "&#62;").replace(/=/g, "&#61;").replace(/"/g, "&#34;").replace(/'/g, "&#39;")}
 
-let messageText = 'Your <span style="color: yellow">Geometry Dash password</span> will <span style="color: lime">not be stored</span> anywhere on the site, both <span style="color:rgb(113, 234, 255)">locally and server-side.</span> You can view the code used for profile posts <a class="menuLink" target="_blank" href="https://github.com/GDColon/GDBrowser/blob/master/api/post/postProfileComment.js">here</a>.'
+let messageText = 'Your <cy>Geometry Dash password</cy> will <cg>not be stored</cg> anywhere on the site, both <ca>locally and server-side.</ca> You can view the code used for profile posts <a class="menuLink" target="_blank" href="https://github.com/GDColon/GDBrowser/blob/master/api/post/postProfileComment.js">here</a>.'
 $('#message').html(messageText)
 $('#likeMessage').html(messageText.replace("profile posts", "liking posts").replace("postProfileComment", "like"))
 
@@ -198,9 +198,9 @@ if (`[[TWITCH]]` != "null")  $('#twitch').show()
 let messages = "[[MESSAGES]]"
 let commenthistory = "[[COMMENTHISTORY]]"
 
-let reqMode = [[FRIENDREQUESTS]] ? "<span style='color:lime'>Enabled</span>" : "<span style='color:red'>Disabled</span>"
-let dmMode = messages == "all" ? "<span style='color:lime'>Public</span>" : messages == "friends" ? "<span style='color:yellow'>Friends Only</span>" : "<span style='color:red'>Disabled</span>"
-let commentMode = commenthistory == "all" ? "<span style='color:lime'>Public</span>" : commenthistory == "friends" ? "<span style='color:yellow'>Friends Only</span>" : "<span style='color:red'>Disabled</span>"
+let reqMode = [[FRIENDREQUESTS]] ? "<cg>Enabled</cg>" : "<cr>Disabled</cr>"
+let dmMode = messages == "all" ? "<cg>Public</cg>" : messages == "friends" ? "<cy>Friends Only</cy>" : "<cr>Disabled</cr>"
+let commentMode = commenthistory == "all" ? "<cg>Public</cg>" : commenthistory == "friends" ? "<cy>Friends Only</cy>" : "<cr>Disabled</cr>"
 
 if (commenthistory == "friends") $('#commentButton').attr('src', '../assets/comments-yellow.png')
 else if (commenthistory == "off") $('#commentButton').attr('src', '../assets/comments-grey.png')
@@ -222,7 +222,7 @@ if (![[FRIENDREQUESTS]]) $('#friendButton').attr('src', '../assets/friends-grey.
 $('#userInfo').html($('#userInfo').html()
 .replace("[[REQS]]", reqMode)
 .replace("[[DMS]]", dmMode)
-.replace("[[COMMENTS]]", commentMode) + (messages == "friends" ? "<br style='line-height: 69%'><span style='color: lime' class='youCanClickThis2'><a target='_blank' href='../messages?sendTo=[[USERNAME]]'>Send message</a></span><br>(if friended)" : ""))
+.replace("[[COMMENTS]]", commentMode) + (messages == "friends" ? "<br style='line-height: 69%'><a target='_blank' style='color: lime' class='youCanClickThis2' href='../messages?sendTo=[[USERNAME]]'>Send message</a><br>(if friended)" : ""))
 
 function appendComments() {
 

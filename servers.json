@@ -7,7 +7,8 @@
     "id": "",
     "endpoint": "http://boomlings.com/database/",
     "timestampSuffix": " ago",
-    "demonList": "https://pointercrate.com/"
+    "demonList": "https://pointercrate.com/",
+    "downloadsDisabled": true
   },
   
   {
