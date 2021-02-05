@@ -7,8 +7,7 @@
     "id": "",
     "endpoint": "http://boomlings.com/database/",
     "timestampSuffix": " ago",
-    "demonList": "https://pointercrate.com/",
-    "downloadsDisabled": true
+    "demonList": "https://pointercrate.com/"
   },
   
   {
@@ -124,6 +123,15 @@
     "authorLink": "https://youtube.com/c/MrScatman7",
     "id": "supreme",
     "endpoint": "http://gdps.mathieuar.fr/supreme1/"
+  },
+
+  {
+    "name": "Aurora Dash",
+    "link": "http://aurorgdpsgd.7m.pl",
+    "author": "Yayi Kawaii",
+    "authorLink": "https://www.youtube.com/channel/UCBH8Y_3SAYB-f-k7zFXLvtA",
+    "id": "aurora",
+    "endpoint": "http://aurorgdpsgd.7m.pl/database/"
   },
 
   {

@@ -343,6 +343,7 @@ $('#checkSong').click(function() {
 	fetch(`../api/song/[[SONGID]]`).then(res => res.json()).then(info => {
 		$('#songLoading').hide()
 		$(info.song.allowed ? '#songAllowed' : '#songNotAllowed').show().addClass('songStatus')
+		if (info.error) return
 		if (!info.artist.scouted) {
 			$('#scout').attr('src', '../assets/x.png')
 			$('#scout').attr('title', $('#scout').attr('title').replace('is ', 'is NOT '))
