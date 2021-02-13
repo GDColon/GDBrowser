@@ -342,18 +342,18 @@ $('#checkSong').click(function() {
 	$('#songLoading').show()
 	fetch(`../api/song/[[SONGID]]`).then(res => res.json()).then(info => {
 		$('#songLoading').hide()
-		$(info && info != -1 ? '#songAllowed' : '#songNotAllowed').show().addClass('songStatus')
-		// if (info.error) return
-		// if (!info.artist.scouted) {
-		// 	$('#scout').attr('src', '../assets/x.png')
-		// 	$('#scout').attr('title', $('#scout').attr('title').replace('is ', 'is NOT '))
-		// 	$('#scout').css('filter', 'saturate(0.4)')
-		// }
-		// if (!info.artist.whitelisted) {
-		// 	$('#whitelist').attr('src', '../assets/x.png')
-		// 	$('#whitelist').attr('title', $('#whitelist').attr('title').replace('is ', 'is NOT '))
-		// }
-		// $('#scout').show(); $('#whitelist').show()
+		$(info.song.allowed ? '#songAllowed' : '#songNotAllowed').show().addClass('songStatus')
+		if (info.error) return
+		if (!info.artist.scouted) {
+			$('#scout').attr('src', '../assets/x.png')
+			$('#scout').attr('title', $('#scout').attr('title').replace('is ', 'is NOT '))
+			$('#scout').css('filter', 'saturate(0.4)')
+		}
+		if (!info.artist.whitelisted) {
+			$('#whitelist').attr('src', '../assets/x.png')
+			$('#whitelist').attr('title', $('#whitelist').attr('title').replace('is ', 'is NOT '))
+		}
+		$('#scout').show(); $('#whitelist').show()
 	})
 })
 
