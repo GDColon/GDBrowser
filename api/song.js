@@ -2,7 +2,27 @@ const request = require('request')
 
 module.exports = async (app, req, res) => {
 
-    let info = {error: true, exists: false, artist: { name: "", scouted: false, whitelisted: false }, song: { name: "", externalUse: false, allowed: false } }
+    // temporary solution until song api is re-enabled
+
+    if (req.offline) return res.send('-1')
+
+    let songID = req.params.song
+    req.gdRequest('getGJSongInfo', {songID: songID}, function(err, resp, body) {
+        if (err || !body || body.startsWith("<")) return res.send('-1')
+        else if (body < 0) return res.send(false)
+        request.get('https://www.newgrounds.com/audio/listen/' + songID, function(err2, resp2, song) {
+            console.log(resp2.statusCode)
+            return res.send(resp2.statusCode == 200)
+        })
+    })
+}
+
+
+    ////////////////////////////////////////////////////
+    // RobTop disabled his song checking page soo.... //
+    ////////////////////////////////////////////////////
+
+    /* let info = {error: true, exists: false, artist: { name: "", scouted: false, whitelisted: false }, song: { name: "", externalUse: false, allowed: false } }
 
     if (req.offline) return res.send(info)
 
@@ -12,7 +32,7 @@ module.exports = async (app, req, res) => {
     request.post('http://boomlings.com/database/testSong.php?songID=' + songID, req.gdParams(), function(err, resp, body) {
     if (err || !body || body == '-1' || body.startsWith("<")) return res.send(info)
     else if (!body.includes("<br>")) testError = true
-
+ 
     req.gdRequest('getGJSongInfo', {songID: songID}, function(err2, resp, songAllowed) {
         if (err2 || !songAllowed || songAllowed < 0 || body.startsWith("<")) return res.send(info)
 
@@ -32,4 +52,5 @@ module.exports = async (app, req, res) => {
 
     })
     })
-}
+
+} */
