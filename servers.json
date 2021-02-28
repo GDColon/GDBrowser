@@ -99,12 +99,12 @@
   },
 
   {
-    "name": "Geometry Dash Gravity",
+    "name": "GD Gravity",
     "link": "https://discord.gg/qpUJgBC",
     "author": "Sai",
     "authorLink": "https://youtube.com/channel/UCvYEPVUVVLDhwfHCzgVdIIg",
     "id": "gravity",
-    "endpoint": "http://gravity4.000webhostapp.com/"
+    "endpoint": "http://gravity5.000webhostapp.com/"
   },
 
   {
@@ -119,8 +119,8 @@
   {
     "name": "Supreme GDPS",
     "link": "https://discord.gg/pAU42pbREb",
-    "author": "Mr.Scatman7",
-    "authorLink": "https://youtube.com/c/MrScatman7",
+    "author": "Optimal",
+    "authorLink": "https://youtube.com/c/Optimal7",
     "id": "supreme",
     "endpoint": "http://gdps.mathieuar.fr/supreme1/"
   },
@@ -150,5 +150,14 @@
     "authorLink": "https://www.youtube.com/channel/UCg9HipnGYtfwIax4bLTTzUQ",
     "id": "resurrection",
     "endpoint": "http://gdpsresu.000webhostapp.com/"
+  },
+
+  {
+    "name": "Ausk’s GDPS",
+    "link": "https://discord.gg/AEBhCaa",
+    "author": "Ausk",
+    "authorLink": "https://www.youtube.com/channel/UCRbHwfh_BlMUfTZOvquDuRA",
+    "id": "ausk",
+    "endpoint": "http://gdps.mathieuar.fr/ausk____/"
   }
 ]

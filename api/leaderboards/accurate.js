@@ -28,7 +28,7 @@ module.exports = async (app, req, res, post) => {
 
       let cell = tab.getCell(1, cellIndex).value
       if (cell.startsWith("GoogleSpreadsheetFormulaError")) return res.send("-1")
-      let leaderboard = JSON.parse(cell)
+      let leaderboard = JSON.parse(cell.replace(/~( |$)/g, ""))
 
       let gdFormatting = ""
       leaderboard.forEach(x => {

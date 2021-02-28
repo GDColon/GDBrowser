@@ -43,6 +43,7 @@ module.exports = async (app, req, res) => {
       let outline = req.query.glow || account[28] || "0";
 
       let topless = form == "bird" && req.query.topless
+      let drawLegs = !(req.query.noLegs > 0)
       let autoSize = req.query.size == "auto"
       let sizeParam = autoSize || (req.query.size && !isNaN(req.query.size))
       if (outline == "0" || outline == "false") outline = false;
@@ -57,7 +58,7 @@ module.exports = async (app, req, res) => {
         glow = genImageName(isSpecial && '01', '2');
         extra = genImageName(isSpecial && '01', 'extra');
       }
-      const isSpecial = ['robot', 'spider'].includes(form);
+      let isSpecial = ['robot', 'spider'].includes(form);
       setBaseIcons();
 
       if (!fs.existsSync(fromIcons(icon)) || (isSpecial && !fs.existsSync(fromIcons(genImageName('02'))))) {
@@ -85,10 +86,9 @@ module.exports = async (app, req, res) => {
 
       let iconCode = `${req.query.form == "cursed" ? "cursed" : form}${topless ? "top" : ""}-${iconID}-${col1}-${col2}-${colG || "x"}-${colW || "x"}-${outline ? 1 : 0}` 
 
-      if (!sizeParam && cache[iconCode]) return res.end(cache[iconCode].value)
+      if (!sizeParam && (!isSpecial || drawLegs) && cache[iconCode]) return res.end(cache[iconCode].value)
 
       let useExtra = false
-
       let originalOffset = icons[icon].spriteOffset;
       let minusOrigOffset = function(x, y) { return x - originalOffset[y] }
       let offset = icons[glow].spriteOffset.map(minusOrigOffset);
@@ -148,7 +148,7 @@ module.exports = async (app, req, res) => {
             if (!outline) ic.composite(await Jimp.read(ufoSprite), ufoCoords[0], ufoCoords[1], {mode: Jimp.BLEND_DESTINATION_OVER})
           }
 
-          if (form == "robot" || req.query.form == "cursed") {
+          if (drawLegs && (form == "robot" || req.query.form == "cursed")) {
 
             ic.contain(iconSize[0], 300, Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_TOP)
             ic.contain(iconSize[0] + 200, 300, Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_TOP)
@@ -203,7 +203,7 @@ module.exports = async (app, req, res) => {
 
           }
 
-          else if (form == "spider") {
+          else if (drawLegs && form == "spider") {
 
             let spiderBody;
             ic.contain(iconSize[0], 300, Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_TOP)
@@ -297,7 +297,7 @@ module.exports = async (app, req, res) => {
               img.resize(imgSize, Jimp.AUTO)
             }
             img.getBuffer(Jimp.AUTO, (err, buffer) => {
-              if (!sizeParam) {
+              if (!sizeParam && drawLegs) {
                 cache[iconCode] = { value: buffer, timeoutID: setTimeout(function() {delete cache[iconCode]}, 10000000) }   // 3 hour cache
                 if (usercode) cache[usercode] = { value: buffer, timeoutID: setTimeout(function() {delete cache[usercode]}, 300000) }  // 5 min cache for player icons
               }

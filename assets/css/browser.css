@@ -720,6 +720,17 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
     height: 25%;
 }
 
+.weeklyStuff {
+    display: none;
+}
+
+.ranking {
+    transform:scale(0.82) translate(-20.7vh, -20vh);
+    position: absolute;
+    height: 10%;
+    width: 12.5%;
+}
+
 #collectibles, .leaderboardStats {
     font-size: 4.3vh;
     white-space: nowrap;
@@ -736,7 +747,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 .leaderboardStats img {
     transform: translate(-20%, -7%);
-    height: 22%;
+    width: 4.3%;
 }
 
 #boomling {
