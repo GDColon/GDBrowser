@@ -108,7 +108,7 @@ module.exports = async (app, req, res) => {
         let arr = x.split(':')
         authorList[arr[0]] = [arr[1], arr[2]]})
 
-        let levelArray = preRes.map(x => app.parseResponse(x)).filter(x => x[1])
+        let levelArray = preRes.map(x => app.parseResponse(x)).filter(x => x[2])
         let parsedLevels = []
 
         levelArray.forEach((x, y) => {
@@ -128,7 +128,7 @@ module.exports = async (app, req, res) => {
             if (level.author != "-" && app.config.cacheAccountIDs) app.userCache(req.id, level.accountID, level.playerID, level.author)
 
             //this is broken if you're not on page 0, blame robtop
-            if (filters.page == 0 && y == 0) {
+            if (filters.page == 0 && y == 0 && splitBody[3]) {
                 let pages = splitBody[3].split(":");
 
                 if (filters.gauntlet) {  // gauntlet page stuff

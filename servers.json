@@ -159,5 +159,20 @@
     "authorLink": "https://www.youtube.com/channel/UCRbHwfh_BlMUfTZOvquDuRA",
     "id": "ausk",
     "endpoint": "http://gdps.mathieuar.fr/ausk____/"
+  },
+
+  {
+    "name": "Rob's Abandoned Server",
+    "link": "http://robtopgames.com/",
+    "author": "RobTop",
+    "authorLink": "https://www.youtube.com/channel/UCz_yk8mDSAnxJq0ar66L4sw",
+    "id": "robtopgames",
+    "endpoint": "http://robtopgames.com/database/",
+    "onePointNine": true,
+    "timestampSuffix": " ago",
+    "overrides": {
+      "getGJLevels21": "getGJLevels",
+      "downloadGJLevel22": "downloadGJLevel"
+    }
   }
 ]
