@@ -16,7 +16,7 @@ module.exports = async (app, req, res, level) => {
         return res.send(response_data);
     } else {
         zlib.unzip(levelString, (err, buffer) => {
-            if (err) { return res.send("-1"); }
+            if (err) { return res.send("-2"); }
 
             const raw_data = buffer.toString();
             const response_data = analyze_level(level, raw_data);

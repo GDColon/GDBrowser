@@ -161,7 +161,7 @@ function Append(firstLoad) {
 	if (firstLoad) {
 		pages = res[0].pages
 		results = res[0].results
-		if (pages == 1000 || pages < 1) {
+		if (!pages || pages == 1000 || pages < 1) {
 			pages = null
 			if (!superSearch) $('#shuffle').addClass('grayscale')
 			else $('#shuffle').css('filter', 'hue-rotate(100deg)')
@@ -193,7 +193,7 @@ function Append(firstLoad) {
 		let noLink = songColor != "whatIfItWasPurple"
 
 		$('#searchBox').append(`<div class="searchresult" title="${clean(x.description)}">
-			<h1 class="help lessspaced pre" title="${x.name} (${x.id})" style="width: fit-content; padding-right: 1%">${clean(x.name)}</h1>
+			<h1 class="help lessspaced pre" title="${x.name} (${x.id})" style="width: fit-content; padding-right: 1%">${clean(x.name || " ")}</h1>
 			<h2 class="lessSpaced pre smaller inline gdButton help ${hasAuthor ? "" : "green unregistered"}" title="Account ID: ${x.accountID}\nPlayer ID: ${x.playerID}">${hasAuthor && !onePointNine ? `<a href="../u/${x.author}">By ${x.author || "-"}</a>` : `<a ${userSearch ? "" : `href="../search/${x.playerID}?user"`}>By ${x.author || "-"}</a>`}</h2><h2 class="inline" style="margin-left: 1.5%; transform:translateY(30%)"> ${x.copiedID == '0' ? "" : `<a target="_blank" href="../${x.copiedID}"><img class="gdButton valign sideSpace" title="Original: ${x.copiedID}" src="../assets/copied.png" height="12%"></a>`}${x.large ? `<img class="help valign sideSpaceD" title="${x.objects}${x.objects == 65535 ? "+" : ""} objects" src="../assets/large.png" height="12%">` : ''}</h2>
 			<h3 class="lessSpaced help ${noLink ? "" : 'gdButton '}pre ${songColor}" title="${filteredSong} by ${x.songAuthor} (${x.songID})" style="overflow: hidden; max-height: 19%; width: fit-content">${noLink ? filteredSong : `<a target="_blank" style="width: fit-content" href="https://www.newgrounds.com/audio/listen/${x.songID}">${filteredSong}</a>`}</h3>
 			<h3 class="lessSpaced" style="width: fit-content" title="">

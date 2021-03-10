@@ -8,7 +8,7 @@ let demonTypes = { 3: "Easy", 4: "Medium", 5: "Insane", 6: "Extreme" }
 
 class Level {
     constructor(levelInfo, server, download, author = []) {
-        if (!levelInfo[2]) return;
+        if (!levelInfo[1]) return;
         this.name = levelInfo[2];
         this.id = levelInfo[1];
         this.description = Buffer.from((levelInfo[3] || ""), "base64").toString() || "(No description provided)";
@@ -37,11 +37,11 @@ class Level {
         this.customSong = +levelInfo[35] || 0
         this.coins = +levelInfo[37]
         this.verifiedCoins = levelInfo[38] > 0
-        this.starsRequested = +levelInfo[39]
+        this.starsRequested = +levelInfo[39] || 0
         this.ldm = levelInfo[40] > 0
         if (+levelInfo[41] > 100000) this.weekly = true
         if (+levelInfo[41]) { this.dailyNumber = (+levelInfo[41] > 100000 ? +levelInfo[41] - 100000 : +levelInfo[41]); this.nextDaily = null; this.nextDailyTimestamp = null }
-        this.objects = +levelInfo[45]
+        this.objects = +levelInfo[45] || 0
         this.large = levelInfo[45] > 40000;
         this.cp = Number((this.stars > 0) + this.featured + this.epic)
 

@@ -49,12 +49,13 @@ function Fetch(link) {
 }
 
 let allowEsc = true;
+let popupEsc = true;
 
 $(document).keydown(function(k) {
 	if (k.keyCode == 27) { //esc
 		if (!allowEsc) return
 		k.preventDefault()
-		if ($('.popup').is(":visible")) $('.popup').hide();   
+		if (popupEsc && $('.popup').is(":visible")) $('.popup').hide();   
 		else $('#backButton').trigger('click')
 	}
 });

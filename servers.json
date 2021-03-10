@@ -153,6 +153,15 @@
   },
 
   {
+    "name": "SilvrPS",
+    "link": "https://discord.gg/A3a6rka",
+    "author": "silverra",
+    "authorLink": "https://www.youtube.com/channel/UCdKNL3PFoZKBkRTo41Ss_dg",
+    "id": "silvrps",
+    "endpoint": "http://silvrragdps.7m.pl/database/"
+  },
+
+  {
     "name": "Ausk’s GDPS",
     "link": "https://discord.gg/AEBhCaa",
     "author": "Ausk",

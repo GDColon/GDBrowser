@@ -15,9 +15,17 @@
 
 <div id="everything" class="center">
 
+	<div class="popup" id="analyzeError">
+		<div class="fancybox bounce center supercenter" style="width: 80vh; top: 46%">
+			<h2 class="smaller center" style="font-size: 5.5vh">Something Went Wrong!</h2>
+			<p class="bigger center" id="errorMessage" style="margin-bottom: 2vh; line-height: 5vh; margin-top: 1.5vh;">An <cr>unknown error</cr> occured while trying to analyze this level.</p>
+			<a id="byebye"><img src="../assets/btn-back.png" width=26%; class="gdButton center closeWindow"></a>
+		</div>
+	</div>
+
 	<div class="supercenter" id="loadingDiv" style="height:50%">
 		<h1 style="transform:scale(1.2)">Analyzing level...</h1>
-		<img class="spin noSelect" src="../assets/loading.png" height="25%" style="margin-top: 7%">
+		<img id="loading" class="spin noSelect" src="../assets/loading.png" height="25%" style="margin-top: 7%">
 	</div>
 
 	<div class="popup" id="colorInfo">
@@ -87,7 +95,7 @@
 </div>
 </body>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="../sizecheck.js?"></script>
+<script type="text/javascript" src="../sizecheck.js"></script>
 <script>
 
 function clean(text) {return text.toString().replace(/&/g, "&#38;").replace(/</g, "&#60;").replace(/>/g, "&#62;").replace(/=/g, "&#61;").replace(/"/g, "&#34;").replace(/'/g, "&#39;")}
@@ -100,7 +108,18 @@ let dualPortals = ['dual', 'single']
 let mirrorPortals = ['mirrorOn', 'mirrorOff']
 
 fetch(`../api${window.location.pathname}`).then(res => res.json()).then(res => {
-	if (!res.level) return window.location.href = window.location.href.replace("analyze", "search")
+	
+	if (!res.level) {
+		switch(res) {
+			case -1: $('#errorMessage').html("This level could not be be <cr>downloaded</cr>. Either the servers rejected the request, or the level simply <co>doesn't exist at all</co>."); break;
+			case -2: $('#errorMessage').html("This level's data appears to be <cr>corrupt</cr> and cannot be <cy>parsed</cy>. It most likely won't load in GD."); break;
+			case -3: $('#errorMessage').html("This level's data could not be obtained because <ca>RobTop</ca> has disabled <cg>level downloading</cg>."); break;
+		}
+		popupEsc = false
+		$('#byebye').attr('href', window.location.href.replace("analyze/", ""))
+		$('#analyzeError').show()
+		return $('#loadingDiv').hide()
+	}
 	$('#levelName').text(res.level.name)
 	$('#objectCount').text(commafy(res.objects) + " objects")
 	document.title = "Analysis of " + res.level.name

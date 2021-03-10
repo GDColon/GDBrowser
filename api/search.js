@@ -108,7 +108,7 @@ module.exports = async (app, req, res) => {
         let arr = x.split(':')
         authorList[arr[0]] = [arr[1], arr[2]]})
 
-        let levelArray = preRes.map(x => app.parseResponse(x)).filter(x => x[2])
+        let levelArray = preRes.map(x => app.parseResponse(x)).filter(x => x[1])
         let parsedLevels = []
 
         levelArray.forEach((x, y) => {

@@ -32,7 +32,7 @@ module.exports = async (app, req, res, api, analyze) => {
     let song = '~' + body.split('#')[2];
     song = app.parseResponse(song, '~|~')
 
-    let levelInfo = app.parseResponse(preRes[0])
+    let levelInfo = app.parseResponse(preRes.find(x => x.startsWith(`1:${levelID}`)) || preRes[0])
     let level = new Level(levelInfo, req.server, false, author).getSongInfo(song)
 
     if (req.isGDPS) level.gdps = (req.onePointNine ? "1.9/" : "") + req.endpoint
