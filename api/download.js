@@ -18,7 +18,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
   req.gdRequest('downloadGJLevel22', { levelID }, function (err, resp, body) {
 
     if (err || !body || body == '-1' || body.startsWith("<")) {
-      if (api && analyze) return res.send("-3")
+      if (analyze && api && req.server.downloadsDisabled) return res.send("-3")
       else if (!api && levelID < 0) return res.redirect(`/?daily=${levelID * -1}`)
       else if (!api) return res.redirect('search/' + req.params.id)
       else return res.send("-1")

@@ -19,7 +19,7 @@
 		<div class="fancybox bounce center supercenter" style="width: 80vh; top: 46%">
 			<h2 class="smaller center" style="font-size: 5.5vh">Something Went Wrong!</h2>
 			<p class="bigger center" id="errorMessage" style="margin-bottom: 2vh; line-height: 5vh; margin-top: 1.5vh;">An <cr>unknown error</cr> occured while trying to analyze this level.</p>
-			<a id="byebye"><img src="../assets/btn-back.png" width=26%; class="gdButton center closeWindow"></a>
+			<img onclick='window.location.replace(window.location.href.replace("analyze/", ""))' src="../assets/btn-back.png" width=26%; class="gdButton center closeWindow">
 		</div>
 	</div>
 
@@ -116,7 +116,6 @@ fetch(`../api${window.location.pathname}`).then(res => res.json()).then(res => {
 			case -3: $('#errorMessage').html("This level's data could not be obtained because <ca>RobTop</ca> has disabled <cg>level downloading</cg>."); break;
 		}
 		popupEsc = false
-		$('#byebye').attr('href', window.location.href.replace("analyze/", ""))
 		$('#analyzeError').show()
 		return $('#loadingDiv').hide()
 	}
