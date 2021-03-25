@@ -162,12 +162,12 @@
   },
 
   {
-    "name": "Ausk’s GDPS",
-    "link": "https://discord.gg/AEBhCaa",
-    "author": "Ausk",
-    "authorLink": "https://www.youtube.com/channel/UCRbHwfh_BlMUfTZOvquDuRA",
-    "id": "ausk",
-    "endpoint": "http://gdps.mathieuar.fr/ausk____/"
+    "name": "NEON GDPS",
+    "link": "https://discord.gg/zu6Uv95",
+    "author": "PjoseP",
+    "authorLink": "https://www.youtube.com/c/PjoseP",
+    "id": "neon",
+    "endpoint": "http://newgdpsneon.7m.pl/database/"
   },
 
   {
