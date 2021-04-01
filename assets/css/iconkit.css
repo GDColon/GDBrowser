@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
-@font-face {font-family: Pusab; src: url('../../assets/Pusab.ttf')}
+@font-face {font-family: Pusab; src: url('../../assets/Pusab.ttf?')}
 
 .gdButton {
   cursor: pointer;
@@ -291,7 +291,7 @@ input:focus, select:focus, textarea:focus, button:focus {
 }
 
 .iconSelected {
-  border-image: url('../../assets/select.png') 10 stretch !important;
+  border-image: url('../../assets/select.png?') 10 stretch !important;
 }
 
 .iconTabButton, .glowToggle, .copyForm {
@@ -424,7 +424,7 @@ input:focus, select:focus, textarea:focus, button:focus {
   border: 17px solid transparent;
   border-radius: 25px;
   background-color: black;
-  border-image: url('../../assets/brownbox.png') 10% round;
+  border-image: url('../../assets/brownbox.png?') 10% round;
 }
 
 .xButton {
@@ -461,7 +461,7 @@ input[type=checkbox] {
 .gdcheckbox {
   vertical-align: middle;
   display: inline-block;
-  background-image: url(../../assets/check-off.png);
+  background-image: url(../../assets/check-off.png?);
   background-repeat: no-repeat;
   background-size: contain;
   padding-right: 40px;
@@ -471,7 +471,7 @@ input[type=checkbox] {
 }
 
 input[type=checkbox]:checked + label.gdcheckbox {
-  background-image: url(../../assets/check-on.png);
+  background-image: url(../../assets/check-on.png?);
 }
 
 .bounce {

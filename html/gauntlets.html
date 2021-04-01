@@ -45,7 +45,7 @@ fetch('../api/gauntlets').then(res => res.json()).then(gauntlets => {
 		$('#gauntletList').append(`
 			<div class="gauntlet">
 			<a href="../search/*?gauntlet=${x.id}">
-			<img src="../assets/black${Math.random() >= 0.5 ? "Check" : "x"}.png" height="300%"><br>
+			<img src="../assets/black${Math.random() >= 0.5 ? "Check" : "X"}.png" height="300%"><br>
 			<h3 class="gauntletText"">${name}<br>Gauntlet</h3></div></a>`)
 		})
 });

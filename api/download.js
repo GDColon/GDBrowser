@@ -16,9 +16,9 @@ module.exports = async (app, req, res, api, ID, analyze) => {
   else levelID = levelID.replace(/[^0-9]/g, "")
 
   // daily hardcode fo' today 😎
-  if (levelID < 0 && req.server.name == "Geometry Dash") {
-    if (levelID == -1) levelID = "67984875" // marte
-    else if (levelID == -2) levelID = "59075347" // tartarus
+  if (!api && levelID < 0 && req.server.name == "Geometry Dash") {
+    if (levelID == -1) return res.redirect("67984875") // marte
+    else if (levelID == -2) return res.redirect("59075347") // tartarus
   }
   
   req.gdRequest('downloadGJLevel22', { levelID }, function (err, resp, body) {
