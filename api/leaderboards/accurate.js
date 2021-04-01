@@ -32,7 +32,7 @@ module.exports = async (app, req, res, post) => {
 
       let gdFormatting = ""
       leaderboard.forEach(x => {
-        app.userCache(req.id, x.accountID, x.playerID, x.username)
+        //app.userCache(req.id, x.accountID, x.playerID, x.username)
         gdFormatting += `1:${x.username}:2:${x.playerID}:13:${x.coins}:17:${x.usercoins}:6:${x.rank}:9:${x.icon.icon}:10:${x.icon.col1}:11:${x.icon.col2}:14:${forms.indexOf(x.icon.form)}:15:${x.icon.glow ? 2 : 0}:16:${x.accountID}:3:${x.stars}:8:${x.cp}:46:${x.diamonds}:4:${x.demons}|`
       })
       caches[modMode ? 1 : 0][type] = JSON.stringify(leaderboard)
