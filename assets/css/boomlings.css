@@ -101,8 +101,8 @@ h2 {
     margin: 1.8% 0 0 0;
     font-size: 7.5vh;
     font-family: Pusab, Arial;
-    color: rgb(255, 200, 0);
-	letter-spacing: 0.02em;
+    color: rgb(220, 0, 0);
+	letter-spacing: -0.05em;
 	text-align: center;
     text-shadow: -0.275vh -0.275vh 0vh #000, 0.275vh -0.275vh 0vh #000, -0.275vh 0.275vh 0vh #000, 0.275vh 0.275vh 0vh #000, 0.5vh 0.5vh 0vh rgba(0,0,0,0.4);
 }
@@ -178,7 +178,7 @@ h2 {
 .brownBox {
     border: 2.5vh solid transparent;
     border-radius: 3vh;
-    background-color: #995533;
+    background-color: black;
     border-image: url('../../assets/brownbox.png') 10% round;
 }
 

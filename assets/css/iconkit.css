@@ -28,7 +28,7 @@ h1 {
   font-size: 60px;
   font-family: Pusab;
   color: white;
-  letter-spacing: 0.02em;
+  letter-spacing: -0.05em;
   overflow: hidden;
   white-space: nowrap;
   text-shadow: -2.2px -2.2px 0px #000, 2.2px -2.2px 0px #000, -2.2px 2.2px 0px #000, 2.2px 2.2px 0px #000, 5px 5px 0px rgba(0,0,0,0.4);
@@ -41,7 +41,7 @@ h2 {
   font-family: Pusab;
   width: fit-content;
   color: white;
-  letter-spacing: 0.02em;
+  letter-spacing: -0.05em;
   text-shadow: -1.5px -1.5px 0px #000, 1.5px -1.5px 0px #000, -1.5px 1.5px 0px #000, 1.5px 1.5px 0px #000;
 }
 
@@ -423,7 +423,7 @@ input:focus, select:focus, textarea:focus, button:focus {
 .brownBox {
   border: 17px solid transparent;
   border-radius: 25px;
-  background-color: #995533;
+  background-color: black;
   border-image: url('../../assets/brownbox.png') 10% round;
 }
 
@@ -440,11 +440,11 @@ input[type=text] {
   font-size: 45px;
   font-family: Pusab;
   color: white;
-  letter-spacing: 0.02em;
+  letter-spacing: -0.05em;
   text-shadow: -0.2vh -0.2vh 0vh #000, 0.2vh -0.2vh 0vh #000, -0.2vh 0.2vh 0vh #000, 0.2vh 0.2vh 0vh #000;
   border: 0 solid transparent;
   border-radius: 15px;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(255, 255, 255, 0.2);
   white-space: nowrap;
 }
 
@@ -479,7 +479,7 @@ input[type=checkbox]:checked + label.gdcheckbox {
 }
 
 .gold {
-  color: rgb(255, 200, 0);
+  color: rgb(220, 0, 0);
 }
 
 .blue {

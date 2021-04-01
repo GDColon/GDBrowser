@@ -1,12 +1,12 @@
 <head>
 	<title>Demon Leaderboard</title>
 	<meta charset="utf-8">
-	<link href="../assets/css/browser.css?v=2" type="text/css" rel="stylesheet">
+	<link href="../assets/css/browser.css?v=x" type="text/css" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
-	<link rel="icon" href="../assets/trophy-demon.png">
+	<link rel="icon" href="../assets/trophy-demon.png?">
 	<meta id="meta-title" property="og:title" content="Demon Leaderboard">
 	<meta id="meta-desc" property="og:description" content="View the victors of a very hard Geometry Dash level!">
-	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/assets/trophy-demon.png">
+	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/assets/trophy-demon.png?">
 	<meta name="twitter:card" content="summary">
 </head>
 
@@ -24,16 +24,16 @@
 			<p class="bigger center" style="margin-top: 1vh">
 				Usernames may <cy>differ</cy> from what is used in GD
 			</p>
-			<img src="../assets/ok.png" width=15%; class="gdButton center" onclick="$('.popup').hide()">
+			<img src="../assets/ok.png?" width=15%; class="gdButton center" onclick="$('.popup').hide()">
 		</div>
 	</div>
 
 	<div style="position:absolute; bottom: 0%; left: 0%; width: 100%">
-		<img class="cornerPiece grayscale" src="../assets/corner.png" width=7%;>
+		<img class="cornerPiece grayscale" src="../assets/corner.png?" width=7%;>
 	</div>
 
 	<div style="position:absolute; bottom: 0%; right: 0%; width: 100%; text-align: right;">
-		<img class="cornerPiece grayscale" src="../assets/corner.png" width=7%; style="transform: scaleX(-1)">
+		<img class="cornerPiece grayscale" src="../assets/corner.png?" width=7%; style="transform: scaleX(-1)">
 	</div>
 
 	<div id="searchBox" class="supercenter dragscroll"; style="width: 124vh">
@@ -47,24 +47,24 @@
 	</div>
 
 	<div style="position: absolute; left: 7%; top: 45%; height: 10%;">
-		<a id="pageDown"><img class="gdButton" src="../assets/arrow-left.png" height="90%"></a>
+		<a id="pageDown"><img class="gdButton" src="../assets/arrow-left.png?" height="90%"></a>
 	</div>
 
 	<div style="position: absolute; right: 7%; top: 45%; height: 10%;">
-		<a id="pageUp"><img class="gdButton" src="../assets/arrow-right.png" height="90%"></a>
+		<a id="pageUp"><img class="gdButton" src="../assets/arrow-right.png?" height="90%"></a>
 	</div>
 
 	<div style="position:absolute; top: 2%; left: 1.5%; width: 10%; height: 25%; pointer-events: none">
-		<img class="gdButton yesClick" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()">
+		<img class="gdButton yesClick" id="backButton" src="../assets/back.png?" height="30%" onclick="backButton()">
 	</div>
 
 	<div class="supercenter" id="loading" style="height: 10%; top: 47%">
-		<img class="spin noSelect" src="../assets/loading.png" height="105%">
+		<img class="spin noSelect" src="../assets/loading.png?" height="105%">
 	</div>
 
 	<div style="position:absolute; top: 3%; right: 2%; text-align: right; width: 20%;">
-		<a target="_blank" id="pointercrate"><img class="inline gdButton" src="../assets/demonButton.png" width="23%" style="margin-right: 4%" onclick="$('#infoDiv').show()"></a>
-		<img id="creditsButton" class="inline gdButton" src="../assets/credits.png" width="25%" onclick="$('#infoDiv').show()">
+		<a target="_blank" id="pointercrate"><img class="inline gdButton" src="../assets/sort-demons.png?" width="23%" style="margin-right: 4%" onclick="$('#infoDiv').show()"></a>
+		<img id="creditsButton" class="inline gdButton" src="../assets/credits.png?" width="25%" onclick="$('#infoDiv').show()">
 	</div>
 
 </div>
@@ -113,12 +113,12 @@ fetch(`${server.demonList}api/v1/demons/${demonID}/`).then(res => res.json()).th
 	
 		<div class="center" style="position:absolute; transform:scale(0.82) translate(-28vh, -10vh); height: 10%; width: 12.5%;">
 			<div class="inline" style="width: 50%; margin: 0% 20% 0% 10%; transform:translateY(-15%)"><h2 class="inline center" style="transform:scale(${1-shift[0]}) translateX(-${shift[1]}%)">${y+1}</h2></div>
-			<img class="inline spaced" src="../assets/trophies/${trophies.findIndex(z => y+1 <= z) + 1}.png" height="120%" style="margin-bottom: 0%; transform:scale(1.1)">
+			<img class="inline spaced" src="../assets/trophies/${trophies.findIndex(z => y+1 <= z) + 1}.png?" height="120%" style="margin-bottom: 0%; transform:scale(1.1)">
 		</div>
 
 		<div style="${!x.video ? "display: none; " : ""}position:absolute; width: 12.5%; height: 15%; right: 0%">
 			<a target="_blank" href="${x.video}">
-			<img class="gdButton inline spaced" src="../assets/${videoIcon}.png" height="80%" style="transform: translateY(-8.5vh)">
+			<img class="gdButton inline spaced" src="../assets/${videoIcon}.png?" height="80%" style="transform: translateY(-8.5vh)">
 			</a>
 		</div>
 

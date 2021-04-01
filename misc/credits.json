@@ -1,7 +1,7 @@
 {
     "credits": [
         {
-            "header": "Programming/Website",
+            "header": "Who's fault is this?",
             "name": "Colon",
             "youtube": ["https://youtube.com/channel/UCFDsxSlQXpLLpVScy2NmbcQ", "youtube"],
             "twitter": ["https://twitter.com/TheRealGDColon", "twitter"],
@@ -9,7 +9,7 @@
         },
 
         {
-            "header": "Accurate Leaderboard",
+            "header": "🦴 Woof 🦴",
             "name": "XShadowWizardX",
             "youtube": ["https://www.youtube.com/channel/UCaf3-yyZDsAwh1IlYte5VtA", "youtube"],
             "twitter": ["https://twitter.com/XShadowWizardX", "twitter"],
@@ -17,7 +17,7 @@
         },
 
         {
-            "header": "Demon List",
+            "header": "Pointer of Crates",
             "name": "stadust",
             "ign": "stardust1971",
             "youtube": ["https://youtube.com/user/stardust19710", "youtube"],
@@ -26,7 +26,7 @@
         },
 
         {
-            "header": "Level Analyzing Help",
+            "header": "Level Data Maestro",
             "name": "Alten",
             "youtube": ["https://youtube.com/channel/UC9M8hLqh2yZIPSDvpyL7o8g", "youtube"],
             "twitter": ["https://twitter.com/altenhh", "twitter"],
@@ -34,8 +34,8 @@
         },
 
         {
-            "header": "API Help",
-            "name": "SMJS",
+            "header": "SMJS Gaming",
+            "name": "SMJS Gaming",
             "ign": "SMJSGaming",
             "youtube": ["https://youtube.com/channel/UCwEsWDs9kGN2vvoiNTJKdaQ", "youtube"],
             "twitter": ["https://twitter.com/SMJS90708001", "twitter"],
@@ -43,7 +43,7 @@
         },
 
         {
-            "header": "API Help",
+            "header": "Ultimate IP Ban Bot",
             "name": "Alex1304",
             "youtube": ["https://youtube.com/channel/UC0hFAVN-GAbZYuf_Hfk1Iog", "youtube"],
             "twitter": ["https://twitter.com/gd_alex1304", "twitter"],
@@ -51,7 +51,32 @@
         },
 
         {
-            "header": "Everything Else",
+            "header": "Texture Pack",
+            "name": "icedcave",
+            "ign": "IcEDCave OG",
+            "youtube": ["https://www.youtube.com/channel/UCnG4WVthOU8yEqjol4BR44g", "youtube"],
+            "twitter": ["https://twitter.com/icedcaveog", "twitter"],
+            "github": ["https://twitch.tv/icedcave", "twitch"]
+        },
+
+        {
+            "header": "Difficulty Faces",
+            "name": "AmorAltra",
+            "youtube": ["https://www.youtube.com/c/AmorAltra", "youtube"],
+            "twitter": ["https://twitter.com/AmorAltra", "twitter"],
+            "github": ["https://twitch.tv/amoraltra", "twitch"]
+        },
+
+        {
+            "header": "Difficulty Faces",
+            "name": "Bluskys",
+            "youtube": ["https://www.youtube.com/channel/UCugkJ-ikYFxUOphb0_TI_Hg", "youtube"],
+            "twitter": ["https://twitter.com/bluskystv", "twitter"],
+            "github": ["https://twitch.tv/bluskystv", "twitch"]
+        },
+
+        {
+            "header": "IP Bans",
             "name": "RobTop",
             "youtube": ["https://youtube.com/channel/UCz_yk8mDSAnxJq0ar66L4sw", "youtube"],
             "twitter": ["https://twitter.com/RobTopGames", "twitter"],

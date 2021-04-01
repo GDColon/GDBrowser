@@ -167,7 +167,7 @@ app.clean = function(text) {if (!text || typeof text != "string") return text; e
 
 // ASSETS
 
-app.use('/assets', express.static(__dirname + '/assets', {maxAge: "7d"}));
+app.use('/assets', express.static(__dirname + '/assets'));
 app.use('/assets/css', express.static(__dirname + '/assets/css')); // override maxAge
 
 app.get("/sizecheck.js", function(req, res) { res.sendFile(__dirname + "/misc/sizecheck.js") })
@@ -211,7 +211,7 @@ app.post("/accurateLeaderboard", function(req, res) { app.run.accurate(app, req,
 // HTML
 
 let onePointNineDisabled = ['daily', 'weekly', 'gauntlets', 'messages']
-let downloadDisabled = ['daily', 'weekly']
+let downloadDisabled = []
 let gdpsHide = ['achievements', 'messages']
 
 app.get("/", function(req, res) { 
@@ -230,7 +230,7 @@ app.get("/", function(req, res) {
       if (req.server.downloadsDisabled) {
         downloadDisabled.forEach(x => { html = html.replace(`menu-${x}`, 'menuDisabled') })
         html = html.replace('id="dl" style="display: none', 'style="display: block')
-        .replace('No active <span id="noLevel">daily</span> level!', '[Blocked by RobTop]')
+        .replace('No active <span id="noLevel">daily</span> level!', '[RobTop still refuses to allow dailies]')
       }
       return res.send(html)
     })

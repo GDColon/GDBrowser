@@ -8,7 +8,7 @@ body {
 }
 
 .levelBG {
-    background-image: linear-gradient(#0065FD, #002E73);
+    background-image: url(../../assets/spaaaaace.jpg);
     height: 100vh;
     background-position: center center;
     background-repeat: no-repeat;
@@ -98,6 +98,11 @@ img, .noSelect {
     margin-top: 0.5%;
 }
 
+.minii {
+    font-size: 2.75vh;
+    margin-top: 0.5%;
+}
+
 .pre {
     white-space: pre;
 }
@@ -160,7 +165,7 @@ h1 {
     font-size: 6vh;
     font-family: Pusab, Arial;
     color: white;
-    letter-spacing: 0.02em;
+    letter-spacing: -0.05em;
     overflow: hidden;
     white-space: nowrap;
     text-shadow: -0.275vh -0.275vh 0vh #000, 0.275vh -0.275vh 0vh #000, -0.275vh 0.275vh 0vh #000, 0.275vh 0.275vh 0vh #000, 0.5vh 0.6vh 0vh rgba(0,0,0,0.4);
@@ -173,8 +178,8 @@ h2 {
     margin: 0 0;
     font-size: 8vh;
     font-family: Pusab, Arial;
-    color: rgb(255, 200, 0);
-    letter-spacing: 0.02em;
+    color: rgb(220, 0, 0);
+    letter-spacing: -0.05em;
     text-shadow: -0.275vh -0.275vh 0vh #000, 0.275vh -0.275vh 0vh #000, -0.275vh 0.275vh 0vh #000, 0.275vh 0.275vh 0vh #000, 0.5vh 0.5vh 0vh rgba(0,0,0,0.4);
 }
 
@@ -184,7 +189,7 @@ h3, input[type=text], input[type=password], input[type=number], .h3Size {
     font-size: 3.5vh;
     font-family: Pusab, Arial;
     color: white;
-    letter-spacing: 0.02em;
+    letter-spacing: -0.05em;
     text-shadow: -0.15vh -0.15vh 0vh #000, 0.15vh -0.15vh 0vh #000, -0.15vh 0.15vh 0vh #000, 0.15vh 0.15vh 0vh #000;
 }
 
@@ -240,8 +245,8 @@ textarea::-webkit-scrollbar-thumb {
 }
 
 input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active {
-    box-shadow: 0 0 0px 1000px #764F1A inset !important;
-    -webkit-box-shadow: 0 0 0px 1000px #764F1A inset !important;
+    box-shadow: 0 0 0px 1000px rgb(60, 60, 60) inset !important;
+    -webkit-box-shadow: 0 0 0px 1000px rgb(60, 60, 60) inset !important;
     -webkit-text-fill-color: white !important;
 }
 
@@ -294,7 +299,7 @@ input:focus, textarea:focus {
 .transparentBox, input[type=text], input[type=password], input[type=number], textarea {
     border: 0 solid transparent;
     border-radius: 2vh;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(255, 255, 255, 0.3);
     white-space: nowrap;
 }
 
@@ -316,23 +321,23 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 }
 
 .lightBox {
-    border: 0.2vh solid #803E1E;
+    border: 0.2vh solid black;
     border-radius: 2vh;
-    background-color: #BE6F3F;
+    background-color: black;
     white-space: nowrap;
 }
 
 .brownBox {
     border: 2.5vh solid transparent;
     border-radius: 3vh;
-    background-color: #995533;
+    background-color: black;
     border-image: url('../../assets/brownbox.png') 10% round;
 }
 
 .blueBox {
     border: 2.5vh solid transparent;
     border-radius: 3vh;
-    background-color: #334499;
+    background-color: black;
     border-image: url('../../assets/bluebox.png') 10% round;
 }
 
@@ -341,9 +346,9 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
     padding: 1vh 3vh;
     border: 3.5vh solid transparent;
     border-radius: 3vh;
-    background-color: #001931;
-    border-image: url('../../assets/fancybox.png') 10% stretch;
-    border-image-slice: 65;
+    background-color: black;
+    border-image: url('../../assets/fancybox.png') 20% stretch;
+    border-image-slice: 35;
 }
 
 .bounce {
@@ -353,6 +358,13 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 .epicbox {
     border: 3.5vh solid transparent;
     border-image: url('../../assets/epicbox.png') 20% stretch;
+    border-image-slice: 85 77;
+    border-image-width: 9.5vh;
+}
+
+.unepicbox {
+    border: 3.5vh solid transparent;
+    border-image: url('../../assets/unepicbox.png') 20% stretch;
     border-image-slice: 85 77;
     border-image-width: 9.5vh;
 }
@@ -402,7 +414,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 }
 
 .diffDiv img {
-    width: 75%;
+    width: 85%;
 }
 
 .demonDiff {
@@ -425,6 +437,10 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 .lengthDiv h3 {
     font-size: 4vh;
+}
+
+.lengthDiv h1 {
+    overflow: visible;
 }
 
 .selectedFilter {
@@ -589,7 +605,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 }
 
 #searchBox {
-    background-color: rgb(173, 115, 76);
+    background-color: rgba(0, 0, 0, 0);
     width: 122vh;
     height: 75%; 
     overflow-y: auto; 
@@ -603,17 +619,17 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 .searchResult {
     width: 80%;
     height: 32%;
-    background-color: #A1582C;
+    background-color: rgba(0, 0, 0, 0.5);
     margin: auto;
-    border-bottom: 0.18vh rgba(0, 0, 0, 0.4) solid;
+    border-bottom: 0.18vh rgba(0, 0, 0, 0.7) solid;
     padding-left: 18vh;
     padding-top: 1vh;
     white-space: nowrap;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 .searchResult:nth-child(odd) {
-    background-color: #C1743F;
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 #statusDiv, #commentBox {
@@ -624,10 +640,10 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 .commentBG {
     width: 100%;
     height: 23vh;
-    background-color: #A1582C;
+    background-color: rgba(255, 255, 255, 0.15);
     overflow: hidden;
     margin: auto;
-    border-bottom: 0.18vh rgba(0, 0, 0, 0.4) solid;
+    border-bottom: 0.25vh rgba(255, 255, 255, 0.05) solid;
 }
 
 .compactBG {
@@ -635,21 +651,21 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 }
 
 .commentBG:nth-child(odd) {
-    background-color: #b96c39;
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .oddComment {
-    background-color: #A1582C !important;
+    background-color: rgba(255, 255, 255, 0.075) !important;
 }
 .evenComment {
-    background-color: #b96c39 !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 .comment {
     margin: 1.5vh auto 0 auto;
     width: 96%;
     height: 18.5vh;
-    background-color: rgba(147, 79, 39, 0.8);
+    background-color: rgba(255, 255, 255, 0.15);
     border-radius: 1.5vh;
     text-align: left;
     padding-top: 1.5vh;
@@ -689,7 +705,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
     transform: translate(-3vh, -4.8vh);
     text-align: right;
     font-size: 1.8vh;
-    color: rgba(0, 0, 0, 0.5);
+    color: rgba(255, 255, 255, 0.7);
     pointer-events: none;
 }
 
@@ -737,8 +753,8 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 }
 
 #collectibles img {
-    transform: translate(-20%, -7%);
-    height: 6.5%;
+    transform: translate(0%, -7%);
+    height: 5%;
 }
 
 .leaderboardStats {
@@ -746,7 +762,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 }
 
 .leaderboardStats img {
-    transform: translate(-20%, -7%);
+    transform: translate(0%, -7%);
     width: 4.3%;
 }
 
@@ -768,7 +784,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
     transform: rotate(355deg) scale(1.2) translate(-4%, -6%);
 }
 
-#collectibles img:first-child, #collectibles img:last-child {
+#collectibles img:first-child {
     transform: translate(-20%, -10%);
     height: 5.5%;
 }
@@ -777,7 +793,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
     margin: 2% auto;
     width: 115vh;
     height: 75%;
-    background-color: #BE6F3F;
+    background-color: rgb(0, 0, 0);
     overflow-y: scroll;
     scrollbar-width: none;
     -ms-overflow-style: none; 
@@ -825,7 +841,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 }
 
 .gdMessage:hover {
-    border: 0.6vh solid rgba(0, 0, 0, 0.5);
+    border: 0.6vh solid rgba(0, 0, 0, 0.6);
 }
 
 .messageInput {
@@ -833,7 +849,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
     text-align: left;
     padding: 1.5%;
     overflow: hidden;
-    background-color: rgba(0, 0, 0, 0.35);
+    background-color: rgba(255, 255, 255, 0.25);
 }
 
 .labelButton {
@@ -882,7 +898,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 .specialThanks h2 {
     margin-bottom: 3%;
-    font-size: 4vh;
+    font-size: 3.5vh;
 }
 
 .analysis {
@@ -1134,7 +1150,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 }
 
 .typeFilter {
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(255, 255, 255, 0.3);
     padding: 0.75% 0.75%;
     border-radius: 0.5vh;
 }
@@ -1148,7 +1164,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 }
 
 .typeFilter.achDeselected {
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .labelHover {
@@ -1187,7 +1203,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
     transition-duration: 0s !important;
 }
 
-cr { color: #ff5a5a }
+cr { color: #ff0000 }
 co { color: #ffa54b }
 cy { color: #ffff00 }
 cg { color: #40e348 }
@@ -1204,7 +1220,7 @@ cp { color: #ff00ff }
 }
 
 .gold {
-    color: rgb(255, 200, 0);
+    color: rgb(220, 0, 0);
 }
 
 .green {

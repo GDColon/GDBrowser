@@ -1,12 +1,12 @@
 <head>
 	<title>Leaderboard</title>
 	<meta charset="utf-8">
-	<link href="../assets/css/browser.css?v=3"text/css" rel="stylesheet">
+	<link href="../assets/css/browser.css?v=x"text/css" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
-	<link rel="icon" href="../assets/trophy.png">
+	<link rel="icon" href="../assets/trophy.png?">
 	<meta id="meta-title" property="og:title" content="Leaderboards">
 	<meta id="meta-desc" property="og:description" content="View Geometry Dash's leaderboards, plus an accurate and updated list of the top players.">
-	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/assets/trophy.png">
+	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/assets/trophy.png?">
 	<meta name="twitter:card" content="summary">
 </head>
 
@@ -15,35 +15,35 @@
 <div id="everything" style="overflow: auto;">
 
 	<div id="scoreTabs">
-		<img src="../assets/tab-top-on.png" class="leaderboardTab" id="topTabOn" style="display: none">
-		<img src="../assets/tab-top-off.png" class="leaderboardTab leaderboardClick" id="topTabOff">
+		<img src="../assets/tab-top-on.png?" class="leaderboardTab" id="topTabOn" style="display: none">
+		<img src="../assets/tab-top-off.png?" class="leaderboardTab leaderboardClick" id="topTabOff">
 
 		<!-- for some GDPS'es -->
-		<img src="../assets/tab-weekly-on.png" class="sideSpaceC leaderboardTab" id="weeklyTabOn" style="display: none">
-		<img src="../assets/tab-weekly-off.png" class="sideSpaceC leaderboardTab leaderboardClick" id="weeklyTabOff" style="display: none">
+		<img src="../assets/tab-weekly-on.png?" class="sideSpaceC leaderboardTab" id="weeklyTabOn" style="display: none">
+		<img src="../assets/tab-weekly-off.png?" class="sideSpaceC leaderboardTab leaderboardClick" id="weeklyTabOff" style="display: none">
 
-		<img src="../assets/tab-accurate-on.png" class="sideSpaceC leaderboardTab" id="accurateTabOn">
-		<img src="../assets/tab-accurate-off.png" class="sideSpaceC leaderboardTab leaderboardClick" id="accurateTabOff" style="display: none">
+		<img src="../assets/tab-accurate-on.png?" class="sideSpaceC leaderboardTab" id="accurateTabOn">
+		<img src="../assets/tab-accurate-off.png?" class="sideSpaceC leaderboardTab leaderboardClick" id="accurateTabOff" style="display: none">
 
-		<img src="../assets/tab-creators-on.png" class="sideSpaceC leaderboardTab" id="creatorTabOn" style="display: none">
-		<img src="../assets/tab-creators-off.png" class="sideSpaceC leaderboardTab leaderboardClick" id="creatorTabOff">
+		<img src="../assets/tab-creators-on.png?" class="sideSpaceC leaderboardTab" id="creatorTabOn" style="display: none">
+		<img src="../assets/tab-creators-off.png?" class="sideSpaceC leaderboardTab leaderboardClick" id="creatorTabOff">
 	</div>
 
 	<div class="popup" id="infoDiv">
 		<div class="fancybox bounce center supercenter" style="width: 80vh">
 			<h2 class="smaller center" style="font-size: 5.5vh">Leaderboard Info</h2>
 			<p class="bigger center" id="infoText" style="line-height: 5vh; margin-top: 1.5vh"></p>
-			<img src="../assets/ok.png" width=20%; class="gdButton center" onclick="$('.popup').hide()">
+			<img src="../assets/ok.png?" width=20%; class="gdButton center" onclick="$('.popup').hide()">
 		</div>
 	</div>
 
 	<div style="position:absolute; bottom: 0%; left: 0%; width: 100%">
-		<img class="cornerPiece noClick" src="../assets/corner.png" width=7%;>
+		<img class="cornerPiece noClick" src="../assets/corner.png?" width=7%;>
 	</div>
 
 	<div style="position:absolute; bottom: 0%; right: 0%; width: 100%; text-align: right;">
 		<a title="Boomlings Leaderboard?????" href="../boomlings"><img id="boomling" style="position: absolute; width: 6%; top: 2%; right: 1%"></a>
-		<img class="cornerPiece noClick" src="../assets/corner.png" width=7%; style="transform: scaleX(-1)">
+		<img class="cornerPiece noClick" src="../assets/corner.png?" width=7%; style="transform: scaleX(-1)">
 	</div>
 
 	<div id="searchBox" class="supercenter dragscroll">
@@ -52,27 +52,27 @@
 	
 	<div class="leaderboardBox supercenter gs" style="width: 120vh; height: 80%; pointer-events: none">
 		<div class="sortDiv" style="position: relative; left: 100%; transform: translateX(4.5vh); top: 12%; width: 0.1%">
-			<img class="gdButton" id="modSort" style="margin-bottom: 1vh" title="Moderators" src="../assets/sort-mod.png" height="11%">
-			<img class="gdButton" id="weeklyStats" style="margin-bottom: 1vh" title="Weekly Stats" src="../assets/sort-week.png" height="11%">
+			<img class="gdButton" id="modSort" style="margin-bottom: 1vh" title="Moderators" src="../assets/sort-mod.png?" height="11%">
+			<img class="gdButton" id="weeklyStats" style="margin-bottom: 1vh" title="Weekly Stats" src="../assets/sort-week.png?" height="11%">
 		</div>
 		<div class="sortDiv" style="position: relative; right: 10.5%; top: 0%; width: 0.1%; transform: translateY(-33.3%)">
-			<img class="gdButton sortButton" style="margin-bottom: 1vh" sort="stars" title="Most stars" src="../assets/sort-stars-on.png" height="11%" id="starSort">
-			<img class="gdButton sortButton" style="margin-bottom: 1vh" sort="coins" title="Most coins" src="../assets/sort-coins.png" height="11%">
-			<img class="gdButton sortButton" style="margin-bottom: 1vh" sort="demons" title="Most demons" src="../assets/sort-demons.png" height="11%">
-			<img class="gdButton sortButton" style="margin-bottom: 1vh; display: none" sort="cp" title="Most creator points" src="../assets/sort-cp.png" height="11%" id="cpSort">
+			<img class="gdButton sortButton" style="margin-bottom: 1vh" sort="stars" title="Most stars" src="../assets/sort-stars-on.png?" height="11%" id="starSort">
+			<img class="gdButton sortButton" style="margin-bottom: 1vh" sort="coins" title="Most coins" src="../assets/sort-coins.png?" height="11%">
+			<img class="gdButton sortButton" style="margin-bottom: 1vh" sort="demons" title="Most demons" src="../assets/sort-demons.png?" height="11%">
+			<img class="gdButton sortButton" style="margin-bottom: 1vh; display: none" sort="cp" title="Most creator points" src="../assets/sort-cp.png?" height="11%" id="cpSort">
 		</div>
 	</div>
 
 	<div style="position:absolute; top: 2%; left: 1.5%; width: 10%; height: 25%; pointer-events: none">
-		<img class="gdButton yesClick" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()">
+		<img class="gdButton yesClick" id="backButton" src="../assets/back.png?" height="30%" onclick="backButton()">
 	</div>
 
 	<div style="position:absolute; top: 2.5%; right: 2%; width: 10%; text-align: right;">
-		<img class="gdButton" src="../assets/smallinfo.png" width="32%" onclick="$('#infoDiv').show()">
+		<img class="gdButton" src="../assets/smallinfo.png?" width="32%" onclick="$('#infoDiv').show()">
 	</div>
 
 	<div class="supercenter" id="loading" style="height: 10%; top: 47%; display: none;">
-		<img class="spin noSelect" src="../assets/loading.png" height="105%">
+		<img class="spin noSelect" src="../assets/loading.png?" height="105%">
 	</div>
 </div>
 
@@ -106,7 +106,7 @@ let accurateText =
 let creatorText = 
 `The <cg>Creators Leaderboard</cg> is sorted by <cg>creator points</cg>, rather than stars. A player's <cg>creator points</cg> (CP) is calculated by counting their number of <cy>star rated</cy> levels, plus an extra point for every level that has been <cb>featured</cb>, plus an additional point for <co>epic rated</co> levels.`
 
-if (showWeek) $('#weeklyStats').attr('src', '../assets/sort-week-on.png')
+if (showWeek) $('#weeklyStats').attr('src', '../assets/sort-week-on.png?')
 
 function infoText(text) { $('#infoText').html(text) }
 infoText(accurateText)
@@ -141,29 +141,29 @@ function leaderboard(val) {
 
 		let wp = x.weeklyProgress || {}
 		$('#searchBox').append(`<div class="searchresult leaderboardSlot">
-			${x.moderator ? `<img title="${x.moderator == 2 ? "Elder " : ""}Moderator" src="../assets/mod${x.moderator == 2 ? "-elder" : ""}.png" style="height: 30%; cursor: help; padding-right: 1.6%; transform: translateY(0.7vh)">` : ""}
-			<h2 class="small inline gdButton" style="margin-top: 1.5%${x.moderator == 2 ? "; color: #FF9977;" : ""}"><a href="${onePointNine ? `../search/${x.playerID}?user` : `../u/${x.username}`}">${x.username}</a></h2>
-			<h3 class="inline sideSpace${x.stars >= 100000 ? " yellow" : ""}" style="font-size: 4.5vh${type == "weekly" ? "; display: none" : ""};">${x.stars} <img class="help valign" src="../assets/star.png"
-					style="width: 4vh; transform: translate(-25%, -10%);" title="Stars"></h3>
+			${x.moderator ? `<img title="${x.moderator == 2 ? "Elder " : ""}Moderator" src="../assets/mod${x.moderator == 2 ? "-elder" : ""}.png?" style="height: 30%; cursor: help; padding-right: 1.6%; transform: translateY(0.7vh)">` : ""}
+			<h2 class="small inline gdButton" style="margin-top: 1.5%${x.moderator == 2 ? "; color: rgb(255, 200, 0);" : ""}"><a href="${onePointNine ? `../search/${x.playerID}?user` : `../u/${x.username}`}">${x.username}</a></h2>
+			<h3 class="inline sideSpace${x.stars >= 100000 ? " yellow" : ""}" style="font-size: 4.5vh${type == "weekly" ? "; display: none" : ""};">${x.stars} <img class="help valign" src="../assets/star.png?"
+					style="width: 4vh; transform: translate(0%, -10%);" title="Stars"></h3>
 		
 			<h3 class="lessSpaced leaderboardStats">
-				${type != "weekly" ? "" : `<span${x.stars >= 1000 ? " class='yellow'" : ""}>+${x.stars}</span> <img class="help valign" src="../assets/star.png" title="Star Gain">`}
-				${wk || onePointNine ? "" : `<span${x.diamonds >= 65535 ? ` class='blue'>${type == "accurate" ? "~" : ""}` : ">"}${x.diamonds}</span> <img class="help valign" src="../assets/diamond.png" title="Diamonds">`}
-				${wk ? "&nbsp;" : `<span${x.coins >= 149 ? " class='yellow'" : ""}>${x.coins}</span> <img class="help valign" src="../assets/coin.png" title="Secret Coins">`}
-				${wk || onePointNine ? "" : `<span${x.usercoins >= 10000 ? " class='brightblue'" : ""}>${x.usercoins}</span> <img class="help valign" src="../assets/silvercoin.png" title="User Coins">`}
-				${wk ? "" : `<span${x.demons >= 1000 ? " class='brightred'" : ""}>${x.demons}</span> <img class="help valign" src="../assets/demon.png" title="Demons">`}
-				${x.cp <= 0 ? "" : `<span${x.cp >= 100 ? " class='yellow'" : ""}>${x.cp}</span> <img class="help valign" src="../assets/cp.png" title="Creator Points">`}
+				${type != "weekly" ? "" : `<span${x.stars >= 1000 ? " class='yellow'" : ""}>+${x.stars}</span> <img class="help valign" src="../assets/star.png?" title="Star Gain">`}
+				${wk || onePointNine ? "" : `<span${x.diamonds >= 65535 ? ` class='blue'>${type == "accurate" ? "~" : ""}` : ">"}${x.diamonds}</span> <img class="help valign" src="../assets/diamond.png?" title="Diamonds">`}
+				${wk ? "&nbsp;" : `<span${x.coins >= 149 ? " class='yellow'" : ""}>${x.coins}</span> <img class="help valign" src="../assets/coin.png?" title="Secret Coins">`}
+				${wk || onePointNine ? "" : `<span${x.usercoins >= 10000 ? " class='brightblue'" : ""}>${x.usercoins}</span> <img class="help valign" src="../assets/silvercoin.png?" title="User Coins">`}
+				${wk ? "" : `<span${x.demons >= 1000 ? " class='brightred'" : ""}>${x.demons}</span> <img class="help valign" src="../assets/demon.png?" title="Demons">`}
+				${x.cp <= 0 ? "" : `<span${x.cp >= 100 ? " class='yellow'" : ""}>${x.cp}</span> <img class="help valign" src="../assets/cp.png?" title="Creator Points">`}
 			</h3>
 
 			<h3 class="lessSpaced leaderboardStats weeklyStuff"}>
-				  <span${wp.diamonds >= 250 ? " class='blue'" : ""}>${wp.diamonds >= 0 ? "+" : ""}${wp.diamonds}</span> <img class="help valign" src="../assets/diamond.png" title="Diamond Gain">
-				  <span${wp.stars >= 1000 ? " class='yellow'" : ""}>${wp.stars >= 0 ? "+" : ""}${wp.stars}</span> <img class="help valign" src="../assets/star.png" title="Star Gain">
-				  <span${wp.usercoins >= 250 ? " class='brightblue'" : ""}>${wp.usercoins >= 0 ? "+" : ""}${wp.usercoins}</span> <img class="help valign" src="../assets/silvercoin.png" title="User Coin Gain">
-				  <span${wp.demons >= 25 ? " class='brightred'" : ""}>${wp.demons >= 0 ? "+" : ""}${wp.demons}</span> <img class="help valign" src="../assets/demon.png" title="Demon Gain">
+				  <span${wp.diamonds >= 250 ? " class='blue'" : ""}>${wp.diamonds >= 0 ? "+" : ""}${wp.diamonds}</span> <img class="help valign" src="../assets/diamond.png?" title="Diamond Gain">
+				  <span${wp.stars >= 1000 ? " class='yellow'" : ""}>${wp.stars >= 0 ? "+" : ""}${wp.stars}</span> <img class="help valign" src="../assets/star.png?" title="Star Gain">
+				  <span${wp.usercoins >= 250 ? " class='brightblue'" : ""}>${wp.usercoins >= 0 ? "+" : ""}${wp.usercoins}</span> <img class="help valign" src="../assets/silvercoin.png?" title="User Coin Gain">
+				  <span${wp.demons >= 25 ? " class='brightred'" : ""}>${wp.demons >= 0 ? "+" : ""}${wp.demons}</span> <img class="help valign" src="../assets/demon.png?" title="Demon Gain">
 			</h3>
 		
 			<div class="center ranking">
-				${x.icon.icon == -1 && type == "accurate" ? `<img class="spaced" src="./assets/trophies/${trophies.findIndex(z => y+1 <= z) + 1}.png" height="150%" style="margin-bottom: 0%; transform:scale(1.1)">` : 
+				${x.icon.icon == -1 && type == "accurate" ? `<img class="spaced" src="./assets/trophies/${trophies.findIndex(z => y+1 <= z) + 1}.png?" height="150%" style="margin-bottom: 0%; transform:scale(1.1)">` : 
 				`<img class="spaced lazyLoad" data-src="./icon/icon?form=${x.icon.form}&icon=${x.icon.icon}&col1=${x.icon.col1}&col2=${x.icon.col2}&glow=${x.icon.glow}&size=auto" height="150%" style="margin-bottom: 0%; transform:scale(1.1)">`}
 				<h2 class="small" style="margin-top: 2%">${y+1}</h2>
 			</div>
@@ -187,13 +187,13 @@ function leaderboard(val) {
 let type = "accurate"
 leaderboard(type)
 
-$('#boomling').attr('src', `../assets/boomlings/${boomColors[Math.floor(Math.random() * boomColors.length)]}.png`)
+$('#boomling').attr('src', `../assets/boomlings/${boomColors[Math.floor(Math.random() * boomColors.length)]}.png?`)
 
 $(document).on('click', '.sortButton', function () {
 	if ($('#loading').is(":visible")) return
 	sort = $(this).attr('sort')
 	$('.sortButton').each(function() {
-		$(this).attr('src', $(this).attr('src').replace('-on', '').replace('.png', '') + ($(this).attr('sort') == sort ? "-on" : "") + ".png")
+		$(this).attr('src', $(this).attr('src').replace('-on', '').replace('.png?', '') + ($(this).attr('sort') == sort ? "-on" : "") + ".png?")
 	})
 	return leaderboard("accurate")
 })
@@ -248,7 +248,7 @@ $('#creatorTabOff').click(function() {
 
 $('#modSort').click(function() {
 	modMode = !modMode
-	$(this).attr('src', `../assets/sort-mod${modMode ? "-on" : ""}.png`)
+	$(this).attr('src', `../assets/sort-mod${modMode ? "-on" : ""}.png?`)
 	if (modMode) { $('#cpSort').show() }
 	else { $('#cpSort').hide(); if (sort == "cp") $('#starSort').trigger('click') }
 	leaderboard(type)
@@ -264,7 +264,7 @@ function weeklyAdjust() {
 $('#weeklyStats').click(function() {
 	showWeek = !showWeek
 	localStorage.weeklyStats = showWeek + 0
-	$(this).attr('src', `../assets/sort-week${showWeek ? "-on" : ""}.png`)
+	$(this).attr('src', `../assets/sort-week${showWeek ? "-on" : ""}.png?`)
 	weeklyAdjust()
 })
 

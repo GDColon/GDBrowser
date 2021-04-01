@@ -3,14 +3,14 @@
 <head>
 	<title>GD Level Browser API</title>
 	<meta charset="utf-8">
-	<link rel="icon" href="../assets/difficulties/auto.png">
+	<link rel="icon" href="../assets/difficulties/auto.png?">
 	<link href="../assets/css/api.css" type="text/css" rel="stylesheet">
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,600,700,800&display=swap" rel="stylesheet">
 	
 	<meta id="meta-title" property="og:title" content="GDBrowser API">
     <meta id="meta-desc" property="og:description" content="It's basically the Geometry Dash API, but not terrible!">
-	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/assets/difficulties/auto.png">
+	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/assets/difficulties/auto.png?">
 	<meta name="twitter:card" content="summary">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -68,7 +68,7 @@
 				<sb>Geometry Dash Level Browser API</sb>! <br><br> The
 				<sb>API</sb> (application programming interface) is how the website is able to get all the neat stuff from the Geometry Dash servers. In the off chance that you actually know what any of this means, this page contains everything you need to know about grabbing information on GD levels/accounts/etc without going through the trouble of using the actual GD API on boomlings.com
 				<br><br>
-				Geometry Dash's API isn't meant to be publicly used, and is a <a href="https://i.imgur.com/PZ2AsZB.png" target="_blank">total nightmare</a> to fetch stuff from. That's why I made this API to send you whatever you need in a nice, clean JSON. You're welcome.<br><br>Everything on the API can be accessed
+				Geometry Dash's API isn't meant to be publicly used, and is a <a href="https://i.imgur.com/PZ2AsZB.png?" target="_blank">total nightmare</a> to fetch stuff from. That's why I made this API to send you whatever you need in a nice, clean JSON. You're welcome.<br><br>Everything on the API can be accessed
 				<sb>without any authorization</sb>, and with little to no required parameters.</p>
 		</div>
 
@@ -145,7 +145,7 @@
 				<p>objects: The number of objects in the level. This was added in a recent version of GD, so older levels will simply return 0</p>
 				<p>large: Whether the level is considered "large" (more than 40k objects)</p>
 				<p>cp: How many creator points the level is worth (1 for star rating, 1 for feature, and 1 for epic rating)</p>
-				<p>difficultyFace: The URL of the difficulty face image for this level. Plug it into gdbrowser.com/assets/difficulties/{difficultyFace}.png</p>
+				<p>difficultyFace: The URL of the difficulty face image for this level. Plug it into gdbrowser.com/assets/difficulties/{difficultyFace}.png?</p>
 				<p>songName: The name of the song used for the level</p>
 				<p>songAuthor: The name of the author of said song</p>
 				<p>songSize: The size of the song in megabytes, if a custom song was used</p>
