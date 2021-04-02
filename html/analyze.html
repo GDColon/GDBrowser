@@ -6,7 +6,7 @@
     <meta id="meta-desc" property="og:description" content="Analyze a Geometry Dash level and view it's objects, portals, color channels, code, and more!">
 	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/assets/cp.png">
 	<meta name="twitter:card" content="summary">
-	<link href="../assets/css/browser.css?v=2" type="text/css" rel="stylesheet">
+	<link href="../assets/css/browser.css" type="text/css" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
 	<link rel="icon" href="../assets/cp.png">
 </head>
@@ -43,6 +43,9 @@
 			<div class="transparentBox analysis roundBottom" id="highdetail" style="height: 10%; text-align: left; overflow: hidden; background-color: darkblue;"></div>
 			<h3 style="margin-top: -0.25%" id="hdText"></h3>
 		</div>
+
+		<h1 class="topMargin" id="coinText">Coin order</h1>
+		<div class="transparentBox analysis" id="coins"></div>
 
 		<h1 class="topMargin">Portal order</h1>
 		<div class="transparentBox analysis" id="portals" style="height: 23%"></div>
@@ -144,6 +147,7 @@ let blockList = Object.keys(res.blocks)
 let colorList = Object.keys(res.colors)
 
 let portals = res.portals.split(", ").map(x => x.split(" "))
+let coins = res.coins.split(", ").map(x => x.split(" "))
 
 function commafy(num) { return (+num || 0).toString().replace(/(\d)(?=(\d\d\d)+$)/g, "$1,") }
 
@@ -168,6 +172,14 @@ function appendPortals() {
 	)}
 
 appendPortals()
+
+	coins.forEach(x => {
+		if (!x || x[0] == "") {
+			$('#coinText').remove()
+			$('#coins').remove()
+		}
+		else $('#coins').append(`<div class="inline coinDiv"><img height="40%" src='../assets/${res.coinsVerified ? "silvercoin" : "browncoin"}.png'><h3>${x[1]}</h3></div>`)
+	})
 
 	triggerList.forEach(x => {
 		if (x == "total") $('#triggerText').text(`Triggers (${commafy(res.triggers[x])})`)
