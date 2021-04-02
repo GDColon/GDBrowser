@@ -211,7 +211,7 @@ app.post("/accurateLeaderboard", function(req, res) { app.run.accurate(app, req,
 // HTML
 
 let onePointNineDisabled = ['daily', 'weekly', 'gauntlets', 'messages']
-let downloadDisabled = []
+let downloadDisabled = ['daily']
 let gdpsHide = ['achievements', 'messages']
 
 app.get("/", function(req, res) { 
