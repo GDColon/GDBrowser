@@ -78,6 +78,7 @@ function analyze_level(level, rawData) {
     const header = data.shift();
 
     let level_portals = [];
+    let level_coins = [];
     let level_text = [];
 
     let orb_array = {};
@@ -94,6 +95,9 @@ function analyze_level(level, rawData) {
         if (id in ids.portals) {
             obj.portal = ids.portals[id];
             level_portals.push(obj);
+        } else if (id in ids.coins) {
+            obj.coin = ids.coins[id];
+            level_coins.push(obj);
         } else if (id in ids.orbs) {
             obj.orb = ids.orbs[id];
 
@@ -153,6 +157,8 @@ function analyze_level(level, rawData) {
     response.settings = {}
 
     response.portals = level_portals.sort(function (a, b) {return parseInt(a.x) - parseInt(b.x)}).map(x => x.portal + " " + Math.floor(x.x / (Math.max(last, 529.0) + 340.0) * 100) + "%").join(", ")
+    response.coins = level_coins.sort(function (a, b) {return parseInt(a.x) - parseInt(b.x)}).map(x => x.coin + " " + Math.floor(x.x / (Math.max(last, 529.0) + 340.0) * 100) + "%").join(", ")
+    response.coinsVerified = level.verifiedCoins
 
     response.orbs = orb_array
     response.orbs.total = Object.values(orb_array).reduce((a, x) => a + x, 0); // we already have an array of objects, use it
