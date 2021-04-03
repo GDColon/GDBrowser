@@ -157,7 +157,7 @@ function analyze_level(level, rawData) {
     response.settings = {}
 
     response.portals = level_portals.sort(function (a, b) {return parseInt(a.x) - parseInt(b.x)}).map(x => x.portal + " " + Math.floor(x.x / (Math.max(last, 529.0) + 340.0) * 100) + "%").join(", ")
-    response.coins = level_coins.sort(function (a, b) {return parseInt(a.x) - parseInt(b.x)}).map(x => x.coin + " " + Math.floor(x.x / (Math.max(last, 529.0) + 340.0) * 100) + "%").join(", ")
+    response.coins = level_coins.sort(function (a, b) {return parseInt(a.x) - parseInt(b.x)}).map(x => Math.floor(x.x / (Math.max(last, 529.0) + 340.0) * 100))
     response.coinsVerified = level.verifiedCoins
 
     response.orbs = orb_array

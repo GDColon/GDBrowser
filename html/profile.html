@@ -157,6 +157,9 @@
 
 function clean(text) {return text.replace(/&/g, "&#38;").replace(/</g, "&#60;").replace(/>/g, "&#62;").replace(/=/g, "&#61;").replace(/"/g, "&#34;").replace(/'/g, "&#39;")}
 
+// remove ID from URL
+if (window.location.pathname.endsWith(".")) window.history.pushState({}, null, window.location.origin + `/u/[[USERNAME]]`);
+
 let messageText = 'Your <cy>Geometry Dash password</cy> will <cg>not be stored</cg> anywhere on the site, both <ca>locally and server-side.</ca> You can view the code used for profile posts <a class="menuLink" target="_blank" href="https://github.com/GDColon/GDBrowser/blob/master/api/post/postProfileComment.js">here</a>.'
 $('#message').html(messageText)
 $('#likeMessage').html(messageText.replace("profile posts", "liking posts").replace("postProfileComment", "like"))

@@ -187,7 +187,7 @@ Fetch(target).then(lvl => {
 			$('#levelAuthor').addClass("green").addClass("unregistered")
 			$('#authorLink').attr('href', '../search/' + lvl.playerID + "?user")
 		}
-		else $('#authorLink').attr('href', '../u/' + lvl.author)
+		else $('#authorLink').attr('href', `../u/${lvl.accountID}.`)
 		$('#levelName').text(lvl.name || ("Nonexistent level " + lvlID))
 		if (!lvl.name) $('#leaveComment').hide()
 		$('#levelAuthor').text("By " + (lvl.author || "-"))
@@ -244,7 +244,6 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 		if (auto) bgCol = $('.commentBG').first().hasClass('oddComment') ? "evenComment" : "oddComment"
 
 		let userName = !history ? x.username : lvl.username
-		let userLink = encodeURI(userName)
 		let modNumber = x.moderator || lvl.moderator
 
 		if (x.pages) {
@@ -260,7 +259,7 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 			<div class="commentBG ${bgCol}">
 				<div class="comment" commentID="${x.ID}">
 					<img class="inline" src="../icon/icon?form=${x.icon.form}&icon=${x.icon.icon}&col1=${x.icon.col1}&col2=${x.icon.col2}&glow=${x.icon.glow}&size=auto" height=21% style="margin-right: 0.8%">
-					<a href=../${x.accountID == "0" ? `search/${x.playerID}?user` : `../u/${userLink}`}>
+					<a href=../${x.accountID == "0" ? `search/${x.playerID}?user` : `../u/${x.accountID}.`}>
 					<h2 class="inline gdButton ${x.accountID == "0" ? "green unregistered" : ""}">${userName}</h2></a>
 					${modNumber > 0 ? `<img class="inline" src="../assets/mod${modNumber > 2 ? "-extra" : modNumber == 2 ? "-elder" : ""}.png" height=18% style="margin-left: 0.6%;">` : ""}
 					<p class="commentPercent inline">${x.percent ? x.percent + "%" : ""}</p>
@@ -285,7 +284,7 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 			<div class="commentBG compactBG ${bgCol}">
 				<div class="comment compact" commentID="${x.ID}">
 					<img class="inline" src="../icon/icon?form=${x.icon.form}&icon=${x.icon.icon}&col1=${x.icon.col1}&col2=${x.icon.col2}&glow=${x.icon.glow}&size=auto" height=21% style="margin-right: 0.8%">
-					<a href=../${x.accountID == "0" ? `search/${x.playerID}?user` : `../u/${userLink}`}>
+					<a href=../${x.accountID == "0" ? `search/${x.playerID}?user` : `../u/${x.accountID}.`}>
 					<h2 class="inline gdButton ${x.accountID == "0" ? "green unregistered" : ""}">${userName}</h2></a>
 					${modNumber > 0 ? `<img class="inline" src="../assets/mod${modNumber > 2 ? "-extra" : modNumber == 2 ? "-elder" : ""}.png" height=18% style="margin-left: 0.6%;">` : ""}
 					<p class="commentPercent inline">${x.percent ? x.percent + "%" : ""}</p>

@@ -39,6 +39,12 @@
 	<div class="supercenter" id="loading" style="height: 10%; top: 47%; display: none;">
 		<img class="spin noSelect" src="../assets/loading.png" height="105%">
 	</div>
+	
+	<div id="error" class="supercenter" style="height: 20%; top: 47%; display: none;">
+		<h1 class="center">No scores available...</h1>
+		<h3 class="center" style="margin-top: 2%">Either this leaderboard is empty, or the scores weren't able to be obtained from the GD servers.</h3>
+		<h3 class="center" style="margin-top: 1.5%">Last worked: <span class="gold" id="lastWorked"></span></h3>
+	</div>
 
 	<div class="supercenter" style="left: 87%; top: 24%; height: 10%">
 		<img class="gdButton darken" id="topMode" src="../assets/leaderboard-top.png" height="90%">
@@ -67,6 +73,7 @@ function leaderboard() {
 
 	if (loading == true) return;
 
+	$('#error').hide()
 	$('#searchBox').html(`<div style="height: 4.5%"></div>`)
 	loading = true;
 	$('#loading').show()
@@ -83,14 +90,20 @@ function leaderboard() {
 
 	fetch(`../api/leaderboardLevel/${lvlID}?count=200${weekly ? "&week" : ""}`).then(res => res.json()).then(res => {
 
-		if (res == "-1" || !res || !res.length) {$('#loading').hide(); return loading = false;}
+		if (!res || res.error || res == "-1") {
+			loading = false;
+			$('#loading').hide();
+			$('#lastWorked').html(res.error ? res.lastWorked + " ago": "Unknown")
+			$('#error').show()
+			return
+		}
 
 		res.forEach((x, y) => {
 
 		let shift = x.rank >= 100 ? [0.4, 50] : x.rank >= 10 ? [0.2, 25] : [0, 10] 
 
 		$('#searchBox').append(`<div class="searchresult leaderboardSlot" style="padding-left: 25.5vh; height: 15%">
-			<h2 class="small inline gdButton" style="margin-top: 1.5%; font-size: 6.5vh; margin-right: 3%;"><a href="../u/${x.username}">${x.username}</a></h2>
+			<h2 class="small inline gdButton" style="margin-top: 1.5%; font-size: 6.5vh; margin-right: 3%;"><a href="../u/${x.accountID}.">${x.username}</a></h2>
 		
 			<h3 class="inline lessSpaced leaderboardStats" style="transform:translateY(-10%)">
 				${x.percent}%
