@@ -1,12 +1,12 @@
 <head>
 	<title id="tabTitle">Level Search</title>
 	<meta charset="utf-8">
-	<link href="../assets/css/browser.css?v=2" type="text/css" rel="stylesheet">
+	<link href="../assets/css/browser.css?v=3" type="text/css" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
 	<link rel="icon" href="../assets/coin.png">
 	<meta id="meta-title" property="og:title" content="Level Search">
 	<meta id="meta-desc" property="og:description" content="Search for Geometry Dash levels, and filter by length, difficulty, song + more!">
-	<meta id="meta-image" name="og:image" itemprop="image" content="../dragscroll.js">
+	<meta id="meta-image" name="og:image" itemprop="image" content="../coin.png">
 	<meta name="twitter:card" content="summary">
 </head>
 
@@ -108,7 +108,7 @@
 </body>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="../sizecheck.js?"></script>
-<script type="text/javascript" src="https://asvd.github.io/dragscroll/dragscroll.js"></script>
+<script type="text/javascript" src="../dragscroll.js"></script>
 <script>
 
 $('#pageDown').hide()
@@ -193,14 +193,20 @@ function Append(firstLoad) {
 		let noLink = songColor != "whatIfItWasPurple"
 
 		$('#searchBox').append(`<div class="searchresult" title="${clean(x.description)}">
-			<h1 class="help lessspaced pre" title="${x.name} (${x.id})" style="width: fit-content; padding-right: 1%">${clean(x.name || " ")}</h1>
-			<h2 class="lessSpaced pre smaller inline gdButton help ${hasAuthor ? "" : "green unregistered"}" title="Account ID: ${x.accountID}\nPlayer ID: ${x.playerID}">${hasAuthor && !onePointNine ? `<a href="../u/${x.accountID}.">By ${x.author || "-"}</a>` : `<a ${userSearch ? "" : `href="../search/${x.playerID}?user"`}>By ${x.author || "-"}</a>`}</h2><h2 class="inline" style="margin-left: 1.5%; transform:translateY(30%)"> ${x.copiedID == '0' ? "" : `<a target="_blank" href="../${x.copiedID}"><img class="gdButton valign sideSpace" title="Original: ${x.copiedID}" src="../assets/copied.png" height="12%"></a>`}${x.large ? `<img class="help valign sideSpaceD" title="${x.objects}${x.objects == 65535 ? "+" : ""} objects" src="../assets/large.png" height="12%">` : ''}</h2>
+			<h1 class="help lessspaced pre" title="${x.name} by ${!x.author || x.author == "-" ? "some nerd" : x.author}" style="width: fit-content; padding-right: 1%">${clean(x.name || " ")}</h1>
+			<h2 class="lessSpaced pre smaller inline gdButton help ${hasAuthor ? "" : "green unregistered"}" title="Account ID: ${x.accountID}\nPlayer ID: ${x.playerID}"><!--
+				-->${hasAuthor && !onePointNine ? `<a style="margin-right: 0.66vh" href="../u/${x.accountID}.">By ${x.author || "-"}</a>` : `<a ${userSearch ? "" : `href="../search/${x.playerID}?user"`}>By ${x.author || "-"}</a>`}</h2><!--
+				--><h2 class="inline" style="margin-left: 1.5%; transform:translateY(30%)"> ${x.copiedID == '0' ? "" : `<a target="_blank" href="../${x.copiedID}"><!--
+				--><img class="gdButton valign sideSpaceD" title="Original: ${x.copiedID}" src="../assets/copied.png" height="12%"></a>`}<!--
+				-->${x.large ? `<img class="help valign sideSpaceD" title="${x.objects}${x.objects == 65535 ? "+" : ""} objects" src="../assets/large.png" height="12%">` : ''}<!--
+				-->${x.twoPlayer ? `<img class="help valign sideSpaceD" title="Two player level" src="../assets/twoPlayer.png" height="12%">` : ''}
+			</h2>
 			<h3 class="lessSpaced help ${noLink ? "" : 'gdButton '}pre ${songColor}" title="${filteredSong} by ${x.songAuthor} (${x.songID})" style="overflow: hidden; max-height: 19%; width: fit-content">${noLink ? filteredSong : `<a target="_blank" style="width: fit-content" href="https://www.newgrounds.com/audio/listen/${x.songID}">${filteredSong}</a>`}</h3>
 			<h3 class="lessSpaced" style="width: fit-content" title="">
-				<img class="help valign" title="Length" src="../assets/time.png" height="14%"> ${x.length}
-				<img class="help valign" title="Downloads" src="../assets/download.png" height="14%"> ${x.downloads}
-				<img class="help valign" title="Likes" src="../assets/${x.disliked ? 'dis' : ''}like.png" height="14%"> ${x.likes}
-				${x.orbs != 0 ? `<img class="help valign" title="Mana Orbs" src="../assets/orbs.png" height="14%"> ${x.orbs}` : ""}
+				<img class="help valign rightSpace" title="Length" src="../assets/time.png" height="14%">${x.length}
+				<img class="help valign rightSpace" title="Downloads" src="../assets/download.png" height="14%">${x.downloads}
+				<img class="help valign rightSpace" title="Likes" src="../assets/${x.disliked ? 'dis' : ''}like.png" height="14%">${x.likes}
+				${x.orbs != 0 ? `<img class="help valign rightSpace" title="Mana Orbs" src="../assets/orbs.png" height="14%">${x.orbs}` : ""}
 			</h3>
 		
 			<div class="center" style="position:absolute; top: ${6.5 + (y * 33.5) + (x.coins == 0 ? 2.5 : 0)}%; left: 4.4%; transform:scale(0.82); height: 10%; width: 12.5%;">
@@ -220,6 +226,7 @@ function Append(firstLoad) {
 				<a title="View level" href="../${x.id}""><img style="margin-bottom: 4.5%" class="valign gdButton" src="../assets/view.png" height="105%"></a>
 				${demonList ? `<br><a title="View leaderboard" href="../demon/${x.demonPosition}""><img class="valign gdButton" src="../assets/trophyButton.png" height="110%"></a>
 				<a title="View on Pointercrate" href="${demonListLink}demonlist/${x.demonPosition}" target=_blank><img class="valign gdButton" src="../assets/demonButton.png" height="110%"></a>` : "" }
+				<p title="Level ID" style="text-align: right; color: rgba(0, 0, 0, 0.4); font-size: 2.2vh; transform: translate(2.8vh, 2.5vh)">#${x.id}</p>
 			</div>
 		</div>`)
 	})

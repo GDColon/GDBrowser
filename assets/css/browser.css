@@ -389,7 +389,11 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 }
 
 .sideSpaceD {
-    margin-left: 25%;
+    margin-right: 25%;
+}
+
+.rightSpace {
+    margin-right: 2%;
 }
 
 .diffDiv {
