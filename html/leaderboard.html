@@ -140,12 +140,20 @@ function leaderboard(val) {
 		if (val == type && res != -1 && res.length) res.forEach((x, y) => {
 
 		let wp = x.weeklyProgress || {}
-		$('#searchBox').append(`<div class="searchresult leaderboardSlot">
+		let cosmetics = x.cosmetics || {}
+		
+		let bgCol = cosmetics.bgColor
+		let bgString = bgCol ? ` style="background-color: rgb(${bgCol.join()})"` : ""
+
+		let nameCol = cosmetics.nameColor
+		let nameString = nameCol ? `; color: rgb(${nameCol.join()}) ;` : null
+
+		$('#searchBox').append(`<div class="searchresult leaderboardSlot"${bgString}>
 			${x.moderator ? `<img title="${x.moderator == 2 ? "Elder " : ""}Moderator" src="../assets/mod${x.moderator == 2 ? "-elder" : ""}.png" style="height: 30%; cursor: help; padding-right: 1.6%; transform: translateY(0.7vh)">` : ""}
-			<h2 class="small inline gdButton" style="margin-top: 1.5%${x.moderator == 2 ? "; color: #FF9977;" : ""}"><a href="${onePointNine ? `../search/${x.playerID}?user` : `../u/${x.accountID}.`}">${x.username}</a></h2>
+			<h2 class="small inline gdButton" style="margin-top: 1.5%${nameString || (x.moderator == 2 ? "; color: #FF9977;" : "")}"><a href="${onePointNine ? `../search/${x.playerID}?user` : `../u/${x.accountID}.`}">${x.username}</a></h2>
 			<h3 class="inline sideSpace${x.stars >= 100000 ? " yellow" : ""}" style="font-size: 4.5vh${type == "weekly" ? "; display: none" : ""};">${x.stars} <img class="help valign" src="../assets/star.png"
 					style="width: 4vh; transform: translate(-25%, -10%);" title="Stars"></h3>
-		
+
 			<h3 class="lessSpaced leaderboardStats">
 				${type != "weekly" ? "" : `<span${x.stars >= 1000 ? " class='yellow'" : ""}>+${x.stars}</span> <img class="help valign" src="../assets/star.png" title="Star Gain">`}
 				${wk || onePointNine ? "" : `<span${x.diamonds >= 65535 ? ` class='blue'>${type == "accurate" ? "~" : ""}` : ">"}${x.diamonds}</span> <img class="help valign" src="../assets/diamond.png" title="Diamonds">`}
