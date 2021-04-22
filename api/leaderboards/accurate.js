@@ -27,7 +27,7 @@ module.exports = async (app, req, res, post) => {
       if (modMode) cellIndex += 3
 
       let cell = tab.getCell(1, cellIndex).value
-      if (cell.startsWith("GoogleSpreadsheetFormulaError")) return res.send("-1")
+      if (!cell || typeof cell != "string" || cell.startsWith("GoogleSpreadsheetFormulaError")) { console.log("Spreadsheet Error:"); console.log(cell); return res.send("-1") }
       let leaderboard = JSON.parse(cell.replace(/~( |$)/g, ""))
 
       let gdFormatting = ""

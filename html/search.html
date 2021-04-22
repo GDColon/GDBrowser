@@ -193,7 +193,7 @@ function Append(firstLoad) {
 		let noLink = songColor != "whatIfItWasPurple"
 
 		$('#searchBox').append(`<div class="searchresult" title="${clean(x.description)}">
-			<h1 class="help lessspaced pre" title="${x.name} by ${!x.author || x.author == "-" ? "some nerd" : x.author}" style="width: fit-content; padding-right: 1%">${clean(x.name || " ")}</h1>
+			<h1 class="lessspaced pre" title="${x.name} by ${!x.author || x.author == "-" ? "some nerd" : x.author}" style="width: fit-content; padding-right: 1%">${clean(x.name || " ")}</h1>
 			<h2 class="lessSpaced pre smaller inline gdButton help ${hasAuthor ? "" : "green unregistered"}" title="Account ID: ${x.accountID}\nPlayer ID: ${x.playerID}"><!--
 				-->${hasAuthor && !onePointNine ? `<a style="margin-right: 0.66vh" href="../u/${x.accountID}.">By ${x.author || "-"}</a>` : `<a ${userSearch ? "" : `href="../search/${x.playerID}?user"`}>By ${x.author || "-"}</a>`}</h2><!--
 				--><h2 class="inline" style="margin-left: 1.5%; transform:translateY(30%)"> ${x.copiedID == '0' ? "" : `<a target="_blank" href="../${x.copiedID}"><!--

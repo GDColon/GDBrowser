@@ -223,6 +223,7 @@ app.get("/", function(req, res) {
         html = html.replace('"levelBG"', '"levelBG purpleBG"')
         .replace(/Geometry Dash Browser!/g, req.server.name + " Browser!")
         .replace("/assets/gdlogo", `/assets/gdps/${req.id}_logo`)
+        .replace("coin.png\" itemprop", `gdps/${req.id}_icon.png" itemprop`)
         .replace(/coin\.png/g, 'silvercoin.png')
         gdpsHide.forEach(x => { html = html.replace(`menu-${x}`, 'changeDaWorld') })
       }

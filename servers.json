@@ -7,7 +7,8 @@
     "id": "",
     "endpoint": "http://boomlings.com/database/",
     "timestampSuffix": " ago",
-    "demonList": "https://pointercrate.com/"
+    "demonList": "https://pointercrate.com/",
+    "downloadsDisabled": true
   },
   
   {
@@ -47,7 +48,8 @@
     "author": "XcreatorGoal",
     "authorLink": "https://www.youtube.com/channel/UC33L-Y8asG7gju6f-4-Cl2g",
     "id": "xgdps",
-    "endpoint": "http://xcggdpsserver.xyz/database/"
+    "endpoint": "http://xcggdpsserver.xyz/database/",
+    "timestampSuffix": " ago"
   },
 
   {
@@ -140,7 +142,16 @@
     "author": "Nonixgames",
     "authorLink": "https://youtube.com/c/Nonixgames",
     "id": "multiverse",
-    "endpoint": "http://gdpsnoni.000webhostapp.com/"
+    "endpoint": "http://gdm2021y.000webhostapp.com/database/"
+  },
+
+  {
+    "name": "GDPS Editor",
+    "link": "https://discord.gg/zdbZuErMfg",
+    "author": "NicknameGG",
+    "authorLink": "https://www.youtube.com/channel/UCINrRsYwXSZ1nvs-IkxzvQg",
+    "id": "gdpseditor",
+    "endpoint": "http://gmdpseditor.7m.pl/database/"
   },
 
   {

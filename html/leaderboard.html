@@ -189,7 +189,7 @@ function leaderboard(val) {
 		$('#searchBox').append('<div style="height: 4.5%"></div>')
 		$('#loading').hide();
 		$('.lazyLoad').Lazy({ appendScroll: '#searchBox' });
-	})
+	}).catch(e => {console.log(e); $('#loading').hide();})
 }
 
 let type = "accurate"

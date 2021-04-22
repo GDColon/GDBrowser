@@ -2,7 +2,6 @@ const request = require('request')
 const music = require('../misc/music.json')
 const Level = require('../classes/Level.js')
 let demonList = {}
-// list: [], lastUpdated: 0
 
 module.exports = async (app, req, res) => {
 
@@ -85,7 +84,7 @@ module.exports = async (app, req, res) => {
         filters.type = 10
         filters.str = demonMode ? demonList[req.id].list : filters.str.split(",")
         listSize = filters.str.length
-        filters.str = filters.str.slice(filters.page*amount, filters.page*amount + amount).join()
+        filters.str = filters.str.slice(filters.page*amount, filters.page*amount + amount).map(x => String(Number(x) + (+req.query.l || 0))).join()
         filters.page = 0
     }
 
