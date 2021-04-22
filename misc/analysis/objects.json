@@ -86,13 +86,23 @@
         "57": "Transition",
         "58": "Transition",
         "59": "Transition",
-
+        
         "1912": "Random",
         "1913": "CameraZoom",
         "1914": "CameraStatic",
         "1916": "CameraOffset",
         "1917": "Reverse",
-        "1931": "LevelEnd"
+        "1931": "LevelEnd",
+		"2701": "Pause",
+		"2702": "Resume",
+		"2067": "Scale",
+		"2068": "AdvRandom",
+		"2015": "CameraRotate",
+		"2062": "CameraEdge",
+		"2016": "CameraGuide",
+		"1934": "Song",
+		"1935": "TimeWarp",
+		"1932": "StopJump"
     },
 
     "misc": {
