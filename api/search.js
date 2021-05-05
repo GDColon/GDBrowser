@@ -5,7 +5,7 @@ let demonList = {}
 
 module.exports = async (app, req, res) => {
 
-    if (req.offline) return res.send("-1")
+    if (req.offline) return res.send(req.query.hasOwnProperty("err") ? "err" : "-1")
 
     let demonMode = req.query.hasOwnProperty("demonlist") || req.query.hasOwnProperty("demonList") || req.query.type == "demonlist" || req.query.type == "demonList"
     if (demonMode) {
@@ -84,7 +84,9 @@ module.exports = async (app, req, res) => {
         filters.type = 10
         filters.str = demonMode ? demonList[req.id].list : filters.str.split(",")
         listSize = filters.str.length
-        filters.str = filters.str.slice(filters.page*amount, filters.page*amount + amount).map(x => String(Number(x) + (+req.query.l || 0))).join()
+        filters.str = filters.str.slice(filters.page*amount, filters.page*amount + amount)
+        if (!filters.str.length) return res.send("-1")
+        filters.str = filters.str.map(x => String(Number(x) + (+req.query.l || 0))).join()
         filters.page = 0
     }
 

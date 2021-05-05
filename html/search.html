@@ -187,8 +187,8 @@ function Append(firstLoad) {
 			accID = x.playerID
 		}
 
-		let filteredSong = x.songName.replace(/[^ -~]/g, "")
-		if (!filteredSong) filteredSong = x.songName
+		let filteredSong = clean(x.songName.replace(/[^ -~]/g, ""))
+		if (!filteredSong) filteredSong = clean(x.songName)
 		let songColor = x.customSong == 0 ? "blue" : (x.songLink && !x.songLink.match(/^https?:\/\/\audio\.ngfiles\.com\//)) ? "nong" : "whatIfItWasPurple"
 		let noLink = songColor != "whatIfItWasPurple"
 
