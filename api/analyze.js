@@ -56,6 +56,7 @@ function analyze_level(level, rawData) {
     let miscCounts = {}
     let triggerGroups = []
     let highDetail = 0
+    let alphaTriggers = []
 
     let misc_objects = {};
     let block_ids = {};
@@ -145,8 +146,18 @@ function analyze_level(level, rawData) {
             last = Math.max(last, obj.x);
         }
 
+        if (obj.trigger == "Alpha") { // invisible triggers
+            alphaTriggers.push(obj)
+        }
+
         data[i] = obj;
     }
+
+    let invisTriggers = []
+    alphaTriggers.forEach(tr => {
+        if (tr.x < 500 && !tr.touchTriggered && !tr.spawnTriggered && tr.opacity == 0 && tr.duration == 0
+            && alphaTriggers.filter(x => x.targetGroupID == tr.targetGroupID).length == 1) invisTriggers.push(Number(tr.targetGroupID))
+    })
 
     response.level = {
         name: level.name, id: level.id, author: level.author, playerID: level.playerID, accountID: level.accountID, large: level.large
@@ -177,7 +188,11 @@ function analyze_level(level, rawData) {
     })
 
     response.triggerGroups = sortObj(response.triggerGroups)
-    response.triggerGroups.total = Object.keys(response.triggerGroups).length
+    let triggerKeys = Object.keys(response.triggerGroups).map(x => Number(x.slice(6)))
+    response.triggerGroups.total = triggerKeys.length
+
+    // find alpha group with the most objects
+    response.invisibleGroup = triggerKeys.find(x => invisTriggers.includes(x))
 
     response.text = level_text.sort(function (a, b) {return parseInt(a.x) - parseInt(b.x)}).map(x => [Buffer.from(x.message, 'base64').toString(), Math.round(x.x / last * 99) + "%"])
 
