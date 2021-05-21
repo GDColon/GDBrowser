@@ -42,13 +42,12 @@
   },
 
   {
-    "name": "XGDPS",
-    "link": "http://xcggdpsserver.xyz/",
-    "author": "XcreatorGoal",
-    "authorLink": "https://www.youtube.com/channel/UC33L-Y8asG7gju6f-4-Cl2g",
-    "id": "xgdps",
-    "endpoint": "http://xcggdpsserver.xyz/database/",
-    "timestampSuffix": " ago"
+    "name": "Enlly GDPS",
+    "link": "http://ps.fhgdps.com/envyandjolly/download/EnVy.zip",
+    "author": "EnVy",
+    "authorLink": "https://www.youtube.com/channel/UCN0PkVpzRDJMZnCj1leZoeA",
+    "id": "enllygdps",
+    "endpoint": "http://ps.fhgdps.com/envyandjolly/",
   },
 
   {
