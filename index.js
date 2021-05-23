@@ -172,6 +172,7 @@ app.use('/assets/css', express.static(__dirname + '/assets/css')); // override m
 
 app.get("/sizecheck.js", function(req, res) { res.sendFile(__dirname + "/misc/sizecheck.js") })
 app.get("/dragscroll.js", function(req, res) { res.sendFile(__dirname + "/misc/dragscroll.js") })
+app.get("/accessibility.js", function(req, res) { res.sendFile(__dirname + "/misc/accessibility.js") })
 
 app.get("/assets/:dir*?", function(req, res) {
   let main = (req.params.dir || "").toLowerCase()
