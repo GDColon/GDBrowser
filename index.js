@@ -134,12 +134,15 @@ directories.forEach(d => {
   fs.readdirSync('./api/' + d).forEach(x => {if (x.includes('.')) app.run[x.split('.')[0]] = require('./api/' + d + "/" + x) })
 })
 
+app.xor = new XOR() //why complicated gjp stuff just xor it
+
 try {
   const secrets = require("./misc/secretStuff.json")
   app.id = secrets.id
-  app.gjp = secrets.gjp
+  app.password = secrets.password
+  app.gjp = app.xor.encrypt(app.password)
   app.sheetsKey = secrets.sheetsKey
-  if (app.id == "account id goes here" || app.gjp == "account gjp goes here") console.warn("Warning: No account ID and/or GJP has been provided in secretStuff.json! These are required for level leaderboards to work.")
+  if (app.id == "account id goes here" || app.password == "account password goes here") console.warn("Warning: No account ID and/or GJP has been provided in secretStuff.json! These are required for level leaderboards to work.")
   if (app.sheetsKey.startsWith("google sheets api key")) app.sheetsKey = undefined
 }
 
@@ -159,8 +162,6 @@ app.parseResponse = function (responseBody, splitter) {
   res[response[i]] = response[i + 1]}
   return res  
 }
-
-app.xor = new XOR()
 
 //xss bad
 app.clean = function(text) {if (!text || typeof text != "string") return text; else return text.replace(/&/g, "&#38;").replace(/</g, "&#60;").replace(/>/g, "&#62;").replace(/=/g, "&#61;").replace(/"/g, "&#34;").replace(/'/g, "&#39;")}
