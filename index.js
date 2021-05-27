@@ -142,14 +142,14 @@ try {
   app.password = secrets.password
   app.gjp = app.xor.encrypt(app.password)
   app.sheetsKey = secrets.sheetsKey
-  if (app.id == "account id goes here" || app.password == "account password goes here") console.warn("Warning: No account ID and/or GJP has been provided in secretStuff.json! These are required for level leaderboards to work.")
+  if (app.id == "account id goes here" || app.password == "account password goes here") console.warn("Warning: No account ID and/or password has been provided in secretStuff.json! These are required for level leaderboards to work.")
   if (app.sheetsKey.startsWith("google sheets api key")) app.sheetsKey = undefined
 }
 
 catch(e) {
   app.id = 0
   app.gjp = 0
-  console.warn("Warning: secretStuff.json has not been created! These are required for level leaderboards to work.")
+  console.warn("Warning: secretStuff.json has not been created! This file is required for level leaderboards to work.")
 }
 
 app.parseResponse = function (responseBody, splitter) {
