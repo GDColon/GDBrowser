@@ -1310,3 +1310,17 @@ cp { color: #ff00ff }
         transform: scale(1.1);
     }
 }
+
+/*
+ * Disable all transitions and animations if the user has reduced motion enabled in their sytem settings
+ * Also disabled on devices that may be slow to render new frames for performance optimization
+ */
+@media screen and
+  (prefers-reduced-motion: reduce), 
+  (update: slow) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
