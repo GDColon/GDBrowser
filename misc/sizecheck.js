@@ -71,7 +71,7 @@ $(document).ready(function() {
 
 
 // Adds all necessary elements into the tab index (all buttons and links that aren't natively focusable)
-const inaccessibleLinkSelector = "*:not(a) > img.gdButton, .leaderboardTab, .gdcheckbox";
+const inaccessibleLinkSelector = "*:not(a) > img.gdButton, .leaderboardTab, .gdcheckbox, .diffDiv, .lengthDiv";
 
 document.querySelectorAll(inaccessibleLinkSelector).forEach(elem => {
   elem.setAttribute('tabindex', 0);

@@ -25,6 +25,9 @@
 		<img class="cornerPiece" src="../assets/corner.png" width=7%; style="transform: scaleY(-1)">
 	</div>
 
+	<div style="position:absolute; top: 1.7%; right: 2%; text-align: right; width: 10%;">
+		<img id="creditsButton" class="gdButton" src="../assets/credits.png" width="60%" onclick="loadCredits()">
+	</div>
 
 	<div class="menu-achievements" style="position:absolute; top: 5.5%; left: 3%; width: 12%;">
 		<a href="../achievements"><img class="gdButton" src="../assets/achievements.png" width="40%"></a>
@@ -37,10 +40,6 @@
 	<div style="position:absolute; top: -1.5%; right: 10%; text-align: right; width: 10%;">
 		<a href="../iconkit"><img class="iconRope" src="../assets/iconrope.png" width="40%"></a>
 	</div>
-
-	<div style="position:absolute; top: 1.7%; right: 2%; text-align: right; width: 10%;">
-		<img id="creditsButton" class="gdButton" src="../assets/credits.png" width="60%" onclick="loadCredits()">
-	</div>
 	
 	<div id="dl" style="display: none; position:absolute; top: 15%; right: 0.5%; text-align: center; width: 17%">
 		<h1 class="smaller" style="margin-bottom: 1%">Note</h1>
@@ -50,13 +49,13 @@
 	
 	<div class="supercenter center" id="menuButtons" style="bottom: 5%;">
 			<table>
-					<tr>
+					<tr class="menuButtonList">
 						<td><a tabindex="1" href="./search/*?type=saved"><img class="menubutton menu-saved" src="../assets/category-saved.png"></a></td>
 						<td><a tabindex="1" href="./daily"><img class="menubutton menu-daily" src="../assets/category-daily.png"></a></td>
 						<td><a tabindex="1" href="./weekly"><img class="menubutton menu-weekly" src="../assets/category-weekly.png"></a></td>
 						<td><a tabindex="1" href="./gauntlets"><img class="menubutton menu-gauntlets" src="../assets/category-gauntlets.png"></a></td>
 					</tr>
-					<tr>
+					<tr class="menuButtonList">
 						<td><a tabindex="1" href="./leaderboard"><img class="menubutton menu-leaderboard" src="../assets/category-scores.png"></a></td>
 						<!-- <img src="./assets/exclamation.png" style="position: absolute; height: 18%; left: 3.5%; bottom: 23%; pointer-events: none; z-index: 50;"> -->
 						<td><a tabindex="1" href="./search/*?type=hof"><img class="menubutton menu-hof" src="../assets/category-hof.png"></a></td>

@@ -242,9 +242,9 @@ $('.lengthDiv').click(function() {
 })
 
 $(document).keydown(function(k) {
-	if (k.which == 13) {
+	if (!$(':focus-visible').length && k.which == 13) { // enter
 		if (!$('#customlist').is(':hidden')) k.preventDefault();
-		else if ($('#filters').is(':hidden')) $('#searchBtn').trigger('click') //enter	
+		else if ($('#filters').is(':hidden')) $('#searchBtn').trigger('click')
 	} 
 });
 

@@ -464,7 +464,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
     transition-timing-function: ease-in-out;
 }
 
-.gdButton:active {
+.gdButton:active, .gdButton:focus-visible, a:focus-visible .gdButton {
     animation: bounceButton 0.25s ease-in-out forwards;
 }
 
@@ -490,13 +490,20 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
     margin-bottom: 15%;
 }
 
+.menuButtonList td {
+    padding: 1.2vh 2vh;
+}
+
+.menuButtonList td a {
+    display: inline-block;
+}
+
 .menuButton {
   width: 24vh;
-  margin: 1.2vh 2vh;
   cursor: pointer;
 }
 
-.menuButton:active {
+.menuButton:active, .menuButton:focus-visible, a:focus-visible .menuButton {
   animation: bounceButton 0.25s ease-in-out forwards;
 }
 
