@@ -242,7 +242,8 @@ $('.lengthDiv').click(function() {
 })
 
 $(document).keydown(function(k) {
-	if (!$(':focus-visible').length && k.which == 13) { // enter
+	let searchFocus = $(':focus-visible').length == 1 && $(':focus-visible').first().attr('id') == "levelName"
+	if ((!$(':focus-visible').length || searchFocus) && k.which == 13) { // enter
 		if (!$('#customlist').is(':hidden')) k.preventDefault();
 		else if ($('#filters').is(':hidden')) $('#searchBtn').trigger('click')
 	} 

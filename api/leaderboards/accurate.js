@@ -1,9 +1,11 @@
 const {GoogleSpreadsheet} = require('google-spreadsheet');
 const sheet = new GoogleSpreadsheet('1ADIJvAkL0XHGBDhO7PP9aQOuK3mPIKB2cVPbshuBBHc'); // accurate leaderboard spreadsheet
 
+let indexes = ["stars", "coins", "demons", "diamonds"]
+
 let forms = ['cube', 'ship', 'ball', 'ufo', 'wave', 'robot', 'spider']
-let lastIndex = [{"stars": 0, "coins": 0, "demons": 0}, {"stars": 0, "coins": 0, "demons": 0}]
-let caches = [{"stars": null, "coins": null, "demons": null}, {"stars": null, "coins": null, "demons": null}, {"stars": null, "coins": null, "demons": null}] // 0 for JSON, 1 for mods, 2 for GD
+let lastIndex = [{"stars": 0, "coins": 0, "demons": 0}, {"stars": 0, "coins": 0, "demons": 0, "diamonds": 0}]
+let caches = [{"stars": null, "coins": null, "demons": null, "diamonds": null}, {"stars": null, "coins": null, "demons": null, "diamonds": null}, {"stars": null, "coins": null, "demons": null, "diamonds": null}] // 0 for JSON, 1 for mods, 2 for GD
 
 module.exports = async (app, req, res, post) => {
 
@@ -15,16 +17,16 @@ module.exports = async (app, req, res, post) => {
 
       let type = req.query.type ? req.query.type.toLowerCase() : 'stars'
       if (type == "usercoins") type = "coins"
-      if (!["stars", "coins", "demons"].includes(type)) type = "stars"
+      if (!indexes.includes(type)) type = "stars"
       if (lastIndex[modMode ? 1 : 0][type] + 600000 > Date.now() && cache[type]) return res.send(gdMode ? cache[type] : JSON.parse(cache[type]))   // 10 min cache
 
       sheet.useApiKey(app.sheetsKey)
       sheet.loadInfo().then(async () => {
       let tab = sheet.sheetsById[1555821000]
-      await tab.loadCells('A2:F2')
+      await tab.loadCells('A2:H2')
 
-      let cellIndex = type == "demons" ? 2 : type == "coins" ? 1 : 0
-      if (modMode) cellIndex += 3
+      let cellIndex = indexes.findIndex(x => type == x)
+      if (modMode) cellIndex += indexes.length
 
       let cell = tab.getCell(1, cellIndex).value
       if (!cell || typeof cell != "string" || cell.startsWith("GoogleSpreadsheetFormulaError")) { console.log("Spreadsheet Error:"); console.log(cell); return res.send("-1") }

@@ -55,8 +55,9 @@
 			<img class="gdButton" id="modSort" style="margin-bottom: 1vh" title="Moderators" src="../assets/sort-mod.png" height="11%">
 			<img class="gdButton" id="weeklyStats" style="margin-bottom: 1vh" title="Weekly Stats" src="../assets/sort-week.png" height="11%">
 		</div>
-		<div class="sortDiv" style="position: relative; right: 10.5%; top: 0%; width: 0.1%; transform: translateY(-33.3%)">
+		<div class="sortDiv" style="position: relative; right: 10.5%; top: 0%; width: 0.1%; transform: translateY(-33.3%)" id="statSort">
 			<img class="gdButton sortButton" style="margin-bottom: 1vh" sort="stars" title="Most stars" src="../assets/sort-stars-on.png" height="11%" id="starSort">
+			<img class="gdButton sortButton" style="margin-bottom: 1vh" sort="diamonds" title="Most diamonds" src="../assets/sort-diamonds.png" height="11%">
 			<img class="gdButton sortButton" style="margin-bottom: 1vh" sort="coins" title="Most coins" src="../assets/sort-coins.png" height="11%">
 			<img class="gdButton sortButton" style="margin-bottom: 1vh" sort="demons" title="Most demons" src="../assets/sort-demons.png" height="11%">
 			<img class="gdButton sortButton" style="margin-bottom: 1vh; display: none" sort="cp" title="Most creator points" src="../assets/sort-cp.png" height="11%" id="cpSort">
@@ -157,7 +158,7 @@ function leaderboard(val) {
 
 			<h3 class="lessSpaced leaderboardStats">
 				${type != "weekly" ? "" : `<span${x.stars >= 1000 ? " class='yellow'" : ""}>+${x.stars}</span> <img class="help valign" src="../assets/star.png" title="Star Gain">`}
-				${wk || onePointNine ? "" : `<span${x.diamonds >= 65535 ? ` class='blue'>${type == "accurate" ? "~" : ""}` : ">"}${x.diamonds}</span> <img class="help valign" src="../assets/diamond.png" title="Diamonds">`}
+				${wk || onePointNine ? "" : `<span${x.diamonds >= 65535 ? ` class='blue'>` : ">"}${x.diamonds}</span> <img class="help valign" src="../assets/diamond.png" title="Diamonds">`}
 				${wk ? "&nbsp;" : `<span${x.coins >= 149 ? " class='yellow'" : ""}>${x.coins}</span> <img class="help valign" src="../assets/coin.png" title="Secret Coins">`}
 				${wk || onePointNine ? "" : `<span${x.usercoins >= 10000 ? " class='brightblue'" : ""}>${x.usercoins}</span> <img class="help valign" src="../assets/silvercoin.png" title="User Coins">`}
 				${wk ? "" : `<span${x.demons >= 1000 ? " class='brightred'" : ""}>${x.demons}</span> <img class="help valign" src="../assets/demon.png" title="Demons">`}
@@ -256,8 +257,15 @@ $('#creatorTabOff').click(function() {
 $('#modSort').click(function() {
 	modMode = !modMode
 	$(this).attr('src', `../assets/sort-mod${modMode ? "-on" : ""}.png`)
-	if (modMode) { $('#cpSort').show() }
-	else { $('#cpSort').hide(); if (sort == "cp") $('#starSort').trigger('click') }
+	if (modMode) { 
+		$('#cpSort').show();
+		$('#statSort').css('transform', 'translateY(-26.7%')
+	}
+	else {
+		$('#cpSort').hide();
+		$('#statSort').css('transform', 'translateY(-33.3%')
+		if (sort == "cp") $('#starSort').trigger('click')
+	}
 	leaderboard(type)
 })
 

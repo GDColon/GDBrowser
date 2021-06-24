@@ -226,7 +226,7 @@ function Append(firstLoad) {
 				<a title="View level" href="../${x.id}""><img style="margin-bottom: 4.5%" class="valign gdButton" src="../assets/view.png" height="105%"></a>
 				${demonList ? `<br><a title="View leaderboard" href="../demon/${x.demonPosition}""><img class="valign gdButton" src="../assets/trophyButton.png" height="110%"></a>
 				<a title="View on Pointercrate" href="${demonListLink}demonlist/${x.demonPosition}" target=_blank><img class="valign gdButton" src="../assets/demonButton.png" height="110%"></a>` : "" }
-				<p title="Level ID" style="text-align: right; color: rgba(0, 0, 0, 0.4); font-size: 2.2vh; transform: translate(2.8vh, 2.5vh)">#${x.id}</p>
+				<p title="Level ID" style="text-align: right; color: rgba(0, 0, 0, 0.4); font-size: 2.2vh; transform: translate(2.8vh, ${demonList ? -1.8 : 2.5}vh)">#${x.id}</p>
 			</div>
 		</div>`)
 	})
