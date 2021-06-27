@@ -63,8 +63,12 @@
 	</div>
 
 	<div style="position:absolute; top: 3%; right: 2%; text-align: right; width: 20%;">
-		<a target="_blank" id="pointercrate"><img class="inline gdButton" src="../assets/demonButton.png" width="23%" style="margin-right: 4%" onclick="$('#infoDiv').show()"></a>
+		<a target="_blank" id="pointercrate"><img class="inline gdButton" src="../assets/demonButton.png" width="23%" style="margin-right: 4%"></a>
 		<img id="creditsButton" class="inline gdButton" src="../assets/credits.png" width="25%" onclick="$('#infoDiv').show()">
+	</div>
+
+	<div style="position:absolute; bottom: 5.5%; right: 3.5%; text-align: right; width: 18%;">
+		<a id="realLeaderboardLink"><img class="gdButton" src="../assets/leaderboard.png" width="35%"></a>
 	</div>
 
 </div>
@@ -96,9 +100,11 @@ fetch(`${server.demonList}api/v1/demons/${demonID}/`).then(res => res.json()).th
 
 	document.title = "Demon Leaderboard for " + demon.name
 	$('#header').html(`${demon.name} <span class="smallerer" style="vertical-align: middle">(#${demonID})</span>`)
+	$('#realLeaderboardLink').attr('href', `../leaderboard/${demon.level_id}`)
+	$('#pointercrate').attr('href', `${server.demonList}demonlist/${demonID}`)
+
 	$('#meta-title').attr('content', "Demon Leaderboard for " + demon.name)
 	$('#meta-desc').attr('content', 'View the challengers and victors of' + demon.name)
-	$('#pointercrate').attr('href', `${server.demonList}demonlist/${demonID}`)
 
 	demon.records.forEach((x, y) => {
 
