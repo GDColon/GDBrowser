@@ -145,12 +145,12 @@
   },
 
   {
-    "name": "GDPS Editor",
-    "link": "https://discord.gg/zdbZuErMfg",
+    "name": "GDPS Editor 2.2",
+    "link": "https://discord.gg/4n8n98AkSk",
     "author": "NicknameGG",
     "authorLink": "https://www.youtube.com/channel/UCINrRsYwXSZ1nvs-IkxzvQg",
     "id": "gdpseditor",
-    "endpoint": "http://gmdpseditor.7m.pl/database/"
+    "endpoint": "http://ps.fhgdps.com/GDPSEditor22/"
   },
 
   {
