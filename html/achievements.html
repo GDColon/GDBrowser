@@ -113,7 +113,7 @@ function append(reset=true) {
 		$('#searchBox').append(`<div class="flex searchresult leaderboardSlot" style="height: 18%; width: 92%; padding-left: 3%; padding-top: 0%; overflow: hidden">
 			<div class="flex" style="width: 8%; margin-right: 2%"><img src="${iconImg}></div>
 			<div>
-				<h2 title="${x.trueID}" smaller inline" style="font-size: 4.5vh; margin-top: 1vh; color: rgb(${gameColors[x.game]})">${x.name}</h2>
+				<h2 title="${x.trueID}" class="smallerer" style="font-size: 4.5vh; margin-top: 1vh; color: rgb(${gameColors[x.game]})">${x.name}</h2>
 				<p style="margin-top: 2vh; color:${completed ? "yellow" : "white"}">${completed ? x.achievedDescription : x.description}</p>
 			</div>
 		</div>`)

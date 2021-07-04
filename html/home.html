@@ -136,8 +136,8 @@ Fetch(`./api/credits`).then(res => {
 		$('#credits').append(`<div id="credits${y+1}" class="subCredits" style="display: none;">
 			<img class="gdButton" src="../assets/arrow-left.png" width="60vh" style="${y == 0 ? "display: none; " : ""}position: absolute; top: 45%; right: 75%" tabindex="0" onclick="page -= 1; loadCredits()">
 			<div class="brownBox center supercenter" style="width: 80vh; height: 43%; padding-top: 1.5%; padding-bottom: 3.5%;">
-				<h1>${x.header}</h1><br>
-				<h2 style="margin-bottom: 1.5%" class="gdButton"><a href="https://gdbrowser.com/u/${x.ign || x.name}">${x.name}</h2></a>
+				<h1>${x.header}</h1>
+				<h2 style="margin-bottom: 1.5%; margin-top: 1.5%" class="gdButton biggerShadow"><a href="https://gdbrowser.com/u/${x.ign || x.name}">${x.name}</h2></a>
 				<img class="creditsicon" icon="./icon/${x.ign || x.name}?forceGD=1" height=30%; style="margin-bottom: 7%"><br>
 				<a target=_blank href="${x.youtube[0]}"><img src="../assets/${x.youtube[1]}.png" width="11%" class="gdButton"></a>
 				<a target=_blank href="${x.twitter[0]}"><img src="../assets/${x.twitter[1]}.png" width="11%" class="sideSpace gdButton"></a>

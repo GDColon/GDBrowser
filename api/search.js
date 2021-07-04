@@ -117,6 +117,7 @@ module.exports = async (app, req, res) => {
             let songSearch = songs.find(y => y['~1'] == x[35]) || []
 
             let level = new Level(x, req.server).getSongInfo(songSearch)
+            if (!level.id) return
             level.author = authorList[x[6]] ? authorList[x[6]][0] : "-";
             level.accountID = authorList[x[6]] ? authorList[x[6]][1] : "0";
 

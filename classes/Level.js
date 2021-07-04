@@ -8,12 +8,11 @@ let demonTypes = { 3: "Easy", 4: "Medium", 5: "Insane", 6: "Extreme" }
 
 class Level {
     constructor(levelInfo, server, download, author = []) {
-        if (!levelInfo[1]) return;
-        this.name = levelInfo[2];
-        this.id = levelInfo[1];
+        this.name = levelInfo[2] || "-";
+        this.id = levelInfo[1] || 0;
         this.description = Buffer.from((levelInfo[3] || ""), "base64").toString() || "(No description provided)";
         this.author = author[1] || "-"
-        this.playerID = levelInfo[6]
+        this.playerID = levelInfo[6] || 0
         this.accountID = author[2] || 0
         this.difficulty = difficulty[levelInfo[9]] || "Unrated"
         this.downloads = +levelInfo[10] || 0
@@ -22,20 +21,21 @@ class Level {
         this.length = length[levelInfo[15]] || "XL"
         this.stars = +levelInfo[18] || 0
         this.orbs = orbs[levelInfo[18]] || 0
-        this.diamonds = levelInfo[18] < 2 ? 0 : parseInt(levelInfo[18]) + 2
+        this.diamonds = !levelInfo[18] || (levelInfo[18]) < 2 ? 0 : parseInt(levelInfo[18]) + 2
         this.featured = levelInfo[19] > 0
         this.epic = levelInfo[42] > 0
         this.gameVersion = levelInfo[13] > 17 ? (levelInfo[13] / 10).toFixed(1) : levelInfo[13] == 11 ? "1.8" : levelInfo[13] == 10 ? "1.7" : "Pre-1.7"
         if (levelInfo[28]) this.uploaded = levelInfo[28] + (server.timestampSuffix || "")
         if (levelInfo[29]) this.updated = levelInfo[29] + (server.timestampSuffix || "")
-        if (download) { this.editorTime = +levelInfo[46] || 0; this.totalEditorTime = +levelInfo[47] || 0 }
+        if (levelInfo[46]) this.editorTime = +levelInfo[46] || 0
+        if (levelInfo[47]) this.totalEditorTime = +levelInfo[47] || 0
         if (levelInfo[27]) this.password = levelInfo[27];
-        this.version = +levelInfo[5];
+        this.version = +levelInfo[5] || 0;
         this.copiedID = levelInfo[30] || "0"
         this.twoPlayer = levelInfo[31] > 0
         this.officialSong = +levelInfo[35] ? 0 : parseInt(levelInfo[12]) + 1
         this.customSong = +levelInfo[35] || 0
-        this.coins = +levelInfo[37]
+        this.coins = +levelInfo[37] || 0
         this.verifiedCoins = levelInfo[38] > 0
         this.starsRequested = +levelInfo[39] || 0
         this.ldm = levelInfo[40] > 0
