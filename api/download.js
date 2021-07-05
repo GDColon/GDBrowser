@@ -11,7 +11,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
 
   if (req.offline) {
     if (!api && levelID < 0) return res.redirect('/')
-    rejectLevel()
+    return rejectLevel()
   }
 
   let levelID = ID || req.params.id
@@ -24,7 +24,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
     if (err || !body || body == '-1' || body.startsWith("<")) {
       if (analyze && api && req.server.downloadsDisabled) return res.send("-3")
       else if (!api && levelID < 0) return res.redirect(`/?daily=${levelID * -1}`)
-      else rejectLevel()
+      else return rejectLevel()
     }
 
     let authorData = body.split("#")[3]  // daily/weekly only, most likely
