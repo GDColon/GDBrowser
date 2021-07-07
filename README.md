@@ -52,15 +52,13 @@ If you 100% insist on adding a private server to your own magical little fork, y
 
 **endpoint:** The actual endpoint to ~~spam~~ send requests to (e.g. `http://boomlings.com/database/` - make sure it ends with a slash!)
 
-
-----
 There's also a few optional values for fine-tuning. I'll add more over time
 
 [string] **timestampSuffix:** A string to append at the end of timestamps. Vanilla GD uses " ago" 
 
 [string] **demonList:** The URL of the server's Demon List API, if it has one (e.g. `http://pointercrate.com/` - make sure it ends with a slash!)
 
-[bool] **downloadsDisabled:** (Greys out all forms of downloading on the frontend (daily, weekly, analysis, etc). I love you too RobTop <3
+[bool] **downloadsDisabled:** Greys out all forms of downloading on the frontend (daily, weekly, analysis, etc). I love you too RobTop <3
 
 [bool] **onePointNine:** Makes a bunch of fancy changes to better fit 1.9 servers. (removes orbs/diamonds, hides some pointless buttons, etc)
 
@@ -200,10 +198,6 @@ achievements.json - List of all GD/meltdown/subzero/etc achievements. `parseAchi
   
 
 achievementTypes.json - An object containing different categories of achievements (stars, shards, vault, etc) and how to identify them
-
-  
-
-colors.json - List of icon colors in RGB format
 
   
 

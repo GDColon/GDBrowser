@@ -171,6 +171,7 @@ h1, h2, h3 {
     margin: 0% 0%;
     letter-spacing: -0.01em;
     -webkit-text-size-adjust: 100%;
+    -webkit-text-stroke-color: black;
 }
 
 h1 {
@@ -180,7 +181,6 @@ h1 {
     overflow: hidden;
     white-space: nowrap;
     -webkit-text-stroke-width: 0.25vh;
-    -webkit-text-stroke-color: black;
     text-shadow: 0.375vh 0.375vh 0vh rgba(0, 0, 0, 0.3);
 }
 
@@ -188,7 +188,6 @@ h2 {
     color: rgb(255, 200, 0);
     font-size: 8vh;
     -webkit-text-stroke-width: 0.265vh;
-    -webkit-text-stroke-color: black;
     text-shadow: 0.35vh 0.35vh 0.1vh rgba(0, 0, 0, 0.3);
 }
 

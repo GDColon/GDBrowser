@@ -52,6 +52,7 @@ app.servers.forEach(x => {
   app.accountCache[x.id || "gd"] = {}
   app.lastSuccess[x.id || "gd"] = Date.now()
 })
+app.mainEndpoint = app.servers.find(x => !x.id).endpoint // boomlings.com unless changed in fork
 
 app.set('json spaces', 2)
 app.use(compression());
@@ -72,7 +73,7 @@ app.use(async function(req, res, next) {
   req.onePointNine = req.server.onePointNine
   req.timestampSuffix = req.server.timestampSuffix || ""
   req.id = req.server.id || "gd"
-  req.isGDPS = req.server.endpoint != "http://boomlings.com/database/"
+  req.isGDPS = req.server.endpoint != app.mainEndpoint
 
   if (req.isGDPS) res.set("gdps", (req.onePointNine ? "1.9/" : "") + req.id)
   if (req.query.online > 0) req.offline = false

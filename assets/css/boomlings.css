@@ -35,7 +35,9 @@ body {
 .rankNumber {
 	font-size: 5vh;
 	text-align: center;
-	text-shadow: -0.2vh -0.2vh 0vh #000, 0.2vh -0.2vh 0vh #000, -0.2vh 0.2vh 0vh #000, 0.2vh 0.2vh 0vh #000;
+    -webkit-text-stroke-width: 0.2vh;
+	-webkit-text-stroke-color: black;
+    text-shadow: 0.3vh 0.3vh 0vh rgba(0, 0, 0, 0.3);
 }
 
 .username {
@@ -47,12 +49,16 @@ body {
 
 .level {
 	font-size: 3.8vh;
-	text-shadow: -0.18vh -0.18vh 0vh #000, 0.18vh -0.18vh 0vh #000, -0.18vh 0.18vh 0vh #000, 0.18vh 0.18vh 0vh #000;
+    -webkit-text-stroke-width: 0.15vh;
+	-webkit-text-stroke-color: black;
+    text-shadow: 0.2vh 0.2vh 0vh rgba(0, 0, 0, 0.3);
 }
 
 .score {
 	font-size: 2.5vh;
-	text-shadow: -0.15vh -0.15vh 0vh #000, 0.15vh -0.15vh 0vh #000, -0.15vh 0.15vh 0vh #000, 0.15vh 0.15vh 0vh #000;
+    -webkit-text-stroke-width: 0.1vh;
+	-webkit-text-stroke-color: black;
+    text-shadow: 0.15vh 0.15vh 0vh rgba(0, 0, 0, 0.3);
 }
 
 .powerup {
@@ -92,8 +98,6 @@ h1 {
 	font-size: 8vh;
 	font-family: Kaine;
 	color: #ffc800;
-	letter-spacing: .02em;
-	text-shadow: -0.25vh -0.25vh 0vh #000, 0.25vh -0.25vh 0vh #000, -0.25vh 0.25vh 0vh #000, 0.25vh 0.25vh 0vh #000;
 }
 
 h2 {
@@ -102,9 +106,11 @@ h2 {
     font-size: 7.5vh;
     font-family: Pusab, Arial;
     color: rgb(255, 200, 0);
-	letter-spacing: 0.02em;
 	text-align: center;
-    text-shadow: -0.275vh -0.275vh 0vh #000, 0.275vh -0.275vh 0vh #000, -0.275vh 0.275vh 0vh #000, 0.275vh 0.275vh 0vh #000, 0.5vh 0.5vh 0vh rgba(0,0,0,0.4);
+	letter-spacing: -0.01em;
+    -webkit-text-stroke-width: 0.265vh;
+	-webkit-text-stroke-color: black;
+    text-shadow: 0.35vh 0.35vh 0.1vh rgba(0, 0, 0, 0.3);
 }
 
 .gdButton {
