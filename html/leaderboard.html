@@ -127,7 +127,8 @@ function leaderboard(val) {
 			Fetch('../api/gdps?current=1').then(ps => {
 				$('#accurateTabOn').remove()
 				$('#accurateTabOff').remove()
-				if (ps.weeklyLeaderboard) { $('#weeklyTabOff').show(); weekly = true }
+				if (weekly) return
+				else if (ps.weeklyLeaderboard) { $('#weeklyTabOff').show(); weekly = true }
 				else $('#scoreTabs').css('margin-left', '-29vh')
 			})
 		}
