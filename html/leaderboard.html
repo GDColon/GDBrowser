@@ -120,17 +120,16 @@ function leaderboard(val) {
 
 	Fetch(`../api/leaderboard?count=250&${val}&type=${sort}${modMode ? "&mod=1" : ""}`).then(res => {
 
-		if (gdps) {
-			top250Text = topGDPSText
-			$('#boomling').remove()
-		}
+		top250Text = topGDPSText
+		$('#boomling').remove()
 
-		if (gdps && type == "accurate" && (res == "-2" || res == "-3")) {  // for GDPS'es
-			$('#accurateTabOn').remove()
-			$('#accurateTabOff').remove()
-			if (res == "-3") { $('#weeklyTabOff').show(); weekly = true }
-			else $('#scoreTabs').css('margin-left', '-29vh')
-			return $('#topTabOff').trigger('click')
+		if (gdps) {
+			Fetch('../api/gdps?current=1').then(ps => {
+				$('#accurateTabOn').remove()
+				$('#accurateTabOff').remove()
+				if (ps.weeklyLeaderboard) { $('#weeklyTabOff').show(); weekly = true }
+				else $('#scoreTabs').css('margin-left', '-29vh')
+			})
 		}
 
 		$('#searchBox').html(`<div style="height: 4.5%"></div>`)
@@ -206,7 +205,6 @@ $(document).on('click', '.sortButton', function () {
 })
 
 $('#topTabOff').click(function() {
-	console.log(1)
 	if (type == "top") return;
 	type = "top"
 	leaderboard(type)

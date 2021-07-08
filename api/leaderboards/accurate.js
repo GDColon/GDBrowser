@@ -9,7 +9,7 @@ let caches = [{"stars": null, "coins": null, "demons": null, "diamonds": null}, 
 
 module.exports = async (app, req, res, post) => {
 
-      if (req.isGDPS) return res.send(req.server.weeklyLeaderboard ? "-3" : "-2")
+      if (req.isGDPS) return res.send("-2")
       if (!app.sheetsKey) return res.send([])
       let gdMode = post || req.query.hasOwnProperty("gd")
       let modMode = !gdMode && req.query.hasOwnProperty("mod")
