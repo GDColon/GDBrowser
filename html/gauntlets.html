@@ -36,17 +36,14 @@
 <script type="text/javascript" src="../sizecheck.js?"></script>
 <script>
 
-let gauntletNames = ["Fire", "Ice", "Poison", "Shadow", "Lava", "Bonus", "Chaos", "Demon", "Time", "Crystal", "Magic", "Spike", "Monster", "Doom", "Death"]
-
 fetch('../api/gauntlets').then(res => res.json()).then(gauntlets => {
 	$('#loading').hide()
 	gauntlets.forEach((x, y) => {
-		let name = gauntletNames[x.id - 1]
 		$('#gauntletList').append(`
 			<div class="gauntlet">
 			<a href="../search/*?gauntlet=${x.id}">
-			<img src="../assets/gauntlets/${name.toLowerCase()}.png" height="300%"><br>
-			<h3 class="gauntletText"">${name}<br>Gauntlet</h3></div></a>`)
+			<img src="../assets/gauntlets/${x.name.toLowerCase()}.png" height="300%"><br>
+			<h3 class="gauntletText"">${x.name}<br>Gauntlet</h3></div></a>`)
 		})
 });
 
