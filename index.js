@@ -6,8 +6,12 @@ const rateLimit = require("express-rate-limit");
 const fs = require("fs");
 const app = express();
 
+let serverList = require('./servers.json')
+let pinnedServers = serverList.filter(x => x.pinned)
+let notPinnedServers = serverList.filter(x => !x.pinned).sort((a, b) => a.name.localeCompare(b.name))
+
+app.servers = pinnedServers.concat(notPinnedServers)
 app.config = require('./settings.js')
-app.servers = require('./servers.json')
 
 let rlMessage = "Rate limited ¯\\_(ツ)_/¯<br><br>Please do not spam my servers with a crazy amount of requests. It slows things down on my end and stresses RobTop's servers just as much." +
 " If you really want to send a zillion requests for whatever reason, please download the GDBrowser repository locally - or even just send the request directly to the GD servers.<br><br>" +
@@ -230,6 +234,7 @@ app.get("/", function(req, res) {
         gdpsHide.forEach(x => { html = html.replace(`menu-${x}`, 'changeDaWorld') })
       }
       if (req.onePointNine) onePointNineDisabled.forEach(x => { html = html.replace(`menu-${x}`, 'menuDisabled') })
+      if (req.server.disabled) req.server.disabled.forEach(x => { html = html.replace(`menu-${x}`, 'menuDisabled') })
       if (req.server.downloadsDisabled) {
         downloadDisabled.forEach(x => { html = html.replace(`menu-${x}`, 'menuDisabled') })
         html = html.replace('id="dl" style="display: none', 'style="display: block')
@@ -297,9 +302,9 @@ app.get("/:id", function(req, res) { app.run.level(app, req, res) })
 
 app.get("/icon/:text", function(req, res) { app.run.icon(app, req, res) })
 app.get("/api/userCache", function(req, res) { res.send(app.accountCache) })
-app.get("/api/gdps", function(req, res) { res.send(req.query.hasOwnProperty("current") ? req.server : app.servers) })
 app.get("/api/achievements", function(req, res) { res.send({achievements, types: achievementTypes, shopIcons, colors: colorList }) })
 app.get("/api/music", function(req, res) { res.send(music) })
+app.get("/api/gdps", function(req, res) {res.send(req.query.hasOwnProperty("current") ? req.server : app.servers) })
 app.get('/api/icons', function(req, res) { 
   let sample = [JSON.stringify(sampleIcons[Math.floor(Math.random() * sampleIcons.length)].slice(1))]
   let iconserver = req.isGDPS ? req.server.name : undefined

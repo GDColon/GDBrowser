@@ -7,7 +7,8 @@
     "id": "",
     "endpoint": "http://boomlings.com/database/",
     "timestampSuffix": " ago",
-    "demonList": "https://pointercrate.com/"
+    "demonList": "https://pointercrate.com/",
+    "pinned": true
   },
   
   {
@@ -17,6 +18,8 @@
     "authorLink": "https://www.youtube.com/channel/UClXb1w9vSL3Z0V-mUbudOnw",
     "id": "22unlocked",
     "endpoint": "http://smjs.eu/gd/unlock/database/",
+    "pinned": true,
+    "disabled": ["gauntlets", "mappacks", "daily", "weekly"],
     "substitutions": {
       "levelID": "oereoIE",
       "accountID": "BddpvouKE",
@@ -34,6 +37,7 @@
     "onePointNine": true,
     "weeklyLeaderboard": true,
     "demonList": "https://pointercrate.xyze.dev/",
+    "pinned": true,
     "overrides": {
       "getGJMapPacks21": "getGJMapPacks",
       "getGJScores20": "getGJScores",
@@ -48,7 +52,18 @@
     "authorLink": "https://www.youtube.com/channel/UC33L-Y8asG7gju6f-4-Cl2g",
     "id": "xgdps",
     "endpoint": "http://xcggdpsserver.xyz/database/",
+    "pinned": true,
     "timestampSuffix": " ago"
+  },
+
+  {
+    "name": "GDPS Editor 2.2",
+    "link": "https://discord.gg/4n8n98AkSk",
+    "author": "NicknameGG",
+    "authorLink": "https://www.youtube.com/channel/UCINrRsYwXSZ1nvs-IkxzvQg",
+    "id": "gdpseditor",
+    "pinned": true,
+    "endpoint": "http://ps.fhgdps.com/GDPSEditor22/"
   },
 
   {
@@ -142,15 +157,6 @@
     "authorLink": "https://youtube.com/c/Nonixgames",
     "id": "multiverse",
     "endpoint": "http://gdm2021y.000webhostapp.com/database/"
-  },
-
-  {
-    "name": "GDPS Editor 2.2",
-    "link": "https://discord.gg/4n8n98AkSk",
-    "author": "NicknameGG",
-    "authorLink": "https://www.youtube.com/channel/UCINrRsYwXSZ1nvs-IkxzvQg",
-    "id": "gdpseditor",
-    "endpoint": "http://ps.fhgdps.com/GDPSEditor22/"
   },
 
   {
