@@ -8,6 +8,7 @@
     "endpoint": "http://boomlings.com/database/",
     "timestampSuffix": " ago",
     "demonList": "https://pointercrate.com/",
+    "downloadsDisabled": true,
     "pinned": true
   },
   
@@ -59,8 +60,8 @@
   {
     "name": "GDPS Editor 2.2",
     "link": "https://discord.gg/4n8n98AkSk",
-    "author": "NicknameGG",
-    "authorLink": "https://www.youtube.com/channel/UCINrRsYwXSZ1nvs-IkxzvQg",
+    "author": "iAndy_HD3",
+    "authorLink": "https://www.youtube.com/channel/UCleHhypAuPn2o09N4ISyBxw",
     "id": "gdpseditor",
     "pinned": true,
     "endpoint": "http://ps.fhgdps.com/GDPSEditor22/"
@@ -184,6 +185,15 @@
     "authorLink": "https://www.youtube.com/c/PjoseP",
     "id": "neon",
     "endpoint": "http://newgdpsneon.7m.pl/database/"
+  },
+
+  {
+    "name": "VPS",
+    "link": "https://discord.gg/WVVZPCsGQV",
+    "author": "Vultra",
+    "authorLink": "https://www.youtube.com/channel/UC6q0dlnMosjajrkSfSsOklQ",
+    "id": "vps",
+    "endpoint": "http://ps.fhgdps.com/VGDPSNEW6942/"
   },
 
   {

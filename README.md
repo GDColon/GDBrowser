@@ -58,7 +58,7 @@ There's also a few optional values for fine-tuning. I'll add more over time
 
 [string] **demonList:** The URL of the server's Demon List API, if it has one (e.g. `http://pointercrate.com/` - make sure it ends with a slash!)
 
-[bool] **downloadsDisabled:** Greys out all forms of downloading on the frontend (daily, weekly, analysis, etc). I love you too RobTop <3
+[array] **disabled:** An array of menu buttons to "disable" (mappacks, gauntlets, daily, weekly, etc). They appear greyed out but are still clickable.
 
 [bool] **onePointNine:** Makes a bunch of fancy changes to better fit 1.9 servers. (removes orbs/diamonds, hides some pointless buttons, etc)
 

@@ -235,7 +235,7 @@ app.get("/", function(req, res) {
       }
       if (req.onePointNine) onePointNineDisabled.forEach(x => { html = html.replace(`menu-${x}`, 'menuDisabled') })
       if (req.server.disabled) req.server.disabled.forEach(x => { html = html.replace(`menu-${x}`, 'menuDisabled') })
-      if (req.server.downloadsDisabled) {
+      if (req.server.downloadsDisabled && process.platform == "linux") {
         downloadDisabled.forEach(x => { html = html.replace(`menu-${x}`, 'menuDisabled') })
         html = html.replace('id="dl" style="display: none', 'style="display: block')
         .replace('No active <span id="noLevel">daily</span> level!', '[Blocked by RobTop]')
