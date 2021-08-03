@@ -32,7 +32,7 @@ If you want to disable rate limits, ip forwarding, etc you can do so by modifyin
 Hold up, wait a minute... private servers are an official feature now!
 
 
-If you would like to add your GDPS to GDBrowser, simply reach out to me on [Twitter](https://twitter.com/TheRealGDColon) and I'll be happy to add it (provided the server is relatively large and active)
+If you would like to add your GDPS to GDBrowser, [fill out this quick form](https://forms.gle/kncuRqyKykQX42QD7) and I'll be happy to add it (provided the server is relatively large and active)
   
   
 If you 100% insist on adding a private server to your own magical little fork, you can do so by adding it to **servers.json**. Simply add a new object to the array with the following information:
@@ -59,6 +59,8 @@ There's also a few optional values for fine-tuning. I'll add more over time
 [string] **demonList:** The URL of the server's Demon List API, if it has one (e.g. `http://pointercrate.com/` - make sure it ends with a slash!)
 
 [array] **disabled:** An array of menu buttons to "disable" (mappacks, gauntlets, daily, weekly, etc). They appear greyed out but are still clickable.
+
+[bool] **pinned:** "Pins" the server to the top of the GDPS list. It appears above all unpinned servers and is not placed in alphabetical order.
 
 [bool] **onePointNine:** Makes a bunch of fancy changes to better fit 1.9 servers. (removes orbs/diamonds, hides some pointless buttons, etc)
 

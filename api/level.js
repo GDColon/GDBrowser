@@ -32,7 +32,7 @@ module.exports = async (app, req, res, api, analyze) => {
     let level = new Level(levelInfo, req.server, false, author).getSongInfo(song)
     if (!level.id) return rejectLevel()
 
-    if (req.isGDPS) level.gdps = (req.onePointNine ? "1.9/" : "") + req.endpoint
+    if (req.isGDPS) level.gdps = (req.onePointNine ? "1.9/" : "") + req.server.id
     if (level.author != "-") app.userCache(req.id, level.accountID, level.playerID, level.author)
 
     function sendLevel() {

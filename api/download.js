@@ -64,7 +64,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
           level = level.getSongInfo(app.parseResponse(songRes, '~|~'))
           level.extraString = levelInfo[36]
           level.data = levelInfo[4]
-          if (req.isGDPS) level.gdps = (req.onePointNine ? "1.9/" : "") + req.endpoint
+          if (req.isGDPS) level.gdps = (req.onePointNine ? "1.9/" : "") + req.server.id
 
           if (analyze) return app.run.analyze(app, req, res, level)
 

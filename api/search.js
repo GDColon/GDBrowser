@@ -126,7 +126,7 @@ module.exports = async (app, req, res) => {
                 level.demonPosition = demonList[req.id].list.indexOf(level.id) + 1
             }
 
-            if (req.isGDPS) level.gdps = (req.onePointNine ? "1.9/" : "") + req.endpoint
+            if (req.isGDPS) level.gdps = (req.onePointNine ? "1.9/" : "") + req.server.id
             if (level.author != "-" && app.config.cacheAccountIDs) app.userCache(req.id, level.accountID, level.playerID, level.author)
 
             //this is broken if you're not on page 0, blame robtop

@@ -11,6 +11,8 @@ let pinnedServers = serverList.filter(x => x.pinned)
 let notPinnedServers = serverList.filter(x => !x.pinned).sort((a, b) => a.name.localeCompare(b.name))
 
 app.servers = pinnedServers.concat(notPinnedServers)
+app.safeServers = JSON.parse(JSON.stringify(app.servers)) // clone
+app.safeServers.forEach(x => { delete x.endpoint; delete x.substitutions; delete x.overrides; delete x.disabled })
 app.config = require('./settings.js')
 
 let rlMessage = "Rate limited ¯\\_(ツ)_/¯<br><br>Please do not spam my servers with a crazy amount of requests. It slows things down on my end and stresses RobTop's servers just as much." +
@@ -139,22 +141,24 @@ directories.forEach(d => {
   fs.readdirSync('./api/' + d).forEach(x => {if (x.includes('.')) app.run[x.split('.')[0]] = require('./api/' + d + "/" + x) })
 })
 
-app.xor = new XOR() //why complicated gjp stuff just xor it
+app.xor = new XOR()
+let hasSecretStuff = false
 
 try {
   const secrets = require("./misc/secretStuff.json")
+  hasSecretStuff = true
   app.id = secrets.id
-  app.password = secrets.password
-  app.gjp = app.xor.encrypt(app.password)
+  app.gjp = secrets.gjp || app.xor.encrypt(secrets.password)
   app.sheetsKey = secrets.sheetsKey
-  if (app.id == "account id goes here" || app.password == "account password goes here") console.warn("Warning: No account ID and/or password has been provided in secretStuff.json! These are required for level leaderboards to work.")
-  if (app.sheetsKey.startsWith("google sheets api key")) app.sheetsKey = undefined
+  if (!Number(app.id) || !secrets.password || !secrets.gjp || (secrets.password || secrets.gjp).includes("delete this line")) console.warn("Warning: No account ID and/or password has been provided in secretStuff.json! These are required for level leaderboards to work.")
+  if (app.sheetsKey.includes("google sheets api key")) app.sheetsKey = undefined
 }
 
 catch(e) {
   app.id = 0
   app.gjp = 0
-  console.warn("Warning: secretStuff.json has not been created! This file is required for level leaderboards to work.")
+  if (!hasSecretStuff) console.warn("Warning: secretStuff.json has not been created! This file is required for level leaderboards to work.")
+  else { console.warn("There was an error parsing your secretStuff.json file!"); console.error(e) }
 }
 
 app.parseResponse = function (responseBody, splitter) {
@@ -304,7 +308,7 @@ app.get("/icon/:text", function(req, res) { app.run.icon(app, req, res) })
 app.get("/api/userCache", function(req, res) { res.send(app.accountCache) })
 app.get("/api/achievements", function(req, res) { res.send({achievements, types: achievementTypes, shopIcons, colors: colorList }) })
 app.get("/api/music", function(req, res) { res.send(music) })
-app.get("/api/gdps", function(req, res) {res.send(req.query.hasOwnProperty("current") ? req.server : app.servers) })
+app.get("/api/gdps", function(req, res) {res.send(req.query.hasOwnProperty("current") ? app.safeServers.find(x => req.server.id == x.id) : app.safeServers) })
 app.get('/api/icons', function(req, res) { 
   let sample = [JSON.stringify(sampleIcons[Math.floor(Math.random() * sampleIcons.length)].slice(1))]
   let iconserver = req.isGDPS ? req.server.name : undefined
