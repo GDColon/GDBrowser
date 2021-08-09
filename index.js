@@ -234,7 +234,7 @@ app.get("/", function(req, res) {
         .replace(/Geometry Dash Browser!/g, req.server.name + " Browser!")
         .replace("/assets/gdlogo", `/assets/gdps/${req.id}_logo`)
         .replace("coin.png\" itemprop", `gdps/${req.id}_icon.png" itemprop`)
-        .replace(/coin\.png/g, 'silvercoin.png')
+        .replace(/coin\.png/g, `${req.server.onePointNine ? "blue" : "silver"}coin.png`)
         gdpsHide.forEach(x => { html = html.replace(`menu-${x}`, 'changeDaWorld') })
       }
       if (req.onePointNine) onePointNineDisabled.forEach(x => { html = html.replace(`menu-${x}`, 'menuDisabled') })
