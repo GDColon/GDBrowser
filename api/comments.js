@@ -20,7 +20,7 @@ module.exports = async (app, req, res) => {
 
     req.gdRequest(path, req.gdParams(params), function(err, resp, body) { 
 
-      if (err || body == '-1' || !body) return res.send("-1")
+      if (err) return res.send("-1")
 
       comments = body.split('|')
       comments = comments.map(x => x.split(':'))

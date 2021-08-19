@@ -8,7 +8,7 @@ module.exports = async (app, req, res) => {
 
     let songID = req.params.song
     req.gdRequest('getGJSongInfo', {songID: songID}, function(err, resp, body) {
-        if (err || !body || body.startsWith("<")) return res.send('-1')
+        if (err) return res.send('-1')
         else if (body < 0) return res.send(false)
         request.get('https://www.newgrounds.com/audio/listen/' + songID, function(err2, resp2, song) {
             console.log(resp2.statusCode)

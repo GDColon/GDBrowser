@@ -18,7 +18,7 @@ module.exports = async (app, req, res) => {
 
     req.gdRequest('getGJLevelScores211', params, function(err, resp, body) { 
 
-      if (err || body == -1 || !body) return res.send({error: true, lastWorked: app.timeSince(req.id)})
+      if (err) return res.send({error: true, lastWorked: app.timeSince(req.id)})
       scores = body.split('|').map(x => app.parseResponse(x)).filter(x => x[1])
       if (!scores.length) return res.send([])
       else app.trackSuccess(req.id)

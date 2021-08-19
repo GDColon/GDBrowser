@@ -95,7 +95,7 @@ module.exports = async (app, req, res) => {
 
     req.gdRequest('getGJLevels21', req.gdParams(filters), function(err, resp, body) {
 
-        if (err || !body || body == '-1' || body.startsWith("<")) return res.send("-1")
+        if (err) return res.send("-1")
         let splitBody = body.split('#')
         let preRes = splitBody[0].split('|')
         let authorList = {}

@@ -105,7 +105,11 @@ app.use(async function(req, res, next) {
     let endpoint = req.endpoint
     if (params.forceGD || (params.form && params.form.forceGD)) endpoint = "http://boomlings.com/database/"
     request.post(endpoint + target + '.php', parameters, function(err, res, body) {
-      return cb(err, res, body)
+      let error = err
+      if (!error && (err || !body || body.match(/^-\d$/) || body.startsWith("error") || body.startsWith("<"))) {
+        error = {serverError: true, response: body}
+      }
+      return cb(error, res, body)
     })
   }
 
@@ -150,7 +154,7 @@ try {
   app.id = secrets.id
   app.gjp = secrets.gjp || app.xor.encrypt(secrets.password)
   app.sheetsKey = secrets.sheetsKey
-  if (!Number(app.id) || !secrets.password || !secrets.gjp || (secrets.password || secrets.gjp).includes("delete this line")) console.warn("Warning: No account ID and/or password has been provided in secretStuff.json! These are required for level leaderboards to work.")
+  if (!Number(app.id) || (!secrets.password && !secrets.gjp) || (secrets.password || secrets.gjp).includes("delete this line")) console.warn("Warning: No account ID and/or password has been provided in secretStuff.json! These are required for level leaderboards to work.")
   if (app.sheetsKey.includes("google sheets api key")) app.sheetsKey = undefined
 }
 
@@ -161,11 +165,11 @@ catch(e) {
   else { console.warn("There was an error parsing your secretStuff.json file!"); console.error(e) }
 }
 
-app.parseResponse = function (responseBody, splitter) {
+app.parseResponse = function (responseBody, splitter=":") {
   if (!responseBody || responseBody == "-1") return {};
   if (responseBody.startsWith("\nWarning:")) responseBody = responseBody.split("\n").slice(2).join("\n").trim() // GDPS'es are wild
   if (responseBody.startsWith("<br />")) responseBody = responseBody.split("<br />").slice(2).join("<br />").trim() // Seriously screw this
-  let response = responseBody.split('#')[0].split(splitter || ':');
+  let response = responseBody.split('#')[0].split(splitter);
   let res = {};
   for (let i = 0; i < response.length; i += 2) {
   res[response[i]] = response[i + 1]}
@@ -323,5 +327,8 @@ app.get('*', function(req, res) {
 app.use(function (err, req, res, next) {
   if (err && err.message == "Response timeout") res.status(500).send('Internal server error! (Timed out)')
 })
+
+process.on('uncaughtException', (e) => { console.log(e) });
+process.on('unhandledRejection', (e, p) => { console.log(e) });
 
 app.listen(app.config.port, () => console.log(`Site online! (port ${app.config.port})`))

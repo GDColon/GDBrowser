@@ -21,7 +21,7 @@ module.exports = async (app, req, res, api, analyze) => {
 
   req.gdRequest('getGJLevels21', { str: levelID, type: 0 }, function (err, resp, body) {
 
-    if (err || !body || body == '-1' || body.startsWith("<") || body.startsWith("##")) return rejectLevel()
+    if (err || body.startsWith("##")) return rejectLevel()
 
     let preRes = body.split('#')[0].split('|', 10)
     let author = body.split('#')[1].split('|')[0].split(':')

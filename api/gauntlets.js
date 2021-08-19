@@ -10,7 +10,7 @@ module.exports = async (app, req, res) => {
 
   req.gdRequest('getGJGauntlets21', {}, function (err, resp, body) {
 
-    if (err || !body || body == '-1' || body.startsWith("<")) return res.send("-1")
+    if (err) return res.send("-1")
     let gauntlets = body.split('#')[0].split('|').map(x => app.parseResponse(x)).filter(x => x[3])
     let gauntletList = gauntlets.map(x => ({ id: +x[1], name: gauntletNames[+x[1] - 1] || "Unknown", levels: x[3].split(",") }))
 

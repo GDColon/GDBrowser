@@ -40,7 +40,7 @@ module.exports = async (app, req, res, api, getLevels) => {
       let account = app.parseResponse(body || "")
       let dumbGDPSError = req.isGDPS && (!account[16] || account[1].toLowerCase() == "undefined")
       
-      if (err2 || body == '-1' || !body || dumbGDPSError) {
+      if (err2 || dumbGDPSError) {
         if (!api) return res.redirect('/search/' + req.params.id)
         else return res.send("-1")
       }

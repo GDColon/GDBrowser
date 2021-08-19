@@ -13,7 +13,7 @@ module.exports = async (app, req, res) => {
   function mapPackLoop() {
     req.gdRequest('getGJMapPacks21', params, function (err, resp, body) {
 
-      if (err || !body || body == '-1' || body.startsWith("<")) return res.send("-1")
+      if (err) return res.send("-1")
 
       let newPacks = body.split('#')[0].split('|').map(x => app.parseResponse(x)).filter(x => x[2])
       packs = packs.concat(newPacks)

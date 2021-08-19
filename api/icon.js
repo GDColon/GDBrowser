@@ -374,11 +374,11 @@ module.exports = async (app, req, res) => {
     // skip request by causing fake error lmao
     req.gdRequest(skipRequest ? "" : 'getGJUsers20', skipRequest ? {} : req.gdParams({ str: username, forceGD }, !forceGD), function (err1, res1, body1) {
 
-      let result = foundID ? foundID[0] : (accountMode || err1 || !body1 || body1 == "-1" || body1.startsWith("<")) ? username : app.parseResponse(body1)[16];
+      let result = foundID ? foundID[0] : (accountMode || err1) ? username : app.parseResponse(body1)[16];
   
       req.gdRequest('getGJUserInfo20', req.gdParams({ targetAccountID: result, forceGD }, !forceGD), function (err2, res2, body2) {
   
-        if (err2 || !body2 || body2 == '-1' || body2.startsWith("<")) return buildIcon();
+        if (err2) return buildIcon();
         let iconData = app.parseResponse(body2)
         if (!foundID && !forceGD) app.userCache(req.id, iconData[16], iconData[2], iconData[1])
         return buildIcon(iconData, userCode);

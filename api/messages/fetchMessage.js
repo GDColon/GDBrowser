@@ -11,7 +11,7 @@ module.exports = async (app, req, res, api) => {
 
   req.gdRequest('downloadGJMessage20', params, function (err, resp, body) {
 
-    if (err || body == -1 || !body) return res.status(400).send(`Error fetching message! Try again later, or make sure your username and password are entered correctly. Last worked: ${app.timeSince(req.id)} ago.`)
+    if (err) return res.status(400).send(`Error fetching message! Try again later, or make sure your username and password are entered correctly. Last worked: ${app.timeSince(req.id)} ago.`)
     else app.trackSuccess(req.id)
 
     let x = app.parseResponse(body)

@@ -30,8 +30,7 @@ module.exports = async (app, req, res) => {
   params.chk = chk
 
   req.gdRequest('likeGJItem211', params, function (err, resp, body) {
-    if (err) return res.status(400).send("The Geometry Dash servers returned an error! Perhaps they're down for maintenance")
-    if (!body || body == -1) return res.status(400).send(`The Geometry Dash servers rejected your vote! Try again later, or make sure your username and password are entered correctly. Last worked: ${app.timeSince(req.id)} ago.`)
+    if (err) return res.status(400).send(`The Geometry Dash servers rejected your vote! Try again later, or make sure your username and password are entered correctly. Last worked: ${app.timeSince(req.id)} ago.`)
     else app.trackSuccess(req.id)
     res.status(200).send((params.like == 1 ? 'Successfully liked!' : 'Successfully disliked!') + " (this will only take effect if this is your first time doing so)")
   })
