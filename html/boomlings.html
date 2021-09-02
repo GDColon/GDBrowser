@@ -51,6 +51,7 @@
 
 	fetch(`../api/boomlings`).then(res => res.json()).then(res => {
 
+		if (res == "0") res = []
 		$('#boomerbox').html('')
 		$('.ranking').remove()
 

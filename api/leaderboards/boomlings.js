@@ -2,6 +2,8 @@ const request = require('request')
 
 module.exports = async (app, req, res) => {
 
+    if (req.isGDPS) return res.send("0")
+
     request.post('http://robtopgames.com/Boomlings/get_scores.php', {
     form : { secret: app.config.params.secret || "Wmfd2893gb7", name: "Player" }  }, function(err, resp, body) { 
 

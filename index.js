@@ -103,7 +103,7 @@ app.use(async function(req, res, next) {
     target = req.server.overrides ? (req.server.overrides[target] || target) : target
     let parameters = params.headers ? params : req.gdParams(params)
     let endpoint = req.endpoint
-    if (params.forceGD || (params.form && params.form.forceGD)) endpoint = "http://boomlings.com/database/"
+    if (params.forceGD || (params.form && params.form.forceGD)) endpoint = "http://www.boomlings.com/database/"
     request.post(endpoint + target + '.php', parameters, function(err, res, body) {
       let error = err
       if (!error && (err || !body || body.match(/^-\d$/) || body.startsWith("error") || body.startsWith("<"))) {
