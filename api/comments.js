@@ -26,7 +26,7 @@ module.exports = async (app, req, res) => {
       comments = comments.map(x => x.split(':'))
       comments = comments.map(x => x.map(x => app.parseResponse(x, "~")))
       if (req.query.type == "profile") comments.filter(x => x[0][2])
-      else comments = comments.filter(x => x[1] && x[1][1])
+      else comments = comments.filter(x => x[0] && x[0][2])
       if (!comments.length) return res.send("-1")
 
       let pages = body.split('#')[1].split(":")
@@ -52,10 +52,10 @@ module.exports = async (app, req, res) => {
         }
         
         if (req.query.type != "profile") {
-          comment.username = y[1] || "Unknown"
+          comment.username = y[1] || "-"
           comment.levelID = x[1] || req.params.id
-          comment.playerID = x[3]
-          comment.accountID = y[16]
+          comment.playerID = x[3] || 0
+          comment.accountID = y[16] || 0
           comment.color = (comment.playerID == "16" ? "50,255,255" : x[12] || "255,255,255")
           if (x[10] > 0) comment.percent = +x[10]
           comment.moderator = +x[11] || 0
