@@ -1,7 +1,7 @@
 {
     "credits": [
         {
-            "header": "Programming/Website",
+            "header": "Programming & Website",
             "name": "Colon",
             "youtube": ["https://youtube.com/channel/UCFDsxSlQXpLLpVScy2NmbcQ", "youtube"],
             "twitter": ["https://twitter.com/TheRealGDColon", "twitter"],
@@ -55,7 +55,7 @@
             "name": "RobTop",
             "youtube": ["https://youtube.com/channel/UCz_yk8mDSAnxJq0ar66L4sw", "youtube"],
             "twitter": ["https://twitter.com/RobTopGames", "twitter"],
-            "github": ["https://twitch.tv/RobTopGames", "twitch"]
+            "github": ["http://www.robtopgames.com/", "site"]
         }
     ],
 
