@@ -146,6 +146,7 @@ let like = true
 let lastPage = 0
 let auto = false
 let interval = null
+let commentCache = {}
 
 let target = `../api/level/${lvlID}`
 if (lvlID > 999999999 || lvlID < -999999999) window.location.href = window.location.href.replace("comments", "search")
@@ -204,7 +205,7 @@ Fetch(target).then(lvl => {
 		}
 	}
 
-function appendComments(auto) {
+function appendComments(auto, noCache) {
 
 if (loadingComments) return;
 else loadingComments = true;
@@ -224,13 +225,18 @@ else {
 	}
 }
 
-fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID}?count=${compact && !auto ? 20 : 10}&page=${page}${history ? "&type=commentHistory" : ""}&${mode}`).then(res => res.json()).then(res => {
+if (!noCache && commentCache[page]) addComments(commentCache[page])
+fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID}?count=${compact && !auto ? 20 : 10}&page=${page}${history ? "&type=commentHistory" : ""}&${mode}`).then(res => res.json()).then(addComments)
+
+function addComments(res) {
 	
 	if (history && lvl.commentHistory != "all") $('#pageUp').hide()
 
 	if (res == -1 || (history && lvl.commentHistory != "all")) {
 		loadingComments = false; return $('#loading').hide()
 	}
+
+	commentCache[page] = res
 
 	res.forEach((x, index) => {
 
@@ -318,7 +324,7 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 
 	 $('#loading').hide()
 	 return loadingComments = false;
-	})
+	}
 }
 
 loadingComments = false
@@ -332,6 +338,7 @@ function resetSort() {
 	page = 0
 	auto = false
 	clearInterval(interval)
+	commentCache = {}
 	$('#liveText').hide()
 	$('#autoMode').attr('src', `../assets/playbutton.png`)
 }
@@ -383,14 +390,14 @@ $('#autoMode').click(function() {
 		$('#autoMode').attr('src', `../assets/playbutton.png`)
 		clearInterval(interval)
 	}
-	appendComments(true)
+	appendComments(true, true)
 })
 
 $(document).on('click', '.refreshBtn', function () {
 	if (loadingComments) return
 	lastPage = 0;
 	page = 0;
-	appendComments()
+	appendComments(false, true)
 })
 
 $('#content').on('input', function() {

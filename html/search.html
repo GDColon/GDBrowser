@@ -91,6 +91,10 @@
 		<img class="gdButton" src="../assets/delete.png" width="60%" onclick="$('#purgeDiv').show()">
 	</div>
 
+	<div style="position:absolute; bottom: 2%; right: 1%; text-align: right; width: 15%;">
+		<img class="gdButton" src="../assets/refresh.png" width="40%" id="refreshPage"></a>
+	</div>
+
 	<div style="position: absolute; left: 7%; top: 45%; height: 10%;">
 		<img class="gdButton" id="pageDown" style="display: none"; src="../assets/arrow-left.png" height="90%">
 	</div>
@@ -132,6 +136,7 @@ let pages = 0
 let results = 0
 let legalPages = true
 let superSearch = ['*', '*?type=mostliked', '*?type=mostdownloaded', '*?type=recent'].includes(window.location.href.split('/')[4].toLowerCase())
+let pageCache = {}
 
 let demonListLink = "https://pointercrate.com/"
 let searchFilters = `../api/search/${type == 'saved' ? JSON.parse(localStorage.getItem('saved') || '[]').reverse().toString() : accID || path}?page=[PAGE]${count ? "" : "&count=10"}${window.location.search.replace(/\?/g, "&").replace("page", "nope")}`
@@ -143,7 +148,7 @@ if (type == "followed") {
 	searchFilters += ("&creators=" + followed.join()) 
 }
 
-function Append(firstLoad) {
+function Append(firstLoad, noCache) {
 
 	loading = true;
 	if (!firstLoad) $('#pagenum').text(`Page ${(page + 1)}${pages ? ` of ${pages}` : ""}`)
@@ -154,9 +159,13 @@ function Append(firstLoad) {
 	if (page == 0) $('#pageDown').hide()
 	else $('#pageDown').show()
 
-	Fetch(searchFilters.replace("[PAGE]", page)).then(res => {
+	if (!noCache && pageCache[page]) appendLevels(pageCache[page])
+	else Fetch(searchFilters.replace("[PAGE]", page)).then(appendLevels)
+
+	function appendLevels(res) {
 
 	if (res == '-1' || res.length == 0) { $('#loading').hide();  $('#pageUp').hide(); return loading = false }
+	pageCache[page] = res
 
 	if (firstLoad) {
 		pages = res[0].pages
@@ -234,7 +243,7 @@ function Append(firstLoad) {
 	$('#searchBox').append('<div style="height: 4.5%"></div>')
 	$('#loading').hide()
 	loading = false;
-})
+	}
 }
 
 Append(true)
@@ -242,6 +251,7 @@ Append(true)
 $('#pageUp').click(function() {page += 1; if (!loading) Append()})
 $('#pageDown').click(function() {page -= 1; if (!loading) Append()})
 $('#pageJump').click(function() {if (loading) return; page = parseInt(($('#pageSelect').val() || 1) - 1); Append()})
+$('#refreshPage').click(function() { Append(false, true) } )
 
 if (header) {
 	header = header.slice(0, 32) || "Level Search"

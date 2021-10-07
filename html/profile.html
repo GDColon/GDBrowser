@@ -87,8 +87,8 @@
 			--><span style="margin-left: 1%">[[USERNAME]]</span>
 		</h1>
 		
-		<hr style="margin-bottom: 2%">
-		<h3 id="collectibles">
+		<hr style="margin-bottom: 2%" class="profilePostHide">
+		<h3 id="collectibles" class="profilePostHide">
 			<span id="stars">[[STARS]]</span> <img class="help valign" src="../assets/star.png" title="Stars">
 			<span id="diamonds">[[DIAMONDS]]</span> <img class="help valign" src="../assets/diamond.png" title="Diamonds">
 			<span id="coins">[[COINS]]</span> <img class="help valign" src="../assets/coin.png" title="Secret Coins">
@@ -97,7 +97,7 @@
 			<span id="creatorpoints" style="display: none"><span id="cp">[[CP]]</span> <img class="help valign" src="../assets/cp.png" title="Creator Points"></span>
 		</h3>
 
-		<div class="lightBox center" id="iconsDiv" style="margin: 2% auto; width: 105vh">
+		<div class="lightBox center profilePostHide" id="iconsDiv" style="margin: 2% auto; width: 105vh">
 			<img src="../icon/icon?form=cube&icon=[[ICON]]&col1=[[COL1]]&col2=[[COL2]]&glow=[[GLOW]]" title="Cube [[ICON]]">
 			<img src="../icon/icon?form=ship&icon=[[SHIP]]&col1=[[COL1]]&col2=[[COL2]]&glow=[[GLOW]]" title="Ship [[SHIP]]" style="height: 8%">
 			<img src="../icon/icon?form=ball&icon=[[BALL]]&col1=[[COL1]]&col2=[[COL2]]&glow=[[GLOW]]" title="Ball [[BALL]]" >
@@ -108,22 +108,24 @@
 			<img src="../assets/deatheffects/[[DEATHEFFECT]].png" title="Death Effect [[DEATHEFFECT]]" id="deatheffect">
 		</div>
 
-		<div class="lightBox center dragscroll" id="statusDiv" style="margin: 2% auto; width: 105vh; height: 35vh; background-color: #BE6F3F">
+		<div class="lightBox center dragscroll" id="statusDiv" normalHeight="36vh" compactHeight="69vh" style="margin: 2% auto; width: 105vh; height: 36vh; background-color: #BE6F3F">
 		</div>
 
-		<div class="center" style="margin: 1.5% auto 2.5% auto;">
+		<div class="center profilePostHide" style="margin: 1.5% auto 2.5% auto;">
 			<a id="msgA" target="_blank"><img src="../assets/messages.png" height="10%" id="msgButton" class="sideSpace gdButton" onclick="$('#settingsDiv').show()"></a>
 			<img src="../assets/friends.png" height="10%" id="friendButton" class="sideSpace gdButton" onclick="$('#settingsDiv').show()">
 		</div>
 
-		<div style="position: absolute; bottom: 0%; left: 12%">
+		<div style="position: absolute; bottom: 0%; left: 12%;" class="profilePostHide">
 			<p style="text-align: left; font-size: 2.2vh; color: rgba(0, 0, 0, 0.5)">Account ID: [[ACCOUNTID]]<br>Player ID: [[PLAYERID]]</p>
 		</div>
 
-		<img src="../assets/follow-off.png" id="followOff" class="gdButton" style="position: absolute; left: 4.5%; bottom: 1%; width: 6%">
-		<img src="../assets/follow-on.png"  id="followOn"  class="gdButton" style="position: absolute; left: 4.5%; bottom: 1%; width: 6%; display: none">
+		<img src="../assets/follow-off.png" id="followOff" class="gdButton profilePostHide" style="position: absolute; left: 4.5%; bottom: 1%; width: 6%">
+		<img src="../assets/follow-on.png"  id="followOn"  class="gdButton profilePostHide" style="position: absolute; left: 4.5%; bottom: 1%; width: 6%; display: none">
 	
 		<a id="commentA"><img src="../assets/comments.png" class="gdButton" id="commentButton" style="position: absolute; right: 0.5%; bottom: 50%; width: 6%" onclick="$('#settingsDiv').show()"></a>
+		<img src="../assets/expanded-off.png" class="gdButton" id="compactMode" style="position: absolute; left: 2%; bottom: 45%; width: 6%">
+
 		<a href="../search/[[USERNAME]]?user"><img src="../assets/levels.png" class="gdButton" style="position: absolute; right: 0.5%; bottom: 1%; width: 6%"></a>
 
 		<div style="position: absolute; right: 0.5%; top: 0%; width: 6%">
@@ -132,12 +134,12 @@
 			<a id="twitch"  style="display: none" target="_blank" href="https://twitch.tv/[[TWITCH]]"><img src="../assets/twitch.png" class="gdButton socialButton"></a>
 		</div>
 
-		<div class="supercenter" id="pageDown" style="left: 5%; top: 65%; height: 10%; display: none;">
-			<img class="gdButton" src="../assets/arrow-left.png" height="95%" onclick="page -= 1; appendComments()">
+		<div class="supercenter" style="left: 5%; top: 65%; height: 10%">
+			<img class="gdButton" id="pageDown" style="display: none" src="../assets/arrow-left.png" height="95%" onclick="page -= 1; appendComments()">
 		</div>
 	
-		<div class="supercenter" id="pageUp" style="left: 95%; top: 65%; height: 10%;">
-			<img class="gdButton" src="../assets/arrow-right.png" height="95%" onclick="page += 1; appendComments()">
+		<div class="supercenter" style="left: 95%; top: 65%; height: 10%;">
+			<img class="gdButton" id="pageUp" src="../assets/arrow-right.png" height="95%" onclick="page += 1; appendComments()">
 		</div>
 
 		<div id="postButton" style="position:absolute; bottom: 0%; left: 0%; width: 14%; text-align: left; transform: translate(-35%, 40%);">
@@ -248,7 +250,8 @@ fetch(`../api/comments/[[ACCOUNTID]]?type=profile&page=${page}`).then(res => res
 		$('#statusDiv').append(`
 			<div class="commentBG">
 				<div class="comment">
-					<h2>[[USERNAME]]</h2>
+					<img class="inline statusIcon" src="../icon/icon?form=cube&icon=[[ICON]]&col1=[[COL1]]&col2=[[COL2]]&glow=[[GLOW]]&size=auto" height=21% style="display: ${compactMode ? "inline-block" : "none"}; margin-right: 0.8%">
+					<h2 class="inline">[[USERNAME]]</h2>
 					<div class="commentAlign">
 						<p class="pre commentText" style="color: rgb(${"[[USERNAME]]" == "RobTop" ? "50, 255, 255" : "[[MODERATOR]]" == "2" ? "75, 255, 75" : x.browserColor ? "255, 180, 255" : "255, 255, 255"})">${clean(x.content)}</p>
 					</div>
@@ -371,15 +374,43 @@ $('#submitVote').click(function() {
 	})
 })
 
+let compactMode = false
+$('#compactMode').click(function() {
+	compactMode = !compactMode
+	if (compactMode) {
+		$('.profilePostHide').hide()
+		$('.statusIcon').show()
+		$('#statusDiv').css('height', $('#statusDiv').attr('compactHeight'))
+		$(this).attr('src', "../assets/expanded-on.png")
+	}
+
+	else {
+		$('.profilePostHide').show()
+		$('.statusIcon').hide()	
+		$('#statusDiv').css('height', $('#statusDiv').attr('normalHeight'))
+		$(this).attr('src', "../assets/expanded-off.png")
+	}
+})
+
 $('#leavePost').on("change keyup keydown paste click", "textarea", function () {
 	$('#content').val($('#content').val().replace(/[^\S ]+/g, ""))
 })
 
 $(document).keydown(function(k) {
 	
-   if ($('#content').is(':visible')) {
-		if (k.which == 13) k.preventDefault() //enter
-   }
+	if ($('#content').is(':visible')) {
+			if (k.which == 13) k.preventDefault() //enter
+	}
+
+	if (loadingComments || $('.popup').is(":visible")) return;
+
+	if (k.which == 37 && $('#pageDown').is(":visible")) { //left
+		$('#pageDown').trigger('click')
+	}
+
+	if (k.which == 39 && $('#pageUp').is(":visible")) { //right
+		$('#pageUp').trigger('click')
+	}
 
 }) 
 
