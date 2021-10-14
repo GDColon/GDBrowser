@@ -94,7 +94,11 @@ else $('#pageUp').hide()
 Fetch(`../api/gdps?current=1`).then(server => {
 if (illegal || !server.demonList) return $('#loading').hide();
 
-fetch(`${server.demonList}api/v1/demons/${demonID}/`).then(res => res.json()).then(demonRes => {
+fetch(`${server.demonList}api/v2/demons/listed?after=${demonID-1}&before=${demonID+1}`).then(res => res.json()).then(rawDemon => {
+
+	// two requests because stadust is h
+	if (rawDemon && rawDemon[0]) fetch(`${server.demonList}api/v2/demons/${rawDemon[0].id}`).then(res => res.json()).then(demonRes => {
+
 	let demon = demonRes.data
 	if (!demon.id) window.location.href = "../../../"
 
@@ -133,6 +137,7 @@ fetch(`${server.demonList}api/v1/demons/${demonID}/`).then(res => res.json()).th
 	})
 
 	$('#loading').hide();
+}).catch(e => $('#loading').hide())
 }).catch(e => $('#loading').hide())
 
 })
