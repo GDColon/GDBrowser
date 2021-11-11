@@ -4,6 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "dev": "node ./index.js"
+  },
   "dependencies": {
     "canvas": "^2.8.0",
     "compression": "^1.7.4",
