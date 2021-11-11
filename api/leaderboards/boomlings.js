@@ -2,7 +2,7 @@ const request = require('request')
 
 module.exports = async (app, req, res) => {
 
-    // What is this supposed to notify, good or bad?
+    // Accurate leaderboard returns 418 because Private servers do not use.
     if (req.isGDPS) return res.status(418).send("0")
 
     request.post('http://robtopgames.com/Boomlings/get_scores.php', {

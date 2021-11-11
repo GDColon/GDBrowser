@@ -9,7 +9,7 @@ let caches = [{"stars": null, "coins": null, "demons": null, "diamonds": null}, 
 
 module.exports = async (app, req, res, post) => {
 
-      // What does this mean, good or bad?
+      // Accurate leaderboard returns 418 because private servers do not use.
       if (req.isGDPS) return res.status(418).send("-2")
       if (!app.sheetsKey) return res.status(500).send([])
       let gdMode = post || req.query.hasOwnProperty("gd")
