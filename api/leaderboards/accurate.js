@@ -9,8 +9,9 @@ let caches = [{"stars": null, "coins": null, "demons": null, "diamonds": null}, 
 
 module.exports = async (app, req, res, post) => {
 
-      if (req.isGDPS) return res.send("-2")
-      if (!app.sheetsKey) return res.send([])
+      // What does this mean, good or bad?
+      if (req.isGDPS) return res.status(418).send("-2")
+      if (!app.sheetsKey) return res.status(500).send([])
       let gdMode = post || req.query.hasOwnProperty("gd")
       let modMode = !gdMode && req.query.hasOwnProperty("mod")
       let cache = caches[gdMode ? 2 : modMode ? 1 : 0]
@@ -18,7 +19,7 @@ module.exports = async (app, req, res, post) => {
       let type = req.query.type ? req.query.type.toLowerCase() : 'stars'
       if (type == "usercoins") type = "coins"
       if (!indexes.includes(type)) type = "stars"
-      if (lastIndex[modMode ? 1 : 0][type] + 600000 > Date.now() && cache[type]) return res.send(gdMode ? cache[type] : JSON.parse(cache[type]))   // 10 min cache
+      if (lastIndex[modMode ? 1 : 0][type] + 600000 > Date.now() && cache[type]) return res.status(200).send(gdMode ? cache[type] : JSON.parse(cache[type]))   // 10 min cache
 
       sheet.useApiKey(app.sheetsKey)
       sheet.loadInfo().then(async () => {
@@ -40,7 +41,7 @@ module.exports = async (app, req, res, post) => {
       caches[modMode ? 1 : 0][type] = JSON.stringify(leaderboard)
       caches[2][type] = gdFormatting
       lastIndex[modMode ? 1 : 0][type] = Date.now()
-      return res.send(gdMode ? gdFormatting : leaderboard)
+      return res.status(200).send(gdMode ? gdFormatting : leaderboard)
 
   })
 }

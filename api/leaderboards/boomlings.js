@@ -2,12 +2,13 @@ const request = require('request')
 
 module.exports = async (app, req, res) => {
 
-    if (req.isGDPS) return res.send("0")
+    // What is this supposed to notify, good or bad?
+    if (req.isGDPS) return res.status(418).send("0")
 
     request.post('http://robtopgames.com/Boomlings/get_scores.php', {
     form : { secret: app.config.params.secret || "Wmfd2893gb7", name: "Player" }  }, function(err, resp, body) { 
 
-      if (err || !body || body == 0) return res.send("0")
+      if (err || !body || body == 0) return res.status(500).send("0")
 
       let info = body.split(" ").filter(x => x.includes(";"))
       let users = []
@@ -36,7 +37,7 @@ module.exports = async (app, req, res) => {
       users.push(user)
       })
 
-      return res.send(users)
+      return res.status(200).send(users)
       
       })
 }
