@@ -86,7 +86,7 @@ module.exports = async (app, req, res) => {
 
       let iconCode = `${req.query.form == "cursed" ? "cursed" : form}${topless ? "top" : ""}-${iconID}-${col1}-${col2}-${colG || "x"}-${colW || "x"}-${outline ? 1 : 0}` 
 
-      if (!sizeParam && (!isSpecial || drawLegs) && cache[iconCode]) return res.end(cache[iconCode].value)
+      if (!sizeParam && (!isSpecial || drawLegs) && cache[iconCode]) return res.status(200).end(cache[iconCode].value)
 
       let useExtra = false
       let originalOffset = icons[icon].spriteOffset;
@@ -301,7 +301,7 @@ module.exports = async (app, req, res) => {
                 cache[iconCode] = { value: buffer, timeoutID: setTimeout(function() {delete cache[iconCode]}, 10000000) }   // 3 hour cache
                 if (usercode) cache[usercode] = { value: buffer, timeoutID: setTimeout(function() {delete cache[usercode]}, 300000) }  // 5 min cache for player icons
               }
-              return res.end(buffer, 'base64')
+              return res.status(200).end(buffer, 'base64')
             })
           }
 
@@ -363,7 +363,7 @@ module.exports = async (app, req, res) => {
 
     else if (app.config.cachePlayerIcons && !Object.keys(req.query).filter(x => !["form", "forceGD"].includes(x)).length) {
       userCode = `${req.id}u-${username.toLowerCase()}-${forms[req.query.form] ? req.query.form : 'cube'}`
-      if (cache[userCode]) return res.end(cache[userCode].value)
+      if (cache[userCode]) return res.status(200).end(cache[userCode].value)
     }
 
     let accountMode = !req.query.hasOwnProperty("player") && Number(req.params.id)
