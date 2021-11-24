@@ -37,38 +37,28 @@ If you would like to add your GDPS to GDBrowser, [fill out this quick form](http
   
 If you 100% insist on adding a private server to your own magical little fork, you can do so by adding it to **servers.json**. Simply add a new object to the array with the following information:
 
+| identifier       | description                  |
+|:----------------:|:-----------------------------:|
+| `name`           | The display name of the server |
+| `link`           | The server's website URL (unrelated to the actual endpoint) |
+| `author`         | The creator(s) of the server |
+| `authorLink`     |  The URL to open when clicking on the creator's name |
+| `id`             | An ID for the server, also used as the subdomain (e.g. `something` would become `something.gdbrowser.com`) |
+| `endpoint`       | The actual endpoint to ~~spam~~ send requests to (e.g. `http://boomlings.com/database/` - make sure it ends with a slash!) |
 
-
-
-**name:** The display name of the server
-
-**link:** The server's website URL (unrelated to the actual endpoint)
-
-**author:** The creator(s) of the server
-
-**authorLink:** The URL to open when clicking on the creator's name
-
-**id:** An ID for the server, also used as the subdomain (e.g. `something` would become `something.gdbrowser.com`)
-
-**endpoint:** The actual endpoint to ~~spam~~ send requests to (e.g. `http://boomlings.com/database/` - make sure it ends with a slash!)
 
 There's also a few optional values for fine-tuning. I'll add more over time
 
-[string] **timestampSuffix:** A string to append at the end of timestamps. Vanilla GD uses " ago" 
-
-[string] **demonList:** The URL of the server's Demon List API, if it has one (e.g. `http://pointercrate.com/` - make sure it ends with a slash!)
-
-[array] **disabled:** An array of menu buttons to "disable" (mappacks, gauntlets, daily, weekly, etc). They appear greyed out but are still clickable.
-
-[bool] **pinned:** "Pins" the server to the top of the GDPS list. It appears above all unpinned servers and is not placed in alphabetical order.
-
-[bool] **onePointNine:** Makes a bunch of fancy changes to better fit 1.9 servers. (removes orbs/diamonds, hides some pointless buttons, etc)
-
-[bool] **weeklyLeaderboard:** Enables the lost but not forgotten Weekly Leaderboard, for servers that still milk it
-
-[object] **substitutions:** A list of parameter substitutions, because some servers rename/obfuscate them. (e.g. `{ "levelID": "oiuyhxp4w9I" }`)
-
-[object] **overrides:** A list of endpoint substitutions, because some servers use renamed or older versions. (e.g. `{ "getGJLevels21": "dorabaeChooseLevel42" }`)
+| identifier       | description                   | type |
+|:----------------:|:-----------------------------:|:----:|
+| `timestampSuffix` | A string to append at the end of timestamps. Vanilla GD uses " ago" | string |
+| `demonList` | The URL of the server's Demon List API, if it has one (e.g. `http://pointercrate.com/` - make sure it ends with a slash!) | string |
+| `disabled` | An array of menu buttons to "disable" (mappacks, gauntlets, daily, weekly, etc). They appear greyed out but are still clickable. | array |
+| `pinned` | "Pins" the server to the top of the GDPS list. It appears above all unpinned servers and is not placed in alphabetical order. | bool |
+| `onePointNine` | Makes a bunch of fancy changes to better fit 1.9 servers. (removes orbs/diamonds, hides some pointless buttons, etc) | bool |
+| `weeklyLeaderboard` | Enables the lost but not forgotten Weekly Leaderboard, for servers that still milk it | bool |
+| `substitutions` | A list of parameter substitutions, because some servers rename/obfuscate them. (e.g. `{ "levelID": "oiuyhxp4w9I" }`) | object |
+| `overrides` | A list of endpoint substitutions, because some servers use renamed or older versions. (e.g. `{ "getGJLevels21": "dorabaeChooseLevel42" }`) | object |
 
   
 
