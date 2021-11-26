@@ -133,23 +133,13 @@ comingsoon.html was used while the site was still in development, I just left it
   
 
 ## Icons
-
 It's GJ_Gamesheet02 but split into a much more intimidating cluster of a million files. These icons are put together and colored in the monstrosity that is icon.js
-
-  
-
-parseIconPlist.js reads GJ_GameSheet02-uhd.plist and magically transforms it into gameSheet.json. Props to 101arrowz for helping make this
-
-
-colors.json is a list of the player colors in GD. Fairly straight forward
-
-
-forms.json is a list of the different icon forms, their ingame filenames, and their index in responses from the GD servers
-
-
-offsets.json is a bunch of hardcoded offsets. Desperate times call for desperate measures
-
-  
+| name | description |
+|:----:|:-----------:|
+|`parseIconPlist.js`| Reads GJ_GameSheet02-uhd.plist and magically transforms it into gameSheet.json. Props to 101arrowz for helping make this |
+| `colors.json` | List of the player colors in GD. Fairly straight forward |
+| `forms.json` | List of the different icon forms, their ingame filenames, and their index in responses from the GD servers
+| `offsets.json` | A bunch of hardcoded offsets. Desperate times call for desperate measures |
 
 ## Misc
 
@@ -160,72 +150,32 @@ Inevitable misc folder
 **Level Analysis Stuff (in a separate folder)**
 
   
-
-blocks.json - The object IDs in the different 'families' of blocks
-
-  
-
-colorProperties.json - Color channel cheatsheet
-
-  
-
-initialProperties.json - Level settings cheatsheet
-
-  
-
-objectProperties.json - Object property cheatsheet. Low budget version of [AlFas' one](https://github.com/AlFasGD/GDAPI/blob/master/GDAPI/GDAPI/Enumerations/GeometryDash/ObjectProperty.cs)
-
-  
-
-objects.json - IDs for portals, orbs, triggers, and misc stuff
+| name | description |
+|:----:|:-----------:|
+| `blocks.json` | The object IDs in the different 'families' of blocks |
+| `colorProperties.json` | Color channel cheatsheet |
+| `initialProperties.json` | Level settings cheatsheet |
+| `objectProperties.json` | Object property cheatsheet. Low budget version of [AlFas' one](https://github.com/AlFasGD/GDAPI/blob/master/GDAPI/GDAPI/Enumerations/GeometryDash/ObjectProperty.cs) |
+| `objects.json` | IDs for portals, orbs, triggers, and misc stuff |
 
   
 
 **Everything Else**
 
   
-
-achievements.json - List of all GD/meltdown/subzero/etc achievements. `parseAchievementPlist.js` automatically creates this file
-
-  
-
-achievementTypes.json - An object containing different categories of achievements (stars, shards, vault, etc) and how to identify them
-
-  
-
-credits.json - Credits! (shown on the homepage)
-
-  
-
-dragscroll.js - Used on several pages for drag scrolling
-
-  
-
-music.json - An array of the official GD tracks (name, artist)
-
-  
-
-parseAchievementPlist.js - A script that reads GD's achievement .plist files and converts it into achievements.json
-
-  
-
-sampleIcons.json - A pool of icons, one of which will randomly appear when visiting the icon kit. Syntax is [Name, ID, Col1, Col2, Glow],
-
-  
-
-secretStuff.json - GJP goes here, needed for level leaderboards. Not included in the repo for obvious reasons
-
-  
-
-settings.js - Tweak small settings here, mainly for local use or GDPS'es
-
-  
-
-shops.js - A hardcoded list of all the shop icons in GD
-
-  
-
-sizecheck.js - Excecuted on most pages. Used for the 'page isn't wide enough' message, back button, and a few other things
+| name | description |
+|:----:|:-----------:|
+| `achievements.json` | List of all GD/meltdown/subzero/etc achievements. `parseAchievementPlist.js` automatically creates this file |
+| `achievementTypes.json` | An object containing different categories of achievements (stars, shards, vault, etc) and how to identify them |
+| `credits.json` | Credits! (shown on the homepage) | 
+| `dragscroll.js` | Used on several pages for drag scrolling |
+| `music.json` | An array of the official GD tracks (name, artist) |
+| `parseAchievementPlist.js` | A script that reads GD's achievement .plist files and converts it into achievements.json |
+| `sampleIcons.json` | A pool of icons, one of which will randomly appear when visiting the icon kit. Syntax is [Name, ID, Col1, Col2, Glow] |
+| `secretStuff.json` | GJP goes here, needed for level leaderboards. Not included in the repo for obvious reasons |
+| `settings.js` | Tweak small settings here, mainly for local use or GDPS'es |
+| `shops.js` | A hardcoded list of all the shop icons in GD |
+| `sizecheck.js` | Excecuted on most pages. Used for the 'page isn't wide enough' message, back button, and a few other things |
 
   
 
