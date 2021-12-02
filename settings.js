@@ -2,10 +2,10 @@
 // Feel free to enable/disable stuff here for smoother local use, free of rate limits
 
 module.exports = {
-    
-    port: 2000, // Port to host website on
 
-    params: {   // Always send this stuff to the servers
+    port: 8080, // Port to host website on. 8080 is objectively the best default port to use, screw 2000 (:
+
+    params: { // Always send this stuff to the servers
         secret: 'Wmfd2893gb7',
         gameVersion: '21',
         binaryVersion: '35',

@@ -14,5 +14,9 @@
     "jimp": "^0.8.5",
     "plist": "^3.0.1",
     "request": "^2.88.2"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "node test.js"
   }
 }
