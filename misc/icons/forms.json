@@ -1,0 +1,50 @@
+{
+  "icon": {
+    "form": "player",
+    "name": "Icon",
+    "index": 21
+  },
+  "ship": {
+    "form": "ship",
+    "name": "Ship",
+    "index": 22
+  },
+  "ball": {
+    "form": "player_ball",
+    "name": "Ball",
+    "index": 23
+  },
+  "ufo": {
+    "form": "bird",
+    "name": "UFO",
+    "index": 24
+  },
+  "wave": {
+    "form": "dart",
+    "name": "Wave",
+    "index": 25
+  },
+  "robot": {
+    "form": "robot",
+    "name": "Robot",
+    "legs": true,
+    "index": 26
+  },
+  "spider": {
+    "form": "spider",
+    "name": "Spider",
+    "legs": true,
+    "index": 43
+  },
+  "cursed": {
+    "form": "spider",
+    "name": "Cursed",
+    "legs": true,
+    "index": 43
+  },
+  "swing": {
+    "form": "swing",
+    "name": "Swing",
+    "index": -1
+  }
+}

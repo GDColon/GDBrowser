@@ -50,6 +50,8 @@
     <hr id="gdfloor">
     <div id="menuButtons" style="height: 65px; margin: 0 0 8 0;">
         <button class="blankButton menuButton" id="customColors" title="Settings" onclick="$('#settings').show()"><img src="../assets/iconkitbuttons/cog.png" width=60px></button>
+        <button class="blankButton menuButton" id="downloadPSD" title="Download layered PSD"><a id="psdLink" download="cube_1.psd" href=""><img src="../assets/iconkitbuttons/psd.png" width=60px></a></button>
+        <button class="blankButton menuButton" id="psdDisabled" style="display: none" onclick="alert('Robots and spiders still use older icon code and cannot be downloaded as a PSD! (hopefully soon)')"><img class="grayscale" src="../assets/iconkitbuttons/psd.png" width=60px></button>
         <button class="blankButton menuButton" id="downloadIcon" title="Download icon"><a id="downloadLink" download="cube_1.png" href=""><img src="../assets/iconkitbuttons/save.png" width=60px></a></button>
         <button class="blankButton menuButton" id="getUserIcon" title="Get player icon"><img src="../assets/iconkitbuttons/steal.png" width=60px></button>
         <button class="blankButton menuButton" id="randomIcon" title="Random Icon"><img src="../assets/iconkitbuttons/shuffle.png" width=60px></button>
@@ -84,7 +86,13 @@
         </div>
 
     <br>
-    <p style="color: rgb(20, 20, 20); margin-top: 4px">Created by <a target=_blank href="https://twitter.com/TheRealGDColon">Colon</a> • All sprites/assets belong to <a target=_blank href="http://robtopgames.com">RobTop Games</a> • <a target=_blank href="https://gdbrowser.com/api#icons">API Reference</a></p>
+    <p style="color: rgb(20, 20, 20); margin-top: 0px; line-height: 16px">
+        Created by <a target=_blank href="https://twitter.com/TheRealGDColon">Colon</a>
+        • All sprites/assets belong to <a target=_blank href="http://robtopgames.com">RobTop Games</a>
+        <br><br>
+        <a target=_blank href="https://gdbrowser.com/api#icons">API Reference</a>
+        • <a target=_blank href="https://github.com/GDColon/GDBrowser/blob/master/api/icon.js">Source Code</a>
+    </p>
 
     <div style="position:absolute; top: 2%; left: -1.95%; width: 10%; height: 25%; pointer-events: none">
 		<img class="gdButton" style="pointer-events: all" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()">
@@ -144,6 +152,11 @@ function colorSplit() {
     if ($("#colG").is(':visible') || $("#colW").is(':visible')) $('.colorSplit').show()
     else $('.colorSplit').hide()
 }
+function psdCheck() {
+    let psdHref = $('#psdLink').attr('href').toLowerCase()
+    if (psdHref.includes("&form=robot") || psdHref.includes("&form=spider")) { $('#downloadPSD').hide(); $('#psdDisabled').show() }
+    else { $('#downloadPSD').show(); $('#psdDisabled').hide() }
+}
 
 forms.forEach(form => {
     $("#iconTabs").append(`<button form="${form}" class="blankButton iconTabButton"><img src="../assets/iconkitbuttons/${form}_off.png" width=50px></button>`)
@@ -166,6 +179,8 @@ function generateIcon() {
     let finalURL = `../icon/icon?icon=${selectedIcon}&form=${selectedForm}${noDome ? "&topless=1" : ""}&col1=${selectedCol1}&col2=${selectedCol2}${selectedColG != selectedCol2 ? `&colG=${selectedColG}` : ""}${selectedColW ? `&colW=${selectedColW}` : ""}${enableGlow > 0 ? "&glow=1" : ""}${square ? "&size=auto" : ""}`
     $("#result").attr('src', finalURL).attr('download', `${selectedForm}_${selectedIcon}.png`)
     $("#downloadLink").attr('href', finalURL).attr('download', `${selectedForm}_${selectedIcon}.png`)
+    $("#psdLink").attr('href', finalURL + "&psd=1").attr('download', `${selectedForm}_${selectedIcon}.psd`)
+    psdCheck()
     if (enableGlow == 2) enableGlow = 0
 }
 
@@ -244,7 +259,8 @@ fetch('./api/icons').then(res => {
             currentForm = form
 
             $('.iconTabButton').each(function(x, y) {
-            $(this).children().first().attr('src', $(this).children().first().attr('src').replace('_on', '_off'))})
+                $(this).children().first().attr('src', $(this).children().first().attr('src').replace('_on', '_off'))
+            })
 
             var img = $(this).children().first()
             img.attr('src', img.attr('src').replace('_off', '_on'));
@@ -471,8 +487,10 @@ fetch('./api/icons').then(res => {
         $("#steal").hide()
         $("#loading").show()
         $("#result").hide()
-        $("#result").attr('src', iconURL).attr('download',  `${user}_${formCopy}.png`)
-        $("#downloadLink").attr('href', iconURL).attr('download',  `${user}_${formCopy}.png`)
+        $("#result").attr('src', iconURL).attr('download', `${user}_${formCopy}.png`)
+        $("#downloadLink").attr('href', iconURL).attr('download', `${user}_${formCopy}.png`)
+        $("#psdLink").attr('href', iconURL + "&psd=1").attr('download', `${user}_${formCopy}.psd`)
+        psdCheck()
         $('#glow').attr('src', '../assets/iconkitbuttons/streak_off.png')
         enableGlow = 0
 

@@ -1,0 +1,5486 @@
+{
+  "bird_01_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [147, 62]
+  },
+  "bird_01_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [139, 56]
+  },
+  "bird_01_3_001.png": {
+    "spriteOffset": [0, 59],
+    "spriteSize": [123, 78]
+  },
+  "bird_02_001.png": {
+    "spriteOffset": [0, 3],
+    "spriteSize": [154, 74]
+  },
+  "bird_02_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [138, 58]
+  },
+  "bird_02_3_001.png": {
+    "spriteOffset": [0, 59],
+    "spriteSize": [123, 78]
+  },
+  "bird_03_001.png": {
+    "spriteOffset": [0, 1],
+    "spriteSize": [150, 66]
+  },
+  "bird_03_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [144, 58]
+  },
+  "bird_03_3_001.png": {
+    "spriteOffset": [0, 59],
+    "spriteSize": [123, 78]
+  },
+  "bird_04_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [157, 66]
+  },
+  "bird_04_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [134, 60]
+  },
+  "bird_04_3_001.png": {
+    "spriteOffset": [0, 59],
+    "spriteSize": [123, 78]
+  },
+  "bird_05_001.png": {
+    "spriteOffset": [0, 6],
+    "spriteSize": [150, 78]
+  },
+  "bird_05_2_001.png": {
+    "spriteOffset": [0, 2],
+    "spriteSize": [120, 54]
+  },
+  "bird_05_3_001.png": {
+    "spriteOffset": [0, 59],
+    "spriteSize": [123, 78]
+  },
+  "bird_06_001.png": {
+    "spriteOffset": [0, 6],
+    "spriteSize": [148, 76]
+  },
+  "bird_06_2_001.png": {
+    "spriteOffset": [0, 6],
+    "spriteSize": [144, 72]
+  },
+  "bird_06_3_001.png": {
+    "spriteOffset": [0, 59],
+    "spriteSize": [123, 78]
+  },
+  "bird_07_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [142, 68]
+  },
+  "bird_07_2_001.png": {
+    "spriteOffset": [0, 2],
+    "spriteSize": [136, 52]
+  },
+  "bird_07_3_001.png": {
+    "spriteOffset": [0, 59],
+    "spriteSize": [123, 78]
+  },
+  "bird_08_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [148, 68]
+  },
+  "bird_08_2_001.png": {
+    "spriteOffset": [0, 6],
+    "spriteSize": [141, 50]
+  },
+  "bird_08_3_001.png": {
+    "spriteOffset": [0, 56],
+    "spriteSize": [123, 84]
+  },
+  "bird_09_001.png": {
+    "spriteOffset": [0, -1],
+    "spriteSize": [153, 68]
+  },
+  "bird_09_2_001.png": {
+    "spriteOffset": [0, 1],
+    "spriteSize": [144, 56]
+  },
+  "bird_09_3_001.png": {
+    "spriteOffset": [0, 61],
+    "spriteSize": [106, 72]
+  },
+  "bird_10_001.png": {
+    "spriteOffset": [0, -1],
+    "spriteSize": [118, 72]
+  },
+  "bird_10_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [104, 60]
+  },
+  "bird_10_3_001.png": {
+    "spriteOffset": [0, 61],
+    "spriteSize": [106, 72]
+  },
+  "bird_11_001.png": {
+    "spriteOffset": [0, 3],
+    "spriteSize": [132, 72]
+  },
+  "bird_11_2_001.png": {
+    "spriteOffset": [0, 14],
+    "spriteSize": [82, 14]
+  },
+  "bird_11_3_001.png": {
+    "spriteOffset": [0, 61],
+    "spriteSize": [106, 72]
+  },
+  "bird_12_001.png": {
+    "spriteOffset": [0, 5],
+    "spriteSize": [140, 66]
+  },
+  "bird_12_2_001.png": {
+    "spriteOffset": [0, -2],
+    "spriteSize": [132, 44]
+  },
+  "bird_12_3_001.png": {
+    "spriteOffset": [0, 61],
+    "spriteSize": [106, 72]
+  },
+  "bird_13_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [146, 62]
+  },
+  "bird_13_2_001.png": {
+    "spriteOffset": [0, 8],
+    "spriteSize": [138, 30]
+  },
+  "bird_13_3_001.png": {
+    "spriteOffset": [0, 61],
+    "spriteSize": [106, 72]
+  },
+  "bird_14_001.png": {
+    "spriteOffset": [0, 7],
+    "spriteSize": [148, 78]
+  },
+  "bird_14_2_001.png": {
+    "spriteOffset": [0, 18],
+    "spriteSize": [128, 50]
+  },
+  "bird_14_3_001.png": {
+    "spriteOffset": [0, 61],
+    "spriteSize": [106, 72]
+  },
+  "bird_15_001.png": {
+    "spriteOffset": [0, 13],
+    "spriteSize": [140, 92]
+  },
+  "bird_15_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [110, 56]
+  },
+  "bird_15_3_001.png": {
+    "spriteOffset": [0, 61],
+    "spriteSize": [106, 72]
+  },
+  "bird_16_001.png": {
+    "spriteOffset": [0, 7],
+    "spriteSize": [158, 78]
+  },
+  "bird_16_2_001.png": {
+    "spriteOffset": [0, 10],
+    "spriteSize": [122, 66]
+  },
+  "bird_16_3_001.png": {
+    "spriteOffset": [0, 61],
+    "spriteSize": [106, 72]
+  },
+  "bird_17_001.png": {
+    "spriteOffset": [0, 15],
+    "spriteSize": [136, 96]
+  },
+  "bird_17_2_001.png": {
+    "spriteOffset": [0, 25],
+    "spriteSize": [120, 72]
+  },
+  "bird_17_3_001.png": {
+    "spriteOffset": [0, 61],
+    "spriteSize": [106, 72]
+  },
+  "bird_18_001.png": {
+    "spriteOffset": [0, 8],
+    "spriteSize": [160, 78]
+  },
+  "bird_18_2_001.png": {
+    "spriteOffset": [0, 4],
+    "spriteSize": [88, 66]
+  },
+  "bird_18_3_001.png": {
+    "spriteOffset": [0, 61],
+    "spriteSize": [106, 72]
+  },
+  "bird_19_001.png": {
+    "spriteOffset": [0, -3],
+    "spriteSize": [148, 72]
+  },
+  "bird_19_2_001.png": {
+    "spriteOffset": [0, -7],
+    "spriteSize": [144, 60]
+  },
+  "bird_19_3_001.png": {
+    "spriteOffset": [0, 59],
+    "spriteSize": [122, 78]
+  },
+  "bird_20_001.png": {
+    "spriteOffset": [0, 4],
+    "spriteSize": [156, 76]
+  },
+  "bird_20_2_001.png": {
+    "spriteOffset": [0, 4],
+    "spriteSize": [153, 72]
+  },
+  "bird_20_3_001.png": {
+    "spriteOffset": [0, 59],
+    "spriteSize": [122, 78]
+  },
+  "bird_20_extra_001.png": {
+    "spriteOffset": [0, -9],
+    "spriteSize": [90, 48]
+  },
+  "bird_21_001.png": {
+    "spriteOffset": [0, -7],
+    "spriteSize": [128, 100]
+  },
+  "bird_21_2_001.png": {
+    "spriteOffset": [0, -22],
+    "spriteSize": [92, 68]
+  },
+  "bird_21_3_001.png": {
+    "spriteOffset": [0, 59],
+    "spriteSize": [122, 78]
+  },
+  "bird_21_extra_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [96, 70]
+  },
+  "bird_22_001.png": {
+    "spriteOffset": [0, 2],
+    "spriteSize": [180, 72]
+  },
+  "bird_22_2_001.png": {
+    "spriteOffset": [0, -10],
+    "spriteSize": [108, 34]
+  },
+  "bird_22_3_001.png": {
+    "spriteOffset": [0, 59],
+    "spriteSize": [122, 78]
+  },
+  "bird_22_extra_001.png": {
+    "spriteOffset": [0, 13],
+    "spriteSize": [74, 50]
+  },
+  "bird_23_001.png": {
+    "spriteOffset": [0, 1],
+    "spriteSize": [136, 70]
+  },
+  "bird_23_2_001.png": {
+    "spriteOffset": [0, -3],
+    "spriteSize": [132, 54]
+  },
+  "bird_23_3_001.png": {
+    "spriteOffset": [0, 59],
+    "spriteSize": [116, 78]
+  },
+  "bird_23_extra_001.png": {
+    "spriteOffset": [0, 5],
+    "spriteSize": [92, 20]
+  },
+  "bird_24_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [164, 68]
+  },
+  "bird_24_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [160, 64]
+  },
+  "bird_24_3_001.png": {
+    "spriteOffset": [0, 59],
+    "spriteSize": [122, 78]
+  },
+  "bird_24_extra_001.png": {
+    "spriteOffset": [0, 14],
+    "spriteSize": [128, 14]
+  },
+  "bird_25_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [136, 68]
+  },
+  "bird_25_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [132, 64]
+  },
+  "bird_25_3_001.png": {
+    "spriteOffset": [0, 59],
+    "spriteSize": [122, 78]
+  },
+  "bird_25_extra_001.png": {
+    "spriteOffset": [0, 4],
+    "spriteSize": [122, 52]
+  },
+  "bird_26_001.png": {
+    "spriteOffset": [0, 4],
+    "spriteSize": [130, 82]
+  },
+  "bird_26_2_001.png": {
+    "spriteOffset": [0, 12],
+    "spriteSize": [114, 62]
+  },
+  "bird_26_3_001.png": {
+    "spriteOffset": [0, 59],
+    "spriteSize": [122, 78]
+  },
+  "bird_26_extra_001.png": {
+    "spriteOffset": [0, 10],
+    "spriteSize": [114, 58]
+  },
+  "bird_27_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [156, 68]
+  },
+  "bird_27_2_001.png": {
+    "spriteOffset": [0, -5],
+    "spriteSize": [128, 54]
+  },
+  "bird_27_3_001.png": {
+    "spriteOffset": [0, 52],
+    "spriteSize": [122, 92]
+  },
+  "bird_27_extra_001.png": {
+    "spriteOffset": [0, 4],
+    "spriteSize": [82, 38]
+  },
+  "bird_28_001.png": {
+    "spriteOffset": [0, 7],
+    "spriteSize": [144, 96]
+  },
+  "bird_28_2_001.png": {
+    "spriteOffset": [0, 8],
+    "spriteSize": [140, 90]
+  },
+  "bird_28_3_001.png": {
+    "spriteOffset": [0, 59],
+    "spriteSize": [122, 78]
+  },
+  "bird_28_extra_001.png": {
+    "spriteOffset": [0, 7],
+    "spriteSize": [136, 80]
+  },
+  "bird_29_001.png": {
+    "spriteOffset": [0, 10],
+    "spriteSize": [148, 84]
+  },
+  "bird_29_2_001.png": {
+    "spriteOffset": [0, 8],
+    "spriteSize": [138, 76]
+  },
+  "bird_29_3_001.png": {
+    "spriteOffset": [0, 59],
+    "spriteSize": [122, 78]
+  },
+  "bird_29_extra_001.png": {
+    "spriteOffset": [0, 11],
+    "spriteSize": [132, 56]
+  },
+  "bird_30_001.png": {
+    "spriteOffset": [0, 21],
+    "spriteSize": [154, 114]
+  },
+  "bird_30_2_001.png": {
+    "spriteOffset": [0, 20],
+    "spriteSize": [152, 108]
+  },
+  "bird_30_3_001.png": {
+    "spriteOffset": [0, 53],
+    "spriteSize": [116, 92]
+  },
+  "bird_30_extra_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [112, 56]
+  },
+  "bird_31_001.png": {
+    "spriteOffset": [0, 3],
+    "spriteSize": [152, 68]
+  },
+  "bird_31_2_001.png": {
+    "spriteOffset": [0, 3],
+    "spriteSize": [136, 66]
+  },
+  "bird_31_3_001.png": {
+    "spriteOffset": [0, 59],
+    "spriteSize": [122, 78]
+  },
+  "bird_32_001.png": {
+    "spriteOffset": [0, 7],
+    "spriteSize": [144, 84]
+  },
+  "bird_32_2_001.png": {
+    "spriteOffset": [0, 4],
+    "spriteSize": [112, 60]
+  },
+  "bird_32_3_001.png": {
+    "spriteOffset": [0, 53],
+    "spriteSize": [116, 92]
+  },
+  "bird_32_extra_001.png": {
+    "spriteOffset": [0, 9],
+    "spriteSize": [140, 70]
+  },
+  "bird_33_001.png": {
+    "spriteOffset": [0, 13],
+    "spriteSize": [152, 102]
+  },
+  "bird_33_2_001.png": {
+    "spriteOffset": [0, -4],
+    "spriteSize": [144, 54]
+  },
+  "bird_33_3_001.png": {
+    "spriteOffset": [0, 59],
+    "spriteSize": [122, 78]
+  },
+  "bird_33_extra_001.png": {
+    "spriteOffset": [0, 6],
+    "spriteSize": [42, 22]
+  },
+  "bird_34_001.png": {
+    "spriteOffset": [0, 9],
+    "spriteSize": [150, 90]
+  },
+  "bird_34_2_001.png": {
+    "spriteOffset": [0, 9],
+    "spriteSize": [144, 82]
+  },
+  "bird_34_3_001.png": {
+    "spriteOffset": [0, 59],
+    "spriteSize": [122, 78]
+  },
+  "bird_34_extra_001.png": {
+    "spriteOffset": [0, 2],
+    "spriteSize": [138, 58]
+  },
+  "bird_35_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [140, 68]
+  },
+  "bird_35_2_001.png": {
+    "spriteOffset": [0, 2],
+    "spriteSize": [132, 52]
+  },
+  "bird_35_3_001.png": {
+    "spriteOffset": [0, 59],
+    "spriteSize": [122, 78]
+  },
+  "bird_35_extra_001.png": {
+    "spriteOffset": [0, 4],
+    "spriteSize": [128, 40]
+  },
+  "boost_01_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [140, 174]
+  },
+  "boost_02_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [132, 226]
+  },
+  "boost_03_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [202, 226]
+  },
+  "boost_04_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [260, 226]
+  },
+  "boost_05_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [276, 226]
+  },
+  "checkpoint_01_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [68, 126]
+  },
+  "dart_01_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [102, 82]
+  },
+  "dart_01_2_001.png": {
+    "spriteOffset": [-32, 0],
+    "spriteSize": [20, 40]
+  },
+  "dart_02_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [102, 82]
+  },
+  "dart_02_2_001.png": {
+    "spriteOffset": [-12, 0],
+    "spriteSize": [60, 40]
+  },
+  "dart_03_001.png": {
+    "spriteOffset": [-6, 0],
+    "spriteSize": [116, 82]
+  },
+  "dart_03_2_001.png": {
+    "spriteOffset": [-8, 0],
+    "spriteSize": [98, 44]
+  },
+  "dart_04_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [104, 82]
+  },
+  "dart_04_2_001.png": {
+    "spriteOffset": [-2, 0],
+    "spriteSize": [84, 62]
+  },
+  "dart_05_001.png": {
+    "spriteOffset": [-5, 0],
+    "spriteSize": [116, 80]
+  },
+  "dart_05_2_001.png": {
+    "spriteOffset": [-6, 0],
+    "spriteSize": [96, 50]
+  },
+  "dart_06_001.png": {
+    "spriteOffset": [-6, 0],
+    "spriteSize": [118, 82]
+  },
+  "dart_06_2_001.png": {
+    "spriteOffset": [-29, 0],
+    "spriteSize": [66, 40]
+  },
+  "dart_07_001.png": {
+    "spriteOffset": [-4, 0],
+    "spriteSize": [112, 82]
+  },
+  "dart_07_2_001.png": {
+    "spriteOffset": [-6, 0],
+    "spriteSize": [58, 20]
+  },
+  "dart_08_001.png": {
+    "spriteOffset": [-5, 0],
+    "spriteSize": [104, 96]
+  },
+  "dart_08_2_001.png": {
+    "spriteOffset": [-19, 0],
+    "spriteSize": [70, 36]
+  },
+  "dart_09_001.png": {
+    "spriteOffset": [-1, 0],
+    "spriteSize": [108, 82]
+  },
+  "dart_09_2_001.png": {
+    "spriteOffset": [-18, 0],
+    "spriteSize": [66, 42]
+  },
+  "dart_10_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [102, 82]
+  },
+  "dart_10_2_001.png": {
+    "spriteOffset": [-9, 0],
+    "spriteSize": [74, 50]
+  },
+  "dart_11_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [102, 82]
+  },
+  "dart_11_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [88, 30]
+  },
+  "dart_12_001.png": {
+    "spriteOffset": [-4, 0],
+    "spriteSize": [102, 76]
+  },
+  "dart_12_2_001.png": {
+    "spriteOffset": [-24, 0],
+    "spriteSize": [46, 62]
+  },
+  "dart_13_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [102, 86]
+  },
+  "dart_13_2_001.png": {
+    "spriteOffset": [-12, 0],
+    "spriteSize": [38, 34]
+  },
+  "dart_14_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [106, 88]
+  },
+  "dart_14_2_001.png": {
+    "spriteOffset": [-26, 0],
+    "spriteSize": [50, 62]
+  },
+  "dart_15_001.png": {
+    "spriteOffset": [-1, 0],
+    "spriteSize": [104, 84]
+  },
+  "dart_15_2_001.png": {
+    "spriteOffset": [5, 0],
+    "spriteSize": [85, 78]
+  },
+  "dart_16_001.png": {
+    "spriteOffset": [-2, 0],
+    "spriteSize": [106, 86]
+  },
+  "dart_16_2_001.png": {
+    "spriteOffset": [-8, 0],
+    "spriteSize": [90, 82]
+  },
+  "dart_17_001.png": {
+    "spriteOffset": [-1, 0],
+    "spriteSize": [104, 90]
+  },
+  "dart_17_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [71, 60]
+  },
+  "dart_18_001.png": {
+    "spriteOffset": [-1, 0],
+    "spriteSize": [108, 80]
+  },
+  "dart_18_2_001.png": {
+    "spriteOffset": [-1, 0],
+    "spriteSize": [104, 52]
+  },
+  "dart_19_001.png": {
+    "spriteOffset": [-6, 0],
+    "spriteSize": [96, 92]
+  },
+  "dart_19_2_001.png": {
+    "spriteOffset": [-15, 0],
+    "spriteSize": [70, 84]
+  },
+  "dart_20_001.png": {
+    "spriteOffset": [-1, 0],
+    "spriteSize": [106, 80]
+  },
+  "dart_20_2_001.png": {
+    "spriteOffset": [-7, 0],
+    "spriteSize": [48, 18]
+  },
+  "dart_21_001.png": {
+    "spriteOffset": [-1, 0],
+    "spriteSize": [102, 88]
+  },
+  "dart_21_2_001.png": {
+    "spriteOffset": [-4, 0],
+    "spriteSize": [58, 34]
+  },
+  "dart_22_001.png": {
+    "spriteOffset": [-7, 0],
+    "spriteSize": [102, 70]
+  },
+  "dart_22_2_001.png": {
+    "spriteOffset": [-7, 0],
+    "spriteSize": [94, 62]
+  },
+  "dart_23_001.png": {
+    "spriteOffset": [-1, 0],
+    "spriteSize": [110, 84]
+  },
+  "dart_23_2_001.png": {
+    "spriteOffset": [-1, 0],
+    "spriteSize": [102, 74]
+  },
+  "dart_24_001.png": {
+    "spriteOffset": [-2, 0],
+    "spriteSize": [102, 80]
+  },
+  "dart_24_2_001.png": {
+    "spriteOffset": [-1, 0],
+    "spriteSize": [94, 74]
+  },
+  "dart_24_extra_001.png": {
+    "spriteOffset": [16, 0],
+    "spriteSize": [47, 6]
+  },
+  "dart_25_001.png": {
+    "spriteOffset": [-1, 0],
+    "spriteSize": [104, 74]
+  },
+  "dart_25_2_001.png": {
+    "spriteOffset": [7, 0],
+    "spriteSize": [65, 62]
+  },
+  "dart_26_001.png": {
+    "spriteOffset": [-2, 0],
+    "spriteSize": [104, 80]
+  },
+  "dart_26_2_001.png": {
+    "spriteOffset": [-6, 0],
+    "spriteSize": [50, 60]
+  },
+  "dart_27_001.png": {
+    "spriteOffset": [0, 4],
+    "spriteSize": [108, 72]
+  },
+  "dart_27_2_001.png": {
+    "spriteOffset": [2, 0],
+    "spriteSize": [50, 48]
+  },
+  "dart_28_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [95, 84]
+  },
+  "dart_28_2_001.png": {
+    "spriteOffset": [-5, 0],
+    "spriteSize": [72, 48]
+  },
+  "dart_29_001.png": {
+    "spriteOffset": [-3, 0],
+    "spriteSize": [108, 82]
+  },
+  "dart_29_2_001.png": {
+    "spriteOffset": [-6, 0],
+    "spriteSize": [94, 76]
+  },
+  "dart_29_extra_001.png": {
+    "spriteOffset": [-12, 0],
+    "spriteSize": [48, 20]
+  },
+  "dart_30_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [100, 66]
+  },
+  "dart_30_2_001.png": {
+    "spriteOffset": [-3, 0],
+    "spriteSize": [86, 60]
+  },
+  "dart_30_extra_001.png": {
+    "spriteOffset": [6, 0],
+    "spriteSize": [11, 12]
+  },
+  "dart_31_001.png": {
+    "spriteOffset": [-7, 0],
+    "spriteSize": [116, 86]
+  },
+  "dart_31_2_001.png": {
+    "spriteOffset": [-8, 0],
+    "spriteSize": [108, 74]
+  },
+  "dart_31_extra_001.png": {
+    "spriteOffset": [-22, 0],
+    "spriteSize": [8, 16]
+  },
+  "dart_32_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [95, 80]
+  },
+  "dart_32_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [87, 74]
+  },
+  "dart_32_extra_001.png": {
+    "spriteOffset": [5, 0],
+    "spriteSize": [53, 16]
+  },
+  "dart_33_001.png": {
+    "spriteOffset": [-3, 0],
+    "spriteSize": [108, 72]
+  },
+  "dart_33_2_001.png": {
+    "spriteOffset": [-6, 0],
+    "spriteSize": [98, 64]
+  },
+  "dart_33_extra_001.png": {
+    "spriteOffset": [10, 0],
+    "spriteSize": [59, 62]
+  },
+  "dart_34_001.png": {
+    "spriteOffset": [-4, 0],
+    "spriteSize": [112, 70]
+  },
+  "dart_34_2_001.png": {
+    "spriteOffset": [9, 0],
+    "spriteSize": [63, 22]
+  },
+  "dart_34_extra_001.png": {
+    "spriteOffset": [3, 5],
+    "spriteSize": [29, 10]
+  },
+  "dart_35_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [102, 78]
+  },
+  "dart_35_2_001.png": {
+    "spriteOffset": [-8, 0],
+    "spriteSize": [74, 58]
+  },
+  "dart_35_extra_001.png": {
+    "spriteOffset": [6, 0],
+    "spriteSize": [49, 12]
+  },
+  "edit_eAlphaBtn_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [140, 122]
+  },
+  "edit_eAnimateBtn_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [162, 122]
+  },
+  "edit_eBGEOff_001.png": {
+    "spriteOffset": [0, -1],
+    "spriteSize": [136, 114]
+  },
+  "edit_eBGEOn_001.png": {
+    "spriteOffset": [0, -1],
+    "spriteSize": [136, 112]
+  },
+  "edit_eCollisionBlock01_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "edit_eCollisionBtn_001.png": {
+    "spriteOffset": [0, 2],
+    "spriteSize": [196, 128]
+  },
+  "edit_eCountBtn_001.png": {
+    "spriteOffset": [0, 1],
+    "spriteSize": [138, 126]
+  },
+  "edit_eCounterBtn_001.png": {
+    "spriteOffset": [0, 1],
+    "spriteSize": [174, 126]
+  },
+  "edit_eFollowComBtn_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [158, 124]
+  },
+  "edit_eFollowPComBtn_001.png": {
+    "spriteOffset": [0, 22],
+    "spriteSize": [170, 168]
+  },
+  "edit_eGhostDBtn_001.png": {
+    "spriteOffset": [0, -6],
+    "spriteSize": [141, 86]
+  },
+  "edit_eGhostEBtn_001.png": {
+    "spriteOffset": [0, -6],
+    "spriteSize": [129, 86]
+  },
+  "edit_eInstantCountBtn_001.png": {
+    "spriteOffset": [0, 18],
+    "spriteSize": [140, 160]
+  },
+  "edit_eMoveComBtn_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [114, 124]
+  },
+  "edit_eOnDeathBtn_001.png": {
+    "spriteOffset": [0, 18],
+    "spriteSize": [108, 160]
+  },
+  "edit_ePHideBtn_001.png": {
+    "spriteOffset": [0, 3],
+    "spriteSize": [90, 114]
+  },
+  "edit_ePShowBtn_001.png": {
+    "spriteOffset": [0, 3],
+    "spriteSize": [106, 114]
+  },
+  "edit_ePickupBtn_001.png": {
+    "spriteOffset": [0, 2],
+    "spriteSize": [156, 130]
+  },
+  "edit_ePulseBtn_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [134, 122]
+  },
+  "edit_eRotateComBtn_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [152, 124]
+  },
+  "edit_eShakeBtn_001.png": {
+    "spriteOffset": [0, 8],
+    "spriteSize": [140, 104]
+  },
+  "edit_eSpawnBtn_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [134, 122]
+  },
+  "edit_eStartPosBtn_001.png": {
+    "spriteOffset": [0, -2],
+    "spriteSize": [144, 86]
+  },
+  "edit_eStopMoverBtn_001.png": {
+    "spriteOffset": [0, 7],
+    "spriteSize": [138, 138]
+  },
+  "edit_eTint3DLBtn_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [84, 112]
+  },
+  "edit_eTintBGBtn_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [77, 112]
+  },
+  "edit_eTintCol01Btn_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [82, 112]
+  },
+  "edit_eTintG2Btn_001.png": {
+    "spriteOffset": [0, -1],
+    "spriteSize": [154, 110]
+  },
+  "edit_eTintGBtn_001.png": {
+    "spriteOffset": [0, -1],
+    "spriteSize": [110, 110]
+  },
+  "edit_eTintLBtn_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [100, 112]
+  },
+  "edit_eTintObjBtn_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [84, 112]
+  },
+  "edit_eToggleBtn2_001.png": {
+    "spriteOffset": [0, -18],
+    "spriteSize": [84, 86]
+  },
+  "edit_eToggleBtn_001.png": {
+    "spriteOffset": [0, 44],
+    "spriteSize": [158, 32]
+  },
+  "edit_eTouchBtn_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [138, 126]
+  },
+  "edit_eeFABtn_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [79, 80]
+  },
+  "edit_eeFALBtn_001.png": {
+    "spriteOffset": [-3, 0],
+    "spriteSize": [73, 80]
+  },
+  "edit_eeFARBtn_001.png": {
+    "spriteOffset": [3, 0],
+    "spriteSize": [72, 80]
+  },
+  "edit_eeFBBtn_001.png": {
+    "spriteOffset": [0, 4],
+    "spriteSize": [65, 112]
+  },
+  "edit_eeFLBtn_001.png": {
+    "spriteOffset": [2, 1],
+    "spriteSize": [112, 64]
+  },
+  "edit_eeFRBtn_001.png": {
+    "spriteOffset": [-2, 1],
+    "spriteSize": [111, 64]
+  },
+  "edit_eeFRHBtn_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [52, 116]
+  },
+  "edit_eeFRHInvBtn_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [52, 118]
+  },
+  "edit_eeFTBtn_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [65, 112]
+  },
+  "edit_eeNoneBtn_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [104, 104]
+  },
+  "edit_eeSDBtn_001.png": {
+    "spriteOffset": [-8, 0],
+    "spriteSize": [105, 48]
+  },
+  "edit_eeSUBtn_001.png": {
+    "spriteOffset": [4, 0],
+    "spriteSize": [108, 50]
+  },
+  "edit_scaleBtn_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [108, 60]
+  },
+  "fireBoost_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [48, 64]
+  },
+  "floorLine_01_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [1764, 6]
+  },
+  "floorLine_02_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [1801, 8]
+  },
+  "player_00_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_00_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [44, 44]
+  },
+  "player_01_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_01_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [26, 26]
+  },
+  "player_02_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_02_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [78, 60]
+  },
+  "player_03_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_03_2_001.png": {
+    "spriteOffset": [23, 0],
+    "spriteSize": [66, 112]
+  },
+  "player_04_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_04_2_001.png": {
+    "spriteOffset": [0, 7],
+    "spriteSize": [73, 54]
+  },
+  "player_05_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_05_2_001.png": {
+    "spriteOffset": [0, 27],
+    "spriteSize": [66, 22]
+  },
+  "player_06_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_06_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [113, 112]
+  },
+  "player_07_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_07_2_001.png": {
+    "spriteOffset": [0, 12],
+    "spriteSize": [18, 30]
+  },
+  "player_08_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_08_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [113, 112]
+  },
+  "player_09_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_09_2_001.png": {
+    "spriteOffset": [0, 21],
+    "spriteSize": [63, 22]
+  },
+  "player_100_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_100_2_001.png": {
+    "spriteOffset": [0, -7],
+    "spriteSize": [102, 66]
+  },
+  "player_100_extra_001.png": {
+    "spriteOffset": [0, -3],
+    "spriteSize": [100, 72]
+  },
+  "player_101_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_101_2_001.png": {
+    "spriteOffset": [0, 1],
+    "spriteSize": [104, 76]
+  },
+  "player_101_extra_001.png": {
+    "spriteOffset": [0, 1],
+    "spriteSize": [102, 74]
+  },
+  "player_102_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_102_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [108, 108]
+  },
+  "player_102_extra_001.png": {
+    "spriteOffset": [1, 18],
+    "spriteSize": [82, 12]
+  },
+  "player_103_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_103_2_001.png": {
+    "spriteOffset": [0, -36],
+    "spriteSize": [49, 20]
+  },
+  "player_103_extra_001.png": {
+    "spriteOffset": [0, -4],
+    "spriteSize": [102, 84]
+  },
+  "player_104_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_104_2_001.png": {
+    "spriteOffset": [13, -5],
+    "spriteSize": [47, 80]
+  },
+  "player_104_extra_001.png": {
+    "spriteOffset": [-1, 2],
+    "spriteSize": [146, 96]
+  },
+  "player_105_001.png": {
+    "spriteOffset": [2, -2],
+    "spriteSize": [127, 126]
+  },
+  "player_105_2_001.png": {
+    "spriteOffset": [3, 0],
+    "spriteSize": [117, 110]
+  },
+  "player_105_extra_001.png": {
+    "spriteOffset": [7, -10],
+    "spriteSize": [99, 98]
+  },
+  "player_106_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_106_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [110, 110]
+  },
+  "player_106_extra_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [108, 108]
+  },
+  "player_107_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_107_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [108, 108]
+  },
+  "player_108_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 124]
+  },
+  "player_108_2_001.png": {
+    "spriteOffset": [0, -3],
+    "spriteSize": [90, 66]
+  },
+  "player_109_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [123, 120]
+  },
+  "player_109_2_001.png": {
+    "spriteOffset": [2, -3],
+    "spriteSize": [109, 104]
+  },
+  "player_109_extra_001.png": {
+    "spriteOffset": [26, -22],
+    "spriteSize": [59, 64]
+  },
+  "player_10_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_10_2_001.png": {
+    "spriteOffset": [0, 18],
+    "spriteSize": [85, 22]
+  },
+  "player_110_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [127, 126]
+  },
+  "player_110_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_111_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [127, 128]
+  },
+  "player_111_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_111_extra_001.png": {
+    "spriteOffset": [5, 5],
+    "spriteSize": [3, 3]
+  },
+  "player_112_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 122]
+  },
+  "player_112_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [115, 114]
+  },
+  "player_112_extra_001.png": {
+    "spriteOffset": [0, 5],
+    "spriteSize": [113, 100]
+  },
+  "player_113_001.png": {
+    "spriteOffset": [1, 0],
+    "spriteSize": [141, 120]
+  },
+  "player_113_2_001.png": {
+    "spriteOffset": [2, 0],
+    "spriteSize": [135, 112]
+  },
+  "player_113_extra_001.png": {
+    "spriteOffset": [1, 0],
+    "spriteSize": [131, 110]
+  },
+  "player_114_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [122, 122]
+  },
+  "player_114_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [112, 112]
+  },
+  "player_114_extra_001.png": {
+    "spriteOffset": [14, -26],
+    "spriteSize": [81, 52]
+  },
+  "player_115_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [124, 122]
+  },
+  "player_115_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [118, 116]
+  },
+  "player_115_extra_001.png": {
+    "spriteOffset": [0, -20],
+    "spriteSize": [113, 70]
+  },
+  "player_116_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [133, 122]
+  },
+  "player_116_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [129, 118]
+  },
+  "player_116_extra_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [127, 114]
+  },
+  "player_117_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_117_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [88, 110]
+  },
+  "player_117_extra_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [85, 108]
+  },
+  "player_118_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_118_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [118, 118]
+  },
+  "player_118_extra_001.png": {
+    "spriteOffset": [0, -15],
+    "spriteSize": [108, 62]
+  },
+  "player_119_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_119_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [110, 110]
+  },
+  "player_119_extra_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [108, 108]
+  },
+  "player_11_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_11_2_001.png": {
+    "spriteOffset": [0, 9],
+    "spriteSize": [71, 26]
+  },
+  "player_120_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_120_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [110, 110]
+  },
+  "player_121_001.png": {
+    "spriteOffset": [0, 1],
+    "spriteSize": [134, 124]
+  },
+  "player_121_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [122, 114]
+  },
+  "player_121_extra_001.png": {
+    "spriteOffset": [-1, 1],
+    "spriteSize": [100, 84]
+  },
+  "player_122_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [122, 122]
+  },
+  "player_122_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [112, 110]
+  },
+  "player_123_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_123_2_001.png": {
+    "spriteOffset": [5, 0],
+    "spriteSize": [99, 110]
+  },
+  "player_124_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [124, 124]
+  },
+  "player_124_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [118, 118]
+  },
+  "player_125_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_125_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [112, 112]
+  },
+  "player_126_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [136, 124]
+  },
+  "player_126_2_001.png": {
+    "spriteOffset": [0, 6],
+    "spriteSize": [128, 102]
+  },
+  "player_127_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [126, 120]
+  },
+  "player_127_2_001.png": {
+    "spriteOffset": [0, 14],
+    "spriteSize": [110, 78]
+  },
+  "player_127_extra_001.png": {
+    "spriteOffset": [0, -7],
+    "spriteSize": [120, 68]
+  },
+  "player_128_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [124, 124]
+  },
+  "player_128_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [116, 116]
+  },
+  "player_128_extra_001.png": {
+    "spriteOffset": [-2, -4],
+    "spriteSize": [84, 90]
+  },
+  "player_129_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_129_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [106, 106]
+  },
+  "player_129_extra_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [79, 80]
+  },
+  "player_12_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_12_2_001.png": {
+    "spriteOffset": [0, -4],
+    "spriteSize": [85, 70]
+  },
+  "player_130_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_130_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [112, 110]
+  },
+  "player_131_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_131_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [112, 112]
+  },
+  "player_131_extra_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [74, 74]
+  },
+  "player_132_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_132_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [110, 104]
+  },
+  "player_133_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [122, 122]
+  },
+  "player_133_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [110, 110]
+  },
+  "player_133_extra_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [20, 20]
+  },
+  "player_134_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [122, 122]
+  },
+  "player_134_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [116, 116]
+  },
+  "player_135_001.png": {
+    "spriteOffset": [0, 2],
+    "spriteSize": [120, 126]
+  },
+  "player_135_2_001.png": {
+    "spriteOffset": [0, 2],
+    "spriteSize": [112, 118]
+  },
+  "player_136_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_136_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [116, 114]
+  },
+  "player_136_extra_001.png": {
+    "spriteOffset": [25, -2],
+    "spriteSize": [62, 60]
+  },
+  "player_137_001.png": {
+    "spriteOffset": [2, 6],
+    "spriteSize": [132, 134]
+  },
+  "player_137_2_001.png": {
+    "spriteOffset": [2, 7],
+    "spriteSize": [126, 128]
+  },
+  "player_137_extra_001.png": {
+    "spriteOffset": [27, 44],
+    "spriteSize": [64, 54]
+  },
+  "player_138_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_138_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [108, 108]
+  },
+  "player_138_extra_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [106, 106]
+  },
+  "player_139_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_139_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [110, 110]
+  },
+  "player_139_extra_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [108, 108]
+  },
+  "player_13_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_13_2_001.png": {
+    "spriteOffset": [0, 21],
+    "spriteSize": [64, 22]
+  },
+  "player_140_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_140_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [110, 110]
+  },
+  "player_141_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [124, 124]
+  },
+  "player_141_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [116, 116]
+  },
+  "player_141_extra_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [94, 94]
+  },
+  "player_142_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_142_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [92, 92]
+  },
+  "player_142_extra_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [88, 90]
+  },
+  "player_143_001.png": {
+    "spriteOffset":[0,0],
+    "spriteSize":[120,120]
+  },  
+  "player_143_2_001.png": {
+    "spriteOffset":[0,0],
+    "spriteSize":[92,88]
+  },  
+  "player_144_001.png": {
+    "spriteOffset":[0,0],
+    "spriteSize":[120,120]
+  },  
+  "player_144_2_001.png": {
+    "spriteOffset":[0,0],
+    "spriteSize":[88,88]
+  },  
+  "player_145_001.png": {
+    "spriteOffset":[0,0],
+    "spriteSize":[120,120]
+  },  
+  "player_145_2_001.png": {
+    "spriteOffset":[0,0],
+    "spriteSize":[108,108]
+  },  
+  "player_145_extra_001.png": {
+    "spriteOffset":[0,-2],
+    "spriteSize":[88,68]
+  },  
+  "player_146_001.png": {
+    "spriteOffset":[0,0],
+    "spriteSize":[120,120]
+  },  
+  "player_146_2_001.png": {
+    "spriteOffset":[0,-18],
+    "spriteSize":[92,52]
+  },  
+  "player_146_extra_001.png": {
+    "spriteOffset":[0,24],
+    "spriteSize":[92,36]
+  },  
+  "player_147_001.png": {
+    "spriteOffset":[0,0],
+    "spriteSize":[120,120]
+  },  
+  "player_147_2_001.png": {
+    "spriteOffset":[0,0],
+    "spriteSize":[104,112]
+  },  
+  "player_148_001.png": {
+    "spriteOffset":[0,0],
+    "spriteSize":[128,120]
+  },  
+  "player_148_2_001.png": {
+    "spriteOffset":[0,4],
+    "spriteSize":[108,100]
+  },  
+  "player_148_extra_001.png": {
+    "spriteOffset":[0,-8],
+    "spriteSize":[84,16]
+  },
+  "player_14_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_14_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [83, 82]
+  },
+  "player_15_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_15_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [111, 110]
+  },
+  "player_16_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_16_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [82, 82]
+  },
+  "player_17_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_17_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [111, 110]
+  },
+  "player_18_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_18_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [111, 110]
+  },
+  "player_19_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_19_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [85, 84]
+  },
+  "player_20_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_20_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [95, 94]
+  },
+  "player_21_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_21_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [111, 110]
+  },
+  "player_22_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_22_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [97, 98]
+  },
+  "player_23_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_23_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [111, 112]
+  },
+  "player_24_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_24_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [68, 68]
+  },
+  "player_25_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_25_2_001.png": {
+    "spriteOffset": [1, -1],
+    "spriteSize": [108, 108]
+  },
+  "player_26_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_26_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [113, 112]
+  },
+  "player_27_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_27_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [103, 102]
+  },
+  "player_28_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_28_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [110, 110]
+  },
+  "player_29_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_29_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [111, 110]
+  },
+  "player_30_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_30_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [92, 92]
+  },
+  "player_31_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_31_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [63, 62]
+  },
+  "player_32_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_32_2_001.png": {
+    "spriteOffset": [0, 3],
+    "spriteSize": [78, 90]
+  },
+  "player_33_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_33_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [111, 110]
+  },
+  "player_34_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_34_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [95, 94]
+  },
+  "player_35_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_35_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [111, 110]
+  },
+  "player_36_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_36_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [65, 90]
+  },
+  "player_37_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_37_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [111, 76]
+  },
+  "player_38_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_38_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [98, 98]
+  },
+  "player_39_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_39_2_001.png": {
+    "spriteOffset": [0, -7],
+    "spriteSize": [76, 62]
+  },
+  "player_40_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_40_2_001.png": {
+    "spriteOffset": [0, -2],
+    "spriteSize": [62, 52]
+  },
+  "player_41_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_41_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [83, 84]
+  },
+  "player_42_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_42_2_001.png": {
+    "spriteOffset": [0, -1],
+    "spriteSize": [80, 82]
+  },
+  "player_43_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_43_2_001.png": {
+    "spriteOffset": [1, -1],
+    "spriteSize": [108, 108]
+  },
+  "player_44_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_44_2_001.png": {
+    "spriteOffset": [0, 23],
+    "spriteSize": [66, 24]
+  },
+  "player_45_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_45_2_001.png": {
+    "spriteOffset": [0, -4],
+    "spriteSize": [111, 102]
+  },
+  "player_46_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [121, 120]
+  },
+  "player_46_2_001.png": {
+    "spriteOffset": [7, 0],
+    "spriteSize": [96, 110]
+  },
+  "player_47_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_47_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [72, 72]
+  },
+  "player_48_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_48_2_001.png": {
+    "spriteOffset": [-1, 10],
+    "spriteSize": [82, 48]
+  },
+  "player_49_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_49_2_001.png": {
+    "spriteOffset": [0, -38],
+    "spriteSize": [84, 34]
+  },
+  "player_50_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_50_2_001.png": {
+    "spriteOffset": [0, 6],
+    "spriteSize": [62, 32]
+  },
+  "player_51_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [124, 120]
+  },
+  "player_51_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [116, 96]
+  },
+  "player_52_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [128, 120]
+  },
+  "player_52_2_001.png": {
+    "spriteOffset": [0, -1],
+    "spriteSize": [98, 92]
+  },
+  "player_53_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_53_2_001.png": {
+    "spriteOffset": [0, 2],
+    "spriteSize": [86, 80]
+  },
+  "player_54_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_54_2_001.png": {
+    "spriteOffset": [0, -20],
+    "spriteSize": [102, 70]
+  },
+  "player_55_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_55_2_001.png": {
+    "spriteOffset": [-10, 10],
+    "spriteSize": [90, 90]
+  },
+  "player_56_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_56_2_001.png": {
+    "spriteOffset": [0, 2],
+    "spriteSize": [78, 18]
+  },
+  "player_57_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_57_2_001.png": {
+    "spriteOffset": [0, -17],
+    "spriteSize": [92, 60]
+  },
+  "player_58_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_58_2_001.png": {
+    "spriteOffset": [0, -4],
+    "spriteSize": [94, 86]
+  },
+  "player_59_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_59_2_001.png": {
+    "spriteOffset": [0, -19],
+    "spriteSize": [98, 62]
+  },
+  "player_60_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_60_2_001.png": {
+    "spriteOffset": [0, -1],
+    "spriteSize": [88, 90]
+  },
+  "player_61_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_61_2_001.png": {
+    "spriteOffset": [0, -7],
+    "spriteSize": [88, 64]
+  },
+  "player_62_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [122, 120]
+  },
+  "player_62_2_001.png": {
+    "spriteOffset": [-1, 9],
+    "spriteSize": [86, 18]
+  },
+  "player_63_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_63_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [78, 70]
+  },
+  "player_64_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_64_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [78, 78]
+  },
+  "player_65_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_65_2_001.png": {
+    "spriteOffset": [0, -12],
+    "spriteSize": [110, 86]
+  },
+  "player_66_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_66_2_001.png": {
+    "spriteOffset": [-28, 18],
+    "spriteSize": [22, 22]
+  },
+  "player_67_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_67_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [78, 66]
+  },
+  "player_68_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [144, 120]
+  },
+  "player_68_2_001.png": {
+    "spriteOffset": [0, -13],
+    "spriteSize": [136, 84]
+  },
+  "player_69_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_69_2_001.png": {
+    "spriteOffset": [0, -6],
+    "spriteSize": [110, 98]
+  },
+  "player_70_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_70_2_001.png": {
+    "spriteOffset": [0, -1],
+    "spriteSize": [86, 88]
+  },
+  "player_71_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_71_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [110, 110]
+  },
+  "player_72_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_72_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [70, 68]
+  },
+  "player_73_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_73_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [91, 94]
+  },
+  "player_74_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [126, 120]
+  },
+  "player_74_2_001.png": {
+    "spriteOffset": [0, 1],
+    "spriteSize": [118, 92]
+  },
+  "player_75_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_75_2_001.png": {
+    "spriteOffset": [1, 30],
+    "spriteSize": [25, 26]
+  },
+  "player_76_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_76_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [80, 80]
+  },
+  "player_77_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_77_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [98, 98]
+  },
+  "player_78_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_78_2_001.png": {
+    "spriteOffset": [0, -12],
+    "spriteSize": [110, 86]
+  },
+  "player_79_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_79_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [76, 76]
+  },
+  "player_80_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [126, 120]
+  },
+  "player_80_2_001.png": {
+    "spriteOffset": [0, 3],
+    "spriteSize": [118, 104]
+  },
+  "player_81_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_81_2_001.png": {
+    "spriteOffset": [0, 12],
+    "spriteSize": [50, 52]
+  },
+  "player_82_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_82_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [22, 22]
+  },
+  "player_83_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_83_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [92, 92]
+  },
+  "player_84_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_84_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [22, 22]
+  },
+  "player_85_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_85_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [110, 110]
+  },
+  "player_86_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_86_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [108, 26]
+  },
+  "player_87_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_87_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [110, 110]
+  },
+  "player_88_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_88_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [110, 110]
+  },
+  "player_89_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_89_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [108, 108]
+  },
+  "player_90_001.png": {
+    "spriteOffset": [0, 1],
+    "spriteSize": [120, 124]
+  },
+  "player_90_2_001.png": {
+    "spriteOffset": [0, 6],
+    "spriteSize": [82, 108]
+  },
+  "player_91_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_91_2_001.png": {
+    "spriteOffset": [0, 27],
+    "spriteSize": [86, 16]
+  },
+  "player_92_001.png": {
+    "spriteOffset": [0, 7],
+    "spriteSize": [152, 138]
+  },
+  "player_92_2_001.png": {
+    "spriteOffset": [0, 13],
+    "spriteSize": [144, 118]
+  },
+  "player_93_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [142, 120]
+  },
+  "player_93_2_001.png": {
+    "spriteOffset": [0, 5],
+    "spriteSize": [132, 98]
+  },
+  "player_94_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [142, 120]
+  },
+  "player_94_2_001.png": {
+    "spriteOffset": [0, 17],
+    "spriteSize": [132, 32]
+  },
+  "player_95_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_95_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [76, 62]
+  },
+  "player_96_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_96_2_001.png": {
+    "spriteOffset": [9, 0],
+    "spriteSize": [91, 110]
+  },
+  "player_97_001.png": {
+    "spriteOffset": [0, -4],
+    "spriteSize": [140, 130]
+  },
+  "player_97_2_001.png": {
+    "spriteOffset": [0, -23],
+    "spriteSize": [134, 88]
+  },
+  "player_97_extra_001.png": {
+    "spriteOffset": [0, -11],
+    "spriteSize": [98, 86]
+  },
+  "player_98_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 120]
+  },
+  "player_98_2_001.png": {
+    "spriteOffset": [1, -18],
+    "spriteSize": [84, 74]
+  },
+  "player_98_extra_001.png": {
+    "spriteOffset": [1, -18],
+    "spriteSize": [82, 72]
+  },
+  "player_99_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [136, 124]
+  },
+  "player_99_2_001.png": {
+    "spriteOffset": [0, -19],
+    "spriteSize": [102, 74]
+  },
+  "player_99_extra_001.png": {
+    "spriteOffset": [0, -16],
+    "spriteSize": [100, 78]
+  },
+  "player_ball_00_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [141, 140]
+  },
+  "player_ball_00_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [58, 58]
+  },
+  "player_ball_01_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [141, 140]
+  },
+  "player_ball_01_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [72, 72]
+  },
+  "player_ball_02_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [141, 140]
+  },
+  "player_ball_02_2_001.png": {
+    "spriteOffset": [-4, -21],
+    "spriteSize": [123, 90]
+  },
+  "player_ball_03_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [141, 140]
+  },
+  "player_ball_03_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [113, 112]
+  },
+  "player_ball_04_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [141, 140]
+  },
+  "player_ball_04_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [113, 112]
+  },
+  "player_ball_05_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [141, 140]
+  },
+  "player_ball_05_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [89, 90]
+  },
+  "player_ball_06_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [141, 140]
+  },
+  "player_ball_06_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [131, 132]
+  },
+  "player_ball_07_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [141, 140]
+  },
+  "player_ball_07_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [95, 96]
+  },
+  "player_ball_08_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [141, 140]
+  },
+  "player_ball_08_2_001.png": {
+    "spriteOffset": [-2, 4],
+    "spriteSize": [127, 124]
+  },
+  "player_ball_09_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [141, 140]
+  },
+  "player_ball_09_2_001.png": {
+    "spriteOffset": [0, 19],
+    "spriteSize": [53, 94]
+  },
+  "player_ball_10_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [140, 140]
+  },
+  "player_ball_10_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [101, 100]
+  },
+  "player_ball_11_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [140, 140]
+  },
+  "player_ball_11_2_001.png": {
+    "spriteOffset": [19, -4],
+    "spriteSize": [94, 124]
+  },
+  "player_ball_12_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [140, 140]
+  },
+  "player_ball_12_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [132, 132]
+  },
+  "player_ball_13_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [140, 140]
+  },
+  "player_ball_13_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [96, 132]
+  },
+  "player_ball_14_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [140, 140]
+  },
+  "player_ball_14_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [112, 132]
+  },
+  "player_ball_15_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [142, 142]
+  },
+  "player_ball_15_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [112, 112]
+  },
+  "player_ball_16_001.png": {
+    "spriteOffset": [-4, 0],
+    "spriteSize": [132, 140]
+  },
+  "player_ball_16_2_001.png": {
+    "spriteOffset": [0, -3],
+    "spriteSize": [112, 106]
+  },
+  "player_ball_17_001.png": {
+    "spriteOffset": [-4, 0],
+    "spriteSize": [132, 140]
+  },
+  "player_ball_17_2_001.png": {
+    "spriteOffset": [9, 0],
+    "spriteSize": [72, 76]
+  },
+  "player_ball_18_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [140, 140]
+  },
+  "player_ball_18_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [128, 128]
+  },
+  "player_ball_19_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [140, 140]
+  },
+  "player_ball_19_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [130, 130]
+  },
+  "player_ball_20_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [140, 140]
+  },
+  "player_ball_20_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [130, 130]
+  },
+  "player_ball_21_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [140, 140]
+  },
+  "player_ball_21_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [36, 130]
+  },
+  "player_ball_22_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [140, 140]
+  },
+  "player_ball_22_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [130, 130]
+  },
+  "player_ball_22_extra_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [76, 76]
+  },
+  "player_ball_23_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [140, 140]
+  },
+  "player_ball_23_2_001.png": {
+    "spriteOffset": [1, 0],
+    "spriteSize": [85, 62]
+  },
+  "player_ball_23_extra_001.png": {
+    "spriteOffset": [-3, 17],
+    "spriteSize": [118, 94]
+  },
+  "player_ball_24_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [140, 140]
+  },
+  "player_ball_24_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [130, 130]
+  },
+  "player_ball_24_extra_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [90, 64]
+  },
+  "player_ball_25_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [140, 140]
+  },
+  "player_ball_25_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [130, 130]
+  },
+  "player_ball_25_extra_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [88, 90]
+  },
+  "player_ball_26_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [140, 140]
+  },
+  "player_ball_26_2_001.png": {
+    "spriteOffset": [-4, -4],
+    "spriteSize": [124, 124]
+  },
+  "player_ball_27_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [140, 140]
+  },
+  "player_ball_27_2_001.png": {
+    "spriteOffset": [0, 4],
+    "spriteSize": [71, 84]
+  },
+  "player_ball_28_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [140, 140]
+  },
+  "player_ball_28_2_001.png": {
+    "spriteOffset": [0, 7],
+    "spriteSize": [130, 96]
+  },
+  "player_ball_28_extra_001.png": {
+    "spriteOffset": [0, -11],
+    "spriteSize": [46, 50]
+  },
+  "player_ball_29_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [140, 140]
+  },
+  "player_ball_29_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [132, 132]
+  },
+  "player_ball_30_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [140, 140]
+  },
+  "player_ball_30_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [100, 100]
+  },
+  "player_ball_31_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [138, 138]
+  },
+  "player_ball_31_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [110, 110]
+  },
+  "player_ball_32_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [140, 140]
+  },
+  "player_ball_32_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [124, 124]
+  },
+  "player_ball_33_001.png": {
+    "spriteOffset": [0, -4],
+    "spriteSize": [140, 132]
+  },
+  "player_ball_33_2_001.png": {
+    "spriteOffset": [0, -5],
+    "spriteSize": [132, 122]
+  },
+  "player_ball_34_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [142, 142]
+  },
+  "player_ball_34_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [106, 132]
+  },
+  "player_ball_35_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [142, 141]
+  },
+  "player_ball_35_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [112, 112]
+  },
+  "player_ball_35_extra_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [30, 19]
+  },
+  "player_ball_36_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [140, 140]
+  },
+  "player_ball_36_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [98, 97]
+  },
+  "player_ball_37_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [140, 140]
+  },
+  "player_ball_37_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [116, 115]
+  },
+  "player_ball_38_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [144, 144]
+  },
+  "player_ball_38_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [110, 110]
+  },
+  "player_ball_39_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [142, 140]
+  },
+  "player_ball_39_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [94, 126]
+  },
+  "player_ball_40_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [144, 144]
+  },
+  "player_ball_40_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [132, 58]
+  },
+  "player_ball_41_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [140, 140]
+  },
+  "player_ball_41_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [104, 104]
+  },
+  "player_ball_42_001.png": {
+    "spriteOffset": [4, 0],
+    "spriteSize": [131, 140]
+  },
+  "player_ball_42_2_001.png": {
+    "spriteOffset": [4, 0],
+    "spriteSize": [123, 132]
+  },
+  "player_ball_43_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [140, 140]
+  },
+  "player_ball_43_2_001.png": {
+    "spriteOffset": [8, -4],
+    "spriteSize": [115, 100]
+  },
+  "portal_01_back_001.png": {
+    "spriteOffset": [-43, 0],
+    "spriteSize": [84, 306]
+  },
+  "portal_01_front_001.png": {
+    "spriteOffset": [21, -3],
+    "spriteSize": [96, 300]
+  },
+  "portal_02_back_001.png": {
+    "spriteOffset": [-43, 0],
+    "spriteSize": [84, 308]
+  },
+  "portal_02_front_001.png": {
+    "spriteOffset": [21, -3],
+    "spriteSize": [96, 300]
+  },
+  "portal_03_back_001.png": {
+    "spriteOffset": [-47, 0],
+    "spriteSize": [100, 308]
+  },
+  "portal_03_front_001.png": {
+    "spriteOffset": [22, -1],
+    "spriteSize": [134, 340]
+  },
+  "portal_04_back_001.png": {
+    "spriteOffset": [-47, 0],
+    "spriteSize": [100, 308]
+  },
+  "portal_04_front_001.png": {
+    "spriteOffset": [22, -1],
+    "spriteSize": [134, 340]
+  },
+  "portal_05_back_001.png": {
+    "spriteOffset": [-30, -1],
+    "spriteSize": [200, 308]
+  },
+  "portal_05_front_001.png": {
+    "spriteOffset": [30, 0],
+    "spriteSize": [174, 362]
+  },
+  "portal_06_back_001.png": {
+    "spriteOffset": [-30, -1],
+    "spriteSize": [200, 308]
+  },
+  "portal_06_front_001.png": {
+    "spriteOffset": [30, 0],
+    "spriteSize": [174, 362]
+  },
+  "portal_07_back_001.png": {
+    "spriteOffset": [-47, 0],
+    "spriteSize": [100, 308]
+  },
+  "portal_07_front_001.png": {
+    "spriteOffset": [22, -1],
+    "spriteSize": [134, 340]
+  },
+  "portal_08_back_001.png": {
+    "spriteOffset": [-49, 0],
+    "spriteSize": [101, 302]
+  },
+  "portal_08_front_001.png": {
+    "spriteOffset": [26, 0],
+    "spriteSize": [124, 358]
+  },
+  "portal_09_back_001.png": {
+    "spriteOffset": [-49, 0],
+    "spriteSize": [102, 302]
+  },
+  "portal_09_front_001.png": {
+    "spriteOffset": [27, -1],
+    "spriteSize": [121, 356]
+  },
+  "portal_10_back_001.png": {
+    "spriteOffset": [-47, 0],
+    "spriteSize": [100, 308]
+  },
+  "portal_10_front_001.png": {
+    "spriteOffset": [22, -1],
+    "spriteSize": [134, 340]
+  },
+  "portal_11_back_001.png": {
+    "spriteOffset": [-21, -5],
+    "spriteSize": [112, 288]
+  },
+  "portal_11_front_001.png": {
+    "spriteOffset": [5, 0],
+    "spriteSize": [162, 360]
+  },
+  "portal_12_back_001.png": {
+    "spriteOffset": [-21, -5],
+    "spriteSize": [112, 288]
+  },
+  "portal_12_front_001.png": {
+    "spriteOffset": [5, 0],
+    "spriteSize": [162, 360]
+  },
+  "portal_13_back_001.png": {
+    "spriteOffset": [-47, 0],
+    "spriteSize": [100, 308]
+  },
+  "portal_13_front_001.png": {
+    "spriteOffset": [22, -1],
+    "spriteSize": [134, 340]
+  },
+  "portal_14_back_001.png": {
+    "spriteOffset": [-46, 0],
+    "spriteSize": [99, 308]
+  },
+  "portal_14_front_001.png": {
+    "spriteOffset": [22, -1],
+    "spriteSize": [134, 340]
+  },
+  "portal_15_back_001.png": {
+    "spriteOffset": [-47, -4],
+    "spriteSize": [100, 336]
+  },
+  "portal_15_front_001.png": {
+    "spriteOffset": [32, 0],
+    "spriteSize": [152, 360]
+  },
+  "portal_16_back_001.png": {
+    "spriteOffset": [-46, -5],
+    "spriteSize": [99, 334]
+  },
+  "portal_16_front_001.png": {
+    "spriteOffset": [32, 0],
+    "spriteSize": [152, 360]
+  },
+  "portal_17_back_001.png": {
+    "spriteOffset": [-44, 0],
+    "spriteSize": [94, 298]
+  },
+  "portal_17_front_001.png": {
+    "spriteOffset": [22, 0],
+    "spriteSize": [134, 338]
+  },
+  "robot_01_01_001.png": {
+    "spriteOffset": [1, 0],
+    "spriteSize": [110, 78]
+  },
+  "robot_01_01_2_001.png": {
+    "spriteOffset": [0, -7],
+    "spriteSize": [96, 56]
+  },
+  "robot_01_01_glow_001.png": {
+    "spriteOffset": [1, 0],
+    "spriteSize": [118, 86]
+  },
+  "robot_01_02_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [38, 54]
+  },
+  "robot_01_02_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [6, 6]
+  },
+  "robot_01_02_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [46, 62]
+  },
+  "robot_01_03_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [18, 50]
+  },
+  "robot_01_03_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [14, 46]
+  },
+  "robot_01_03_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [26, 58]
+  },
+  "robot_01_04_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [54, 34]
+  },
+  "robot_01_04_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [6, 6]
+  },
+  "robot_01_04_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [62, 42]
+  },
+  "robot_02_01_001.png": {
+    "spriteOffset": [-4, 0],
+    "spriteSize": [116, 78]
+  },
+  "robot_02_01_2_001.png": {
+    "spriteOffset": [18, 8],
+    "spriteSize": [44, 16]
+  },
+  "robot_02_01_glow_001.png": {
+    "spriteOffset": [-4, 0],
+    "spriteSize": [126, 88]
+  },
+  "robot_02_02_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [38, 54]
+  },
+  "robot_02_02_2_001.png": {
+    "spriteOffset": [0, 7],
+    "spriteSize": [14, 18]
+  },
+  "robot_02_02_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [46, 62]
+  },
+  "robot_02_03_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [18, 50]
+  },
+  "robot_02_03_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [14, 46]
+  },
+  "robot_02_03_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [26, 58]
+  },
+  "robot_02_04_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [52, 32]
+  },
+  "robot_02_04_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [6, 6]
+  },
+  "robot_02_04_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [60, 40]
+  },
+  "robot_03_01_001.png": {
+    "spriteOffset": [-1, 5],
+    "spriteSize": [120, 100]
+  },
+  "robot_03_01_2_001.png": {
+    "spriteOffset": [-7, 13],
+    "spriteSize": [104, 80]
+  },
+  "robot_03_01_glow_001.png": {
+    "spriteOffset": [-1, 5],
+    "spriteSize": [128, 106]
+  },
+  "robot_03_02_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [38, 54]
+  },
+  "robot_03_02_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [32, 48]
+  },
+  "robot_03_02_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [46, 62]
+  },
+  "robot_03_03_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [18, 50]
+  },
+  "robot_03_03_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [6, 6]
+  },
+  "robot_03_03_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [26, 58]
+  },
+  "robot_03_04_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [52, 32]
+  },
+  "robot_03_04_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [46, 26]
+  },
+  "robot_03_04_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [62, 40]
+  },
+  "robot_04_01_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 108]
+  },
+  "robot_04_01_2_001.png": {
+    "spriteOffset": [3, 8],
+    "spriteSize": [94, 86]
+  },
+  "robot_04_01_glow_001.png": {
+    "spriteOffset": [1, 0],
+    "spriteSize": [128, 116]
+  },
+  "robot_04_02_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [38, 54]
+  },
+  "robot_04_02_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [6, 6]
+  },
+  "robot_04_02_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [46, 62]
+  },
+  "robot_04_03_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [18, 50]
+  },
+  "robot_04_03_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [14, 46]
+  },
+  "robot_04_03_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [26, 58]
+  },
+  "robot_04_04_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [54, 34]
+  },
+  "robot_04_04_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [6, 6]
+  },
+  "robot_04_04_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [62, 42]
+  },
+  "robot_05_01_001.png": {
+    "spriteOffset": [0, -2],
+    "spriteSize": [104, 94]
+  },
+  "robot_05_01_2_001.png": {
+    "spriteOffset": [28, -2],
+    "spriteSize": [42, 76]
+  },
+  "robot_05_01_glow_001.png": {
+    "spriteOffset": [0, -2],
+    "spriteSize": [112, 102]
+  },
+  "robot_05_02_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [38, 54]
+  },
+  "robot_05_02_2_001.png": {
+    "spriteOffset": [0, 7],
+    "spriteSize": [20, 20]
+  },
+  "robot_05_02_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [46, 62]
+  },
+  "robot_05_03_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [18, 50]
+  },
+  "robot_05_03_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [6, 6]
+  },
+  "robot_05_03_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [26, 58]
+  },
+  "robot_05_04_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [56, 34]
+  },
+  "robot_05_04_2_001.png": {
+    "spriteOffset": [11, -7],
+    "spriteSize": [28, 14]
+  },
+  "robot_05_04_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [64, 42]
+  },
+  "robot_06_01_001.png": {
+    "spriteOffset": [6, -5],
+    "spriteSize": [126, 98]
+  },
+  "robot_06_01_2_001.png": {
+    "spriteOffset": [22, -5],
+    "spriteSize": [52, 42]
+  },
+  "robot_06_01_glow_001.png": {
+    "spriteOffset": [6, -5],
+    "spriteSize": [134, 106]
+  },
+  "robot_06_02_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [38, 54]
+  },
+  "robot_06_02_2_001.png": {
+    "spriteOffset": [0, 7],
+    "spriteSize": [18, 20]
+  },
+  "robot_06_02_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [46, 62]
+  },
+  "robot_06_03_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [18, 50]
+  },
+  "robot_06_03_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [6, 6]
+  },
+  "robot_06_03_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [26, 58]
+  },
+  "robot_06_04_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [56, 34]
+  },
+  "robot_06_04_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [6, 6]
+  },
+  "robot_06_04_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [64, 42]
+  },
+  "robot_07_01_001.png": {
+    "spriteOffset": [3, 7],
+    "spriteSize": [132, 112]
+  },
+  "robot_07_01_2_001.png": {
+    "spriteOffset": [-4, 15],
+    "spriteSize": [110, 92]
+  },
+  "robot_07_01_glow_001.png": {
+    "spriteOffset": [3, 7],
+    "spriteSize": [140, 120]
+  },
+  "robot_07_02_001.png": {
+    "spriteOffset": [-4, 0],
+    "spriteSize": [50, 54]
+  },
+  "robot_07_02_2_001.png": {
+    "spriteOffset": [-18, 0],
+    "spriteSize": [18, 32]
+  },
+  "robot_07_02_glow_001.png": {
+    "spriteOffset": [-4, 0],
+    "spriteSize": [58, 62]
+  },
+  "robot_07_03_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [18, 50]
+  },
+  "robot_07_03_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [14, 46]
+  },
+  "robot_07_03_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [26, 58]
+  },
+  "robot_07_04_001.png": {
+    "spriteOffset": [3, 0],
+    "spriteSize": [62, 34]
+  },
+  "robot_07_04_2_001.png": {
+    "spriteOffset": [18, -4],
+    "spriteSize": [24, 18]
+  },
+  "robot_07_04_glow_001.png": {
+    "spriteOffset": [3, 0],
+    "spriteSize": [70, 42]
+  },
+  "robot_08_01_001.png": {
+    "spriteOffset": [1, 12],
+    "spriteSize": [114, 102]
+  },
+  "robot_08_01_2_001.png": {
+    "spriteOffset": [29, -2],
+    "spriteSize": [48, 56]
+  },
+  "robot_08_01_glow_001.png": {
+    "spriteOffset": [1, 12],
+    "spriteSize": [122, 110]
+  },
+  "robot_08_02_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [38, 54]
+  },
+  "robot_08_02_2_001.png": {
+    "spriteOffset": [0, 7],
+    "spriteSize": [16, 16]
+  },
+  "robot_08_02_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [46, 62]
+  },
+  "robot_08_03_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [18, 50]
+  },
+  "robot_08_03_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [6, 4]
+  },
+  "robot_08_03_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [26, 58]
+  },
+  "robot_08_04_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [54, 34]
+  },
+  "robot_08_04_2_001.png": {
+    "spriteOffset": [-3, -1],
+    "spriteSize": [14, 14]
+  },
+  "robot_08_04_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [62, 42]
+  },
+  "robot_09_01_001.png": {
+    "spriteOffset": [10, -5],
+    "spriteSize": [116, 106]
+  },
+  "robot_09_01_2_001.png": {
+    "spriteOffset": [8, 9],
+    "spriteSize": [102, 114]
+  },
+  "robot_09_01_extra_001.png": {
+    "spriteOffset": [16, 0],
+    "spriteSize": [104, 94]
+  },
+  "robot_09_01_glow_001.png": {
+    "spriteOffset": [10, 11],
+    "spriteSize": [124, 148]
+  },
+  "robot_09_02_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [38, 54]
+  },
+  "robot_09_02_2_001.png": {
+    "spriteOffset": [0, 7],
+    "spriteSize": [16, 16]
+  },
+  "robot_09_02_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [46, 62]
+  },
+  "robot_09_03_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [18, 50]
+  },
+  "robot_09_03_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [14, 46]
+  },
+  "robot_09_03_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [26, 58]
+  },
+  "robot_09_04_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [54, 34]
+  },
+  "robot_09_04_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [6, 4]
+  },
+  "robot_09_04_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [62, 42]
+  },
+  "robot_10_01_001.png": {
+    "spriteOffset": [3, 6],
+    "spriteSize": [154, 94]
+  },
+  "robot_10_01_2_001.png": {
+    "spriteOffset": [28, 22],
+    "spriteSize": [94, 52]
+  },
+  "robot_10_01_glow_001.png": {
+    "spriteOffset": [3, 6],
+    "spriteSize": [162, 102]
+  },
+  "robot_10_02_001.png": {
+    "spriteOffset": [-4, 0],
+    "spriteSize": [50, 54]
+  },
+  "robot_10_02_2_001.png": {
+    "spriteOffset": [-18, 0],
+    "spriteSize": [18, 32]
+  },
+  "robot_10_02_glow_001.png": {
+    "spriteOffset": [-4, 0],
+    "spriteSize": [58, 62]
+  },
+  "robot_10_03_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [18, 50]
+  },
+  "robot_10_03_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [14, 46]
+  },
+  "robot_10_03_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [26, 58]
+  },
+  "robot_10_04_001.png": {
+    "spriteOffset": [3, 0],
+    "spriteSize": [62, 34]
+  },
+  "robot_10_04_2_001.png": {
+    "spriteOffset": [18, -4],
+    "spriteSize": [24, 18]
+  },
+  "robot_10_04_glow_001.png": {
+    "spriteOffset": [3, 0],
+    "spriteSize": [70, 42]
+  },
+  "robot_11_01_001.png": {
+    "spriteOffset": [5, 2],
+    "spriteSize": [108, 84]
+  },
+  "robot_11_01_2_001.png": {
+    "spriteOffset": [3, 2],
+    "spriteSize": [100, 80]
+  },
+  "robot_11_01_glow_001.png": {
+    "spriteOffset": [5, 2],
+    "spriteSize": [116, 92]
+  },
+  "robot_11_02_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [38, 54]
+  },
+  "robot_11_02_2_001.png": {
+    "spriteOffset": [0, 7],
+    "spriteSize": [16, 16]
+  },
+  "robot_11_02_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [46, 62]
+  },
+  "robot_11_03_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [18, 50]
+  },
+  "robot_11_03_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [14, 46]
+  },
+  "robot_11_03_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [26, 58]
+  },
+  "robot_11_04_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [54, 34]
+  },
+  "robot_11_04_2_001.png": {
+    "spriteOffset": [-3, -1],
+    "spriteSize": [14, 14]
+  },
+  "robot_11_04_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [62, 42]
+  },
+  "robot_12_01_001.png": {
+    "spriteOffset": [7, 9],
+    "spriteSize": [124, 104]
+  },
+  "robot_12_01_2_001.png": {
+    "spriteOffset": [29, 28],
+    "spriteSize": [68, 42]
+  },
+  "robot_12_01_glow_001.png": {
+    "spriteOffset": [7, 9],
+    "spriteSize": [131, 112]
+  },
+  "robot_12_02_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [38, 54]
+  },
+  "robot_12_02_2_001.png": {
+    "spriteOffset": [0, 7],
+    "spriteSize": [16, 16]
+  },
+  "robot_12_02_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [46, 62]
+  },
+  "robot_12_03_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [18, 50]
+  },
+  "robot_12_03_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [14, 46]
+  },
+  "robot_12_03_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [26, 58]
+  },
+  "robot_12_04_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [56, 34]
+  },
+  "robot_12_04_2_001.png": {
+    "spriteOffset": [8, -5],
+    "spriteSize": [32, 16]
+  },
+  "robot_12_04_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [64, 42]
+  },
+  "robot_13_01_001.png": {
+    "spriteOffset": [2, -1],
+    "spriteSize": [122, 104]
+  },
+  "robot_13_01_2_001.png": {
+    "spriteOffset": [0, 8],
+    "spriteSize": [112, 80]
+  },
+  "robot_13_01_extra_001.png": {
+    "spriteOffset": [22, 6],
+    "spriteSize": [18, 14]
+  },
+  "robot_13_01_glow_001.png": {
+    "spriteOffset": [2, -1],
+    "spriteSize": [131, 112]
+  },
+  "robot_13_02_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [44, 60]
+  },
+  "robot_13_02_2_001.png": {
+    "spriteOffset": [0, 2],
+    "spriteSize": [18, 26]
+  },
+  "robot_13_02_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [52, 66]
+  },
+  "robot_13_03_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [18, 50]
+  },
+  "robot_13_03_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [14, 46]
+  },
+  "robot_13_03_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [26, 58]
+  },
+  "robot_13_04_001.png": {
+    "spriteOffset": [-1, 0],
+    "spriteSize": [64, 38]
+  },
+  "robot_13_04_2_001.png": {
+    "spriteOffset": [-10, 4],
+    "spriteSize": [22, 14]
+  },
+  "robot_13_04_glow_001.png": {
+    "spriteOffset": [-1, 0],
+    "spriteSize": [72, 46]
+  },
+  "robot_14_01_001.png": {
+    "spriteOffset": [-5, 10],
+    "spriteSize": [132, 104]
+  },
+  "robot_14_01_2_001.png": {
+    "spriteOffset": [-5, 11],
+    "spriteSize": [126, 98]
+  },
+  "robot_14_01_glow_001.png": {
+    "spriteOffset": [-5, 10],
+    "spriteSize": [140, 112]
+  },
+  "robot_14_02_001.png": {
+    "spriteOffset": [-1, 0],
+    "spriteSize": [44, 58]
+  },
+  "robot_14_02_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [6, 4]
+  },
+  "robot_14_02_glow_001.png": {
+    "spriteOffset": [-2, 0],
+    "spriteSize": [52, 66]
+  },
+  "robot_14_03_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [18, 50]
+  },
+  "robot_14_03_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [14, 46]
+  },
+  "robot_14_03_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [26, 58]
+  },
+  "robot_14_04_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [54, 34]
+  },
+  "robot_14_04_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [6, 4]
+  },
+  "robot_14_04_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [62, 42]
+  },
+  "robot_15_01_001.png": {
+    "spriteOffset": [3, 0],
+    "spriteSize": [110, 98]
+  },
+  "robot_15_01_2_001.png": {
+    "spriteOffset": [20, 0],
+    "spriteSize": [72, 92]
+  },
+  "robot_15_01_glow_001.png": {
+    "spriteOffset": [3, 0],
+    "spriteSize": [117, 106]
+  },
+  "robot_15_02_001.png": {
+    "spriteOffset": [0, -1],
+    "spriteSize": [48, 64]
+  },
+  "robot_15_02_2_001.png": {
+    "spriteOffset": [0, 7],
+    "spriteSize": [18, 20]
+  },
+  "robot_15_02_glow_001.png": {
+    "spriteOffset": [0, -1],
+    "spriteSize": [56, 72]
+  },
+  "robot_15_03_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [18, 50]
+  },
+  "robot_15_03_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [14, 46]
+  },
+  "robot_15_03_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [26, 58]
+  },
+  "robot_15_04_001.png": {
+    "spriteOffset": [-1, 0],
+    "spriteSize": [64, 38]
+  },
+  "robot_15_04_2_001.png": {
+    "spriteOffset": [-10, 4],
+    "spriteSize": [22, 14]
+  },
+  "robot_15_04_glow_001.png": {
+    "spriteOffset": [-1, 0],
+    "spriteSize": [72, 46]
+  },
+  "robot_16_01_001.png": {
+    "spriteOffset": [8, 7],
+    "spriteSize": [114, 110]
+  },
+  "robot_16_01_2_001.png": {
+    "spriteOffset": [8, 6],
+    "spriteSize": [110, 102]
+  },
+  "robot_16_01_extra_001.png": {
+    "spriteOffset": [35, 0],
+    "spriteSize": [50, 16]
+  },
+  "robot_16_01_glow_001.png": {
+    "spriteOffset": [8, 7],
+    "spriteSize": [121, 118]
+  },
+  "robot_16_02_001.png": {
+    "spriteOffset": [0, 1],
+    "spriteSize": [38, 54]
+  },
+  "robot_16_02_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [6, 4]
+  },
+  "robot_16_02_glow_001.png": {
+    "spriteOffset": [0, 1],
+    "spriteSize": [45, 62]
+  },
+  "robot_16_03_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [18, 50]
+  },
+  "robot_16_03_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [6, 4]
+  },
+  "robot_16_03_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [26, 58]
+  },
+  "robot_16_04_001.png": {
+    "spriteOffset": [0, -1],
+    "spriteSize": [52, 38]
+  },
+  "robot_16_04_2_001.png": {
+    "spriteOffset": [0, -1],
+    "spriteSize": [46, 32]
+  },
+  "robot_16_04_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [60, 46]
+  },
+  "robot_17_01_001.png": {
+    "spriteOffset": [-2, 7],
+    "spriteSize": [132, 134]
+  },
+  "robot_17_01_2_001.png": {
+    "spriteOffset": [-4, 13],
+    "spriteSize": [126, 120]
+  },
+  "robot_17_01_extra_001.png": {
+    "spriteOffset": [31, -15],
+    "spriteSize": [50, 60]
+  },
+  "robot_17_01_glow_001.png": {
+    "spriteOffset": [-2, 7],
+    "spriteSize": [140, 142]
+  },
+  "robot_17_02_001.png": {
+    "spriteOffset": [0, -1],
+    "spriteSize": [48, 64]
+  },
+  "robot_17_02_2_001.png": {
+    "spriteOffset": [0, 7],
+    "spriteSize": [18, 20]
+  },
+  "robot_17_02_glow_001.png": {
+    "spriteOffset": [0, -1],
+    "spriteSize": [56, 72]
+  },
+  "robot_17_03_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [18, 50]
+  },
+  "robot_17_03_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [6, 4]
+  },
+  "robot_17_03_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [26, 58]
+  },
+  "robot_17_04_001.png": {
+    "spriteOffset": [0, -1],
+    "spriteSize": [52, 38]
+  },
+  "robot_17_04_2_001.png": {
+    "spriteOffset": [0, -1],
+    "spriteSize": [46, 32]
+  },
+  "robot_17_04_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [60, 46]
+  },
+  "robot_18_01_001.png": {
+    "spriteOffset": [0, 3],
+    "spriteSize": [126, 92]
+  },
+  "robot_18_01_2_001.png": {
+    "spriteOffset": [-6, 2],
+    "spriteSize": [108, 50]
+  },
+  "robot_18_01_glow_001.png": {
+    "spriteOffset": [0, 3],
+    "spriteSize": [134, 100]
+  },
+  "robot_18_02_001.png": {
+    "spriteOffset": [0, 10],
+    "spriteSize": [54, 82]
+  },
+  "robot_18_02_2_001.png": {
+    "spriteOffset": [0, 8],
+    "spriteSize": [44, 78]
+  },
+  "robot_18_02_glow_001.png": {
+    "spriteOffset": [0, 10],
+    "spriteSize": [62, 90]
+  },
+  "robot_18_03_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [16, 50]
+  },
+  "robot_18_03_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [4, 4]
+  },
+  "robot_18_03_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [24, 58]
+  },
+  "robot_18_04_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [59, 32]
+  },
+  "robot_18_04_2_001.png": {
+    "spriteOffset": [-4, 0],
+    "spriteSize": [42, 26]
+  },
+  "robot_18_04_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [67, 40]
+  },
+  "robot_19_01_001.png": {
+    "spriteOffset": [-23, 4],
+    "spriteSize": [176, 110]
+  },
+  "robot_19_01_2_001.png": {
+    "spriteOffset": [-2, 0],
+    "spriteSize": [130, 96]
+  },
+  "robot_19_01_glow_001.png": {
+    "spriteOffset": [-23, 4],
+    "spriteSize": [184, 118]
+  },
+  "robot_19_02_001.png": {
+    "spriteOffset": [-4, 0],
+    "spriteSize": [50, 54]
+  },
+  "robot_19_02_2_001.png": {
+    "spriteOffset": [-18, 0],
+    "spriteSize": [18, 30]
+  },
+  "robot_19_02_glow_001.png": {
+    "spriteOffset": [-4, 0],
+    "spriteSize": [58, 62]
+  },
+  "robot_19_03_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [18, 50]
+  },
+  "robot_19_03_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [4, 4]
+  },
+  "robot_19_03_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [26, 58]
+  },
+  "robot_19_04_001.png": {
+    "spriteOffset": [3, 0],
+    "spriteSize": [61, 34]
+  },
+  "robot_19_04_2_001.png": {
+    "spriteOffset": [18, -4],
+    "spriteSize": [23, 18]
+  },
+  "robot_19_04_glow_001.png": {
+    "spriteOffset": [3, 0],
+    "spriteSize": [69, 42]
+  },
+  "robot_20_01_001.png": {
+    "spriteOffset": [-5, 9],
+    "spriteSize": [146, 96]
+  },
+  "robot_20_01_2_001.png": {
+    "spriteOffset": [-8, 8],
+    "spriteSize": [134, 88]
+  },
+  "robot_20_01_glow_001.png": {
+    "spriteOffset": [-5, 9],
+    "spriteSize": [154, 104]
+  },
+  "robot_20_02_001.png": {
+    "spriteOffset": [-1, 0],
+    "spriteSize": [46, 56]
+  },
+  "robot_20_02_2_001.png": {
+    "spriteOffset": [-1, 0],
+    "spriteSize": [38, 38]
+  },
+  "robot_20_02_glow_001.png": {
+    "spriteOffset": [-1, 0],
+    "spriteSize": [54, 64]
+  },
+  "robot_20_03_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [22, 50]
+  },
+  "robot_20_03_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [18, 46]
+  },
+  "robot_20_03_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [30, 58]
+  },
+  "robot_20_04_001.png": {
+    "spriteOffset": [3, 0],
+    "spriteSize": [61, 34]
+  },
+  "robot_20_04_2_001.png": {
+    "spriteOffset": [13, -5],
+    "spriteSize": [33, 20]
+  },
+  "robot_20_04_glow_001.png": {
+    "spriteOffset": [3, 0],
+    "spriteSize": [69, 42]
+  },
+  "robot_21_01_001.png": {
+    "spriteOffset": [0, 4],
+    "spriteSize": [115, 106]
+  },
+  "robot_21_01_2_001.png": {
+    "spriteOffset": [2, 11],
+    "spriteSize": [109, 86]
+  },
+  "robot_21_01_glow_001.png": {
+    "spriteOffset": [0, 4],
+    "spriteSize": [123, 114]
+  },
+  "robot_21_02_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [38, 54]
+  },
+  "robot_21_02_2_001.png": {
+    "spriteOffset": [0, 8],
+    "spriteSize": [32, 32]
+  },
+  "robot_21_02_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [46, 62]
+  },
+  "robot_21_03_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [10, 26]
+  },
+  "robot_21_03_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [14, 46]
+  },
+  "robot_21_03_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [26, 58]
+  },
+  "robot_21_04_001.png": {
+    "spriteOffset": [3, 0],
+    "spriteSize": [59, 36]
+  },
+  "robot_21_04_2_001.png": {
+    "spriteOffset": [18, -3],
+    "spriteSize": [27, 26]
+  },
+  "robot_21_04_glow_001.png": {
+    "spriteOffset": [3, 0],
+    "spriteSize": [67, 44]
+  },
+  "robot_22_01_001.png": {
+    "spriteOffset": [0, -1],
+    "spriteSize": [117, 98]
+  },
+  "robot_22_01_2_001.png": {
+    "spriteOffset": [-3, 7],
+    "spriteSize": [102, 66]
+  },
+  "robot_22_01_glow_001.png": {
+    "spriteOffset": [0, -1],
+    "spriteSize": [125, 106]
+  },
+  "robot_22_02_001.png": {
+    "spriteOffset": [0, 1],
+    "spriteSize": [42, 60]
+  },
+  "robot_22_02_2_001.png": {
+    "spriteOffset": [0, 1],
+    "spriteSize": [24, 54]
+  },
+  "robot_22_02_glow_001.png": {
+    "spriteOffset": [0, 1],
+    "spriteSize": [50, 68]
+  },
+  "robot_22_03_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [18, 50]
+  },
+  "robot_22_03_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [4, 4]
+  },
+  "robot_22_03_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [26, 58]
+  },
+  "robot_22_04_001.png": {
+    "spriteOffset": [2, 0],
+    "spriteSize": [59, 38]
+  },
+  "robot_22_04_2_001.png": {
+    "spriteOffset": [-14, -5],
+    "spriteSize": [22, 22]
+  },
+  "robot_22_04_glow_001.png": {
+    "spriteOffset": [2, 0],
+    "spriteSize": [67, 46]
+  },
+  "robot_23_01_001.png": {
+    "spriteOffset": [4, 2],
+    "spriteSize": [115, 102]
+  },
+  "robot_23_01_2_001.png": {
+    "spriteOffset": [4, 1],
+    "spriteSize": [109, 94]
+  },
+  "robot_23_01_glow_001.png": {
+    "spriteOffset": [4, 2],
+    "spriteSize": [123, 110]
+  },
+  "robot_23_02_001.png": {
+    "spriteOffset": [-1, 0],
+    "spriteSize": [54, 54]
+  },
+  "robot_23_02_2_001.png": {
+    "spriteOffset": [0, -13],
+    "spriteSize": [20, 20]
+  },
+  "robot_23_02_glow_001.png": {
+    "spriteOffset": [-1, 0],
+    "spriteSize": [62, 60]
+  },
+  "robot_23_03_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [18, 50]
+  },
+  "robot_23_03_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [4, 4]
+  },
+  "robot_23_03_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [26, 58]
+  },
+  "robot_23_04_001.png": {
+    "spriteOffset": [2, 1],
+    "spriteSize": [65, 40]
+  },
+  "robot_23_04_2_001.png": {
+    "spriteOffset": [-1, 1],
+    "spriteSize": [26, 32]
+  },
+  "robot_23_04_glow_001.png": {
+    "spriteOffset": [2, 1],
+    "spriteSize": [73, 48]
+  },
+  "robot_24_01_001.png": {
+    "spriteOffset": [8, 11],
+    "spriteSize": [109, 118]
+  },
+  "robot_24_01_2_001.png": {
+    "spriteOffset": [16, -3],
+    "spriteSize": [87, 70]
+  },
+  "robot_24_01_glow_001.png": {
+    "spriteOffset": [8, 11],
+    "spriteSize": [117, 126]
+  },
+  "robot_24_02_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [38, 54]
+  },
+  "robot_24_02_2_001.png": {
+    "spriteOffset": [0, 7],
+    "spriteSize": [16, 18]
+  },
+  "robot_24_02_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [46, 62]
+  },
+  "robot_24_03_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [18, 50]
+  },
+  "robot_24_03_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [14, 46]
+  },
+  "robot_24_03_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [26, 58]
+  },
+  "robot_24_04_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [54, 34]
+  },
+  "robot_24_04_2_001.png": {
+    "spriteOffset": [-3, -1],
+    "spriteSize": [14, 14]
+  },
+  "robot_24_04_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [62, 42]
+  },
+  "robot_25_01_001.png": {
+    "spriteOffset": [-2, 4],
+    "spriteSize": [126, 90]
+  },
+  "robot_25_01_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [120, 68]
+  },
+  "robot_25_01_glow_001.png": {
+    "spriteOffset": [-1, 4],
+    "spriteSize": [136, 98]
+  },
+  "robot_25_02_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [42, 56]
+  },
+  "robot_25_02_2_001.png": {
+    "spriteOffset": [0, 9],
+    "spriteSize": [38, 32]
+  },
+  "robot_25_02_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [50, 64]
+  },
+  "robot_25_03_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [18, 50]
+  },
+  "robot_25_03_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [14, 46]
+  },
+  "robot_25_03_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [26, 58]
+  },
+  "robot_25_04_001.png": {
+    "spriteOffset": [3, 0],
+    "spriteSize": [61, 36]
+  },
+  "robot_25_04_2_001.png": {
+    "spriteOffset": [0, -3],
+    "spriteSize": [20, 22]
+  },
+  "robot_25_04_glow_001.png": {
+    "spriteOffset": [2, 0],
+    "spriteSize": [71, 44]
+  },
+  "robot_26_01_001.png": {
+    "spriteOffset": [11, 6],
+    "spriteSize": [118, 128]
+  },
+  "robot_26_01_2_001.png": {
+    "spriteOffset": [25, 13],
+    "spriteSize": [84, 104]
+  },
+  "robot_26_01_glow_001.png": {
+    "spriteOffset": [11, 6],
+    "spriteSize": [126, 136]
+  },
+  "robot_26_02_001.png": {
+    "spriteOffset": [0, -1],
+    "spriteSize": [48, 66]
+  },
+  "robot_26_02_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [42, 60]
+  },
+  "robot_26_02_glow_001.png": {
+    "spriteOffset": [0, -1],
+    "spriteSize": [56, 74]
+  },
+  "robot_26_03_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [18, 50]
+  },
+  "robot_26_03_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [14, 46]
+  },
+  "robot_26_03_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [26, 58]
+  },
+  "robot_26_04_001.png": {
+    "spriteOffset": [2, -2],
+    "spriteSize": [58, 32]
+  },
+  "robot_26_04_2_001.png": {
+    "spriteOffset": [6, -2],
+    "spriteSize": [38, 26]
+  },
+  "robot_26_04_glow_001.png": {
+    "spriteOffset": [2, -2],
+    "spriteSize": [66, 40]
+  },
+  "ship_01_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [149, 90]
+  },
+  "ship_01_2_001.png": {
+    "spriteOffset": [4, 20],
+    "spriteSize": [96, 42]
+  },
+  "ship_02_001.png": {
+    "spriteOffset": [0, 1],
+    "spriteSize": [149, 88]
+  },
+  "ship_02_2_001.png": {
+    "spriteOffset": [5, 1],
+    "spriteSize": [112, 78]
+  },
+  "ship_03_001.png": {
+    "spriteOffset": [-6, 0],
+    "spriteSize": [167, 92]
+  },
+  "ship_03_2_001.png": {
+    "spriteOffset": [-6, -15],
+    "spriteSize": [157, 44]
+  },
+  "ship_04_001.png": {
+    "spriteOffset": [-3, 1],
+    "spriteSize": [179, 102]
+  },
+  "ship_04_2_001.png": {
+    "spriteOffset": [-9, -12],
+    "spriteSize": [143, 66]
+  },
+  "ship_05_001.png": {
+    "spriteOffset": [3, -4],
+    "spriteSize": [162, 88]
+  },
+  "ship_05_2_001.png": {
+    "spriteOffset": [-4, -9],
+    "spriteSize": [135, 68]
+  },
+  "ship_06_001.png": {
+    "spriteOffset": [5, 0],
+    "spriteSize": [172, 96]
+  },
+  "ship_06_2_001.png": {
+    "spriteOffset": [5, 0],
+    "spriteSize": [164, 88]
+  },
+  "ship_07_001.png": {
+    "spriteOffset": [7, -3],
+    "spriteSize": [166, 80]
+  },
+  "ship_07_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [115, 64]
+  },
+  "ship_08_001.png": {
+    "spriteOffset": [6, -1],
+    "spriteSize": [166, 90]
+  },
+  "ship_08_2_001.png": {
+    "spriteOffset": [5, 1],
+    "spriteSize": [158, 76]
+  },
+  "ship_09_001.png": {
+    "spriteOffset": [0, -5],
+    "spriteSize": [174, 94]
+  },
+  "ship_09_2_001.png": {
+    "spriteOffset": [0, -11],
+    "spriteSize": [168, 74]
+  },
+  "ship_10_001.png": {
+    "spriteOffset": [4, -6],
+    "spriteSize": [160, 96]
+  },
+  "ship_10_2_001.png": {
+    "spriteOffset": [0, -19],
+    "spriteSize": [146, 64]
+  },
+  "ship_11_001.png": {
+    "spriteOffset": [7, -8],
+    "spriteSize": [174, 92]
+  },
+  "ship_11_2_001.png": {
+    "spriteOffset": [-11, -1],
+    "spriteSize": [121, 64]
+  },
+  "ship_12_001.png": {
+    "spriteOffset": [7, -8],
+    "spriteSize": [162, 96]
+  },
+  "ship_12_2_001.png": {
+    "spriteOffset": [-2, 0],
+    "spriteSize": [137, 70]
+  },
+  "ship_13_001.png": {
+    "spriteOffset": [3, -2],
+    "spriteSize": [158, 88]
+  },
+  "ship_13_2_001.png": {
+    "spriteOffset": [3, -12],
+    "spriteSize": [152, 62]
+  },
+  "ship_14_001.png": {
+    "spriteOffset": [2, -7],
+    "spriteSize": [156, 84]
+  },
+  "ship_14_2_001.png": {
+    "spriteOffset": [2, -9],
+    "spriteSize": [150, 68]
+  },
+  "ship_15_001.png": {
+    "spriteOffset": [5, -4],
+    "spriteSize": [162, 92]
+  },
+  "ship_15_2_001.png": {
+    "spriteOffset": [8, -3],
+    "spriteSize": [148, 66]
+  },
+  "ship_16_001.png": {
+    "spriteOffset": [2, -7],
+    "spriteSize": [176, 90]
+  },
+  "ship_16_2_001.png": {
+    "spriteOffset": [3, -3],
+    "spriteSize": [168, 74]
+  },
+  "ship_17_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [175, 76]
+  },
+  "ship_17_2_001.png": {
+    "spriteOffset": [-8, 0],
+    "spriteSize": [155, 72]
+  },
+  "ship_18_001.png": {
+    "spriteOffset": [5, -4],
+    "spriteSize": [178, 72]
+  },
+  "ship_18_2_001.png": {
+    "spriteOffset": [-6, -4],
+    "spriteSize": [143, 64]
+  },
+  "ship_19_001.png": {
+    "spriteOffset": [7, 0],
+    "spriteSize": [184, 80]
+  },
+  "ship_19_2_001.png": {
+    "spriteOffset": [-6, 6],
+    "spriteSize": [148, 60]
+  },
+  "ship_20_001.png": {
+    "spriteOffset": [14, 2],
+    "spriteSize": [172, 104]
+  },
+  "ship_20_2_001.png": {
+    "spriteOffset": [17, 2],
+    "spriteSize": [134, 98]
+  },
+  "ship_21_001.png": {
+    "spriteOffset": [-7, -6],
+    "spriteSize": [196, 82]
+  },
+  "ship_21_2_001.png": {
+    "spriteOffset": [-10, -7],
+    "spriteSize": [154, 64]
+  },
+  "ship_22_001.png": {
+    "spriteOffset": [0, 7],
+    "spriteSize": [176, 94]
+  },
+  "ship_22_2_001.png": {
+    "spriteOffset": [52, -3],
+    "spriteSize": [16, 32]
+  },
+  "ship_23_001.png": {
+    "spriteOffset": [7, 11],
+    "spriteSize": [158, 106]
+  },
+  "ship_23_2_001.png": {
+    "spriteOffset": [8, 17],
+    "spriteSize": [142, 84]
+  },
+  "ship_24_001.png": {
+    "spriteOffset": [1, 3],
+    "spriteSize": [162, 84]
+  },
+  "ship_24_2_001.png": {
+    "spriteOffset": [-7, 1],
+    "spriteSize": [128, 52]
+  },
+  "ship_25_001.png": {
+    "spriteOffset": [0, -2],
+    "spriteSize": [186, 86]
+  },
+  "ship_25_2_001.png": {
+    "spriteOffset": [1, 9],
+    "spriteSize": [140, 52]
+  },
+  "ship_26_001.png": {
+    "spriteOffset": [7, 0],
+    "spriteSize": [171, 96]
+  },
+  "ship_26_2_001.png": {
+    "spriteOffset": [-9, 0],
+    "spriteSize": [130, 88]
+  },
+  "ship_26_extra_001.png": {
+    "spriteOffset": [7, -8],
+    "spriteSize": [165, 72]
+  },
+  "ship_27_001.png": {
+    "spriteOffset": [4, -2],
+    "spriteSize": [169, 86]
+  },
+  "ship_27_2_001.png": {
+    "spriteOffset": [4, -2],
+    "spriteSize": [165, 82]
+  },
+  "ship_27_extra_001.png": {
+    "spriteOffset": [1, 0],
+    "spriteSize": [82, 22]
+  },
+  "ship_28_001.png": {
+    "spriteOffset": [3, -6],
+    "spriteSize": [165, 80]
+  },
+  "ship_28_2_001.png": {
+    "spriteOffset": [3, -6],
+    "spriteSize": [161, 76]
+  },
+  "ship_28_extra_001.png": {
+    "spriteOffset": [5, 5],
+    "spriteSize": [3, 3]
+  },
+  "ship_29_001.png": {
+    "spriteOffset": [-3, -6],
+    "spriteSize": [180, 80]
+  },
+  "ship_29_2_001.png": {
+    "spriteOffset": [-9, -5],
+    "spriteSize": [152, 74]
+  },
+  "ship_29_extra_001.png": {
+    "spriteOffset": [33, -7],
+    "spriteSize": [67, 50]
+  },
+  "ship_30_001.png": {
+    "spriteOffset": [-6, -5],
+    "spriteSize": [182, 86]
+  },
+  "ship_30_2_001.png": {
+    "spriteOffset": [2, -16],
+    "spriteSize": [55, 14]
+  },
+  "ship_30_extra_001.png": {
+    "spriteOffset": [60, 10],
+    "spriteSize": [31, 16]
+  },
+  "ship_31_001.png": {
+    "spriteOffset": [3, 12],
+    "spriteSize": [169, 106]
+  },
+  "ship_31_2_001.png": {
+    "spriteOffset": [0, -8],
+    "spriteSize": [159, 60]
+  },
+  "ship_31_extra_001.png": {
+    "spriteOffset": [65, -2],
+    "spriteSize": [37, 34]
+  },
+  "ship_32_001.png": {
+    "spriteOffset": [15, -3],
+    "spriteSize": [195, 88]
+  },
+  "ship_32_2_001.png": {
+    "spriteOffset": [-2, -12],
+    "spriteSize": [156, 66]
+  },
+  "ship_32_extra_001.png": {
+    "spriteOffset": [22, 0],
+    "spriteSize": [147, 70]
+  },
+  "ship_33_001.png": {
+    "spriteOffset": [9, -7],
+    "spriteSize": [183, 98]
+  },
+  "ship_33_2_001.png": {
+    "spriteOffset": [8, -7],
+    "spriteSize": [177, 94]
+  },
+  "ship_34_001.png": {
+    "spriteOffset": [4, -6],
+    "spriteSize": [167, 114]
+  },
+  "ship_34_2_001.png": {
+    "spriteOffset": [10, -4],
+    "spriteSize": [151, 72]
+  },
+  "ship_35_001.png": {
+    "spriteOffset": [-5, -5],
+    "spriteSize": [206, 84]
+  },
+  "ship_35_2_001.png": {
+    "spriteOffset": [-5, -6],
+    "spriteSize": [200, 78]
+  },
+  "ship_35_extra_001.png": {
+    "spriteOffset": [32, 1],
+    "spriteSize": [17, 12]
+  },
+  "ship_36_001.png": {
+    "spriteOffset": [4, -8],
+    "spriteSize": [172, 94]
+  },
+  "ship_36_2_001.png": {
+    "spriteOffset": [0, -13],
+    "spriteSize": [154, 76]
+  },
+  "ship_36_extra_001.png": {
+    "spriteOffset": [7, -16],
+    "spriteSize": [100, 60]
+  },
+  "ship_37_001.png": {
+    "spriteOffset": [3, -6],
+    "spriteSize": [182, 74]
+  },
+  "ship_37_2_001.png": {
+    "spriteOffset": [3, -6],
+    "spriteSize": [172, 50]
+  },
+  "ship_38_001.png": {
+    "spriteOffset": [-1, 0],
+    "spriteSize": [182, 112]
+  },
+  "ship_38_2_001.png": {
+    "spriteOffset": [-2, -2],
+    "spriteSize": [172, 98]
+  },
+  "ship_38_extra_001.png": {
+    "spriteOffset": [-13, -16],
+    "spriteSize": [148, 54]
+  },
+  "ship_39_001.png": {
+    "spriteOffset": [-7, 1],
+    "spriteSize": [190, 86]
+  },
+  "ship_39_2_001.png": {
+    "spriteOffset": [-8, -4],
+    "spriteSize": [182, 64]
+  },
+  "ship_40_001.png": {
+    "spriteOffset": [-5, -9],
+    "spriteSize": [182, 80]
+  },
+  "ship_40_2_001.png": {
+    "spriteOffset": [-9, -5],
+    "spriteSize": [160, 62]
+  },
+  "ship_40_extra_001.png": {
+    "spriteOffset": [30, 2],
+    "spriteSize": [76, 18]
+  },
+  "ship_41_001.png": {
+    "spriteOffset": [-3, -9],
+    "spriteSize": [166, 92]
+  },
+  "ship_41_2_001.png": {
+    "spriteOffset": [-3, -9],
+    "spriteSize": [158, 86]
+  },
+  "ship_41_extra_001.png": {
+    "spriteOffset": [36, -2],
+    "spriteSize": [10, 6]
+  },
+  "ship_42_001.png": {
+    "spriteOffset": [0, -3],
+    "spriteSize": [192, 84]
+  },
+  "ship_42_2_001.png": {
+    "spriteOffset": [6, -3],
+    "spriteSize": [176, 78]
+  },
+  "ship_43_001.png": {
+    "spriteOffset": [2, -4],
+    "spriteSize": [178, 92]
+  },
+  "ship_43_2_001.png": {
+    "spriteOffset": [-1, -4],
+    "spriteSize": [160, 86]
+  },
+  "ship_44_001.png": {
+    "spriteOffset": [-7, 0],
+    "spriteSize": [206, 94]
+  },
+  "ship_44_2_001.png": {
+    "spriteOffset": [-4, -1],
+    "spriteSize": [192, 86]
+  },
+  "ship_45_001.png": {
+    "spriteOffset": [-1, -6],
+    "spriteSize": [168, 76]
+  },
+  "ship_45_2_001.png": {
+    "spriteOffset": [-1, -5],
+    "spriteSize": [162, 70]
+  },
+  "ship_46_001.png": {
+    "spriteOffset": [-5, -3],
+    "spriteSize": [184, 82]
+  },
+  "ship_46_2_001.png": {
+    "spriteOffset": [1, -3],
+    "spriteSize": [164, 68]
+  },
+  "ship_47_001.png": {
+    "spriteOffset": [-3, 2],
+    "spriteSize": [192, 114]
+  },
+  "ship_47_2_001.png": {
+    "spriteOffset": [-1, 2],
+    "spriteSize": [182, 104]
+  },
+  "ship_47_extra_001.png": {
+    "spriteOffset": [21, 27],
+    "spriteSize": [106, 54]
+  },
+  "ship_48_001.png": {
+    "spriteOffset": [-11, -5],
+    "spriteSize": [180, 108]
+  },
+  "ship_48_2_001.png": {
+    "spriteOffset": [-9, -6],
+    "spriteSize": [170, 100]
+  },
+  "ship_48_extra_001.png": {
+    "spriteOffset": [49, 8],
+    "spriteSize": [8, 6]
+  },
+  "ship_49_001.png": {
+    "spriteOffset": [6, 0],
+    "spriteSize": [170, 104]
+  },
+  "ship_49_2_001.png": {
+    "spriteOffset": [7, 0],
+    "spriteSize": [164, 100]
+  },
+  "ship_49_extra_001.png": {
+    "spriteOffset": [13, 3],
+    "spriteSize": [126, 28]
+  },
+  "ship_50_001.png": {
+    "spriteOffset": [0, 3],
+    "spriteSize": [152, 92]
+  },
+  "ship_50_2_001.png": {
+    "spriteOffset": [-5, 2],
+    "spriteSize": [132, 80]
+  },
+  "ship_50_extra_001.png": {
+    "spriteOffset": [49, -5],
+    "spriteSize": [50, 44]
+  },
+  "ship_51_001.png": {
+    "spriteOffset": [4, 3],
+    "spriteSize": [176, 102]
+  },
+  "ship_51_2_001.png": {
+    "spriteOffset": [2, 3],
+    "spriteSize": [164, 94]
+  },
+  "spider_01_01_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [118, 78]
+  },
+  "spider_01_01_2_001.png": {
+    "spriteOffset": [25, 6],
+    "spriteSize": [37, 38]
+  },
+  "spider_01_01_extra_001.png": {
+    "spriteOffset": [25, 6],
+    "spriteSize": [35, 36]
+  },
+  "spider_01_01_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [126, 86]
+  },
+  "spider_01_02_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [44, 62]
+  },
+  "spider_01_02_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [6, 4]
+  },
+  "spider_01_02_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [52, 70]
+  },
+  "spider_01_03_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [38, 74]
+  },
+  "spider_01_03_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [6, 4]
+  },
+  "spider_01_03_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [47, 82]
+  },
+  "spider_01_04_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [55, 34]
+  },
+  "spider_01_04_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [6, 4]
+  },
+  "spider_01_04_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [63, 42]
+  },
+  "spider_02_01_001.png": {
+    "spriteOffset": [3, 5],
+    "spriteSize": [133, 102]
+  },
+  "spider_02_01_2_001.png": {
+    "spriteOffset": [4, 11],
+    "spriteSize": [123, 82]
+  },
+  "spider_02_01_extra_001.png": {
+    "spriteOffset": [26, 5],
+    "spriteSize": [35, 38]
+  },
+  "spider_02_01_glow_001.png": {
+    "spriteOffset": [3, 5],
+    "spriteSize": [141, 110]
+  },
+  "spider_02_02_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [44, 62]
+  },
+  "spider_02_02_2_001.png": {
+    "spriteOffset": [-2, 9],
+    "spriteSize": [20, 20]
+  },
+  "spider_02_02_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [52, 70]
+  },
+  "spider_02_03_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [38, 74]
+  },
+  "spider_02_03_2_001.png": {
+    "spriteOffset": [-9, 14],
+    "spriteSize": [14, 26]
+  },
+  "spider_02_03_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [47, 82]
+  },
+  "spider_02_04_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [55, 34]
+  },
+  "spider_02_04_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [6, 4]
+  },
+  "spider_02_04_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [63, 42]
+  },
+  "spider_03_01_001.png": {
+    "spriteOffset": [7, 5],
+    "spriteSize": [107, 108]
+  },
+  "spider_03_01_2_001.png": {
+    "spriteOffset": [21, 8],
+    "spriteSize": [35, 34]
+  },
+  "spider_03_01_extra_001.png": {
+    "spriteOffset": [11, 24],
+    "spriteSize": [89, 60]
+  },
+  "spider_03_01_glow_001.png": {
+    "spriteOffset": [7, 5],
+    "spriteSize": [115, 116]
+  },
+  "spider_03_02_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [44, 62]
+  },
+  "spider_03_02_2_001.png": {
+    "spriteOffset": [-2, 9],
+    "spriteSize": [20, 20]
+  },
+  "spider_03_02_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [52, 70]
+  },
+  "spider_03_03_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [38, 74]
+  },
+  "spider_03_03_2_001.png": {
+    "spriteOffset": [-9, 14],
+    "spriteSize": [14, 26]
+  },
+  "spider_03_03_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [47, 82]
+  },
+  "spider_03_04_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [55, 34]
+  },
+  "spider_03_04_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [6, 4]
+  },
+  "spider_03_04_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [63, 42]
+  },
+  "spider_04_01_001.png": {
+    "spriteOffset": [0, 6],
+    "spriteSize": [120, 96]
+  },
+  "spider_04_01_2_001.png": {
+    "spriteOffset": [25, 6],
+    "spriteSize": [31, 34]
+  },
+  "spider_04_01_extra_001.png": {
+    "spriteOffset": [26, 7],
+    "spriteSize": [25, 28]
+  },
+  "spider_04_01_glow_001.png": {
+    "spriteOffset": [0, 6],
+    "spriteSize": [128, 104]
+  },
+  "spider_04_02_001.png": {
+    "spriteOffset": [-3, 0],
+    "spriteSize": [42, 64]
+  },
+  "spider_04_02_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [6, 4]
+  },
+  "spider_04_02_glow_001.png": {
+    "spriteOffset": [-3, 0],
+    "spriteSize": [52, 72]
+  },
+  "spider_04_03_001.png": {
+    "spriteOffset": [0, -1],
+    "spriteSize": [50, 76]
+  },
+  "spider_04_03_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [6, 4]
+  },
+  "spider_04_03_glow_001.png": {
+    "spriteOffset": [0, -1],
+    "spriteSize": [58, 86]
+  },
+  "spider_04_04_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [55, 34]
+  },
+  "spider_04_04_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [6, 4]
+  },
+  "spider_04_04_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [63, 42]
+  },
+  "spider_05_01_001.png": {
+    "spriteOffset": [7, 8],
+    "spriteSize": [125, 108]
+  },
+  "spider_05_01_2_001.png": {
+    "spriteOffset": [8, 8],
+    "spriteSize": [121, 104]
+  },
+  "spider_05_01_extra_001.png": {
+    "spriteOffset": [35, 1],
+    "spriteSize": [61, 66]
+  },
+  "spider_05_01_glow_001.png": {
+    "spriteOffset": [7, 8],
+    "spriteSize": [133, 116]
+  },
+  "spider_05_02_001.png": {
+    "spriteOffset": [-2, 0],
+    "spriteSize": [52, 64]
+  },
+  "spider_05_02_2_001.png": {
+    "spriteOffset": [-2, 0],
+    "spriteSize": [48, 60]
+  },
+  "spider_05_02_glow_001.png": {
+    "spriteOffset": [-2, 0],
+    "spriteSize": [60, 70]
+  },
+  "spider_05_03_001.png": {
+    "spriteOffset": [-2, -3],
+    "spriteSize": [42, 76]
+  },
+  "spider_05_03_2_001.png": {
+    "spriteOffset": [-2, -3],
+    "spriteSize": [38, 72]
+  },
+  "spider_05_03_glow_001.png": {
+    "spriteOffset": [-2, -3],
+    "spriteSize": [50, 84]
+  },
+  "spider_05_04_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [55, 34]
+  },
+  "spider_05_04_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [6, 4]
+  },
+  "spider_05_04_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [63, 42]
+  },
+  "spider_06_01_001.png": {
+    "spriteOffset": [7, 0],
+    "spriteSize": [127, 110]
+  },
+  "spider_06_01_2_001.png": {
+    "spriteOffset": [7, 9],
+    "spriteSize": [123, 64]
+  },
+  "spider_06_01_extra_001.png": {
+    "spriteOffset": [32, 5],
+    "spriteSize": [31, 32]
+  },
+  "spider_06_01_glow_001.png": {
+    "spriteOffset": [7, 0],
+    "spriteSize": [135, 118]
+  },
+  "spider_06_02_001.png": {
+    "spriteOffset": [-1, 0],
+    "spriteSize": [50, 64]
+  },
+  "spider_06_02_2_001.png": {
+    "spriteOffset": [-1, 0],
+    "spriteSize": [46, 60]
+  },
+  "spider_06_02_glow_001.png": {
+    "spriteOffset": [-1, 0],
+    "spriteSize": [58, 72]
+  },
+  "spider_06_03_001.png": {
+    "spriteOffset": [-1, 0],
+    "spriteSize": [50, 78]
+  },
+  "spider_06_03_2_001.png": {
+    "spriteOffset": [-1, 0],
+    "spriteSize": [46, 74]
+  },
+  "spider_06_03_glow_001.png": {
+    "spriteOffset": [-1, 0],
+    "spriteSize": [58, 86]
+  },
+  "spider_06_04_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [55, 34]
+  },
+  "spider_06_04_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [6, 4]
+  },
+  "spider_06_04_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [63, 42]
+  },
+  "spider_07_01_001.png": {
+    "spriteOffset": [4, 4],
+    "spriteSize": [133, 106]
+  },
+  "spider_07_01_2_001.png": {
+    "spriteOffset": [6, 2],
+    "spriteSize": [101, 70]
+  },
+  "spider_07_01_extra_001.png": {
+    "spriteOffset": [20, 13],
+    "spriteSize": [75, 88]
+  },
+  "spider_07_01_glow_001.png": {
+    "spriteOffset": [4, 4],
+    "spriteSize": [141, 114]
+  },
+  "spider_07_02_001.png": {
+    "spriteOffset": [-7, -3],
+    "spriteSize": [40, 54]
+  },
+  "spider_07_02_2_001.png": {
+    "spriteOffset": [-8, -21],
+    "spriteSize": [34, 14]
+  },
+  "spider_07_02_glow_001.png": {
+    "spriteOffset": [-7, -2],
+    "spriteSize": [48, 64]
+  },
+  "spider_07_03_001.png": {
+    "spriteOffset": [-6, -11],
+    "spriteSize": [50, 60]
+  },
+  "spider_07_03_2_001.png": {
+    "spriteOffset": [-1, -26],
+    "spriteSize": [34, 26]
+  },
+  "spider_07_03_glow_001.png": {
+    "spriteOffset": [-6, -11],
+    "spriteSize": [58, 68]
+  },
+  "spider_07_04_001.png": {
+    "spriteOffset": [5, 5],
+    "spriteSize": [3, 3]
+  },
+  "spider_07_04_2_001.png": {
+    "spriteOffset": [5, 5],
+    "spriteSize": [3, 3]
+  },
+  "spider_07_04_glow_001.png": {
+    "spriteOffset": [5, 5],
+    "spriteSize": [3, 3]
+  },
+  "spider_08_01_001.png": {
+    "spriteOffset": [8, 0],
+    "spriteSize": [137, 94]
+  },
+  "spider_08_01_2_001.png": {
+    "spriteOffset": [-23, 10],
+    "spriteSize": [24, 48]
+  },
+  "spider_08_01_extra_001.png": {
+    "spriteOffset": [42, 10],
+    "spriteSize": [63, 22]
+  },
+  "spider_08_01_glow_001.png": {
+    "spriteOffset": [8, 0],
+    "spriteSize": [145, 102]
+  },
+  "spider_08_02_001.png": {
+    "spriteOffset": [-3, 0],
+    "spriteSize": [42, 64]
+  },
+  "spider_08_02_2_001.png": {
+    "spriteOffset": [-3, 0],
+    "spriteSize": [38, 60]
+  },
+  "spider_08_02_glow_001.png": {
+    "spriteOffset": [-3, 0],
+    "spriteSize": [52, 72]
+  },
+  "spider_08_03_001.png": {
+    "spriteOffset": [1, 0],
+    "spriteSize": [39, 74]
+  },
+  "spider_08_03_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [6, 4]
+  },
+  "spider_08_03_glow_001.png": {
+    "spriteOffset": [1, 0],
+    "spriteSize": [47, 82]
+  },
+  "spider_08_04_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [55, 34]
+  },
+  "spider_08_04_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [50, 30]
+  },
+  "spider_08_04_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [63, 42]
+  },
+  "spider_09_01_001.png": {
+    "spriteOffset": [4, 11],
+    "spriteSize": [135, 110]
+  },
+  "spider_09_01_2_001.png": {
+    "spriteOffset": [27, 17],
+    "spriteSize": [85, 94]
+  },
+  "spider_09_01_extra_001.png": {
+    "spriteOffset": [35, 6],
+    "spriteSize": [63, 40]
+  },
+  "spider_09_01_glow_001.png": {
+    "spriteOffset": [4, 11],
+    "spriteSize": [143, 118]
+  },
+  "spider_09_02_001.png": {
+    "spriteOffset": [-3, 0],
+    "spriteSize": [42, 64]
+  },
+  "spider_09_02_2_001.png": {
+    "spriteOffset": [-3, 0],
+    "spriteSize": [38, 60]
+  },
+  "spider_09_02_glow_001.png": {
+    "spriteOffset": [-3, 0],
+    "spriteSize": [52, 72]
+  },
+  "spider_09_03_001.png": {
+    "spriteOffset": [1, 0],
+    "spriteSize": [39, 74]
+  },
+  "spider_09_03_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [32, 66]
+  },
+  "spider_09_03_glow_001.png": {
+    "spriteOffset": [1, 0],
+    "spriteSize": [47, 82]
+  },
+  "spider_09_04_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [55, 34]
+  },
+  "spider_09_04_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [50, 30]
+  },
+  "spider_09_04_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [63, 42]
+  },
+  "spider_10_01_001.png": {
+    "spriteOffset": [10, 8],
+    "spriteSize": [141, 100]
+  },
+  "spider_10_01_2_001.png": {
+    "spriteOffset": [22, 19],
+    "spriteSize": [113, 74]
+  },
+  "spider_10_01_extra_001.png": {
+    "spriteOffset": [32, 0],
+    "spriteSize": [47, 12]
+  },
+  "spider_10_01_glow_001.png": {
+    "spriteOffset": [9, 7],
+    "spriteSize": [149, 108]
+  },
+  "spider_10_02_001.png": {
+    "spriteOffset": [-1, 0],
+    "spriteSize": [48, 70]
+  },
+  "spider_10_02_2_001.png": {
+    "spriteOffset": [-2, 8],
+    "spriteSize": [18, 26]
+  },
+  "spider_10_02_glow_001.png": {
+    "spriteOffset": [-1, 0],
+    "spriteSize": [56, 78]
+  },
+  "spider_10_03_001.png": {
+    "spriteOffset": [-1, 1],
+    "spriteSize": [50, 76]
+  },
+  "spider_10_03_2_001.png": {
+    "spriteOffset": [-2, 10],
+    "spriteSize": [20, 32]
+  },
+  "spider_10_03_glow_001.png": {
+    "spriteOffset": [-1, 1],
+    "spriteSize": [58, 84]
+  },
+  "spider_10_04_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [55, 34]
+  },
+  "spider_10_04_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [50, 30]
+  },
+  "spider_10_04_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [63, 42]
+  },
+  "spider_11_01_001.png": {
+    "spriteOffset": [4, 5],
+    "spriteSize": [128, 102]
+  },
+  "spider_11_01_2_001.png": {
+    "spriteOffset": [5, 4],
+    "spriteSize": [122, 94]
+  },
+  "spider_11_01_extra_001.png": {
+    "spriteOffset": [42, 6],
+    "spriteSize": [38, 12]
+  },
+  "spider_11_01_glow_001.png": {
+    "spriteOffset": [4, 5],
+    "spriteSize": [138, 110]
+  },
+  "spider_11_02_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [44, 66]
+  },
+  "spider_11_02_2_001.png": {
+    "spriteOffset": [0, 1],
+    "spriteSize": [38, 56]
+  },
+  "spider_11_02_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [52, 74]
+  },
+  "spider_11_03_001.png": {
+    "spriteOffset": [1, 0],
+    "spriteSize": [46, 76]
+  },
+  "spider_11_03_2_001.png": {
+    "spriteOffset": [1, 1],
+    "spriteSize": [38, 64]
+  },
+  "spider_11_03_glow_001.png": {
+    "spriteOffset": [1, -1],
+    "spriteSize": [54, 84]
+  },
+  "spider_11_04_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [56, 34]
+  },
+  "spider_11_04_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [4, 4]
+  },
+  "spider_11_04_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [64, 42]
+  },
+  "spider_12_01_001.png": {
+    "spriteOffset": [7, 0],
+    "spriteSize": [120, 100]
+  },
+  "spider_12_01_2_001.png": {
+    "spriteOffset": [9, 5],
+    "spriteSize": [110, 70]
+  },
+  "spider_12_01_glow_001.png": {
+    "spriteOffset": [6, 0],
+    "spriteSize": [130, 108]
+  },
+  "spider_12_02_001.png": {
+    "spriteOffset": [0, 1],
+    "spriteSize": [44, 66]
+  },
+  "spider_12_02_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [4, 4]
+  },
+  "spider_12_02_glow_001.png": {
+    "spriteOffset": [0, 1],
+    "spriteSize": [52, 74]
+  },
+  "spider_12_03_001.png": {
+    "spriteOffset": [-3, -1],
+    "spriteSize": [42, 78]
+  },
+  "spider_12_03_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [4, 4]
+  },
+  "spider_12_03_glow_001.png": {
+    "spriteOffset": [-3, -1],
+    "spriteSize": [50, 86]
+  },
+  "spider_12_04_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [56, 34]
+  },
+  "spider_12_04_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [4, 4]
+  },
+  "spider_12_04_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [64, 42]
+  },
+  "spider_13_01_001.png": {
+    "spriteOffset": [-6, 7],
+    "spriteSize": [160, 110]
+  },
+  "spider_13_01_2_001.png": {
+    "spriteOffset": [13, -5],
+    "spriteSize": [104, 76]
+  },
+  "spider_13_01_extra_001.png": {
+    "spriteOffset": [26, 4],
+    "spriteSize": [88, 46]
+  },
+  "spider_13_01_glow_001.png": {
+    "spriteOffset": [-6, 7],
+    "spriteSize": [168, 118]
+  },
+  "spider_13_02_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [44, 62]
+  },
+  "spider_13_02_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [4, 4]
+  },
+  "spider_13_02_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [52, 70]
+  },
+  "spider_13_03_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [38, 74]
+  },
+  "spider_13_03_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [4, 4]
+  },
+  "spider_13_03_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [48, 82]
+  },
+  "spider_13_04_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [56, 34]
+  },
+  "spider_13_04_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [4, 4]
+  },
+  "spider_13_04_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [64, 42]
+  },
+  "spider_14_01_001.png": {
+    "spriteOffset": [1, 20],
+    "spriteSize": [144, 142]
+  },
+  "spider_14_01_2_001.png": {
+    "spriteOffset": [1, 19],
+    "spriteSize": [138, 130]
+  },
+  "spider_14_01_glow_001.png": {
+    "spriteOffset": [1, 20],
+    "spriteSize": [154, 150]
+  },
+  "spider_14_02_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [44, 64]
+  },
+  "spider_14_02_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [38, 58]
+  },
+  "spider_14_02_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [52, 74]
+  },
+  "spider_14_03_001.png": {
+    "spriteOffset": [-7, -1],
+    "spriteSize": [40, 84]
+  },
+  "spider_14_03_2_001.png": {
+    "spriteOffset": [-7, 0],
+    "spriteSize": [34, 72]
+  },
+  "spider_14_03_glow_001.png": {
+    "spriteOffset": [-7, 0],
+    "spriteSize": [48, 92]
+  },
+  "spider_14_04_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [4, 4]
+  },
+  "spider_14_04_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [4, 4]
+  },
+  "spider_14_04_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [4, 4]
+  },
+  "spider_15_01_001.png": {
+    "spriteOffset": [3, 0],
+    "spriteSize": [118, 82]
+  },
+  "spider_15_01_2_001.png": {
+    "spriteOffset": [6, 0],
+    "spriteSize": [92, 76]
+  },
+  "spider_15_01_extra_001.png": {
+    "spriteOffset": [13, 9],
+    "spriteSize": [52, 32]
+  },
+  "spider_15_01_glow_001.png": {
+    "spriteOffset": [3, 0],
+    "spriteSize": [126, 90]
+  },
+  "spider_15_02_001.png": {
+    "spriteOffset": [0, 2],
+    "spriteSize": [42, 64]
+  },
+  "spider_15_02_2_001.png": {
+    "spriteOffset": [0, -6],
+    "spriteSize": [32, 40]
+  },
+  "spider_15_02_glow_001.png": {
+    "spriteOffset": [0, 2],
+    "spriteSize": [50, 72]
+  },
+  "spider_15_03_001.png": {
+    "spriteOffset": [-6, 2],
+    "spriteSize": [42, 74]
+  },
+  "spider_15_03_2_001.png": {
+    "spriteOffset": [-4, -8],
+    "spriteSize": [32, 44]
+  },
+  "spider_15_03_glow_001.png": {
+    "spriteOffset": [-6, 2],
+    "spriteSize": [50, 82]
+  },
+  "spider_15_04_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [56, 34]
+  },
+  "spider_15_04_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [4, 4]
+  },
+  "spider_15_04_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [64, 42]
+  },
+  "spider_16_01_001.png": {
+    "spriteOffset": [16, 17],
+    "spriteSize": [98, 128]
+  },
+  "spider_16_01_2_001.png": {
+    "spriteOffset": [27, -8],
+    "spriteSize": [64, 48]
+  },
+  "spider_16_01_extra_001.png": {
+    "spriteOffset": [31, 9],
+    "spriteSize": [38, 12]
+  },
+  "spider_16_01_glow_001.png": {
+    "spriteOffset": [15, 17],
+    "spriteSize": [108, 136]
+  },
+  "spider_16_02_001.png": {
+    "spriteOffset": [-5, 1],
+    "spriteSize": [46, 68]
+  },
+  "spider_16_02_2_001.png": {
+    "spriteOffset": [-5, -14],
+    "spriteSize": [38, 30]
+  },
+  "spider_16_02_glow_001.png": {
+    "spriteOffset": [-5, 1],
+    "spriteSize": [54, 76]
+  },
+  "spider_16_03_001.png": {
+    "spriteOffset": [-5, -1],
+    "spriteSize": [46, 80]
+  },
+  "spider_16_03_2_001.png": {
+    "spriteOffset": [-4, -19],
+    "spriteSize": [38, 36]
+  },
+  "spider_16_03_glow_001.png": {
+    "spriteOffset": [-5, -1],
+    "spriteSize": [54, 88]
+  },
+  "spider_16_04_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [56, 34]
+  },
+  "spider_16_04_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [4, 4]
+  },
+  "spider_16_04_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [64, 42]
+  },
+  "spider_17_01_001.png": {
+    "spriteOffset": [7, 5],
+    "spriteSize": [140, 98]
+  },
+  "spider_17_01_2_001.png": {
+    "spriteOffset": [7, 5],
+    "spriteSize": [134, 92]
+  },
+  "spider_17_01_extra_001.png": {
+    "spriteOffset": [43, 10],
+    "spriteSize": [54, 12]
+  },
+  "spider_17_01_glow_001.png": {
+    "spriteOffset": [7, 5],
+    "spriteSize": [148, 106]
+  },
+  "spider_17_02_001.png": {
+    "spriteOffset": [-1, 0],
+    "spriteSize": [48, 64]
+  },
+  "spider_17_02_2_001.png": {
+    "spriteOffset": [-1, 0],
+    "spriteSize": [42, 58]
+  },
+  "spider_17_02_glow_001.png": {
+    "spriteOffset": [-1, 0],
+    "spriteSize": [56, 72]
+  },
+  "spider_17_03_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [48, 78]
+  },
+  "spider_17_03_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [42, 70]
+  },
+  "spider_17_03_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [56, 86]
+  },
+  "spider_17_04_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [56, 34]
+  },
+  "spider_17_04_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [4, 4]
+  },
+  "spider_17_04_glow_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [64, 42]
+  },
+  "swing_01_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [163, 150]
+  },
+  "swing_01_2_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [163, 150]
+  },
+  "swing_01_extra_001.png": {
+    "spriteOffset": [0, 0],
+    "spriteSize": [163, 150]
+  }
+}

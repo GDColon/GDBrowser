@@ -6,6 +6,14 @@ const properties = require('../misc/analysis/objectProperties.json')
 const ids = require('../misc/analysis/objects.json')
 
 module.exports = async (app, req, res, level) => {
+
+    if (!level) {
+        level = {
+            name: (req.body.name || "Unnamed").slice(0, 64),
+            data: (req.body.data || "")
+        }
+    }
+
     let unencrypted = level.data.startsWith('kS') // some gdps'es don't encrypt level data
     let levelString = unencrypted ? level.data : Buffer.from(level.data, 'base64')
 

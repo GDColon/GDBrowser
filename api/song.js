@@ -11,7 +11,6 @@ module.exports = async (app, req, res) => {
         if (err) return res.send('-1')
         else if (body < 0) return res.send(false)
         request.get('https://www.newgrounds.com/audio/listen/' + songID, function(err2, resp2, song) {
-            console.log(resp2.statusCode)
             return res.send(resp2.statusCode == 200)
         })
     })

@@ -5,6 +5,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "ag-psd": "^14.3.2",
     "canvas": "^2.8.0",
     "compression": "^1.7.4",
     "connect-timeout": "^1.9.0",
@@ -13,6 +14,7 @@
     "google-spreadsheet": "^3.0.11",
     "jimp": "^0.8.5",
     "plist": "^3.0.1",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "sharp": "^0.29.1"
   }
 }
