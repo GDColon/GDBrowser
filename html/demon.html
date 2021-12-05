@@ -126,15 +126,17 @@ fetch(`${server.demonList}api/v2/demons/listed?after=${demonID-1}&before=${demon
 			<img class="inline spaced" src="../assets/trophies/${trophies.findIndex(z => y+1 <= z) + 1}.png" height="120%" style="margin-bottom: 0%; transform:scale(1.1)">
 		</div>
 
-		<div style="${!x.video ? "display: none; " : ""}position:absolute; width: 12.5%; height: 15%; right: 0%">
+		<div style="${!x.video ? "display: none; " : ""}position:absolute; width: 12.5%; height: 15%; right: 0%; transform: translateY(-8.5vh)">
 			<a target="_blank" href="${x.video}">
-			<img class="gdButton inline spaced" src="../assets/${videoIcon}.png" height="80%" style="transform: translateY(-8.5vh)">
+			<img class="gdButton inline spaced" src="../assets/${videoIcon}.png" height="80%">
 			</a>
 		</div>
 
 	</div>`)
 
 	})
+
+	$('#searchBox').append('<div style="height: 4.5%"></div>')
 
 	$('#loading').hide();
 }).catch(e => $('#loading').hide())

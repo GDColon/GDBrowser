@@ -1,0 +1,95 @@
+{
+    "spider": [
+        {
+            "name": "base",
+            "leg": 1,
+            "xPos": 2.3,
+            "yPos": 16.2
+          },
+          {
+            "name": "connector",
+            "leg": 4,
+            "xPos": -30,
+            "yPos": -6,
+            "darken": 49.6
+          },
+          {
+            "name": "leftmost",
+            "leg": 3,
+            "xPos": -74,
+            "yPos": -24.2,
+            "rotation": 38.964
+          },
+          {
+            "name": "middle left",
+            "leg": 2,
+            "xPos": -9.9,
+            "yPos": -24
+          },
+          {
+            "name": "middle right",
+            "leg": 2,
+            "xPos": 20.1,
+            "yPos": -32,
+            "yScale": 0.884,
+            "darken": 49.6
+          },
+          {
+            "name": "rightmost",
+            "leg": 2,
+            "xPos": 55,
+            "yPos": -31,
+            "yScale": 0.884,
+            "xFlip": true,
+            "darken": 49.6
+          }
+    ],
+    
+    "robot": [
+        {
+            "leg": 1,
+            "xPos": 0.250,
+            "yPos": 5.500,
+            "rotation": -2.286
+        },
+        {
+            "leg": 2,
+            "xPos": -5.750,
+            "yPos": -2.150,
+            "rotation": 42.501
+        },
+        {
+            "leg": 2,
+            "xPos": -7.175,
+            "yPos": -1.025,
+            "yScale": 0.998,
+            "rotation": 57.968,
+            "darken": 49.6
+        },
+        {
+            "leg": 3,
+            "xPos": -4.525,
+            "yPos": -6.625,
+            "rotation": -42.941
+        },
+        {
+            "leg": 3,
+            "xPos": -7.175,
+            "yPos": -6.875,
+            "yScale": 0.998,
+            "rotation": -29.673,
+            "darken": 49.6
+        },
+        {
+            "leg": 4,
+            "xPos": 2.275,
+            "yPos": -10.900
+        },
+        {
+            "leg": 4,
+            "xPos": -2.675,
+            "yPos": -10.900,
+            "darken": 49.6
+        }
+    ]
+}

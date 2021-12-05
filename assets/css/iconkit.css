@@ -482,6 +482,10 @@ input[type=checkbox]:checked + label.gdcheckbox {
   animation: boxAnimator 0.25s;
 }
 
+.grayscale {
+  filter: grayscale(100%) brightness(0.7);
+}
+
 .gold {
   color: rgb(255, 200, 0);
 }

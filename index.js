@@ -45,7 +45,7 @@ let achievementTypes = require('./misc/achievementTypes.json')
 let shopIcons = require('./misc/shops.json')
 let music = require('./misc/music.json')
 
-let colorList = JSON.parse(fs.readFileSync('./icons/colors.json', 'utf8')) // need a clone of this
+let colorList = JSON.parse(fs.readFileSync('./misc/icons/colors.json', 'utf8')) // need a clone of this
 let assetPage = fs.readFileSync('./html/assets.html', 'utf8')
 let gdIcons = fs.readdirSync('./assets/previewicons')
 let whiteIcons = fs.readdirSync('./icons').filter(x => x.endsWith("extra_001.png")).map(function (x) { let xh = x.split("_"); return [xh[1] == "ball" ? "ball" : forms[xh[0]] || xh[0], +xh[xh[1] == "ball" ? 2 : 1]]})
@@ -221,6 +221,7 @@ app.post("/deleteMessage", RL, function(req, res) { app.run.deleteMessage(app, r
 app.post("/sendMessage", RL, function(req, res) { app.run.sendMessage(app, req, res) })  
 
 app.post("/accurateLeaderboard", function(req, res) { app.run.accurate(app, req, res, true) })
+app.post("/analyzeLevel", function(req, res) { app.run.analyze(app, req, res) })
 
 // HTML
 

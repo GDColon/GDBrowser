@@ -17,15 +17,18 @@
   },
   "robot": {
     "form": "robot",
-    "ind": 26
+    "ind": 26,
+    "legs": true
   },
   "spider": {
     "form": "spider",
-    "ind": 43
+    "ind": 43,
+    "legs": true
   },
   "cursed": {
     "form": "spider",
-    "ind": 43
+    "ind": 43,
+    "legs": true
   },
   "swing": {
     "form": "swing",

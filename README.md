@@ -37,38 +37,28 @@ If you would like to add your GDPS to GDBrowser, [fill out this quick form](http
   
 If you 100% insist on adding a private server to your own magical little fork, you can do so by adding it to **servers.json**. Simply add a new object to the array with the following information:
 
+| identifier       | description                  |
+|:----------------:|:-----------------------------:|
+| `name`           | The display name of the server |
+| `link`           | The server's website URL (unrelated to the actual endpoint) |
+| `author`         | The creator(s) of the server |
+| `authorLink`     |  The URL to open when clicking on the creator's name |
+| `id`             | An ID for the server, also used as the subdomain (e.g. `something` would become `something.gdbrowser.com`) |
+| `endpoint`       | The actual endpoint to ~~spam~~ send requests to (e.g. `http://boomlings.com/database/` - make sure it ends with a slash!) |
 
-
-
-**name:** The display name of the server
-
-**link:** The server's website URL (unrelated to the actual endpoint)
-
-**author:** The creator(s) of the server
-
-**authorLink:** The URL to open when clicking on the creator's name
-
-**id:** An ID for the server, also used as the subdomain (e.g. `something` would become `something.gdbrowser.com`)
-
-**endpoint:** The actual endpoint to ~~spam~~ send requests to (e.g. `http://boomlings.com/database/` - make sure it ends with a slash!)
 
 There's also a few optional values for fine-tuning. I'll add more over time
 
-[string] **timestampSuffix:** A string to append at the end of timestamps. Vanilla GD uses " ago" 
-
-[string] **demonList:** The URL of the server's Demon List API, if it has one (e.g. `http://pointercrate.com/` - make sure it ends with a slash!)
-
-[array] **disabled:** An array of menu buttons to "disable" (mappacks, gauntlets, daily, weekly, etc). They appear greyed out but are still clickable.
-
-[bool] **pinned:** "Pins" the server to the top of the GDPS list. It appears above all unpinned servers and is not placed in alphabetical order.
-
-[bool] **onePointNine:** Makes a bunch of fancy changes to better fit 1.9 servers. (removes orbs/diamonds, hides some pointless buttons, etc)
-
-[bool] **weeklyLeaderboard:** Enables the lost but not forgotten Weekly Leaderboard, for servers that still milk it
-
-[object] **substitutions:** A list of parameter substitutions, because some servers rename/obfuscate them. (e.g. `{ "levelID": "oiuyhxp4w9I" }`)
-
-[object] **overrides:** A list of endpoint substitutions, because some servers use renamed or older versions. (e.g. `{ "getGJLevels21": "dorabaeChooseLevel42" }`)
+| identifier       | description                   | type |
+|:----------------:|:-----------------------------:|:----:|
+| `timestampSuffix` | A string to append at the end of timestamps. Vanilla GD uses " ago" | string |
+| `demonList` | The URL of the server's Demon List API, if it has one (e.g. `http://pointercrate.com/` - make sure it ends with a slash!) | string |
+| `disabled` | An array of menu buttons to "disable" (mappacks, gauntlets, daily, weekly, etc). They appear greyed out but are still clickable. | array |
+| `pinned` | "Pins" the server to the top of the GDPS list. It appears above all unpinned servers and is not placed in alphabetical order. | bool |
+| `onePointNine` | Makes a bunch of fancy changes to better fit 1.9 servers. (removes orbs/diamonds, hides some pointless buttons, etc) | bool |
+| `weeklyLeaderboard` | Enables the lost but not forgotten Weekly Leaderboard, for servers that still milk it | bool |
+| `substitutions` | A list of parameter substitutions, because some servers rename/obfuscate them. (e.g. `{ "levelID": "oiuyhxp4w9I" }`) | object |
+| `overrides` | A list of endpoint substitutions, because some servers use renamed or older versions. (e.g. `{ "getGJLevels21": "dorabaeChooseLevel42" }`) | object |
 
   
 
@@ -143,23 +133,13 @@ comingsoon.html was used while the site was still in development, I just left it
   
 
 ## Icons
-
 It's GJ_Gamesheet02 but split into a much more intimidating cluster of a million files. These icons are put together and colored in the monstrosity that is icon.js
-
-  
-
-parseIconPlist.js reads GJ_GameSheet02-uhd.plist and magically transforms it into gameSheet.json. Props to 101arrowz for helping make this
-
-
-colors.json is a list of the player colors in GD. Fairly straight forward
-
-
-forms.json is a list of the different icon forms, their ingame filenames, and their index in responses from the GD servers
-
-
-offsets.json is a bunch of hardcoded offsets. Desperate times call for desperate measures
-
-  
+| name | description |
+|:----:|:-----------:|
+|`parseIconPlist.js`| Reads GJ_GameSheet02-uhd.plist and magically transforms it into gameSheet.json. Props to 101arrowz for helping make this |
+| `colors.json` | List of the player colors in GD. Fairly straight forward |
+| `forms.json` | List of the different icon forms, their ingame filenames, and their index in responses from the GD servers
+| `offsets.json` | A bunch of hardcoded offsets. Desperate times call for desperate measures |
 
 ## Misc
 
@@ -170,72 +150,32 @@ Inevitable misc folder
 **Level Analysis Stuff (in a separate folder)**
 
   
-
-blocks.json - The object IDs in the different 'families' of blocks
-
-  
-
-colorProperties.json - Color channel cheatsheet
-
-  
-
-initialProperties.json - Level settings cheatsheet
-
-  
-
-objectProperties.json - Object property cheatsheet. Low budget version of [AlFas' one](https://github.com/AlFasGD/GDAPI/blob/master/GDAPI/GDAPI/Enumerations/GeometryDash/ObjectProperty.cs)
-
-  
-
-objects.json - IDs for portals, orbs, triggers, and misc stuff
+| name | description |
+|:----:|:-----------:|
+| `blocks.json` | The object IDs in the different 'families' of blocks |
+| `colorProperties.json` | Color channel cheatsheet |
+| `initialProperties.json` | Level settings cheatsheet |
+| `objectProperties.json` | Object property cheatsheet. Low budget version of [AlFas' one](https://github.com/AlFasGD/GDAPI/blob/master/GDAPI/GDAPI/Enumerations/GeometryDash/ObjectProperty.cs) |
+| `objects.json` | IDs for portals, orbs, triggers, and misc stuff |
 
   
 
 **Everything Else**
 
   
-
-achievements.json - List of all GD/meltdown/subzero/etc achievements. `parseAchievementPlist.js` automatically creates this file
-
-  
-
-achievementTypes.json - An object containing different categories of achievements (stars, shards, vault, etc) and how to identify them
-
-  
-
-credits.json - Credits! (shown on the homepage)
-
-  
-
-dragscroll.js - Used on several pages for drag scrolling
-
-  
-
-music.json - An array of the official GD tracks (name, artist)
-
-  
-
-parseAchievementPlist.js - A script that reads GD's achievement .plist files and converts it into achievements.json
-
-  
-
-sampleIcons.json - A pool of icons, one of which will randomly appear when visiting the icon kit. Syntax is [Name, ID, Col1, Col2, Glow],
-
-  
-
-secretStuff.json - GJP goes here, needed for level leaderboards. Not included in the repo for obvious reasons
-
-  
-
-settings.js - Tweak small settings here, mainly for local use or GDPS'es
-
-  
-
-shops.js - A hardcoded list of all the shop icons in GD
-
-  
-
-sizecheck.js - Excecuted on most pages. Used for the 'page isn't wide enough' message, back button, and a few other things
+| name | description |
+|:----:|:-----------:|
+| `achievements.json` | List of all GD/meltdown/subzero/etc achievements. `parseAchievementPlist.js` automatically creates this file |
+| `achievementTypes.json` | An object containing different categories of achievements (stars, shards, vault, etc) and how to identify them |
+| `credits.json` | Credits! (shown on the homepage) | 
+| `dragscroll.js` | Used on several pages for drag scrolling |
+| `music.json` | An array of the official GD tracks (name, artist) |
+| `parseAchievementPlist.js` | A script that reads GD's achievement .plist files and converts it into achievements.json |
+| `sampleIcons.json` | A pool of icons, one of which will randomly appear when visiting the icon kit. Syntax is [Name, ID, Col1, Col2, Glow] |
+| `secretStuff.json` | GJP goes here, needed for level leaderboards. Not included in the repo for obvious reasons |
+| `settings.js` | Tweak small settings here, mainly for local use or GDPS'es |
+| `shops.js` | A hardcoded list of all the shop icons in GD |
+| `sizecheck.js` | Excecuted on most pages. Used for the 'page isn't wide enough' message, back button, and a few other things |
 
   
 

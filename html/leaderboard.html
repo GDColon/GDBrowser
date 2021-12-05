@@ -72,6 +72,11 @@
 		<img class="gdButton" src="../assets/smallinfo.png" width="32%" onclick="$('#infoDiv').show()">
 	</div>
 
+	<div style="position:absolute; top: 12%; right: 1.5%; width: 21%; text-align: right;">
+		<a id="discord" target="_blank" title="Official leaderboard Discord!" href="https://discord.gg/leaderboard"><img class="gdButton" src="../assets/discord.png" width="20%"></a>
+		<a id="altDiscord" target="_blank" title="Accurate leaderboard Discord!" style="display: none; filter: hue-rotate(300deg)" href="https://discord.gg/Uz7pd4"><img class="gdButton" src="../assets/discord.png" width="20%"></a>
+	</div>
+
 	<div class="supercenter" id="loading" style="height: 10%; top: 47%; display: none;">
 		<img class="spin noSelect" src="../assets/loading.png" height="105%">
 	</div>
@@ -103,15 +108,20 @@ let weeklyText =
 `The <cg>Weekly</cg> leaderboard displays the players who have gained the most <cy>stars</cy> in the <cb>past week</cb>. It was officially <co>removed</co> in update 2.0, but lives on in some GDPS'es.`
 
 let accurateText =
-`The <cg>Accurate Leaderboard</cg> is a highly accurate, hacker-proof leaderboard with <cy>proper stats and positioning</cy> (unlike the regular one). It is managed by <cb>XShadowWizardX, Pepper360, Octeract</cb>, and many many other helpers. Be sure to check out their <a target="_blank" href="https://docs.google.com/spreadsheets/d/10lbPnDYJXhbtlA0ls0cGjjX_osFSG559IDrTbhgPHvc"><ca class="underline">interactive leaderboard spreadsheet</ca></a> or join their <a target="_blank" href="https://discord.gg/Uz7pd4d"><ca class="underline">Discord server<ca></a>.`
+`The <cg>Accurate Leaderboard</cg> is an <cy>externally managed</cy> leaderboard which aims to provide <ca>detailed</ca> and hacker-proof stats on top players. It also once provided a way to view an <cg>accurate</cg> list of players with the most <cy>stars</cy> when the official leaderboards were <ca>frozen</ca>. It is managed by <cb>XShadowWizardX, Pepper360, Octeract</cb>, and many many other helpers.`
 
 let creatorText = 
 `The <cg>Creators Leaderboard</cg> is sorted by <cg>creator points</cg>, rather than stars. A player's <cg>creator points</cg> (CP) is calculated by counting their number of <cy>star rated</cy> levels, plus an extra point for every level that has been <cb>featured</cb>, plus an additional point for <co>epic rated</co> levels.`
 
 if (showWeek) $('#weeklyStats').attr('src', '../assets/sort-week-on.png')
 
-function infoText(text) { $('#infoText').html(text) }
-infoText(accurateText)
+function infoText(text, altDiscord) {
+	$('#infoText').html(text)
+	if (altDiscord) { $('#discord').hide(); $('#altDiscord').show() }
+	else { $('#discord').show(); $('#altDiscord').hide() }
+}
+
+infoText(top250Text)
 
 function leaderboard(val) {
 
@@ -225,7 +235,7 @@ $('#accurateTabOff').click(function() {
 	$('#topTabOff').show()
 	$('#accurateTabOn').show()
 	$('#creatorTabOff').show()
-	infoText(accurateText)
+	infoText(accurateText, true)
 	$('.sortDiv').show()
 })
 
