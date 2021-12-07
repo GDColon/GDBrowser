@@ -252,7 +252,11 @@ app.get("/", function(req, res) {
       if (req.server.downloadsDisabled && process.platform == "linux") {
         downloadDisabled.forEach(x => { html = html.replace(`menu-${x}`, 'menuDisabled') })
         html = html.replace('id="dl" style="display: none', 'style="display: block')
-        .replace('No active <span id="noLevel">daily</span> level!', '[Blocked by RobTop]')
+        .replace('No active < span id="noLevel">daily</span> level!', '[Blocked by RobTop]')
+      }
+      if (html.includes('menuDisabled" src="../assets/category-weekly')) { // if weekly disabled, replace with featured
+        html = html.replace('block" id="menu_weekly', 'none" id="menu_weekly')
+        .replace('none" id="menu_featured', 'block" id="menu_featured')
       }
       return res.status(200).send(html)
     })
