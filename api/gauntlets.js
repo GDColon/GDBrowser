@@ -3,14 +3,14 @@ let gauntletNames = ["Fire", "Ice", "Poison", "Shadow", "Lava", "Bonus", "Chaos"
 
 module.exports = async (app, req, res) => {
 
-  if (req.offline) return res.status(500).send("-1")
+  if (req.offline) return res.sendError()
 
   let cached = cache[req.id]
   if (app.config.cacheGauntlets && cached && cached.data && cached.indexed + 2000000 > Date.now()) return res.status(200).send(cached.data)   // half hour cache
 
   req.gdRequest('getGJGauntlets21', {}, function (err, resp, body) {
 
-    if (err) return res.status(500).send("-1")
+    if (err) return res.sendError()
     let gauntlets = body.split('#')[0].split('|').map(x => app.parseResponse(x)).filter(x => x[3])
     let gauntletList = gauntlets.map(x => ({ id: +x[1], name: gauntletNames[+x[1] - 1] || "Unknown", levels: x[3].split(",") }))
 

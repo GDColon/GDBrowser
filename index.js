@@ -73,6 +73,11 @@ app.use(async function(req, res, next) {
   req.server = app.servers.find(x => subdomains.includes(x.id.toLowerCase()))
   if (subdomains.length > 1 || !req.server) return res.redirect("http://" + req.get('host').split(".").slice(subdomains.length).join(".") + req.originalUrl)
 
+  // will expand this in the future :wink:
+  res.sendError = function(errorCode=500) {
+    res.status(errorCode).send("-1")
+  }
+
   // literally just for convenience
   req.offline = req.server.offline
   req.endpoint = req.server.endpoint

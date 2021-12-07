@@ -1,6 +1,6 @@
 module.exports = async (app, req, res) => {
 
-    if (req.offline) return res.status(500).send("-1")
+    if (req.offline) return res.sendError()
 
     let count = +req.query.count || 10
     if (count > 1000) count = 1000
@@ -20,14 +20,14 @@ module.exports = async (app, req, res) => {
 
     req.gdRequest(path, req.gdParams(params), function(err, resp, body) { 
 
-      if (err) return res.status(500).send("-1")
+      if (err) return res.sendError()
 
       comments = body.split('|')
       comments = comments.map(x => x.split(':'))
       comments = comments.map(x => x.map(x => app.parseResponse(x, "~")))
       if (req.query.type == "profile") comments.filter(x => x[0][2])
       else comments = comments.filter(x => x[0] && x[0][2])
-      if (!comments.length) return res.status(204).send("-1")
+      if (!comments.length) return res.status(204).send([])
 
       let pages = body.split('#')[1].split(":")
       let lastPage = +Math.ceil(+pages[0] / +pages[2]);

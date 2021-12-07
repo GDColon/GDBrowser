@@ -3,7 +3,7 @@ let cache = {}
 
 module.exports = async (app, req, res) => {
 
-  if (req.offline) return res.status(500).send("-1")
+  if (req.offline) return res.sendError()
   
   let cached = cache[req.id]
   if (app.config.cacheMapPacks && cached && cached.data && cached.indexed + 5000000 > Date.now()) return res.status(200).send(cached.data)   // 1.5 hour cache
@@ -13,7 +13,7 @@ module.exports = async (app, req, res) => {
   function mapPackLoop() {
     req.gdRequest('getGJMapPacks21', params, function (err, resp, body) {
 
-      if (err) return res.status(500).send("-1")
+      if (err) return res.sendError()
 
       let newPacks = body.split('#')[0].split('|').map(x => app.parseResponse(x)).filter(x => x[2])
       packs = packs.concat(newPacks)

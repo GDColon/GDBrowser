@@ -1,6 +1,6 @@
 module.exports = async (app, req, res) => {
 
-   if (req.offline) return res.status(500).send("-1")
+   if (req.offline) return res.sendError()
 
     let amount = 100;
     let count = req.query.count ? parseInt(req.query.count) : null
@@ -16,9 +16,9 @@ module.exports = async (app, req, res) => {
 
     req.gdRequest('getGJScores20', params, function(err, resp, body) { 
 
-      if (err) return res.status(500).send("-1")
+      if (err) return res.sendError()
       scores = body.split('|').map(x => app.parseResponse(x)).filter(x => x[1])
-      if (!scores.length) return res.status(500).send("-1")
+      if (!scores.length) return res.sendError()
 
       scores.forEach(x => {
         let keys = Object.keys(x)

@@ -83,6 +83,10 @@
 		<img src="../assets/random.png" height="60%" class="gdButton" style="margin-top: 5%">
 	</div>
 
+	<div id="lastPage" title="Last page" style="display: none; text-align: right; position:absolute; top: 7.5%; right: 11%; height: 11%;">
+		<img src="../assets/double-arrow.png" height="60%" class="gdButton" style="margin-top: 5%">
+	</div>
+
 	<div style="position:absolute; top: 2%; left: 1.5%; width: 10%; height: 25%; pointer-events: none">
 		<img class="gdButton yesClick" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()">
 	</div>
@@ -159,6 +163,9 @@ function Append(firstLoad, noCache) {
 	if (page == 0) $('#pageDown').hide()
 	else $('#pageDown').show()
 
+	if (page == (pages - 1)) $('#lastPage').addClass('grayscale').find('img').removeClass('gdButton')
+	else $('#lastPage').removeClass('grayscale').find('img').addClass('gdButton')
+
 	if (!noCache && pageCache[page]) appendLevels(pageCache[page])
 	else Fetch(searchFilters.replace("[PAGE]", page)).then(appendLevels)
 
@@ -176,6 +183,7 @@ function Append(firstLoad, noCache) {
 			else $('#shuffle').css('filter', 'hue-rotate(100deg)')
 		}
 		$('#shuffle').show()
+		$('#lastPage').show()
 		$('#pagenum').text(`Page ${page + 1}${pages ? ` of ${pages}` : ""}`)
 	}
 
@@ -250,6 +258,7 @@ Append(true)
 
 $('#pageUp').click(function() {page += 1; if (!loading) Append()})
 $('#pageDown').click(function() {page -= 1; if (!loading) Append()})
+$('#lastPage').click(function() {page = (pages - 1); if (!loading) Append()})
 $('#pageJump').click(function() {if (loading) return; page = parseInt(($('#pageSelect').val() || 1) - 1); Append()})
 $('#refreshPage').click(function() { Append(false, true) } )
 

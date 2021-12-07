@@ -4,7 +4,7 @@ module.exports = async (app, req, res, api, getLevels) => {
 
   if (req.offline) {
     if (!api) return res.redirect('/search/' + req.params.id)
-    else return res.status(500).send("-1")
+    else return res.sendError()
   }
   
   let username = getLevels || req.params.id
@@ -42,7 +42,7 @@ module.exports = async (app, req, res, api, getLevels) => {
       
       if (err2 || dumbGDPSError) {
         if (!api) return res.redirect('/search/' + req.params.id)
-        else return res.status(500).send("-1")
+        else return res.sendError()
       }
       
       if (!foundID) app.userCache(req.id, account[16], account[2], account[1])

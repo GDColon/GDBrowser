@@ -4,11 +4,11 @@ module.exports = async (app, req, res) => {
 
     // temporary solution until song api is re-enabled
 
-    if (req.offline) return res.status(500).send('-1')
+    if (req.offline) return res.sendError()
 
     let songID = req.params.song
     req.gdRequest('getGJSongInfo', {songID: songID}, function(err, resp, body) {
-        if (err) return res.status(400).send('-1')
+        if (err) return res.sendError(400)
         else if (body < 0) return res.send(false)
         request.get('https://www.newgrounds.com/audio/listen/' + songID, function(err2, resp2, song) {
             console.log(resp2.statusCode)

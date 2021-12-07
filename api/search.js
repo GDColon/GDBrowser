@@ -9,13 +9,13 @@ module.exports = async (app, req, res) => {
 
     let demonMode = req.query.hasOwnProperty("demonlist") || req.query.hasOwnProperty("demonList") || req.query.type == "demonlist" || req.query.type == "demonList"
     if (demonMode) {
-        if (!req.server.demonList) return res.status(400).send('-1')
+        if (!req.server.demonList) return res.sendError(400)
         let dList = demonList[req.id]
         if (!dList || !dList.list.length || dList.lastUpdated + 600000 < Date.now()) {  // 10 minute cache
             return request.get(req.server.demonList + 'api/v2/demons/listed/?limit=100', function (err1, resp1, list1) {
-                if (err1) return res.status(500).send("-1")
+                if (err1) return res.sendError()
                 else return request.get(req.server.demonList + 'api/v2/demons/listed/?limit=100&after=100', function (err2, resp2, list2) {
-                    if (err2) return res.status(500).send("-1")
+                    if (err2) return res.sendError()
                     demonList[req.id] = {list: JSON.parse(list1).concat(JSON.parse(list2)).map(x => String(x.level_id)), lastUpdated: Date.now()}
                     return app.run.search(app, req, res)
                 })
@@ -85,7 +85,7 @@ module.exports = async (app, req, res) => {
         filters.str = demonMode ? demonList[req.id].list : filters.str.split(",")
         listSize = filters.str.length
         filters.str = filters.str.slice(filters.page*amount, filters.page*amount + amount)
-        if (!filters.str.length) return res.status(400).send("-1")
+        if (!filters.str.length) return res.sendError(400)
         filters.str = filters.str.map(x => String(Number(x) + (+req.query.l || 0))).join()
         filters.page = 0
     }
@@ -95,7 +95,7 @@ module.exports = async (app, req, res) => {
 
     req.gdRequest('getGJLevels21', req.gdParams(filters), function(err, resp, body) {
 
-        if (err) return res.status(500).send("-1")
+        if (err) return res.sendError()
         let splitBody = body.split('#')
         let preRes = splitBody[0].split('|')
         let authorList = {}

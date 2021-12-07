@@ -6,7 +6,7 @@ module.exports = async (app, req, res, api, analyze) => {
 
   function rejectLevel() {
     if (!api) return res.redirect('search/' + req.params.id)
-    else return res.status(500).send("-1")
+    else return res.sendError()
   }
 
   if (req.offline) return rejectLevel()

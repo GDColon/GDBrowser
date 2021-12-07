@@ -1,6 +1,6 @@
 module.exports = async (app, req, res) => {
 
-  if (req.offline) return res.status(500).send("-1")
+  if (req.offline) return res.sendError()
 
     let amount = 100;
     let count = req.query.count ? parseInt(req.query.count) : null
