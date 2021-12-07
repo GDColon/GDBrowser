@@ -4,7 +4,7 @@ module.exports = async (app, req, res, api, getLevels) => {
 
   if (req.offline) {
     if (!api) return res.redirect('/search/' + req.params.id)
-    else return res.send("-1")
+    else return res.status(500).send("-1")
   }
   
   let username = getLevels || req.params.id
@@ -42,7 +42,7 @@ module.exports = async (app, req, res, api, getLevels) => {
       
       if (err2 || dumbGDPSError) {
         if (!api) return res.redirect('/search/' + req.params.id)
-        else return res.send("-1")
+        else return res.status(500).send("-1")
       }
       
       if (!foundID) app.userCache(req.id, account[16], account[2], account[1])
@@ -78,7 +78,7 @@ module.exports = async (app, req, res, api, getLevels) => {
           glow: account[28] == "1",
       }
   
-      if (api) return res.send(userData)
+      if (api) return res.status(200).send(userData)
 
       else fs.readFile('./html/profile.html', 'utf8', function(err, data) {
         let html = data;
@@ -87,7 +87,7 @@ module.exports = async (app, req, res, api, getLevels) => {
           let regex = new RegExp(`\\[\\[${x.toUpperCase()}\\]\\]`, "g")
           html = html.replace(regex, app.clean(userData[x]))
         })
-        return res.send(html)
+        return res.status(200).send(html)
       })
   
       })

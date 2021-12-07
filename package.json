@@ -4,6 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "dev": "node ./index.js"
+  },
   "dependencies": {
     "ag-psd": "^14.3.2",
     "canvas": "^2.8.0",

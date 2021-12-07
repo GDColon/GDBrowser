@@ -6,7 +6,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
 
   function rejectLevel() {
     if (!api) return res.redirect('search/' + req.params.id)
-    else return res.send("-1")
+    else return res.status(500).send("-1")
   }
 
   if (req.offline) {
@@ -22,7 +22,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
   req.gdRequest('downloadGJLevel22', { levelID }, function (err, resp, body) {
 
     if (err) {
-      if (analyze && api && req.server.downloadsDisabled) return res.send("-3")
+      if (analyze && api && req.server.downloadsDisabled) return res.status(403).send("-3")
       else if (!api && levelID < 0) return res.redirect(`/?daily=${levelID * -1}`)
       else return rejectLevel()
     }
@@ -69,7 +69,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
           if (analyze) return app.run.analyze(app, req, res, level)
 
           function sendLevel() {
-            if (api) return res.send(level)
+            if (api) return res.status(200).send(level)
 
             else return fs.readFile('./html/level.html', 'utf8', function (err, data) {
               let html = data;
@@ -78,7 +78,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
                 let regex = new RegExp(`\\[\\[${x.toUpperCase()}\\]\\]`, "g")
                 html = html.replace(regex, app.clean(level[x]))
               })
-              return res.send(html)
+              return res.status(200).send(html)
             })
           }
 
