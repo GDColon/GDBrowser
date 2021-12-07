@@ -184,8 +184,8 @@ app.clean = function(text) {if (!text || typeof text != "string") return text; e
 app.use('/assets', express.static(__dirname + '/assets', {maxAge: "7d"}));
 app.use('/assets/css', express.static(__dirname + '/assets/css')); // override maxAge
 
-app.get("/sizecheck.js", function(req, res) { res.sendFile(__dirname + "/misc/sizecheck.js") })
-app.get("/dragscroll.js", function(req, res) { res.sendFile(__dirname + "/misc/dragscroll.js") })
+app.get("/sizecheck.js", function(req, res) { res.status(200).sendFile(__dirname + "/misc/sizecheck.js") })
+app.get("/dragscroll.js", function(req, res) { res.status(200).sendFile(__dirname + "/misc/dragscroll.js") })
 
 app.get("/assets/:dir*?", function(req, res) {
   let main = (req.params.dir || "").toLowerCase()
@@ -193,10 +193,10 @@ app.get("/assets/:dir*?", function(req, res) {
 
   if (dir.includes('.') || !req.path.endsWith("/")) {
     if (!req.params[0]) main = ""
-    if (req.params.dir == "deatheffects" || req.params.dir == "trails") return res.sendFile(__dirname + "/assets/deatheffects/0.png")
-    else if (req.params.dir == "gdps" && req.params[0].endsWith("_icon.png")) return res.sendFile(__dirname + "/assets/gdps/unknown_icon.png")
-    else if (req.params.dir == "gdps" && req.params[0].endsWith("_logo.png")) return res.sendFile(__dirname + "/assets/gdps/unknown_logo.png")
-    return res.send(`<p style="font-size: 20px; font-family: aller, helvetica, arial">Looks like this file doesn't exist ¯\\_(ツ)_/¯<br><a href='/assets/${main}'>View directory listing for <b>/assets/${main}</b></a></p>`)
+    if (req.params.dir == "deatheffects" || req.params.dir == "trails") return res.status(200).sendFile(__dirname + "/assets/deatheffects/0.png")
+    else if (req.params.dir == "gdps" && req.params[0].endsWith("_icon.png")) return res.status(200).sendFile(__dirname + "/assets/gdps/unknown_icon.png")
+    else if (req.params.dir == "gdps" && req.params[0].endsWith("_logo.png")) return res.status(200).sendFile(__dirname + "/assets/gdps/unknown_logo.png")
+    return res.status(404).send(`<p style="font-size: 20px; font-family: aller, helvetica, arial">Looks like this file doesn't exist ¯\\_(ツ)_/¯<br><a href='/assets/${main}'>View directory listing for <b>/assets/${main}</b></a></p>`)
   }
 
   let path = `./assets/${dir}`
@@ -205,7 +205,7 @@ app.get("/assets/:dir*?", function(req, res) {
 
   assetPage = fs.readFileSync('./html/assets.html', 'utf8')
   let assetData = JSON.stringify({files: files.filter(x => x.includes('.')), directories: files.filter(x => !x.includes('.'))})
-  res.send(assetPage.replace('{NAME}', dir || "assets").replace('{DATA}', assetData))
+  res.status(200).send(assetPage.replace('{NAME}', dir || "assets").replace('{DATA}', assetData))
 })
 
 
@@ -230,7 +230,7 @@ let downloadDisabled = ['daily', 'weekly']
 let gdpsHide = ['achievements', 'messages']
 
 app.get("/", function(req, res) { 
-  if (req.query.hasOwnProperty("offline") || (req.offline && !req.query.hasOwnProperty("home"))) res.sendFile(__dirname + "/html/offline.html")
+  if (req.query.hasOwnProperty("offline") || (req.offline && !req.query.hasOwnProperty("home"))) res.status(200).sendFile(__dirname + "/html/offline.html")
   else {
     fs.readFile('./html/home.html', 'utf8', function (err, data) {
       let html = data;
@@ -249,26 +249,26 @@ app.get("/", function(req, res) {
         html = html.replace('id="dl" style="display: none', 'style="display: block')
         .replace('No active <span id="noLevel">daily</span> level!', '[Blocked by RobTop]')
       }
-      return res.send(html)
+      return res.status(200).send(html)
     })
   }
 })   
 
-app.get("/achievements", function(req, res) { res.sendFile(__dirname + "/html/achievements.html") })
-app.get("/analyze/:id", function(req, res) { res.sendFile(__dirname + "/html/analyze.html") })
-app.get("/api", function(req, res) { res.sendFile(__dirname + "/html/api.html") })
-app.get("/boomlings", function(req, res) { res.sendFile(__dirname + "/html/boomlings.html") })
-app.get("/comments/:id", function(req, res) { res.sendFile(__dirname + "/html/comments.html") })
-app.get("/demon/:id", function(req, res) { res.sendFile(__dirname + "/html/demon.html") })
-app.get("/gauntlets", function(req, res) { res.sendFile(__dirname + "/html/gauntlets.html") })
-app.get("/gdps", function(req, res) { res.sendFile(__dirname + "/html/gdps.html") })
-app.get("/iconkit", function(req, res) { res.sendFile(__dirname + "/html/iconkit.html") })
-app.get("/leaderboard", function(req, res) { res.sendFile(__dirname + "/html/leaderboard.html") })
-app.get("/leaderboard/:text", function(req, res) { res.sendFile(__dirname + "/html/levelboard.html") })
-app.get("/mappacks", function(req, res) { res.sendFile(__dirname + "/html/mappacks.html") })
-app.get("/messages", function(req, res) { res.sendFile(__dirname + "/html/messages.html") })
-app.get("/search", function(req, res) { res.sendFile(__dirname + "/html/filters.html") })
-app.get("/search/:text", function(req, res) { res.sendFile(__dirname + "/html/search.html") })
+app.get("/achievements", function(req, res) { res.status(200).sendFile(__dirname + "/html/achievements.html") })
+app.get("/analyze/:id", function(req, res) { res.status(200).sendFile(__dirname + "/html/analyze.html") })
+app.get("/api", function(req, res) { res.status(200).sendFile(__dirname + "/html/api.html") })
+app.get("/boomlings", function(req, res) { res.status(200).sendFile(__dirname + "/html/boomlings.html") })
+app.get("/comments/:id", function(req, res) { res.status(200).sendFile(__dirname + "/html/comments.html") })
+app.get("/demon/:id", function(req, res) { res.status(200).sendFile(__dirname + "/html/demon.html") })
+app.get("/gauntlets", function(req, res) { res.status(200).sendFile(__dirname + "/html/gauntlets.html") })
+app.get("/gdps", function(req, res) { res.status(200).sendFile(__dirname + "/html/gdps.html") })
+app.get("/iconkit", function(req, res) { res.status(200).sendFile(__dirname + "/html/iconkit.html") })
+app.get("/leaderboard", function(req, res) { res.status(200).sendFile(__dirname + "/html/leaderboard.html") })
+app.get("/leaderboard/:text", function(req, res) { res.status(200).sendFile(__dirname + "/html/levelboard.html") })
+app.get("/mappacks", function(req, res) { res.status(200).sendFile(__dirname + "/html/mappacks.html") })
+app.get("/messages", function(req, res) { res.status(200).sendFile(__dirname + "/html/messages.html") })
+app.get("/search", function(req, res) { res.status(200).sendFile(__dirname + "/html/filters.html") })
+app.get("/search/:text", function(req, res) { res.status(200).sendFile(__dirname + "/html/search.html") })
 
 
 // API
@@ -276,7 +276,7 @@ app.get("/search/:text", function(req, res) { res.sendFile(__dirname + "/html/se
 app.get("/api/analyze/:id", RL, function(req, res) { app.run.level(app, req, res, true, true) })
 app.get("/api/boomlings", function(req, res) { app.run.boomlings(app, req, res) })
 app.get("/api/comments/:id", RL2, function(req, res) { app.run.comments(app, req, res) })
-app.get("/api/credits", function(req, res) { res.send(require('./misc/credits.json')) })
+app.get("/api/credits", function(req, res) { res.status(200).send(require('./misc/credits.json')) })
 app.get("/api/gauntlets", function(req, res) { app.run.gauntlets(app, req, res) })
 app.get("/api/leaderboard", function(req, res) { app.run[req.query.hasOwnProperty("accurate") ? "accurate" : "scores"](app, req, res) })
 app.get("/api/leaderboardLevel/:id", RL2, function(req, res) { app.run.leaderboardLevel(app, req, res) })
@@ -310,24 +310,23 @@ app.get("/:id", function(req, res) { app.run.level(app, req, res) })
 // MISC
 
 app.get("/icon/:text", function(req, res) { app.run.icon(app, req, res) })
-app.get("/api/userCache", function(req, res) { res.send(app.accountCache) })
-app.get("/api/achievements", function(req, res) { res.send({achievements, types: achievementTypes, shopIcons, colors: colorList }) })
-app.get("/api/music", function(req, res) { res.send(music) })
-app.get("/api/gdps", function(req, res) {res.send(req.query.hasOwnProperty("current") ? app.safeServers.find(x => req.server.id == x.id) : app.safeServers) })
+app.get("/api/userCache", function(req, res) { res.status(200).send(app.accountCache) })
+app.get("/api/achievements", function(req, res) { res.status(200).send({achievements, types: achievementTypes, shopIcons, colors: colorList }) })
+app.get("/api/music", function(req, res) { res.status(200).send(music) })
+app.get("/api/gdps", function(req, res) {res.status(200).send(req.query.hasOwnProperty("current") ? app.safeServers.find(x => req.server.id == x.id) : app.safeServers) })
 app.get('/api/icons', function(req, res) { 
   let sample = [JSON.stringify(sampleIcons[Math.floor(Math.random() * sampleIcons.length)].slice(1))]
   let iconserver = req.isGDPS ? req.server.name : undefined
-  res.send({icons: gdIcons, colors: colorList, colorOrder, whiteIcons, server: iconserver, noCopy: req.onePointNine || req.offline, sample}); 
+  res.status(200).send({icons: gdIcons, colors: colorList, colorOrder, whiteIcons, server: iconserver, noCopy: req.onePointNine || req.offline, sample});
 });
 
 app.get('*', function(req, res) {
-  if (req.path.startsWith('/api')) res.send('-1')
+  if (req.path.startsWith('/api')) res.status(404).send('-1')
   else res.redirect('/search/404%20')
 });
 
 app.use(function (err, req, res, next) {
-  if (err && err.message == "Response timeout") res.status(500).send('Internal server error! (Timed out)')
-  else if (err) console.log(err)
+  if (err && err.message == "Response timeout") res.status(504).send('Internal server error! (Timed out)')
 })
 
 process.on('uncaughtException', (e) => { console.log(e) });

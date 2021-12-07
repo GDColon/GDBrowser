@@ -1,6 +1,9 @@
 # Ew
 extra
+
+# Package manager lockfiles
 package-lock.json
+yarn.lock
 
 # Logs
 logs
@@ -40,9 +43,6 @@ build/Release
 node_modules/
 jspm_packages/
 
-# TypeScript v1 declaration files
-typings/
-
 # Optional npm cache directory
 .npm
 
@@ -60,6 +60,8 @@ typings/
 
 # dotenv environment variables file
 .env
+.env.*
 
-# next.js build output
-.next
+# Editors
+.idea
+.vscode

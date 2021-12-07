@@ -1,6 +1,6 @@
 module.exports = async (app, req, res) => {
 
-  if (req.offline) return res.send("-1")
+  if (req.offline) return res.status(500).send("-1")
 
     let amount = 100;
     let count = req.query.count ? parseInt(req.query.count) : null
@@ -18,9 +18,9 @@ module.exports = async (app, req, res) => {
 
     req.gdRequest('getGJLevelScores211', params, function(err, resp, body) { 
 
-      if (err) return res.send({error: true, lastWorked: app.timeSince(req.id)})
+      if (err) return res.status(500).send({error: true, lastWorked: app.timeSince(req.id)})
       scores = body.split('|').map(x => app.parseResponse(x)).filter(x => x[1])
-      if (!scores.length) return res.send([])
+      if (!scores.length) return res.status(500).send([])
       else app.trackSuccess(req.id)
 
       scores.forEach(x => {
@@ -43,7 +43,7 @@ module.exports = async (app, req, res) => {
         app.userCache(req.id, x.accountID, x.playerID, x.username)
       }) 
 
-      return res.send(scores.slice(0, amount))
+      return res.status(200).send(scores.slice(0, amount))
       
       })
 }

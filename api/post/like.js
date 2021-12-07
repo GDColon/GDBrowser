@@ -3,6 +3,8 @@ function sha1(data) { return crypto.createHash("sha1").update(data, "binary").di
 
 module.exports = async (app, req, res) => {
 
+  if (req.method !== 'POST') return res.status(405).send("Method not allowed.")
+
   if (!req.body.ID) return res.status(400).send("No ID provided!")
   if (!req.body.accountID) return res.status(400).send("No account ID provided!")
   if (!req.body.password) return res.status(400).send("No password provided!")

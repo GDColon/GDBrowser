@@ -1,4 +1,6 @@
-module.exports = async (app, req, res, api) => {
+module.exports = async (app, req, res) => {
+
+  if (req.method !== 'POST') return res.status(405).send("Method not allowed.")
 
   if (!req.body.targetID) return res.status(400).send("No target ID provided!")
   if (!req.body.message) return res.status(400).send("No message provided!")
