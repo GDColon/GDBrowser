@@ -920,7 +920,7 @@
     "spriteSize": [102, 84]
   },
   "player_104_001.png": {
-    "spriteOffset": [0, 0],
+    "spriteOffset": [-12, 0],
     "spriteSize": [120, 120]
   },
   "player_104_2_001.png": {
