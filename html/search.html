@@ -167,7 +167,7 @@ function Append(firstLoad, noCache) {
 	else $('#lastPage').removeClass('grayscale').find('img').addClass('gdButton')
 
 	if (!noCache && pageCache[page]) appendLevels(pageCache[page])
-	else Fetch(searchFilters.replace("[PAGE]", page)).then(appendLevels)
+	else Fetch(searchFilters.replace("[PAGE]", page)).then(appendLevels).catch(e => $('#loading').hide())
 
 	function appendLevels(res) {
 
@@ -183,7 +183,7 @@ function Append(firstLoad, noCache) {
 			else $('#shuffle').css('filter', 'hue-rotate(100deg)')
 		}
 		$('#shuffle').show()
-		$('#lastPage').show()
+		if (pages > 1) $('#lastPage').show()
 		$('#pagenum').text(`Page ${page + 1}${pages ? ` of ${pages}` : ""}`)
 	}
 

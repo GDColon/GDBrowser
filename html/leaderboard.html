@@ -72,7 +72,7 @@
 		<img class="gdButton" src="../assets/smallinfo.png" width="32%" onclick="$('#infoDiv').show()">
 	</div>
 
-	<div style="position:absolute; top: 12%; right: 1.5%; width: 21%; text-align: right;">
+	<div id="discordLinks" style="display: none; position:absolute; top: 12%; right: 1.5%; width: 21%; text-align: right;">
 		<a id="discord" target="_blank" title="Official leaderboard Discord!" href="https://discord.gg/leaderboard"><img class="gdButton" src="../assets/discord.png" width="20%"></a>
 		<a id="altDiscord" target="_blank" title="Accurate leaderboard Discord!" style="display: none; filter: hue-rotate(300deg)" href="https://discord.gg/Uz7pd4"><img class="gdButton" src="../assets/discord.png" width="20%"></a>
 	</div>
@@ -139,9 +139,17 @@ function leaderboard(val) {
 				if (weekly) return
 				else if (ps.weeklyLeaderboard) { $('#weeklyTabOff').show(); weekly = true }
 				else $('#scoreTabs').css('margin-left', '-29vh')
+
+				if (ps.link.includes("https://discord.gg")) {
+					$('#discord').attr('href', ps.link).attr('title', `${ps.name} Discord!`)
+					$('#discordLinks').show()
+				}
 			})
 		}
-		else $('#boomling').show()
+		else {
+			$('#boomling').show()
+			$('#discordLinks').show()
+		}
 
 		$('#searchBox').html(`<div style="height: 4.5%"></div>`)
 		$('.ranking').remove()
