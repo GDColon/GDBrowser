@@ -67,6 +67,8 @@ module.exports = async (app, req, res) => {
             case 'starred': filters.type = 11; break;
             case 'halloffame': filters.type = 16; break;
             case 'hof': filters.type = 16; break;
+            case 'gdw': filters.type = 17; break;
+            case 'gdworld': filters.type = 17; break;
         }
     }
 

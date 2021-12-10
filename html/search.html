@@ -99,6 +99,14 @@
 		<img class="gdButton" src="../assets/refresh.png" width="40%" id="refreshPage"></a>
 	</div>
 
+	<div style="position:absolute; bottom: 2%; right: 8.5%; text-align: right; width: 15%; display: none" id="gdWorld">
+		<a title="Geometry Dash World" href="/search/*?type=gdw"><img class="gdButton" src="../assets/gdw_circle.png" width="40%"></a>
+	</div>
+
+	<div style="position:absolute; bottom: 2%; right: 8.5%; text-align: right; width: 15%; display: none" id="normalGD">
+		<a title="Back to Geometry Dash" href="/search/*?type=featured"><img class="gdButton" src="../assets/gd_circle.png" width="40%"></a>
+	</div>
+
 	<div style="position: absolute; left: 7%; top: 45%; height: 10%;">
 		<img class="gdButton" id="pageDown" style="display: none"; src="../assets/arrow-left.png" height="90%">
 	</div>
@@ -139,6 +147,7 @@ let page = Math.max(1, url.searchParams.get('page')) - 1
 let pages = 0
 let results = 0
 let legalPages = true
+let gdwMode = false
 let superSearch = ['*', '*?type=mostliked', '*?type=mostdownloaded', '*?type=recent'].includes(window.location.href.split('/')[4].toLowerCase())
 let pageCache = {}
 
@@ -273,10 +282,11 @@ else {
 	if (type == 2 || type == 'mostliked') $('#header').text("Most Liked")
 	if (type == 3 || type == 'trending') $('#header').text("Trending Levels")
 	if (type == 4 || type == 'recent') $('#header').text("Recent Levels")
-	if (type == 6 || type == 'featured') $('#header').text("Featured")
+	if (type == 6 || type == 'featured') { $('#header').text("Featured"); $('#gdWorld').show() }
 	if (type == 7 || type == 'magic') $('#header').text("Magic Levels")
 	if (type == 11 || type == 'awarded' || type == 'starred') $('#header').text("Awarded Levels")
 	if (type == 16 || type == 'halloffame' || type == 'hof') $('#header').text("Hall of Fame")
+	if (type == 17 || type == 'gdw' || type == 'gdworld') { $('#header').text("Featured (GD World)"); $('#normalGD').show() }
 	if (path != "*" && (type == 10 || list != null)) $('#header').text("Custom List")
 	if (type == 'followed') $('#header').text("Followed Creators")
 	document.title = $('#header').text() || "Level Search"
