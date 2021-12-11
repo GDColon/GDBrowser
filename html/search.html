@@ -161,6 +161,11 @@ if (type == "followed") {
 	searchFilters += ("&creators=" + followed.join()) 
 }
 
+if (window.location.host.match(/\./g).length > 1) { // gdps check
+	$('#gdWorld').remove()
+	$('#normalGD').remove()
+}
+
 function Append(firstLoad, noCache) {
 
 	loading = true;
@@ -257,7 +262,7 @@ function Append(firstLoad, noCache) {
 		</div>`)
 	})
 
-	$('#searchBox').append('<div style="height: 4.5%"></div>')
+	$('#searchBox').append('<div style="height: 4.5%"></div>').scrollTop(0)
 	$('#loading').hide()
 	loading = false;
 	}
