@@ -1,3 +1,5 @@
+const colors = require('../misc/icons/colors.json');
+
 module.exports = async (app, req, res) => {
 
     if (req.offline) return res.sendError()
@@ -64,7 +66,9 @@ module.exports = async (app, req, res) => {
             icon: +y[9] || 1,
             col1: +y[10],
             col2: +y[11],
-            glow: +y[15] > 1
+            glow: +y[15] > 1,
+            col1RGB: colors[y[10]] || colors["0"],
+            col2RGB: colors[y[11]] || colors["3"]
           }
           app.userCache(req.id, comment.accountID, comment.playerID, comment.username)
         }

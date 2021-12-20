@@ -1,4 +1,5 @@
 const fs = require('fs')
+const colors = require('../misc/icons/colors.json');
 
 module.exports = async (app, req, res, api, getLevels) => {
 
@@ -76,6 +77,8 @@ module.exports = async (app, req, res, api, getLevels) => {
           col2: +account[11],
           deathEffect: +account[48] || 1,
           glow: account[28] == "1",
+          col1RGB: colors[account[10]] || colors["0"],
+          col2RGB: colors[account[11]] || colors["3"]
       }
   
       if (api) return res.status(200).send(userData)
