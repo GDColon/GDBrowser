@@ -160,7 +160,9 @@ function clean(text) {return text.replace(/&/g, "&#38;").replace(/</g, "&#60;").
 
 $('#compactMode').attr('src', `../assets/compact-${compact ? "on" : "off"}.png`)
 
-Fetch(target).then(lvl => {
+Fetch(target).then(lvl => buildComments(lvl)).catch(e => buildComments({}))
+
+function buildComments(lvl) {
 
 	if (gdps) {
 		$('#leaveComment').hide()
@@ -533,7 +535,7 @@ $(document).keydown(function(k) {
     }
 });
 
-});
+};
 
 </script>
 
