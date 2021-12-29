@@ -51,11 +51,15 @@
 	</div>
 	
 	<div class="leaderboardBox supercenter gs" style="width: 120vh; height: 80%; pointer-events: none">
-		<div class="sortDiv" style="position: relative; left: 100%; transform: translateX(4.5vh); top: 12%; width: 0.1%">
+		<div id="relativeUser" class="sortDiv" style="position: relative; left: 100%; transform: translateX(4.5vh); top: 12%; width: 0.1%">
+			<img class="gdButton" id="findRelative" style="margin-bottom: 1vh" title="Global Search" src="../assets/magnify.png" height="11%">
+			<img class="gdButton" id="clearRelative" style="margin-bottom: 1vh; display: none" title="Clear Global Search" src="../assets/unmagnify.png" height="11%">
+		</div>
+		<div class="sortDiv" style="display: none; position: relative; left: 100%; transform: translateX(4.5vh); top: 12%; width: 0.1%">
 			<img class="gdButton" id="modSort" style="margin-bottom: 1vh" title="Moderators" src="../assets/sort-mod.png" height="11%">
 			<img class="gdButton" id="weeklyStats" style="margin-bottom: 1vh" title="Weekly Stats" src="../assets/sort-week.png" height="11%">
 		</div>
-		<div class="sortDiv" style="position: relative; right: 10.5%; top: 0%; width: 0.1%; transform: translateY(-33.3%)" id="statSort">
+		<div class="sortDiv" style="display: none; position: relative; right: 10.5%; top: 0%; width: 0.1%; transform: translateY(-33.3%)" id="statSort">
 			<img class="gdButton sortButton" style="margin-bottom: 1vh" sort="stars" title="Most stars" src="../assets/sort-stars-on.png" height="11%" id="starSort">
 			<img class="gdButton sortButton" style="margin-bottom: 1vh" sort="diamonds" title="Most diamonds" src="../assets/sort-diamonds.png" height="11%">
 			<img class="gdButton sortButton" style="margin-bottom: 1vh" sort="coins" title="Most coins" src="../assets/sort-coins.png" height="11%">
@@ -80,12 +84,24 @@
 	<div class="supercenter" id="loading" style="height: 10%; top: 47%; display: none;">
 		<img class="spin noSelect" src="../assets/loading.png" height="105%">
 	</div>
+
+	<div class="popup" id="userSearch">
+		<div class="brownbox bounce center supercenter" style="width: 75vh">
+			<h2 class="smaller center" style="font-size: 5.5vh; margin-top: 1%">User Search</h2>
+			<p>Enter the <cy>username</cy> of a player to find their position in the <ca>global leaderboard</ca>.</p>
+			<input type="text" id="relativeName" placeholder="Username" style="height: 8vh; width: 90%; text-align: center; margin-top: 0.5%; margin-bottom: 5%"><br>
+			<img src="../assets/btn-cancel.png" class="postButton gdButton center" style="width: 32%; margin-right: 1%" onclick="$('#userSearch').hide()">
+			<img src="../assets/btn-submit.png" class="postButton gdButton center" style="width: 32%; margin-left: 1%" id="relativeSearch">
+			<p id="relativeStatus" style="display: none"></p>
+			<img class="closeWindow gdButton" src="../assets/close.png" width="13%" style="position: absolute; top: -13.5%; left: -6vh" onclick="$('#userSearch').hide()">
+		</div>
+	</div>
 </div>
 
 </body>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.plugins.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.plugins.min.js"></script>
 <script type="text/javascript" src="../sizecheck.js?"></script>
 <script type="text/javascript" src="../dragscroll.js"></script>
 <script>
@@ -123,14 +139,18 @@ function infoText(text, altDiscord) {
 
 infoText(top250Text)
 
-function leaderboard(val) {
+let didGDPSStuff = false
+
+function leaderboard(val, leaderboardParams, scrollTo) {
 
 	$('#searchBox').html(`<div style="height: 4.5%"></div>`)
+	$('#clearRelative').hide()
 	$('#loading').show()
 
-	Fetch(`../api/leaderboard?count=250&${val}&type=${sort}${modMode ? "&mod=1" : ""}`).then(res => {
+	Fetch("../api/leaderboard?" + (leaderboardParams || `count=250&${val}&type=${sort}${modMode ? "&mod=1" : ""}`)).then(res => {
 
-		if (gdps) {
+		if (gdps && !didGDPSStuff) {
+			didGDPSStuff = true
 			top250Text = topGDPSText
 			$('#accurateTabOn').remove()
 			$('#accurateTabOff').remove()
@@ -157,45 +177,50 @@ function leaderboard(val) {
 		if (modMode && sort == "cp") res = res.sort(function(a, b){return b.cp - a.cp});
 		let wk = type == "weekly"
 
-		if (val == type && res != -1 && res.length) res.forEach((x, y) => {
+		if ((leaderboardParams ? true : val == type) && res != -1 && res.length) res.forEach((x, y) => {
 
-		let wp = x.weeklyProgress || {}
-		let cosmetics = x.cosmetics || {}
-		
-		let bgCol = cosmetics.bgColor
-		let bgString = bgCol ? ` style="background-color: rgb(${bgCol.join()})"` : ""
+			let wp = x.weeklyProgress || {}
+			let cosmetics = x.cosmetics || {}
+			
+			let bgCol = cosmetics.bgColor
+			let bgString = bgCol ? ` style="background-color: rgb(${bgCol.join()})"` : ""
 
-		let nameCol = cosmetics.nameColor
-		let nameString = nameCol ? `; color: rgb(${nameCol.join()}) ;` : null
+			let nameCol = cosmetics.nameColor
+			let nameString = nameCol ? `; color: rgb(${nameCol.join()}) ;` : null
 
-		$('#searchBox').append(`<div class="searchresult leaderboardSlot"${bgString}>
-			${x.moderator ? `<img title="${x.moderator == 2 ? "Elder " : ""}Moderator" src="../assets/mod${x.moderator == 2 ? "-elder" : ""}.png" style="height: 25%; cursor: help; padding-right: 1.6%; transform: translateY(0.7vh)">` : ""}
-			<h2 class="small inline gdButton" style="margin-top: 1.5%${nameString || (x.moderator == 2 ? "; color: #FF9977;" : "")}"><a href="${onePointNine ? `../search/${x.playerID}?user` : `../u/${x.accountID}.`}">${x.username}</a></h2>
-			<h3 class="inline sideSpace${x.stars >= 100000 ? " yellow" : ""}" style="font-size: 4.5vh${type == "weekly" ? "; display: none" : ""};">${x.stars} <img class="help valign" src="../assets/star.png"
-					style="width: 4vh; transform: translate(-25%, -10%);" title="Stars"></h3>
+			if (x.usercoins) x.userCoins = x.userCoins
+			if (wp.usercoins) wp.userCoins = wp.userCoins
 
-			<h3 class="lessSpaced leaderboardStats">
-				${type != "weekly" ? "" : `<span${x.stars >= 1000 ? " class='yellow'" : ""}>+${x.stars}</span> <img class="help valign" src="../assets/star.png" title="Star Gain">`}
-				${wk || onePointNine ? "" : `<span${x.diamonds >= 65535 ? ` class='blue'>` : ">"}${x.diamonds}</span> <img class="help valign" src="../assets/diamond.png" title="Diamonds">`}
-				${wk ? "&nbsp;" : `<span${x.coins >= 149 ? " class='yellow'" : ""}>${x.coins}</span> <img class="help valign" src="../assets/coin.png" title="Secret Coins">`}
-				${wk || onePointNine ? "" : `<span${x.usercoins >= 10000 ? " class='brightblue'" : ""}>${x.usercoins}</span> <img class="help valign" src="../assets/silvercoin.png" title="User Coins">`}
-				${wk ? "" : `<span${x.demons >= 1000 ? " class='brightred'" : ""}>${x.demons}</span> <img class="help valign" src="../assets/demon.png" title="Demons">`}
-				${x.cp <= 0 ? "" : `<span${x.cp >= 100 ? " class='yellow'" : ""}>${x.cp}</span> <img class="help valign" src="../assets/cp.png" title="Creator Points">`}
-			</h3>
+			$('#searchBox').append(`<div class="searchresult leaderboardSlot"${bgString}>
+				${x.moderator ? `<img title="${x.moderator == 2 ? "Elder " : ""}Moderator" src="../assets/mod${x.moderator == 2 ? "-elder" : ""}.png" style="height: 25%; cursor: help; padding-right: 1.6%; transform: translateY(0.7vh)">` : ""}
+				<h2 class="leaderboardName small inline gdButton" style="margin-top: 1.5%${nameString || (x.moderator == 2 ? "; color: #FF9977;" : "")}"><a href="${onePointNine ? `../search/${x.playerID}?user` : `../u/${x.accountID}.`}" accountID="${x.accountID}">${x.username}</a></h2>
+				<h3 class="inline sideSpace${x.stars >= 100000 ? " yellow" : ""}" style="font-size: 4.5vh${type == "weekly" ? "; display: none" : ""};">${x.stars} <img class="help valign" src="../assets/star.png"
+						style="width: 4vh; transform: translate(-25%, -10%);" title="Stars"></h3>
 
-			<h3 class="lessSpaced leaderboardStats weeklyStuff"}>
-				  <span${wp.diamonds >= 250 ? " class='blue'" : ""}>${wp.diamonds >= 0 ? "+" : ""}${wp.diamonds}</span> <img class="help valign" src="../assets/diamond.png" title="Diamond Gain">
-				  <span${wp.stars >= 1000 ? " class='yellow'" : ""}>${wp.stars >= 0 ? "+" : ""}${wp.stars}</span> <img class="help valign" src="../assets/star.png" title="Star Gain">
-				  <span${wp.usercoins >= 250 ? " class='brightblue'" : ""}>${wp.usercoins >= 0 ? "+" : ""}${wp.usercoins}</span> <img class="help valign" src="../assets/silvercoin.png" title="User Coin Gain">
-				  <span${wp.demons >= 25 ? " class='brightred'" : ""}>${wp.demons >= 0 ? "+" : ""}${wp.demons}</span> <img class="help valign" src="../assets/demon.png" title="Demon Gain">
-			</h3>
-		
-			<div class="center ranking">
-				${x.icon.icon == -1 && type == "accurate" ? `<img class="spaced" src="./assets/trophies/${trophies.findIndex(z => y+1 <= z) + 1}.png" height="150%" style="margin-bottom: 0%; transform:scale(1.1)">` : 
-				`<img class="spaced lazyLoad" data-src="./icon/icon?form=${x.icon.form}&icon=${x.icon.icon}&col1=${x.icon.col1}&col2=${x.icon.col2}&glow=${x.icon.glow}&size=auto" height="150%" style="margin-bottom: 0%; transform:scale(1.1);">`}
-				<h2 class="small" style="margin-top: 0%">${y+1}</h2>
-			</div>
-		</div>`)
+				<h3 class="lessSpaced leaderboardStats">
+					${type != "weekly" ? "" : `<span${x.stars >= 1000 ? " class='yellow'" : ""}>+${x.stars}</span> <img class="help valign" src="../assets/star.png" title="Star Gain">`}
+					${wk || onePointNine ? "" : `<span${x.diamonds >= 65535 ? ` class='blue'>` : ">"}${x.diamonds}</span> <img class="help valign" src="../assets/diamond.png" title="Diamonds">`}
+					${wk ? "&nbsp;" : `<span${x.coins >= 149 ? " class='yellow'" : ""}>${x.coins}</span> <img class="help valign" src="../assets/coin.png" title="Secret Coins">`}
+					${wk || onePointNine ? "" : `<span${x.userCoins >= 10000 ? " class='brightblue'" : ""}>${x.userCoins}</span> <img class="help valign" src="../assets/silvercoin.png" title="User Coins">`}
+					${wk ? "" : `<span${x.demons >= 1000 ? " class='brightred'" : ""}>${x.demons}</span> <img class="help valign" src="../assets/demon.png" title="Demons">`}
+					${x.cp <= 0 ? "" : `<span${x.cp >= 100 ? " class='yellow'" : ""}>${x.cp}</span> <img class="help valign" src="../assets/cp.png" title="Creator Points">`}
+				</h3>
+
+				<h3 class="lessSpaced leaderboardStats weeklyStuff"}>
+					<span${wp.diamonds >= 250 ? " class='blue'" : ""}>${wp.diamonds >= 0 ? "+" : ""}${wp.diamonds}</span> <img class="help valign" src="../assets/diamond.png" title="Diamond Gain">
+					<span${wp.stars >= 1000 ? " class='yellow'" : ""}>${wp.stars >= 0 ? "+" : ""}${wp.stars}</span> <img class="help valign" src="../assets/star.png" title="Star Gain">
+					<span${wp.userCoins >= 250 ? " class='brightblue'" : ""}>${wp.userCoins >= 0 ? "+" : ""}${wp.userCoins}</span> <img class="help valign" src="../assets/silvercoin.png" title="User Coin Gain">
+					<span${wp.demons >= 25 ? " class='brightred'" : ""}>${wp.demons >= 0 ? "+" : ""}${wp.demons}</span> <img class="help valign" src="../assets/demon.png" title="Demon Gain">
+				</h3>
+			
+				<div class="center ranking">
+					${x.icon.icon == -1 && type == "accurate" ? `<img class="spaced" src="./assets/trophies/${trophies.findIndex(z => y+1 <= z) + 1}.png" height="150%" style="margin-bottom: 0%; transform:scale(1.1)">` : 
+					`<img class="spaced lazyLoad" data-src="./icon/icon?form=${x.icon.form}&icon=${x.icon.icon}&col1=${x.icon.col1}&col2=${x.icon.col2}&glow=${x.icon.glow}&size=auto" height="150%" style="margin-bottom: 0%; transform:scale(1.1);">`}
+					<div style="display: flex; justify-content: center">
+						<h2 class="small" style="margin-top: 1%; transform: scale(${1 - (Math.max(0, String(x.rank).length - 3) * 0.16)})">${x.rank}</h2>
+					</div>
+				</div>
+			</div>`)
 		})
 
 		/* else if (type == "accurate") {
@@ -207,6 +232,15 @@ function leaderboard(val) {
 
 		weeklyAdjust()
 		$('#searchBox').append('<div style="height: 4.5%"></div>')
+
+		if (scrollTo) {
+			let foundElement = $(`#searchBox .leaderboardName a[accountID=${scrollTo}]`)
+			if (foundElement.length) {
+				let foundParent = foundElement.parent().parent()
+				$('#searchBox').scrollTop(foundParent.offset().top - foundParent.height())
+			}
+		}
+
 		$('#loading').hide();
 		$('.lazyLoad').Lazy({ appendScroll: '#searchBox' });
 	}).catch(e => {console.log(e); $('#loading').hide();})
@@ -233,6 +267,7 @@ $('#topTabOff').click(function() {
 	$('#creatorTabOff').show()
 	infoText(top250Text)
 	$('.sortDiv').hide()
+	$('#relativeUser').show()
 })
 
 $('#accurateTabOff').click(function() {
@@ -245,6 +280,7 @@ $('#accurateTabOff').click(function() {
 	$('#creatorTabOff').show()
 	infoText(accurateText, true)
 	$('.sortDiv').show()
+	$('#relativeUser').hide()
 })
 
 $('#weeklyTabOff').click(function() {
@@ -298,6 +334,44 @@ $('#weeklyStats').click(function() {
 	localStorage.weeklyStats = showWeek + 0
 	$(this).attr('src', `../assets/sort-week${showWeek ? "-on" : ""}.png`)
 	weeklyAdjust()
+})
+
+$('#findRelative').click(function() {
+	$('#userSearch').show()
+	$('#relativeName').focus().select()
+})
+
+let relativeLoading = false
+$('#relativeSearch').click(function() {
+	let relativeUsername = $('#relativeName').val()
+	if (relativeLoading || !relativeUsername) return
+	relativeLoading = true
+	Fetch("../api/profile/" + relativeUsername).then(foundUser => {
+		if (foundUser && foundUser.accountID && foundUser.rank) {
+			leaderboard(null, "type=relative&accountID=" + foundUser.accountID, foundUser.accountID)
+			$('#userSearch').hide()
+			$('#relativeStatus').hide()
+			$('#clearRelative').show()
+			type = "relative"
+			relativeLoading = false
+		}
+		else {
+			$('#relativeStatus').html(`${foundUser.username ? `<cy>${foundUser.username}</cy>` : "That user"} doesn't have a global rank!`).show()
+			relativeLoading = false
+		}
+
+	}).catch(e => {
+		$('#relativeStatus').text("That account doesn't seem to exist!").show()
+		relativeLoading = false
+	})
+})
+
+$('#clearRelative').click(function() {
+	$('#topTabOff').trigger('click')
+})
+
+$(document).keydown(function(k) {
+	if ($('#userSearch').is(':visible') && k.which == 13 && !relativeLoading) $('#relativeSearch').trigger('click') //enter
 })
 
 $("#topTabOff").trigger('click')

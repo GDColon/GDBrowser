@@ -1,5 +1,5 @@
 const fs = require('fs')
-const colors = require('../misc/icons/colors.json');
+const Player = require('../classes/Player.js')
 
 module.exports = async (app, req, res, api, getLevels) => {
 
@@ -48,38 +48,7 @@ module.exports = async (app, req, res, api, getLevels) => {
       
       if (!foundID) app.userCache(req.id, account[16], account[2], account[1])
       
-      let userData = {
-          username: account[1] || "[MISSINGNO.]",
-          playerID: account[2],
-          accountID: account[16],
-          rank: +account[30],
-          stars: +account[3],
-          diamonds: +account[46],
-          coins: +account[13],
-          userCoins: +account[17],
-          demons: +account[4],
-          cp: +account[8],
-          friendRequests: account[19] == "0",
-          messages: account[18] == "0" ? "all" : account[18] == "1" ? "friends" : "off",
-          commentHistory: account[50] == "0" ? "all" : account[50] == "1" ? "friends" : "off",
-          moderator: +account[49],
-          youtube: account[20] || null,
-          twitter: account[44] || null,
-          twitch: account[45] || null,
-          icon: +account[21],
-          ship: +account[22],
-          ball: +account[23],
-          ufo: +account[24],
-          wave: +account[25],
-          robot: +account[26],
-          spider: +account[43],
-          col1: +account[10],
-          col2: +account[11],
-          deathEffect: +account[48] || 1,
-          glow: account[28] == "1",
-          col1RGB: colors[account[10]] || colors["0"],
-          col2RGB: colors[account[11]] || colors["3"]
-      }
+      let userData = new Player(account) 
   
       if (api) return res.status(200).send(userData)
 

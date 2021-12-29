@@ -7,10 +7,10 @@
 
 const Jimp = require('jimp');
 const fs = require('fs');
-const icons = require('../icons/gameSheet.json');
-const colors = require('../icons/colors.json');
-const forms = require('../icons/forms.json')
-const offsets = require('../icons/offsets.json');
+const icons = require('../misc/icons/gameSheet.json');
+const colors = require('../misc/icons/colors.json');
+const forms = require('../misc/icons/forms.json')
+const offsets = require('../misc/icons/offsets.json');
 
 let hexRegex = /^[A-Fa-f0-9]{6}$/
 function hexConvert(hex) { hex = hex.replace('#', ''); return {r: '0x' + hex[0] + hex[1] | 0, g: '0x' + hex[2] + hex[3] | 0, b: '0x' + hex[4] + hex[5] | 0}; }

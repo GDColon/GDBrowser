@@ -1,4 +1,4 @@
-const colors = require('../misc/icons/colors.json');
+const Player = require('../classes/Player.js')
 
 module.exports = async (app, req, res) => {
 
@@ -54,22 +54,15 @@ module.exports = async (app, req, res) => {
         }
         
         if (req.query.type != "profile") {
-          comment.username = y[1] || "-"
+          let commentUser = new Player(y)
+          Object.keys(commentUser).forEach(k => {
+            comment[k] = commentUser[k]
+          })
           comment.levelID = x[1] || req.params.id
           comment.playerID = x[3] || 0
-          comment.accountID = y[16] || 0
           comment.color = (comment.playerID == "16" ? "50,255,255" : x[12] || "255,255,255")
           if (x[10] > 0) comment.percent = +x[10]
           comment.moderator = +x[11] || 0
-          comment.icon = {
-            form: ['icon', 'ship', 'ball', 'ufo', 'wave', 'robot', 'spider'][+y[14]],
-            icon: +y[9] || 1,
-            col1: +y[10],
-            col2: +y[11],
-            glow: +y[15] > 1,
-            col1RGB: colors[y[10]] || colors["0"],
-            col2RGB: colors[y[11]] || colors["3"]
-          }
           app.userCache(req.id, comment.accountID, comment.playerID, comment.username)
         }
 

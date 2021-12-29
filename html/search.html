@@ -161,7 +161,8 @@ if (type == "followed") {
 	searchFilters += ("&creators=" + followed.join()) 
 }
 
-if (window.location.host.match(/\./g).length > 1) { // gdps check
+let hostMatch = window.location.host.match(/\./g)
+if (hostMatch && hostMatch.length > 1) { // gdps check
 	$('#gdWorld').remove()
 	$('#normalGD').remove()
 }
