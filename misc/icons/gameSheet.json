@@ -2888,11 +2888,11 @@
     "spriteSize": [116, 106]
   },
   "robot_09_01_2_001.png": {
-    "spriteOffset": [8, 24],
+    "spriteOffset": [8, 7],
     "spriteSize": [102, 114]
   },
   "robot_09_01_extra_001.png": {
-    "spriteOffset": [16, 15],
+    "spriteOffset": [16, 0],
     "spriteSize": [104, 94]
   },
   "robot_09_01_glow_001.png": {
