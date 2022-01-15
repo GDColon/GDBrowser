@@ -26,19 +26,19 @@
 	</div>
 
 	<div style="position:absolute; top: 1.7%; right: 2%; text-align: right; width: 10%;">
-		<img id="creditsButton" class="gdButton" src="../assets/credits.png" width="60%" onclick="loadCredits()">
+		<img id="creditsButton" class="gdButton" src="../assets/credits.png" width="60%" onclick="loadCredits()" title="Credits">
 	</div>
 
 	<div class="menu-achievements" style="position:absolute; top: 5.5%; left: 3%; width: 12%;">
-		<a href="../achievements"><img class="gdButton" src="../assets/achievements.png" width="40%"></a>
+		<a href="../achievements" title="Achievements"><img class="gdButton" src="../assets/achievements.png" width="40%"></a>
 	</div>
 
 	<div class="menu-messages" style="position:absolute; top: -1.7%; left: 11%; text-align: left; width: 10%;">
-		<a href="../messages"><img class="iconRope" src="../assets/messagerope.png" width="40%"></a>
+		<a href="../messages" title="Messages"><img class="iconRope" src="../assets/messagerope.png" width="40%"></a>
 	</div>
 
 	<div style="position:absolute; top: -1.5%; right: 10%; text-align: right; width: 10%;">
-		<a href="../iconkit"><img class="iconRope" src="../assets/iconrope.png" width="40%"></a>
+		<a href="../iconkit" title="Online Icon Kit"><img class="iconRope" src="../assets/iconrope.png" width="40%"></a>
 	</div>
 	
 	<div id="dl" style="display: none; position:absolute; top: 15%; right: 0.5%; text-align: center; width: 17%">
@@ -159,7 +159,7 @@ Fetch(`./api/credits`).then(res => {
 	res.specialThanks.forEach((x, y) => {
 		n = x.split("/")
 		$('#specialthanks').append(`<div class="specialThanks">
-				<h2 class="gdButton smaller"><a href="https://gdbrowser.com/u/${n[1] || n[0]}" title=${n[0]}>${n[0]}</h2></a>
+				<h2 class="gdButton smaller"><a href="https://gdbrowser.com/u/${n[1] || n[0]}" title="${n[0]}">${n[0]}</h2></a>
 				<img class="creditsicon" icon="./icon/${n[1] || n[0]}?forceGD=1" height=77%><br>
 				</div>`)
 		})
