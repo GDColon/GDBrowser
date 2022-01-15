@@ -43,7 +43,7 @@ fetch('../api/gauntlets').then(res => res.json()).then(gauntlets => {
 			<div class="gauntlet">
 			<a href="../search/*?gauntlet=${x.id}">
 			<img src="../assets/gauntlets/${x.name.toLowerCase()}.png" height="300%"><br>
-			<h3 class="gauntletText"">${x.name}<br>Gauntlet</h3></div></a>`)
+			<h3 class="gauntletText" title="${x.name} Gauntlet">${x.name}<br>Gauntlet</h3></div></a>`)
 		})
 });
 
