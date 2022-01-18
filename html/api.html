@@ -18,43 +18,43 @@
 <body>
 	<div class="main-header-wrap">
 		<div class="main-header">
-			<div class="header-drawer" id="menu-btn">
+			<div class="header-drawer" id="menu-btn" title="Menu">
 				<img src="../assets/menu-ic.svg" alt="Menu" id="menu-btn-img">
 			</div>
 			<div class="header-links hid">
-				<a class="header-link" href="#intro">Introduction</a>
+				<a class="header-link" href="#intro" title="Introduction">Introduction</a>
 				<div class="header-category">
 					<div class="category-name">Levels</div>
 					<div class="category-content">
-						<a class="header-link" href="#level">Levels</a>
-						<a class="header-link" href="#search">Searching</a>
-						<a class="header-link" href="#mappacks">Map Packs + Gauntlets</a>
-						<a class="header-link" href="#levelleaderboard">Level Leaderboards</a>
+						<a class="header-link" href="#level" title="Levels">Levels</a>
+						<a class="header-link" href="#search" title="Searching">Searching</a>
+						<a class="header-link" href="#mappacks" title="Map Packs + Gauntlets">Map Packs + Gauntlets</a>
+						<a class="header-link" href="#levelleaderboard" title="Level Leaderboards">Level Leaderboards</a>
 					</div>
 				</div>
 				<div class="header-category">
 					<div class="category-name">Users</div>
 					<div class="category-content">
-						<a class="header-link" href="#profile">Profiles</a>
-						<a class="header-link" href="#leaderboard">Leaderboards</a>
-						<a class="header-link" href="#comments">Comments & Posts</a> 
+						<a class="header-link" href="#profile" title="Profiles">Profiles</a>
+						<a class="header-link" href="#leaderboard" title="Leaderboards">Leaderboards</a>
+						<a class="header-link" href="#comments" title="Comments & Posts">Comments & Posts</a> 
 					</div>
 				</div>
 				<div class="header-category">
 					<div class="category-name">Account</div>
 					<div class="category-content">
-						<a class="header-link" href="#commenting">Commenting</a> 
-						<a class="header-link" href="#profileposting">Profile Posting</a> 
-						<a class="header-link" href="#liking">Liking</a> 
-						<a class="header-link" href="#messages">Messages</a> 
+						<a class="header-link" href="#commenting" title="Commenting">Commenting</a> 
+						<a class="header-link" href="#profileposting" title="Profile Posting">Profile Posting</a> 
+						<a class="header-link" href="#liking" title="Liking">Liking</a> 
+						<a class="header-link" href="#messages" title="Messages">Messages</a> 
 					</div>
 				</div>
 				<div class="header-category">
 					<div class="category-name">Misc</div>
 					<div class="category-content">
-						<a class="header-link" href="#analyze">Level Analysis</a> 
-						<a class="header-link" href="#artist">Song Verification</a> 
-						<a class="header-link" href="#icons">Icons</a> 
+						<a class="header-link" href="#analyze" title="Level Analysis">Level Analysis</a> 
+						<a class="header-link" href="#artist" title="Song Verification">Song Verification</a> 
+						<a class="header-link" href="#icons" title="Icons">Icons</a> 
 					</div>
 				</div>
 			</div>
@@ -68,7 +68,7 @@
 				<sb>Geometry Dash Level Browser API</sb>! <br><br> The
 				<sb>API</sb> (application programming interface) is how the website is able to get all the neat stuff from the Geometry Dash servers. In the off chance that you actually know what any of this means, this page contains everything you need to know about grabbing information on GD levels/accounts/etc without going through the trouble of using the actual GD API on boomlings.com
 				<br><br>
-				Geometry Dash's API isn't meant to be publicly used, and is a <a href="https://i.imgur.com/PZ2AsZB.png" target="_blank">total nightmare</a> to fetch stuff from. That's why I made this API to send you whatever you need in a nice, clean JSON. You're welcome.<br><br>Everything on the API can be accessed
+				Geometry Dash's API isn't meant to be publicly used, and is a <a href="https://i.imgur.com/PZ2AsZB.png" target="_blank" title="Total nightmare">total nightmare</a> to fetch stuff from. That's why I made this API to send you whatever you need in a nice, clean JSON. You're welcome.<br><br>Everything on the API can be accessed
 				<sb>without any authorization</sb>, and with little to no required parameters.</p>
 		</div>
 
@@ -76,18 +76,18 @@
 			<p>Here are the different things you can use the API for. Click one to skip to it's documentation.</p>
 
 			<quote>
-				<p><a href="#level"><u>Levels</u></a> <i>/api/level/levelID</i></p>
-				<p><a href="#profile"><u>Profiles</u></a> <i>/api/profile/username-or-id</i></p>
-				<p><a href="#search"><u>Searching</u></a> <i>/api/search/search-query</i></p>
-				<p><a href="#leaderboard"><u>Leaderboards</u></a> <i>/api/leaderboard</i></p>
-				<p><a href="#levelleaderboard"><u>Level Leaderboards</u></a> <i>/api/leaderboardLevel/levelID</i></p>
-				<p><a href="#comments"><u>Comments & Posts</u></a> <i>/api/comments/level-or-user-ID</i></p>
-				<p><a href="#analyze"><u>Level Analysis</u></a> <i>/api/analyze/levelID</i></p>
-				<p><a href="#commenting"><u>Commenting</u></a> <i>/postComment (POST)</i></p>
-				<p><a href="#profileposting"><u>Profile Posting</u></a> <i>/postProfileComment (POST)</i></p>
-				<p><a href="#messages"><u>Messages</u></a> <i>/messages (4 different POSTs)</i></p>
-				<p><a href="#liking"><u>Liking</u></a> <i>/like (POST)</i></p>
-				<p><a href="#icons"><u>Icons</u></a> <i>/icon/username</i></p>
+				<p><a href="#level" title="Levels"><u>Levels</u></a> <i>/api/level/levelID</i></p>
+				<p><a href="#profile" title="Profiles"><u>Profiles</u></a> <i>/api/profile/username-or-id</i></p>
+				<p><a href="#search" title="Searching"><u>Searching</u></a> <i>/api/search/search-query</i></p>
+				<p><a href="#leaderboard" title="Leaderboards"><u>Leaderboards</u></a> <i>/api/leaderboard</i></p>
+				<p><a href="#levelleaderboard" title="Level Leaderboards"><u>Level Leaderboards</u></a> <i>/api/leaderboardLevel/levelID</i></p>
+				<p><a href="#comments" title="Comments & Posts"><u>Comments & Posts</u></a> <i>/api/comments/level-or-user-ID</i></p>
+				<p><a href="#analyze" title="Level Analysis"><u>Level Analysis</u></a> <i>/api/analyze/levelID</i></p>
+				<p><a href="#commenting" title="Commenting"><u>Commenting</u></a> <i>/postComment (POST)</i></p>
+				<p><a href="#profileposting" title="Profile Posting"><u>Profile Posting</u></a> <i>/postProfileComment (POST)</i></p>
+				<p><a href="#messages" title="Messages"><u>Messages</u></a> <i>/messages (4 different POSTs)</i></p>
+				<p><a href="#liking" title="Liking"><u>Liking</u></a> <i>/like (POST)</i></p>
+				<p><a href="#icons" title="Icons"><u>Icons</u></a> <i>/icon/username</i></p>
 			</quote>
 			<br>
 			<p>In the event that something goes horribly wrong and the server doesn't like your request (or you tried to search for a level/profile/etc that doesn't exist), the API will return
@@ -373,7 +373,7 @@
 				<br>
 				<p><b>Example Response</b></p>
 				<p>(first example used)</p>
-				<pre><p class="fetch" link="/api/leaderboard?count=10">Loading...</p></pre>
+				<pre><p class="fetch" link="/api/leaderboard?count=10">Loading&hellip;</p></pre>
 			</div>
 
 			<br>
@@ -528,7 +528,7 @@
 				<br>
 				<p><b>Example Response</b></p>
 				<p>(first example used)</p>
-				<pre><p class="fetch" link="/api/comments/26681070?top">Loading...</p></pre>
+				<pre><p class="fetch" link="/api/comments/26681070?top">Loading&hellip;</p></pre>
 			</div>
 
 		</div>
@@ -863,7 +863,7 @@
 	</main>
 
 	<footer>
-		<p>API made by <a href="https://twitter.com/TheRealGDColon">GD Colon</a>. Webpage design by <a href="https://twitter.com/GDUcrash">GD Ucrash</a><br><br>
+		<p>API made by <a href="https://twitter.com/TheRealGDColon" title="GD Colon">GD Colon</a>. Webpage design by <a href="https://twitter.com/GDUcrash" title="GD Ucrash">GD Ucrash</a><br><br>
 		Good job man, this looks really nice -Colon</p>
 	</footer>
 </body>
