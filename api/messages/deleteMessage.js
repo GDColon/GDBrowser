@@ -17,7 +17,7 @@ module.exports = async (app, req, res) => {
   req.gdRequest('deleteGJMessages20', params, function (err, resp, body) {
 
     if (body != 1) return res.status(400).send(`The Geometry Dash servers refused to delete the message! Try again later, or make sure your username and password are entered correctly. Last worked: ${app.timeSince(req.id)} ago.`)
-    else res.status(200).send(`${deleted == 1 ? "1 message" : `${deleted} messages`} deleted!`)
+    else res.send(`${deleted == 1 ? "1 message" : `${deleted} messages`} deleted!`)
     app.trackSuccess(req.id)
   })
 

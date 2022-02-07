@@ -28,6 +28,6 @@ module.exports = async (app, req, res) => {
 
       scores = scores.map(x => new Player(x))
       scores.forEach(x => app.userCache(req.id, x.accountID, x.playerID, x.username)) 
-      return res.status(200).send(scores.slice(0, amount))
+      return res.send(scores.slice(0, amount))
     })
 }

@@ -50,7 +50,7 @@ module.exports = async (app, req, res, api, getLevels) => {
       
       let userData = new Player(account) 
   
-      if (api) return res.status(200).send(userData)
+      if (api) return res.send(userData)
 
       else fs.readFile('./html/profile.html', 'utf8', function(err, data) {
         let html = data;
@@ -59,7 +59,7 @@ module.exports = async (app, req, res, api, getLevels) => {
           let regex = new RegExp(`\\[\\[${x.toUpperCase()}\\]\\]`, "g")
           html = html.replace(regex, app.clean(userData[x]))
         })
-        return res.status(200).send(html)
+        return res.send(html)
       })
   
       })

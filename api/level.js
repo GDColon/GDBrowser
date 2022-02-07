@@ -37,7 +37,7 @@ module.exports = async (app, req, res, api, analyze) => {
 
     function sendLevel() {
 
-      if (api) return res.status(200).send(level)
+      if (api) return res.send(level)
 
       else return fs.readFile('./html/level.html', 'utf8', function (err, data) {
         let html = data;
@@ -50,7 +50,7 @@ module.exports = async (app, req, res, api, analyze) => {
         })
         if (req.server.downloadsDisabled) html = html.replace('id="additional" class="', 'id="additional" class="downloadDisabled ')
           .replace('analyzeBtn"', 'analyzeBtn" style="filter: opacity(30%)"')
-        return res.status(200).send(html)
+        return res.send(html)
       })
     }
 

@@ -156,7 +156,7 @@ module.exports = async (app, req, res) => {
         })
 
         if (filters.type == 10) parsedLevels = parsedLevels.slice((+filters.page) * amount, (+filters.page + 1) * amount)
-        return res.status(200).send(parsedLevels)
+        return res.send(parsedLevels)
 
     })
 }

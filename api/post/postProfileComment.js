@@ -31,6 +31,6 @@ module.exports = async (app, req, res) => {
       return res.status(400).send(`You have been banned from commenting for ${(parseInt(banStuff[1]) / 86400).toFixed(0)} days. Reason: ${banStuff[2] || "None"}`)
     }
     else app.trackSuccess(req.id)
-    res.status(200).send(`Comment posted to ${params.userName} with ID ${body}`)
+    res.send(`Comment posted to ${params.userName} with ID ${body}`)
   })
 }

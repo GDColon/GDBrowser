@@ -6,7 +6,7 @@ module.exports = async (app, req, res) => {
   if (req.offline) return res.sendError()
 
   let cached = cache[req.id]
-  if (app.config.cacheGauntlets && cached && cached.data && cached.indexed + 2000000 > Date.now()) return res.status(200).send(cached.data)   // half hour cache
+  if (app.config.cacheGauntlets && cached && cached.data && cached.indexed + 2000000 > Date.now()) return res.send(cached.data)   // half hour cache
 
   req.gdRequest('getGJGauntlets21', {}, function (err, resp, body) {
 
@@ -15,7 +15,7 @@ module.exports = async (app, req, res) => {
     let gauntletList = gauntlets.map(x => ({ id: +x[1], name: gauntletNames[+x[1] - 1] || "Unknown", levels: x[3].split(",") }))
 
     if (app.config.cacheGauntlets) cache[req.id] = {data: gauntletList, indexed: Date.now()}
-    res.status(200).send(gauntletList)
+    res.send(gauntletList)
 
   })
     

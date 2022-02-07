@@ -31,7 +31,7 @@ module.exports = async (app, req, res) => {
       msg.browserColor = true 
   }
     
-    return res.status(200).send(msg)
+    return res.send(msg)
   })
 
 }

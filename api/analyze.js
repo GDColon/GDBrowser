@@ -21,14 +21,14 @@ module.exports = async (app, req, res, level) => {
         const raw_data = level.data;
 
         const response_data = analyze_level(level, raw_data);
-        return res.status(200).send(response_data);
+        return res.send(response_data);
     } else {
         zlib.unzip(levelString, (err, buffer) => {
             if (err) { return res.status(500).send("-2"); }
 
             const raw_data = buffer.toString();
             const response_data = analyze_level(level, raw_data);
-            return res.status(200).send(response_data);
+            return res.send(response_data);
         });
     }
 }

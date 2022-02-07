@@ -76,7 +76,7 @@ module.exports = async (app, req, res) => {
 
       }) 
 
-      return res.status(200).send(commentArray)
+      return res.send(commentArray)
 
       })
 }

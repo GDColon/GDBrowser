@@ -39,7 +39,7 @@ module.exports = async (app, req, res) => {
       app.userCache(req.id, msg.accountID, msg.playerID, msg.author)
       messageArray.push(msg)
     })
-    return res.status(200).send(messageArray)
+    return res.send(messageArray)
   })
 
 }

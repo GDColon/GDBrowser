@@ -69,7 +69,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
           if (analyze) return app.run.analyze(app, req, res, level)
 
           function sendLevel() {
-            if (api) return res.status(200).send(level)
+            if (api) return res.send(level)
 
             else return fs.readFile('./html/level.html', 'utf8', function (err, data) {
               let html = data;
@@ -78,7 +78,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
                 let regex = new RegExp(`\\[\\[${x.toUpperCase()}\\]\\]`, "g")
                 html = html.replace(regex, app.clean(level[x]))
               })
-              return res.status(200).send(html)
+              return res.send(html)
             })
           }
 

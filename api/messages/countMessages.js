@@ -17,7 +17,7 @@ module.exports = async (app, req, res) => {
     else app.trackSuccess(req.id)
     let count = app.parseResponse(body)[38]
     if (!count) return res.status(400).send("Error fetching unread messages!")
-    else res.status(200).send(count)
+    else res.send(count)
   })
 
 }

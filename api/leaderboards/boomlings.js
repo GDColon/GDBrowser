@@ -37,7 +37,7 @@ module.exports = async (app, req, res) => {
       users.push(user)
       })
 
-      return res.status(200).send(users)
+      return res.send(users)
       
       })
 }

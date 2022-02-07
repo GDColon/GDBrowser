@@ -19,7 +19,7 @@ module.exports = async (app, req, res, post) => {
       let type = req.query.type ? req.query.type.toLowerCase() : 'stars'
       if (type == "usercoins") type = "coins"
       if (!indexes.includes(type)) type = "stars"
-      if (lastIndex[modMode ? 1 : 0][type] + 600000 > Date.now() && cache[type]) return res.status(200).send(gdMode ? cache[type] : JSON.parse(cache[type]))   // 10 min cache
+      if (lastIndex[modMode ? 1 : 0][type] + 600000 > Date.now() && cache[type]) return res.send(gdMode ? cache[type] : JSON.parse(cache[type]))   // 10 min cache
 
       sheet.useApiKey(app.sheetsKey)
       sheet.loadInfo().then(async () => {
@@ -41,7 +41,7 @@ module.exports = async (app, req, res, post) => {
       caches[modMode ? 1 : 0][type] = JSON.stringify(leaderboard)
       caches[2][type] = gdFormatting
       lastIndex[modMode ? 1 : 0][type] = Date.now()
-      return res.status(200).send(gdMode ? gdFormatting : leaderboard)
+      return res.send(gdMode ? gdFormatting : leaderboard)
 
   })
 }
