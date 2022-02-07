@@ -1,6 +1,6 @@
 const colors = require('../misc/icons/colors.json');
 
-class Level {
+class Player {
     constructor(account) {
         this.username = account[1] || "-",
         this.playerID = account[2],
@@ -50,4 +50,4 @@ class Level {
     }
 }
 
-module.exports = Level;
+module.exports = Player;
