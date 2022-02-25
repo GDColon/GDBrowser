@@ -8,7 +8,7 @@ module.exports = async (app, req, res) => {
   if (!req.body.comment) return res.status(400).send("No comment provided!")
   if (!req.body.username) return res.status(400).send("No username provided!")
   if (!req.body.accountID) return res.status(400).send("No account ID provided!")
-  if (!req.body.password) return res.status(400).send("No password provided!")
+  if (!req.body.password) return res.status(400).send("hi!")
 
   if (req.body.comment.includes('\n')) return res.status(400).send("Profile posts cannot contain line breaks!")
   
