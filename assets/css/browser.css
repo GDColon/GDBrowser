@@ -7,6 +7,35 @@ body {
 	background: #000;
 }
 
+/* is kinda dumb but...
+i recreated the gd button (menu) in css
+
+here is the code: */
+
+    .YourClass
+    {
+        /* text-transform: uppercase; <---- optional*/
+        height: 138px; /* height (u can change, bruh ._.)*/
+        width: 138px; /* width (u can change, bruh ._.)*/
+        border-radius: 5px;
+        background-color: #87da23; /*main color*/
+        box-shadow: 10px 10px 0px rgb(62 62 62 / 50%);
+        background-image: linear-gradient(#c5fa59 10%, #c5fa59a3 15%, #4caa11 91%,#376813 0%); /*extra colors*/
+        cursor: pointer;
+        margin-bottom: 8px;
+        border: 3.5px solid black;
+        outline: 2.5px solid white;
+
+        /* TEXT INFO: */
+        color: rgb(255, 255, 255);
+        font-family: 'Pusab, Arial';
+        font-weight: normal;
+        font-size: 5vh;
+        -webkit-text-stroke-width: 0.2vh;
+        -webkit-text-stroke-color: black;
+        text-shadow: 0.35vh 0.35vh 0vh rgb(0 0 0 / 30%)
+}
+
 .levelBG {
     background-image: linear-gradient(#0065FD, #002E73);
     height: 100vh;
