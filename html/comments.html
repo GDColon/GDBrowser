@@ -228,7 +228,10 @@ else {
 }
 
 if (!noCache && commentCache[page]) addComments(commentCache[page])
-fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID}?count=${compact && !auto ? 20 : 10}&page=${page}${history ? "&type=commentHistory" : ""}&${mode}`).then(res => res.json()).then(addComments)
+fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID}?count=${compact && !auto ? 20 : 10}&page=${page}${history ? "&type=commentHistory" : ""}&${mode}`).then((res) => {
+	if (res.status === 204) return [];
+	return res.json();
+}).then(addComments)
 
 function addComments(res) {
 	
