@@ -23,12 +23,12 @@ let partNames = {
 }
 
 // convert hex to RGB
-let hexRegex = /^[A-Fa-f0-9]{6}$/
+let hexRegex = /^[a-f\d]{6}$/i
 function hexConvert(hex) { hex = hex.replace('#', ''); return {val: hex, r: '0x' + hex[0] + hex[1] | 0, g: '0x' + hex[2] + hex[3] | 0, b: '0x' + hex[4] + hex[5] | 0}; }
 
 // get path name from icon form and ID
 function getIconPath(icon, formName) {
-  return `${mainPath}${formName}_${icon < 10 ? "0" : ""}${icon}`
+  return mainPath + formName + `_${icon < 10 ? '0' : ''}` + icon
 }
 
 // get color from param input
@@ -39,7 +39,7 @@ function getColor(colInput, defaultCol) {
     foundColor.val = colInput
     return foundColor
   }
-  else if (colInput.match(hexRegex)) { // custom hex code
+  else if (hexRegex.test(colInput)) { // custom hex code
     let hexCol = hexConvert(colInput)
     colors[colInput.toLowerCase()] = hexCol
     return hexCol
@@ -51,36 +51,40 @@ function getColor(colInput, defaultCol) {
   }
 }
 
+function isBlack(colorObj) {
+  let c = colorObj
+  return [c.r, c.g, c.b].every(v => v == 0)
+}
+
 module.exports = async (app, req, res) => {
 
 async function buildIcon(account=[], userCode) { 
 
-  let form = forms[req.query.form] || forms["icon"]
+  let form = forms[req.query.form] || forms.icon
 
-  let iconID = req.query.icon || account[form.index] || 1;
+  let iconID = req.query.icon || account[form.index] || 1
   let col1 = getColor(req.query.col1 || account[10], "0")
   let col2 = getColor(req.query.col2 || account[11], "3")
   let colG = getColor(req.query.colG || req.query.colg)
   let colW = getColor(req.query.colW || req.query.colw || req.query.col3)
 
-  let useGlow = req.query.glow || account[28] || false;
+  let useGlow = req.query.glow || account[28] || false
   if (useGlow && ["false", "0"].includes(useGlow)) useGlow = false
-  if (col1.r == 0 && col1.g == 0 && col1.b == 0 ) useGlow = true
+  if (isBlack(col1)) useGlow = true
 
   // bit of a hacky solution for glow color but whatev
   let glowColor = colG || col2
-  if (glowColor.r == 0 && glowColor.g == 0 && glowColor.b == 0) glowColor = col1
-  if (glowColor.r == 0 && glowColor.g == 0 && glowColor.b == 0) glowColor = {r: 255, g: 255, b: 255}
+  if (isBlack(glowColor)) glowColor = isBlack(col1) ? {r: 0xff, g: 0xff, b: 0xff} : col1
 
   let psdExport = req.query.psd || false
-  let topless = form.name == "UFO" ? req.query.topless || false : false
+  let topless = form.name == "UFO" && (req.query.topless || false)
 
   let customSize = req.query.size == "auto" ? "auto" : +req.query.size || null
 
   let iconPath = getIconPath(iconID, form.form)
 
   let iconCode = `${form.name}-${iconID}-${col1.val}-${col2.val}-${colG ? colG.val : "x"}-${colW ? colW.val : "x"}-${useGlow ? 1 : 0}` 
-  let cachable = !topless && !customSize && !psdExport
+  let cachable = !(topless || customSize || psdExport)
   if (cachable && cache[iconCode]) return res.end(cache[iconCode].buffer)
 
   // default to 1 if icon ID does not exist
