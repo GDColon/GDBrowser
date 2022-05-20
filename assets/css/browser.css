@@ -178,7 +178,6 @@ h1 {
     color: white;
     font-size: 6vh;
     line-height: 100%;
-    overflow: hidden;
     white-space: nowrap;
     -webkit-text-stroke-width: 0.25vh;
     text-shadow: 0.375vh 0.375vh 0vh rgba(0, 0, 0, 0.3);
