@@ -726,10 +726,9 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 .commentPercent {
     vertical-align: top;
-    margin: 0 0 0 1vh;
+    margin: 0 0 0 1.5vh;
     font-size: 2vh;
     color: rgba(0, 0, 0, 0.5);
-    transform: translateY(40%);
 }
 
 .commentLikes {
@@ -743,8 +742,54 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
     transform: translateY(-19%)
 }
 
+.commentIcon {
+    margin-right: 1.25%;
+    width: 3.5%;
+}
+
+.commentIcon img {
+    width: 100%;
+}
+
+.commentRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.creditsIcon {
+    height: 30%;
+    margin-bottom: 7%;
+}
+
+.creditsIcon img {
+    height: 100%;
+}
+
+.specialThanksIcon img {
+    width: 42%;
+    height: unset;
+}
+
 .leaderboardSlot {
     height: 25%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding-left: 0%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.leaderboardName {
+    margin-right: 2.5%;
+}
+
+.leaderboardStars {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .weeklyStuff {
@@ -752,10 +797,38 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 }
 
 .ranking {
-    transform:scale(0.82) translate(-20.7vh, -20vh);
-    position: absolute;
-    height: 10%;
-    width: 12.5%;
+    display: flex;
+    padding-left: 5%;
+    padding-right: 2%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 88%;
+    width: 10%
+}
+
+.ranking h2 {
+    width: 100%;
+    margin-top: 2%;
+}
+
+.leaderboardIcon {
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+}
+
+.leaderboardIcon img {
+    height: 80%;
+    max-width: 150%;
+}
+
+.leaderboardSide {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 0.5%
 }
 
 #collectibles, .leaderboardStats {
@@ -769,12 +842,16 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 }
 
 .leaderboardStats {
+    display: flex;
     margin-top: 2%;
+    width: 100%;
+    align-items: center;
 }
 
 .leaderboardStats img {
-    transform: translate(-20%, -7%);
     width: 4.3%;
+    margin-left: 1%;
+    margin-right: 2.5%;
 }
 
 #boomling {

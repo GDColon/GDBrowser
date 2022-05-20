@@ -1,7 +1,7 @@
 <head>
 	<title>Comments</title>
 	<meta charset="utf-8">
-	<link href="../assets/css/browser.css" type="text/css" rel="stylesheet">
+	<link href="../assets/css/browser.css?v=1" type="text/css" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
 	<link rel="icon" href="../assets/like.png">
 	<meta id="meta-title" property="og:title" content="Level Comments">
@@ -128,8 +128,10 @@
 </div>
 
 </body>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="../sizecheck.js?"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/6.2.2/browser/pixi.js"></script>
+<script type="text/javascript" src="../iconkit/icon.js"></script>
+<script type="text/javascript" src="../global.js?"></script>
 <script type="text/javascript" src="../dragscroll.js"></script>
 <script>
 
@@ -269,11 +271,13 @@ function addComments(res) {
 		commentHTML = !compact ? `
 			<div class="commentBG ${bgCol}">
 				<div class="comment" commentID="${x.ID}">
-					<img class="inline" src="../icon/icon?form=${x.icon.form}&icon=${x.icon.icon}&col1=${x.icon.col1}&col2=${x.icon.col2}&glow=${x.icon.glow}&size=auto" height=21% style="margin-right: 0.8%">
-					<a href=../${x.accountID == "0" ? `search/${x.playerID}?user` : `../u/${x.accountID}.`}>
-					<h2 class="inline gdButton ${x.accountID == "0" ? "green unregistered" : ""}">${userName}</h2></a>
-					${modNumber > 0 ? `<img class="inline" src="../assets/mod${modNumber > 2 ? "-extra" : modNumber == 2 ? "-elder" : ""}.png" height=18% style="margin-left: 0.6%;">` : ""}
-					<p class="commentPercent inline">${x.percent ? x.percent + "%" : ""}</p>
+					<div class="commentRow">
+						<gdicon class="commentIcon inline" cacheID=${x.playerID} iconID=${x.icon.icon} iconForm="${x.icon.form}" col1="${x.icon.col1}" col2="${x.icon.col2}" glow="${x.icon.glow}"></gdicon>
+						<a href=../${x.accountID == "0" ? `search/${x.playerID}?user` : `../u/${x.accountID}.`}>
+						<h2 class="inline gdButton ${x.accountID == "0" ? "green unregistered" : ""}">${userName}</h2></a>
+						${modNumber > 0 ? `<img class="inline" src="../assets/mod${modNumber > 2 ? "-extra" : modNumber == 2 ? "-elder" : ""}.png" style="margin-left: 1%; width: 3.5%">` : ""}
+						<p class="commentPercent inline">${x.percent ? x.percent + "%" : ""}</p>
+					</div>
 
 					<div class="commentAlign">
 						<p class="pre commentText" style="color: rgb(${!history && x.playerID == lvl.playerID ? "255,255,75" : x.browserColor ? "255,180,255" : x.color})">${clean(x.content)}</p>
@@ -294,11 +298,13 @@ function addComments(res) {
 			:  `
 			<div class="commentBG compactBG ${bgCol}">
 				<div class="comment compact" commentID="${x.ID}">
-					<img class="inline" src="../icon/icon?form=${x.icon.form}&icon=${x.icon.icon}&col1=${x.icon.col1}&col2=${x.icon.col2}&glow=${x.icon.glow}&size=auto" height=21% style="margin-right: 0.8%">
-					<a href=../${x.accountID == "0" ? `search/${x.playerID}?user` : `../u/${x.accountID}.`}>
-					<h2 class="inline gdButton ${x.accountID == "0" ? "green unregistered" : ""}">${userName}</h2></a>
-					${modNumber > 0 ? `<img class="inline" src="../assets/mod${modNumber > 2 ? "-extra" : modNumber == 2 ? "-elder" : ""}.png" height=18% style="margin-left: 0.6%;">` : ""}
-					<p class="commentPercent inline">${x.percent ? x.percent + "%" : ""}</p>
+					<div class="commentRow">
+						<gdicon class="commentIcon inline" cacheID=${x.playerID} iconID=${x.icon.icon} iconForm="${x.icon.form}" col1="${x.icon.col1}" col2="${x.icon.col2}" glow="${x.icon.glow}"></gdicon>
+						<a href=../${x.accountID == "0" ? `search/${x.playerID}?user` : `../u/${x.accountID}.`}>
+						<h2 class="inline gdButton ${x.accountID == "0" ? "green unregistered" : ""}">${userName}</h2></a>
+						${modNumber > 0 ? `<img class="inline" src="../assets/mod${modNumber > 2 ? "-extra" : modNumber == 2 ? "-elder" : ""}.png" style="margin-left: 1.2%; width: 3.2%">` : ""}
+						<p class="commentPercent inline">${x.percent ? x.percent + "%" : ""}</p>
+					</div>
 
 					<div class="commentAlign">
 						<p class="pre commentText" style="color: rgb(${!history && x.playerID == lvl.playerID ? "255,255,75" : x.browserColor ? "255,180,255" : x.color})">${clean(x.content)}</p>
@@ -327,6 +333,7 @@ function addComments(res) {
 
 	});
 
+	renderIcons()
 	 $('#loading').hide()
 	 return loadingComments = false;
 	}

@@ -1,7 +1,7 @@
 <head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
     <title>Online Icon Kit</title>
-    <link href="../assets/css/iconkit.css?v=1" type="text/css" rel="stylesheet">
+    <link href="../assets/css/iconkit.css?v=2" type="text/css" rel="stylesheet">
     <meta name="viewport" content="width=1024">
     <meta property="og:description" content="Build and save your very own Geometry Dash icons, right from the internet!">
     <meta property="og:title" content="Geometry Dash Online Icon Kit">
@@ -12,14 +12,14 @@
     <link rel="icon" href="../assets/icon.png">
     </link>
 </head>
-<body class="iconscroll" style="background-image: linear-gradient(rgb(139, 139, 139), rgb(100, 100, 100));" onbeforeunload="sessionStorage.setItem('prevUrl', window.location.href)">
+<body style="background-image: linear-gradient(rgb(139, 139, 139), rgb(100, 100, 100));" onbeforeunload="sessionStorage.setItem('prevUrl', window.location.href)">
 <div class="center hidden"><br>
 
     <div class="popup" id="steal">
-        <div id="stealBox" class="brownbox bounce center supercenter" style="height: 340px; width: 700px">
+        <div id="stealBox" class="brownbox bounce center supercenter" style="height: 350px; width: 700px">
             <h1 class="center gold" style="margin-top: 10px">Copy Icon</h1>
             <p id="copyFrom" class="white" style="font-size: 24px; margin: 10px auto 5px auto"></p>
-            <input type="text" name="gdbrowser" id="playerName" autocomplete="off" placeholder="Username" maxlength="32" style="height: 58px; width: 90%; text-align: center; margin-top: 25px; margin-bottom: 5px;">
+            <input type="text" name="gdbrowser" id="playerName" autocomplete="off" placeholder="Username" maxlength="32" style="height: 58px; width: 90%; text-align: center; margin-top: 25px; margin-bottom: 10px;">
             <div id="copyForms"></div>
             <img src="../assets/ok.png" height=55px; class="postButton gdButton center" style="margin-top: 30px" id="fetchUser">
             <img class="gdButton xButton" src="../assets/close.png" width="70px" onclick="$('#steal').hide()">
@@ -27,108 +27,129 @@
     </div>
     
     <div class="popup" data-nosnippet id="settings">
-        <div class="brownbox bounce center supercenter" style="height: 350px; width: 720px">
+        <div class="brownbox bounce center supercenter" style="height: 380px; width: 820px">
             <h1 class="center gold" style="margin-top: 10px; margin-bottom: 20px;">Settings</h1>
-            <div class="inline"><h2 class="help" help="Removes the clear dome on top of UFOs"><input type="checkbox" class="iconsetting" id="box-ufo"><label for="box-ufo" class="gdcheckbox gdButton"></label>No UFO Dome</h2></div>
-            <div class="inline"><h2 class="help" help="Forces a square aspect ratio on generated icons"><input type="checkbox" class="iconsetting" id="box-square"><label for="box-square" class="gdcheckbox gdButton"></label>Square Image</h2></div>
-            <br>
-            <div class="inline" style="margin-top: 12px"><h2 class="help" help="Sorts the colors by internal ID instead of their in-game order"><input type="checkbox" class="iconsetting" id="box-sort"><label for="box-sort" class="gdcheckbox gdButton"></label>Unsort Colors</h2></div>
+            <div id="settingList">
+                <div class="help" help="Removes the clear dome on top of UFOs"><input type="checkbox" class="iconsetting" id="box-ufo"><label for="box-ufo" class="gdcheckbox gdButton"></label><h2>No UFO Dome</h2></div>
+                <div class="help" help="Sorts the colors by internal ID instead of their in-game order"><input type="checkbox" class="iconsetting" id="box-sort"><label for="box-sort" class="gdcheckbox gdButton"></label><h2>Unsort Colors</h2></div>
+                <div class="help" help="Allows robots to play spider animations and vice versa"><input type="checkbox" class="iconsetting" id="box-cursed"><label for="box-cursed" class="gdcheckbox gdButton"></label><h2>Cursed animations</h2></div>
+            </div> 
             <p class="white" id="helpText" style="font-size: 24px; margin-bottom: 0;">(Hover over a setting for information)</p>
             <img src="../assets/ok.png" height=55px; class="postButton gdButton center" style="margin-top: 30px" onclick="$('#settings').hide()">
             <img class="gdButton xButton" src="../assets/close.png" width="70px" onclick="$('#settings').hide()">
         </div>
 	</div>
 
-    <img id="iconkitlogo" src="../assets/iconkit.png" height=50px; style="margin: 7px 0;"><br>
-    <h2 style="margin: 5 auto 0 auto; display: none" id="howto"><span style='color: #aaaaaa'>(hover over an icon for info)</span></h2>
+    <img id="iconkitlogo" src="../assets/iconkit.png" style="margin: 7px 0px; height: 50px"><br>
+    <h2 style="margin: 5 auto 0 auto; display: none; height: 45px" id="howto"><span style='color: #aaaaaa'>(hover over an icon for info)</span></h2>
 
-    <div id="iconbox" style="min-height: 145px; display: inline-flex">
-        <img id="loading" src="../assets/loading.png" class="spin" height=85px; style="display: flex; align-self: center">
-        <img id="result" src="" download="" style="display: flex; align-self: flex-end;">
+    <div id="iconbox">
+        <canvas id="result" style="transform: translateY(-35px)">
     </div>
 
     <hr id="gdfloor">
     <div id="menuButtons" style="height: 65px; margin: 0 0 8 0;">
         <button class="blankButton menuButton" id="customColors" title="Settings" onclick="$('#settings').show()"><img src="../assets/iconkitbuttons/cog.png" width=60px></button>
-        <button class="blankButton menuButton" id="downloadPSD" title="Download layered PSD"><a id="psdLink" download="cube_1.psd" href=""><img src="../assets/iconkitbuttons/psd.png" width=60px></a></button>
-        <button class="blankButton menuButton" id="psdDisabled" style="display: none" onclick="alert('Robots and spiders still use older icon code and cannot be downloaded as a PSD! (hopefully soon)')"><img class="grayscale" src="../assets/iconkitbuttons/psd.png" width=60px></button>
-        <button class="blankButton menuButton" id="downloadIcon" title="Download icon"><a id="downloadLink" download="cube_1.png" href=""><img src="../assets/iconkitbuttons/save.png" width=60px></a></button>
+        <button class="blankButton menuButton" onclick="icon.psdExport()" title="Download layered PSD"><img src="../assets/iconkitbuttons/psd.png" width=60px></button>
+        <button class="blankButton menuButton" id="copyToClipboard" title="Copy to clipboard"><img src="../assets/iconkitbuttons/copy.png" width=60px></button>
+        <button class="blankButton menuButton" onclick="icon.pngExport()" title="Download icon"><img src="../assets/iconkitbuttons/save.png" width=60px></a></button>
         <button class="blankButton menuButton" id="getUserIcon" title="Get player icon"><img src="../assets/iconkitbuttons/steal.png" width=60px></button>
         <button class="blankButton menuButton" id="randomIcon" title="Random Icon"><img src="../assets/iconkitbuttons/shuffle.png" width=60px></button>
         <button class="blankButton menuButton" id="unlockIcon" title="Unlock details"><img id="lock" src="../assets/iconkitbuttons/unlock.png" width=60px></button>
+    </div>
+    <div id="iconTabs"></div><br>
+    <div id="iconKitParent" class="iconKit noDarken">
+        <div id="iconprogressbar">
+            <div id="iconloading"></div>
         </div>
-        <div id="iconTabs"></div><br>
-        <div id="iconKitParent" class="iconKit noDarken">
-            <div id="iconprogressbar">
-                <div id="iconloading"></div>
-            </div>
-        </div><br>
+    </div><br>
 
-        <div id="done" style="display: none; width: 1100px; text-align: left; margin: 0 auto; position: relative; right: 42px">
-            <img src="../assets/btn-done.png" class="gdButton" style="height: 50px; margin: 5 0 16 80">
+    <div style="width: 1200px; margin: 0 auto; position: relative; right: 42px">
+        <div style="padding-top: 15px; width: 75px; vertical-align: top;" class="colTypes inline">
+            <button id="cc1" class="colorLabel blankButton" onclick="$('#cp1').trigger('click')" title="Primary Color"><img src="../assets/col1.png"></button><input type="color" id="cp1" class="colorPicker">
+            <button id="cc2" class="colorLabel blankButton" onclick="$('#cp2').trigger('click')" title="Secondary Color"><img src="../assets/col2.png"></button><input type="color" id="cp2" class="colorPicker">
+            <div class="colorSplit" style="height: 12.5px"></div>
+            <button id="ccG" class="colorLabel blankButton" onclick="$('#cpG').trigger('click')" title="Glow Color"><img src="../assets/colG.png"></button><input type="color" id="cpG" class="colorPicker">
+            <button id="ccW" class="colorLabel blankButton" onclick="$('#cpW').trigger('click')" title="White Highlights" style="display: none"><img src="../assets/colW.png" style="background-color: rgb(255, 255, 255)";></button><input type="color" id="cpW" class="colorPicker">
+            <button id="ccU" class="colorLabel blankButton" onclick="$('#cpU').trigger('click')" title="UFO Dome" style="display: none"><img src="../assets/colU.png" style="background-color: rgb(255, 255, 255)";></button><input type="color" id="cpU" class="colorPicker">
         </div>
-
-        <div style="width: 1200px; margin: 0 auto; position: relative; right: 42px">
-            <div style="padding-top: 15px; width: 75px; vertical-align: top;" class="colTypes inline">
-                <button id="cc1" class="colorLabel blankButton" onclick="$('#cp1').trigger('click')" title="Primary Color"><img src="../assets/col1.png"></button><input type="color" id="cp1" class="colorPicker">
-                <button id="cc2" class="colorLabel blankButton" onclick="$('#cp2').trigger('click')" title="Secondary Color"><img src="../assets/col2.png"></button><input type="color" id="cp2" class="colorPicker">
-                <div class="colorSplit" style="height: 12.5px"></div>
-                <button id="ccG" class="colorLabel blankButton" onclick="$('#cpG').trigger('click')" title="Glow Color"><img src="../assets/colG.png"></button><input type="color" id="cpG" class="colorPicker">
-                <button id="ccW" class="colorLabel blankButton" onclick="$('#cpW').trigger('click')" title="White Highlights" style="display: none"><img src="../assets/colW.png" style="background-color: rgb(255, 255, 255)";></button><input type="color" id="cpW" class="colorPicker">
-            </div>
-            <div id="colors" class="inline iconKit">
-                <div id="col1"></div>
-                <div id="col2"></div>
-                <div class="colorSplit" style="height: 12.5px"></div>
-                <div id="colG"></div>
-                <div id="colW" style="display: none"></div>
-            </div>
+        <div id="colors" class="inline iconKit">
+            <div id="col1"></div>
+            <div id="col2"></div>
+            <div class="colorSplit" style="height: 12.5px"></div>
+            <div id="colG"></div>
+            <div id="colW" style="display: none"></div>
+            <div id="colU" style="display: none"></div>
         </div>
+    </div>
 
-    <br>
-    <p style="color: rgb(20, 20, 20); margin-top: 0px; line-height: 16px">
+    <div id="animationOptions" style="display: none;">
+        <div class="animationSelector">
+            <h2 style="margin-right: 20px">Animation: </h2>
+            <select id="robotAnimation"></select>
+        </div>
+        <div class="animationSelector">
+            <h2 style="margin-right: 20px">Speed:</h2>
+            <input id="animationSpeed" style="width: 250px" type="range" value="1" placeholder="1" min="0.1" max="3" step="0.1">
+            <input id="animationSpeedBox" type="number" value="1">
+        </div>
+    </div>
+
+    <p style="color: rgb(20, 20, 20); margin-top: 25px; margin-bottom: 25px; line-height: 16px">
         Created by <a target=_blank href="https://twitter.com/TheRealGDColon">Colon</a>
         • All sprites/assets belong to <a target=_blank href="http://robtopgames.com">RobTop Games</a>
         <br><br>
-        <a target=_blank href="https://gdbrowser.com/api#icons">API Reference</a>
-        • <a target=_blank href="https://github.com/GDColon/GDBrowser/blob/master/api/icon.js">Source Code</a>
+        <a target=_blank href="https://github.com/GDColon/GDBrowser/blob/master/iconkit/icon.js">Source Code</a> (now 100% local with <a target="_blank" href="https://pixijs.com/">pixi.js</a>!)
     </p>
 
-    <div style="position:absolute; top: 2%; left: -1.95%; width: 10%; height: 25%; pointer-events: none">
-		<img class="gdButton" style="pointer-events: all" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()">
+    <div class="hideIfSmall" style="position:absolute; top: 20px; left: 20px; width: 64px; height: 64px; pointer-events: none">
+		<img class="gdButton" style="pointer-events: all" id="backButton" src="../assets/back.png" height="100%" onclick="backButton()">
 	</div>
+
+    <div class="hideIfSmall" id="extraInfo" style="position:absolute; top: 20px; right: 15px"></div>
     
 </div>
 </body>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script type="text/javascript" src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/6.2.2/browser/pixi.js"></script>
+<script type="text/javascript" src="./libs/ag-psd.js"></script>
+<script type="text/javascript" src="./libs/pixi-ease.js"></script>
+<script type="text/javascript" src="./libs/imagesloaded.js"></script>
+<script type="text/javascript" src="./icon.js"></script>
 <script type="text/javascript">
 
-$('#loading').hide();
+// hi there hello! this code is really old, so it's shit. i should rewrite it some time omg
+
 $('.hidden').show();
 
 let mobile =  /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)
-let forms = ['cube', 'ship', 'ball', 'ufo', 'wave', 'robot', 'spider', 'swing']
-let picking = [0, 0, 0, 0]
-let currentForm = 'cube'
-let formCopy = 'cube'
+let currentForm = 'icon'
+let glowbtnformCopy = 'icon'
+const yOffsets = { ball: -10, ufo: 30, spider: 7, swing: -15 }
 
 let selectedIcon = 1
-let selectedForm = 'cube'
+let selectedForm = 'icon'
+
 let selectedCol1 = 0
 let selectedCol2 = 3
 let selectedColG = 3
 let selectedColW = null
+let selectedColU = null
 let enableGlow = 0
 
-let imagesLoaded = 0
-let totalLoaded = 0
-
-let shops = ["", "Scratch's ", "community "]
+let shops = ["the Shop", "Scratch's Shop", "the Community Shop"]
 let achievements = []
 let shopIcons = []
+let iconStuff = {}
 let unlockMode = false
+let currentAnimation = {}
+let animationMultiplier = 1
+
+let icon = null
+
+let iconCanvas = document.getElementById('result');
+let app = new PIXI.Application({ view: iconCanvas, width: 300, height: 300, backgroundAlpha: 0 });
 
 if (mobile) $('#logo').attr('width', '80%');
 
@@ -137,58 +158,116 @@ iconSettings.forEach(x => {
     $(`#box-${x}`).prop('checked', true)
 })
 
-if (iconSettings.includes("square")) $("#result").addClass("squareIcon")
-else $("#result").removeClass("squareIcon")
-
 function capitalize(str) { return str[0].toUpperCase() + str.substr(1) }
 function randInt(min, max) { return Math.floor(Math.random() * (max - min + 1) ) + min }
-function rgbToHex(r, g, b) { return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1) }
 function colorBG(e, c, hex) { 
     $(`#cc${e} img`).css('background-color', hex ? `#${c}` : `rgb(${c.r}, ${c.g}, ${c.b})`)
-    if (!hex) $(`#cp${e}`).val(rgbToHex(c.r, c.g, c.b))
+    if (!hex) $(`#cp${e}`).val(toHexCode(rgbToDecimal(c.r, c.g, c.b)))
 }
-function undone(num) { picking[num] = 0; if (!picking.some(x => x)) $('#done').hide() }
 function colorSplit() { 
-    if ($("#colG").is(':visible') || $("#colW").is(':visible')) $('.colorSplit').show()
+    if ($("#colG").is(':visible') || $("#colW").is(':visible') || $("#colU").is(':visible')) $('.colorSplit').show()
     else $('.colorSplit').hide()
 }
-function psdCheck() {
-    let psdHref = $('#psdLink').attr('href').toLowerCase()
-    if (psdHref.includes("&form=robot") || psdHref.includes("&form=spider")) { $('#downloadPSD').hide(); $('#psdDisabled').show() }
-    else { $('#downloadPSD').show(); $('#psdDisabled').hide() }
+
+function setColor(type, col) {
+    icon.setColor(type, getCol(col))
+    updateDetails()
 }
 
-forms.forEach(form => {
-    $("#iconTabs").append(`<button form="${form}" class="blankButton iconTabButton"><img src="../assets/iconkitbuttons/${form}_off.png" width=50px></button>`)
-    $("#copyForms").append(`<button form="${form}" class="blankButton copyForm"><img src="../assets/iconkitbuttons/${form}_off.png" width=50px></button>`)
-})
-$("#iconTabs").append(`<button title="Glow" class="blankButton glowToggle" id="glowbtn"><img id="glow" src="../assets/iconkitbuttons/streak_off.png" width=50px></button>`)
+function updateDetails() {
+    checkGlow()
+    colorSplit()
+    checkAnimation()
+    setExtras()
+}
 
-forms.forEach(form => {$("#iconKitParent").append(`<div id="${form}s"></div>`)})
-
-function generateIcon() {
-
-    if (enableGlow == 1 || selectedCol1 == 15 || selectedCol1 == "000000") { $('#colG').show(); $('#ccG').show() }
+// check if glow col tab should be visible
+function checkGlow() {
+    if (icon.isGlowing()) { $('#colG').show(); $('#ccG').show() }
     else { $('#colG').hide(); $('#ccG').hide(); }
     colorSplit()
-
-    $("#loading").show()
-    $("#result").hide()
-    let noDome = selectedForm == "ufo" && iconSettings.includes("ufo")
-    let square = iconSettings.includes("square")
-    let finalURL = `../icon/icon?icon=${selectedIcon}&form=${selectedForm}${noDome ? "&topless=1" : ""}&col1=${selectedCol1}&col2=${selectedCol2}${selectedColG != selectedCol2 ? `&colG=${selectedColG}` : ""}${selectedColW ? `&colW=${selectedColW}` : ""}${enableGlow > 0 ? "&glow=1" : ""}${square ? "&size=auto" : ""}`
-    $("#result").attr('src', finalURL).attr('download', `${selectedForm}_${selectedIcon}.png`)
-    $("#downloadLink").attr('href', finalURL).attr('download', `${selectedForm}_${selectedIcon}.png`)
-    $("#psdLink").attr('href', finalURL + "&psd=1").attr('download', `${selectedForm}_${selectedIcon}.psd`)
-    psdCheck()
-    if (enableGlow == 2) enableGlow = 0
+    checkAnimation()
 }
 
-fetch('./api/icons').then(res => {
-    return (res.json())})
-    .then(iconStuff => {
+// check if animation selector should be visible
+function checkAnimation() {
+    let animationData = iconData.robotAnimations.animations[selectedForm]
+    if (animationData && !$(`#robotAnimation[form="${selectedForm}"]`).is(":visible")) {
+        appendAnimations(selectedForm, animationData)
+    }
+    else if (!animationData) $('#animationOptions').hide()
+}
 
-        let miniIcon = iconStuff.icons.filter(x => x.startsWith("cube")).length
+let commonAnimations = ["idle", "run", "walk"]
+function animationSort(anim) {
+    return Object.keys(anim).sort((a, b) => (commonAnimations.includes(b)) - (commonAnimations.includes(a)) || a.localeCompare(b))
+}
+
+function appendAnimations(form, animationData) {
+    let animationNames = animationSort(animationData)
+    $('#robotAnimation').html(animationNames.map(x => `<option form="${form}" value="${x}">${x.replace(/_/g, " ")}</option>`))
+    $('#robotAnimation').val("idle")
+    $('#robotAnimation').attr("form", selectedForm)
+
+    if (iconSettings.includes("cursed")) Object.keys(iconData.robotAnimations.animations).forEach(altForm => {
+        if (altForm != form) {
+            let altNames = animationSort(iconData.robotAnimations.animations[altForm])
+            $('#robotAnimation').append(altNames.map(x => `<option form="${altForm}" value="${x}">*${x.replace(/_/g, " ")} (${altForm})</option>`))
+        }
+    })
+
+    $('#animationOptions').show()
+}
+
+function setExtras() {
+    let extraInfo = {
+        "Icon ID": `${iconStuff.forms[selectedForm].name} ${+selectedIcon}`,
+        "Col 1": extraColString(selectedCol1),
+        "Col 2": extraColString(selectedCol2)
+    }
+
+    if ($('#colG').is(":visible") && (getCol(selectedColG) != getCol(selectedCol2))) extraInfo["Glow"] = extraColString(selectedColG)
+    if ($('#colW').is(":visible") && (getCol(selectedColW) != 0xffffff)) extraInfo["White"] = extraColString(selectedColW)
+    if ($('#colU').is(":visible") && (getCol(selectedColU) != 0xffffff)) extraInfo["UFO Dome"] = extraColString(selectedColU)
+
+    let foundCredit = iconStuff.iconCredits.find(x => x.form == selectedForm && x.id == selectedIcon)
+    if (foundCredit) extraInfo["🎨 Artist"] = foundCredit.name
+
+    let extraData = Object.entries(extraInfo).map(x => `<div><p>${x[0]}: ${x[1]}</p></div>`)
+    $('#extraInfo').html(extraData)
+}
+
+function extraColString(col) {
+    let realCol = getCol(col)
+    let hexCol = toHexCode(realCol) 
+    let foundGDCol = Object.entries(iconStuff.colors).find(x => rgbToDecimal(x[1]) == realCol)
+    return foundGDCol ? `${foundGDCol[0]} (${hexCol})` : hexCol
+}
+
+function getCol(id) {
+    return parseIconColor(id, iconStuff.colors)
+}
+
+function toHexCode(decimal) {
+    return "#" + decimal.toString(16).padStart(6, "0")
+}
+
+let iconData = null
+fetch('../api/icons').then(res => res.json()).then(sacredTexts => {
+fetch('../api/iconkit').then(res => res.json()).then(iconKitData => {
+
+        iconStuff = Object.assign(sacredTexts, iconKitData)
+        iconData = sacredTexts
+
+        let forms = Object.keys(iconStuff.forms)
+
+        forms.forEach(form => {
+            $("#iconTabs").append(`<button form="${form}" title="${iconStuff.forms[form].name}" class="blankButton iconTabButton"><img src="../assets/iconkitbuttons/${form}_off.png" style="width: 50px"></button>`)
+            $("#copyForms").append(`<button form="${form}" title="${iconStuff.forms[form].name}" class="blankButton copyForm"><img src="../assets/iconkitbuttons/${form}_off.png" style="width: 50px"></button>`)
+        })
+        $("#iconTabs").append(`<button title="Glow" class="blankButton glowToggle" id="glowbtn"><img id="glow" src="../assets/iconkitbuttons/streak_off.png" style="width: 50px"></button>`)
+
+        forms.forEach(form => {$("#iconKitParent").append(`<div id="${form}s" class="iconContainer"></div>`)})
 
         if (iconStuff.noCopy) $('#getUserIcon').remove()
         else if (iconStuff.server) {
@@ -196,53 +275,86 @@ fetch('./api/icons').then(res => {
             $('#stealBox').css('height', '385px')
         }
 
-        function filterIcon(name) { return iconStuff.icons.filter(x => x.startsWith(name)).sort(function (a,b) {return a.replace(/[^0-9]/g, "") - b.replace(/[^0-9]/g, "");})}
+        function generateIcon(cb) {
+            let noDome = selectedForm == "ufo" && iconSettings.includes("ufo")
+            let foundForm = parseIconForm(selectedForm)
+
+            loadIconLayers(foundForm, selectedIcon, function(l, sprites) {
+                let iconArgs = {app, form: foundForm, id: selectedIcon, col1: getCol(selectedCol1), col2: getCol(selectedCol2), glow: enableGlow > 0}
+                if (selectedCol2 != selectedColG) iconArgs.colG = getCol(selectedColG)
+                if (selectedColW) iconArgs.colW = getCol(selectedColW)
+                if (selectedColU) iconArgs.colU = getCol(selectedColU)
+                if (iconSettings.includes("ufo")) iconArgs.noUFODome = true
+                if (animationMultiplier != 1) iconArgs.animationSpeed = animationMultiplier
+                if (currentAnimation.form && (iconSettings.includes("cursed") || currentAnimation.form == selectedForm)) {
+                    iconArgs.animation = currentAnimation.name
+                    iconArgs.animationForm = currentAnimation.form
+                }
+
+                icon = new Icon(iconArgs)
+                icon.sprite.position.set(app.renderer.width / 2, (app.renderer.height / 2) + (yOffsets[selectedForm] || 0))
+                updateDetails()
+
+                if (cb) cb()
+            })
+        }
+
+        function filterIcon(name) { return iconStuff.previewIcons.filter(x => x.startsWith(name)).sort(function (a,b) {return a.replace(/[^0-9]/g, "") - b.replace(/[^0-9]/g, "");})}
 
         function appendIcon(form, formName) {
-            imagesLoaded = 0; totalLoaded = 0
-            $('#' + formName + 's').append('<br>')
+
+            let imagesLoaded = 0
+            let totalLoaded = 0  
+            let formContainer = $('#' + formName + 's')
+
+            let hasMini = form[0].endsWith("_0.png")
+            if (hasMini) form.shift()
 
             form.forEach(function (i, p) {
-            if (p != 0 && p % 12 == 0) $('#' + formName + 's').append('<br>')
-            $('#' + formName + 's').append(`<button num="${p + 1}" form="${formName}" class="blankButton iconButton" id="${formName}-${p + 1}"><img src="../assets/previewicons/${i}" width="50px" title="${capitalize(formName)} ${formName == "cube" && p+1 == form.length ? 0 : p + 1}"></button>`)})
-            $('#' + formName + 's').imagesLoaded(function() {}).progress(function() {
+                // if (p != 0 && p % 12 == 0) formContainer.append('<br>')
+                formContainer.append(`<button num="${p + 1}" form="${formName}" class="blankButton iconButton" id="${formName}-${p + 1}"><img src="./premade/${i}" title="${capitalize(formName)} ${p + 1}"></button>`)
+            })
+
+            if (hasMini) formContainer.append(`<button num="0" form="${formName}" class="blankButton iconButton" id="${formName}-0"><img src="./premade/${formName}_0.png" title="Mini ${formName}"></button>`)
+
+            formContainer.imagesLoaded(function() {}).progress(function() {
                 imagesLoaded += 1;
-                totalLoaded = imagesLoaded / $('#' + formName + 's').find('img').length * 100
+                totalLoaded = imagesLoaded / formContainer.find('img').length * 100
                 $('#iconloading').css('width', `${totalLoaded}%`)
             }
         )}
 
         function loadColors(devmode) { 
-            let colTypes = [1, 2, "G", "W"]
+            let colTypes = [1, 2, "G", "W", "U"]
             colTypes.forEach(x => $(`#col${x}`).html(""))
             iconStuff.colorOrder.forEach(function (p, n) {
                 if (iconSettings.includes("sort")) p = n;
                 colTypes.forEach(c => {
-                    $(`#col${c}`).append(`<button col=${p} colType=color${c} class="blankButton color${c}" title="Color ${p}" id="col${c}-${p}"><img src="../assets/previewicons/color_${p}.png" width=50px></button>`)
+                    let colRGB = iconStuff.colors[p]
+                    $(`#col${c}`).append(`<button col=${p} colType=color${c} class="blankButton color${c} iconColor" title="Color ${p} (#${toHexCode(rgbToDecimal(colRGB))})" id="col${c}-${p}"><div style="background-color: rgb(${colRGB.r}, ${colRGB.g}, ${colRGB.b})"></button>`)
                 })
             })
             $('#col1').append("<span style='min-width: 10px'></span>")
         }
 
         loadColors()
-        let cubes = filterIcon('cube');
+        let icons = filterIcon('icon');
         
         let sample = JSON.parse(iconStuff.sample);
         enableGlow = sample[3] * 2;
         [selectedIcon, selectedCol1, selectedCol2] = sample;
         selectedColG = selectedCol2
 
-        cubes.push(cubes.shift())
-
         $('body').imagesLoaded(function () {
-            appendIcon(cubes, "cube")
-            $(`[num="${sample[0]}"][form="cube"]`).addClass('iconSelected');
+            appendIcon(icons, "icon")
+            $(`[num="${sample[0]}"][form="icon"]`).addClass('iconSelected');
         })
 
         $(`.color1[col="${sample[1]}"]`).addClass('iconSelected');
         $(`.color2[col="${sample[2]}"]`).addClass('iconSelected');
         $(`.colorG[col="${sample[2]}"]`).addClass('iconSelected');
         $('.colorW[col="12"]').addClass('iconSelected');
+        $('.colorU[col="12"]').addClass('iconSelected');
 
         colorBG(1, iconStuff.colors[sample[1]])
         colorBG(2, iconStuff.colors[sample[2]])
@@ -250,11 +362,11 @@ fetch('./api/icons').then(res => {
 
         $('.colorLabel img').show()
 
-        generateIcon()
+        generateIcon(() => { icon.glow = false; enableGlow = 0 } ) // disable glow after first generated
 
         $(document).on('click', '.iconTabButton', function () {
-            var form = $(this).attr('form')
-            var forms = '#' + form + 's'
+            let form = $(this).attr('form')
+            let forms = '#' + form + 's'
 
             currentForm = form
 
@@ -262,7 +374,7 @@ fetch('./api/icons').then(res => {
                 $(this).children().first().attr('src', $(this).children().first().attr('src').replace('_on', '_off'))
             })
 
-            var img = $(this).children().first()
+            let img = $(this).children().first()
             img.attr('src', img.attr('src').replace('_off', '_on'));
 
             $('#iconKitParent').each(function(x, y) { $(this).children().not('#iconprogressbar').hide() })
@@ -276,12 +388,15 @@ fetch('./api/icons').then(res => {
 
         $("#randomIcon").click(function() {
 
+            let colorCount = Object.keys(iconStuff.colors).length
             selectedForm = forms[Math.floor(Math.random() * forms.length)]
-            selectedIcon = randInt(0, iconStuff.icons.filter(x => x.startsWith(selectedForm)).length)
-            selectedCol1 = randInt(0, iconStuff.icons.filter(x => x.startsWith("color")).length) - 1
-            selectedCol2 = randInt(0, iconStuff.icons.filter(x => x.startsWith("color")).length) - 1
+            selectedIcon = randInt(1, iconStuff.previewIcons.filter(x => x.startsWith(selectedForm)).length)
+            selectedCol1 = randInt(0, colorCount - 1)
+            selectedCol2 = randInt(0, colorCount - 1)
             selectedColW = null
+            selectedColU = null
             enableGlow = randInt(0, 2) == 1 ? 1 : 0   // 1 in 3 chance of glow
+            generateIcon()
 
             $('#glow').attr('src', '../assets/iconkitbuttons/streak_off.png')
 
@@ -291,24 +406,25 @@ fetch('./api/icons').then(res => {
             $(`#col2-${selectedCol2}`).trigger('click')
             $(`#colG-${selectedCol2}`).trigger('click')
             $('#colW-12').trigger('click')
+            $('#colU-12').trigger('click')
             if (enableGlow == 1) $("#glow").attr('src', $("#glow").attr('src').replace('_off', '_on'))
             else $("#glow").attr('src', $("#glow").attr('src').replace('_on', '_off'))
-            generateIcon()
         })
 
     $(document).on('click', '.glowToggle', function () {
 
-    if (enableGlow) {
-        $("#glow").attr('src', $("#glow").attr('src').replace('_on', '_off'))
-        enableGlow = 0;
-    }
+        if (enableGlow) {
+            $("#glow").attr('src', $("#glow").attr('src').replace('_on', '_off'))
+            enableGlow = 0;
+        }
 
-    else {
-        $("#glow").attr('src', $("#glow").attr('src').replace('_off', '_on'))
-        enableGlow = 1;
-    }
+        else {
+            $("#glow").attr('src', $("#glow").attr('src').replace('_off', '_on'))
+            enableGlow = 1;
+        }
 
-    generateIcon()
+        icon.setGlow(enableGlow > 0, false)
+        updateDetails()
 
     })
 
@@ -322,12 +438,18 @@ fetch('./api/icons').then(res => {
     $(document).on('click', '.iconButton', function () {
         $(".iconButton").removeClass("iconSelected");
         $(this).addClass('iconSelected');
+        let oldForm = selectedForm
         selectedIcon = $(this).attr('num');
         selectedForm = $(this).attr('form');
-        if (selectedIcon == miniIcon) selectedIcon = 0;
 
         if (iconStuff.whiteIcons.find(x => x[1] == selectedIcon && x[0] == selectedForm)) { $('#colW').show(); $('#ccW').show() }
-        else { $('#colW').hide(); $('#ccW').hide(); $(`#colW-12`).trigger('click') }
+        else { $('#colW').hide(); $('#ccW').hide(); $(`#colW-12`).trigger('click'); }
+
+        if (selectedForm == "ufo") { $('#colU').show(); $('#ccU').show() }
+        else { $('#colU').hide(); $('#ccU').hide(); $(`#colU-12`).trigger('click'); }
+
+        if (selectedForm != oldForm) currentAnimation = {}
+
         colorSplit()
 
         generateIcon()
@@ -337,26 +459,26 @@ fetch('./api/icons').then(res => {
         $(".color1").removeClass("iconSelected");
         $(this).addClass('iconSelected');
         selectedCol1 = $(this).attr('col');
-        colorBG(1, iconStuff.colors[$(this).attr('col')]); undone(0)
-        generateIcon()
+        colorBG(1, iconStuff.colors[$(this).attr('col')]);
+        setColor("1", selectedCol1)
     })
 
     $(document).on('click', '.color2', function () {
         $(".color2").removeClass("iconSelected");
         $(this).addClass('iconSelected');
         selectedCol2 = $(this).attr('col');
-        colorBG(2, iconStuff.colors[$(this).attr('col')]); undone(1)
+        colorBG(2, iconStuff.colors[$(this).attr('col')]);
         $(`#colG-${$(this).attr('col')}`).trigger('click')
         selectedColG = $(this).attr('col');
-        generateIcon()
+        setColor("2", selectedCol2)
     })
 
     $(document).on('click', '.colorG', function () {
         $(".colorG").removeClass("iconSelected");
         $(this).addClass('iconSelected');
         selectedColG = $(this).attr('col');
-        colorBG('G', iconStuff.colors[$(this).attr('col')]); undone(2)
-        generateIcon()
+        colorBG('G', iconStuff.colors[$(this).attr('col')]);
+        setColor("g", selectedColG)
     })
 
     $(document).on('click', '.colorW', function () {
@@ -364,53 +486,81 @@ fetch('./api/icons').then(res => {
         $(this).addClass('iconSelected');
         selectedColW = $(this).attr('col');
         if (selectedColW == 12) selectedColW = null
-        colorBG('W', iconStuff.colors[$(this).attr('col')]); undone(3)
-        generateIcon()
+        colorBG('W', iconStuff.colors[$(this).attr('col')]);
+        setColor("w", selectedColW)
+    })
+
+    $(document).on('click', '.colorU', function () {
+        $(".colorU").removeClass("iconSelected");
+        $(this).addClass('iconSelected');
+        selectedColU = $(this).attr('col');
+        if (selectedColU == 12) selectedColU = null
+        colorBG('U', iconStuff.colors[$(this).attr('col')]);
+        setColor("u", selectedColU)
     })
 
     $("#cp1").on('input change', function() {
-        picking[0] = true; colorBG(1, $(this).val(), true);
-        $(".color1").removeClass("iconSelected"); $("#done").show()
+        colorBG(1, $(this).val(), true);
+        $(".color1").removeClass("iconSelected");
+        selectedCol1 = $('#cp1').val().slice(1)
+        setColor("1", selectedCol1)
     })
 
     $("#cp2").on('input change', function() {
-        picking[1] = true; colorBG(2, $(this).val(), true);
-        $(".color2").removeClass("iconSelected"); $("#done").show()
+        colorBG(2, $(this).val(), true);
+        $(".color2").removeClass("iconSelected");
+        selectedCol2 = $('#cp2').val().slice(1)
+        setColor("2", selectedCol2)
     })
 
     $("#cpG").on('input change', function() {
-        picking[2] = true; colorBG('G', $(this).val(), true);
-        $(".colorG").removeClass("iconSelected"); $("#done").show()
+        colorBG('G', $(this).val(), true);
+        $(".colorG").removeClass("iconSelected");
+        selectedColG = $('#cpG').val().slice(1)
+        setColor("g", selectedColG)
     })
 
     $("#cpW").on('input change', function() {
-        picking[3] = true; colorBG('W', $(this).val(), true);
-        $(".colorW").removeClass("iconSelected"); $("#done").show()
+        colorBG('W', $(this).val(), true);
+        $(".colorW").removeClass("iconSelected");
+        selectedColW = $('#cpW').val().slice(1)
+        setColor("w", selectedColW)
     })
 
-    $("#done img").click(function() {
-        $("#done").hide()
-        if (picking[0]) selectedCol1 = $('#cp1').val().slice(1)
-        if (picking[1]) selectedCol2 = $('#cp2').val().slice(1)
-        if (picking[2]) selectedColG = $('#cpG').val().slice(1)
-        if (picking[3]) selectedColW = $('#cpW').val().slice(1)
-        picking = [0, 0, 0, 0]
-        generateIcon()
+    $("#cpU").on('input change', function() {
+        colorBG('U', $(this).val(), true);
+        $(".colorU").removeClass("iconSelected");
+        selectedColU = $('#cpU').val().slice(1)
+        setColor("u", selectedColU)
     })
-
-    $('#result').on('load', function() {
-        $('#iconbox').css('min-height', `${(currentForm == "ship" || currentForm == "wave") ? 110 : 145}px`)
-        $("#loading").hide()
-        $("#result").show()
-        if (enableGlow > 1) $("#gdfloor").css('margin-top', '-3px')
-        else $("#gdfloor").css('margin-top', '0px')
-    })
-
+    
     $("#getUserIcon").click(function() {
         $(`.copyForm[form=${currentForm}]`).trigger('click')
         $('#steal').show();
         $('#playerName').focus()  
         $('#playerName').select()  
+    })
+    
+    $('#copyToClipboard').click(function() {
+        if ($(this).hasClass('greyedOut')) return
+        icon.copyToClipboard()
+        let copyIcon = $(this).find('img')
+        $(this).addClass('greyedOut')
+        copyIcon.attr('src', '../assets/iconkitbuttons/copied.png')
+        setTimeout(() => {
+            $(this).removeClass('greyedOut')
+            copyIcon.attr('src', '../assets/iconkitbuttons/copy.png')
+        }, 420);
+    })
+
+
+    $('#robotAnimation').on('change', function() {
+        let prevForm = currentAnimation.form
+        currentAnimation = { name: $(this).val(), form: $('#robotAnimation').find(":selected").attr('form') }
+        if (currentAnimation.form != prevForm) {
+            generateIcon(() => icon.setAnimation(currentAnimation.name, currentAnimation.form))
+        }
+        else icon.setAnimation(currentAnimation.name, currentAnimation.form)
     })
 
     let hoverText = $('#helpText').html()
@@ -426,17 +576,23 @@ fetch('./api/icons').then(res => {
         let checkedSettings = []
         $('.iconsetting:checkbox:checked').each((i, x) => { checkedSettings.push(x.id.split('-')[1]) })
         iconSettings = checkedSettings
-        if ($(this).attr('id') == "box-sort") loadColors()
-        if (iconSettings.includes("square")) $("#result").addClass("squareIcon")
-        else $("#result").removeClass("squareIcon")
+        switch ($(this).attr('id').slice(4)) {
+            case "sort": loadColors(); break;
+            case "ufo": generateIcon(); break;
+            case "cursed":
+                $('#animationOptions').hide();
+                checkAnimation();
+                $('#robotAnimation').trigger('change');
+                break;
+        }
         localStorage.iconkit = checkedSettings.join(",")
     })
 
     $('#unlockIcon').click(function() {
         if (!achievements.length) { 
-            fetch('./api/achievements').then(res => { res.json().then(x => {
+            fetch('../api/achievements').then(res => { res.json().then(x => {
                 achievements = x.achievements
-                shopIcons = x.shopIcons
+                shopIcons = iconStuff.shops
                 unlockMode = true
                 $('#lock').attr('src', $('#lock').attr('src').replace('.png', '_on.png'));
                 $('#howto').show();
@@ -448,26 +604,13 @@ fetch('./api/icons').then(res => {
             else { $('#lock').attr('src', $('#lock').attr('src').replace('_on.png', '.png')); $('#howto').hide() }
         }
     })
-
     
     $(document).on('mouseover', '.iconButton, .color1, .color2', function () {
         if (unlockMode && achievements.length) {
             $(this).addClass('iconHover')
             let form = $(this).attr('form') || $(this).attr('colType')
             let iconNumber = $(this).attr('num') || $(this).attr('col')
-
-            if (form == "swing") return $('#howto').html("Coming soon™")
-            else if (iconNumber == 1 || ((form == "cube") && iconNumber <= 4) || ((form.startsWith('color')) && iconNumber <= 3)) return $('#howto').html("Always unlocked")
-            else if (iconNumber == miniIcon && form == "cube") return $('#howto').html("Legacy mini icon, enable in GD settings")
-            else if (iconNumber == 13 && form == "cube") return $('#howto').html("Click lock on icon kit")
-
-
-            let foundAch = achievements.find(x => x.rewardType == form && x.rewardID == +iconNumber)
-            let foundMerch = shopIcons.find(x => x.type == form && x.icon == +iconNumber)
-
-            if (foundAch) $('#howto').html(foundAch.description.replace("Demon difficulty", "Demon"))
-            else if (foundMerch) $('#howto').html(`Purchase in ${shops[foundMerch.shop]}shop for <ca>${foundMerch.price}</ca> orbs`)
-            else $('#howto').html("<span style='color: #aaaaaa'>(no info available)</span>")
+            $('#howto').html(getUnlockMethod(iconNumber, form) || `<span style='color: #aaaaaa'>(no info available)</span>`)
         }
     })
 
@@ -476,44 +619,49 @@ fetch('./api/icons').then(res => {
         $('#howto').html("<span style='color: #aaaaaa'>(hover over an icon for info)</span>")
     })
 })
+})
 
-    $("#fetchUser").click(function () {
-
+    $("#fetchUser").click(async function () {
         let user = $("#playerName").val()
         if (!user || !user.length) return $("#steal").hide()
 
-        let iconURL = `../icon/${user}?form=${formCopy}`
         $(`.iconTabButton[form=${formCopy}]`).trigger('click')
-        $("#steal").hide()
-        $("#loading").show()
-        $("#result").hide()
-        $("#result").attr('src', iconURL).attr('download', `${user}_${formCopy}.png`)
-        $("#downloadLink").attr('href', iconURL).attr('download', `${user}_${formCopy}.png`)
-        $("#psdLink").attr('href', iconURL + "&psd=1").attr('download', `${user}_${formCopy}.psd`)
-        psdCheck()
         $('#glow').attr('src', '../assets/iconkitbuttons/streak_off.png')
+        $("#steal").hide()
         enableGlow = 0
 
-        fetch('../api/profile/' + user).then(res => res.json())
-        .then(info => {
-            if (info == "-1") return
-            $(`#${formCopy}-${info[formCopy == "cube" ? "icon" : formCopy] || 1}`).trigger('click')
-            $(`#col1-${info.col1}`).trigger('click')
-            $(`#col2-${info.col2}`).trigger('click')
-            $(`#colG-${info.col2}`).trigger('click')
-            $(`#colW-12`).trigger('click')
-            if (info.glow) $('#glowbtn').trigger('click')
-        })
+        let info = await fetch('../api/profile/' + user).then(res => res.json()).catch(e => {})
+        if (info == "-1") info = {}
+
+        $(`#${formCopy}-${Math.min(info[formCopy] || 1, $(`.iconButton[form=${formCopy}]`).length)}`).trigger('click')
+        $(`#col1-${info.col1 || 0}`).trigger('click')
+        $(`#col2-${info.col2 || 3}`).trigger('click')
+        $(`#colG-${info.col2 || 3}`).trigger('click')
+        $(`#colW-12`).trigger('click')
+        $(`#colU-12`).trigger('click')
+        if (info.glow) $('#glowbtn').trigger('click')
 })
 
-document.getElementById("downloadIcon").onmousedown = function(event) {
-    if (event.which == 3) {
-        alert("URL copied to clipboard!");
-        var temp = $("<input>");
-          $("body").append(temp);
-          temp.val('https://gdbrowser.com' + $('#result').attr('src').slice(2)).select();
-          document.execCommand("copy"); temp.remove();
+function getUnlockMethod(iconNumber, form) {
+    if (form == "swing") return "Coming soon™"
+    else if (iconNumber == 0 && form == "icon") return "Legacy mini icon, enable in settings"
+    else if (iconNumber == 1 || ((form == "icon") && iconNumber <= 4) || ((form.startsWith('color')) && iconNumber <= 3)) return "Always unlocked"
+
+    let method = iconStuff.hardcodedUnlocks.find(x => x.form == form && x.id == iconNumber)
+    let foundAch = achievements.find(x => x.rewardType == form && x.rewardID == +iconNumber)
+    let foundMerch = shopIcons.find(x => x.type == form && x.icon == +iconNumber)
+
+    if (method) {
+        switch (method.type) {
+            case "treasureRoom": return `Found in a ${method.keys == 5 ? "large" : "small"} chest in the Treasure Room`
+            case "treasureRoomMilestone": return `Open ${method.chests} chests in the Treasure Room`
+            case "gauntlet": return `Complete the ${method.gauntlet} gauntlet`
+            default: return method.unlock
+        }
     }
+
+    if (foundAch) return foundAch.description.replace("Demon difficulty", "Demon")
+    else if (foundMerch) return `Purchase in ${shops[foundMerch.shop]} for <ca>${foundMerch.price}</ca> orbs`
 }
 
 function backButton() {
@@ -521,11 +669,25 @@ function backButton() {
 	window.location.href = "../../../../../"
 }
 
+$('#animationSpeed').on('input', function() {
+    animationMultiplier = Number($(this).val())
+    $('#animationSpeedBox').val(animationMultiplier)
+    if (icon.complex) icon.animationSpeed = animationMultiplier
+})
+
+$('#animationSpeedBox').change(function() {
+    animationMultiplier = Number(Math.abs(Number($(this).val()) || 1).toFixed(2))
+    if (animationMultiplier > 99) animationMultiplier = 99
+    else if (animationMultiplier <= 0) animationMultiplier = 0.1
+    $('#animationSpeed').val(animationMultiplier)
+    $('#animationSpeedBox').val(animationMultiplier)
+    if (icon.complex) icon.animationSpeed = animationMultiplier
+})
+
 $(document).keydown(function(k) {
-    if (k.keyCode == 13) {
+    if (k.keyCode == 13) { // enter
         if ($("#steal").is(":visible")) $("#fetchUser").trigger('click')
         else if ($(".popup").is(":visible")) return
-        else generateIcon()
     }
     if (k.keyCode == 27) { //esc
         if ($(".popup").is(":visible")) return $('.popup').hide()

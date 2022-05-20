@@ -9,6 +9,15 @@
         },
 
         {
+            "header": "Reverse Engineering",
+            "name": "Wylie",
+            "ign": "TheWylieMaster",
+            "youtube": ["https://youtube.com/c/TheWylieMaster", "youtube"],
+            "twitter": ["https://twitter.com/thewyliemaster", "twitter"],
+            "github": ["https://github.com/Wyliemaster", "github"]
+        },
+
+        {
             "header": "Accurate Leaderboard",
             "name": "XShadowWizardX",
             "youtube": ["https://www.youtube.com/channel/UCaf3-yyZDsAwh1IlYte5VtA", "youtube"],
@@ -23,14 +32,6 @@
             "youtube": ["https://youtube.com/user/stardust19710", "youtube"],
             "twitter": ["https://twitter.com/stadust1971", "twitter"],
             "github": ["https://pointercrate.com", "demonButton"]
-        },
-
-        {
-            "header": "Level Analyzing Help",
-            "name": "Alten",
-            "youtube": ["https://youtube.com/channel/UC9M8hLqh2yZIPSDvpyL7o8g", "youtube"],
-            "twitter": ["https://twitter.com/altenhh", "twitter"],
-            "github": ["https://github.com/Altenhh", "github"]
         },
 
         {
@@ -50,6 +51,15 @@
             "github": ["https://github.com/Alex1304", "github"]
         },
 
+        
+        {
+            "header": "Level Analyzing Help",
+            "name": "Alten",
+            "youtube": ["https://youtube.com/channel/UC9M8hLqh2yZIPSDvpyL7o8g", "youtube"],
+            "twitter": ["https://twitter.com/altenhh", "twitter"],
+            "github": ["https://github.com/Altenhh", "github"]
+        },
+
         {
             "header": "Everything Else",
             "name": "RobTop",
@@ -66,8 +76,8 @@
         "Qufy",
         "Ucrash",
         "ViPriN",
-        "Wylie/TheWylieMaster",
-        "zmxmx",
+        "matcool/mat4",
+        "zmx/qjivxn",
         "101arrowz"
     ]
 }

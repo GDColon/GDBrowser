@@ -1,7 +1,7 @@
 <head>
 	<title>Leaderboard</title>
 	<meta charset="utf-8">
-	<link href="../assets/css/browser.css" type="text/css" rel="stylesheet">
+	<link href="../assets/css/browser.css?v=1" type="text/css" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
 	<link rel="icon" href="../assets/trophy.png">
 	<meta id="meta-title" property="og:title" content="Leaderboards">
@@ -99,10 +99,10 @@
 </div>
 
 </body>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.plugins.min.js"></script>
-<script type="text/javascript" src="../sizecheck.js?"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/6.2.2/browser/pixi.js"></script>
+<script type="text/javascript" src="../iconkit/icon.js"></script>
+<script type="text/javascript" src="../global.js?"></script>
 <script type="text/javascript" src="../dragscroll.js"></script>
 <script>
 
@@ -115,7 +115,7 @@ let trophies = [1, 3, 10, 25, 50, 75, 100]
 let boomColors = ["red", "orange", "yellow", "green", "teal", "blue", "pink"]
 
 let top250Text = 
-`The <cg>Stars</cg> leaderboard contains the <cg>top 250 players</cg>, sorted by <cy>star</cy> value. It was formerly <co>inaccurate</co> but should be much more <cb>reliable</cb> now.`
+`The <cg>Stars</cg> leaderboard contains the <cg>top 100 players</cg>, sorted by <cy>star</cy> value. It was formerly <co>inaccurate</co> but should be much more <cb>reliable</cb> now.`
 
 let topGDPSText = 
 `The <cg>Stars</cg> leaderboard contains the <cg>top players</cg>, sorted by <cy>star</cy> value.`
@@ -167,7 +167,7 @@ function leaderboard(val, leaderboardParams, scrollTo) {
 			})
 		}
 		else {
-			$('#boomling').show()
+			// $('#boomling').show()
 			$('#discordLinks').show()
 		}
 
@@ -192,34 +192,37 @@ function leaderboard(val, leaderboardParams, scrollTo) {
 			if (wp.usercoins) wp.userCoins = wp.userCoins
 
 			$('#searchBox').append(`<div class="searchresult leaderboardSlot"${bgString}>
-				${x.moderator ? `<img title="${x.moderator == 2 ? "Elder " : ""}Moderator" src="../assets/mod${x.moderator == 2 ? "-elder" : ""}.png" style="height: 25%; cursor: help; padding-right: 1.6%; transform: translateY(0.7vh)">` : ""}
-				<h2 class="leaderboardName small inline gdButton" style="margin-top: 1.5%${nameString || (x.moderator == 2 ? "; color: #FF9977;" : "")}"><a href="${onePointNine ? `../search/${x.playerID}?user` : `../u/${x.accountID}.`}" accountID="${x.accountID}">${x.username}</a></h2>
-				<h3 class="inline sideSpace${x.stars >= 100000 ? " yellow" : ""}" style="font-size: 4.5vh${type == "weekly" ? "; display: none" : ""};">${x.stars} <img class="help valign" src="../assets/star.png"
-						style="width: 4vh; transform: translate(-25%, -10%);" title="Stars"></h3>
 
-				<h3 class="lessSpaced leaderboardStats">
-					${type != "weekly" ? "" : `<span${x.stars >= 1000 ? " class='yellow'" : ""}>+${x.stars}</span> <img class="help valign" src="../assets/star.png" title="Star Gain">`}
-					${wk || onePointNine ? "" : `<span${x.diamonds >= 65535 ? ` class='blue'>` : ">"}${x.diamonds}</span> <img class="help valign" src="../assets/diamond.png" title="Diamonds">`}
-					${wk ? "&nbsp;" : `<span${x.coins >= 149 ? " class='yellow'" : ""}>${x.coins}</span> <img class="help valign" src="../assets/coin.png" title="Secret Coins">`}
-					${wk || onePointNine ? "" : `<span${x.userCoins >= 10000 ? " class='brightblue'" : ""}>${x.userCoins}</span> <img class="help valign" src="../assets/silvercoin.png" title="User Coins">`}
-					${wk ? "" : `<span${x.demons >= 1000 ? " class='brightred'" : ""}>${x.demons}</span> <img class="help valign" src="../assets/demon.png" title="Demons">`}
-					${x.cp <= 0 ? "" : `<span${x.cp >= 100 ? " class='yellow'" : ""}>${x.cp}</span> <img class="help valign" src="../assets/cp.png" title="Creator Points">`}
-				</h3>
-
-				<h3 class="lessSpaced leaderboardStats weeklyStuff"}>
-					<span${wp.diamonds >= 250 ? " class='blue'" : ""}>${wp.diamonds >= 0 ? "+" : ""}${wp.diamonds}</span> <img class="help valign" src="../assets/diamond.png" title="Diamond Gain">
-					<span${wp.stars >= 1000 ? " class='yellow'" : ""}>${wp.stars >= 0 ? "+" : ""}${wp.stars}</span> <img class="help valign" src="../assets/star.png" title="Star Gain">
-					<span${wp.userCoins >= 250 ? " class='brightblue'" : ""}>${wp.userCoins >= 0 ? "+" : ""}${wp.userCoins}</span> <img class="help valign" src="../assets/silvercoin.png" title="User Coin Gain">
-					<span${wp.demons >= 25 ? " class='brightred'" : ""}>${wp.demons >= 0 ? "+" : ""}${wp.demons}</span> <img class="help valign" src="../assets/demon.png" title="Demon Gain">
-				</h3>
-			
 				<div class="center ranking">
 					${x.icon.icon == -1 && type == "accurate" ? `<img class="spaced" src="./assets/trophies/${trophies.findIndex(z => y+1 <= z) + 1}.png" height="150%" style="margin-bottom: 0%; transform:scale(1.1)">` : 
-					`<img class="spaced lazyLoad" data-src="./icon/icon?form=${x.icon.form}&icon=${x.icon.icon}&col1=${x.icon.col1}&col2=${x.icon.col2}&glow=${x.icon.glow}&size=auto" height="150%" style="margin-bottom: 0%; transform:scale(1.1);">`}
-					<div style="display: flex; justify-content: center">
-						<h2 class="small" style="margin-top: 1%; transform: scale(${1 - (Math.max(0, String(x.rank).length - 3) * 0.16)})">${x.rank}</h2>
-					</div>
+					`<gdicon dontload="true" class="leaderboardIcon" iconID=${x.icon.icon} cacheID=${x.playerID} iconForm="${x.icon.form}" col1="${x.icon.col1}" col2="${x.icon.col2}" glow="${x.icon.glow}"></gdicon>`}
+					<h2 class="slightlySmaller" style="transform: scale(${1 - (Math.max(0, String(x.rank).length - 1) * 0.1)})">${x.rank}</h2>
 				</div>
+
+				<div class="leaderboardSide">
+					<div class="leaderboardStars">
+						${x.moderator ? `<img title="${x.moderator == 2 ? "Elder " : ""}Moderator" src="../assets/mod${x.moderator == 2 ? "-elder" : ""}.png" style="width: 9%; cursor: help; padding-right: 1.6%; transform: translateY(0.7vh)">` : ""}
+						<h2 class="leaderboardName small inline gdButton" style="margin-top: 1.5%${nameString || (x.moderator == 2 ? "; color: #FF9977;" : "")}"><a href="${onePointNine ? `../search/${x.playerID}?user` : `../u/${x.accountID}.`}" accountID="${x.accountID}">${x.username}</a></h2>
+						<h3 class="inline${x.stars >= 100000 ? " yellow" : ""}" style="margin-left: 4%; margin-top: 2%; font-size: 4.5vh${type == "weekly" ? "; display: none" : ""};">${x.stars} <img class="help valign" src="../assets/star.png"style="width: 4vh; transform: translate(-25%, -10%);" title="Stars"></h3>
+					</div>
+
+					<h3 class="lessSpaced leaderboardStats">
+						${type != "weekly" ? "" : `<span${x.stars >= 1000 ? " class='yellow'" : ""}>+${x.stars}</span> <img class="help valign" src="../assets/star.png" title="Star Gain">`}
+						${wk || onePointNine ? "" : `<span${x.diamonds >= 65535 ? ` class='blue'>` : ">"}${x.diamonds}</span> <img class="help valign" src="../assets/diamond.png" title="Diamonds">`}
+						${wk ? "&nbsp;" : `<span${x.coins >= 149 ? " class='yellow'" : ""}>${x.coins}</span> <img class="help valign" src="../assets/coin.png" title="Secret Coins">`}
+						${wk || onePointNine ? "" : `<span${x.userCoins >= 10000 ? " class='brightblue'" : ""}>${x.userCoins}</span> <img class="help valign" src="../assets/silvercoin.png" title="User Coins">`}
+						${wk ? "" : `<span${x.demons >= 1000 ? " class='brightred'" : ""}>${x.demons}</span> <img class="help valign" src="../assets/demon.png" title="Demons">`}
+						${x.cp <= 0 ? "" : `<span${x.cp >= 100 ? " class='yellow'" : ""}>${x.cp}</span> <img class="help valign" src="../assets/cp.png" title="Creator Points">`}
+					</h3>
+
+					<h3 class="lessSpaced leaderboardStats weeklyStuff"}>
+						<span${wp.diamonds >= 250 ? " class='blue'" : ""}>${wp.diamonds >= 0 ? "+" : ""}${wp.diamonds}</span> <img class="help valign" src="../assets/diamond.png" title="Diamond Gain">
+						<span${wp.stars >= 1000 ? " class='yellow'" : ""}>${wp.stars >= 0 ? "+" : ""}${wp.stars}</span> <img class="help valign" src="../assets/star.png" title="Star Gain">
+						<span${wp.userCoins >= 250 ? " class='brightblue'" : ""}>${wp.userCoins >= 0 ? "+" : ""}${wp.userCoins}</span> <img class="help valign" src="../assets/silvercoin.png" title="User Coin Gain">
+						<span${wp.demons >= 25 ? " class='brightred'" : ""}>${wp.demons >= 0 ? "+" : ""}${wp.demons}</span> <img class="help valign" src="../assets/demon.png" title="Demon Gain">
+					</h3>
+				</div>
+
 			</div>`)
 		})
 
@@ -241,12 +244,12 @@ function leaderboard(val, leaderboardParams, scrollTo) {
 			}
 		}
 
+		lazyLoadIcons()
 		$('#loading').hide();
-		$('.lazyLoad').Lazy({ appendScroll: '#searchBox' });
 	}).catch(e => {console.log(e); $('#loading').hide();})
 }
 
-$('#boomling').attr('src', `../assets/boomlings/${boomColors[Math.floor(Math.random() * boomColors.length)]}.png`)
+// $('#boomling').attr('src', `../assets/boomlings/${boomColors[Math.floor(Math.random() * boomColors.length)]}.png`)
 
 $(document).on('click', '.sortButton', function () {
 	if ($('#loading').is(":visible")) return
@@ -326,7 +329,6 @@ function weeklyAdjust() {
 	let weekEnabled = showWeek && type == "accurate"
 	$('.leaderboardSlot').css('height', weekEnabled ? '33%' : '25%')
 	$('.weeklyStuff').css('display', weekEnabled ? 'block' : 'none')
-	$('.ranking').css('transform', `scale(0.82) translate(-20.7vh, -${weekEnabled ? 24 : 20}vh)`)
 }
 
 $('#weeklyStats').click(function() {
@@ -375,5 +377,18 @@ $(document).keydown(function(k) {
 })
 
 $("#topTabOff").trigger('click')
+
+function lazyLoadIcons() {
+	let newIconFound = false
+	$('gdicon[dontload]').each(function() {
+		if ($(this).isInViewport()) {
+			$(this).removeAttr('dontload')
+			newIconFound = true
+		}
+	})
+	if (newIconFound) renderIcons()
+}
+
+$('#searchBox').scroll(lazyLoadIcons)
 
 </script>
