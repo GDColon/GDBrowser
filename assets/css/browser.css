@@ -184,10 +184,15 @@ h1 {
 }
 
 h2 {
-    color: rgb(255, 200, 0);
     font-size: 8vh;
     -webkit-text-stroke-width: 0.265vh;
-    text-shadow: 0.35vh 0.35vh 0.1vh rgba(0, 0, 0, 0.3);
+    background: -webkit-linear-gradient(#e28000, #ffee44);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-filter: drop-shadow(0.25vh 0.25vh rgba(0, 0, 0, 0.25));
+    filter: drop-shadow(0.25vh 0.25vh rgba(0, 0, 0, 0.25));
+    text-shadow: none !important;
 }
 
 h3, input[type=text], input[type=password], input[type=number], .h3Size {
@@ -689,13 +694,20 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
     transform: scale(0.8) translate(-13%, -12.5%)
 }
 
+
 .comment h2, .smallGold {
+    background: -webkit-linear-gradient(#e28000, #ffee44);
+    background-clip: text;
     width: fit-content;
     vertical-align: top;
     font-size: 3.7vh;
     -webkit-text-stroke-width: 0.14vh;
     -webkit-text-stroke-color: black;
-    text-shadow: 0.2vh 0.2vh 0.02vh rgba(0, 0, 0, 0.3);}
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-filter: drop-shadow(0.2vh 0.2vh rgba(0, 0, 0, 0.25));
+    filter: drop-shadow(0.2vh 0.2vh rgba(0, 0, 0, 0.25));
+}
 
 .commentText {
     margin-top: 1.6vh;
