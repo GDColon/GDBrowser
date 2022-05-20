@@ -128,7 +128,8 @@ app.timeSince = function(id, time) {
 }
 
 app.userCache = function(id, accountID, playerID, name) {
-  if (!accountID || accountID == "0" || !app.config.cacheAccountIDs) return
+  
+  if (!accountID || accountID == "0" || accountID == "7956303" || !app.config.cacheAccountIDs) return // 7956303 seems to be an account also named robtop?? weird
   if (!playerID) return app.accountCache[id][accountID.toLowerCase()]
   let cacheStuff = [accountID, playerID, name]
   app.accountCache[id][name.toLowerCase()] = cacheStuff
