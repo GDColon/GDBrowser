@@ -1,4 +1,4 @@
-const colors = require('../../misc/icons/colors.json');
+const colors = require('../../iconkit/sacredtexts/colors.json');
 
 module.exports = async (app, req, res) => {
 

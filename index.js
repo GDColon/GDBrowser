@@ -17,8 +17,7 @@ app.config = require('./settings.js')
 
 let rlMessage = "Rate limited ¯\\_(ツ)_/¯<br><br>Please do not spam my servers with a crazy amount of requests. It slows things down on my end and stresses RobTop's servers just as much." +
 " If you really want to send a zillion requests for whatever reason, please download the GDBrowser repository locally - or even just send the request directly to the GD servers.<br><br>" +
-"This kind of spam usually leads to GDBrowser getting IP banned by RobTop, and every time that happens I have to start making the rate limit even stricter. Please don't be the reason for that.<br><br>" +
-"(also, keep in mind that most endpoints have a ?count parameter that let you fetch a LOT more stuff in just one request)"
+"This kind of spam usually leads to GDBrowser getting IP banned by RobTop, and every time that happens I have to start making the rate limit even stricter. Please don't be the reason for that.<br><br>"
 
 const RL = rateLimit({
   windowMs: app.config.rateLimiting ? 5 * 60 * 1000 : 0,
@@ -35,20 +34,11 @@ const RL2 = rateLimit({
   keyGenerator: function(req) { return req.headers['x-real-ip'] || req.headers['x-forwarded-for'] }
 })
 
-let forms = { "player": "cube", "bird": "ufo", "dart": "wave" }
-let colorOrder = [0, 1, 2, 3, 16, 4, 5, 6, 13, 7, 8, 9, 29, 10, 14, 11, 12, 17, 18, 15, 27, 32, 28, 38, 20, 33, 21, 34, 22, 39, 23, 35, 24, 36, 25, 37, 30, 26, 31, 19, 40, 41]
-
 let XOR = require('./classes/XOR.js');
-let sampleIcons = require('./misc/sampleIcons.json')
 let achievements = require('./misc/achievements.json')
 let achievementTypes = require('./misc/achievementTypes.json')
-let shopIcons = require('./misc/shops.json')
 let music = require('./misc/music.json')
-
-let colorList = JSON.parse(fs.readFileSync('./misc/icons/colors.json', 'utf8')) // need a clone of this
 let assetPage = fs.readFileSync('./html/assets.html', 'utf8')
-let gdIcons = fs.readdirSync('./assets/previewicons')
-let whiteIcons = fs.readdirSync('./icons').filter(x => x.endsWith("extra_001.png")).map(function (x) { let xh = x.split("_"); return [xh[1] == "ball" ? "ball" : forms[xh[0]] || xh[0], +xh[xh[1] == "ball" ? 2 : 1]]})
 
 app.accountCache = {}
 app.lastSuccess = {}
@@ -138,7 +128,8 @@ app.timeSince = function(id, time) {
 }
 
 app.userCache = function(id, accountID, playerID, name) {
-  if (!accountID || accountID == "0" || !app.config.cacheAccountIDs) return
+  
+  if (!accountID || accountID == "0" || accountID == "7956303" || !app.config.cacheAccountIDs) return // 7956303 seems to be an account also named robtop?? weird
   if (!playerID) return app.accountCache[id][accountID.toLowerCase()]
   let cacheStuff = [accountID, playerID, name]
   app.accountCache[id][name.toLowerCase()] = cacheStuff
@@ -187,9 +178,10 @@ app.clean = function(text) {if (!text || typeof text != "string") return text; e
 // ASSETS
 
 app.use('/assets', express.static(__dirname + '/assets', {maxAge: "7d"}));
-app.use('/assets/css', express.static(__dirname + '/assets/css')); // override maxAge
+app.use('/assets/css', express.static(__dirname + '/assets/css'));
 
-app.get("/sizecheck.js", function(req, res) { res.status(200).sendFile(__dirname + "/misc/sizecheck.js") })
+app.use('/iconkit', express.static(__dirname + '/iconkit'));
+app.get("/global.js", function(req, res) { res.status(200).sendFile(__dirname + "/misc/global.js") })
 app.get("/dragscroll.js", function(req, res) { res.status(200).sendFile(__dirname + "/misc/dragscroll.js") })
 
 app.get("/assets/:dir*?", function(req, res) {
@@ -279,7 +271,6 @@ app.get("/messages", function(req, res) { res.status(200).sendFile(__dirname + "
 app.get("/search", function(req, res) { res.status(200).sendFile(__dirname + "/html/filters.html") })
 app.get("/search/:text", function(req, res) { res.status(200).sendFile(__dirname + "/html/search.html") })
 
-
 // API
 
 app.get("/api/analyze/:id", RL, function(req, res) { app.run.level(app, req, res, true, true) })
@@ -299,7 +290,6 @@ app.get("/api/song/:song", function(req, res){ app.run.song(app, req, res) })
 // REDIRECTS
 
 app.get("/icon", function(req, res) { res.redirect('/iconkit') })
-app.get("/iconkit/:text", function(req, res) { res.redirect('/icon/' + req.params.text) })
 app.get("/obj/:text", function(req, res) { res.redirect('/obj/' + req.params.text) })
 app.get("/leaderboards/:id", function(req, res) { res.redirect('/leaderboard/' + req.params.id) })
 app.get("/profile/:id", function(req, res) { res.redirect('/u/' + req.params.id) })
@@ -318,16 +308,64 @@ app.get("/:id", function(req, res) { app.run.level(app, req, res) })
 
 // MISC
 
-app.get("/icon/:text", function(req, res) { app.run.icon(app, req, res) })
 app.get("/api/userCache", function(req, res) { res.status(200).send(app.accountCache) })
-app.get("/api/achievements", function(req, res) { res.status(200).send({achievements, types: achievementTypes, shopIcons, colors: colorList }) })
+app.get("/api/achievements", function(req, res) { res.status(200).send({achievements, types: achievementTypes, shopIcons: sacredTexts.shops, colors: sacredTexts.colors }) })
 app.get("/api/music", function(req, res) { res.status(200).send(music) })
 app.get("/api/gdps", function(req, res) {res.status(200).send(req.query.hasOwnProperty("current") ? app.safeServers.find(x => req.server.id == x.id) : app.safeServers) })
+
+// important icon stuff
+let sacredTexts = {}
+let iconFormNames = { "player": "icon", "bird": "ufo", "dart": "wave" }
+
+fs.readdirSync('./iconkit/sacredtexts').forEach(x => {
+  sacredTexts[x.split(".")[0]] = require("./iconkit/sacredtexts/" + x)
+})
+
+let previewIcons = fs.readdirSync('./iconkit/premade')
+let previewCounts = {}
+previewIcons.forEach(x => {
+  if (x.endsWith("_0.png")) return
+  let iconType = sacredTexts.forms[x.split("_")[0]].form
+  if (!previewCounts[iconType]) previewCounts[iconType] = 1
+  else previewCounts[iconType]++
+})
+sacredTexts.iconCounts = previewCounts
+
+
 app.get('/api/icons', function(req, res) { 
+  res.status(200).send(sacredTexts);
+});
+
+// important icon kit stuff
+let iconKitFiles = {}
+let sampleIcons = require('./misc/sampleIcons.json')
+fs.readdirSync('./iconkit/extradata').forEach(x => {
+  iconKitFiles[x.split(".")[0]] = require("./iconkit/extradata/" + x)
+})
+
+iconKitFiles.whiteIcons = fs.readdirSync('./iconkit/icons')
+.filter(x => x.endsWith("extra_001.png"))
+.map(function (x) {
+  let xh = x.split("_");
+  return [xh[1] == "ball" ? "ball" : iconFormNames[xh[0]] || xh[0], +xh[xh[1] == "ball" ? 2 : 1]]
+})
+
+iconKitFiles.previewIcons = previewIcons
+
+app.get('/api/iconkit', function(req, res) { 
   let sample = [JSON.stringify(sampleIcons[Math.floor(Math.random() * sampleIcons.length)].slice(1))]
   let iconserver = req.isGDPS ? req.server.name : undefined
-  res.status(200).send({icons: gdIcons, colors: colorList, colorOrder, whiteIcons, server: iconserver, noCopy: req.onePointNine || req.offline, sample});
+  res.status(200).send(Object.assign(iconKitFiles, {sample, server: iconserver, noCopy: req.onePointNine || req.offline}));
 });
+
+app.get('/icon/:text', function(req, res) {
+  let iconID = Number(req.query.icon || 1)
+  let iconForm = sacredTexts.forms[req.query.form] ? req.query.form : "icon"
+  let iconPath = `${iconForm}_${iconID}.png`
+  let fileExists = iconKitFiles.previewIcons.includes(iconPath)
+  if (fileExists) return res.status(200).sendFile(`./iconkit/premade/${iconPath}`, {root: __dirname })
+  else return res.status(200).sendFile(`./iconkit/premade/${iconForm}_01.png`, {root: __dirname})
+})
 
 app.get('*', function(req, res) {
   if (req.path.startsWith('/api')) res.status(404).send('-1')

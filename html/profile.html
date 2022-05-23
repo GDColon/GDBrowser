@@ -1,9 +1,9 @@
 <head>
 	<title>[[USERNAME]]'s Profile</title>
 	<meta charset="utf-8">
-	<link href="../assets/css/browser.css" type="text/css" rel="stylesheet">
+	<link href="../assets/css/browser.css?v=1" type="text/css" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
-	<link rel="icon" href="../icon/icon?form=cube&icon=[[ICON]]&col1=[[COL1]]&col2=[[COL2]]&glow=[[GLOW]]">
+	<link rel="icon" href="">
 	<meta id="meta-title" property="og:title" content="[[USERNAME]]'s profile">
 	<meta id="meta-desc" property="og:description" content="Stars: [[STARS]] | Diamonds: [[DIAMONDS]] | Coins: [[COINS]] | User Coins: [[USERCOINS]] | Demons: [[DEMONS]] | CP: [[CP]]">
 	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/icon/icon?form=cube&icon=[[ICON]]&col1=[[COL1]]&col2=[[COL2]]&glow=[[GLOW]]">
@@ -98,13 +98,13 @@
 		</h3>
 
 		<div class="lightBox center profilePostHide" id="iconsDiv" style="margin: 2% auto; width: 105vh">
-			<img src="../icon/icon?form=cube&icon=[[ICON]]&col1=[[COL1]]&col2=[[COL2]]&glow=[[GLOW]]" title="Cube [[ICON]]">
-			<img src="../icon/icon?form=ship&icon=[[SHIP]]&col1=[[COL1]]&col2=[[COL2]]&glow=[[GLOW]]" title="Ship [[SHIP]]" style="height: 8%">
-			<img src="../icon/icon?form=ball&icon=[[BALL]]&col1=[[COL1]]&col2=[[COL2]]&glow=[[GLOW]]" title="Ball [[BALL]]" >
-			<img src="../icon/icon?form=ufo&icon=[[UFO]]&col1=[[COL1]]&col2=[[COL2]]&glow=[[GLOW]]" title="UFO [[UFO]]">
-			<img src="../icon/icon?form=wave&icon=[[WAVE]]&col1=[[COL1]]&col2=[[COL2]]&glow=[[GLOW]]" title="Wave [[WAVE]]" style="height: 7%">
-			<img src="../icon/icon?form=robot&icon=[[ROBOT]]&col1=[[COL1]]&col2=[[COL2]]&glow=[[GLOW]]" title="Robot [[ROBOT]]" >
-			<img src="../icon/icon?form=spider&icon=[[SPIDER]]&col1=[[COL1]]&col2=[[COL2]]&glow=[[GLOW]]" title="Spider [[SPIDER]]">
+			<gdicon iconID=[[ICON]] iconForm="icon" col1="[[COL1]]" col2="[[COL2]]" glow="[[GLOW]]" id="mainIcon"></gdicon>
+			<gdicon iconID=[[SHIP]] iconForm="ship" col1="[[COL1]]" col2="[[COL2]]" glow="[[GLOW]]" imgStyle="height: 8%"></gdicon>
+			<gdicon iconID=[[BALL]] iconForm="ball" col1="[[COL1]]" col2="[[COL2]]" glow="[[GLOW]]"></gdicon>
+			<gdicon iconID=[[UFO]] iconForm="ufo" col1="[[COL1]]" col2="[[COL2]]" glow="[[GLOW]]"></gdicon>
+			<gdicon iconID=[[WAVE]] iconForm="wave" col1="[[COL1]]" col2="[[COL2]]" glow="[[GLOW]]" imgStyle="height: 7%"></gdicon>
+			<gdicon iconID=[[ROBOT]] iconForm="robot" col1="[[COL1]]" col2="[[COL2]]" glow="[[GLOW]]"></gdicon>
+			<gdicon iconID=[[SPIDER]] iconForm="spider" col1="[[COL1]]" col2="[[COL2]]" glow="[[GLOW]]"></gdicon>
 			<img src="../assets/deatheffects/[[DEATHEFFECT]].png" title="Death Effect [[DEATHEFFECT]]" id="deatheffect">
 		</div>
 
@@ -151,8 +151,10 @@
 </div>
 
 </body>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="../sizecheck.js?"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/6.2.2/browser/pixi.js"></script>
+<script type="text/javascript" src="../iconkit/icon.js"></script>
+<script type="text/javascript" src="../global.js?"></script>
 <script type="text/javascript" src="../dragscroll.js"></script>
 
 <script>
@@ -161,6 +163,14 @@ function clean(text) {return text.replace(/&/g, "&#38;").replace(/</g, "&#60;").
 
 // remove ID from URL
 if (window.location.pathname.endsWith(".")) window.history.pushState({}, null, window.location.origin + `/u/[[USERNAME]]`);
+
+// icons! (god this code sucks)
+renderIcons()
+
+// set favicon
+$('#mainIcon').on('DOMNodeInserted', 'img', function () {
+	$("link[rel='icon']").attr("href", $(this).attr("src"));
+});
 
 let messageText = 'Your <cy>Geometry Dash password</cy> will <cg>not be stored</cg> anywhere on the site, both <ca>locally and server-side.</ca> You can view the code used for profile posts <a class="menuLink" target="_blank" href="https://github.com/GDColon/GDBrowser/blob/master/api/post/postProfileComment.js">here</a>.'
 $('#message').html(messageText)
@@ -240,49 +250,48 @@ $('#userInfo').html($('#userInfo').html()
 .replace("[[COMMENTS]]", commentMode) + (messages == "friends" ? "<br style='line-height: 69%'><a target='_blank' style='color: lime' class='youCanClickThis2' href='../messages?sendTo=[[USERNAME]]'>Send message</a><br>(if friended)" : ""))
 
 function appendComments() {
+	if (loadingComments) return;
+	else loadingComments = true;
 
-if (loadingComments) return;
-else loadingComments = true;
+	$('#statusDiv').html(`<div class="supercenter" id="loading" style="height: 12%; top: 62%;"><img class="spin noSelect" src="../assets/loading.png" height="105%"></div>`)
 
-$('#statusDiv').html(`<div class="supercenter" id="loading" style="height: 12%; top: 62%;"><img class="spin noSelect" src="../assets/loading.png" height="105%"></div>`)
+	if (page == 0) $('#pageDown').hide()
+	else $('#pageDown').show()
 
-if (page == 0) $('#pageDown').hide()
-else $('#pageDown').show()
+	Fetch(`../api/comments/[[ACCOUNTID]]?type=profile&page=${page}`).then(res => {
 
-fetch(`../api/comments/[[ACCOUNTID]]?type=profile&page=${page}`).then(res => res.json()).then(res => {
+		if (res.length != 10) $('#pageUp').hide()
+		else $('#pageUp').show()
 
-	if (res.length != 10) $('#pageUp').hide()
-	else $('#pageUp').show()
+		if (res == "-1") return $('#loading').hide()
 
-	if (res == "-1") return $('#loading').hide()
-
-	res.forEach(x => {
-		$('#statusDiv').append(`
-			<div class="commentBG">
-				<div class="comment">
-					<img class="inline statusIcon" src="../icon/icon?form=cube&icon=[[ICON]]&col1=[[COL1]]&col2=[[COL2]]&glow=[[GLOW]]&size=auto" height=21% style="display: ${compactMode ? "inline-block" : "none"}; margin-right: 0.8%">
-					<h2 class="inline">[[USERNAME]]</h2>
-					<div class="commentAlign">
-						<p class="pre commentText" style="color: rgb(${"[[USERNAME]]" == "RobTop" ? "50, 255, 255" : "[[MODERATOR]]" == "2" ? "75, 255, 75" : x.browserColor ? "255, 180, 255" : "255, 255, 255"})">${clean(x.content)}</p>
+		res.forEach(x => {
+			$('#statusDiv').append(`
+				<div class="commentBG">
+					<div class="comment">
+						<img class="inline statusIcon" src="${$('#mainIcon').find('img').attr('src') || ""}" height=21% style="display: ${compactMode ? "inline-block" : "none"}; margin-right: 0.8%">
+						<h2 class="inline">[[USERNAME]]</h2>
+						<div class="commentAlign">
+							<p class="pre commentText" style="color: rgb(${"[[USERNAME]]" == "RobTop" ? "50, 255, 255" : "[[MODERATOR]]" == "2" ? "75, 255, 75" : x.browserColor ? "255, 180, 255" : "255, 255, 255"})">${clean(x.content)}</p>
+						</div>
 					</div>
-				</div>
-				<p class="commentDate">${x.date}</p>
-				<div class="commentLikes">
-					<img id="likeImg" class="likeComment gdButton inline" commentID="${x.ID}" ${x.likes < 0 ? "style='transform: translateY(25%)'" : ""} src="../assets/${x.likes < 0 ? "dis" : ""}like.png" height=20% style="margin-right: 0.4%">
-					<h3 class="inline">${x.likes}</h3><br>
-				</div>
-			</div>`)
-	})
+					<p class="commentDate">${x.date}</p>
+					<div class="commentLikes">
+						<img id="likeImg" class="likeComment gdButton inline" commentID="${x.ID}" ${x.likes < 0 ? "style='transform: translateY(25%)'" : ""} src="../assets/${x.likes < 0 ? "dis" : ""}like.png" height=20% style="margin-right: 0.4%">
+						<h3 class="inline">${x.likes}</h3><br>
+					</div>
+				</div>`)
+		})
 
-	$('.commentText').each(function() {
-	if ($(this).text().length > 100) {
-	let overflow = ($(this).text().length - 100) * 0.01
-	$(this).css('font-size', (3.5 - (overflow)) + 'vh')
-	}
-});
-$('#loading').hide()
-})
-loadingComments = false;
+		$('.commentText').each(function() {
+		if ($(this).text().length > 100) {
+		let overflow = ($(this).text().length - 100) * 0.01
+		$(this).css('font-size', (3.5 - (overflow)) + 'vh')
+		}
+	});
+	$('#loading').hide()
+	})
+	loadingComments = false;
 }
 
 let page = 0
@@ -362,7 +371,7 @@ $('#submitVote').click(function() {
 		$('.postbutton').hide()
 		allowEsc = false
 
-	fetch(`../api/profile/${username}`).then(res => res.json()).then(res => {
+	Fetch(`../api/profile/${username}`).then(res => {
 		if (!res || res == "-1") {allowEsc = true; $('.postbutton').show(); return $('#likeMessage').text("The username you provided doesn't exist!")}
 		else accountID = res.accountID
 

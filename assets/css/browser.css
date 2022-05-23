@@ -178,17 +178,21 @@ h1 {
     color: white;
     font-size: 6vh;
     line-height: 100%;
-    overflow: hidden;
     white-space: nowrap;
     -webkit-text-stroke-width: 0.25vh;
     text-shadow: 0.375vh 0.375vh 0vh rgba(0, 0, 0, 0.3);
 }
 
 h2 {
-    color: rgb(255, 200, 0);
     font-size: 8vh;
     -webkit-text-stroke-width: 0.265vh;
-    text-shadow: 0.35vh 0.35vh 0.1vh rgba(0, 0, 0, 0.3);
+    background: -webkit-linear-gradient(#e28000, #ffee44);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-filter: drop-shadow(0.25vh 0.25vh rgba(0, 0, 0, 0.25));
+    filter: drop-shadow(0.25vh 0.25vh rgba(0, 0, 0, 0.25));
+    text-shadow: none !important;
 }
 
 h3, input[type=text], input[type=password], input[type=number], .h3Size {
@@ -338,14 +342,16 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 }
 
 .brownBox {
-    border: 2.5vh solid transparent;
+    border-width: 2.5vh;
+    border-style: solid;
     border-radius: 3vh;
     background-color: #995533;
     border-image: url('../../assets/brownbox.png') 10% round;
 }
 
 .blueBox {
-    border: 2.5vh solid transparent;
+    border-width: 2.5vh;
+    border-style: solid;
     border-radius: 3vh;
     background-color: #334499;
     border-image: url('../../assets/bluebox.png') 10% round;
@@ -354,7 +360,8 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 .fancybox {
     width: 69vh;
     padding: 1vh 3vh;
-    border: 3.5vh solid transparent;
+    border-width: 3.5vh;
+    border-style: solid;
     border-radius: 3vh;
     background-color: #001931;
     border-image: url('../../assets/fancybox.png') 10% stretch;
@@ -366,14 +373,18 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 }
 
 .epicbox {
-    border: 3.5vh solid transparent;
+
+    border-width: 3.5vh;
+    border-style: solid;
     border-image: url('../../assets/epicbox.png') 20% stretch;
     border-image-slice: 85 77;
     border-image-width: 9.5vh;
 }
 
 .leaderboardBox {
-    border: 3.5vh solid transparent;
+
+    border-width: 3.5vh;
+    border-style: solid;
     border-image: url('../../assets/leaderboardbox.png') 20% stretch;
     border-image-slice: 85 77;
     border-image-width: 9.5vh;
@@ -690,13 +701,20 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
     transform: scale(0.8) translate(-13%, -12.5%)
 }
 
+
 .comment h2, .smallGold {
+    background: -webkit-linear-gradient(#e28000, #ffee44);
+    background-clip: text;
     width: fit-content;
     vertical-align: top;
     font-size: 3.7vh;
     -webkit-text-stroke-width: 0.14vh;
     -webkit-text-stroke-color: black;
-    text-shadow: 0.2vh 0.2vh 0.02vh rgba(0, 0, 0, 0.3);}
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-filter: drop-shadow(0.2vh 0.2vh rgba(0, 0, 0, 0.25));
+    filter: drop-shadow(0.2vh 0.2vh rgba(0, 0, 0, 0.25));
+}
 
 .commentText {
     margin-top: 1.6vh;
@@ -726,10 +744,9 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 .commentPercent {
     vertical-align: top;
-    margin: 0 0 0 1vh;
+    margin: 0 0 0 1.5vh;
     font-size: 2vh;
     color: rgba(0, 0, 0, 0.5);
-    transform: translateY(40%);
 }
 
 .commentLikes {
@@ -743,8 +760,54 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
     transform: translateY(-19%)
 }
 
+.commentIcon {
+    margin-right: 1.25%;
+    width: 3.5%;
+}
+
+.commentIcon img {
+    width: 100%;
+}
+
+.commentRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.creditsIcon {
+    height: 30%;
+    margin-bottom: 7%;
+}
+
+.creditsIcon img {
+    height: 100%;
+}
+
+.specialThanksIcon img {
+    width: 42%;
+    height: unset;
+}
+
 .leaderboardSlot {
     height: 25%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding-left: 0%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.leaderboardName {
+    margin-right: 2.5%;
+}
+
+.leaderboardStars {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .weeklyStuff {
@@ -752,10 +815,38 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 }
 
 .ranking {
-    transform:scale(0.82) translate(-20.7vh, -20vh);
-    position: absolute;
-    height: 10%;
-    width: 12.5%;
+    display: flex;
+    padding-left: 5%;
+    padding-right: 2%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 88%;
+    width: 10%
+}
+
+.ranking h2 {
+    width: 100%;
+    margin-top: 2%;
+}
+
+.leaderboardIcon {
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+}
+
+.leaderboardIcon img {
+    height: 80%;
+    max-width: 150%;
+}
+
+.leaderboardSide {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 0.5%
 }
 
 #collectibles, .leaderboardStats {
@@ -769,12 +860,16 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 }
 
 .leaderboardStats {
+    display: flex;
     margin-top: 2%;
+    width: 100%;
+    align-items: center;
 }
 
 .leaderboardStats img {
-    transform: translate(-20%, -7%);
     width: 4.3%;
+    margin-left: 1%;
+    margin-right: 2.5%;
 }
 
 #boomling {

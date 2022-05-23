@@ -1,3 +1,9 @@
+hi, this is colon from the future.
+
+what the FUCK was wrong with me back then???? seriously this is some of the worst code i've ever seen
+
+welp, here's the readme. but you've been warned,,,
+
 
 # GDBrowser
 
@@ -84,9 +90,6 @@ This is where all the backend stuff happens! Yipee!
 
 They're all fairly similar. Fetch something, parse the response, and serve it in a crisp and non-intimidating JSON. This is probably what you came for.
 
-  
-
-The odd one out is icon.js, which is for generating GD icons. The code here is horrendous, so apologies in advance. Improvements to it would be greatly appreciated! (and i will love you forever)
 
   
 
@@ -126,20 +129,6 @@ XOR.js encrypts/decrypts stuff like GD passwords
 
 The HTML files! Nothing too fancy, since it can all be seen directly from gdbrowser. Note that profile.html and level.html (and some parts of home.html) have [[VARIABLES]] (name, id, etc) replaced by the server when they're sent.
 
-  
-
-comingsoon.html was used while the site was still in development, I just left it in there as a nice little throwback
-
-  
-
-## Icons
-It's GJ_Gamesheet02 but split into a much more intimidating cluster of a million files. These icons are put together and colored in the monstrosity that is icon.js
-| name | description |
-|:----:|:-----------:|
-|`parseIconPlist.js`| Reads GJ_GameSheet02-uhd.plist and magically transforms it into gameSheet.json. Props to 101arrowz for helping make this |
-| `colors.json` | List of the player colors in GD. Fairly straight forward |
-| `forms.json` | List of the different icon forms, their ingame filenames, and their index in responses from the GD servers
-| `offsets.json` | A bunch of hardcoded offsets. Desperate times call for desperate measures |
 
 ## Misc
 
@@ -169,15 +158,10 @@ Inevitable misc folder
 | `achievementTypes.json` | An object containing different categories of achievements (stars, shards, vault, etc) and how to identify them |
 | `credits.json` | Credits! (shown on the homepage) | 
 | `dragscroll.js` | Used on several pages for drag scrolling |
+| `global.js` | Excecuted on most pages. Used for the 'page isn't wide enough' message, back button, icons, and a few other things |
 | `music.json` | An array of the official GD tracks (name, artist) |
-| `parseAchievementPlist.js` | A script that reads GD's achievement .plist files and converts it into achievements.json |
 | `sampleIcons.json` | A pool of icons, one of which will randomly appear when visiting the icon kit. Syntax is [Name, ID, Col1, Col2, Glow] |
 | `secretStuff.json` | GJP goes here, needed for level leaderboards. Not included in the repo for obvious reasons |
-| `settings.js` | Tweak small settings here, mainly for local use or GDPS'es |
-| `shops.js` | A hardcoded list of all the shop icons in GD |
-| `sizecheck.js` | Excecuted on most pages. Used for the 'page isn't wide enough' message, back button, and a few other things |
-
-  
 
 ---
 

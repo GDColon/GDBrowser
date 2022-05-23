@@ -36,7 +36,7 @@ h1 {
   text-shadow: 3px 3px 0.5px rgba(0, 0, 0, 0.3);
 }
 
-h2 {
+h2, select, input[type=number] {
   font-weight: normal;
   margin: 0 0;
   font-size: 35px;
@@ -89,13 +89,6 @@ input:focus, select:focus, textarea:focus, button:focus {
   outline: none;
  }
 
- input:not([type='checkbox']), select {
-  padding: 7 7 7 7;
-  font-size: 14px;
-  width: 15%;
-  border-style: 1px inset black;
- }
-
  input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active {
   box-shadow: 0 0 0px 1000px #764F1A inset !important;
   -webkit-box-shadow: 0 0 0px 1000px #764F1A inset !important;
@@ -114,6 +107,18 @@ input:focus, select:focus, textarea:focus, button:focus {
   text-align: left;
   font-size: 18px;
   font-family: "Roboto";
+}
+
+#iconbox {
+  display: flex;
+  max-height: 175px;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+#result {
+  object-fit: contain;
+  z-index: -1;
 }
 
 #textbox {
@@ -170,12 +175,6 @@ input:focus, select:focus, textarea:focus, button:focus {
 .configbox select {
   width: 95%;
   text-transform: capitalize;
-}
-
-.squareIcon {
-  background-color: rgba(0, 0, 0, 0.2);
-  padding: 5px 5px;
-  border-radius: 10px;
 }
 
 #url {
@@ -238,7 +237,7 @@ input:focus, select:focus, textarea:focus, button:focus {
 
 #generate {
   font-family: "Roboto";
-  border: transparent;
+  border: rgba(0, 0, 0, 0);
   background-color: #88FF33;
   box-shadow: 2px 2px 3px #66AA22;
   border-radius: 10px;
@@ -259,7 +258,7 @@ input:focus, select:focus, textarea:focus, button:focus {
 
 .miniButton {
   font-family: "Roboto";
-  border: transparent;
+  border: rgba(0, 0, 0, 0);
   background-color: #88FF33;
   box-shadow: 1.5px 1.5px 2px #66AA22;
   border-radius: 10px;
@@ -282,16 +281,36 @@ input:focus, select:focus, textarea:focus, button:focus {
   width: 800px;
   overflow-x: hidden;
   display: block;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
   margin: 0 auto 0 auto;
   background-color: rgba(0, 0, 0, 0.3);
   border-radius: 8px;
 }
 
+.iconContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0px 25px;
+}
+
+.iconContainer button {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.iconContainer button img {
+  width: 50px;
+}
+
 .iconKit button, .colTypes button {
   margin: 0 0 0 0;
-  padding: 0 0 0 0;
-  border: 5px solid transparent;
+  padding: 0px 0px;
+  border: 5px solid rgba(0, 0, 0, 0); /* need this for border image to work */
+  user-select: none;
 }
 
 .iconSelected {
@@ -301,6 +320,11 @@ input:focus, select:focus, textarea:focus, button:focus {
 .iconTabButton, .glowToggle, .copyForm {
   margin: 0 5 0 5;
   transition: transform .1s ease-in-out;
+  user-select: none;
+}
+
+.iconTabButton:focus-visible, .glowToggle:focus-visible, .copyForm:focus-visible, .menuButton:focus-visible, .postButton:focus-visible {
+  transform: scale(1.1);
 }
 
 .colorPicker {
@@ -342,6 +366,7 @@ input:focus, select:focus, textarea:focus, button:focus {
 
 #colors {
   width: 1000px;
+  max-width: 90%;
   overflow-x: auto;
   padding: 10 10 10 10;
   background-color: rgba(0, 0, 0, 0.7);
@@ -349,7 +374,7 @@ input:focus, select:focus, textarea:focus, button:focus {
 
 #colors::-webkit-scrollbar, #iconKitParent::-webkit-scrollbar {
   width: 9px;
-  height: 9px;
+  height: 10px;
   background: rgba(0, 0, 0, 0.5); 
 }
 
@@ -358,30 +383,35 @@ input:focus, select:focus, textarea:focus, button:focus {
 }
 
 #iconKitParent {
+  min-height: 90px;
   max-height: 210px;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-}
-
-#iconKitParent div {
-  margin-top: -5;
 }
 
 #colors div {
   display: flex;
 }
 
+.iconColor div {
+  width: 50px;
+  height: 50px; 
+}
+
 #gdfloor {
   margin-bottom: 15px;
-  margin-top: 0px;
+  margin-top: 1px;
   border: 0;
   height: 3px;
   width: 80%;
   background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+  position: relative;
+  z-index: -10;
 }
 
 .menuButton {
   margin: 0 5 0 5;
   transition: transform .15s ease-in-out;
+  user-select: none;
 }
 
 .menuButton:hover {
@@ -394,21 +424,23 @@ input:focus, select:focus, textarea:focus, button:focus {
 
 #iconprogressbar {
   background: rgba(0, 0, 0, 0.5); 
-  height: 12px;
+  height: 7px;
+  margin-bottom: 12px;
 }
 
 #iconloading {
   background: rgba(255, 255, 255, 0.5); 
-  height: 12px;
+  height: 7px;
   width: 0%;
 }
 
-.iconScroll::-webkit-scrollbar  {
+body::-webkit-scrollbar  {
+  display: none;
   width: 0;
-  background: transparent;
+  background: rgba(0, 0, 0, 0);
 }
 
-.iconHover {
+.iconHover, .iconButton:focus-visible, .iconColor:focus-visible {
   transform: scale(1.075);
   background-color: rgb(255, 255, 255, 0.2);
   border-radius: 10px;
@@ -425,7 +457,7 @@ input:focus, select:focus, textarea:focus, button:focus {
 }
 
 .brownBox {
-  border: 17px solid transparent;
+  border: 17px solid rgba(0, 0, 0, 0);
   border-radius: 25px;
   background-color: #995533;
   border-image: url('../../assets/brownbox.png') 10% round;
@@ -446,7 +478,7 @@ input[type=text] {
   color: white;
   letter-spacing: 0.02em;
   text-shadow: -0.2vh -0.2vh 0vh #000, 0.2vh -0.2vh 0vh #000, -0.2vh 0.2vh 0vh #000, 0.2vh 0.2vh 0vh #000;
-  border: 0 solid transparent;
+  border: none;
   border-radius: 15px;
   background-color: rgba(0, 0, 0, 0.3);
   white-space: nowrap;
@@ -456,6 +488,22 @@ input[type=text]::placeholder {
   color: #6F98D8;
   font-size: 40px;
   text-shadow: -0.15vh -0.15vh 0vh #000, 0.15vh -0.15vh 0vh #000, -0.15vh 0.15vh 0vh #000, 0.15vh 0.15vh 0vh #000;
+}
+
+input[type=number] {
+  border: none;
+  border-radius: 7px;
+  height: 50px;
+  width: 100px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  white-space: nowrap;
+  -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 input[type=checkbox] {
@@ -478,12 +526,105 @@ input[type=checkbox]:checked + label.gdcheckbox {
   background-image: url(../../assets/check-on.png);
 }
 
+#settingList {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+}
+
+#settingList div {
+  width: 200px;
+}
+
+#settingList .gdCheckbox {
+  margin: 0px 0px 5px 0px;
+}
+
+.animationSelector {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.animationSelector select {
+  border-radius: 7px;
+  border: none;
+  outline: none;
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 300px;
+  height: 45px;
+  font-size: 32px;
+  padding-left: 7px;
+  cursor: pointer;
+}
+
+.animationSelector option {
+  color: black;
+  font-size: 20px;
+  font-family: aller, helvetica, arial;
+  letter-spacing: unset;
+  -webkit-text-stroke-width: unset;
+  -webkit-text-stroke-color: unset;
+  text-shadow: unset;
+}
+
+.animationSelector h2 {
+  width: unset
+}
+
+input[type="range"] {
+  background-color: rgba(0, 0, 0, 0);
+  appearance: none !important;
+  height: 20px;
+  min-height: 20px;
+  border: 1px solid;
+  cursor: pointer;
+  border-image: url(../../assets/slider_track.png);
+  border-image-slice: 21 22 22 21;
+  border-image-width: 30px 30px 30px 30px;
+  margin-right: 20px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none !important;
+  height: 45px;
+  width: 45px;
+  background-image: url("../../assets/slider_thumb.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+input[type="range"]::-webkit-slider-thumb:active { background-image: url("../../assets/slider_thumb_active.png"); }
+
+#extraInfo {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  min-width: 220px;
+}
+
+#extraInfo div {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  margin-bottom: 8px;
+  align-items: center;
+}
+
+#extraInfo p {
+  color: white;
+  font-size: 24px;
+  margin: 0px 0px 0px 0px;
+}
+
 .bounce {
   animation: boxAnimator 0.25s;
 }
 
-.grayscale {
+.greyedOut {
   filter: grayscale(100%) brightness(0.7);
+  pointer-events: none;
 }
 
 .gold {
@@ -500,6 +641,10 @@ input[type=checkbox]:checked + label.gdcheckbox {
 
 .inline {
   display: inline-block;
+}
+
+@media screen and (max-width: 1100px) {
+  .hideIfSmall { display: none !important; }
 }
 
 .spin {
