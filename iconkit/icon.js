@@ -18,7 +18,7 @@ function positionPart(part, partIndex, layer, formName, isGlow) {
         let tintInfo = iconData.robotAnimations.info[formName].tints
         let foundTint = tintInfo[partIndex]
         if (foundTint > 0) {
-            let darkenFilter = new PIXI.filters.ColorMatrixFilter();
+            let darkenFilter = new PIXI.filters.ColorMatrixFilter()
             darkenFilter.brightness(0)
             darkenFilter.alpha = (255 - foundTint) / 255
             layer.filters = [darkenFilter]
@@ -26,9 +26,10 @@ function positionPart(part, partIndex, layer, formName, isGlow) {
     }
 }
 
-function validNum(val, defaultVal) {
+function sanitizeNum(val, defaultVal) {
     let colVal = +val
-    return isNaN(colVal) ? defaultVal : colVal
+    //yes, it also checks for NaN
+    return isFinite(colVal) ? colVal : defaultVal
 }
 
 function getGlowColor(colors) {
@@ -37,8 +38,8 @@ function getGlowColor(colors) {
     return glowCol
 }
 
-function validateIconID(id, form) {
-    let realID = Math.min(iconData.iconCounts[form], Math.abs(validNum(id, 1)))
+function sanitizeIconID(id, form) {
+    let realID = Math.min(iconData.iconCounts[form], Math.abs(sanitizeNum(id, 1)))
     if (realID == 0 && !["player", "player_ball"].includes(form)) realID = 1
     return realID
 }
@@ -47,7 +48,7 @@ function parseIconColor(col) {
     if (!col) return WHITE
     else if (typeof col == "string" && col.length >= 6) return parseInt(col, 16)
     let rgb = iconData.colors[col]
-    return rgb ? rgbToDecimal(rgb) : WHITE;
+    return rgb ? rgb2Pac(rgb) : WHITE
 }
 
 function parseIconForm(form) {
@@ -56,35 +57,41 @@ function parseIconForm(form) {
 }
 
 function loadIconLayers(form, id, cb) {
-    let texturesToLoad = Object.keys(iconData.gameSheet).filter(x => x.startsWith(`${form}_${padZero(validateIconID(id, form))}_`))
-    loader.add(texturesToLoad.filter(x => !loader.resources[x]).map(x => ({ name: x, url: `/iconkit/icons/${x}` })))
+    let texturesToLoad = Object.keys(iconData.gameSheet)
+        .filter(x => x.startsWith(`${form}_${padZero(sanitizeIconID(id, form))}_`))
+    loader.add(texturesToLoad
+        .filter(x => !loader.resources[x])
+        .map(x => ({ name: x, url: `/iconkit/icons/${x}` }))
+    )
     loader.load(cb)
 }
 
-function padZero(num) {
-    let numStr = num.toString()
-    if (num < 10) numStr = "0" + numStr
-    return numStr
-}
+function padZero(num) { return num.toString().padStart(2, "0") }
 
-function rgbToDecimal(rgb) {
-    return (rgb.r << 16) + (rgb.g << 8) + rgb.b;
-}
+/*
+name explanation:
+`Number`s are not decimals, because they are not `String`s, and the internal representation is binary.
+This means "rgbToDecimal" is a misleading name.
+Converting independent color components into one number is called "color packing".
+So I thougth it would be funny to rename "rgbToPacked" into "rgb2Pac".
+Alternative names could be "rgbPacker" or "packRGB", IDK
+*/
+function rgb2Pac(rgb) { return (rgb.r << 16) | (rgb.g << 8) | rgb.b }
 
 class Icon {
     constructor(data={}, cb) {
         this.app = data.app
-        this.sprite = new PIXI.Container();
+        this.sprite = new PIXI.Container()
         this.form = data.form || "player"
-        this.id = validateIconID(data.id, this.form)
+        this.id = sanitizeIconID(data.id, this.form)
         this.colors = {
-            "1": validNum(data.col1, 0xafafaf),    // primary
-            "2": validNum(data.col2, WHITE),       // secondary
-            "g": validNum(data.colG, validNum(+data.colg, null)), // glow
-            "w": validNum(data.colW, validNum(+data.colw, WHITE)), // white
-            "u": validNum(data.colU, validNum(+data.colu, WHITE)), // ufo
+            "1": sanitizeNum(data.col1, 0xafafaf),    // primary
+            "2": sanitizeNum(data.col2, WHITE),       // secondary
+            "g": sanitizeNum(data.colG, sanitizeNum(+data.colg, null)), // glow
+            "w": sanitizeNum(data.colW, sanitizeNum(+data.colw, WHITE)), // white
+            "u": sanitizeNum(data.colU, sanitizeNum(+data.colu, WHITE)), // ufo
         }
-                
+
         this.glow = !!data.glow
         this.layers = []
         this.glowLayers = []
@@ -107,17 +114,17 @@ class Icon {
                 x.name = iconData.robotAnimations.info[this.form].names[y]
                 let part = new IconPart(this.form, this.id, this.colors, false, { part: x, skipGlow: true })
                 positionPart(x, y, part.sprite, this.form)
-    
+
                 let glowPart = new IconPart(this.form, this.id, this.colors, true, { part: x, onlyGlow: true })
                 positionPart(x, y, glowPart.sprite, this.form, true)
                 glowPart.sprite.visible = this.glow
                 this.glowLayers.push(glowPart)
-    
+
                 this.layers.push(part)
                 this.sprite.addChild(part.sprite)
             })
-    
-            let fullGlow = new PIXI.Container();
+
+            let fullGlow = new PIXI.Container()
             this.glowLayers.forEach(x => fullGlow.addChild(x.sprite))
             this.sprite.addChildAt(fullGlow, 0)
             if (typeof Ease !== "undefined") this.ease = new Ease.Ease()
@@ -134,14 +141,16 @@ class Icon {
 
     getAllLayers() {
         let allLayers = [];
-        (this.complex ? this.glowLayers : []).concat(this.layers).forEach(x => x.sections.forEach(s => allLayers.push(s)))
+        (this.complex ? this.glowLayers : [])
+            .concat(this.layers)
+            .forEach(x => x.sections.forEach(s => allLayers.push(s)))
         return allLayers
     }
 
     setColor(colorType, newColor, extra={}) {
         let colorStr = String(colorType).toLowerCase()
-        if (!colorType || !Object.keys(this.colors).includes(colorStr)) return
-        else this.colors[colorStr] = newColor
+        if (!colorType || this.colors[colorStr] === undefined) return
+        this.colors[colorStr] = newColor
         let newGlow = getGlowColor(this.colors)
         this.getAllLayers().forEach(x => {
             if (colorType != "g" && x.colorType == colorStr) x.setColor(newColor)
@@ -153,13 +162,9 @@ class Icon {
         }
     }
 
-    formName() {
-        return formNames[this.form] || this.form
-    }
+    formName() { return formNames[this.form] || this.form }
 
-    isGlowing() {
-        return this.glowLayers[0].sprite.visible
-    }
+    isGlowing() { return this.glowLayers[0].sprite.visible }
 
     setGlow(toggle) {
         this.glow = !!toggle
@@ -201,9 +206,9 @@ class Icon {
 
             let bothSections = [section, glowSection]
             bothSections.forEach((x, y) => {
-                let easing = this.ease.add(x.sprite, movementData, { duration: duration || 1, ease: 'linear' })
+                let easing = this.ease.add(x.sprite, movementData, { duration: duration || 1, ease: "linear" })
                 let continueAfterEase = animData.frames.length > 1 && y == 0 && index == 0 && animName == this.animationName
-                if (continueAfterEase) easing.on('complete', () => {
+                if (continueAfterEase) easing.on("complete", () => {
                     this.animationFrame++
                     if (this.animationFrame >= animData.frames.length) {
                         if (animData.info.loop) this.animationFrame = 0
@@ -217,7 +222,7 @@ class Icon {
     autocrop() {
         // find actual icon size by reading pixel data (otherwise there's whitespace and shit)
         let spriteSize = [Math.round(this.sprite.width), Math.round(this.sprite.height)]
-        let pixels = this.app.renderer.plugins.extract.pixels(this.sprite);
+        let pixels = this.app.renderer.plugins.extract.pixels(this.sprite)
         let xRange = [spriteSize[0], 0]
         let yRange = [spriteSize[1], 0]
 
@@ -245,7 +250,7 @@ class Icon {
             xRange[1] += 4
             yRange[1] += 6
         }
-        
+
         let realWidth = xRange[1] - xRange[0]
         let realHeight = yRange[1] - yRange[0]
 
@@ -264,29 +269,29 @@ class Icon {
 
     toDataURL(dataType="image/png") {
         this.autocrop()
-        this.app.renderer.render(this.app.stage);
-        let b64data = this.app.view.toDataURL(dataType);
+        this.app.renderer.render(this.app.stage)
+        let b64data = this.app.view.toDataURL(dataType)
         this.revertCrop()
         return b64data
     }
 
     pngExport() {
         let b64data = this.toDataURL()
-        let downloader = document.createElement('a');
+        let downloader = document.createElement("a")
         downloader.href = b64data
-        downloader.setAttribute("download", `${this.formName()}_${this.id}.png`);
-        document.body.appendChild(downloader);
-        downloader.click();
-        document.body.removeChild(downloader);
+        downloader.setAttribute("download", `${this.formName()}_${this.id}.png`)
+        document.body.appendChild(downloader)
+        downloader.click()
+        document.body.removeChild(downloader)
     }
 
     copyToClipboard() {
         this.autocrop()
-        this.app.renderer.render(app.stage);
+        this.app.renderer.render(app.stage)
         this.app.view.toBlob(blob => {
-            let item = new ClipboardItem({ "image/png": blob });
-            navigator.clipboard.write([item]); 
-        });
+            let item = new ClipboardItem({ "image/png": blob })
+            navigator.clipboard.write([item])
+        })
         this.revertCrop()
 
     }
@@ -304,10 +309,10 @@ class Icon {
         function addPSDLayer(layer, parent, sprite) {
             allLayers.forEach(x => x.sprite.alpha = 0)
             layer.sprite.alpha = 255
-        
+
             let layerChild = { name: layer.colorName, canvas: renderer.plugins.extract.canvas(sprite) }
             if (layer.colorType == "g") {
-                if (parent.part) layerChild.name = parent.part.name + " glow"
+                if (parent.part) layerChild.name = `${parent.part.name} glow`
                 else layerChild.blendMode = "linear dodge"
                 if (!complex && !glowing) layerChild.hidden = true
             }
@@ -332,13 +337,13 @@ class Icon {
 
         allLayers.forEach(x => x.sprite.alpha = 255)
         let output = agPsd.writePsd(psd)
-        let blob = new Blob([output]);
-        let downloader = document.createElement('a');
-        downloader.href = URL.createObjectURL(blob);
-        downloader.setAttribute("download", `${this.formName()}_${this.id}.psd`);
-        document.body.appendChild(downloader);
-        downloader.click();
-        document.body.removeChild(downloader); 
+        let blob = new Blob([output])
+        let downloader = document.createElement("a")
+        downloader.href = URL.createObjectURL(blob)
+        downloader.setAttribute("download", `${this.formName()}_${this.id}.psd`)
+        document.body.appendChild(downloader)
+        downloader.click()
+        document.body.removeChild(downloader)
         this.setGlow(glowing)
     }
 }
@@ -349,11 +354,11 @@ class IconPart {
         if (colors[1] == 0 && !misc.skipGlow) glow = true // add glow if p1 is black
 
         let iconPath = `${form}_${padZero(id)}`
-        let partString = misc.part ? "_" + padZero(misc.part.part) : ""
+        let partString = misc.part ? `_${padZero(misc.part.part)}` : ""
         let sections = {}
         if (misc.part) this.part = misc.part
 
-        this.sprite = new PIXI.Container();
+        this.sprite = new PIXI.Container()
         this.sections = []
 
         if (!misc.skipGlow) {
@@ -376,11 +381,23 @@ class IconPart {
             }
         }
 
-        let layerOrder = ["glow", "ufo", "col2", "col1", "white"].map(x => sections[x]).filter(x => x)
-        layerOrder.forEach(x => {
+        let layerOrder = ["glow", "ufo", "col2", "col1", "white"]
+        for (let x of layerOrder) {
+            x = sections[x]
+            if (!x) continue
             this.sections.push(x)
             this.sprite.addChild(x.sprite)
-        })
+        }/*
+        if the compiler doesn't optimize enough,
+        this would iterate 3 times and make shallow copies of the array each call.
+
+        layerOrder.map(x => sections[x])
+            .filter(x => x)
+            .forEach(x => {
+                this.sections.push(x)
+                this.sprite.addChild(x.sprite)
+            })
+        */
     }
 }
 
@@ -399,7 +416,7 @@ class IconLayer {
     }
 
     setColor(color) {
-        this.color = validNum(color, WHITE)
+        this.color = sanitizeNum(color, WHITE)
         this.sprite.tint = this.color
     }
 }
