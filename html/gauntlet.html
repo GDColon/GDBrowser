@@ -107,9 +107,9 @@
     $(".dots").hide()
 
     if (!gauntlets[gauntlet - 1]) {
-        window.location.href = "../gauntlets"
         $('#loading').hide()
         loading = false
+        window.location.href = `../search/*?gauntlet=${gauntlet}`
     }
 
     let container = $("#everything")[0]
