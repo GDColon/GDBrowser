@@ -1,0 +1,170 @@
+<head>
+    <title id="tabTitle">Gauntlet</title>
+    <meta charset="utf-8">
+    <link href="../assets/css/browser.css" type="text/css" rel="stylesheet">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
+    <link rel="icon" href="../assets/coin.png">
+    <meta id="meta-title" property="og:title" content="Gauntlet">
+    <meta id="meta-desc" property="og:description" content="View the 5 levels in a Gauntlet!">
+    <meta id="meta-image" name="og:image" itemprop="image" content="../coin.png">
+    <meta name="twitter:card" content="summary">
+</head>
+
+<body class="darkBG" onbeforeunload="saveUrl()">
+
+<div id="everything" style="overflow: auto;">
+
+    <div style="position: absolute; height: 100%; width: 100%;">
+        <img class="dots" src="../assets/gauntlet-dots.png" style="position: absolute; left: 21vw;">
+        <img class="dots" src="../assets/gauntlet-dots.png" style="transform:scaleX(-1); position: absolute; left: 39vw;">
+        <img class="dots" src="../assets/gauntlet-dots.png" style="position: absolute; left: 57.5vw;">
+        <img class="dots" src="../assets/gauntlet-dots.png" style="transform:scaleX(-1); position: absolute; left: 75vw;">
+    </div>
+    <div style="position: absolute; height: 100%; width: 100%; background: rgba(0, 0, 0, 0.6)"></div>
+
+    <div class="supercenter" style="top: 7%; width: 100%; text-align: center">
+        <h2 id="title">Gauntlet</h2>
+    </div>
+
+    <div style="position:absolute; top: 2%; left: 1.5%; width: 10%; height: 25%; pointer-events: none">
+        <img class="gdButton yesClick" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()">
+    </div>
+
+    <div class="supercenter" id="loading" style="height: 10%; top: 47%; display: none;">
+        <img class="spin noSelect" src="../assets/loading.png" height="105%">
+    </div>
+
+    <div id="levels">
+
+    </div>
+
+</div>
+
+</body>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="../global.js?"></script>
+<script type="text/javascript" src="../dragscroll.js"></script>
+<style>
+    #levels {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        flex-wrap: wrap;
+        position: absolute;
+        top: 20%;
+        width: 100%;
+    }
+    .dots {
+        top: 35%;
+        height: 31%;
+    }
+    .gauntlet-level {
+        position: relative;
+        width: 18vw;
+    }
+    .gauntlet-level.down {
+        top: 27vh;
+    }
+    .level-text {
+        font-family: "Pusab", sans-serif;
+        -webkit-text-stroke-width: 0.25vh;
+        -webkit-text-stroke-color: black;
+    }
+    .level-last {
+        position: absolute;
+        width: 6vw;
+        right: 5.5vw;
+        top: 9vh;
+    }
+    .level-text.name {
+        margin: 0 0 5px 0;
+        font-size: 30px;
+        width: 100%;
+        position: relative;
+        text-align: center;
+        overflow: hidden;
+    }
+    .level-text.stars {
+        position: relative;
+        margin: 5px 0;
+        font-size: 40px;
+    }
+    .level-star {
+        margin: -4px -12px;
+        height: 42px;
+    }
+    .level-img {
+        height: 11vw;
+    }
+</style>
+<script>
+    let url = new URL(window.location.href)
+    let gauntlet = location.pathname.replace('/gauntlet/', "")
+    let loading = false
+    let gauntlets = ["Fire", "Ice", "Poison", "Shadow", "Lava", "Bonus", "Chaos", "Demon", "Time", "Crystal", "Magic", "Spike", "Monster", "Doom", "Death"]
+
+    $(".dots").hide()
+
+    if (!gauntlets[gauntlet - 1]) {
+        window.location.href = "../gauntlets"
+        $('#loading').hide()
+        loading = false
+    }
+
+    let container = $("#everything")[0]
+    container.style.backgroundImage = `url("../assets/gauntlets/bg/${gauntlet}.png")`
+    container.style.backgroundSize = "cover"
+    container.style.backgroundPosition = "0 92%"
+
+    let searchFilters = `../api/search/*?gauntlet=${gauntlet}`
+
+    function clean(text) {return (text || "").toString().replace(/&/g, "&#38;").replace(/</g, "&#60;").replace(/>/g, "&#62;").replace(/=/g, "&#61;").replace(/"/g, "&#34;").replace(/'/g, "&#39;")}
+    let hostMatch = window.location.host.match(/\./g)
+
+    function Append(firstLoad, noCache) {
+
+        loading = true;
+        $('#loading').show()
+
+        Fetch(searchFilters).then(appendLevels).catch(e => $('#loading').hide())
+
+        function appendLevels(res) {
+
+            if (res == '-1' || res.length == 0) { $('#loading').hide(); return loading = false }
+
+            $(".dots").show()
+
+            res.forEach((x, y) => {
+                $("#levels").append(`<a href="../${x.id}" class="gauntlet-level gdButton${y % 2 ? "" : " down"}">
+<p class="level-text name">${x.name}</p>
+<img class="level-img" src="../assets/gauntlets/${gauntlets[gauntlet - 1].toLowerCase()}.png">
+${y == 4 ? '<img class="level-last" src="../assets/skull.png">' : ""}
+<p class="level-text stars">${x.stars}
+<img class="level-star" src="../assets/gauntlet-star.png"></p>
+</a>`)
+            })
+
+            $('#loading').hide()
+            loading = false;
+        }
+    }
+
+    Append(true)
+
+    document.title = `${gauntlets[gauntlet - 1]} Gauntlet`
+    $('#title').html(`${gauntlets[gauntlet - 1]} Gauntlet`)
+    $('#meta-desc').attr('content',  `View the 5 levels in the ${(gauntlets[parseInt(gauntlet) - 1] || "Unknown") + " Gauntlet"}!`)
+
+    $('.closeWindow').click(function() {$(".popup").attr('style', 'display: none;')})
+
+    $(document).keydown(function(k) {
+        if (loading) return;
+
+        if ($('#pageDiv').is(':visible')) {
+            if (k.which == 13) $('#pageJump').trigger('click') //enter
+            else return;
+        }
+    })
+
+</script>
