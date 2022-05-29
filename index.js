@@ -24,7 +24,7 @@ const RL = rateLimit({
   max: app.config.rateLimiting ? 100 : 0, // max requests per 5 minutes
   message: rlMessage,
   keyGenerator: function(req) { return req.headers['x-real-ip'] || req.headers['x-forwarded-for'] },
-  skip: function(req) { return ((req.url.includes("api/level") && !req.query.hasOwnProperty("download")) ? true : false) }
+  skip: function(req) { return (req.url.includes("api/level") && !req.query.hasOwnProperty("download")) }
 })
 
 const RL2 = rateLimit({
@@ -173,7 +173,7 @@ app.parseResponse = function (responseBody, splitter=":") {
 }
 
 //xss bad
-app.clean = function(text) {if (!text || typeof text != "string") return text; else return text.replace(/&/g, "&#38;").replace(/</g, "&#60;").replace(/>/g, "&#62;").replace(/=/g, "&#61;").replace(/"/g, "&#34;").replace(/'/g, "&#39;")}
+app.clean = function(text) {return !text || typeof text != "string" ? text : text.replace(/./gs, c => {"&": "&#38;", "<": "&#60;", ">": "&#62;", "=": "&#61;", '"': "&#34;", "'": "&#39;"}[c] || c)}
 
 // ASSETS
 
