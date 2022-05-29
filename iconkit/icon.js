@@ -127,7 +127,7 @@ class Icon {
             let fullGlow = new PIXI.Container()
             this.glowLayers.forEach(x => fullGlow.addChild(x.sprite))
             this.sprite.addChildAt(fullGlow, 0)
-            if (typeof Ease !== "undefined") this.ease = new Ease.Ease()
+            if (typeof Ease != "undefined") this.ease = new Ease.Ease()
             this.animationSpeed = Math.abs(Number(data.animationSpeed) || 1)
             if (data.animation) this.setAnimation(data.animation, data.animationForm)
         }
@@ -149,7 +149,7 @@ class Icon {
 
     setColor(colorType, newColor, extra={}) {
         let colorStr = String(colorType).toLowerCase()
-        if (!colorType || this.colors[colorStr] === undefined) return
+        if (!colorType || !Object.hasOwn(this.colors, colorStr)) return
         this.colors[colorStr] = newColor
         let newGlow = getGlowColor(this.colors)
         this.getAllLayers().forEach(x => {
