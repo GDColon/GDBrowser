@@ -317,13 +317,13 @@ input:focus, select:focus, textarea:focus, button:focus {
   border-image: url('../../assets/select.png') 10 stretch !important;
 }
 
-.iconTabButton, .glowToggle, .copyForm {
+.iconTabButton, .glowToggle, .copyForm, .miscFormButton {
   margin: 0 5 0 5;
   transition: transform .1s ease-in-out;
   user-select: none;
 }
 
-.iconTabButton:focus-visible, .glowToggle:focus-visible, .copyForm:focus-visible, .menuButton:focus-visible, .postButton:focus-visible {
+.iconTabButton:focus-visible, .glowToggle:focus-visible, .copyForm:focus-visible, .menuButton:focus-visible, .postButton:focus-visible, .miscFormButton:focus-visible {
   transform: scale(1.1);
 }
 
@@ -360,7 +360,7 @@ input:focus, select:focus, textarea:focus, button:focus {
   margin: 18 10 0 10 !important;
 }
 
-.iconTabButton:active, .glowToggle:active, .copyForm:active {
+.iconTabButton:active, .glowToggle:active, .copyForm:active, .miscFormButton:active {
   transform:scale(1.05)
 }
 
