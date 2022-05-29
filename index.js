@@ -173,7 +173,7 @@ app.parseResponse = function (responseBody, splitter=":") {
 }
 
 //xss bad
-app.clean = function(text) {return !text || typeof text != "string" ? text : text.replace(/./gs, c => {"&": "&#38;", "<": "&#60;", ">": "&#62;", "=": "&#61;", '"': "&#34;", "'": "&#39;"}[c] || c)}
+app.clean = function(text) {return !text || typeof text != "string" ? text : text.replace(/./gs, c => ({"&": "&#38;", "<": "&#60;", ">": "&#62;", "=": "&#61;", '"': "&#34;", "'": "&#39;"}[c] || c))}
 
 // ASSETS
 
