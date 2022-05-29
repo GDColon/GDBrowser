@@ -80,8 +80,8 @@ app.use(async function(req, res, next) {
   if (req.query.online > 0) req.offline = false
 
   req.gdParams = function(obj={}, substitute=true) {
-    Object.keys(app.config.params).forEach(x => { if (!obj[x]) obj[x] = app.config.params[x] })
-    Object.keys(req.server.extraParams || {}).forEach(x => { if (!obj[x]) obj[x] = req.server.extraParams[x] })
+    Object.keys(app.config.params).forEach(x => obj[x] ||= app.config.params[x])
+    Object.keys(req.server.extraParams || {}).forEach(x => obj[x] ||= req.server.extraParams[x])
     let ip = req.headers['x-real-ip'] || req.headers['x-forwarded-for']
     let params = {form: obj, headers: app.config.ipForwarding && ip ? {'x-forwarded-for': ip, 'x-real-ip': ip} : {}}
 
