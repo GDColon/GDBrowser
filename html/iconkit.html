@@ -6,7 +6,7 @@
     <meta property="og:description" content="Build and save your very own Geometry Dash icons, right from the internet!">
     <meta property="og:title" content="Geometry Dash Online Icon Kit">
     <meta property="og:type" content="website">
-    <meta name="og:image" itemprop="image" content="https://gdbrowser.com/iconkitbuttons/iconkit.png">
+    <meta name="og:image" itemprop="image" content="https://gdbrowser.com/assets/icon.png">
     <meta name="theme-color" content="#CCFF55">
     <meta name="twitter:card" content="summary">
     <link rel="icon" href="../assets/icon.png">
@@ -396,7 +396,7 @@ fetch('../api/iconkit').then(res => res.json()).then(iconKitData => {
 
         $(document).on('click', '.iconTabButton', function () {
             let form = $(this).attr('form')
-            let forms = '#' + form + 's'
+            let formElement = '#' + form + 's'
 
             currentForm = form
 
@@ -409,18 +409,22 @@ fetch('../api/iconkit').then(res => res.json()).then(iconKitData => {
 
             $('#iconKitParent').each(function(x, y) { $(this).children().not('#iconprogressbar').hide() })
 
-            if ($(forms).html() == "") appendIcon(filterIcon(form), form)
+            if ($(formElement).html() == "") appendIcon(filterIcon(form), form)
             
-            $(forms).show()
+            $(formElement).show()
         })
 
         $('#iconTabs').find('.iconTabButton').first().children().first().attr('src', $('.iconTabButton').first().children().first().attr('src').replace('_off', '_on'))
 
         $("#randomIcon").click(function() {
 
+            let iconPool = iconStuff.previewIcons.concat(enableSpoilers ? iconStuff.newPreviewIcons : [])
+            let pickedIcon = iconPool[Math.floor(Math.random() * iconPool.length)].split(".")[0].split("_")
+            let [randomForm, randomID] = pickedIcon
+
             let colorCount = Object.keys(iconStuff.colors).length
-            selectedForm = forms[Math.floor(Math.random() * forms.length)]
-            selectedIcon = randInt(1, iconStuff.previewIcons.filter(x => x.startsWith(selectedForm)).length)
+            selectedForm = randomForm
+            selectedIcon = randomID
             selectedCol1 = randInt(0, colorCount - 1)
             selectedCol2 = randInt(0, colorCount - 1)
             selectedColW = null
@@ -670,7 +674,7 @@ fetch('../api/iconkit').then(res => res.json()).then(iconKitData => {
 })
 
 function getUnlockMethod(iconNumber, form) {
-    if (form == "swing") return "Coming soon™"
+    if (form == "swing" || form == "jetpack") return "Coming soon™"
     else if (iconNumber == 0 && form == "icon") return "Legacy mini icon, enable in settings"
     else if (iconNumber == 1 || ((form == "icon") && iconNumber <= 4) || ((form.startsWith('color')) && iconNumber <= 3)) return "Always unlocked"
 
