@@ -5639,10 +5639,6 @@
     "spriteOffset": [0, 0],
     "spriteSize": [136, 128]
   },
-  "player_149_glow_001.png": {
-    "spriteOffset": [0, 0],
-    "spriteSize": [128, 128]
-  },
   "player_14_glow_001.png": {
     "spriteOffset": [0, 0],
     "spriteSize": [129, 128]
@@ -6366,21 +6362,5 @@
   "ship_51_glow_001.png": {
     "spriteOffset": [4, 3],
     "spriteSize": [184, 110]
-  },
-  "swing_01_001.png": {
-    "spriteOffset": [0, 0],
-    "spriteSize": [139, 128]
-  },
-  "swing_01_2_001.png": {
-    "spriteOffset": [0, 0],
-    "spriteSize": [139, 128]
-  },
-  "swing_01_extra_001.png": {
-    "spriteOffset": [0, 0],
-    "spriteSize": [139, 128]
-  },
-  "swing_01_glow_001.png": {
-    "spriteOffset": [1, 0],
-    "spriteSize": [139, 128]
   }
 }
