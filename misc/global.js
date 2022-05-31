@@ -102,7 +102,6 @@ function buildIcon(elements, current) {
 	loadIconLayers(iconConfig.form, iconConfig.id, function(a, b, c) {
 		if (c) iconConfig.new = true
 		new Icon(iconConfig, function(icon) {
-			console.log(icon)
 			let dataURL = icon.toDataURL()
 			let titleStr = `${Object.values(iconData.forms).find(x => x.form == icon.form).name} ${icon.id}`
 			if (cacheID) renderedIcons[cacheID] = {name: titleStr, data: dataURL}
