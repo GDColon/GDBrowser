@@ -459,7 +459,6 @@ class IconPart {
 class IconLayer {
     constructor(path, color, colorType, isNew) {
         let loadedTexture = isNew ? loadedNewIcons[path] : loader.resources[path]
-        if (colorType == "u") console.log(isNew)
         this.offsets = iconData.gameSheet[path] || { spriteOffset: [0, 0] }
         this.sprite = new PIXI.Sprite(loadedTexture ? isNew ? loadedTexture : loadedTexture.texture : PIXI.Texture.EMPTY)
 
