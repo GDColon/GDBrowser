@@ -129,7 +129,7 @@ app.timeSince = function(id, time) {
 
 app.userCache = function(id, accountID, playerID, name) {
   
-  if (!accountID || accountID == "0" || accountID == "7956303" || !app.config.cacheAccountIDs) return // 7956303 seems to be an account also named robtop?? weird
+  if (!accountID || accountID == "0" || (name && name.toLowerCase() == "robtop" && accountID != "71") || !app.config.cacheAccountIDs) return
   if (!playerID) return app.accountCache[id][accountID.toLowerCase()]
   let cacheStuff = [accountID, playerID, name]
   app.accountCache[id][name.toLowerCase()] = cacheStuff
@@ -315,13 +315,14 @@ app.get("/api/gdps", function(req, res) {res.status(200).send(req.query.hasOwnPr
 
 // important icon stuff
 let sacredTexts = {}
-let iconFormNames = { "player": "icon", "bird": "ufo", "dart": "wave" }
 
 fs.readdirSync('./iconkit/sacredtexts').forEach(x => {
   sacredTexts[x.split(".")[0]] = require("./iconkit/sacredtexts/" + x)
 })
 
 let previewIcons = fs.readdirSync('./iconkit/premade')
+let newPreviewIcons = fs.readdirSync('./iconkit/newpremade')
+
 let previewCounts = {}
 previewIcons.forEach(x => {
   if (x.endsWith("_0.png")) return
@@ -331,6 +332,18 @@ previewIcons.forEach(x => {
 })
 sacredTexts.iconCounts = previewCounts
 
+let newIcons = fs.readdirSync('./iconkit/newicons')
+sacredTexts.newIcons = []
+let newIconCounts = {}
+newIcons.forEach(x => {
+  if (x.endsWith(".plist")) {
+    sacredTexts.newIcons.push(x.split("-")[0])
+    let formName = x.split(/_\d/g)[0]
+    if (!newIconCounts[formName]) newIconCounts[formName] = 1
+    else newIconCounts[formName]++
+  }
+})
+sacredTexts.newIconCounts = newIconCounts
 
 app.get('/api/icons', function(req, res) { 
   res.status(200).send(sacredTexts);
@@ -343,14 +356,8 @@ fs.readdirSync('./iconkit/extradata').forEach(x => {
   iconKitFiles[x.split(".")[0]] = require("./iconkit/extradata/" + x)
 })
 
-iconKitFiles.whiteIcons = fs.readdirSync('./iconkit/icons')
-.filter(x => x.endsWith("extra_001.png"))
-.map(function (x) {
-  let xh = x.split("_");
-  return [xh[1] == "ball" ? "ball" : iconFormNames[xh[0]] || xh[0], +xh[xh[1] == "ball" ? 2 : 1]]
-})
-
 iconKitFiles.previewIcons = previewIcons
+iconKitFiles.newPreviewIcons = newPreviewIcons
 
 app.get('/api/iconkit', function(req, res) { 
   let sample = [JSON.stringify(sampleIcons[Math.floor(Math.random() * sampleIcons.length)].slice(1))]
@@ -368,7 +375,7 @@ app.get('/icon/:text', function(req, res) {
 })
 
 app.get('*', function(req, res) {
-  if (req.path.startsWith('/api')) res.status(404).send('-1')
+  if (req.path.startsWith('/api') || req.path.startsWith("/iconkit")) res.status(404).send('-1')
   else res.redirect('/search/404%20')
 });
 
