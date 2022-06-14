@@ -29,8 +29,8 @@ function backButton() {
 			sessionStorage.getItem('prevUrl') === window.location.href.replace('?download', '')
 			? -2 : -1
 		)
-        window.history.go(steps)
-    }
+		window.history.go(steps)
+	}
 	else window.location.href = "../../../../../"
 }
 
@@ -52,12 +52,11 @@ let allowEsc = true
 let popupEsc = true
 
 $(document).keydown(function(k) {
-	if (k.keyCode == 27) { //esc
-		if (!allowEsc) return
-		k.preventDefault()
-		if (popupEsc && $('.popup').is(":visible")) $('.popup').hide();
-		else $('#backButton').trigger('click')
-	}
+	const ESC = 27
+	if (k.keyCode != ESC || !allowEsc) return;
+	k.preventDefault()
+	if (popupEsc && $('.popup').is(":visible")) $('.popup').hide();
+	else $('#backButton').trigger('click')
 });
 
 let iconData = null
@@ -126,32 +125,31 @@ while ($(this).scrollTop() != 0)
 
 
 $(document).ready(function() {
-	$(window).trigger('resize');
-});
+	$(window).trigger('resize')
+})
 
 // Adds all necessary elements into the tab index (all buttons and links that aren't natively focusable)
-const inaccessibleLinkSelector = "*:not(a) > img.gdButton, .leaderboardTab, .gdcheckbox, .diffDiv, .lengthDiv";
+const inaccessibleLinkSelector = "*:not(a) > img.gdButton, .leaderboardTab, .gdcheckbox, .diffDiv, .lengthDiv"
 
-document.querySelectorAll(inaccessibleLinkSelector).forEach(elem => {
-  elem.setAttribute('tabindex', 0);
-})
+document.querySelectorAll(inaccessibleLinkSelector)
+	.forEach(elem => { elem.setAttribute('tabindex', 0) })
 
 document.getElementById('backButton')?.setAttribute('tabindex', 1); // Prioritize back button, first element to be focused
 
 // Event listener to run a .click() function if
 window.addEventListener("keydown", e => {
-  if(e.key !== 'Enter') return;
+	if(e.key !== 'Enter') return
 
-  const active = document.activeElement;
-  const isUnsupportedLink = active.hasAttribute('tabindex'); // Only click on links that aren't already natively supported to prevent double clicking
-  if(isUnsupportedLink) active.click();
+	const active = document.activeElement
+	const isUnsupportedLink = active.hasAttribute('tabindex') // Only click on links that aren't already natively supported to prevent double clicking
+	if(isUnsupportedLink) active.click();
 })
 
 // stolen from stackoverflow
 $.fn.isInViewport = function () {
-    let elementTop = $(this).offset().top;
-    let elementBottom = elementTop + $(this).outerHeight();
-    let viewportTop = $(window).scrollTop();
-    let viewportBottom = viewportTop + $(window).height();
-    return elementBottom > viewportTop && elementTop < viewportBottom;
-};
+	let elementTop = $(this).offset().top
+	let elementBottom = elementTop + $(this).outerHeight()
+	let viewportTop = $(window).scrollTop()
+	let viewportBottom = viewportTop + $(window).height()
+	return elementBottom > viewportTop && elementTop < viewportBottom
+}
