@@ -7,8 +7,9 @@ const loadedNewIcons = {}
 
 let positionMultiplier = 4
 function positionPart(part, partIndex, layer, formName, isNew, isGlow) {
-    layer.position.x += (part.pos[0] * positionMultiplier * (isNew ? 0.5 : 1))
-    layer.position.y -= (part.pos[1] * positionMultiplier * (isNew ? 0.5 : 1))
+    let truePosMultiplier = positionMultiplier / (isNew ? 2 : 1)
+    layer.position.x += (part.pos[0] * truePosMultiplier)
+    layer.position.y -= (part.pos[1] * truePosMultiplier)
     layer.scale.x = part.scale[0]
     layer.scale.y = part.scale[1]
     if (part.flipped[0]) layer.scale.x *= -1
@@ -22,7 +23,7 @@ function positionPart(part, partIndex, layer, formName, isNew, isGlow) {
         if (foundTint > 0) {
             let darkenFilter = new PIXI.filters.ColorMatrixFilter()
             darkenFilter.brightness(0)
-            darkenFilter.alpha = (255 - foundTint) / 255
+            darkenFilter.alpha = (255 - foundTint) / 255 // same as `1 - foundTint / 0xff`
             layer.filters = [darkenFilter]
         }
     }
@@ -124,7 +125,7 @@ function parseNewPlist(data) {
                 let textureArr = keyData.slice(1, -1).split("},{").map(x => parseWeirdArray(x))
                 positionData[frameName].pos = textureArr[0]
                 positionData[frameName].size = textureArr[1]
-            }  
+            }
         }
 
         if (isRotated) positionData[frameName].size.reverse()
@@ -160,9 +161,9 @@ class Icon {
         this.colors = {
             "1": sanitizeNum(data.col1, 0xafafaf),    // primary
             "2": sanitizeNum(data.col2, WHITE),       // secondary
-            "g": sanitizeNum(data.colG, sanitizeNum(+data.colg, null)), // glow
-            "w": sanitizeNum(data.colW, sanitizeNum(+data.colw, WHITE)), // white
-            "u": sanitizeNum(data.colU, sanitizeNum(+data.colu, WHITE)), // ufo
+            "g": sanitizeNum(data.colG, sanitizeNum(data.colg, null)), // glow
+            "w": sanitizeNum(data.colW, sanitizeNum(data.colw, WHITE)), // white
+            "u": sanitizeNum(data.colU, sanitizeNum(data.colu, WHITE)), // ufo
         }
 
         this.glow = !!data.glow
@@ -188,7 +189,7 @@ class Icon {
 
                 let part = new IconPart(this.form, this.id, this.colors, false, { part: x, skipGlow: true, new: this.new })
                 positionPart(x, y, part.sprite, this.form, this.new)
-    
+
                 let glowPart = new IconPart(this.form, this.id, this.colors, true, { part: x, onlyGlow: true, new: this.new })
                 positionPart(x, y, glowPart.sprite, this.form, this.new, true)
 
@@ -265,7 +266,7 @@ class Icon {
         animData.frames[this.animationFrame].forEach((newPart, index) => {
             let section = this.layers[index]
             let glowSection = this.glowLayers[index]
-            let truePosMultiplier = this.new ? positionMultiplier * 0.5 : positionMultiplier
+            let truePosMultiplier = positionMultiplier / (this.new ? 2 : 1)
             if (!section) return
 
             // gd is weird with negative rotations
@@ -371,7 +372,7 @@ class Icon {
     }
 
     psdExport() {
-        if (typeof agPsd === "undefined") throw new Error("ag-psd not imported!")
+        if (typeof agPsd == "undefined") throw new Error("ag-psd not imported!")
         let glowing = this.isGlowing()
         this.setGlow(true)
 
@@ -461,9 +462,8 @@ class IconPart {
             if (!x) continue
             this.sections.push(x)
             this.sprite.addChild(x.sprite)
-        }/*
-        if the compiler doesn't optimize enough,
-        this would iterate 3 times and make shallow copies of the array each call.
+        }
+        /* alternative:
 
         layerOrder.map(x => sections[x])
             .filter(x => x)
