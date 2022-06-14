@@ -7,9 +7,10 @@ const loadedNewIcons = {}
 
 const TAU = Math.PI * 2
 //by default, converts degrees to rads
-const toRadians = (angle, perigon = 360) => TAU / perigon * angle
+const toRadians = (angle, scale = 360) => TAU / scale * angle
 //by default, converts rad to deg
-const fromRadians = (rad, perigon = 360) => rad / (TAU / perigon)
+const fromRadians = (rad, scale = 360) => rad / (TAU / scale)
+//`scale` is the num of subdivisions in a cycle. More info: https://en.wikipedia.org/wiki/Turn_(angle)
 
 let positionMultiplier = 4
 function positionPart(part, partIndex, layer, formName, isNew, isGlow) {
