@@ -6,11 +6,12 @@ const loader = PIXI.Loader.shared
 const loadedNewIcons = {}
 
 const TAU = Math.PI * 2
-//by default, converts degrees to rads
+// by default, converts degrees to rads
 const toRadians = (angle, scale = 360) => TAU / scale * angle
-//by default, converts rad to deg
+// by default, converts rad to deg
 const fromRadians = (rad, scale = 360) => rad / (TAU / scale)
-//`scale` is the num of subdivisions in a cycle. More info: https://en.wikipedia.org/wiki/Turn_(angle)
+// `scale` is the num of subdivisions in a cycle. More info: https://en.wikipedia.org/wiki/Turn_(angle)
+// `scale = 400` corresponds to gradians, `256` to byte radians, and `100` to percentage of a turn
 
 let positionMultiplier = 4
 function positionPart(part, partIndex, layer, formName, isNew, isGlow) {
@@ -38,7 +39,7 @@ function positionPart(part, partIndex, layer, formName, isNew, isGlow) {
 
 function sanitizeNum(val, defaultVal) {
     let colVal = +val
-    //yes, it also checks for NaN
+    // yes, it also checks for NaN
     return isFinite(colVal) ? colVal : defaultVal
 }
 

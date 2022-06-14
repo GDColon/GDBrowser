@@ -10,26 +10,27 @@ $('body').append(`
 
 
 $(window).resize(function () {
-	if (window.innerHeight > window.innerWidth - 75) { 
-		$('#everything').hide(); 
-		$('#tooSmall').show();
-	}
-	else { 
-		$('#everything').show(); 
-		$('#tooSmall').hide() 
-	}
+	//these alternatives maybe helpful: https://stackoverflow.com/a/4917796
+	let portrait = window.innerHeight > window.innerWidth - 75
+	$('#everything')[portrait ? 'hide' : 'show']()
+	$('#tooSmall')[portrait ? 'show' : 'hide']()
 });
 
+let isDownloadURL = () => window.location.href.endsWith('?download')
+
 function saveUrl() {
-	if (window.location.href.endsWith('?download')) return;
-	sessionStorage.setItem('prevUrl', window.location.href);
+	if ( !isDownloadURL() ) sessionStorage.setItem('prevUrl', window.location.href);
 }
 
 function backButton() {
-	if (window.history.length > 1 && document.referrer.startsWith(window.location.origin)){
-            if (window.location.href.endsWith('?download') && sessionStorage.getItem('prevUrl') === window.location.href.replace('?download', '')) window.history.go(-2);
-            else window.history.back()
-        }
+	if (window.history.length > 1 && document.referrer.startsWith(window.location.origin)) {
+		let steps = (
+			isDownloadURL() &&
+			sessionStorage.getItem('prevUrl') === window.location.href.replace('?download', '')
+			? -2 : -1
+		)
+        window.history.go(steps)
+    }
 	else window.location.href = "../../../../../"
 }
 
@@ -47,14 +48,14 @@ function Fetch(link) {
 	})
 }
 
-let allowEsc = true;
-let popupEsc = true;
+let allowEsc = true
+let popupEsc = true
 
 $(document).keydown(function(k) {
 	if (k.keyCode == 27) { //esc
 		if (!allowEsc) return
 		k.preventDefault()
-		if (popupEsc && $('.popup').is(":visible")) $('.popup').hide();   
+		if (popupEsc && $('.popup').is(":visible")) $('.popup').hide();
 		else $('#backButton').trigger('click')
 	}
 });
@@ -71,9 +72,9 @@ async function renderIcons() {
 	if (overrideLoader) return
 	let iconsToRender = $('gdicon:not([rendered], [dontload])')
 	if (iconsToRender.length < 1) return
-	if (!iconData) iconData = await Fetch("../api/icons")
-	if (!iconCanvas) iconCanvas = document.createElement('canvas')
-	if (!iconRenderer) iconRenderer = new PIXI.Application({ view: iconCanvas, width: 300, height: 300, backgroundAlpha: 0});
+	iconData ||= await Fetch("../api/icons")
+	iconCanvas ||= document.createElement('canvas')
+	iconRenderer ||= new PIXI.Application({ view: iconCanvas, width: 300, height: 300, backgroundAlpha: 0});
 	if (loader.loading) return overrideLoader = true
 	buildIcon(iconsToRender, 0)
 }
@@ -120,9 +121,9 @@ function finishIcon(currentIcon, name, data) {
 }
 
 // reset scroll
-while ($(this).scrollTop() != 0) {
+while ($(this).scrollTop() != 0)
 	$(this).scrollTop(0);
-} 
+
 
 $(document).ready(function() {
 	$(window).trigger('resize');
