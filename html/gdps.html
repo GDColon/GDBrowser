@@ -19,7 +19,7 @@
 			<h2 class="smaller center" style="font-size: 5.5vh">Add server</h2>
 			<p class="bigger center" style="line-height: 5vh; margin-top: 1.5vh; margin-bottom: 2.5vh;">
 				Interested in listing your <cg>private server</cg> on GDBrowser?
-				<a target="_blank" href="https://forms.gle/kncuRqyKykQX42QD7"><ca class="underline">Fill out this form</ca></a>
+				<a target="_blank" href="https://forms.gle/kncuRqyKykQX42QD7" title="Fill out this form"><ca class="underline">Fill out this form</ca></a>
 				with your <cy>server information</cy> and I'll look into adding it!
 			</p>
 			<p class="bigger center" style="margin-top: 1vh">
@@ -39,7 +39,7 @@
 	</div> 
 
 	<div style="position:absolute; top: 2%; left: 1.5%; width: 10%; height: 25%; pointer-events: none">
-		<img class="gdButton yesClick" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()">
+		<img class="gdButton yesClick" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()" title="Back">
 	</div>
 
 	<div class="supercenter" id="loading" style="height: 10%; top: 47%">
@@ -47,15 +47,15 @@
 	</div>
 
 	<div style="position: absolute; left: 7%; top: 45%; height: 10%;">
-		<img class="gdButton" id="pageDown" src="../assets/arrow-left.png" style="display: none"; height="90%">
+		<img class="gdButton" id="pageDown" src="../assets/arrow-left.png" style="display: none"; height="90%" title="Previous">
 	</div>
 
 	<div style="position: absolute; right: 7%; top: 45%; height: 10%;">
-		<img class="gdButton" id="pageUp" src="../assets/arrow-right.png" style="display: none"; height="90%">
+		<img class="gdButton" id="pageUp" src="../assets/arrow-right.png" style="display: none"; height="90%" title="Next">
 	</div>
 
 	<div style="position:absolute; top: 3%; right: 2%; text-align: right; width: 20%;">
-		<img id="plusButton" class="inline gdButton" src="../assets/plus.png" width="25%" onclick="$('#infoDiv').show()">
+		<img id="plusButton" class="inline gdButton" src="../assets/plus.png" width="25%" onclick="$('#infoDiv').show()" title="Info">
 	</div>
 
 </div>
@@ -90,10 +90,10 @@ Fetch('../api/gdps').then(servers => {
 		serverPage.forEach(x => {
 			$('#searchBox').append(`<div class="searchresult" style="height: 19%; padding-top: 1.2%">
 					<h1 class="lessspaced blue" style="color: ${(gdps || "") == x.id ? "#00DDFF" : "white"}">${x.name}</h1>
-					<h2 class="lessSpaced smaller inline gdButton"><a href="${x.authorLink}" target="_blank">By ${x.author}</a></h2>
+					<h2 class="lessSpaced smaller inline gdButton"><a href="${x.authorLink}" target="_blank" title="By ${x.author}">By ${x.author}</a></h2>
 		
 					<div class="center" style="position:absolute; height: 10%; width: 12.5%; left: 3%; transform:translateY(-160%)">
-						<a href="${x.link}" target="_blank"><img class="gdButton spaced gdpslogo" src="../assets/gdps/${x.id || "gd"}_icon.png" height="130%"></a>
+						<a href="${x.link}" target="_blank" title="${x.id || "gd"}"><img class="gdButton spaced gdpslogo" src="../assets/gdps/${x.id || "gd"}_icon.png" height="130%"></a>
 					</div>
 					
 					<div class="center" style="position:absolute; right: 7%; transform:translateY(-150%); height: 10%">
