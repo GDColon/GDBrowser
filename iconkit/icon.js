@@ -5,6 +5,12 @@ const loader = PIXI.Loader.shared
 
 const loadedNewIcons = {}
 
+const TAU = Math.PI * 2
+//by default, converts degrees to rads
+const toRadians = (angle, perigon = 360) => TAU / perigon * angle
+//by default, converts rad to deg
+const fromRadians = (rad, perigon = 360) => rad / (TAU / perigon)
+
 let positionMultiplier = 4
 function positionPart(part, partIndex, layer, formName, isNew, isGlow) {
     let truePosMultiplier = positionMultiplier / (isNew ? 2 : 1)
@@ -278,7 +284,7 @@ class Icon {
                 y: newPart.pos[1] * truePosMultiplier * -1,
                 scaleX: newPart.scale[0],
                 scaleY: newPart.scale[1],
-                rotation: realRot * (Math.PI / 180) // radians
+                rotation: toRadians(realRot)
             }
             if (newPart.flipped[0]) movementData.scaleX *= -1
             if (newPart.flipped[1]) movementData.scaleY *= -1
