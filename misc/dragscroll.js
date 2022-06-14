@@ -1,7 +1,7 @@
 function somethingSelected() {
   return typeof window.getSelection == 'function' && window.getSelection().toString() != "";
 }
-const remover = / |\n|\t/g;
+const remover = / |\n|\t/g; //should it be /\s/g ?
 $('.dragscroll').each(function(_, el) {
   let previouslyMouseDown = false;
   el.addEventListener('mousemove', function(e) {
@@ -13,13 +13,15 @@ $('.dragscroll').each(function(_, el) {
       }
       return;
     }
-    if (somethingSelected())
-      return;
+    if (somethingSelected()) return;
     if (!previouslyMouseDown) {
-      for (let el of e.target.childNodes) {
-        if (el.nodeType === Node.TEXT_NODE && el.textContent.replace(remover, '').length)
-          return;
-      }
+      if ([...e.target.childNodes].some(
+            el => el.nodeType === Node.TEXT_NODE
+            &&
+            el.textContent.replace(remover, '').length
+          )
+        ) return;
+
       el.style['user-select'] = 'none';
       el.style['-webkit-user-select'] = 'none';
       previouslyMouseDown = true;
