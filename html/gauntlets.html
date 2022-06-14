@@ -15,7 +15,7 @@
 <div id="everything" class="center" style="width: 100%; height: 100%;">
 
 	<div style="position:absolute; top: 2%; left: -1.95%; width: 10%; height: 25%; pointer-events: none">
-		<img class="gdButton yesClick" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()">
+		<img class="gdButton yesClick" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()" title="Back">
 	</div>
 
 	<div class="center" width="100%" style="margin-top: 2.5%; margin-bottom: 1%;">
@@ -41,7 +41,7 @@ fetch('../api/gauntlets').then(res => res.json()).then(gauntlets => {
 	gauntlets.forEach((x, y) => {
 		$('#gauntletList').append(`
 			<div class="gauntlet">
-			<a href="../search/*?gauntlet=${x.id}">
+			<a href="../search/*?gauntlet=${x.id}" title="${x.name} Gauntlet">
 			<img src="../assets/gauntlets/${x.name.toLowerCase()}.png" height="300%"><br>
 			<h3 class="gauntletText"">${x.name}<br>Gauntlet</h3></div></a>`)
 		})
