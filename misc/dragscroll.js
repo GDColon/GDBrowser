@@ -16,11 +16,11 @@ $('.dragscroll').each(function(_, el) {
     if (somethingSelected()) return;
     if (!previouslyMouseDown) {
       if ([...e.target.childNodes].some(
-            el => el.nodeType === Node.TEXT_NODE
-            &&
-            el.textContent.replace(remover, '').length
-          )
-        ) return;
+          el => el.nodeType === Node.TEXT_NODE
+          &&
+          el.textContent.replace(remover, '').length
+        )
+      ) return;
 
       el.style['user-select'] = 'none';
       el.style['-webkit-user-select'] = 'none';
