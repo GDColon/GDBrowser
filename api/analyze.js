@@ -169,9 +169,8 @@ function analyze_level(level, rawData) {
             invisTriggers.push(Number(tr.targetGroupID));
     })
 
-    response.level = {}
-    for (let k of ['name', 'id', 'author', 'playerID', 'accountID', 'large']) response.level[k] = level[k]
-  //['name', 'id', 'author', 'playerID', 'accountID', 'large'].forEach(k => {response.level[k] = level[k]})
+    response.level = {};
+    ['name', 'id', 'author', 'playerID', 'accountID', 'large'].forEach(k => {response.level[k] = level[k]})
 
     response.objects = data.length - 2
     response.highDetail = highDetail
