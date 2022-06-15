@@ -1,3 +1,4 @@
+"use strict";
 const zlib = require('zlib')
 const blocks = require('../misc/analysis/blocks.json')
 const colorStuff = require('../misc/analysis/colorProperties.json')
@@ -7,11 +8,9 @@ const ids = require('../misc/analysis/objects.json')
 
 module.exports = async (app, req, res, level) => {
 
-    if (!level) {
-        level = {
-            name: (req.body.name || "Unnamed").slice(0, 64),
-            data: (req.body.data || "")
-        }
+    level ||= {
+        name: (req.body.name || "Unnamed").slice(0, 64),
+        data: (req.body.data || "")
     }
 
     let unencrypted = level.data.startsWith('kS') // some gdps'es don't encrypt level data
@@ -35,7 +34,7 @@ module.exports = async (app, req, res, level) => {
 
 function sortObj(obj, sortBy) {
     var sorted = {}
-    var keys = !sortBy ? Object.keys(obj).sort((a,b) => obj[b] - obj[a]) : Object.keys(obj).sort((a,b) => obj[b][sortBy] - obj[a][sortBy])
+    var keys = Object.keys(obj).sort((a,b) => sortBy ? obj[b][sortBy] - obj[a][sortBy] : obj[b] - obj[a])
     keys.forEach(x => {sorted[x] = obj[x]})
     return sorted
 }
@@ -48,9 +47,7 @@ function parse_obj(obj, splitter, name_arr, valid_only) {
     for (let i = 0, obj_l = s_obj.length; i < obj_l; i += 2) {
         let k_name = s_obj[i];
         if (s_obj[i] in name_arr) {
-            if (!valid_only) {
-                k_name = name_arr[s_obj[i]];
-            }
+            if (!valid_only) k_name = name_arr[s_obj[i]];
             robtop_obj[k_name] = s_obj[i + 1];
         }
     }
@@ -93,7 +90,7 @@ function analyze_level(level, rawData) {
     let orb_array = {};
     let trigger_array = {};
 
-    let last = 0;
+    let last = 0
 
     const obj_length = data.length;
     for (let i = 0; i < obj_length; ++i) {
@@ -130,7 +127,7 @@ function analyze_level(level, rawData) {
         }
 
         if (obj.triggerGroups) obj.triggerGroups.split('.').forEach(x => triggerGroups.push(x))
-        if (obj.highDetail == 1) highDetail += 1
+        if (obj.highDetail == 1) highDetail++
 
         if (id in misc_objects) {
             const name = misc_objects[id];
@@ -163,13 +160,18 @@ function analyze_level(level, rawData) {
 
     let invisTriggers = []
     alphaTriggers.forEach(tr => {
-        if (tr.x < 500 && !tr.touchTriggered && !tr.spawnTriggered && tr.opacity == 0 && tr.duration == 0
-            && alphaTriggers.filter(x => x.targetGroupID == tr.targetGroupID).length == 1) invisTriggers.push(Number(tr.targetGroupID))
+        if (
+            tr.x < 500
+            && !tr.touchTriggered && !tr.spawnTriggered
+            && tr.opacity == 0 && tr.duration == 0
+            && alphaTriggers.filter(x => x.targetGroupID == tr.targetGroupID).length == 1
+        )
+            invisTriggers.push(Number(tr.targetGroupID));
     })
 
-    response.level = {
-        name: level.name, id: level.id, author: level.author, playerID: level.playerID, accountID: level.accountID, large: level.large
-    }
+    response.level = {}
+    for (let k of ['name', 'id', 'author', 'playerID', 'accountID', 'large']) response.level[k] = level[k]
+  //['name', 'id', 'author', 'playerID', 'accountID', 'large'].forEach(k => {response.level[k] = level[k]})
 
     response.objects = data.length - 2
     response.highDetail = highDetail

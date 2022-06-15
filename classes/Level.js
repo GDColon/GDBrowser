@@ -5,6 +5,7 @@ let orbs = [0, 0, 50, 75, 125, 175, 225, 275, 350, 425, 500]
 let length = ['Tiny', 'Short', 'Medium', 'Long', 'XL']
 let difficulty = { 0: 'Unrated', 10: 'Easy', 20: 'Normal', 30: 'Hard', 40: 'Harder', 50: 'Insane' }
 let demonTypes = { 3: "Easy", 4: "Medium", 5: "Insane", 6: "Extreme" }
+let dailyLimit = 100000
 
 class Level {
     constructor(levelInfo, server, download, author = []) {
@@ -39,8 +40,12 @@ class Level {
         this.verifiedCoins = levelInfo[38] > 0
         this.starsRequested = +levelInfo[39] || 0
         this.ldm = levelInfo[40] > 0
-        if (+levelInfo[41] > 100000) this.weekly = true
-        if (+levelInfo[41]) { this.dailyNumber = (+levelInfo[41] > 100000 ? +levelInfo[41] - 100000 : +levelInfo[41]); this.nextDaily = null; this.nextDailyTimestamp = null }
+        if (+levelInfo[41] > dailyLimit) this.weekly = true
+        if (+levelInfo[41]) {
+            this.dailyNumber = (+levelInfo[41] > dailyLimit ? +levelInfo[41] - dailyLimit : +levelInfo[41])
+            this.nextDaily = null
+            this.nextDailyTimestamp = null
+        }
         this.objects = +levelInfo[45] || 0
         this.large = levelInfo[45] > 40000;
         this.cp = Number((this.stars > 0) + this.featured + this.epic)
@@ -50,10 +55,9 @@ class Level {
         this.difficultyFace = `${levelInfo[17] != 1 ? this.difficulty.toLowerCase() : `demon-${this.difficulty.toLowerCase().split(' ')[0]}`}${this.epic ? '-epic' : `${this.featured ? '-featured' : ''}`}`
 
         if (this.password && this.password != 0) {
-            let xor = new XOR();
-            let pass = xor.decrypt(this.password, 26364);
-            if (pass.length > 1) this.password = pass.slice(1);
-            else this.password = pass;
+            let xor = new XOR()
+            let pass = xor.decrypt(this.password, 26364)
+            this.password = pass.length > 1 ? pass.slice(1) : pass
         }
 
         if (server.onePointNine) {
@@ -83,7 +87,7 @@ class Level {
             this.songSize = "0MB"
             this.songID = "Level " + this.officialSong
         }
-        
+
         return this
     }
 }
