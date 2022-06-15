@@ -40,14 +40,14 @@
 	<div style="position:absolute; top: -1.5%; right: 10%; text-align: right; width: 10%;">
 		<a href="../iconkit"><img class="iconRope" src="../assets/iconrope.png" width="40%"></a>
 	</div>
-	
+
 	<div id="dl" style="display: none; position:absolute; top: 15%; right: 0.5%; text-align: center; width: 17%">
 		<h1 class="smaller" style="margin-bottom: 1%">Note</h1>
 		<p style="font-size: 2.2vh; margin-top: 1.2%"><ca>Level downloading</ca> has been <cr>blocked</cr> by RobTop.
 		<cy>Level analysis, daily levels, and downloading extra info</cy> will <cg>not work</cg> until he chooses to unblock downloads.
 		These features still work <ca><a class="underline" target="_blank" href="https://github.com/GDColon/GDBrowser">locally</a></ca> and on <ca><a class="underline" href="../gdps">private servers</a></ca></p>
 	</div>
-	
+
 	<div class="supercenter center" id="menuButtons" style="bottom: 5%;">
 			<table>
 					<tr class="menuButtonList">
@@ -68,9 +68,9 @@
 
 			<p style="margin-bottom: 2%">Website created by <a class="menuLink" href="https://twitter.com/TheRealGDColon" title="Colon">Colon</a> :<br>Pretty much everything other than that belongs to <a class="menuLink" href="http://robtopgames.com" title="RobTop Games">RobTop Games</a>.</p>
 			<p style="margin-top: 0%"><a class="menuLink" href="https://gdcolon.com/tools" title="GD Tools">GD Tools</a>
-				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 				<a class="menuLink" href="https://gdcolon.com" title="API">More Projects</a>
-				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 				<a class="menuLink" href="https://github.com/GDColon/GDBrowser" title="GitHub">GitHub</a>
 				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 				<a class="menuLink" href="https://store.steampowered.com/app/322170/Geometry_Dash/" title="Buy Geometry Dash!">Buy Geometry Dash!</a></p>
@@ -106,7 +106,7 @@
 <script>
 
 let page = 1
-$('#browserlogo').css('filter', `hue-rotate(${Math.floor(Math.random() * (330 - 60)) + 60}deg) saturate(${Math.floor(Math.random() * (150 - 100)) + 100}%)`)
+$('#browserlogo').css('filter', `hue-rotate(${Math.floor(randRange(60, 330))}deg) saturate(${Math.floor(randRange(100, 150))}%)`)
 
 let xButtonPos = '43%'
 let lastPage
@@ -126,7 +126,7 @@ function loadCredits() {
 	$('#credits').show()
 	if (page == lastPage) $('#closeCredits').css('height', '52%')
 	else $('#closeCredits').css('height', xButtonPos)
-	$('.creditsIcon:not(".creditLoaded"):visible').each(async function() {		// only load icons when necessary 
+	$('.creditsIcon:not(".creditLoaded"):visible').each(async function() {		// only load icons when necessary
 		$(this).addClass('creditLoaded')
 		let profile = await Fetch(`./api/profile/${$(this).attr('ign')}?forceGD=1`).catch(e => {}) || {}
 		$(this).append(`<gdicon cacheID=${profile.playerID} iconID=${profile.icon} col1="${profile.col1}" col2="${profile.col2}" glow="${profile.glow}"></gdicon>`)
@@ -144,7 +144,7 @@ Fetch(`./api/credits`).then(async res => {
 			<div class="brownBox center supercenter" style="width: 80vh; height: 43%; padding-top: 1.5%; padding-bottom: 3.5%;">
 				<h1>${x.header}</h1>
 				<h2 style="margin-bottom: 1.5%; margin-top: 1.5%" class="gdButton biggerShadow"><a href="https://gdbrowser.com/u/${x.ign || x.name}" title=${x.name}>${x.name}</h2></a>
-				
+
 				<div class="creditsIcon" ign="${x.ign || x.name}"></div>
 
 				<a target=_blank href="${x.youtube[0]}" title="YouTube"><img src="../assets/${x.youtube[1]}.png" width="11%" class="gdButton"></a>
@@ -182,11 +182,11 @@ Fetch(`./api/credits`).then(async res => {
     if (k.which == 37 && page > 1) { //left
 		page -= 1; loadCredits();
 	}
-	
+
 	if (k.which == 39 && page < lastPage) { //right
 		page += 1; loadCredits();
 	}
-	
+
 });
 });
 

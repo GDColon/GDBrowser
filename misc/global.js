@@ -17,6 +17,7 @@ $(window).resize(function () {
 });
 
 let isDownloadURL = () => window.location.href.endsWith('?download')
+let randRange = (min, max) => Math.random() * (max - min) + +min, //[min, max)
 
 function saveUrl() {
 	if ( !isDownloadURL() ) sessionStorage.setItem('prevUrl', window.location.href);
