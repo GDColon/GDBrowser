@@ -270,7 +270,7 @@ function parse_header(header) {
                 // so here we parse the color to something understandable by the rest
                 // slightly smart naming but it is also pretty gross
                 // in a sense - the name would be something like legacy-G -> G
-                const colorVal = name.split('-').pop()
+                const colorVal = name.split('-').at(-1)
 
                 colorObj.channel = colorVal
 
