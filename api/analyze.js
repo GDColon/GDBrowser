@@ -17,18 +17,18 @@ module.exports = async (app, req, res, level) => {
     let levelString = unencrypted ? level.data : Buffer.from(level.data, 'base64')
 
     if (unencrypted) {
-        const raw_data = level.data;
-
-        const response_data = analyze_level(level, raw_data);
-        return res.send(response_data);
-    } else {
+        const raw_data = level.data
+        const response_data = analyze_level(level, raw_data)
+        return res.send(response_data)
+    }
+    else {
         zlib.unzip(levelString, (err, buffer) => {
-            if (err) { return res.status(500).send("-2"); }
+            if (err) return res.status(500).send("-2")
 
-            const raw_data = buffer.toString();
-            const response_data = analyze_level(level, raw_data);
-            return res.send(response_data);
-        });
+            const raw_data = buffer.toString()
+            const response_data = analyze_level(level, raw_data)
+            return res.send(response_data)
+        })
     }
 }
 
@@ -40,22 +40,22 @@ function sortObj(obj, sortBy) {
 }
 
 function parse_obj(obj, splitter, name_arr, valid_only) {
-    const s_obj = obj.split(splitter);
-    let robtop_obj = {};
+    const s_obj = obj.split(splitter)
+    let robtop_obj = {}
 
     // semi-useless optimization depending on where at node js you're at
     for (let i = 0, obj_l = s_obj.length; i < obj_l; i += 2) {
-        let k_name = s_obj[i];
+        let k_name = s_obj[i]
         if (s_obj[i] in name_arr) {
-            if (!valid_only) k_name = name_arr[s_obj[i]];
-            robtop_obj[k_name] = s_obj[i + 1];
+            if (!valid_only) k_name = name_arr[s_obj[i]]
+            robtop_obj[k_name] = s_obj[i + 1]
         }
     }
-    return robtop_obj;
+    return robtop_obj
 }
 
 function analyze_level(level, rawData) {
-    let response = {};
+    let response = {}
 
     let blockCounts = {}
     let miscCounts = {}
@@ -63,62 +63,58 @@ function analyze_level(level, rawData) {
     let highDetail = 0
     let alphaTriggers = []
 
-    let misc_objects = {};
-    let block_ids = {};
+    let misc_objects = {}
+    let block_ids = {}
 
     for (const [name, object_ids] of Object.entries(ids.misc)) {
-        const copied_ids = object_ids.slice(1);
+        const copied_ids = object_ids.slice(1)
         // funny enough, shift effects the original id list
-        copied_ids.forEach((object_id) => {
-            misc_objects[object_id] = name;
-        });
+        copied_ids.forEach(object_id => { misc_objects[object_id] = name })
     }
 
     for (const [name, object_ids] of Object.entries(blocks)) {
-        object_ids.forEach((object_id) => {
-            block_ids[object_id] = name;
-        });
+        object_ids.forEach(object_id => { block_ids[object_id] = name })
     }
 
-    const data = rawData.split(";");
-    const header = data.shift();
+    const data = rawData.split(";")
+    const header = data.shift()
 
-    let level_portals = [];
-    let level_coins = [];
-    let level_text = [];
+    let level_portals = []
+    let level_coins = []
+    let level_text = []
 
-    let orb_array = {};
-    let trigger_array = {};
+    let orb_array = {}
+    let trigger_array = {}
 
     let last = 0
 
-    const obj_length = data.length;
+    const obj_length = data.length
     for (let i = 0; i < obj_length; ++i) {
-        obj = parse_obj(data[i], ',', properties);
+        obj = parse_obj(data[i], ',', properties)
 
         let id = obj.id
 
         if (id in ids.portals) {
-            obj.portal = ids.portals[id];
-            level_portals.push(obj);
+            obj.portal = ids.portals[id]
+            level_portals.push(obj)
         } else if (id in ids.coins) {
-            obj.coin = ids.coins[id];
-            level_coins.push(obj);
+            obj.coin = ids.coins[id]
+            level_coins.push(obj)
         } else if (id in ids.orbs) {
-            obj.orb = ids.orbs[id];
+            obj.orb = ids.orbs[id]
 
             if (obj.orb in orb_array) {
-                orb_array[obj.orb]++;
+                orb_array[obj.orb]++
             } else {
-                orb_array[obj.orb] = 1;
+                orb_array[obj.orb] = 1
             }
         } else if (id in ids.triggers) {
-            obj.trigger = ids.triggers[id];
+            obj.trigger = ids.triggers[id]
 
             if (obj.trigger in trigger_array) {
-                trigger_array[obj.trigger]++;
+                trigger_array[obj.trigger]++
             } else {
-                trigger_array[obj.trigger] = 1;
+                trigger_array[obj.trigger] = 1
             }
         }
 
@@ -130,32 +126,30 @@ function analyze_level(level, rawData) {
         if (obj.highDetail == 1) highDetail++
 
         if (id in misc_objects) {
-            const name = misc_objects[id];
+            const name = misc_objects[id]
             if (name in miscCounts) {
-                miscCounts[name][0] += 1;
+                miscCounts[name][0] += 1
             } else {
-                miscCounts[name] = [1, ids.misc[name][0]];
+                miscCounts[name] = [1, ids.misc[name][0]]
             }
         }
 
         if (id in block_ids) {
-            const name = block_ids[id];
+            const name = block_ids[id]
             if (name in blockCounts) {
-                blockCounts[name] += 1;
+                blockCounts[name]++
             } else {
-                blockCounts[name] = 1;
+                blockCounts[name] = 1
             }
         }
 
-        if (obj.x) { // sometimes the field doesn't exist
-            last = Math.max(last, obj.x);
-        }
+        // sometimes the field doesn't exist
+        if (obj.x) last = Math.max(last, obj.x)
 
-        if (obj.trigger == "Alpha") { // invisible triggers
-            alphaTriggers.push(obj)
-        }
+        // invisible triggers
+        if (obj.trigger == "Alpha") alphaTriggers.push(obj)
 
-        data[i] = obj;
+        data[i] = obj
     }
 
     let invisTriggers = []
@@ -166,7 +160,7 @@ function analyze_level(level, rawData) {
             && tr.opacity == 0 && tr.duration == 0
             && alphaTriggers.filter(x => x.targetGroupID == tr.targetGroupID).length == 1
         )
-            invisTriggers.push(Number(tr.targetGroupID));
+            invisTriggers.push(Number(tr.targetGroupID))
     })
 
     response.level = {};
@@ -176,15 +170,18 @@ function analyze_level(level, rawData) {
     response.highDetail = highDetail
     response.settings = {}
 
-    response.portals = level_portals.sort(function (a, b) {return parseInt(a.x) - parseInt(b.x)}).map(x => x.portal + " " + Math.floor(x.x / (Math.max(last, 529.0) + 340.0) * 100) + "%").join(", ")
-    response.coins = level_coins.sort(function (a, b) {return parseInt(a.x) - parseInt(b.x)}).map(x => Math.floor(x.x / (Math.max(last, 529.0) + 340.0) * 100))
+    // I have no idea what to name this lmao
+    let WTF = x => Math.floor(x.x / (Math.max(last, 529) + 340) * 100)
+    response.portals = level_portals.sort((a, b) => parseInt(a.x) - parseInt(b.x)).map(x => x.portal + " " + WTF(x) + "%").join(", ")
+    response.coins = level_coins.sort((a, b) => parseInt(a.x) - parseInt(b.x)).map(WTF)
     response.coinsVerified = level.verifiedCoins
 
+    let sum = arr => arr.reduce((a, x) => a + x, 0)
     response.orbs = orb_array
-    response.orbs.total = Object.values(orb_array).reduce((a, x) => a + x, 0); // we already have an array of objects, use it
+    response.orbs.total = sum(Object.values(orb_array)) // we already have an array of objects, use it
 
     response.triggers = trigger_array
-    response.triggers.total = Object.values(trigger_array).reduce((a, x) => a + x, 0);
+    response.triggers.total = sum(Object.values(trigger_array))
 
     response.triggerGroups = {}
     response.blocks = sortObj(blockCounts)
@@ -203,24 +200,24 @@ function analyze_level(level, rawData) {
     // find alpha group with the most objects
     response.invisibleGroup = triggerKeys.find(x => invisTriggers.includes(x))
 
-    response.text = level_text.sort(function (a, b) {return parseInt(a.x) - parseInt(b.x)}).map(x => [Buffer.from(x.message, 'base64').toString(), Math.round(x.x / last * 99) + "%"])
+    response.text = level_text.sort((a, b) => parseInt(a.x) - parseInt(b.x)).map(x => [Buffer.from(x.message, 'base64').toString(), Math.round(x.x / last * 99) + "%"])
 
-    const header_response = parse_header(header);
-    response.settings = header_response.settings;
-    response.colors = header_response.colors;
+    const header_response = parse_header(header)
+    response.settings = header_response.settings
+    response.colors = header_response.colors
 
     response.dataLength = rawData.length
     response.data = rawData
 
-    return response;
+    return response
 }
 
 function parse_header(header) {
-    let response = {};
-    response.settings = {};
-    response.colors = [];
+    let response = {}
+    response.settings = {}
+    response.colors = []
 
-    const header_keyed = parse_obj(header, ',', init.values, true);
+    const header_keyed = parse_obj(header, ',', init.values, true)
 
     Object.keys(header_keyed).forEach(x => {
         let val = init.values[x]
@@ -229,41 +226,38 @@ function parse_header(header) {
         switch (val[1]) {
             case 'list':
                 val = init[(val[0] + "s")][property];
-                break;
+                break
             case 'number':
                 val = Number(property);
-                break;
+                break
             case 'bump':
                 val = Number(property) + 1;
-                break;
+                break
             case 'bool':
                 val = property != "0";
-                break;
+                break
             case 'extra-legacy-color': { // scope?
                 // you can only imagine my fear when i discovered this was a thing
                 // these literally are keys set the value, and to convert this to the color list we have to do this fun messy thing that shouldn't exist
                 // since i wrote the 1.9 color before this, a lot of explaination will be there instead
-                const colorInfo = name.split('-');
-                const color = colorInfo[2]; // r,g,b
-                const channel = colorInfo[1];
+                const colorInfo = name.split('-')
+                const color = colorInfo[2] // r,g,b
+                const channel = colorInfo[1]
 
-                if (color == 'r') {
-                    // first we create the color object
-                    response.colors.push({"channel": channel, "opacity": 1});
-                }
+                // first we create the color object
+                if (color == 'r') response.colors.push({"channel": channel, "opacity": 1})
+
                 // from here we touch the color object
-                let currentChannel = response.colors.find(k => k.channel == channel);
-                if (color == 'blend') {
-                    currentChannel.blending = true; // only one color has blending though lol
-                } else if (color == 'pcol' && property != 0) {
-                    currentChannel.pColor = property;
-                }
-                currentChannel[color] = property;
-                break;
+                let currentChannel = response.colors.find(k => k.channel == channel)
+                if (color == 'blend') currentChannel.blending = true // only one color has blending though lol
+                else if (color == 'pcol' && property != 0) currentChannel.pColor = property
+
+                currentChannel[color] = property
+                break
             }
             case 'legacy-color': {
                 // if a level has a legacy color, we can assume that it does not have a kS38 at all
-                const color = parse_obj(property, "_", colorStuff.properties);
+                const color = parse_obj(property, "_", colorStuff.properties)
 
                 let colorObj = color
 
@@ -275,15 +269,15 @@ function parse_header(header) {
                 colorObj.channel = colorVal
 
                 // from here stuff can continue as normal, ish
-                if (colorObj.pColor == "-1" || colorObj.pColor == "0") delete colorObj.pColor;
-                colorObj.opacity = 1; // 1.9 colors don't have this!
-                if (colorObj.blending && colorObj.blending == '1') colorObj.blending = true; // 1.9 colors manage to always think they're blending - they're not
-                else delete colorObj.blending;
+                if (colorObj.pColor == "-1" || colorObj.pColor == "0") delete colorObj.pColor
+                colorObj.opacity = 1 // 1.9 colors don't have this!
+                if (colorObj.blending && colorObj.blending == '1') colorObj.blending = true // 1.9 colors manage to always think they're blending - they're not
+                else delete colorObj.blending
 
-                if (colorVal == '3DL') { response.colors.splice(4, 0, colorObj); } // hardcode the position of 3DL, it typically goes at the end due to how RobTop make the headers
-                else if (colorVal == 'Line') { colorObj.blending = true; response.colors.push(colorObj); }  // in line with 2.1 behavior
-                else { response.colors.push(colorObj); } // bruh whatever was done to make the color list originally was long
-                break;
+                if (colorVal == '3DL') response.colors.splice(4, 0, colorObj) // hardcode the position of 3DL, it typically goes at the end due to how RobTop make the headers
+                else if (colorVal == 'Line') { colorObj.blending = true; response.colors.push(colorObj) } // in line with 2.1 behavior
+                else response.colors.push(colorObj) // bruh whatever was done to make the color list originally was long
+                break
             }
             case 'colors': {
                 let colorList = property.split("|")
@@ -293,9 +287,9 @@ function parse_header(header) {
                     if (!color.channel) return colorList = colorList.filter((h, i) => y != i)
 
                     if (colorStuff.channels[colorObj.channel]) colorObj.channel = colorStuff.channels[colorObj.channel]
-                    if (colorObj.channel > 1000) return;
+                    if (colorObj.channel > 1000) return
                     if (colorStuff.channels[colorObj.copiedChannel]) colorObj.copiedChannel = colorStuff.channels[colorObj.copiedChannel]
-                    if (colorObj.copiedChannel > 1000) delete colorObj.copiedChannel;
+                    if (colorObj.copiedChannel > 1000) delete colorObj.copiedChannel
                     if (colorObj.pColor == "-1") delete colorObj.pColor
                     if (colorObj.blending) colorObj.blending = true
                     if (colorObj.copiedHSV) {
@@ -308,16 +302,16 @@ function parse_header(header) {
                     }
                     colorObj.opacity = +Number(colorObj.opacity).toFixed(2)
                     colorList[y] = colorObj
-                });
+                })
                 // we assume this is only going to be run once so... some stuff can go here
                 colorList = colorList.filter(x => typeof x == "object")
                 if (!colorList.find(x => x.channel == "Obj")) colorList.push({"r": "255", "g": "255", "b": "255", "channel": "Obj", "opacity": "1"})
 
                 const specialSort = ["BG", "G", "G2", "Line", "Obj", "3DL"]
-                let specialColors = colorList.filter(x => isNaN(x.channel)).sort(function (a, b) {return specialSort.indexOf( a.channel ) > specialSort.indexOf( b.channel ) } )
-                let regularColors = colorList.filter(x => !isNaN(x.channel)).sort(function(a, b) {return (+a.channel) - (+b.channel) } );
+                let specialColors = colorList.filter(x => isNaN(x.channel)).sort((a, b) => specialSort.indexOf(a.channel) > specialSort.indexOf(b.channel))
+                let regularColors = colorList.filter(x => !isNaN(x.channel)).sort((a, b) => +a.channel - +b.channel)
                 response.colors = specialColors.concat(regularColors)
-                break;
+                break
             }
         }
         response.settings[name] = val
@@ -332,9 +326,9 @@ function parse_header(header) {
 
     Object.keys(response.settings).filter(k => {
         // this should be parsed into color list instead
-        if (k.includes('legacy')) delete response.settings[k];
-    });
+        if (k.includes('legacy')) delete response.settings[k]
+    })
 
-    delete response.settings['colors'];
-    return response;
+    delete response.settings['colors']
+    return response
 }

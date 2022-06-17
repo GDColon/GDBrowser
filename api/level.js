@@ -1,3 +1,4 @@
+"use strict";
 const request = require('request')
 const fs = require('fs')
 const Level = require('../classes/Level.js')
@@ -5,17 +6,14 @@ const Level = require('../classes/Level.js')
 module.exports = async (app, req, res, api, analyze) => {
 
   function rejectLevel() {
-    if (!api) return res.redirect('search/' + req.params.id)
-    else return res.sendError()
+    return !api ? res.redirect('search/' + req.params.id) : res.sendError()
   }
 
   if (req.offline) return rejectLevel()
 
   let levelID = req.params.id
-  if (levelID == "daily") return app.run.download(app, req, res, api, 'daily', analyze)
-  else if (levelID == "weekly") return app.run.download(app, req, res, api, 'weekly', analyze)
-  else if (levelID.match(/[^0-9]/)) return rejectLevel()
-  else levelID = levelID.replace(/[^0-9]/g, "")
+  if (levelID == "daily" || levelID == "weekly") return app.run.download(app, req, res, api, levelID, analyze)
+  else if (/\D/.test(levelID)) return rejectLevel()
 
   if (analyze || req.query.hasOwnProperty("download")) return app.run.download(app, req, res, api, levelID, analyze)
 
@@ -23,9 +21,10 @@ module.exports = async (app, req, res, api, analyze) => {
 
     if (err || body.startsWith("##")) return rejectLevel()
 
-    let preRes = body.split('#')[0].split('|', 10)
-    let author = body.split('#')[1].split('|')[0].split(':')
-    let song = '~' + body.split('#')[2];
+    const bodySplit = body.split('#') // IDK how to name it lol -Rudxain
+    let preRes = bodySplit[0].split('|', 10)
+    let author = bodySplit[1].split('|')[0].split(':')
+    let song = '~' + bodySplit[2]
     song = app.parseResponse(song, '~|~')
 
     let levelInfo = app.parseResponse(preRes.find(x => x.startsWith(`1:${levelID}`)) || preRes[0])
@@ -40,7 +39,7 @@ module.exports = async (app, req, res, api, analyze) => {
       if (api) return res.send(level)
 
       else return fs.readFile('./html/level.html', 'utf8', function (err, data) {
-        let html = data;
+        let html = data
         let filteredSong = level.songName.replace(/[^ -~]/g, "")  // strip off unsupported characters
         level.songName = filteredSong || level.songName
         let variables = Object.keys(level)

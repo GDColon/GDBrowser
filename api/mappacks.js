@@ -1,12 +1,14 @@
+"use strict";
 let difficulties = ["auto", "easy", "normal", "hard", "harder", "insane", "demon", "demon-easy", "demon-medium", "demon-insane", "demon-extreme"]
 let cache = {}
 
 module.exports = async (app, req, res) => {
 
   if (req.offline) return res.sendError()
-  
+
   let cached = cache[req.id]
-  if (app.config.cacheMapPacks && cached && cached.data && cached.indexed + 5000000 > Date.now()) return res.send(cached.data)   // 1.5 hour cache
+  if (app.config.cacheMapPacks && cached && cached.data && cached.indexed + 5000000 > Date.now())
+    return res.send(cached.data)  // 1.5 hour cache
   let params = { count: 250, page: 0 }
   let packs = []
 
@@ -23,7 +25,7 @@ module.exports = async (app, req, res) => {
         params.page++
         return mapPackLoop()
       }
-      
+
       let mappacks = packs.map(x => ({    // "packs.map()" laugh now please
         id: +x[1],
         name: x[2],
