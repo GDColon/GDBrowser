@@ -1,3 +1,4 @@
+"use strict";
 module.exports = async (app, req, res) => {
 
   if (req.method !== 'POST') return res.status(405).send("Method not allowed.")
@@ -14,23 +15,22 @@ module.exports = async (app, req, res) => {
   req.gdRequest('downloadGJMessage20', params, function (err, resp, body) {
 
     if (err) return res.status(400).send(`Error fetching message! Try again later, or make sure your username and password are entered correctly. Last worked: ${app.timeSince(req.id)} ago.`)
-    else app.trackSuccess(req.id)
+    app.trackSuccess(req.id)
 
     let x = app.parseResponse(body)
     let msg = {}
-    msg.id = x[1];
+    msg.id = x[1]
     msg.playerID = x[3]
     msg.accountID = x[2]
     msg.author = x[6]
     msg.subject = Buffer.from(x[4], "base64").toString().replace(/^Re: ☆/, "Re: ")
     msg.content = app.xor.decrypt(x[5], 14251)
     msg.date = x[7] + req.timestampSuffix
-    if (msg.subject.endsWith("☆") || msg.subject.startsWith("☆")) {
-      if (msg.subject.endsWith("☆")) msg.subject = msg.subject.slice(0, -1)
-      else msg.subject = msg.subject.slice(1)
-      msg.browserColor = true 
-  }
-    
+    if (/^☆|☆$/.test(msg.subject)) {
+      msg.subject = msg.subject.slice(...(msg.subject.endsWith("☆") ? [0, -1] : [1]))
+      msg.browserColor = true
+    }
+
     return res.send(msg)
   })
 
