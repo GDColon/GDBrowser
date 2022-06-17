@@ -1,5 +1,5 @@
-const XOR = require(__dirname + "/../classes/XOR");
-const music = require(__dirname + "/../misc/music.json");
+const XOR = require(__dirname + "/../classes/XOR")
+const music = require(__dirname + "/../misc/music.json")
 
 let orbs = [0, 0, 50, 75, 125, 175, 225, 275, 350, 425, 500]
 let length = ['Tiny', 'Short', 'Medium', 'Long', 'XL']
@@ -9,9 +9,9 @@ let dailyLimit = 100000
 
 class Level {
     constructor(levelInfo, server, download, author = []) {
-        this.name = levelInfo[2] || "-";
-        this.id = levelInfo[1] || 0;
-        this.description = Buffer.from((levelInfo[3] || ""), "base64").toString() || "(No description provided)";
+        this.name = levelInfo[2] || "-"
+        this.id = levelInfo[1] || 0
+        this.description = Buffer.from((levelInfo[3] || ""), "base64").toString() || "(No description provided)"
         this.author = author[1] || "-"
         this.playerID = levelInfo[6] || 0
         this.accountID = author[2] || 0
@@ -30,8 +30,8 @@ class Level {
         if (levelInfo[29]) this.updated = levelInfo[29] + (server.timestampSuffix || "")
         if (levelInfo[46]) this.editorTime = +levelInfo[46] || 0
         if (levelInfo[47]) this.totalEditorTime = +levelInfo[47] || 0
-        if (levelInfo[27]) this.password = levelInfo[27];
-        this.version = +levelInfo[5] || 0;
+        if (levelInfo[27]) this.password = levelInfo[27]
+        this.version = +levelInfo[5] || 0
         this.copiedID = levelInfo[30] || "0"
         this.twoPlayer = levelInfo[31] > 0
         this.officialSong = +levelInfo[35] ? 0 : parseInt(levelInfo[12]) + 1
@@ -47,7 +47,7 @@ class Level {
             this.nextDailyTimestamp = null
         }
         this.objects = +levelInfo[45] || 0
-        this.large = levelInfo[45] > 40000;
+        this.large = levelInfo[45] > 40000
         this.cp = Number((this.stars > 0) + this.featured + this.epic)
 
         if (levelInfo[17] > 0) this.difficulty = (demonTypes[levelInfo[43]] || "Hard") + " Demon"
