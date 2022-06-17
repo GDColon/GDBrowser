@@ -1,3 +1,4 @@
+"use strict";
 $('body').append(`
 	<div data-nosnippet id="tooSmall" class="brownbox center supercenter" style="display: none; width: 80%">
 	<h1>Yikes!</h1>
@@ -10,14 +11,14 @@ $('body').append(`
 
 
 $(window).resize(function () {
-	//these alternatives maybe helpful: https://stackoverflow.com/a/4917796
-	let portrait = window.innerHeight > window.innerWidth - 75
-	$('#everything')[portrait ? 'hide' : 'show']()
-	$('#tooSmall')[portrait ? 'show' : 'hide']()
-});
+	//these alternatives may be helpful: https://stackoverflow.com/a/4917796
+	let isPortrait = window.innerHeight > window.innerWidth - 75
+	$('#everything')[isPortrait ? 'hide' : 'show']()
+	$('#tooSmall')[isPortrait ? 'show' : 'hide']()
+})
 
 let isDownloadURL = () => window.location.href.endsWith('?download')
-let randRange = (min, max) => Math.random() * (max - min) + +min, //[min, max)
+let randRange = (min, max) => Math.random() * (max - min) + +min // [min, max)
 
 function saveUrl() {
 	if ( !isDownloadURL() ) sessionStorage.setItem('prevUrl', window.location.href);
@@ -54,11 +55,11 @@ let popupEsc = true
 
 $(document).keydown(function(k) {
 	const ESC = 27
-	if (k.keyCode != ESC || !allowEsc) return;
+	if (k.keyCode != ESC || !allowEsc) return
 	k.preventDefault()
 	if (popupEsc && $('.popup').is(":visible")) $('.popup').hide();
 	else $('#backButton').trigger('click')
-});
+})
 
 let iconData = null
 let iconCanvas = null
@@ -74,7 +75,7 @@ async function renderIcons() {
 	if (iconsToRender.length < 1) return
 	iconData ||= await Fetch("../api/icons")
 	iconCanvas ||= document.createElement('canvas')
-	iconRenderer ||= new PIXI.Application({ view: iconCanvas, width: 300, height: 300, backgroundAlpha: 0});
+	iconRenderer ||= new PIXI.Application({ view: iconCanvas, width: 300, height: 300, backgroundAlpha: 0})
 	if (loader.loading) return overrideLoader = true
 	buildIcon(iconsToRender, 0)
 }
