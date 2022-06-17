@@ -1,3 +1,4 @@
+"use strict";
 const crypto = require('crypto')
 function sha1(data) { return crypto.createHash("sha1").update(data, "binary").digest("hex"); }
 
@@ -9,12 +10,22 @@ module.exports = async (app, req, res) => {
   if (!req.body.username) return res.status(400).send("No username provided!")
   if (!req.body.accountID) return res.status(400).send("No account ID provided!")
   if (!req.body.password) return res.status(400).send("No password provided!")
+  /*
+  // A compound error message is more helpful, but IDK if this may cause bugs,
+  // so this is commented-out
+  let errMsg = ""
+  if (!req.body.comment) errMsg += "No comment provided!\n"
+  if (!req.body.username) errMsg += "No username provided!\n"
+  if (!req.body.accountID) errMsg += "No account ID provided!\n"
+  if (!req.body.password) errMsg += "No password provided!\n"
+  if (errMsg) return res.status(400).send(errMsg)
+  */
 
   if (req.body.comment.includes('\n')) return res.status(400).send("Profile posts cannot contain line breaks!")
-  
+
   let params = { cType: '1' }
 
-  params.comment = Buffer.from(req.body.comment.slice(0, 190) + (req.body.color ? "☆" : "")).toString('base64').replace(/\//g, '_').replace(/\+/g, "-")
+  params.comment = Buffer.from(req.body.comment.slice(0, 190) + (req.body.color ? "☆" : "")).toString('base64').replace('/', '_').replace('+', '-')
   params.gjp = app.xor.encrypt(req.body.password, 37526)
   params.accountID = req.body.accountID.toString()
   params.userName = req.body.username

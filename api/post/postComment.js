@@ -1,13 +1,16 @@
+"use strict";
 const crypto = require('crypto')
 function sha1(data) { return crypto.createHash("sha1").update(data, "binary").digest("hex"); }
 
-let rateLimit = {};
+let rateLimit = {}
 let cooldown = 15000  // GD has a secret rate limit and doesn't return -1 when a comment is rejected, so this keeps track
 
+// converts a milisecond-precision timestamp to seconds (wrapped-around minutes)
 function getTime(time) {
-  let seconds = Math.ceil(time / 1000);
-  seconds = seconds % 60;
-  return seconds}
+  let seconds = Math.ceil(time / 1000)
+  seconds %= 60
+  return seconds
+}
 
 module.exports = async (app, req, res) => {
 
@@ -18,14 +21,25 @@ module.exports = async (app, req, res) => {
   if (!req.body.levelID) return res.status(400).send("No level ID provided!")
   if (!req.body.accountID) return res.status(400).send("No account ID provided!")
   if (!req.body.password) return res.status(400).send("No password provided!")
+  /*
+  // A compound error message is more helpful, but IDK if this may cause bugs,
+  // so this is commented-out
+  let errMsg = ""
+  if (!req.body.comment) errMsg += "No comment provided!\n"
+  if (!req.body.username) errMsg += "No username provided!\n"
+  if (!req.body.levelID) errMsg += "No level ID provided!\n"
+  if (!req.body.accountID) errMsg += "No account ID provided!\n"
+  if (!req.body.password) errMsg += "No password provided!\n"
+  if (errMsg) return res.status(400).send(errMsg)
+  */
 
   if (req.body.comment.includes('\n')) return res.status(400).send("Comments cannot contain line breaks!")
 
   if (rateLimit[req.body.username]) return res.status(400).send(`Please wait ${getTime(rateLimit[req.body.username] + cooldown - Date.now())} seconds before posting another comment!`)
-  
+
   let params = { percent: 0 }
 
-  params.comment = Buffer.from(req.body.comment + (req.body.color ? "☆" : "")).toString('base64').replace(/\//g, '_').replace(/\+/g, "-")
+  params.comment = Buffer.from(req.body.comment + (req.body.color ? "☆" : "")).toString('base64').replace('/', '_').replace('+', '-')
   params.gjp = app.xor.encrypt(req.body.password, 37526)
   params.levelID = req.body.levelID.toString()
   params.accountID = req.body.accountID.toString()
@@ -48,7 +62,7 @@ module.exports = async (app, req, res) => {
 
     res.send(`Comment posted to level ${params.levelID} with ID ${body}`)
     app.trackSuccess(req.id)
-    rateLimit[req.body.username] = Date.now();
+    rateLimit[req.body.username] = Date.now()
     setTimeout(() => {delete rateLimit[req.body.username]; }, cooldown);
   })
 }
