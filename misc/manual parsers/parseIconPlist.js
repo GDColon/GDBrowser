@@ -25,7 +25,7 @@ for (let key in frames) {
     let fileData = frames[key]
     for (let innerKey in fileData) {
       if (!["spriteSize", "spriteOffset"].includes(innerKey)) delete fileData[innerKey]  // remove useless stuff
-      else fileData[innerKey] = JSON.parse(fileData[innerKey].replace('{', '[').replace('}', ']'))
+      else fileData[innerKey] = JSON.parse(fileData[innerKey].replaceAll('{', '[').replaceAll('}', ']'))
     }
   }
 }
