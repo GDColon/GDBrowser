@@ -174,7 +174,7 @@ $('.levelSearch').click(function() {
 	let difficulties = []
 	$('.diffDiv').each(function() {if ($(this).hasClass('selectedFilter')) difficulties.push($(this).attr('diff'))})
 	demonFilter = demonMode && difficulties[0] > 0
-	
+
 	if (!difficulties.length) url += ""
 	else if (!demonFilter) url += "&diff=" + undupe(difficulties).join(",")
 	else url += "&diff=-2&demonFilter=" + difficulties[0]
@@ -213,13 +213,13 @@ function getDiffFilters() {
 
 function showDemonDiffs() {
 	$('#difficulties').hide();
-	$('#demons').show();
+	$('#demons').show()
 	demonMode = true;
 }
 
 function hideDemonDiffs() {
 	$('#difficulties').show();
-	$('#demons').hide();
+	$('#demons').hide()
 	demonMode = false;
 }
 
@@ -262,9 +262,9 @@ $('.lengthDiv').click(function() {
 $(document).keydown(function(k) {
 	let searchFocus = $(':focus-visible').length == 1 && $(':focus-visible').first().attr('id') == "levelName"
 	if ((!$(':focus-visible').length || searchFocus) && k.which == 13) { // enter
-		if (!$('#customlist').is(':hidden')) k.preventDefault();
+		if (!$('#customlist').is(':hidden')) k.preventDefault()
 		else if ($('#filters').is(':hidden')) $('#searchBtn').trigger('click')
-	} 
+	}
 });
 
 $('#pageSize').on('input blur', function (event) {
@@ -380,7 +380,7 @@ Fetch(`../api/music`).then(music => {
 
 	$('#songName').html("1: " + music[1][0])
 
-	$(document).on('click', '.songChange', function () { 
+	$(document).on('click', '.songChange', function () {
 		officialSong += Number($(this).attr('jump'))
 		if (officialSong < 1) officialSong = 1
 		$('#songName').html(`${officialSong}: ${music[officialSong] ? music[officialSong][0] : officialSong == 69 ? "Nice" : "Unknown"}`)
@@ -395,10 +395,10 @@ Fetch(`../api/music`).then(music => {
 	}
 
 	$(document).keydown(function(k) {
-		if (customSong) return;
+		if (customSong) return
 		if (k.which == 37) $('#songDown').trigger('click')   // left
 		if (k.which == 39) $('#songUp').trigger('click')     // right
-	});
+	})
 
 	if (onePointNine) {
 		$('#userSearch').hide()

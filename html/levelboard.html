@@ -25,7 +25,7 @@
 	<div id="searchBox" class="supercenter dragscroll"; style="width: 124vh">
 		<div style="height: 4.5%"></div>
 	</div>
-	
+
 	<div class="epicbox supercenter gs" style="width: 126vh; height: 80%; pointer-events: none"></div>
 
 	<div class="center" style="position:absolute; top: 8%; left: 0%; right: 0%">
@@ -39,7 +39,7 @@
 	<div class="supercenter" id="loading" style="height: 10%; top: 47%; display: none;">
 		<img class="spin noSelect" src="../assets/loading.png" height="105%">
 	</div>
-	
+
 	<div id="error" class="supercenter" style="height: 20%; top: 47%; display: none;">
 		<h1 class="center">No scores available...</h1>
 		<h3 class="center" style="margin-top: 2%">Either this leaderboard is empty, or the scores weren't able to be obtained from the GD servers.</h3>
@@ -64,7 +64,7 @@
 <script type="text/javascript" src="../dragscroll.js"></script>
 <script>
 
-let loading = false;
+let loading = false
 let lvlID = Math.round(window.location.pathname.split('/')[2])
 
 if (!lvlID || lvlID > 99999999 || lvlID < -99999999) window.location.href = window.location.href.replace("leaderboard", "search")
@@ -86,7 +86,7 @@ function leaderboard() {
 		$('#meta-title').attr('content', "Leaderboards for " + lvl.name)
 		$('#meta-desc').attr('content', 'View the leaderboard for ' + lvl.name + ' by ' + lvl.author + '!')
 	})
-	
+
 
 	fetch(`../api/leaderboardLevel/${lvlID}?count=200${weekly ? "&week" : ""}`).then(res => res.json()).then(res => {
 
@@ -101,7 +101,7 @@ function leaderboard() {
 		res.forEach((x, y) => {
 
 		$('#searchBox').append(`<div class="searchresult leaderboardSlot levelboardSlot" style="align-items: center; padding-left: 1vh; height: 15%; width: 100%; position: relative">
-			
+
 			<h2 class="center" style="width: 12%; margin: 0% 0% 0% 0.5%; transform: scale(${1 - (Math.max(0, String(x.rank).length - 1) * 0.2)}">${x.rank}</h2>
 			<gdicon dontload="true" iconID=${x.icon.icon} cacheID=${x.playerID} iconForm="${x.icon.form}" col1="${x.icon.col1}" col2="${x.icon.col2}" glow="${x.icon.glow}" style="width: 7%; margin-bottom: 1%" imgStyle="width: 100%"></gdicon>
 			<h2 class="small gdButton" style="font-size: 6.5vh; margin-right: 3%; margin-left: 3%"><a href="../u/${x.accountID}.">${x.username}</a></h2>
@@ -117,17 +117,17 @@ function leaderboard() {
 
 		$('#searchBox').append('<div style="height: 4.5%"></div>')
 		loading = false;
-		$('#loading').hide();
+		$('#loading').hide()
 		lazyLoadIcons()
 	})
 
 }
 
-	let weekly = false;
+	let weekly = false
 	leaderboard()
 
 	$('#topMode').click(function() {
-		if (!weekly || loading) return;
+		if (!weekly || loading) return
 		weekly = false
 		leaderboard()
 		$('#weekMode').removeClass('darken')
@@ -135,12 +135,12 @@ function leaderboard() {
 	})
 
 	$('#weekMode').click(function() {
-		if (weekly || loading) return;
+		if (weekly || loading) return
 		weekly = true
 		leaderboard()
 		$('#topMode').removeClass('darken')
 		$('#weekMode').addClass('darken')
-	});
+	})
 
 	function lazyLoadIcons() {
 		let newIconFound = false

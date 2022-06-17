@@ -216,15 +216,15 @@
 <script type="text/javascript" src="../global.js?v=1"></script>
 <script>
 
-	let accountID;
-	let password;
-	let page = 0;
-	let messageID = 0;
-	let playerID = 0;
-	let messages = [];
-	let messageStatus = {};
-	let cache = {};
-	let loading = false;
+	let accountID
+	let password
+	let page = 0
+	let messageID = 0
+	let playerID = 0
+	let messages = []
+	let messageStatus = {}
+	let cache = {}
+	let loading = false
 
 	let messageText = 'Your <cy>Geometry Dash password</cy> will <cg>not be stored</cg> anywhere on the site, both <ca>locally and server-side.</ca> For security, it will be <cy>forgotten</cy> when you exit this page.'
 	$('#message').html(messageText)
@@ -292,7 +292,7 @@
 							let targetUser = window.location.search.match(/(\?|&)sendTo=(.+)/)
 							if (targetUser) {
 								targetUser = decodeURIComponent(targetUser[2])
-								fetch(`../api/profile/${targetUser}`).then(res => res.json()).then(res => { 
+								fetch(`../api/profile/${targetUser}`).then(res => res.json()).then(res => {
 									if (res == "-1" || !res) return;
 									$('#replyAuthor').html(`<a href="../u/${res.accountID}." target="_blank">To: ${res.username}</a>`)
 									messageStatus[res.accountID] = [res.messages, res.username]
@@ -384,7 +384,7 @@
 				$('#deleteButton').show()
 				}
 
-				if (!messageStatus[msg.accountID]) fetch(`../api/profile/${msg.author}`).then(res => res.json()).then(res => { 
+				if (!messageStatus[msg.accountID]) fetch(`../api/profile/${msg.author}`).then(res => res.json()).then(res => {
 					messageStatus[msg.accountID] = [res.messages, msg.author]
 					loadMsg()
 				})
@@ -392,10 +392,10 @@
 					loadMsg()
 				}
 			})
-			.fail(e => { 
+			.fail(e => {
 				$('#messageAuthor').html('&nbsp;')
 				$('#messageSubject').html('&nbsp;')
-				$('#messageLoad').hide() 
+				$('#messageLoad').hide()
 				$('#messageBody').html(e.responseText).show()
 				$('#theMfMessage').attr('style', 'background-color: rgba(0, 0, 0, 0)')
 			})
@@ -416,7 +416,7 @@
 				$('#preDelete').show()
 				$('#deleting').hide()
 			})
-			.fail(e => { 
+			.fail(e => {
 				$('#deleting').hide()
 				$('#delete-error').show()
 				$('#delError').html(e.responseText)
@@ -450,7 +450,7 @@
 				$('#bulkDeleting').hide()
 				$('#preBulkDelete').show()
 			})
-			.fail(e => { 
+			.fail(e => {
 				$('#bulkDeleting').hide()
 				$('#bd-error').show()
 				$('#bdError').html(e.responseText)
@@ -458,7 +458,7 @@
 	})
 
 	$('#replyButton').click(function() {
-		if (!messageStatus[playerID]) return;
+		if (!messageStatus[playerID]) return
 		let status = messageStatus[playerID][0]
 		let name = messageStatus[playerID][1]
 		$('#postMessage').removeClass('grayscale')
@@ -475,7 +475,7 @@
 	$('#postMessage').click(function () {
 		let subject = $('#postSubject').val()
 		let message = $('#postContent').val()
-		if (!subject || !message || !messageStatus[playerID] || messageStatus[playerID][0] == "off") return;
+		if (!subject || !message || !messageStatus[playerID] || messageStatus[playerID][0] == "off") return
 		allowEsc = false
 		$('#reply-loading').show()
 		$('#reply-sent').hide()
@@ -488,7 +488,7 @@
 				$('#reply-sent').show()
 				allowEsc = true
 			})
-			.fail(e => { 
+			.fail(e => {
 				$('#reply-loading').hide()
 				$('#reply-error').show()
 				allowEsc = true
@@ -518,10 +518,10 @@
 	});
 
 	$(document).keydown(function (k) {
-		if (loading) return;
+		if (loading) return
 
 		if ($('#access').is(':visible')) {
-			if (k.which == 13) $('#logIn').trigger('click') //enter 
+			if (k.which == 13) $('#logIn').trigger('click') //enter
 			else return;
 		}
 

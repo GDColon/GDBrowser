@@ -114,11 +114,11 @@ let dualPortals = ['dual', 'single']
 let mirrorPortals = ['mirrorOn', 'mirrorOff']
 
 fetch(`../api${window.location.pathname}`).then(res => res.json()).then(res => {
-	
+
 	if (!res.level) {
 		switch(res) {
-			case -1: $('#errorMessage').html("This level could not be be <cr>downloaded</cr>. Either the servers rejected the request, or the level simply <co>doesn't exist at all</co>."); break;
-			case -2: $('#errorMessage').html("This level's data appears to be <cr>corrupt</cr> and cannot be <cy>parsed</cy>. It most likely won't load in GD."); break;
+			case -1: $('#errorMessage').html("This level could not be be <cr>downloaded</cr>. Either the servers rejected the request, or the level simply <co>doesn't exist at all</co>."); break
+			case -2: $('#errorMessage').html("This level's data appears to be <cr>corrupt</cr> and cannot be <cy>parsed</cy>. It most likely won't load in GD."); break
 			case -3: $('#errorMessage').html("This level's data could not be obtained because <ca>RobTop</ca> has disabled <cg>level downloading</cg>."); break;
 		}
 		popupEsc = false
@@ -216,7 +216,7 @@ function appendTriggerGroups() {
 	})
 
 	miscList.forEach(x => {
-		if (x == "objects") return;
+		if (x == "objects") return
 		else $('#misc').append(`<div class="inline miscDiv"><img height="40%" src='../assets/objects/${x.slice(0, -1)}.png'><h3 style="padding-top: 15%">x${commafy(res.misc[x][0])}<br>${res.misc[x][1]}</h3></div>`)
 	})
 

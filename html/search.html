@@ -24,7 +24,7 @@
 			<div class="supercenter" style="left: 25%; top: 43%; height: 10%;">
 				<img class="gdButton" src="../assets/whitearrow-left.png" height="160%" onclick="$('#pageSelect').val(parseInt($('#pageSelect').val() || 0) - 1); $('#pageSelect').trigger('input');">
 			</div>
-		
+
 			<div class="supercenter" style="left: 75%; top: 43%; height: 10%;">
 				<img class="gdButton" src="../assets/whitearrow-right.png" height="160%" onclick="$('#pageSelect').val(parseInt($('#pageSelect').val() || 0) + 1); $('#pageSelect').trigger('input');">
 			</div>
@@ -64,7 +64,7 @@
 	<div id="searchBox" class="supercenter dragscroll">
 		<div style="height: 4.5%"></div>
 	</div>
-	
+
 	<div class="epicbox supercenter gs" style="width: 120vh; height: 80%; pointer-events: none;"></div>
 
 	<div class="center" style="position:absolute; top: 8%; left: 0%; right: 0%">
@@ -130,7 +130,7 @@
 $('#pageDown').hide()
 $('#pageUp').hide()
 
-let accID;
+let accID
 let path = location.pathname.replace('/search/', "")
 let url = new URL(window.location.href)
 let gauntlet = url.searchParams.get('gauntlet')
@@ -140,7 +140,7 @@ let list = url.searchParams.get('list')
 let count = url.searchParams.get('count')
 let header = url.searchParams.get('header')
 let demonList = ["demonList", "demonlist"].some(x => typeof url.searchParams.get(x) == "string" || type == x)
-let loading = false;
+let loading = false
 let gauntlets = ["Fire", "Ice", "Poison", "Shadow", "Lava", "Bonus", "Chaos", "Demon", "Time", "Crystal", "Magic", "Spike", "Monster", "Doom", "Death"]
 
 let page = Math.max(1, url.searchParams.get('page')) - 1
@@ -158,7 +158,7 @@ function clean(text) {return (text || "").toString().replace(/&/g, "&#38;").repl
 
 if (type == "followed") {
 	let followed = localStorage.followed ? JSON.parse(localStorage.followed) : []
-	searchFilters += ("&creators=" + followed.join()) 
+	searchFilters += ("&creators=" + followed.join())
 }
 
 let hostMatch = window.location.host.match(/\./g)
@@ -169,7 +169,7 @@ if (hostMatch && hostMatch.length > 1) { // gdps check
 
 function Append(firstLoad, noCache) {
 
-	loading = true;
+	loading = true
 	if (!firstLoad) $('#pagenum').text(`Page ${(page + 1)}${pages ? ` of ${pages}` : ""}`)
 	$('#searchBox').html('<div style="height: 4.5%"></div>')
 	$('#pageSelect').val(page + 1)
@@ -240,7 +240,7 @@ function Append(firstLoad, noCache) {
 				<img class="help valign rightSpace" title="Likes" src="../assets/${x.disliked ? 'dis' : ''}like.png" height="14%">${x.likes}
 				${x.orbs != 0 ? `<img class="help valign rightSpace" title="Mana Orbs" src="../assets/orbs.png" height="14%">${x.orbs}` : ""}
 			</h3>
-		
+
 			<div class="center" style="position:absolute; top: ${6.5 + (y * 33.5) + (x.coins == 0 ? 2.5 : 0)}%; left: 4.4%; transform:scale(0.82); height: 10%; width: 12.5%;">
 				<img class="help spaced" id="dFace" title="${x.difficulty}${x.epic ? " (Epic)" : x.featured ? " (Featured)" : ""}" src="../assets/difficulties/${x.difficultyFace}.png" height="150%" style="margin-bottom: 0%; ${x.epic ? 'transform:scale(1.2)' : x.featured ? 'transform:scale(1.1)' : ''}">
 				<h3 title="">${x.difficulty.includes('Demon') ? "Demon" : x.difficulty}</h3>
@@ -336,7 +336,7 @@ if (!$('#header').text() && typeof userMode != "string") {
 $('.closeWindow').click(function() {$(".popup").attr('style', 'display: none;')})
 
 $('#purgeSaved').click(function() {
-	localStorage.removeItem('saved');
+	localStorage.removeItem('saved')
 	location.reload()
 })
 
@@ -344,12 +344,12 @@ var max = 9999
 var min = 1
 
 $('#pageSelect').on('input', function () {
-    var x = $(this).val();
+    var x = $(this).val()
     if ($(this).val() != "") $(this).val(Math.max(Math.min(Math.floor(x), max), min));
 });
 
 $('#pageSelect').on('blur', function () {
-    var x = $(this).val();
+    var x = $(this).val()
     if ($(this).val() != "") $(this).val(Math.max(Math.min(Math.floor(x), max), min));
 });
 
@@ -385,10 +385,10 @@ $('#shuffle').click(function() {
 })
 
 $(document).keydown(function(k) {
-	if (loading) return;
+	if (loading) return
 
 	if ($('#pageDiv').is(':visible')) {
-		if (k.which == 13) $('#pageJump').trigger('click') //enter 
+		if (k.which == 13) $('#pageJump').trigger('click') //enter
 		else return;
 	}
 

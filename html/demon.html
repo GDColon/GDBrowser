@@ -39,7 +39,7 @@
 	<div id="searchBox" class="supercenter dragscroll"; style="width: 124vh">
 		<div style="height: 4.5%"></div>
 	</div>
-	
+
 	<div class="epicbox supercenter gs" style="width: 126vh; height: 80%; pointer-events: none"></div>
 
 	<div class="center" style="position:absolute; top: 8%; left: 0%; right: 0%">
@@ -83,7 +83,7 @@ let max = 250
 let trophies = [1, 5, 10, 25, 50, 100, max]
 
 let demonID = Math.round(window.location.pathname.split('/')[2])
-let illegal = (!demonID || demonID > max || demonID < 1) 
+let illegal = (!demonID || demonID > max || demonID < 1)
 
 if (demonID > 1) $('#pageDown').attr('href', `./${demonID - 1}`)
 else $('#pageDown').hide()
@@ -92,7 +92,7 @@ if (demonID < max) $('#pageUp').attr('href', `./${demonID + 1}`)
 else $('#pageUp').hide()
 
 Fetch(`../api/gdps?current=1`).then(server => {
-if (illegal || !server.demonList) return $('#loading').hide();
+if (illegal || !server.demonList) return $('#loading').hide()
 
 fetch(`${server.demonList}api/v2/demons/listed?after=${demonID-1}&before=${demonID+1}`).then(res => res.json()).then(rawDemon => {
 
@@ -116,7 +116,7 @@ fetch(`${server.demonList}api/v2/demons/listed?after=${demonID-1}&before=${demon
 	if (x.video && x.video.includes("youtube.com")) videoIcon = "youtube"
 	else if (x.video && x.video.includes("twitch.tv")) videoIcon = "twitch"
 
-	$('#searchBox').append(`<div class="searchresult leaderboardSlot" style="align-items: center; padding-left: 1vh; height: 15%; width: 100%; position: relative;">	
+	$('#searchBox').append(`<div class="searchresult leaderboardSlot" style="align-items: center; padding-left: 1vh; height: 15%; width: 100%; position: relative;">
 
 		<h2 class="center" style="width: 12%; margin: 0% 0% 0% 0.5%; transform: scale(${1 - (Math.max(0, String(y+1).length - 1) * 0.2)}">${y+1}</h2>
 		<img class="inline spaced" src="../assets/trophies/${trophies.findIndex(z => y+1 <= z) + 1}.png" style="margin-bottom: 0%; height: 80%;">

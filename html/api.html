@@ -7,7 +7,7 @@
 	<link href="../assets/css/api.css" type="text/css" rel="stylesheet">
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,600,700,800&display=swap" rel="stylesheet">
-	
+
 	<meta id="meta-title" property="og:title" content="GDBrowser API">
     <meta id="meta-desc" property="og:description" content="It's basically the Geometry Dash API, but not terrible!">
 	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/assets/difficulties/auto.png">
@@ -35,22 +35,22 @@
 	// smooth scrolling through anchors
 	document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 		anchor.addEventListener('click', function(e) {
-			e.preventDefault();
+			e.preventDefault()
 			document.querySelector(this.getAttribute('href')).scrollIntoView({
 				behavior: 'smooth'
 			});
 		});
 	});
-	
+
 	// menu button
 	document.getElementById('menu-btn').onclick = function(){
-		document.getElementsByClassName('header-links')[0].classList.toggle('hid');
+		document.getElementsByClassName('header-links')[0].classList.toggle('hid')
 		document.getElementById('menu-btn').classList.toggle('active');
 	}
-	
+
 	for(let i = 0; i < document.getElementsByClassName('header-link').length; i++){
 		document.getElementsByClassName('header-link')[i].onclick = function(){
-			document.getElementsByClassName('header-links')[0].classList.toggle('hid');
+			document.getElementsByClassName('header-links')[0].classList.toggle('hid')
 			document.getElementById('menu-btn').classList.toggle('active');
 		}
 	}

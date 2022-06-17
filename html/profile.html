@@ -49,7 +49,7 @@
 			<img src="../assets/btn-submit.png" type="submit" height=10%; class="postButton gdButton center" style="margin-left: 1%" id="submitVote">
 		</div>
 	</div>
-	
+
 	<div class="popup" id="settingsDiv">
 		<div class="fancybox bounce center supercenter">
 			<h2 class="smaller center" style="font-size: 5.5vh">User Info</h2>
@@ -83,10 +83,10 @@
 		<h1 class="veryBig inline" style="width: inherit">
 			<img class="inline valign" id="modBadge1" style="display: none; height: 7%; cursor:help" src="../assets/mod.png" title="[[USERNAME]] is a moderator!"><!--
 			--><img class="inline valign" id="modBadge2" style="display: none; height: 7%; cursor:help" src="../assets/mod-elder.png" title="[[USERNAME]] is an elder moderator!"><!--
-			--><img class="inline valign" id="modBadge3" style="display: none; height: 7%; cursor:help" src="../assets/mod-extra.png" title="[[USERNAME]] is a custom moderator! (tier [[MODERATOR]])"><!--	
+			--><img class="inline valign" id="modBadge3" style="display: none; height: 7%; cursor:help" src="../assets/mod-extra.png" title="[[USERNAME]] is a custom moderator! (tier [[MODERATOR]])"><!--
 			--><span style="margin-left: 1%">[[USERNAME]]</span>
 		</h1>
-		
+
 		<hr style="margin-bottom: 2%" class="profilePostHide">
 		<h3 id="collectibles" class="profilePostHide">
 			<span id="stars">[[STARS]]</span> <img class="help valign" src="../assets/star.png" title="Stars">
@@ -122,7 +122,7 @@
 
 		<img src="../assets/follow-off.png" id="followOff" class="gdButton profilePostHide" style="position: absolute; left: 4.5%; bottom: 1%; width: 6%">
 		<img src="../assets/follow-on.png"  id="followOn"  class="gdButton profilePostHide" style="position: absolute; left: 4.5%; bottom: 1%; width: 6%; display: none">
-	
+
 		<a id="commentA"><img src="../assets/comments.png" class="gdButton" id="commentButton" style="position: absolute; right: 0.5%; bottom: 50%; width: 6%" onclick="$('#settingsDiv').show()"></a>
 		<img src="../assets/expanded-off.png" class="gdButton" id="compactMode" style="position: absolute; left: 2%; bottom: 45%; width: 6%">
 
@@ -137,7 +137,7 @@
 		<div class="supercenter" style="left: 5%; top: 65%; height: 10%">
 			<img class="gdButton" id="pageDown" style="display: none" src="../assets/arrow-left.png" height="95%" onclick="page -= 1; appendComments()">
 		</div>
-	
+
 		<div class="supercenter" style="left: 95%; top: 65%; height: 10%;">
 			<img class="gdButton" id="pageUp" src="../assets/arrow-right.png" height="95%" onclick="page += 1; appendComments()">
 		</div>
@@ -170,7 +170,7 @@ renderIcons()
 // set favicon
 $('#mainIcon').on('DOMNodeInserted', 'img', function () {
 	$("link[rel='icon']").attr("href", $(this).attr("src"));
-});
+})
 
 let messageText = 'Your <cy>Geometry Dash password</cy> will <cg>not be stored</cg> anywhere on the site, both <ca>locally and server-side.</ca> You can view the code used for profile posts <a class="menuLink" target="_blank" href="https://github.com/GDColon/GDBrowser/blob/master/api/post/postProfileComment.js">here</a>.'
 $('#message').html(messageText)
@@ -250,7 +250,7 @@ $('#userInfo').html($('#userInfo').html()
 .replace("[[COMMENTS]]", commentMode) + (messages == "friends" ? "<br style='line-height: 69%'><a target='_blank' style='color: lime' class='youCanClickThis2' href='../messages?sendTo=[[USERNAME]]'>Send message</a><br>(if friended)" : ""))
 
 function appendComments() {
-	if (loadingComments) return;
+	if (loadingComments) return
 	else loadingComments = true;
 
 	$('#statusDiv').html(`<div class="supercenter" id="loading" style="height: 12%; top: 62%;"><img class="spin noSelect" src="../assets/loading.png" height="105%"></div>`)
@@ -325,9 +325,9 @@ $('#submitComment').click(function () {
 		.fail(e => { allowEsc = true; $('.postbutton').show(); $('#message').text(e.responseText.includes("DOCTYPE") ? "Something went wrong..." : e.responseText) })
 })
 
-let commentID = 0;
-let likeCount, likeImg;
-let likedComments;
+let commentID = 0
+let likeCount, likeImg
+let likedComments
 let like = true;
 
 $('#likebtn').click(function() {
@@ -346,7 +346,7 @@ $(document).on('click', '.likeComment', function(cmnt) {
 	commentID = $(this).attr('commentID')
 
 	likedComments = localStorage.likedComments ? JSON.parse(localStorage.likedComments) : []
-	if (likedComments.includes(commentID)) return;
+	if (likedComments.includes(commentID)) return
 
 	lvID = $(this).attr('levelID') || 0
 	likeImg = $(this).find('img')
@@ -356,7 +356,7 @@ $(document).on('click', '.likeComment', function(cmnt) {
 
 $('#submitVote').click(function() {
 
-	if (likedComments.includes(commentID)) return $('#likeMessage').text("You've already liked/disliked this comment!");
+	if (likedComments.includes(commentID)) return $('#likeMessage').text("You've already liked/disliked this comment!")
 
 	let ID = commentID
 	let username = $('#like-username').val()
@@ -364,7 +364,7 @@ $('#submitVote').click(function() {
 	let extraID = lvID || window.location.pathname.split('/')[2]
 	let accountID = 0
 	let likeType = like ? "1" : "0"
-	
+
 	if (!ID || !username || !password || loadingComments) return $('#postComment').hide()
 
 	$('#likeMessage').text(like ? "Liking..." : "Disliking... :(")
@@ -388,7 +388,7 @@ $('#submitVote').click(function() {
 			allowEsc = true
 			likedComments.push(commentID)
 			localStorage.setItem('likedComments', JSON.stringify(likedComments))
-		})		
+		})
 		.fail(e => {allowEsc = true; $('.postbutton').show();$('#likeMessage').text(e.responseText.includes("DOCTYPE") ? "Something went wrong..." : e.responseText)})
 	})
 })
@@ -405,7 +405,7 @@ $('#compactMode').click(function() {
 
 	else {
 		$('.profilePostHide').show()
-		$('.statusIcon').hide()	
+		$('.statusIcon').hide()
 		$('#statusDiv').css('height', $('#statusDiv').attr('normalHeight'))
 		$(this).attr('src', "../assets/expanded-off.png")
 	}
@@ -416,12 +416,12 @@ $('#leavePost').on("change keyup keydown paste click", "textarea", function () {
 })
 
 $(document).keydown(function(k) {
-	
+
 	if ($('#content').is(':visible')) {
 			if (k.which == 13) k.preventDefault() //enter
 	}
 
-	if (loadingComments || $('.popup').is(":visible")) return;
+	if (loadingComments || $('.popup').is(":visible")) return
 
 	if (k.which == 37 && $('#pageDown').is(":visible")) { //left
 		$('#pageDown').trigger('click')
@@ -431,7 +431,7 @@ $(document).keydown(function(k) {
 		$('#pageUp').trigger('click')
 	}
 
-}) 
+})
 
 
 </script>

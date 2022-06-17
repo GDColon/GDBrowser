@@ -193,13 +193,13 @@ if (window.location.href.endsWith('?download')) $('#infoDiv').show()
 							"Get a life", "...", "bruh moment", "Etched into thy's memory!", "h", "I feel physical pain", "Play it in GD!", "[[ID]]", "go away", "Every copy costs 2 cents!", "Un-copied!", "Copied++", "C O P I E D", "help me please", "Open GD to play the level!", "pretend you're playing it", "Anotha one!"]
 
 		let copies = 0
-		let animated = false;
-		let freeze = false;
+		let animated = false
+		let freeze = false
 		let dailyTime = Number('[[NEXTDAILY]]') || null
 
 		$('#playButton').click(function () {
 			if (!($('#copied').is(':animated')) && !animated) {
-				animated = true;
+				animated = true
 				copies += 1
 				$('#copied').stop().fadeIn(200).delay(500).fadeOut(500, function() {
 					animated = false
@@ -207,8 +207,8 @@ if (window.location.href.endsWith('?download')) $('#infoDiv').show()
 				})
 			}
 			var temp = $("<input>");
-			$("body").append(temp);
-			temp.val('[[ID]]').select();
+			$("body").append(temp)
+			temp.val('[[ID]]').select()
 			document.execCommand("copy"); temp.remove()
 		})
 		$('.closeWindow').click(function () { if (!freeze) $(".popup").attr('style', 'display: none;') })
@@ -238,7 +238,7 @@ else {
 	.replace('[[TIME1]]', "")
 	.replace('[[TIME2]]', "")
 	.replace('[[UPLOAD]]', "")
-	.replace('[[UPDATE]]', "") + 
+	.replace('[[UPDATE]]', "") +
 	`<br><a id="additional" class="youCanClickThis" href="/[[ID]]?download"><ca>Download additional info</ca></a>`
 	)}
 
@@ -282,7 +282,7 @@ if (!"[[GDPS]]".startsWith("[")) {
 	}
 	$('#leaderboardbtn').hide()
 	$('#checkSong').remove()
-} 
+}
 
 if ("[[SONGAUTHOR]]" == "Unknown" || "[[INVALIDSONG]]" == "true") $('.songLink').hide()
 if ("[[DISLIKED]]" == "true") $('#likeImg').attr('src', '../assets/dislike.png').css('transform', 'translateY(20%)')
@@ -319,14 +319,14 @@ $(window).on('load', function() {
 		if (overflow > 3) overflow = 3
 		$('#songname').addClass('smaller').css('font-size', (6 - (overflow)) + 'vh')
 	}
-});
+})
 
-let savedLevels = JSON.parse(localStorage.getItem('saved') || '[]');
-let deleteMode = false;
+let savedLevels = JSON.parse(localStorage.getItem('saved') || '[]')
+let deleteMode = false
 if (savedLevels.includes('[[ID]]')) $('#saveButton').attr('src', '../assets/delete.png').attr('onclick', '$("#deleteDiv").show()')
 
 function saveLevel() {
-  savedLevels.push('[[ID]]');
+  savedLevels.push('[[ID]]')
   localStorage.setItem('saved', JSON.stringify(savedLevels));
 }
 
@@ -414,7 +414,7 @@ $('.artistIcon').hover(function() {
 // 			likedLevels.push('[[ID]]')
 // 			localStorage.setItem('likedLevels', JSON.stringify(likedLevels))
 // 			location.reload()
-// 		})		
+// 		})
 // 		.fail(e => {$('.postbutton').show();$('#message').text(e.responseText.includes("DOCTYPE") ? "Something went wrong..." : e.responseText)})
 // 	})
 // })

@@ -21,23 +21,23 @@
 
 			<div id="rewardLabel">
 				<img filter="rewardFilter" class="achSelect selectAll" style="margin: 0% 2% 1.9% 0%" class="gdButton inline" src="../assets/select-all.png" height="5%">
-				<h1 class="smaller inline" style="margin-bottom: 1.5%">Reward</h1>	
+				<h1 class="smaller inline" style="margin-bottom: 1.5%">Reward</h1>
 				<img filter="rewardFilter" class="achSelect selectNone" style="margin: 0% 0% 1.9% 2%" class="gdButton inline" src="../assets/select-none.png" height="5%">
-			</div>		
+			</div>
 			<div id="forms"></div>
 
 			<div id="typeLabel">
 				<img filter="typeFilter" class="achSelect selectAll" style="margin: 0% 2% 1.4% 0%" class="gdButton inline" src="../assets/select-all.png" height="5%">
-				<h1 class="smaller inline" style="margin-top: 3%; margin-bottom: 1%">Requirement</h1>	
+				<h1 class="smaller inline" style="margin-top: 3%; margin-bottom: 1%">Requirement</h1>
 				<img filter="typeFilter" class="achSelect selectNone" style="margin: 0% 0% 1.4% 2%" class="gdButton inline" src="../assets/select-none.png" height="5%">
-			</div>	
+			</div>
 			<div id="types"></div>
 
 			<div id="gameLabel">
 				<img filter="gameFilter" class="achSelect selectAll" style="margin: 0% 2% 1.8% 0%" class="gdButton inline" src="../assets/select-all.png" height="5%">
-				<h1 class="smaller inline" style="margin-top: 1%; margin-bottom: 1.3%">Game</h1>	
+				<h1 class="smaller inline" style="margin-top: 1%; margin-bottom: 1.3%">Game</h1>
 				<img filter="gameFilter" class="achSelect selectNone" style="margin: 0% 0% 1.8% 2%" class="gdButton inline" src="../assets/select-none.png" height="5%">
-			</div>	
+			</div>
 			<div id="games">
 				<img class="gdButton achFilter gameFilter" src="../assets/achievements/gd.png"  height="12%" style="margin: 0% 1%" title="Geometry Dash" filter="gd">
 				<img class="gdButton achFilter gameFilter" src="../assets/achievements/gdm.png" height="12%" style="margin: 0% 1%" title="Geometry Dash Meltdown" filter="meltdown">
@@ -59,7 +59,7 @@
 	<div id="searchBox" class="supercenter dragscroll" style="width: 128vh">
 		<div style="height: 4.5%"></div>
 	</div>
-	
+
 	<div class="epicbox supercenter gs" style="width: 126vh; height: 80%; pointer-events: none"></div>
 
 	<div class="center" style="position:absolute; top: 8%; left: 0%; right: 0%">
@@ -99,7 +99,7 @@ function append(reset=true) {
 	$('#searchBox').html(`<div style="height: 4.5%"></div>`)
 	achievements.forEach(x => {
 
-		let iconImg = `"`;
+		let iconImg = `"`
 		if (forms.includes(x.rewardType)) iconImg = `../iconkit/premade/${x.rewardType}_${x.rewardID}.png" width="90%" title="${x.rewardType}_${x.rewardID < 10 ? "0" : ""}${x.rewardID}"`
 		else if (x.rewardType.startsWith("color")) {
 			let col = colors[x.rewardID]
