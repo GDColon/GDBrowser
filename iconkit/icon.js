@@ -1,3 +1,4 @@
+"use strict";
 const WHITE = 0xffffff
 const colorNames = { "1": "Color 1", "2": "Color 2", "g": "Glow", "w": "White", "u": "UFO Dome" }
 const formNames = { "player": "icon", "player_ball": "ball", "bird": "ufo", "dart": "wave" }
@@ -7,10 +8,10 @@ const loadedNewIcons = {}
 
 const TAU = Math.PI * 2
 // by default, converts degrees to rads
-const toRadians = (angle, scale = 360) => TAU / scale * angle
-// by default, converts rad to deg
-const fromRadians = (rad, scale = 360) => rad / (TAU / scale)
-// `scale` is the num of subdivisions in a cycle. More info: https://en.wikipedia.org/wiki/Turn_(angle)
+let toRadians = (angle, scale = 360) => TAU / scale * angle
+// default rad to deg
+let fromRadians = (rad, scale = 360) => rad / (TAU / scale)
+// `scale` is the num of subdivisions in a turn. More info: https://en.wikipedia.org/wiki/Turn_(angle)
 // `scale = 400` corresponds to gradians, `256` to byte radians, and `100` to percentage of a turn
 
 let positionMultiplier = 4
@@ -31,7 +32,7 @@ function positionPart(part, partIndex, layer, formName, isNew, isGlow) {
         if (foundTint > 0) {
             let darkenFilter = new PIXI.filters.ColorMatrixFilter()
             darkenFilter.brightness(0)
-            darkenFilter.alpha = (255 - foundTint) / 255 // same as `1 - foundTint / 0xff`
+            darkenFilter.alpha = 1 - foundTint / 255
             layer.filters = [darkenFilter]
         }
     }
@@ -235,7 +236,7 @@ class Icon {
 
     setColor(colorType, newColor, extra={}) {
         let colorStr = String(colorType).toLowerCase()
-        if (!colorType || !Object.hasOwn(this.colors, colorStr)) return
+        if (!colorType || !this.colors.hasOwnProperty(colorStr)) return
         this.colors[colorStr] = newColor
         let newGlow = getGlowColor(this.colors)
         this.getAllLayers().forEach(x => {
