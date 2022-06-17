@@ -128,7 +128,7 @@ function analyze_level(level, rawData) {
         if (id in misc_objects) {
             const name = misc_objects[id]
             if (name in miscCounts) {
-                miscCounts[name][0] += 1
+                miscCounts[name][0]++
             } else {
                 miscCounts[name] = [1, ids.misc[name][0]]
             }
@@ -189,7 +189,7 @@ function analyze_level(level, rawData) {
     response.colors = []
 
     triggerGroups.forEach(x => {
-        if (response.triggerGroups['Group ' + x]) response.triggerGroups['Group ' + x] += 1
+        if (response.triggerGroups['Group ' + x]) response.triggerGroups['Group ' + x]++
         else response.triggerGroups['Group ' + x] = 1
     })
 
