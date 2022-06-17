@@ -1,10 +1,11 @@
-const express = require('express');
-const request = require('request');
-const compression = require('compression');
-const timeout = require('connect-timeout');
-const rateLimit = require("express-rate-limit");
-const fs = require("fs");
-const app = express();
+"use strict";
+const express = require('express')
+const request = require('request')
+const compression = require('compression')
+const timeout = require('connect-timeout')
+const rateLimit = require("express-rate-limit")
+const fs = require("fs")
+const app = express()
 
 let serverList = require('./servers.json')
 let pinnedServers = serverList.filter(x => x.pinned)
@@ -34,7 +35,7 @@ const RL2 = rateLimit({
   keyGenerator: function(req) { return req.headers['x-real-ip'] || req.headers['x-forwarded-for'] }
 })
 
-let XOR = require('./classes/XOR.js');
+let XOR = require('./classes/XOR.js')
 let achievements = require('./misc/achievements.json')
 let achievementTypes = require('./misc/achievementTypes.json')
 let music = require('./misc/music.json')
@@ -51,10 +52,10 @@ app.servers.forEach(x => {
 app.mainEndpoint = app.servers.find(x => !x.id).endpoint // boomlings.com unless changed in fork
 
 app.set('json spaces', 2)
-app.use(compression());
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
-app.use(timeout('20s'));
+app.use(compression())
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+app.use(timeout('20s'))
 
 app.use(async function(req, res, next) {
 
@@ -123,12 +124,12 @@ app.timeSince = function(id, time) {
   if (!time) time = app.lastSuccess[id]
   let secsPassed = Math.floor((Date.now() - time) / 1000)
   let minsPassed = Math.floor(secsPassed / 60)
-  secsPassed -= 60 * minsPassed;
+  secsPassed -= 60 * minsPassed
   return `${app.actuallyWorked[id] ? "" : "~"}${minsPassed}m ${secsPassed}s`
 }
 
 app.userCache = function(id, accountID, playerID, name) {
-  
+
   if (!accountID || accountID == "0" || (name && name.toLowerCase() == "robtop" && accountID != "71") || !app.config.cacheAccountIDs) return
   if (!playerID) return app.accountCache[id][accountID.toLowerCase()]
   let cacheStuff = [accountID, playerID, name]
@@ -162,14 +163,14 @@ catch(e) {
 }
 
 app.parseResponse = function (responseBody, splitter=":") {
-  if (!responseBody || responseBody == "-1") return {};
+  if (!responseBody || responseBody == "-1") return {}
   if (responseBody.startsWith("\nWarning:")) responseBody = responseBody.split("\n").slice(2).join("\n").trim() // GDPS'es are wild
   if (responseBody.startsWith("<br />")) responseBody = responseBody.split("<br />").slice(2).join("<br />").trim() // Seriously screw this
-  let response = responseBody.split('#')[0].split(splitter);
-  let res = {};
+  let response = responseBody.split('#')[0].split(splitter)
+  let res = {}
   for (let i = 0; i < response.length; i += 2) {
   res[response[i]] = response[i + 1]}
-  return res  
+  return res
 }
 
 //xss bad
@@ -177,10 +178,10 @@ app.clean = function(text) {return !text || typeof text != "string" ? text : tex
 
 // ASSETS
 
-app.use('/assets', express.static(__dirname + '/assets', {maxAge: "7d"}));
-app.use('/assets/css', express.static(__dirname + '/assets/css'));
+app.use('/assets', express.static(__dirname + '/assets', {maxAge: "7d"}))
+app.use('/assets/css', express.static(__dirname + '/assets/css'))
 
-app.use('/iconkit', express.static(__dirname + '/iconkit'));
+app.use('/iconkit', express.static(__dirname + '/iconkit'))
 app.get("/global.js", function(req, res) { res.status(200).sendFile(__dirname + "/misc/global.js") })
 app.get("/dragscroll.js", function(req, res) { res.status(200).sendFile(__dirname + "/misc/dragscroll.js") })
 
@@ -208,14 +209,14 @@ app.get("/assets/:dir*?", function(req, res) {
 
 // POST REQUESTS
 
-app.post("/like", RL, function(req, res) { app.run.like(app, req, res) })  
-app.post("/postComment", RL, function(req, res) { app.run.postComment(app, req, res) })  
-app.post("/postProfileComment", RL, function(req, res) { app.run.postProfileComment(app, req, res) })  
+app.post("/like", RL, function(req, res) { app.run.like(app, req, res) })
+app.post("/postComment", RL, function(req, res) { app.run.postComment(app, req, res) })
+app.post("/postProfileComment", RL, function(req, res) { app.run.postProfileComment(app, req, res) })
 
 app.post("/messages", RL, function(req, res) { app.run.getMessages(app, req, res) })
 app.post("/messages/:id", RL, function(req, res) { app.run.fetchMessage(app, req, res) })
-app.post("/deleteMessage", RL, function(req, res) { app.run.deleteMessage(app, req, res) })  
-app.post("/sendMessage", RL, function(req, res) { app.run.sendMessage(app, req, res) })  
+app.post("/deleteMessage", RL, function(req, res) { app.run.deleteMessage(app, req, res) })
+app.post("/sendMessage", RL, function(req, res) { app.run.sendMessage(app, req, res) })
 
 app.post("/accurateLeaderboard", function(req, res) { app.run.accurate(app, req, res, true) })
 app.post("/analyzeLevel", function(req, res) { app.run.analyze(app, req, res) })
@@ -226,11 +227,11 @@ let onePointNineDisabled = ['daily', 'weekly', 'gauntlets', 'messages']
 let downloadDisabled = ['daily', 'weekly']
 let gdpsHide = ['achievements', 'messages']
 
-app.get("/", function(req, res) { 
+app.get("/", function(req, res) {
   if (req.query.hasOwnProperty("offline") || (req.offline && !req.query.hasOwnProperty("home"))) res.status(200).sendFile(__dirname + "/html/offline.html")
   else {
     fs.readFile('./html/home.html', 'utf8', function (err, data) {
-      let html = data;
+      let html = data
       if (req.isGDPS) {
         html = html.replace('"levelBG"', '"levelBG purpleBG"')
         .replace(/Geometry Dash Browser!/g, req.server.name + " Browser!")
@@ -253,7 +254,7 @@ app.get("/", function(req, res) {
       return res.status(200).send(html)
     })
   }
-})   
+})
 
 app.get("/achievements", function(req, res) { res.status(200).sendFile(__dirname + "/html/achievements.html") })
 app.get("/analyze/:id", function(req, res) { res.status(200).sendFile(__dirname + "/html/analyze.html") })
@@ -285,7 +286,7 @@ app.get("/api/mappacks", function(req, res) { app.run.mappacks(app, req, res) })
 app.get("/api/profile/:id", RL2, function(req, res) { app.run.profile(app, req, res, true) })
 app.get("/api/search/:text", RL2, function(req, res) { app.run.search(app, req, res) })
 app.get("/api/song/:song", function(req, res){ app.run.song(app, req, res) })
- 
+
 
 // REDIRECTS
 
@@ -301,9 +302,9 @@ app.get("/d/:id", function(req, res) { res.redirect('/demon/' + req.params.id) }
 
 
 // API AND HTML
-   
+
 app.get("/u/:id", function(req, res) { app.run.profile(app, req, res) })
-app.get("/:id", function(req, res) { app.run.level(app, req, res) }) 
+app.get("/:id", function(req, res) { app.run.level(app, req, res) })
 
 
 // MISC
@@ -345,7 +346,7 @@ newIcons.forEach(x => {
 })
 sacredTexts.newIconCounts = newIconCounts
 
-app.get('/api/icons', function(req, res) { 
+app.get('/api/icons', function(req, res) {
   res.status(200).send(sacredTexts);
 });
 
@@ -359,11 +360,11 @@ fs.readdirSync('./iconkit/extradata').forEach(x => {
 iconKitFiles.previewIcons = previewIcons
 iconKitFiles.newPreviewIcons = newPreviewIcons
 
-app.get('/api/iconkit', function(req, res) { 
+app.get('/api/iconkit', function(req, res) {
   let sample = [JSON.stringify(sampleIcons[Math.floor(Math.random() * sampleIcons.length)].slice(1))]
   let iconserver = req.isGDPS ? req.server.name : undefined
   res.status(200).send(Object.assign(iconKitFiles, {sample, server: iconserver, noCopy: req.onePointNine || req.offline}));
-});
+})
 
 app.get('/icon/:text', function(req, res) {
   let iconID = Number(req.query.icon || 1)
@@ -377,13 +378,13 @@ app.get('/icon/:text', function(req, res) {
 app.get('*', function(req, res) {
   if (req.path.startsWith('/api') || req.path.startsWith("/iconkit")) res.status(404).send('-1')
   else res.redirect('/search/404%20')
-});
+})
 
 app.use(function (err, req, res, next) {
   if (err && err.message == "Response timeout") res.status(504).send('Internal server error! (Timed out)')
 })
 
-process.on('uncaughtException', (e) => { console.log(e) });
-process.on('unhandledRejection', (e, p) => { console.log(e) });
+process.on('uncaughtException', e => { console.log(e) })
+process.on('unhandledRejection', (e, p) => { console.log(e) })
 
 app.listen(app.config.port, () => console.log(`Site online! (port ${app.config.port})`))
