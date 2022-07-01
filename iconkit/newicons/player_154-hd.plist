@@ -4,63 +4,63 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>ship_53_001.png</key>
+            <key>player_154_001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{82,43}</string>
+                <string>{61,61}</string>
                 <key>spriteSourceSize</key>
-                <string>{82,43}</string>
+                <string>{61,61}</string>
                 <key>textureRect</key>
-                <string>{{90,2},{82,43}}</string>
+                <string>{{69,2},{61,61}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>ship_53_2_001.png</key>
+            <key>player_154_2_001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-14,0}</string>
+                <string>{0,8}</string>
                 <key>spriteSize</key>
-                <string>{37,36}</string>
+                <string>{37,15}</string>
                 <key>spriteSourceSize</key>
-                <string>{65,36}</string>
+                <string>{37,31}</string>
                 <key>textureRect</key>
-                <string>{{174,2},{37,36}}</string>
+                <string>{{132,58},{37,15}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>player_154_extra_001.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,8}</string>
+                <key>spriteSize</key>
+                <string>{54,39}</string>
+                <key>spriteSourceSize</key>
+                <string>{54,55}</string>
+                <key>textureRect</key>
+                <string>{{132,2},{54,39}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>ship_53_extra_001.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,2}</string>
-                <key>spriteSize</key>
-                <string>{74,15}</string>
-                <key>spriteSourceSize</key>
-                <string>{74,19}</string>
-                <key>textureRect</key>
-                <string>{{90,47},{74,15}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>ship_53_glow_001.png</key>
+            <key>player_154_glow_001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{86,47}</string>
+                <string>{65,65}</string>
                 <key>spriteSourceSize</key>
-                <string>{86,47}</string>
+                <string>{65,65}</string>
                 <key>textureRect</key>
-                <string>{{2,2},{86,47}}</string>
+                <string>{{2,2},{65,65}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -74,13 +74,13 @@
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
-            <string>icons/ship_53-hd.png</string>
+            <string>icons/player_154-hd.png</string>
             <key>size</key>
-            <string>{212,64}</string>
+            <string>{173,75}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:1c73fcc5c5b28e7944c0452bae72311f:b3934ac3aee76bb44cc0ca9abbba48fb:44d4ee18221503f96ab94f3cc8b09e0f$</string>
+            <string>$TexturePacker:SmartUpdate:82d08c1076588bf2603ce986bd15f219:44afa9caf4a9318f0c16498c02bae3bf:8afb5e6525b2e132b2318dad18b44642$</string>
             <key>textureFileName</key>
-            <string>icons/ship_53-hd.png</string>
+            <string>icons/player_154-hd.png</string>
         </dict>
     </dict>
 </plist>

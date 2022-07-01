@@ -11,13 +11,13 @@
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{70,70}</string>
+                <string>{71,70}</string>
                 <key>spriteSourceSize</key>
-                <string>{70,70}</string>
+                <string>{71,70}</string>
                 <key>textureRect</key>
-                <string>{{2,77},{70,70}}</string>
+                <string>{{79,2},{71,70}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>player_ball_44_2_001.png</key>
             <dict>
@@ -30,7 +30,7 @@
                 <key>spriteSourceSize</key>
                 <string>{65,65}</string>
                 <key>textureRect</key>
-                <string>{{2,149},{65,65}}</string>
+                <string>{{79,75},{65,65}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -41,11 +41,11 @@
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{57,57}</string>
+                <string>{64,64}</string>
                 <key>spriteSourceSize</key>
-                <string>{57,57}</string>
+                <string>{64,64}</string>
                 <key>textureRect</key>
-                <string>{{69,149},{57,57}}</string>
+                <string>{{2,78},{64,64}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -56,11 +56,11 @@
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{74,73}</string>
+                <string>{75,74}</string>
                 <key>spriteSourceSize</key>
-                <string>{74,73}</string>
+                <string>{75,74}</string>
                 <key>textureRect</key>
-                <string>{{2,2},{74,73}}</string>
+                <string>{{2,2},{75,74}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -76,9 +76,9 @@
             <key>realTextureFileName</key>
             <string>icons/player_ball_44-hd.png</string>
             <key>size</key>
-            <string>{128,216}</string>
+            <string>{151,144}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:8535d7330b78eaa52272cb612b841099:151ed26eab1ce2afd602311d6cf74c90:b2d0e63be4563c565e8ac5ec9bb7b8fa$</string>
+            <string>$TexturePacker:SmartUpdate:f3427dfdf82db090b1d9cf00bf17cb23:eaa5811b0965ed65aa77db3407f443dd:b2d0e63be4563c565e8ac5ec9bb7b8fa$</string>
             <key>textureFileName</key>
             <string>icons/player_ball_44-hd.png</string>
         </dict>
