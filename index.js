@@ -6,6 +6,15 @@ const rateLimit = require("express-rate-limit");
 const fs = require("fs");
 const app = express();
 
+if ("serviceWorker" in navigator) {
+window.addEventListener("load", function() {
+navigator.serviceWorker
+  .register("/serviceWorker.js")
+  .then(res => console.log("service worker registered"))
+  .catch(err => console.log("service worker not registered", err))
+})
+}
+
 let serverList = require('./servers.json')
 let pinnedServers = serverList.filter(x => x.pinned)
 let notPinnedServers = serverList.filter(x => !x.pinned).sort((a, b) => a.name.localeCompare(b.name))
