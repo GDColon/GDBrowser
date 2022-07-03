@@ -1,8 +1,10 @@
-const XOR = require(__dirname + "/../classes/XOR")
-const music = require(__dirname + "/../misc/music.json")
+"use strict";
+const XOR = require("./XOR")
+const music = require("../misc/music.json")
 
 let orbs = [0, 0, 50, 75, 125, 175, 225, 275, 350, 425, 500]
 let length = ['Tiny', 'Short', 'Medium', 'Long', 'XL']
+// this can't be shortened with a loop
 let difficulty = { 0: 'Unrated', 10: 'Easy', 20: 'Normal', 30: 'Hard', 40: 'Harder', 50: 'Insane' }
 let demonTypes = { 3: "Easy", 4: "Medium", 5: "Insane", 6: "Extreme" }
 let dailyLimit = 100000
@@ -52,7 +54,7 @@ class Level {
 
         if (levelInfo[17] > 0) this.difficulty = (demonTypes[levelInfo[43]] || "Hard") + " Demon"
         if (levelInfo[25] > 0) this.difficulty = 'Auto'
-        this.difficultyFace = `${levelInfo[17] != 1 ? this.difficulty.toLowerCase() : `demon-${this.difficulty.toLowerCase().split(' ')[0]}`}${this.epic ? '-epic' : `${this.featured ? '-featured' : ''}`}`
+        this.difficultyFace = `${levelInfo[17] != 1 ? this.difficulty.toLowerCase() : `demon-${this.difficulty.toLowerCase().split(' ', 1)[0]}`}${this.epic ? '-epic' : `${this.featured ? '-featured' : ''}`}`
 
         if (this.password && this.password != 0) {
             let xor = new XOR()
@@ -92,4 +94,4 @@ class Level {
     }
 }
 
-module.exports = Level;
+module.exports = Level
