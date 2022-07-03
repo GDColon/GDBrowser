@@ -10,18 +10,25 @@ $('body').append(`
 `)
 
 
-$(window).resize(function () {
-	//these alternatives may be helpful: https://stackoverflow.com/a/4917796
+$(window).resize(function() {
+	// these alternatives may be helpful: https://stackoverflow.com/a/4917796
 	let isPortrait = window.innerHeight > window.innerWidth - 75
 	$('#everything')[isPortrait ? 'hide' : 'show']()
 	$('#tooSmall')[isPortrait ? 'show' : 'hide']()
 })
 
+// supports Numbers, BigInts, and Strings!
+const clamp = (x, min, max) => x < min ? min : (x > max ? max : x) // interval [min, max]
+
+const randRange = (min, max) => Math.random() * (max - min) + +min // prevent string concat
+// interval [min, max)
+const randInt = (min, max) => Math.floor(randRange(min, max))
+
+//fn, to always get an updated answer
 let isDownloadURL = () => window.location.href.endsWith('?download')
-let randRange = (min, max) => Math.random() * (max - min) + +min // [min, max)
 
 function saveUrl() {
-	if ( !isDownloadURL() ) sessionStorage.setItem('prevUrl', window.location.href);
+	if ( !isDownloadURL() ) sessionStorage.setItem('prevUrl', window.location.href)
 }
 
 function backButton() {
@@ -44,7 +51,7 @@ function Fetch(link) {
 		fetch(link).then(resp => {
 			if (!resp.ok) return rej(resp)
 			gdps = resp.headers.get('gdps')
-			if (gdps && gdps.startsWith('1.9/')) { onePointNine = true; gdps = gdps.slice(4) }
+			if (gdps?.startsWith('1.9/')) { onePointNine = true; gdps = gdps.slice(4) }
 			resp.json().then(res)
 		}).catch(rej)
 	})
@@ -54,11 +61,12 @@ let allowEsc = true
 let popupEsc = true
 
 $(document).keydown(function(k) {
-	const ESC = 27
-	if (k.keyCode != ESC || !allowEsc) return
+	if (k.code != 'Escape' || !allowEsc) return
 	k.preventDefault()
-	if (popupEsc && $('.popup').is(":visible")) $('.popup').hide();
-	else $('#backButton').trigger('click')
+	if (popupEsc && $('.popup').is(":visible"))
+		$('.popup').hide()
+	else
+		$('#backButton').trigger('click')
 })
 
 let iconData = null
@@ -73,7 +81,7 @@ async function renderIcons() {
 	if (overrideLoader) return
 	let iconsToRender = $('gdicon:not([rendered], [dontload])')
 	if (iconsToRender.length < 1) return
-	iconData ||= await Fetch("../api/icons")
+	iconData ||= await Fetch("/api/icons")
 	iconCanvas ||= document.createElement('canvas')
 	iconRenderer ||= new PIXI.Application({ view: iconCanvas, width: 300, height: 300, backgroundAlpha: 0})
 	if (loader.loading) return overrideLoader = true
@@ -136,15 +144,16 @@ const inaccessibleLinkSelector = "*:not(a) > img.gdButton, .leaderboardTab, .gdc
 document.querySelectorAll(inaccessibleLinkSelector)
 	.forEach(elem => { elem.setAttribute('tabindex', 0) })
 
-document.getElementById('backButton')?.setAttribute('tabindex', 1); // Prioritize back button, first element to be focused
+document.getElementById('backButton')?.setAttribute('tabindex', 1) // Prioritize back button, first element to be focused
 
 // Event listener to run a .click() function if
-window.addEventListener("keydown", e => {
-	if(e.key !== 'Enter') return
+window.addEventListener("keydown", k => {
+	// standard and Numpad support
+	if ( !k.code.endsWith('Enter') ) return
 
 	const active = document.activeElement
 	const isUnsupportedLink = active.hasAttribute('tabindex') // Only click on links that aren't already natively supported to prevent double clicking
-	if(isUnsupportedLink) active.click();
+	if(isUnsupportedLink) active.click()
 })
 
 // stolen from stackoverflow

@@ -12,7 +12,7 @@ let frames = {}
 
 function addIcons(data) {
   Object.keys(data)
-    .filter(k => formList.includes(k.split("_")[0]))
+    .filter(k => formList.includes(k.split("_", 1)[0]))
     .forEach(k => frames[k] = data[k])
 }
 

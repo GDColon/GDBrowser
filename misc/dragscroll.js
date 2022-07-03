@@ -2,7 +2,7 @@
 function somethingSelected() {
   return typeof window.getSelection == 'function' && window.getSelection().toString() != "";
 }
-const remover = / |\n|\t/g; //should it be /\s/g ?
+const remover = /[ \n\t]/g; //should it be /\s/g ?
 $('.dragscroll').each(function(_, el) {
   let previouslyMouseDown = false
   el.addEventListener('mousemove', function(e) {
