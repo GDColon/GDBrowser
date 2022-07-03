@@ -5,8 +5,8 @@ module.exports = async (app, req, res) => {
 
     let songID = req.params.song
     req.gdRequest('getGJSongInfo', {songID: songID}, function(err, resp, body) {
-        return err ?
-            res.sendError(400) :
-            res.send(!body.startsWith("-") && body.length > 10)
+        return err
+            ? res.sendError(400)
+            : res.send(!body.startsWith("-") && body.length > 10)
     })
 }
