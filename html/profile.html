@@ -1,7 +1,7 @@
 <head>
 	<title>[[USERNAME]]'s Profile</title>
 	<meta charset="utf-8">
-	<link href="../assets/css/browser.css?v=1" type="text/css" rel="stylesheet">
+	<link href="/assets/css/browser.css?v=1" type="text/css" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
 	<link rel="icon" href="">
 	<meta id="meta-title" property="og:title" content="[[USERNAME]]'s profile">
@@ -26,16 +26,16 @@
 			<div style="min-height: 20%; max-height: 20%">
 				<p id="message" style="padding: 0% 10%; margin-top: 2%"></p>
 			</div>
-			<img src="../assets/btn-cancel.png" height=11%; class="postButton gdButton center" style="margin-right: 1%" onclick="$('#leavePost').hide(); $('textarea').val('')">
-			<img src="../assets/btn-submit.png" type="submit" height=11%; class="postButton gdButton center" style="margin-left: 1%" id="submitComment">
+			<img src="/assets/btn-cancel.png" height=11%; class="postButton gdButton center" style="margin-right: 1%" onclick="$('#leavePost').hide(); $('textarea').val('')">
+			<img src="/assets/btn-submit.png" type="submit" height=11%; class="postButton gdButton center" style="margin-left: 1%" id="submitComment">
 		</div>
 	</div>
 
 	<div class="popup" id="likeComment">
 		<div class="brownbox bounce center supercenter" style="height: 75%; width: 100vh">
 			<h1 class="smaller center" style="font-size: 5.5vh">Vote</h1>
-			<img src="../assets/smashLike.png" id="likebtn" class="inline gdButton likeButton"><!--
-		 --><img src="../assets/smashDislike.png" id="dislikebtn" class="inline gdButton likeButton youAreNotTheOne">
+			<img src="/assets/smashLike.png" id="likebtn" class="inline gdButton likeButton"><!--
+		 --><img src="/assets/smashDislike.png" id="dislikebtn" class="inline gdButton likeButton youAreNotTheOne">
 			<form action="nothing lol">
 				<h3 class="center">GD Username</h3>
 				<input type="text" name="gdbrowser" id="like-username" maxlength="50" style="height: 8vh; width: 90%; text-align: center; margin-top: 0.5%">
@@ -45,8 +45,8 @@
 			<div style="min-height: 18%; max-height: 18%">
 				<p id="likeMessage" style="padding: 0% 10%; margin-top: 2.5%"></p>
 			</div>
-			<img src="../assets/btn-cancel.png" height=10%; class="postButton gdButton center" style="margin-right: 1%" onclick="$('#likeComment').hide(); $('#likebtn').trigger('click');">
-			<img src="../assets/btn-submit.png" type="submit" height=10%; class="postButton gdButton center" style="margin-left: 1%" id="submitVote">
+			<img src="/assets/btn-cancel.png" height=10%; class="postButton gdButton center" style="margin-right: 1%" onclick="$('#likeComment').hide(); $('#likebtn').trigger('click');">
+			<img src="/assets/btn-submit.png" type="submit" height=10%; class="postButton gdButton center" style="margin-left: 1%" id="submitVote">
 		</div>
 	</div>
 
@@ -58,43 +58,43 @@
 				Private Messages: [[DMS]]<br>
 				Comment History: [[COMMENTS]]<br>
 			</p>
-			<img src="../assets/ok.png" width=20%; class="gdButton center" onclick="$('#settingsDiv').hide()">
+			<img src="/assets/ok.png" width=20%; class="gdButton center" onclick="$('#settingsDiv').hide()">
 		</div>
 	</div>
 
 	<div style="position:absolute; bottom: 0%; left: 0%; width: 100%">
-		<img class="cornerPiece" src="../assets/corner.png" width=7%;>
+		<img class="cornerPiece" src="/assets/corner.png" width=7%;>
 	</div>
 
 	<div style="position:absolute; bottom: 0%; right: 0%; width: 100%; text-align: right;">
-		<img class="cornerPiece" src="../assets/corner.png" width=7%; style="transform: scaleX(-1)">
+		<img class="cornerPiece" src="/assets/corner.png" width=7%; style="transform: scaleX(-1)">
 	</div>
 
 	<div style="position:absolute; top: 2%; left: 1.5%; width: 10%; height: 25%; pointer-events: none">
-		<img class="gdButton yesClick" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()">
+		<img class="gdButton yesClick" id="backButton" src="/assets/back.png" height="30%" onclick="backButton()">
 	</div>
 
 	<div class="brownBox center supercenter" style="width: 135vh; height: 82%; margin-top: -0.7%">
 
 		<div id="globalrank0" style="position: absolute; left: 0.3%; top: 1.5%; width: 18%; text-align: left">
-			<p style="margin: 0;"><img src="../assets/trophy.png" class="inline valign help profileTrophy" width="22%" title="Global Rank"> [[RANK]]</p>
+			<p style="margin: 0;"><img src="/assets/trophy.png" class="inline valign help profileTrophy" width="22%" title="Global Rank"> [[RANK]]</p>
 		</div>
 
 		<h1 class="veryBig inline" style="width: inherit">
-			<img class="inline valign" id="modBadge1" style="display: none; height: 7%; cursor:help" src="../assets/mod.png" title="[[USERNAME]] is a moderator!"><!--
-			--><img class="inline valign" id="modBadge2" style="display: none; height: 7%; cursor:help" src="../assets/mod-elder.png" title="[[USERNAME]] is an elder moderator!"><!--
-			--><img class="inline valign" id="modBadge3" style="display: none; height: 7%; cursor:help" src="../assets/mod-extra.png" title="[[USERNAME]] is a custom moderator! (tier [[MODERATOR]])"><!--
+			<img class="inline valign" id="modBadge1" style="display: none; height: 7%; cursor:help" src="/assets/mod.png" title="[[USERNAME]] is a moderator!"><!--
+			--><img class="inline valign" id="modBadge2" style="display: none; height: 7%; cursor:help" src="/assets/mod-elder.png" title="[[USERNAME]] is an elder moderator!"><!--
+			--><img class="inline valign" id="modBadge3" style="display: none; height: 7%; cursor:help" src="/assets/mod-extra.png" title="[[USERNAME]] is a custom moderator! (tier [[MODERATOR]])"><!--
 			--><span style="margin-left: 1%">[[USERNAME]]</span>
 		</h1>
 
 		<hr style="margin-bottom: 2%" class="profilePostHide">
 		<h3 id="collectibles" class="profilePostHide">
-			<span id="stars">[[STARS]]</span> <img class="help valign" src="../assets/star.png" title="Stars">
-			<span id="diamonds">[[DIAMONDS]]</span> <img class="help valign" src="../assets/diamond.png" title="Diamonds">
-			<span id="coins">[[COINS]]</span> <img class="help valign" src="../assets/coin.png" title="Secret Coins">
-			<span id="usercoins">[[USERCOINS]]</span> <img class="help valign"src="../assets/silvercoin.png" title="User Coins">
-			<span id="demons">[[DEMONS]]</span> <img class="help valign"src="../assets/demon.png" title="Demons">
-			<span id="creatorpoints" style="display: none"><span id="cp">[[CP]]</span> <img class="help valign" src="../assets/cp.png" title="Creator Points"></span>
+			<span id="stars">[[STARS]]</span> <img class="help valign" src="/assets/star.png" title="Stars">
+			<span id="diamonds">[[DIAMONDS]]</span> <img class="help valign" src="/assets/diamond.png" title="Diamonds">
+			<span id="coins">[[COINS]]</span> <img class="help valign" src="/assets/coin.png" title="Secret Coins">
+			<span id="usercoins">[[USERCOINS]]</span> <img class="help valign"src="/assets/silvercoin.png" title="User Coins">
+			<span id="demons">[[DEMONS]]</span> <img class="help valign"src="/assets/demon.png" title="Demons">
+			<span id="creatorpoints" style="display: none"><span id="cp">[[CP]]</span> <img class="help valign" src="/assets/cp.png" title="Creator Points"></span>
 		</h3>
 
 		<div class="lightBox center profilePostHide" id="iconsDiv" style="margin: 2% auto; width: 105vh">
@@ -105,45 +105,45 @@
 			<gdicon iconID=[[WAVE]] iconForm="wave" col1="[[COL1]]" col2="[[COL2]]" glow="[[GLOW]]" imgStyle="height: 7%"></gdicon>
 			<gdicon iconID=[[ROBOT]] iconForm="robot" col1="[[COL1]]" col2="[[COL2]]" glow="[[GLOW]]"></gdicon>
 			<gdicon iconID=[[SPIDER]] iconForm="spider" col1="[[COL1]]" col2="[[COL2]]" glow="[[GLOW]]"></gdicon>
-			<img src="../assets/deatheffects/[[DEATHEFFECT]].png" title="Death Effect [[DEATHEFFECT]]" id="deatheffect">
+			<img src="/assets/deatheffects/[[DEATHEFFECT]].png" title="Death Effect [[DEATHEFFECT]]" id="deatheffect">
 		</div>
 
 		<div class="lightBox center dragscroll" id="statusDiv" normalHeight="36vh" compactHeight="69vh" style="margin: 2% auto; width: 105vh; height: 36vh; background-color: #BE6F3F">
 		</div>
 
 		<div class="center profilePostHide" style="margin: 1.5% auto 2.5% auto;">
-			<a id="msgA" target="_blank"><img src="../assets/messages.png" height="10%" id="msgButton" class="sideSpace gdButton" onclick="$('#settingsDiv').show()"></a>
-			<img src="../assets/friends.png" height="10%" id="friendButton" class="sideSpace gdButton" onclick="$('#settingsDiv').show()">
+			<a id="msgA" target="_blank"><img src="/assets/messages.png" height="10%" id="msgButton" class="sideSpace gdButton" onclick="$('#settingsDiv').show()"></a>
+			<img src="/assets/friends.png" height="10%" id="friendButton" class="sideSpace gdButton" onclick="$('#settingsDiv').show()">
 		</div>
 
 		<div style="position: absolute; bottom: 0%; left: 12%;" class="profilePostHide">
 			<p style="text-align: left; font-size: 2.2vh; color: rgba(0, 0, 0, 0.5)">Account ID: [[ACCOUNTID]]<br>Player ID: [[PLAYERID]]</p>
 		</div>
 
-		<img src="../assets/follow-off.png" id="followOff" class="gdButton profilePostHide" style="position: absolute; left: 4.5%; bottom: 1%; width: 6%">
-		<img src="../assets/follow-on.png"  id="followOn"  class="gdButton profilePostHide" style="position: absolute; left: 4.5%; bottom: 1%; width: 6%; display: none">
+		<img src="/assets/follow-off.png" id="followOff" class="gdButton profilePostHide" style="position: absolute; left: 4.5%; bottom: 1%; width: 6%">
+		<img src="/assets/follow-on.png"  id="followOn"  class="gdButton profilePostHide" style="position: absolute; left: 4.5%; bottom: 1%; width: 6%; display: none">
 
-		<a id="commentA"><img src="../assets/comments.png" class="gdButton" id="commentButton" style="position: absolute; right: 0.5%; bottom: 50%; width: 6%" onclick="$('#settingsDiv').show()"></a>
-		<img src="../assets/expanded-off.png" class="gdButton" id="compactMode" style="position: absolute; left: 2%; bottom: 45%; width: 6%">
+		<a id="commentA"><img src="/assets/comments.png" class="gdButton" id="commentButton" style="position: absolute; right: 0.5%; bottom: 50%; width: 6%" onclick="$('#settingsDiv').show()"></a>
+		<img src="/assets/expanded-off.png" class="gdButton" id="compactMode" style="position: absolute; left: 2%; bottom: 45%; width: 6%">
 
-		<a href="../search/[[USERNAME]]?user"><img src="../assets/levels.png" class="gdButton" style="position: absolute; right: 0.5%; bottom: 1%; width: 6%"></a>
+		<a href="../search/[[USERNAME]]?user"><img src="/assets/levels.png" class="gdButton" style="position: absolute; right: 0.5%; bottom: 1%; width: 6%"></a>
 
 		<div style="position: absolute; right: 0.5%; top: 0%; width: 6%">
-			<a id="youtube" style="display: none" target="_blank" href="https://youtube.com/channel/[[YOUTUBE]]"><img src="../assets/youtube.png" class="gdButton socialButton"></a>
-			<a id="twitter" style="display: none" target="_blank" href="https://twitter.com/[[TWITTER]]"><img src="../assets/twitter.png" class="gdButton socialButton"></a>
-			<a id="twitch"  style="display: none" target="_blank" href="https://twitch.tv/[[TWITCH]]"><img src="../assets/twitch.png" class="gdButton socialButton"></a>
+			<a id="youtube" style="display: none" target="_blank" href="https://youtube.com/channel/[[YOUTUBE]]"><img src="/assets/youtube.png" class="gdButton socialButton"></a>
+			<a id="twitter" style="display: none" target="_blank" href="https://twitter.com/[[TWITTER]]"><img src="/assets/twitter.png" class="gdButton socialButton"></a>
+			<a id="twitch"  style="display: none" target="_blank" href="https://twitch.tv/[[TWITCH]]"><img src="/assets/twitch.png" class="gdButton socialButton"></a>
 		</div>
 
 		<div class="supercenter" style="left: 5%; top: 65%; height: 10%">
-			<img class="gdButton" id="pageDown" style="display: none" src="../assets/arrow-left.png" height="95%" onclick="page -= 1; appendComments()">
+			<img class="gdButton" id="pageDown" style="display: none" src="/assets/arrow-left.png" height="95%" onclick="page -= 1; appendComments()">
 		</div>
 
 		<div class="supercenter" style="left: 95%; top: 65%; height: 10%;">
-			<img class="gdButton" id="pageUp" src="../assets/arrow-right.png" height="95%" onclick="page += 1; appendComments()">
+			<img class="gdButton" id="pageUp" src="/assets/arrow-right.png" height="95%" onclick="page += 1; appendComments()">
 		</div>
 
 		<div id="postButton" style="position:absolute; bottom: 0%; left: 0%; width: 14%; text-align: left; transform: translate(-35%, 40%);">
-			<img class="gdButton" src="../assets/comment.png" width="60%" onclick="$('#content').trigger('input'); $('#leavePost').show();">
+			<img class="gdButton" src="/assets/comment.png" width="60%" onclick="$('#content').trigger('input'); $('#leavePost').show();">
 		</div>
 
 	</div>
@@ -153,9 +153,9 @@
 </body>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/6.2.2/browser/pixi.js"></script>
-<script type="text/javascript" src="../iconkit/icon.js"></script>
-<script type="text/javascript" src="../global.js?v=1"></script>
-<script type="text/javascript" src="../dragscroll.js"></script>
+<script type="text/javascript" src="/iconkit/icon.js"></script>
+<script type="text/javascript" src="/misc/global.js?v=1"></script>
+<script type="text/javascript" src="/misc/dragscroll.js"></script>
 
 <script>
 
@@ -211,14 +211,14 @@ if (`[[TWITTER]]` != "null") $('#twitter').show()
 if (`[[TWITCH]]` != "null")  $('#twitch').show()
 
 let numRank = parseInt("[[RANK]]")
-if (numRank < 2) $(".profileTrophy").attr("src","../assets/trophies/1.png")
-else if (numRank <= 10) $(".profileTrophy").attr("src","../assets/trophies/2.png")
-else if (numRank <= 50 ) $(".profileTrophy").attr("src","../assets/trophies/3.png")
-else if (numRank <= 100) $(".profileTrophy").attr("src","../assets/trophies/4.png")
-else if (numRank <= 200) $(".profileTrophy").attr("src","../assets/trophies/5.png")
-else if (numRank <= 500) $(".profileTrophy").attr("src","../assets/trophies/6.png")
-else if (numRank <= 1000) $(".profileTrophy").attr("src","../assets/trophies/7.png")
-else $(".profileTrophy").attr("src","../assets/trophies/0.png")
+if (numRank < 2) $(".profileTrophy").attr("src","/assets/trophies/1.png")
+else if (numRank <= 10) $(".profileTrophy").attr("src","/assets/trophies/2.png")
+else if (numRank <= 50 ) $(".profileTrophy").attr("src","/assets/trophies/3.png")
+else if (numRank <= 100) $(".profileTrophy").attr("src","/assets/trophies/4.png")
+else if (numRank <= 200) $(".profileTrophy").attr("src","/assets/trophies/5.png")
+else if (numRank <= 500) $(".profileTrophy").attr("src","/assets/trophies/6.png")
+else if (numRank <= 1000) $(".profileTrophy").attr("src","/assets/trophies/7.png")
+else $(".profileTrophy").attr("src","/assets/trophies/0.png")
 
 let messages = "[[MESSAGES]]"
 let commenthistory = "[[COMMENTHISTORY]]"
@@ -227,10 +227,10 @@ let reqMode = [[FRIENDREQUESTS]] ? "<cg>Enabled</cg>" : "<cr>Disabled</cr>"
 let dmMode = messages == "all" ? "<cg>Public</cg>" : messages == "friends" ? "<cy>Friends Only</cy>" : "<cr>Disabled</cr>"
 let commentMode = commenthistory == "all" ? "<cg>Public</cg>" : commenthistory == "friends" ? "<cy>Friends Only</cy>" : "<cr>Disabled</cr>"
 
-if (commenthistory == "friends") $('#commentButton').attr('src', '../assets/comments-yellow.png')
-else if (commenthistory == "off") $('#commentButton').attr('src', '../assets/comments-grey.png')
+if (commenthistory == "friends") $('#commentButton').attr('src', '/assets/comments-yellow.png')
+else if (commenthistory == "off") $('#commentButton').attr('src', '/assets/comments-grey.png')
 else {
-	$('#commentButton').attr('src', '../assets/comments.png').attr('onclick', '')
+	$('#commentButton').attr('src', '/assets/comments.png').attr('onclick', '')
 	$('#commentA').attr('href', '../comments/[[USERNAME]]')
 }
 
@@ -239,10 +239,10 @@ if (messages == "all") {
 	$('#msgA').attr('href', '../messages?sendTo=[[USERNAME]]')
 }
 
-if (messages == "friends") $('#msgButton').attr('src', '../assets/messages-yellow.png')
-else if (messages == "off") $('#msgButton').attr('src', '../assets/messages-grey.png')
+if (messages == "friends") $('#msgButton').attr('src', '/assets/messages-yellow.png')
+else if (messages == "off") $('#msgButton').attr('src', '/assets/messages-grey.png')
 
-if (![[FRIENDREQUESTS]]) $('#friendButton').attr('src', '../assets/friends-grey.png')
+if (![[FRIENDREQUESTS]]) $('#friendButton').attr('src', '/assets/friends-grey.png')
 
 $('#userInfo').html($('#userInfo').html()
 .replace("[[REQS]]", reqMode)
@@ -253,12 +253,12 @@ function appendComments() {
 	if (loadingComments) return
 	else loadingComments = true;
 
-	$('#statusDiv').html(`<div class="supercenter" id="loading" style="height: 12%; top: 62%;"><img class="spin noSelect" src="../assets/loading.png" height="105%"></div>`)
+	$('#statusDiv').html(`<div class="supercenter" id="loading" style="height: 12%; top: 62%;"><img class="spin noSelect" src="/assets/loading.png" height="105%"></div>`)
 
 	if (page == 0) $('#pageDown').hide()
 	else $('#pageDown').show()
 
-	Fetch(`../api/comments/[[ACCOUNTID]]?type=profile&page=${page}`).then(res => {
+	Fetch(`/api/comments/[[ACCOUNTID]]?type=profile&page=${page}`).then(res => {
 
 		if (res.length != 10) $('#pageUp').hide()
 		else $('#pageUp').show()
@@ -277,7 +277,7 @@ function appendComments() {
 					</div>
 					<p class="commentDate">${x.date}</p>
 					<div class="commentLikes">
-						<img id="likeImg" class="likeComment gdButton inline" commentID="${x.ID}" ${x.likes < 0 ? "style='transform: translateY(25%)'" : ""} src="../assets/${x.likes < 0 ? "dis" : ""}like.png" height=20% style="margin-right: 0.4%">
+						<img id="likeImg" class="likeComment gdButton inline" commentID="${x.ID}" ${x.likes < 0 ? "style='transform: translateY(25%)'" : ""} src="/assets/${x.likes < 0 ? "dis" : ""}like.png" height=20% style="margin-right: 0.4%">
 						<h3 class="inline">${x.likes}</h3><br>
 					</div>
 				</div>`)
@@ -371,7 +371,7 @@ $('#submitVote').click(function() {
 		$('.postbutton').hide()
 		allowEsc = false
 
-	Fetch(`../api/profile/${username}`).then(res => {
+	Fetch(`/api/profile/${username}`).then(res => {
 		if (!res || res == "-1") {allowEsc = true; $('.postbutton').show(); return $('#likeMessage').text("The username you provided doesn't exist!")}
 		else accountID = res.accountID
 
@@ -379,8 +379,8 @@ $('#submitVote').click(function() {
 		.done(x => {
 			let newCount = parseInt(likeCount.text()) + (like ? 1 : -1)
 			likeCount.text(newCount)
-			if (newCount < 0) likeImg.attr('src', '../assets/dislike.png').css('transform', compact ? 'translateY(15%)' : 'translateY(25%)')
-			else likeImg.attr('src', '../assets/like.png').removeAttr('style')
+			if (newCount < 0) likeImg.attr('src', '/assets/dislike.png').css('transform', compact ? 'translateY(15%)' : 'translateY(25%)')
+			else likeImg.attr('src', '/assets/like.png').removeAttr('style')
 			$('#likeComment').hide()
 			$('#likebtn').trigger('click')
 			$('.postbutton').show()
@@ -400,14 +400,14 @@ $('#compactMode').click(function() {
 		$('.profilePostHide').hide()
 		$('.statusIcon').show()
 		$('#statusDiv').css('height', $('#statusDiv').attr('compactHeight'))
-		$(this).attr('src', "../assets/expanded-on.png")
+		$(this).attr('src', "/assets/expanded-on.png")
 	}
 
 	else {
 		$('.profilePostHide').show()
 		$('.statusIcon').hide()
 		$('#statusDiv').css('height', $('#statusDiv').attr('normalHeight'))
-		$(this).attr('src', "../assets/expanded-off.png")
+		$(this).attr('src', "/assets/expanded-off.png")
 	}
 })
 

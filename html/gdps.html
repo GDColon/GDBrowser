@@ -1,9 +1,9 @@
 <head>
 	<title>GD Multiverse Navigation Terminal</title>
 	<meta charset="utf-8">
-	<link href="../assets/css/browser.css?v=1" type="text/css" rel="stylesheet">
+	<link href="/assets/css/browser.css?v=1" type="text/css" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
-	<link rel="icon" href="../assets/unlock.png">
+	<link rel="icon" href="/assets/unlock.png">
 	<meta id="meta-title" property="og:title" content="GD Multiverse Navigation Terminal">
 	<meta id="meta-desc" property="og:description" content="That's uhh... that's just fancy talk for GDPS Browser. Select a popular GD private server and view its levels, creators, packs, leaderboards, and more!">
 	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/assets/unlock.png">
@@ -26,43 +26,43 @@
 				Please note that I only add <cg>relatively large</cg> servers to the list.
 				Servers which are <cr>inactive</cr> or have <cr>few levels/members</cr> will not be accepted.
 			</p>
-			<img src="../assets/ok.png" width=15%; class="gdButton center" onclick="$('.popup').hide()">
+			<img src="/assets/ok.png" width=15%; class="gdButton center" onclick="$('.popup').hide()">
 		</div>
 	</div>
 
 	<div id="searchBox" class="supercenter dragscroll"; style="width: 127vh"></div>
-	
+
 	<div class="epicbox supercenter gs" style="width: 126vh; height: 80%; pointer-events: none"></div>
 
 	<div class="center" style="position:absolute; top: 8%; left: 0%; right: 0%">
 		<h1 class="pre" id="header">GD Private Servers</h1>
-	</div> 
+	</div>
 
 	<div style="position:absolute; top: 2%; left: 1.5%; width: 10%; height: 25%; pointer-events: none">
-		<img class="gdButton yesClick" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()">
+		<img class="gdButton yesClick" id="backButton" src="/assets/back.png" height="30%" onclick="backButton()">
 	</div>
 
 	<div class="supercenter" id="loading" style="height: 10%; top: 47%">
-		<img class="spin noSelect" src="../assets/loading.png" height="105%">
+		<img class="spin noSelect" src="/assets/loading.png" height="105%">
 	</div>
 
 	<div style="position: absolute; left: 7%; top: 45%; height: 10%;">
-		<img class="gdButton" id="pageDown" src="../assets/arrow-left.png" style="display: none"; height="90%">
+		<img class="gdButton" id="pageDown" src="/assets/arrow-left.png" style="display: none"; height="90%">
 	</div>
 
 	<div style="position: absolute; right: 7%; top: 45%; height: 10%;">
-		<img class="gdButton" id="pageUp" src="../assets/arrow-right.png" style="display: none"; height="90%">
+		<img class="gdButton" id="pageUp" src="/assets/arrow-right.png" style="display: none"; height="90%">
 	</div>
 
 	<div style="position:absolute; top: 3%; right: 2%; text-align: right; width: 20%;">
-		<img id="plusButton" class="inline gdButton" src="../assets/plus.png" width="25%" onclick="$('#infoDiv').show()">
+		<img id="plusButton" class="inline gdButton" src="/assets/plus.png" width="25%" onclick="$('#infoDiv').show()">
 	</div>
 
 </div>
 
 </body>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="text/javascript" src="../global.js?v=1"></script>
+<script type="text/javascript" src="/misc/global.js?v=1"></script>
 <script type="text/javascript" src="../dragscroll.js"></script>
 <script>
 
@@ -71,7 +71,7 @@ let page = 1
 let localhost = window.location.hostname == "localhost"
 let host = window.location.host.split(".").slice(-2).join(".")
 
-Fetch('../api/gdps').then(servers => {
+Fetch('/api/gdps').then(servers => {
 
 	let currentServer = servers.find(x => x.id == gdps)
 	servers = [currentServer].concat(servers.filter(x => x.id != gdps)).filter(x => x)
@@ -89,15 +89,15 @@ Fetch('../api/gdps').then(servers => {
 
 		serverPage.forEach(x => {
 			$('#searchBox').append(`<div class="searchresult" style="height: 19%; padding-top: 1.2%">
-					<h1 class="lessspaced blue" style="color: ${(gdps || "") == x.id ? "#00DDFF" : "white"}">${x.name}</h1>
+					<h1 class="lessspaced blue" style="color: ${(gdps || "") == x.id ? "#0DF" : "white"}">${x.name}</h1>
 					<h2 class="lessSpaced smaller inline gdButton"><a href="${x.authorLink}" target="_blank">By ${x.author}</a></h2>
-		
+
 					<div class="center" style="position:absolute; height: 10%; width: 12.5%; left: 3%; transform:translateY(-160%)">
-						<a href="${x.link}" target="_blank"><img class="gdButton spaced gdpslogo" src="../assets/gdps/${x.id || "gd"}_icon.png" height="130%"></a>
+						<a href="${x.link}" target="_blank"><img class="gdButton spaced gdpslogo" src="/assets/gdps/${x.id || "gd"}_icon.png" height="130%"></a>
 					</div>
-					
+
 					<div class="center" style="position:absolute; right: 7%; transform:translateY(-150%); height: 10%">
-						<a href="http://${x.id || ""}${x.id && localhost ? ".x" : ""}${x.id ? "." : ""}${host}"><img style="margin-bottom: 4.5%" class="valign gdButton" src="../assets/view.png" height="105%"></a>
+						<a href="http://${x.id || ""}${x.id && localhost ? ".x" : ""}${x.id ? "." : ""}${host}"><img style="margin-bottom: 4.5%" class="valign gdButton" src="/assets/view.png" height="105%"></a>
 					</div>
 				</div>`)
 		})

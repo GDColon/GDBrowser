@@ -1,9 +1,9 @@
 <head>
 	<title>Demon Leaderboard</title>
 	<meta charset="utf-8">
-	<link href="../assets/css/browser.css?v=1" type="text/css" rel="stylesheet">
+	<link href="/assets/css/browser.css?v=1" type="text/css" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
-	<link rel="icon" href="../assets/trophy-demon.png">
+	<link rel="icon" href="/assets/trophy-demon.png">
 	<meta id="meta-title" property="og:title" content="Demon Leaderboard">
 	<meta id="meta-desc" property="og:description" content="View the victors of a very hard Geometry Dash level!">
 	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/assets/trophy-demon.png">
@@ -24,16 +24,16 @@
 			<p class="bigger center" style="margin-top: 1vh">
 				Usernames may <cy>differ</cy> from what is used in GD
 			</p>
-			<img src="../assets/ok.png" width=15%; class="gdButton center" onclick="$('.popup').hide()">
+			<img src="/assets/ok.png" width=15%; class="gdButton center" onclick="$('.popup').hide()">
 		</div>
 	</div>
 
 	<div style="position:absolute; bottom: 0%; left: 0%; width: 100%">
-		<img class="cornerPiece grayscale" src="../assets/corner.png" width=7%;>
+		<img class="cornerPiece grayscale" src="/assets/corner.png" width=7%;>
 	</div>
 
 	<div style="position:absolute; bottom: 0%; right: 0%; width: 100%; text-align: right;">
-		<img class="cornerPiece grayscale" src="../assets/corner.png" width=7%; style="transform: scaleX(-1)">
+		<img class="cornerPiece grayscale" src="/assets/corner.png" width=7%; style="transform: scaleX(-1)">
 	</div>
 
 	<div id="searchBox" class="supercenter dragscroll"; style="width: 124vh">
@@ -47,35 +47,35 @@
 	</div>
 
 	<div style="position: absolute; left: 7%; top: 45%; height: 10%;">
-		<a id="pageDown"><img class="gdButton" src="../assets/arrow-left.png" height="90%"></a>
+		<a id="pageDown"><img class="gdButton" src="/assets/arrow-left.png" height="90%"></a>
 	</div>
 
 	<div style="position: absolute; right: 7%; top: 45%; height: 10%;">
-		<a id="pageUp"><img class="gdButton" src="../assets/arrow-right.png" height="90%"></a>
+		<a id="pageUp"><img class="gdButton" src="/assets/arrow-right.png" height="90%"></a>
 	</div>
 
 	<div style="position:absolute; top: 2%; left: 1.5%; width: 10%; height: 25%; pointer-events: none">
-		<img class="gdButton yesClick" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()">
+		<img class="gdButton yesClick" id="backButton" src="/assets/back.png" height="30%" onclick="backButton()">
 	</div>
 
 	<div class="supercenter" id="loading" style="height: 10%; top: 47%">
-		<img class="spin noSelect" src="../assets/loading.png" height="105%">
+		<img class="spin noSelect" src="/assets/loading.png" height="105%">
 	</div>
 
 	<div style="position:absolute; top: 3%; right: 2%; text-align: right; width: 20%;">
-		<a target="_blank" id="pointercrate"><img class="inline gdButton" src="../assets/demonButton.png" width="23%" style="margin-right: 4%"></a>
-		<img id="creditsButton" class="inline gdButton" src="../assets/credits.png" width="25%" onclick="$('#infoDiv').show()">
+		<a target="_blank" id="pointercrate"><img class="inline gdButton" src="/assets/demonButton.png" width="23%" style="margin-right: 4%"></a>
+		<img id="creditsButton" class="inline gdButton" src="/assets/credits.png" width="25%" onclick="$('#infoDiv').show()">
 	</div>
 
 	<div style="position:absolute; bottom: 5.5%; right: 3.5%; text-align: right; width: 18%;">
-		<a id="realLeaderboardLink"><img class="gdButton" src="../assets/leaderboard.png" width="35%"></a>
+		<a id="realLeaderboardLink"><img class="gdButton" src="/assets/leaderboard.png" width="35%"></a>
 	</div>
 
 </div>
 
 </body>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="text/javascript" src="../global.js?v=1"></script>
+<script type="text/javascript" src="/misc/global.js?v=1"></script>
 <script type="text/javascript" src="../dragscroll.js"></script>
 <script>
 
@@ -91,7 +91,7 @@ else $('#pageDown').hide()
 if (demonID < max) $('#pageUp').attr('href', `./${demonID + 1}`)
 else $('#pageUp').hide()
 
-Fetch(`../api/gdps?current=1`).then(server => {
+Fetch(`/api/gdps?current=1`).then(server => {
 if (illegal || !server.demonList) return $('#loading').hide()
 
 fetch(`${server.demonList}api/v2/demons/listed?after=${demonID-1}&before=${demonID+1}`).then(res => res.json()).then(rawDemon => {
@@ -119,13 +119,13 @@ fetch(`${server.demonList}api/v2/demons/listed?after=${demonID-1}&before=${demon
 	$('#searchBox').append(`<div class="searchresult leaderboardSlot" style="align-items: center; padding-left: 1vh; height: 15%; width: 100%; position: relative;">
 
 		<h2 class="center" style="width: 12%; margin: 0% 0% 0% 0.5%; transform: scale(${1 - (Math.max(0, String(y+1).length - 1) * 0.2)}">${y+1}</h2>
-		<img class="inline spaced" src="../assets/trophies/${trophies.findIndex(z => y+1 <= z) + 1}.png" style="margin-bottom: 0%; height: 80%;">
+		<img class="inline spaced" src="/assets/trophies/${trophies.findIndex(z => y+1 <= z) + 1}.png" style="margin-bottom: 0%; height: 80%;">
 		<h2 class="small gdButton" style="font-size: 6.5vh; margin-right: 3%; margin-left: 3%"><a href="../u/${x.player.name}">${x.player.name}</a></h2>
 		<h3 class="lessSpaced" style="font-size: 4vh; margin-top: 1.3%; margin-right: 2%">${x.progress}%</h3>
 
 		<div style="${!x.video ? "display: none; " : ""}position:absolute; margin-top: 1.5%; width: 12.5%; height: 90%; right: 0%;">
 			<a target="_blank" href="${x.video}">
-			<img class="gdButton inline spaced" src="../assets/${videoIcon}.png" height="80%">
+			<img class="gdButton inline spaced" src="/assets/${videoIcon}.png" height="80%">
 			</a>
 		</div>
 
