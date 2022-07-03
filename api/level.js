@@ -21,9 +21,10 @@ module.exports = async (app, req, res, api, analyze) => {
 
     if (err || body.startsWith("##")) return rejectLevel()
 
-    const bodySplit = body.split('#') // IDK how to name it lol -Rudxain
+    // "revolutionary name XD" @Rudxain
+    const bodySplit = body.split('#')
     let preRes = bodySplit[0].split('|', 10)
-    let author = bodySplit[1].split('|')[0].split(':')
+    let author = bodySplit[1].split('|', 1)[0].split(':')
     let song = '~' + bodySplit[2]
     song = app.parseResponse(song, '~|~')
 

@@ -170,18 +170,18 @@ function analyze_level(level, rawData) {
     response.highDetail = highDetail
     response.settings = {}
 
-    // I have no idea what to name this lmao
+    // "I have no idea what to name this lmao" @Rudxain
     let WTF = x => Math.floor(x.x / (Math.max(last, 529) + 340) * 100)
     response.portals = level_portals.sort((a, b) => parseInt(a.x) - parseInt(b.x)).map(x => x.portal + " " + WTF(x) + "%").join(", ")
     response.coins = level_coins.sort((a, b) => parseInt(a.x) - parseInt(b.x)).map(WTF)
     response.coinsVerified = level.verifiedCoins
 
-    let sum = arr => arr.reduce((a, x) => a + x, 0)
+    const add = arr => arr.reduce((a, x) => a + x, 0)
     response.orbs = orb_array
-    response.orbs.total = sum(Object.values(orb_array)) // we already have an array of objects, use it
+    response.orbs.total = add(Object.values(orb_array)) // we already have an array of objects, use it
 
     response.triggers = trigger_array
-    response.triggers.total = sum(Object.values(trigger_array))
+    response.triggers.total = add(Object.values(trigger_array))
 
     response.triggerGroups = {}
     response.blocks = sortObj(blockCounts)

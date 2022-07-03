@@ -19,14 +19,14 @@ module.exports = async (app, req, res, api, getLevels) => {
   let accountMode = !req.query.hasOwnProperty("player") && Number(req.params.id)
   let foundID = app.userCache(req.id, username)
   let skipRequest = accountMode || foundID || probablyID
-  let searchResult;
+  let searchResult
 
   // if you're searching by account id, an intentional error is caused to skip the first request to the gd servers. see i pulled a sneaky on ya. (fuck callbacks man)
   req.gdRequest(skipRequest ? "" : 'getGJUsers20', skipRequest ? {} : { str: username, page: 0 }, function (err1, res1, b1) {
 
     if (foundID) searchResult = foundID[0]
     else if (accountMode || err1 || b1 == '-1' || b1.startsWith("<") || !b1) searchResult = probablyID ? username : req.params.id
-    else if (!req.isGDPS) searchResult = app.parseResponse(b1.split("|")[0])[16]
+    else if (!req.isGDPS) searchResult = app.parseResponse(b1.split("|", 1)[0])[16]
     else {  // GDPS's return multiple users, GD no longer does this
      let userResults = b1.split("|").map(x => app.parseResponse(x))
      searchResult = userResults.find(x => x[1].toLowerCase() == username.toLowerCase() || x[2] == username) || ""

@@ -44,7 +44,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
         if (err2 && (foundID || authorData)) {
           let authorInfo = foundID || authorData.split(":")
           level.author = authorInfo[1] || "-"
-          level.accountID = authorInfo[0] && authorInfo[0].includes(",") ? "0" : authorInfo[0]
+          level.accountID = authorInfo[0]?.includes(",") ? "0" : authorInfo[0]
         }
 
         else if (!err && b2 != '-1') {

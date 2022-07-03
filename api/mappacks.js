@@ -17,7 +17,7 @@ module.exports = async (app, req, res) => {
 
       if (err) return res.sendError()
 
-      let newPacks = body.split('#')[0].split('|').map(x => app.parseResponse(x)).filter(x => x[2])
+      let newPacks = body.split('#', 1)[0].split('|').map(x => app.parseResponse(x)).filter(x => x[2])
       packs = packs.concat(newPacks)
 
       // not all GDPS'es support the count param, which means recursion time!!!

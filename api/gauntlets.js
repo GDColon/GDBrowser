@@ -13,7 +13,7 @@ module.exports = async (app, req, res) => {
   req.gdRequest('getGJGauntlets21', {}, function (err, resp, body) {
 
     if (err) return res.sendError()
-    let gauntlets = body.split('#')[0].split('|').map(x => app.parseResponse(x)).filter(x => x[3])
+    let gauntlets = body.split('#', 1)[0].split('|').map(x => app.parseResponse(x)).filter(x => x[3])
     let gauntletList = gauntlets.map(x => ({ id: +x[1], name: gauntletNames[+x[1] - 1] || "Unknown", levels: x[3].split(",") }))
 
     if (app.config.cacheGauntlets)
