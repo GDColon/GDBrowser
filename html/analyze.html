@@ -3,12 +3,13 @@
 	<meta charset="utf-8">
 	<meta property="og:type" content="website">
 	<meta id="meta-title" property="og:title" content="Level Analysis">
-    <meta id="meta-desc" property="og:description" content="Analyze a Geometry Dash level and view it's objects, portals, color channels, code, and more!">
+	<meta id="meta-desc" property="og:description" content="Analyze a Geometry Dash level and view it's objects, portals, color channels, code, and more!">
 	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/assets/cp.png">
 	<meta name="twitter:card" content="summary">
-	<link href="/assets/css/browser.css?v=1" type="text/css" rel="stylesheet">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
-	<link rel="icon" href="/assets/cp.png">
+	<link href="../assets/css/browser.css?v=1" type="text/css" rel="stylesheet">
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script>
+	<script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3')</script>
+	<link rel="icon" href="../assets/cp.png">
 </head>
 
 <body class="levelBG" style="overflow-y:auto;" onbeforeunload="saveUrl()">
@@ -19,13 +20,13 @@
 		<div class="fancybox bounce center supercenter" style="width: 80vh; top: 46%">
 			<h2 class="smaller center" style="font-size: 5.5vh">Something Went Wrong!</h2>
 			<p class="bigger center" id="errorMessage" style="margin-bottom: 2vh; line-height: 5vh; margin-top: 1.5vh;">An <cr>unknown error</cr> occured while trying to analyze this level.</p>
-			<img onclick='window.location.replace(window.location.href.replace("analyze/", ""))' src="/assets/btn-back.png" width=26%; class="gdButton center closeWindow">
+			<img onclick='window.location.replace(window.location.href.replace("analyze/", ""))' src="../assets/btn-back.png" width=26%; class="gdButton center closeWindow">
 		</div>
 	</div>
 
 	<div class="supercenter" id="loadingDiv" style="height:50%">
 		<h1 style="transform:scale(1.2)">Analyzing level...</h1>
-		<img id="loading" class="spin noSelect" src="/assets/loading.png" height="25%" style="margin-top: 7%">
+		<img id="loading" class="spin noSelect" src="../assets/loading.png" height="25%" style="margin-top: 7%">
 	</div>
 
 	<div class="popup" id="colorInfo">
@@ -94,7 +95,7 @@
 	</div>
 
 	<div style="position:absolute; top: 2%; left: -1.95%; width: 10%; height: 25%; pointer-events: none">
-		<img class="gdButton yesClick" id="backButton" src="/assets/back.png" height="30%" onclick="backButton()">
+		<img class="gdButton yesClick" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()">
 	</div>
 
 </div>
@@ -107,11 +108,13 @@ function clean(text) {return text.toString().replace(/&/g, "&#38;").replace(/</g
 
 let disabledPortals = []
 let altTriggerSort = false
-let formPortals = ['cube', 'ship', 'ball', 'ufo', 'wave', 'robot', 'spider']
-let speedPortals = ['-1x', '1x', '2x', '3x', '4x']
-let sizePortals = ['mini', 'big']
-let dualPortals = ['dual', 'single']
-let mirrorPortals = ['mirrorOn', 'mirrorOff']
+const PORTALS = {
+	form: ['cube', 'ship', 'ball', 'ufo', 'wave', 'robot', 'spider'],
+	speed: ['-1x', '1x', '2x', '3x', '4x'],
+	size: ['mini', 'big'],
+	dual: ['dual', 'single'],
+	mirror: ['mirrorOn', 'mirrorOff']
+}
 
 fetch(`/api${window.location.pathname}`).then(res => res.json()).then(res => {
 
@@ -129,8 +132,8 @@ fetch(`/api${window.location.pathname}`).then(res => res.json()).then(res => {
 	$('#objectCount').text(commafy(res.objects) + " objects")
 	document.title = "Analysis of " + res.level.name
 
-	$('#meta-title').attr('content',  "Analysis of " + res.level.name)
-	$('#meta-desc').attr('content',  `${res.portals.split(",").length}x portals, ${res.orbs.total || 0}x orbs, ${res.triggers.total || 0}x triggers, ${res.misc.glow || 0}x glow...`)
+	$('#meta-title').attr('content', "Analysis of " + res.level.name)
+	$('#meta-desc').attr('content', `${res.portals.split(",").length}x portals, ${res.orbs.total || 0}x orbs, ${res.triggers.total || 0}x triggers, ${res.misc.glow || 0}x glow...`)
 
 
 let hdPercent = (res.highDetail / res.objects) * 100
@@ -154,10 +157,10 @@ function commafy(num) { return (+num || 0).toString().replace(/(\d)(?=(\d\d\d)+$
 
 function appendPortals() {
 	$('#portals').html("")
-	if (res.settings.gamemode && res.settings.gamemode != "cube" && !disabledPortals.includes('form')) $('#portals').append(`<div class="inline portalDiv"><img class="portalImage" src='/assets/objects/portals/${res.settings.gamemode}.png'><h3>Start</h3></div><img class="divider portalImage" src="/assets/divider.png" style="margin: 1.3% 0.8%">`)
-	if (res.settings.startMini && !disabledPortals.includes('size')) $('#portals').append(`<div class="inline portalDiv"><img class="portalImage" src='/assets/objects/portals/mini.png'><h3>Start</h3></div><img class="divider portalImage" src="/assets/divider.png" style="margin: 1.3% 0.8%">`)
-	if (res.settings.speed && res.settings.speed != "1x" && !disabledPortals.includes('speed')) $('#portals').append(`<div class="inline portalDiv"><img class="portalImage speedPortal" src='/assets/objects/portals/${res.settings.speed}.png'><h3>Start</h3></div><img class="divider portalImage" src="/assets/divider.png" style="margin: 1.3% 0.8%">`)
-	if (res.settings.startDual && !disabledPortals.includes('dual')) $('#portals').append(`<div class="inline portalDiv"><img class="portalImage" src='/assets/objects/portals/dual.png'><h3>Start</h3></div><img class="divider portalImage" src="/assets/divider.png" style="margin: 1.3% 0.8%">`)
+	if (res.settings.gamemode && res.settings.gamemode != "cube" && !disabledPortals.includes('form')) $('#portals').append(`<div class="inline portalDiv"><img class="portalImage" src='../assets/objects/portals/${res.settings.gamemode}.png'><h3>Start</h3></div><img class="divider portalImage" src="../assets/divider.png" style="margin: 1.3% 0.8%">`)
+	if (res.settings.startMini && !disabledPortals.includes('size')) $('#portals').append(`<div class="inline portalDiv"><img class="portalImage" src='../assets/objects/portals/mini.png'><h3>Start</h3></div><img class="divider portalImage" src="../assets/divider.png" style="margin: 1.3% 0.8%">`)
+	if (res.settings.speed && res.settings.speed != "1x" && !disabledPortals.includes('speed')) $('#portals').append(`<div class="inline portalDiv"><img class="portalImage speedPortal" src='../assets/objects/portals/${res.settings.speed}.png'><h3>Start</h3></div><img class="divider portalImage" src="../assets/divider.png" style="margin: 1.3% 0.8%">`)
+	if (res.settings.startDual && !disabledPortals.includes('dual')) $('#portals').append(`<div class="inline portalDiv"><img class="portalImage" src='../assets/objects/portals/dual.png'><h3>Start</h3></div><img class="divider portalImage" src="../assets/divider.png" style="margin: 1.3% 0.8%">`)
 
 	let dividerCount = $('.divider').length - 1
 
@@ -167,7 +170,7 @@ function appendPortals() {
 
 	portals.forEach(x => {
 		if (!x || x[0] == "") return;
-		$('#portals').append(`<div class="inline portalDiv"><img class="portalImage ${x[0].match(/[0-9]x/) ? "speedPortal" : ""}" src='/assets/objects/portals/${x[0]}.png'><h3>${x[1]}</h3></div>`)
+		$('#portals').append(`<div class="inline portalDiv"><img class="portalImage ${x[0].match(/[0-9]x/) ? "speedPortal" : ""}" src='../assets/objects/portals/${x[0]}.png'><h3>${x[1]}</h3></div>`)
 	}
 )}
 
@@ -192,13 +195,13 @@ function appendTriggerGroups() {
 	else {
 		$('#coinText').text(`User Coins (${res.coins.length})`)
 		res.coins.forEach(x => {
-			$('#coins').append(`<div class="inline orbDiv"><img height="50%" src='/assets/objects/${res.coinsVerified ? "coin" : "browncoin"}.png'><h3 style="padding-top: 7%">${x}%</h3></div>`)
+			$('#coins').append(`<div class="inline orbDiv"><img height="50%" src='../assets/objects/${res.coinsVerified ? "coin" : "browncoin"}.png'><h3 style="padding-top: 7%">${x}%</h3></div>`)
 		})
 	}
 
 	triggerList.forEach(x => {
 		if (x == "total") $('#triggerText').text(`Triggers (${commafy(res.triggers[x])})`)
-		else $('#triggers').append(`<div class="inline triggerDiv"><img height="50%" src='/assets/objects/triggers/${x}.png'><h3 style="padding-top: 7%">x${commafy(res.triggers[x])}</h3></div>`)
+		else $('#triggers').append(`<div class="inline triggerDiv"><img height="50%" src='../assets/objects/triggers/${x}.png'><h3 style="padding-top: 7%">x${commafy(res.triggers[x])}</h3></div>`)
 	})
 
 	if (res.invisibleGroup) {
@@ -208,16 +211,16 @@ function appendTriggerGroups() {
 
 	orbList.forEach(x => {
 		if (x == "total") $('#orbText').text(`Jump Rings (${commafy(res.orbs[x])})`)
-		else $('#orbs').append(`<div class="inline orbDiv"><img height="50%" src='/assets/objects/orbs/${x}.png'><h3 style="padding-top: 7%">x${commafy(res.orbs[x])}</h3></div>`)
+		else $('#orbs').append(`<div class="inline orbDiv"><img height="50%" src='../assets/objects/orbs/${x}.png'><h3 style="padding-top: 7%">x${commafy(res.orbs[x])}</h3></div>`)
 	})
 
 	blockList.forEach(x => {
-		$('#blocks').append(`<div class="inline blockDiv"><img height="45%" src='/assets/objects/blocks/${x}.png'><h3 style="padding-top: 15%">x${commafy(res.blocks[x])}</h3></div>`)
+		$('#blocks').append(`<div class="inline blockDiv"><img height="45%" src='../assets/objects/blocks/${x}.png'><h3 style="padding-top: 15%">x${commafy(res.blocks[x])}</h3></div>`)
 	})
 
 	miscList.forEach(x => {
 		if (x == "objects") return
-		else $('#misc').append(`<div class="inline miscDiv"><img height="40%" src='/assets/objects/${x.slice(0, -1)}.png'><h3 style="padding-top: 15%">x${commafy(res.misc[x][0])}<br>${res.misc[x][1]}</h3></div>`)
+		else $('#misc').append(`<div class="inline miscDiv"><img height="40%" src='../assets/objects/${x.slice(0, -1)}.png'><h3 style="padding-top: 15%">x${commafy(res.misc[x][0])}<br>${res.misc[x][1]}</h3></div>`)
 	})
 
 
@@ -230,11 +233,11 @@ function appendTriggerGroups() {
 	if (!grCol) grCol = {r: 0, g: 102, b: 255}
 	else if (grCol.r < 35 && grCol.g < 35 && grCol.b < 35) grCol = {r: 75, g: 75, b: 75}
 
-	$('#style').append(`<div class="inline styleDiv styleBG" style='background-color: rgb(${clean(bgCol.r)}, ${clean(bgCol.g)}, ${clean(bgCol.b)})'><img height="60%" src='/assets/levelstyle/bg-${res.settings.background}.png'></div>`)
-	$('#style').append(`<div class="inline styleDiv styleBG" style='background-color: rgb(${clean(grCol.r)}, ${clean(grCol.g)}, ${clean(grCol.b)})'><img height="60%" src='/assets/levelstyle/gr-${res.settings.ground}.png'></div>`)
-	$('#style').append(`<div class="inline styleDiv"><img height="55%" src='/assets/levelstyle/font-${res.settings.font}.png'></div>`)
-	$('#style').append(`<div class="inline styleDiv"><img height="60%" src='/assets/levelstyle/line-${res.settings.alternateLine ? 2 : 1}.png'></div>`)
-	if (res.settings.twoPlayer) $('#style').append(`<div class="inline styleDiv"><img height="60%" src='/assets/levelstyle/mode-2p.png'></div>`)
+	$('#style').append(`<div class="inline styleDiv styleBG" style='background-color: rgb(${clean(bgCol.r)}, ${clean(bgCol.g)}, ${clean(bgCol.b)})'><img height="60%" src='../assets/levelstyle/bg-${res.settings.background}.png'></div>`)
+	$('#style').append(`<div class="inline styleDiv styleBG" style='background-color: rgb(${clean(grCol.r)}, ${clean(grCol.g)}, ${clean(grCol.b)})'><img height="60%" src='../assets/levelstyle/gr-${res.settings.ground}.png'></div>`)
+	$('#style').append(`<div class="inline styleDiv"><img height="55%" src='../assets/levelstyle/font-${res.settings.font}.png'></div>`)
+	$('#style').append(`<div class="inline styleDiv"><img height="60%" src='../assets/levelstyle/line-${res.settings.alternateLine ? 2 : 1}.png'></div>`)
+	if (res.settings.twoPlayer) $('#style').append(`<div class="inline styleDiv"><img height="60%" src='../assets/levelstyle/mode-2p.png'></div>`)
 
 	colorList.forEach((x, y) => {
 		let c = res.colors[x]
@@ -259,11 +262,8 @@ function appendTriggerGroups() {
 		else disabledPortals.push($(this).attr('portal'))
 
 		portals = res.portals.split(", ").map(x => x.split(" "))
-		if (disabledPortals.includes('form')) portals = portals.filter(x => !formPortals.includes(x[0]))
-		if (disabledPortals.includes('speed')) portals = portals.filter(x => !speedPortals.includes(x[0]))
-		if (disabledPortals.includes('size')) portals = portals.filter(x => !sizePortals.includes(x[0]))
-		if (disabledPortals.includes('dual')) portals = portals.filter(x => !dualPortals.includes(x[0]))
-		if (disabledPortals.includes('mirror')) portals = portals.filter(x => !mirrorPortals.includes(x[0]))
+		for (let P in PORTALS)
+			if (disabledPortals.includes(P)) portals = portals.filter(x => !PORTALS[P].includes(x[0]))
 
 		if (disabledPortals.includes('dupe')) {
 			portals.reverse().forEach((x, y) => {if (portals[y+1] && portals[y+1][0] == x[0]) portals[y][0] = null;})
@@ -273,7 +273,7 @@ function appendTriggerGroups() {
 		appendPortals()
 	})
 
-	let dataSize = [Number((res.dataLength / 1024 / 1024).toFixed(1)), "MB"]
+	let dataSize = [Number((res.dataLength / (1024 * 2)).toFixed(1)), "MB"]
 	if (dataSize[0] < 1) dataSize = [Number((res.dataLength / 1024).toFixed(1)), "KB"]
 
 	$('#codeLength').html(`${commafy(res.dataLength)} characters (${dataSize.join(" ")})`)
@@ -293,7 +293,8 @@ function appendTriggerGroups() {
 			hsv.s = Number(hsv.s).toFixed(2)
 			hsv.v = Number(hsv.v).toFixed(2)
 		}
-		let hex = "#" + ((1 << 24) + (+col.r << 16) + (+col.g << 8) + +col.b).toString(16).slice(1)
+		// padded (fixed-size) RGB hex
+		let hex = "#" + ((1 << 24) | (col.r << 16) | (col.g << 8) | col.b).toString(16).slice(1) // remove sentinel nibble
 		$('#colorStuff').html(`
 		<h2 class="slightlySmaller">${isNaN(col.channel) ? col.channel : "Color " + col.channel}</h2>
 			<div class="colorSection">
@@ -336,13 +337,12 @@ function appendTriggerGroups() {
 				</div>
 			</div>`
 			: `<div class="colorBox" style="background-color: rgba(${clean(col.r)}, ${clean(col.g)}, ${clean(col.b)}, ${clean(col.opacity)}); border-color: ${hex}"></div>`}
-			<br><img src="/assets/ok.png" width=14%; style="margin-top: 4%" class="gdButton center" onclick="$('.popup').hide()">`)
+			<br><img src="../assets/ok.png" width=14%; style="margin-top: 4%" class="gdButton center" onclick="$('.popup').hide()">`)
 	$('#colorInfo').show()
 	})
 
 	$('#loadingDiv').hide()
 	$('#analysisDiv').show()
 
-});
-
+})
 </script>
