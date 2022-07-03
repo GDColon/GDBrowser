@@ -8,13 +8,13 @@ const loadedNewIcons = {}
 
 const TAU = Math.PI * 2
 // by default, converts degrees to rads
-let toRadians = (angle, scale = 360) => TAU / scale * angle
+const toRadians = (angle, scale = 360) => TAU / scale * angle
 // default rad to deg
-let fromRadians = (rad, scale = 360) => rad / (TAU / scale)
+const fromRadians = (rad, scale = 360) => rad / (TAU / scale)
 // `scale` is the num of subdivisions in a turn. More info: https://en.wikipedia.org/wiki/Turn_(angle)
 // `scale = 400` corresponds to gradians, `256` to byte radians, and `100` to percentage of a turn
 
-let positionMultiplier = 4
+const positionMultiplier = 4
 function positionPart(part, partIndex, layer, formName, isNew, isGlow) {
     let truePosMultiplier = positionMultiplier / (isNew ? 2 : 1)
     layer.position.x += (part.pos[0] * truePosMultiplier)
@@ -58,7 +58,7 @@ function sanitizeIconID(id, form) {
 
 function parseIconColor(col) {
     if (!col) return WHITE
-    else if (typeof col == "string" && col.length >= 6) return parseInt(col, 16)
+    if (typeof col == "string" && col.length >= 6) return parseInt(col, 16)
     let rgb = iconData.colors[col]
     return rgb ? rgb2Pac(rgb) : WHITE
 }
@@ -94,11 +94,11 @@ function loadNewIcon(iconStr, cb) {
         loader.add({ name: sheetName, url: `/iconkit/newicons/${iconStr}-hd.png` })
         loader.load((l, resources) => {
             let texture = resources[sheetName].texture
-            Object.keys(data).forEach(x => {
-                let bounds = data[x]
+            Object.keys(data).forEach(k => {
+                let bounds = data[k]
                 let textureRect = new PIXI.Rectangle(bounds.pos[0], bounds.pos[1], bounds.size[0], bounds.size[1])
                 let partTexture = new PIXI.Texture(texture, textureRect)
-                loadedNewIcons[x] = partTexture
+                loadedNewIcons[k] = partTexture
             })
             cb(l, resources, true)
         })
@@ -118,22 +118,22 @@ function parseNewPlist(data) {
         iconData.gameSheet[frameName] = {}
         positionData[frameName] = {}
 
-        for (let n=0; n < frameData.length; n += 2) {
+        for (let n = 0; n < frameData.length; n += 2) {
             let keyName = frameData[n].innerHTML
             let keyData = frameData[n + 1].innerHTML
-            if (["spriteOffset", "spriteSize", "spriteSourceSize"].includes(keyName)) {
-                iconData.gameSheet[frameName][keyName] = parseWeirdArray(keyData)
-            }
-
-            else if (keyName == "textureRotated") {
-                isRotated = frameData[n + 1].outerHTML.includes("true")
-                iconData.gameSheet[frameName][keyName] = isRotated
-            }
-
-            else if (keyName == "textureRect") {
-                let textureArr = keyData.slice(1, -1).split("},{").map(x => parseWeirdArray(x))
-                positionData[frameName].pos = textureArr[0]
-                positionData[frameName].size = textureArr[1]
+            switch (keyName) {
+                case "spriteOffset": case "spriteSize": case "spriteSourceSize":
+                    iconData.gameSheet[frameName][keyName] = parseWeirdArray(keyData)
+                    break
+                case "textureRotated":
+                    isRotated = frameData[n + 1].outerHTML.includes("true")
+                    iconData.gameSheet[frameName][keyName] = isRotated
+                    break
+                case "textureRect":
+                    let textureArr = keyData.slice(1, -1).split("},{").map(parseWeirdArray)
+                    positionData[frameName].pos = textureArr[0]
+                    positionData[frameName].size = textureArr[1]
+                    break
             }
         }
 
@@ -143,21 +143,20 @@ function parseNewPlist(data) {
     return positionData
 }
 
-function parseWeirdArray(data) {
-    return data.replace(/[^0-9,-]/g, "").split(",").map(x => +x)
-}
+let parseWeirdArray = data => data.replace(/[^\d,-]/g, "").split(",").map(x => +x)
 
-function padZero(num) { return num.toString().padStart(2, "0") }
+let padZero = num => num.toString().padStart(2, "0")
 
 /*
 name explanation:
 `Number`s are not decimals, because they are not `String`s, and the internal representation is binary.
 This means "rgbToDecimal" is a misleading name.
 Converting independent color components into one number is called "color packing".
-So I thougth it would be funny to rename "rgbToPacked" into "rgb2Pac".
-Alternative names could be "rgbPacker" or "packRGB", IDK
+So I thougth it would be funny to rename `rgbToPacked` into `rgb2Pac`.
+Alternative names could be `rgbPacker` or `packRGB`, IDK
+- said by @Rudxain
 */
-function rgb2Pac(rgb) { return (rgb.r << 16) | (rgb.g << 8) | rgb.b }
+let rgb2Pac = rgb => (rgb.r << 16) | (rgb.g << 8) | rgb.b
 
 class Icon {
     constructor(data={}, cb) {
