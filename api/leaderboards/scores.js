@@ -6,16 +6,18 @@ module.exports = async (app, req, res) => {
   if (req.offline) return res.sendError()
 
   let amount = 100
-  let count = req.query.count ? parseInt(req.query.count) : null
-  if (count && count > 0) amount = Math.min(count, 10000)
+  let count = req.query.count ? parseInt(req.query.count) : 0
+  if (count > 0) amount = Math.min(count, 10000)
 
   let params = {count: amount, type: "top"}
 
-  if (["creators", "creator", "cp"].some(x => req.query.hasOwnProperty(x) || req.query.type == x))
+  let isInQuery = (...args) => args.some(x => req.query.hasOwnProperty(x) || req.query.type == x)
+
+  if (isInQuery("creators", "creator", "cp"))
     params.type = "creators"
-  else if (["week", "weekly"].some(x => req.query.hasOwnProperty(x) || req.query.type == x))
+  else if (isInQuery("week", "weekly"))
     params.type = "week"
-  else if (["global", "relative"].some(x => req.query.hasOwnProperty(x) || req.query.type == x)) {
+  else if (isInQuery("global", "relative")) {
     params.type = "relative"
     params.accountID = req.query.accountID
   }
