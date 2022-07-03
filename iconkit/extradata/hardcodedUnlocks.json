@@ -14,7 +14,6 @@
     { "form": "icon", "id": 139, "type": "gauntlet", "gauntlet": "Crystal" },
     { "form": "icon", "id": 141, "type": "gauntlet", "gauntlet": "spike" },
     { "form": "icon", "id": 142, "type": "gauntlet", "gauntlet": "Monster" },
-    { "form": "icon", "id": 154, "unlock": "Bully the Shopkeeper" },
 
     { "form": "color1", "id": 41, "type": "treasureRoom", "keys": 1 },
 
