@@ -9315,25 +9315,22 @@ Buffer.prototype.fill = function fill (val, start, end, encoding) {
 // HELPER FUNCTIONS
 // ================
 
-var INVALID_BASE64_RE = /[^+/0-9A-Za-z-_]/g
+var INVALID_BASE64_RE = /[^+/\dA-Z-_]/gi
 
 function base64clean (str) {
   // Node takes equal signs as end of the Base64 encoding
-  str = str.split('=')[0]
+  str = str.split('=', 1)[0]
   // Node strips out invalid characters like \n and \t from the string, base64-js does not
   str = str.trim().replace(INVALID_BASE64_RE, '')
   // Node converts strings with length < 2 to ''
   if (str.length < 2) return ''
   // Node allows for non-padded base64 strings (missing trailing ===), base64-js does not
-  while (str.length % 4 !== 0) {
-    str = str + '='
-  }
+  while (str.length % 4 !== 0) str += '='
   return str
 }
 
 function toHex (n) {
-  if (n < 16) return '0' + n.toString(16)
-  return n.toString(16)
+  return (n < 16 ? '0' : '') + n.toString(16)
 }
 
 function utf8ToBytes (string, units) {
