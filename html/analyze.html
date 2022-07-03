@@ -273,7 +273,7 @@ function appendTriggerGroups() {
 		appendPortals()
 	})
 
-	let dataSize = [Number((res.dataLength / (1024 * 2)).toFixed(1)), "MB"]
+	let dataSize = [Number((res.dataLength / 1024 / 1024).toFixed(1)), "MB"]
 	if (dataSize[0] < 1) dataSize = [Number((res.dataLength / 1024).toFixed(1)), "KB"]
 
 	$('#codeLength').html(`${commafy(res.dataLength)} characters (${dataSize.join(" ")})`)
