@@ -1,5 +1,5 @@
-@font-face { font-family: Pusab; src: url('../../assets/Pusab.ttf') }
-@font-face { font-family: Kaine; src: url('../../assets/boomlings/Kaine.ttf') }
+@font-face { font-family: Pusab; src: url('/assets/Pusab.ttf') }
+@font-face { font-family: Kaine; src: url('/assets/boomlings/Kaine.ttf') }
 
 body {
 	margin: 0;
@@ -184,7 +184,7 @@ h2 {
 .brownBox {
     border: 2.5vh solid transparent;
     border-radius: 3vh;
-    background-color: #995533;
+    background-color: #953;
     border-image: url('../../assets/brownbox.png') 10% round;
 }
 
