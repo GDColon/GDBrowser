@@ -27,6 +27,7 @@ class Level {
         this.gameVersion = levelInfo[13] > 17 ? (levelInfo[13] / 10).toFixed(1) : levelInfo[13] == 11 ? "1.8" : levelInfo[13] == 10 ? "1.7" : "Pre-1.7"
         if (levelInfo[28]) this.uploaded = levelInfo[28] + (server.timestampSuffix || "")
         if (levelInfo[29]) this.updated = levelInfo[29] + (server.timestampSuffix || "")
+	if (levelInfo[13] < 21) this.editorTime = 0, this.totalEditorTime = 0
         if (levelInfo[46]) this.editorTime = +levelInfo[46] || 0
         if (levelInfo[47]) this.totalEditorTime = +levelInfo[47] || 0
         if (levelInfo[27]) this.password = levelInfo[27];
