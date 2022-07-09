@@ -1,6 +1,8 @@
+const Player = require('../classes/Player.js')
+
 module.exports = async (app, req, res) => {
 
-    if (req.offline) return res.send("-1")
+    if (req.offline) return res.sendError()
 
     let count = +req.query.count || 10
     if (count > 1000) count = 1000
@@ -20,14 +22,14 @@ module.exports = async (app, req, res) => {
 
     req.gdRequest(path, req.gdParams(params), function(err, resp, body) { 
 
-      if (err || body == '-1' || !body) return res.send("-1")
+      if (err) return res.sendError()
 
       comments = body.split('|')
       comments = comments.map(x => x.split(':'))
       comments = comments.map(x => x.map(x => app.parseResponse(x, "~")))
       if (req.query.type == "profile") comments.filter(x => x[0][2])
-      else comments = comments.filter(x => x[1] && x[1][1])
-      if (!comments.length) return res.send("-1")
+      else comments = comments.filter(x => x[0] && x[0][2])
+      if (!comments.length) return res.status(204).send([])
 
       let pages = body.split('#')[1].split(":")
       let lastPage = +Math.ceil(+pages[0] / +pages[2]);
@@ -52,20 +54,15 @@ module.exports = async (app, req, res) => {
         }
         
         if (req.query.type != "profile") {
-          comment.username = y[1] || "Unknown"
+          let commentUser = new Player(y)
+          Object.keys(commentUser).forEach(k => {
+            comment[k] = commentUser[k]
+          })
           comment.levelID = x[1] || req.params.id
-          comment.playerID = x[3]
-          comment.accountID = y[16]
+          comment.playerID = x[3] || 0
           comment.color = (comment.playerID == "16" ? "50,255,255" : x[12] || "255,255,255")
           if (x[10] > 0) comment.percent = +x[10]
           comment.moderator = +x[11] || 0
-          comment.icon = {
-            form: ['icon', 'ship', 'ball', 'ufo', 'wave', 'robot', 'spider'][+y[14]],
-            icon: +y[9] || 1,
-            col1: +y[10],
-            col2: +y[11],
-            glow: +y[15] > 1
-          }
           app.userCache(req.id, comment.accountID, comment.playerID, comment.username)
         }
 

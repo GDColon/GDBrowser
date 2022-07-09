@@ -1,4 +1,6 @@
-module.exports = async (app, req, res, api) => {
+module.exports = async (app, req, res) => {
+
+  if (req.method !== 'POST') return res.status(405).send("Method not allowed.")
 
   if (!req.body.accountID) return res.status(400).send("No account ID provided!")
   if (!req.body.password) return res.status(400).send("No password provided!")
@@ -11,7 +13,7 @@ module.exports = async (app, req, res, api) => {
 
   req.gdRequest('downloadGJMessage20', params, function (err, resp, body) {
 
-    if (err || body == -1 || !body) return res.status(400).send(`Error fetching message! Try again later, or make sure your username and password are entered correctly. Last worked: ${app.timeSince(req.id)} ago.`)
+    if (err) return res.status(400).send(`Error fetching message! Try again later, or make sure your username and password are entered correctly. Last worked: ${app.timeSince(req.id)} ago.`)
     else app.trackSuccess(req.id)
 
     let x = app.parseResponse(body)
@@ -29,7 +31,7 @@ module.exports = async (app, req, res, api) => {
       msg.browserColor = true 
   }
     
-    return res.status(200).send(msg)
+    return res.send(msg)
   })
 
 }

@@ -6,7 +6,7 @@
     <meta id="meta-desc" property="og:description" content="Analyze a Geometry Dash level and view it's objects, portals, color channels, code, and more!">
 	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/assets/cp.png">
 	<meta name="twitter:card" content="summary">
-	<link href="../assets/css/browser.css" type="text/css" rel="stylesheet">
+	<link href="../assets/css/browser.css?v=1" type="text/css" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
 	<link rel="icon" href="../assets/cp.png">
 </head>
@@ -44,10 +44,7 @@
 			<h3 style="margin-top: -0.25%" id="hdText"></h3>
 		</div>
 
-		<h1 class="topMargin" id="coinText">Coin order</h1>
-		<div class="transparentBox analysis" id="coins"></div>
-
-		<h1 class="topMargin">Portal order</h1>
+		<h1 class="topMargin">Portal Order</h1>
 		<div class="transparentBox analysis" id="portals" style="height: 23%"></div>
 		<div>
 			<div class="portalSetting"><h3><input checked type="checkbox" class="portalToggle" id="box1" portal="form"> <label for="box1" class="gdcheckbox gdButton portalButton"></label>Form Portals</h3></div>
@@ -60,8 +57,12 @@
 
 		</div>
 
+		<h1 class="topMargin" id="coinText">User Coins</h1>
+		<div class="transparentBox analysis" id="coins"></div>
+
 		<h1 class="topMargin2" id="triggerText">Triggers</h1>
-		<div class="transparentBox analysis" id="triggers"></div>
+		<div class="transparentBox analysis" id="triggers" style="margin-bottom: 0.6%"></div>
+		<h3 style="margin-right: 1.2vh; font-size: 4.2vh; display: none" id="alphaGroup" class="inline">Invisible Group: <span id="alphaGroupNum" class="gold"></span></h3>
 
 		<h1 class="topMargin2" id="orbText">Jump Rings</h1>
 		<div class="transparentBox analysis" id="orbs"></div>
@@ -77,6 +78,7 @@
 
 		<h1 class="topMargin2" id="grouptext">Trigger Groups</h1>
 		<div class="transparentBox analysis" id="groups" style="height: 18%"></div>
+		<h3 style="margin-right: 1.2vh" class="inline">Sort:</h3><h3 id="triggerSort" class="inline gdButton gold" style="text-decoration: underline;">Ascending</h3>
 
 		<h1 class="topMargin2">Color Channels</h1>
 		<div class="transparentBox analysis" id="colorDiv"></div>
@@ -97,13 +99,14 @@
 
 </div>
 </body>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="../sizecheck.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="../global.js"></script>
 <script>
 
 function clean(text) {return text.toString().replace(/&/g, "&#38;").replace(/</g, "&#60;").replace(/>/g, "&#62;").replace(/=/g, "&#61;").replace(/"/g, "&#34;").replace(/'/g, "&#39;")}
 
 let disabledPortals = []
+let altTriggerSort = false
 let formPortals = ['cube', 'ship', 'ball', 'ufo', 'wave', 'robot', 'spider']
 let speedPortals = ['-1x', '1x', '2x', '3x', '4x']
 let sizePortals = ['mini', 'big']
@@ -140,7 +143,6 @@ else {
 }
 
 let triggerList = Object.keys(res.triggers)
-let groupList = Object.keys(res.triggerGroups)
 let orbList = Object.keys(res.orbs)
 let miscList = Object.keys(res.misc)
 let blockList = Object.keys(res.blocks)
@@ -168,10 +170,32 @@ function appendPortals() {
 		if (!x || x[0] == "") return;
 		$('#portals').append(`<div class="inline portalDiv"><img class="portalImage ${x[0].match(/[0-9]x/) ? "speedPortal" : ""}" src='../assets/objects/portals/${x[0]}.png'><h3>${x[1]}</h3></div>`)
 	}
+)}
 
-	)}
+function appendTriggerGroups() {
+	$('#groups').html("")
+	let groupList = Object.keys(res.triggerGroups)
+	if (!altTriggerSort) groupList = groupList.sort((a, b) => Number(a.slice(6)) - Number(b.slice(6)))
+	groupList.forEach(x => {
+		if (x == "total") $('#grouptext').text(`Trigger Groups (${commafy(res.triggerGroups[x])})`)
+		else $('#groups').append(`<div class="inline groupDiv"><h1 class="groupID">${x.slice(6)}</h1><h3 style="padding-top: 7%">x${commafy(res.triggerGroups[x])}</h3></div>`)
+	})
+}
 
-appendPortals()
+	appendPortals()
+	appendTriggerGroups()
+
+	if (!res.coins || !res.coins.length) {
+		$('#coinText').remove()
+		$('#coins').remove()
+	}
+
+	else {
+		$('#coinText').text(`User Coins (${res.coins.length})`)
+		res.coins.forEach(x => {
+			$('#coins').append(`<div class="inline orbDiv"><img height="50%" src='../assets/objects/${res.coinsVerified ? "coin" : "browncoin"}.png'><h3 style="padding-top: 7%">${x}%</h3></div>`)
+		})
+	}
 
 	coins.forEach(x => {
 		if (!x || x[0] == "") {
@@ -185,6 +209,11 @@ appendPortals()
 		if (x == "total") $('#triggerText').text(`Triggers (${commafy(res.triggers[x])})`)
 		else $('#triggers').append(`<div class="inline triggerDiv"><img height="50%" src='../assets/objects/triggers/${x}.png'><h3 style="padding-top: 7%">x${commafy(res.triggers[x])}</h3></div>`)
 	})
+
+	if (res.invisibleGroup) {
+		$('#alphaGroupNum').text(res.invisibleGroup)
+		$('#alphaGroup').show()
+	}
 
 	orbList.forEach(x => {
 		if (x == "total") $('#orbText').text(`Jump Rings (${commafy(res.orbs[x])})`)
@@ -200,10 +229,6 @@ appendPortals()
 		else $('#misc').append(`<div class="inline miscDiv"><img height="40%" src='../assets/objects/${x.slice(0, -1)}.png'><h3 style="padding-top: 15%">x${commafy(res.misc[x][0])}<br>${res.misc[x][1]}</h3></div>`)
 	})
 
-	groupList.forEach(x => {
-		if (x == "total") $('#grouptext').text(`Trigger Groups (${commafy(res.triggerGroups[x])})`)
-		else $('#groups').append(`<div class="inline groupDiv"><h1 class="groupID">${x.slice(6)}</h1><h3 style="padding-top: 7%">x${commafy(res.triggerGroups[x])}</h3></div>`)
-	})
 
 	let bgCol = res.colors.find(x => x.channel == "BG")
 	let grCol = res.colors.find(x => x.channel == "G")
@@ -231,6 +256,12 @@ appendPortals()
 	})
 
 	if (colorList.length == 0) $('#colorDiv').append('<h3 style="margin-top: 7vh">Could not get color info!</h3>')
+
+	$('#triggerSort').click(function() {
+		altTriggerSort = !altTriggerSort
+		$('#triggerSort').text(altTriggerSort ? "Most Used" : "Ascending")
+		appendTriggerGroups()
+	})
 
 	$(".portalToggle").click(function() {
 		if ($(this).prop('checked')) disabledPortals = disabledPortals.filter(x => x != $(this).attr('portal'))

@@ -1,7 +1,7 @@
 <head>
 	<title>Gauntlets</title>
 	<meta charset="utf-8">
-	<link href="../assets/css/browser.css?v=2" type="text/css" rel="stylesheet">
+	<link href="../assets/css/browser.css?v=1" type="text/css" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
 	<link rel="icon" href="../assets/gauntlet.png">
 	<meta id="meta-title" property="og:title" content="Gauntlets">
@@ -32,21 +32,18 @@
 	
 </div>
 </body>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="../sizecheck.js?"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="../global.js?v=1"></script>
 <script>
-
-let gauntletNames = ["Fire", "Ice", "Poison", "Shadow", "Lava", "Bonus", "Chaos", "Demon", "Time", "Crystal", "Magic", "Spike", "Monster", "Doom", "Death"]
 
 fetch('../api/gauntlets').then(res => res.json()).then(gauntlets => {
 	$('#loading').hide()
 	gauntlets.forEach((x, y) => {
-		let name = gauntletNames[x.id - 1]
 		$('#gauntletList').append(`
 			<div class="gauntlet">
 			<a href="../search/*?gauntlet=${x.id}">
-			<img src="../assets/gauntlets/${name.toLowerCase()}.png" height="300%"><br>
-			<h3 class="gauntletText"">${name}<br>Gauntlet</h3></div></a>`)
+			<img src="../assets/gauntlets/${x.name.toLowerCase()}.png" height="300%"><br>
+			<h3 class="gauntletText"">${x.name}<br>Gauntlet</h3></div></a>`)
 		})
 });
 

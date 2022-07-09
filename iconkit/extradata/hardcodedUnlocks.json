@@ -1,0 +1,54 @@
+[
+    { "form": "icon", "id": 13, "unlock": "Click this icon's lock on the icon kit" },
+    { "form": "icon", "id": 97, "type": "treasureRoom", "keys": 1 },
+    { "form": "icon", "id": 103, "unlock": "Complete \"The Challenge\" in Normal mode" },
+    { "form": "icon", "id": 104, "type": "treasureRoomMilestone", "chests": 100 },
+    { "form": "icon", "id": 106, "unlock": "Free the Demon Guardian" },
+    { "form": "icon", "id": 111, "unlock": "Visit @geometrydash on Facebook" },
+    { "form": "icon", "id": 112, "type": "treasureRoom", "keys": 5 },
+    { "form": "icon", "id": 114, "type": "treasureRoom", "keys": 5 },
+    { "form": "icon", "id": 115, "type": "treasureRoom", "keys": 5 },
+    { "form": "icon", "id": 116, "type": "treasureRoom", "keys": 5 },
+    { "form": "icon", "id": 137, "type": "treasureRoom", "keys": 5 },
+    { "form": "icon", "id": 138, "type": "gauntlet", "gauntlet": "Time" },
+    { "form": "icon", "id": 139, "type": "gauntlet", "gauntlet": "Crystal" },
+    { "form": "icon", "id": 141, "type": "gauntlet", "gauntlet": "spike" },
+    { "form": "icon", "id": 142, "type": "gauntlet", "gauntlet": "Monster" },
+    { "form": "icon", "id": 154, "unlock": "Bully the Shopkeeper" },
+
+    { "form": "color1", "id": 41, "type": "treasureRoom", "keys": 1 },
+
+    { "form": "color2", "id": 29, "type": "gauntlet", "gauntlet": "Lava" },
+    { "form": "color2", "id": 30, "type": "gauntlet", "gauntlet": "Fire" },
+    { "form": "color2", "id": 34, "type": "gauntlet", "gauntlet": "Poison" },
+    { "form": "color2", "id": 35, "type": "gauntlet", "gauntlet": "Ice" },
+    { "form": "color2", "id": 36, "type": "gauntlet", "gauntlet": "Shadow" },
+    { "form": "color2", "id": 37, "type": "gauntlet", "gauntlet": "Bonus" },
+    { "form": "color2", "id": 40, "type": "treasureRoom", "keys": 1 },
+
+    { "form": "ship", "id": 26, "type": "treasureRoom", "keys": 1 },
+    { "form": "ship", "id": 49, "type": "gauntlet", "gauntlet": "Death" },
+    { "form": "ship", "id": 50, "unlock": "Visit @RobTopGames on Twitter" },
+    { "form": "ship", "id": 51, "type": "treasureRoom", "keys": 5 },
+    
+    { "form": "ball", "id": 21, "type": "treasureRoom", "keys": 1 },
+    { "form": "ball", "id": 23, "type": "treasureRoomMilestone", "chests": 50 },
+    { "form": "ball", "id": 39, "type": "treasureRoom", "keys": 5 },
+    { "form": "ball", "id": 41, "unlock": "Visit RobTopGames on YouTube" },
+    { "form": "ball", "id": 42, "type": "treasureRoom", "keys": 5 },
+    { "form": "ball", "id": 43, "type": "gauntlet", "gauntlet": "Magic" },
+
+    { "form": "ufo", "id": 19, "type": "treasureRoom", "keys": 1 },
+    { "form": "ufo", "id": 27, "type": "treasureRoomMilestone", "chests": 200 },
+
+    { "form": "wave", "id": 16, "type": "treasureRoom", "keys": 1 },
+    { "form": "wave", "id": 34, "type": "treasureRoom", "keys": 5 },
+
+    { "form": "robot", "id": 10, "type": "treasureRoom", "keys": 1 },
+    { "form": "robot", "id": 16, "type": "gauntlet", "gauntlet": "Chaos" },
+    { "form": "robot", "id": 26, "type": "treasureRoom", "keys": 5 },
+
+    { "form": "spider", "id": 7, "type": "treasureRoom", "keys": 1 },
+    { "form": "spider", "id": 10, "type": "gauntlet", "gauntlet": "Demon" },
+    { "form": "spider", "id": 17, "type": "treasureRoom", "keys": 5 }
+]

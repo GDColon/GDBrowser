@@ -3,7 +3,7 @@ let cache = {}
 
 module.exports = async (app, req, res) => {
 
-  if (req.offline) return res.send("-1")
+  if (req.offline) return res.sendError()
   
   let cached = cache[req.id]
   if (app.config.cacheMapPacks && cached && cached.data && cached.indexed + 5000000 > Date.now()) return res.send(cached.data)   // 1.5 hour cache
@@ -13,7 +13,7 @@ module.exports = async (app, req, res) => {
   function mapPackLoop() {
     req.gdRequest('getGJMapPacks21', params, function (err, resp, body) {
 
-      if (err || !body || body == '-1' || body.startsWith("<")) return res.send("-1")
+      if (err) return res.sendError()
 
       let newPacks = body.split('#')[0].split('|').map(x => app.parseResponse(x)).filter(x => x[2])
       packs = packs.concat(newPacks)
@@ -26,8 +26,8 @@ module.exports = async (app, req, res) => {
       
       let mappacks = packs.map(x => ({    // "packs.map()" laugh now please
         id: +x[1],
-        levels: x[3].split(","),
         name: x[2],
+        levels: x[3].split(","),
         stars: +x[4],
         coins: +x[5],
         difficulty: difficulties[+x[6]] || "unrated",

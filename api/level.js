@@ -4,28 +4,24 @@ const Level = require('../classes/Level.js')
 
 module.exports = async (app, req, res, api, analyze) => {
 
-  if (req.offline) {
+  function rejectLevel() {
     if (!api) return res.redirect('search/' + req.params.id)
-    else return res.send("-1")
+    else return res.sendError()
   }
+
+  if (req.offline) return rejectLevel()
 
   let levelID = req.params.id
   if (levelID == "daily") return app.run.download(app, req, res, api, 'daily', analyze)
   else if (levelID == "weekly") return app.run.download(app, req, res, api, 'weekly', analyze)
-  else if (levelID.match(/[^0-9]/)) {
-    if (!api) return res.redirect('search/' + req.params.id)
-    else return res.send("-1")
-  }
+  else if (levelID.match(/[^0-9]/)) return rejectLevel()
   else levelID = levelID.replace(/[^0-9]/g, "")
 
   if (analyze || req.query.hasOwnProperty("download")) return app.run.download(app, req, res, api, levelID, analyze)
 
   req.gdRequest('getGJLevels21', { str: levelID, type: 0 }, function (err, resp, body) {
 
-    if (err || !body || body == '-1' || body.startsWith("<") || body.startsWith("##")) {
-      if (!api) return res.redirect('search/' + req.params.id)
-      else return res.send("-1")
-    }
+    if (err || body.startsWith("##")) return rejectLevel()
 
     let preRes = body.split('#')[0].split('|', 10)
     let author = body.split('#')[1].split('|')[0].split(':')
@@ -34,8 +30,9 @@ module.exports = async (app, req, res, api, analyze) => {
 
     let levelInfo = app.parseResponse(preRes.find(x => x.startsWith(`1:${levelID}`)) || preRes[0])
     let level = new Level(levelInfo, req.server, false, author).getSongInfo(song)
+    if (!level.id) return rejectLevel()
 
-    if (req.isGDPS) level.gdps = (req.onePointNine ? "1.9/" : "") + req.endpoint
+    if (req.isGDPS) level.gdps = (req.onePointNine ? "1.9/" : "") + req.server.id
     if (level.author != "-") app.userCache(req.id, level.accountID, level.playerID, level.author)
 
     function sendLevel() {

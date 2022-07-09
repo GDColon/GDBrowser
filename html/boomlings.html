@@ -1,7 +1,7 @@
 <head>
 	<title>Boomlings Leaderboard</title>
 	<meta charset="utf-8">
-	<link href="../assets/css/boomlings.css" type="text/css" rel="stylesheet">
+	<link href="../assets/css/boomlings.css?v=1" type="text/css" rel="stylesheet">
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script>
 	<script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-135255146-3');</script>
 	<link rel="icon" href="../assets/boomlings/red.png">
@@ -40,9 +40,9 @@
 	</div>
 
 </body>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
-<script type="text/javascript" src="../sizecheck.js?"></script>
+<script type="text/javascript" src="../global.js?v=1"></script>
 <script type="text/javascript" src="../dragscroll.js"></script>
 <script>
 
@@ -51,6 +51,7 @@
 
 	fetch(`../api/boomlings`).then(res => res.json()).then(res => {
 
+		if (res == "0") res = []
 		$('#boomerbox').html('')
 		$('.ranking').remove()
 

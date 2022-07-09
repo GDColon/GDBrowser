@@ -1,7 +1,7 @@
 <head>
 	<title>Messages</title>
 	<meta charset="utf-8">
-	<link href="../assets/css/browser.css?v=2" type="text/css" rel="stylesheet">
+	<link href="../assets/css/browser.css?v=1" type="text/css" rel="stylesheet">
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script>
 	<script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-135255146-3');</script>
 	<link rel="icon" href="../assets/messages.png">
@@ -212,8 +212,8 @@
 
 </body>
 
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="../sizecheck.js?"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="../global.js?v=1"></script>
 <script>
 
 	let accountID;
@@ -247,7 +247,7 @@
 			$('#msgList').append(`
 			<div messageID=${x.id} playerID="${x.accountID}" ${x.browserColor ? 'browserColor="true" ' : ""}class="commentBG gdMessage">
 				<h3 style="color: ${x.browserColor ? 'rgb(120, 200, 255)' : 'white'}; font-size: ${x.subject.length > 35 ? "3" : x.subject.length > 30 ? "3.5" : x.subject.length > 25 ? "3.75" : "4"}vh">${x.subject}${x.unread ? " <cg>!</cg>" : ""}</h3>
-				<h3 class="gold gdButton msgAuthor hitbox fit"><a href="../u/${x.author}" target="_blank">From: ${x.author}</a></h3>
+				<h3 class="gold gdButton msgAuthor hitbox fit"><a href="../u/${x.accountID}." target="_blank">From: ${x.author}</a></h3>
 				<p class="msgDate">${x.date}</p>
 				<div class="labelButton hitbox">
 					<input id="message-${y}" type="checkbox" class="chk" messageID=${x.id}>
@@ -294,7 +294,7 @@
 								targetUser = decodeURIComponent(targetUser[2])
 								fetch(`../api/profile/${targetUser}`).then(res => res.json()).then(res => { 
 									if (res == "-1" || !res) return;
-									$('#replyAuthor').html(`<a href="../u/${res.username}" target="_blank">To: ${res.username}</a>`)
+									$('#replyAuthor').html(`<a href="../u/${res.accountID}." target="_blank">To: ${res.username}</a>`)
 									messageStatus[res.accountID] = [res.messages, res.username]
 									playerID = res.accountID
 									if (res.messages == "all") $('#messageStatus').html(`<cy>${res.username}</cy> has messages <cg>enabled</cg>`)

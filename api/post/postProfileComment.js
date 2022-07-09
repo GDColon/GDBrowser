@@ -3,6 +3,8 @@ function sha1(data) { return crypto.createHash("sha1").update(data, "binary").di
 
 module.exports = async (app, req, res) => {
 
+  if (req.method !== 'POST') return res.status(405).send("Method not allowed.")
+
   if (!req.body.comment) return res.status(400).send("No comment provided!")
   if (!req.body.username) return res.status(400).send("No username provided!")
   if (!req.body.accountID) return res.status(400).send("No account ID provided!")
@@ -23,13 +25,12 @@ module.exports = async (app, req, res) => {
   params.chk = chk
 
   req.gdRequest('uploadGJAccComment20', params, function (err, resp, body) {
-    if (err) return res.status(400).send("The Geometry Dash servers returned an error! Perhaps they're down for maintenance")
-    else if (!body || body == -1) return res.status(400).send(`The Geometry Dash servers rejected your profile post! Try again later, or make sure your username and password are entered correctly. Try again later, or make sure your username and password are entered correctly. Last worked: ${app.timeSince(req.id)} ago.`)
-    if (body.startsWith("temp")) {
+    if (err) return res.status(400).send(`The Geometry Dash servers rejected your profile post! Try again later, or make sure your username and password are entered correctly. Try again later, or make sure your username and password are entered correctly. Last worked: ${app.timeSince(req.id)} ago.`)
+    else if (body.startsWith("temp")) {
       let banStuff = body.split("_")
       return res.status(400).send(`You have been banned from commenting for ${(parseInt(banStuff[1]) / 86400).toFixed(0)} days. Reason: ${banStuff[2] || "None"}`)
     }
     else app.trackSuccess(req.id)
-    res.status(200).send(`Comment posted to ${params.userName} with ID ${body}`)
+    res.send(`Comment posted to ${params.userName} with ID ${body}`)
   })
 }

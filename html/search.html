@@ -1,12 +1,12 @@
 <head>
 	<title id="tabTitle">Level Search</title>
 	<meta charset="utf-8">
-	<link href="../assets/css/browser.css?v=2" type="text/css" rel="stylesheet">
+	<link href="../assets/css/browser.css?v=1" type="text/css" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
 	<link rel="icon" href="../assets/coin.png">
 	<meta id="meta-title" property="og:title" content="Level Search">
 	<meta id="meta-desc" property="og:description" content="Search for Geometry Dash levels, and filter by length, difficulty, song + more!">
-	<meta id="meta-image" name="og:image" itemprop="image" content="../dragscroll.js">
+	<meta id="meta-image" name="og:image" itemprop="image" content="../coin.png">
 	<meta name="twitter:card" content="summary">
 </head>
 
@@ -83,6 +83,10 @@
 		<img src="../assets/random.png" height="60%" class="gdButton" style="margin-top: 5%">
 	</div>
 
+	<div id="lastPage" title="Last page" style="display: none; text-align: right; position:absolute; top: 7.5%; right: 11%; height: 11%;">
+		<img src="../assets/double-arrow.png" height="60%" class="gdButton" style="margin-top: 5%">
+	</div>
+
 	<div style="position:absolute; top: 2%; left: 1.5%; width: 10%; height: 25%; pointer-events: none">
 		<img class="gdButton yesClick" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()">
 	</div>
@@ -91,12 +95,24 @@
 		<img class="gdButton" src="../assets/delete.png" width="60%" onclick="$('#purgeDiv').show()">
 	</div>
 
+	<div style="position:absolute; bottom: 2%; right: 1%; text-align: right; width: 15%;">
+		<img class="gdButton" src="../assets/refresh.png" width="40%" id="refreshPage"></a>
+	</div>
+
+	<div style="position:absolute; bottom: 2%; right: 8.5%; text-align: right; width: 15%; display: none" id="gdWorld">
+		<a title="Geometry Dash World" href="/search/*?type=gdw"><img class="gdButton" src="../assets/gdw_circle.png" width="40%"></a>
+	</div>
+
+	<div style="position:absolute; bottom: 2%; right: 8.5%; text-align: right; width: 15%; display: none" id="normalGD">
+		<a title="Back to Geometry Dash" href="/search/*?type=featured"><img class="gdButton" src="../assets/gd_circle.png" width="40%"></a>
+	</div>
+
 	<div style="position: absolute; left: 7%; top: 45%; height: 10%;">
-		<img class="gdButton" id="pageDown" src="../assets/arrow-left.png" height="90%">
+		<img class="gdButton" id="pageDown" style="display: none"; src="../assets/arrow-left.png" height="90%">
 	</div>
 
 	<div style="position: absolute; right: 7%; top: 45%; height: 10%;">
-		<img class="gdButton" id="pageUp" src="../assets/arrow-right.png" height="90%">
+		<img class="gdButton" id="pageUp" style="display: none"; src="../assets/arrow-right.png" height="90%">
 	</div>
 
 	<div class="supercenter" id="loading" style="height: 10%; top: 47%; display: none;">
@@ -106,9 +122,9 @@
 </div>
 
 </body>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="../sizecheck.js?"></script>
-<script type="text/javascript" src="https://asvd.github.io/dragscroll/dragscroll.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="../global.js?v=1"></script>
+<script type="text/javascript" src="../dragscroll.js"></script>
 <script>
 
 $('#pageDown').hide()
@@ -131,7 +147,9 @@ let page = Math.max(1, url.searchParams.get('page')) - 1
 let pages = 0
 let results = 0
 let legalPages = true
+let gdwMode = false
 let superSearch = ['*', '*?type=mostliked', '*?type=mostdownloaded', '*?type=recent'].includes(window.location.href.split('/')[4].toLowerCase())
+let pageCache = {}
 
 let demonListLink = "https://pointercrate.com/"
 let searchFilters = `../api/search/${type == 'saved' ? JSON.parse(localStorage.getItem('saved') || '[]').reverse().toString() : accID || path}?page=[PAGE]${count ? "" : "&count=10"}${window.location.search.replace(/\?/g, "&").replace("page", "nope")}`
@@ -143,7 +161,13 @@ if (type == "followed") {
 	searchFilters += ("&creators=" + followed.join()) 
 }
 
-function Append(firstLoad) {
+let hostMatch = window.location.host.match(/\./g)
+if (hostMatch && hostMatch.length > 1) { // gdps check
+	$('#gdWorld').remove()
+	$('#normalGD').remove()
+}
+
+function Append(firstLoad, noCache) {
 
 	loading = true;
 	if (!firstLoad) $('#pagenum').text(`Page ${(page + 1)}${pages ? ` of ${pages}` : ""}`)
@@ -154,9 +178,16 @@ function Append(firstLoad) {
 	if (page == 0) $('#pageDown').hide()
 	else $('#pageDown').show()
 
-	Fetch(searchFilters.replace("[PAGE]", page)).then(res => {
+	if (page == (pages - 1)) $('#lastPage').addClass('grayscale').find('img').removeClass('gdButton')
+	else $('#lastPage').removeClass('grayscale').find('img').addClass('gdButton')
+
+	if (!noCache && pageCache[page]) appendLevels(pageCache[page])
+	else Fetch(searchFilters.replace("[PAGE]", page)).then(appendLevels).catch(e => $('#loading').hide())
+
+	function appendLevels(res) {
 
 	if (res == '-1' || res.length == 0) { $('#loading').hide();  $('#pageUp').hide(); return loading = false }
+	pageCache[page] = res
 
 	if (firstLoad) {
 		pages = res[0].pages
@@ -167,6 +198,7 @@ function Append(firstLoad) {
 			else $('#shuffle').css('filter', 'hue-rotate(100deg)')
 		}
 		$('#shuffle').show()
+		if (pages > 1) $('#lastPage').show()
 		$('#pagenum').text(`Page ${page + 1}${pages ? ` of ${pages}` : ""}`)
 	}
 
@@ -187,20 +219,26 @@ function Append(firstLoad) {
 			accID = x.playerID
 		}
 
-		let filteredSong = x.songName.replace(/[^ -~]/g, "")
-		if (!filteredSong) filteredSong = x.songName
+		let filteredSong = clean(x.songName.replace(/[^ -~]/g, ""))
+		if (!filteredSong) filteredSong = clean(x.songName)
 		let songColor = x.customSong == 0 ? "blue" : (x.songLink && !x.songLink.match(/^https?:\/\/\audio\.ngfiles\.com\//)) ? "nong" : "whatIfItWasPurple"
 		let noLink = songColor != "whatIfItWasPurple"
 
 		$('#searchBox').append(`<div class="searchresult" title="${clean(x.description)}">
-			<h1 class="help lessspaced pre" title="${x.name} (${x.id})" style="width: fit-content; padding-right: 1%">${clean(x.name || " ")}</h1>
-			<h2 class="lessSpaced pre smaller inline gdButton help ${hasAuthor ? "" : "green unregistered"}" title="Account ID: ${x.accountID}\nPlayer ID: ${x.playerID}">${hasAuthor && !onePointNine ? `<a href="../u/${x.author}">By ${x.author || "-"}</a>` : `<a ${userSearch ? "" : `href="../search/${x.playerID}?user"`}>By ${x.author || "-"}</a>`}</h2><h2 class="inline" style="margin-left: 1.5%; transform:translateY(30%)"> ${x.copiedID == '0' ? "" : `<a target="_blank" href="../${x.copiedID}"><img class="gdButton valign sideSpace" title="Original: ${x.copiedID}" src="../assets/copied.png" height="12%"></a>`}${x.large ? `<img class="help valign sideSpaceD" title="${x.objects}${x.objects == 65535 ? "+" : ""} objects" src="../assets/large.png" height="12%">` : ''}</h2>
-			<h3 class="lessSpaced help ${noLink ? "" : 'gdButton '}pre ${songColor}" title="${filteredSong} by ${x.songAuthor} (${x.songID})" style="overflow: hidden; max-height: 19%; width: fit-content">${noLink ? filteredSong : `<a target="_blank" style="width: fit-content" href="https://www.newgrounds.com/audio/listen/${x.songID}">${filteredSong}</a>`}</h3>
+			<h1 class="lessspaced pre" title="${x.name} by ${!x.author || x.author == "-" ? "some nerd" : x.author}" style="width: fit-content; padding-right: 1%">${clean(x.name || " ")}</h1>
+			<h2 class="pre smaller inline gdButton help ${hasAuthor ? "" : "green unregistered"}" title="Account ID: ${x.accountID}\nPlayer ID: ${x.playerID}"><!--
+				-->${hasAuthor && !onePointNine ? `<a style="margin-right: 0.66vh" href="../u/${x.accountID}.">By ${x.author || "-"}</a>` : `<a ${userSearch ? "" : `href="../search/${x.playerID}?user"`}>By ${x.author || "-"}</a>`}</h2><!--
+				--><h2 class="inline" style="margin-left: 1.5%; transform:translateY(30%)"> ${x.copiedID == '0' ? "" : `<a target="_blank" href="../${x.copiedID}"><!--
+				--><img class="gdButton valign sideSpaceD" title="Original: ${x.copiedID}" src="../assets/copied.png" height="12%"></a>`}<!--
+				-->${x.large ? `<img class="help valign sideSpaceD" title="${x.objects}${x.objects == 65535 ? "+" : ""} objects" src="../assets/large.png" height="12%">` : ''}<!--
+				-->${x.twoPlayer ? `<img class="help valign sideSpaceD" title="Two player level" src="../assets/twoPlayer.png" height="12%">` : ''}
+			</h2>
+			<h3 class="lessSpaced help ${noLink ? "" : 'gdButton '}pre ${songColor}" title="${filteredSong} by ${x.songAuthor} (${x.songID})" style="overflow: hidden; max-height: 19%; width: fit-content; padding: 1% 1% 0% 0%">${noLink ? filteredSong : `<a target="_blank" style="width: fit-content" href="https://www.newgrounds.com/audio/listen/${x.songID}">${filteredSong}</a>`}</h3>
 			<h3 class="lessSpaced" style="width: fit-content" title="">
-				<img class="help valign" title="Length" src="../assets/time.png" height="14%"> ${x.length}
-				<img class="help valign" title="Downloads" src="../assets/download.png" height="14%"> ${x.downloads}
-				<img class="help valign" title="Likes" src="../assets/${x.disliked ? 'dis' : ''}like.png" height="14%"> ${x.likes}
-				${x.orbs != 0 ? `<img class="help valign" title="Mana Orbs" src="../assets/orbs.png" height="14%"> ${x.orbs}` : ""}
+				<img class="help valign rightSpace" title="Length" src="../assets/time.png" height="14%">${x.length}
+				<img class="help valign rightSpace" title="Downloads" src="../assets/download.png" height="14%">${x.downloads}
+				<img class="help valign rightSpace" title="Likes" src="../assets/${x.disliked ? 'dis' : ''}like.png" height="14%">${x.likes}
+				${x.orbs != 0 ? `<img class="help valign rightSpace" title="Mana Orbs" src="../assets/orbs.png" height="14%">${x.orbs}` : ""}
 			</h3>
 		
 			<div class="center" style="position:absolute; top: ${6.5 + (y * 33.5) + (x.coins == 0 ? 2.5 : 0)}%; left: 4.4%; transform:scale(0.82); height: 10%; width: 12.5%;">
@@ -220,21 +258,24 @@ function Append(firstLoad) {
 				<a title="View level" href="../${x.id}""><img style="margin-bottom: 4.5%" class="valign gdButton" src="../assets/view.png" height="105%"></a>
 				${demonList ? `<br><a title="View leaderboard" href="../demon/${x.demonPosition}""><img class="valign gdButton" src="../assets/trophyButton.png" height="110%"></a>
 				<a title="View on Pointercrate" href="${demonListLink}demonlist/${x.demonPosition}" target=_blank><img class="valign gdButton" src="../assets/demonButton.png" height="110%"></a>` : "" }
+				<p title="Level ID" style="text-align: right; color: rgba(0, 0, 0, 0.4); font-size: 2.2vh; transform: translate(2.8vh, ${demonList ? -1.8 : 2.5}vh)">#${x.id}</p>
 			</div>
 		</div>`)
 	})
 
-	$('#searchBox').append('<div style="height: 4.5%"></div>')
+	$('#searchBox').append('<div style="height: 4.5%"></div>').scrollTop(0)
 	$('#loading').hide()
 	loading = false;
-})
+	}
 }
 
 Append(true)
 
 $('#pageUp').click(function() {page += 1; if (!loading) Append()})
 $('#pageDown').click(function() {page -= 1; if (!loading) Append()})
+$('#lastPage').click(function() {page = (pages - 1); if (!loading) Append()})
 $('#pageJump').click(function() {if (loading) return; page = parseInt(($('#pageSelect').val() || 1) - 1); Append()})
+$('#refreshPage').click(function() { Append(false, true) } )
 
 if (header) {
 	header = header.slice(0, 32) || "Level Search"
@@ -247,10 +288,11 @@ else {
 	if (type == 2 || type == 'mostliked') $('#header').text("Most Liked")
 	if (type == 3 || type == 'trending') $('#header').text("Trending Levels")
 	if (type == 4 || type == 'recent') $('#header').text("Recent Levels")
-	if (type == 6 || type == 'featured') $('#header').text("Featured")
+	if (type == 6 || type == 'featured') { $('#header').text("Featured"); $('#gdWorld').show() }
 	if (type == 7 || type == 'magic') $('#header').text("Magic Levels")
 	if (type == 11 || type == 'awarded' || type == 'starred') $('#header').text("Awarded Levels")
 	if (type == 16 || type == 'halloffame' || type == 'hof') $('#header').text("Hall of Fame")
+	if (type == 17 || type == 'gdw' || type == 'gdworld') { $('#header').text("Featured (GD World)"); $('#normalGD').show() }
 	if (path != "*" && (type == 10 || list != null)) $('#header').text("Custom List")
 	if (type == 'followed') $('#header').text("Followed Creators")
 	document.title = $('#header').text() || "Level Search"
