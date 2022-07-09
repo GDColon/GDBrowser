@@ -27,7 +27,7 @@
 
         {
             "header": "Demon List",
-            "name": "Patrick",
+            "name": "stadust",
             "ign": "stardust1971",
             "youtube": ["https://youtube.com/user/stardust19710", "youtube"],
             "twitter": ["https://twitter.com/stadust1971", "twitter"],
@@ -38,8 +38,8 @@
             "header": "API Help",
             "name": "SMJS",
             "ign": "SMJSGaming",
-            "youtube": ["https://www.youtube.com/c/SMJSProductions", "youtube"],
-            "twitter": ["https://twitter.com/SMJSGaming", "twitter"],
+            "youtube": ["https://youtube.com/channel/UCwEsWDs9kGN2vvoiNTJKdaQ", "youtube"],
+            "twitter": ["https://twitter.com/SMJS90708001", "twitter"],
             "github": ["https://github.com/SMJSGaming", "github"]
         },
 
@@ -54,10 +54,10 @@
         
         {
             "header": "Level Analyzing Help",
-            "name": "Naoei",
+            "name": "Alten",
             "youtube": ["https://youtube.com/channel/UC9M8hLqh2yZIPSDvpyL7o8g", "youtube"],
-            "twitter": ["https://twitter.com/___Laica", "twitter"],
-            "github": ["https://github.com/naoei", "github"]
+            "twitter": ["https://twitter.com/altenhh", "twitter"],
+            "github": ["https://github.com/Altenhh", "github"]
         },
 
         {
