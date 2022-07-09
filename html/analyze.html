@@ -149,6 +149,7 @@ let blockList = Object.keys(res.blocks)
 let colorList = Object.keys(res.colors)
 
 let portals = res.portals.split(", ").map(x => x.split(" "))
+let coins = res.coins.split(", ").map(x => x.split(" "))
 
 function commafy(num) { return (+num || 0).toString().replace(/(\d)(?=(\d\d\d)+$)/g, "$1,") }
 
@@ -195,6 +196,14 @@ function appendTriggerGroups() {
 			$('#coins').append(`<div class="inline orbDiv"><img height="50%" src='../assets/objects/${res.coinsVerified ? "coin" : "browncoin"}.png'><h3 style="padding-top: 7%">${x}%</h3></div>`)
 		})
 	}
+
+	coins.forEach(x => {
+		if (!x || x[0] == "") {
+			$('#coinText').remove()
+			$('#coins').remove()
+		}
+		else $('#coins').append(`<div class="inline coinDiv"><img height="40%" src='../assets/${res.coinsVerified ? "silvercoin" : "browncoin"}.png'><h3>${x[1]}</h3></div>`)
+	})
 
 	triggerList.forEach(x => {
 		if (x == "total") $('#triggerText').text(`Triggers (${commafy(res.triggers[x])})`)
