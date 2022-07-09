@@ -134,6 +134,12 @@ function loadCredits() {
 	})
 }
 
+let creditsButtonTitles = {
+    github: "GitHub",
+    twitch: "Twitch",
+    demonButton: "Pointercrate",
+    ulButton: "Updated Leaderboard"
+}
 
 Fetch(`./api/credits`).then(async res => {
 
@@ -149,7 +155,7 @@ Fetch(`./api/credits`).then(async res => {
 
 				<a target=_blank href="${x.youtube[0]}" title="YouTube"><img src="../assets/${x.youtube[1]}.png" width="11%" class="gdButton"></a>
 				<a target=_blank href="${x.twitter[0]}" title="Twitter"><img src="../assets/${x.twitter[1]}.png" width="11%" class="sideSpace gdButton"></a>
-				<a target=_blank href="${x.github[0]}" title="GitHub"><img src="../assets/${x.github[1]}.png" width="11%" class="sideSpace gdButton"></a>
+				<a target=_blank href="${x.github[0]}" title="${creditsButtonTitles[x.github[1]]}"><img src="../assets/${x.github[1]}.png" width="11%" class="sideSpace gdButton"></a>
 				<br>
 			</div>
 			<img class="gdButton" src="../assets/arrow-right.png" style="position: absolute; top: 45%; left: 75%; width: 4.5%" tabindex="0" onclick="page += 1; loadCredits()">
