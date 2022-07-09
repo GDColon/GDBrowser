@@ -4,10 +4,14 @@ const Level = require('../classes/Level.js')
 
 module.exports = async (app, req, res, api, ID, analyze) => {
 
+  function rejectLevel() {
+    if (!api) return res.redirect('search/' + req.params.id)
+    else return res.sendError()
+  }
+
   if (req.offline) {
     if (!api && levelID < 0) return res.redirect('/')
-    if (!api) return res.redirect('search/' + req.params.id)
-    else return res.send("-1")
+    return rejectLevel()
   }
 
   let levelID = ID || req.params.id
@@ -17,17 +21,17 @@ module.exports = async (app, req, res, api, ID, analyze) => {
 
   req.gdRequest('downloadGJLevel22', { levelID }, function (err, resp, body) {
 
-    if (err || !body || body == '-1' || body.startsWith("<")) {
-      if (analyze && api && req.server.downloadsDisabled) return res.send("-3")
+    if (err) {
+      if (analyze && api && req.server.downloadsDisabled) return res.status(403).send("-3")
       else if (!api && levelID < 0) return res.redirect(`/?daily=${levelID * -1}`)
-      else if (!api) return res.redirect('search/' + req.params.id)
-      else return res.send("-1")
+      else return rejectLevel()
     }
 
     let authorData = body.split("#")[3]  // daily/weekly only, most likely
 
     let levelInfo = app.parseResponse(body)
     let level = new Level(levelInfo, req.server, true)
+    if (!level.id) return rejectLevel()
 
     let foundID = app.accountCache[req.id][Object.keys(app.accountCache[req.id]).find(x => app.accountCache[req.id][x][1] == level.playerID)]
     if (foundID) foundID = foundID.filter(x => x != level.playerID)
@@ -39,7 +43,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
         if (err2 && (foundID || authorData)) {
           let authorInfo = foundID || authorData.split(":")
           level.author = authorInfo[1] || "-"
-          level.accountID = authorInfo[0].includes(",") ? "0" : authorInfo[0]
+          level.accountID = authorInfo[0] && authorInfo[0].includes(",") ? "0" : authorInfo[0]
         }
 
         else if (!err && b2 != '-1') {
@@ -60,7 +64,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
           level = level.getSongInfo(app.parseResponse(songRes, '~|~'))
           level.extraString = levelInfo[36]
           level.data = levelInfo[4]
-          if (req.isGDPS) level.gdps = (req.onePointNine ? "1.9/" : "") + req.endpoint
+          if (req.isGDPS) level.gdps = (req.onePointNine ? "1.9/" : "") + req.server.id
 
           if (analyze) return app.run.analyze(app, req, res, level)
 

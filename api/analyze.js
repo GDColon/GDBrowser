@@ -6,6 +6,14 @@ const properties = require('../misc/analysis/objectProperties.json')
 const ids = require('../misc/analysis/objects.json')
 
 module.exports = async (app, req, res, level) => {
+
+    if (!level) {
+        level = {
+            name: (req.body.name || "Unnamed").slice(0, 64),
+            data: (req.body.data || "")
+        }
+    }
+
     let unencrypted = level.data.startsWith('kS') // some gdps'es don't encrypt level data
     let levelString = unencrypted ? level.data : Buffer.from(level.data, 'base64')
 
@@ -16,7 +24,7 @@ module.exports = async (app, req, res, level) => {
         return res.send(response_data);
     } else {
         zlib.unzip(levelString, (err, buffer) => {
-            if (err) { return res.send("-2"); }
+            if (err) { return res.status(500).send("-2"); }
 
             const raw_data = buffer.toString();
             const response_data = analyze_level(level, raw_data);
@@ -56,6 +64,7 @@ function analyze_level(level, rawData) {
     let miscCounts = {}
     let triggerGroups = []
     let highDetail = 0
+    let alphaTriggers = []
 
     let misc_objects = {};
     let block_ids = {};
@@ -145,8 +154,18 @@ function analyze_level(level, rawData) {
             last = Math.max(last, obj.x);
         }
 
+        if (obj.trigger == "Alpha") { // invisible triggers
+            alphaTriggers.push(obj)
+        }
+
         data[i] = obj;
     }
+
+    let invisTriggers = []
+    alphaTriggers.forEach(tr => {
+        if (tr.x < 500 && !tr.touchTriggered && !tr.spawnTriggered && tr.opacity == 0 && tr.duration == 0
+            && alphaTriggers.filter(x => x.targetGroupID == tr.targetGroupID).length == 1) invisTriggers.push(Number(tr.targetGroupID))
+    })
 
     response.level = {
         name: level.name, id: level.id, author: level.author, playerID: level.playerID, accountID: level.accountID, large: level.large
@@ -157,7 +176,7 @@ function analyze_level(level, rawData) {
     response.settings = {}
 
     response.portals = level_portals.sort(function (a, b) {return parseInt(a.x) - parseInt(b.x)}).map(x => x.portal + " " + Math.floor(x.x / (Math.max(last, 529.0) + 340.0) * 100) + "%").join(", ")
-    response.coins = level_coins.sort(function (a, b) {return parseInt(a.x) - parseInt(b.x)}).map(x => x.coin + " " + Math.floor(x.x / (Math.max(last, 529.0) + 340.0) * 100) + "%").join(", ")
+    response.coins = level_coins.sort(function (a, b) {return parseInt(a.x) - parseInt(b.x)}).map(x => Math.floor(x.x / (Math.max(last, 529.0) + 340.0) * 100))
     response.coinsVerified = level.verifiedCoins
 
     response.orbs = orb_array
@@ -177,7 +196,11 @@ function analyze_level(level, rawData) {
     })
 
     response.triggerGroups = sortObj(response.triggerGroups)
-    response.triggerGroups.total = Object.keys(response.triggerGroups).length
+    let triggerKeys = Object.keys(response.triggerGroups).map(x => Number(x.slice(6)))
+    response.triggerGroups.total = triggerKeys.length
+
+    // find alpha group with the most objects
+    response.invisibleGroup = triggerKeys.find(x => invisTriggers.includes(x))
 
     response.text = level_text.sort(function (a, b) {return parseInt(a.x) - parseInt(b.x)}).map(x => [Buffer.from(x.message, 'base64').toString(), Math.round(x.x / last * 99) + "%"])
 

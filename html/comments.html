@@ -1,7 +1,7 @@
 <head>
 	<title>Comments</title>
 	<meta charset="utf-8">
-	<link href="../assets/css/browser.css?v=2" type="text/css" rel="stylesheet">
+	<link href="../assets/css/browser.css?v=1" type="text/css" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
 	<link rel="icon" href="../assets/like.png">
 	<meta id="meta-title" property="og:title" content="Level Comments">
@@ -115,7 +115,7 @@
 			<a id="levelLink"><h2 class="smallGold inline gdButton" id="levelID" style="margin-left: 6vh"></h2></a>
 		</div>
 		
-		<div id="leaveComment" style="position:absolute;bottom: 0%;right: 0%;width: 14%;text-align: right;transform: translate(30%, 40%);">
+		<div id="leaveComment" style="display: none; position:absolute;bottom: 0%;right: 0%;width: 14%;text-align: right;transform: translate(30%, 40%);">
 			<img class="gdButton" src="../assets/comment.png" width="60%" onclick="$('#content').trigger('input'); $('#postComment').show();">
 		</div>
 
@@ -128,8 +128,10 @@
 </div>
 
 </body>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="../sizecheck.js?"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/6.2.2/browser/pixi.js"></script>
+<script type="text/javascript" src="../iconkit/icon.js"></script>
+<script type="text/javascript" src="../global.js?v=1"></script>
 <script type="text/javascript" src="../dragscroll.js"></script>
 <script>
 
@@ -146,6 +148,7 @@ let like = true
 let lastPage = 0
 let auto = false
 let interval = null
+let commentCache = {}
 
 let target = `../api/level/${lvlID}`
 if (lvlID > 999999999 || lvlID < -999999999) window.location.href = window.location.href.replace("comments", "search")
@@ -159,7 +162,9 @@ function clean(text) {return text.replace(/&/g, "&#38;").replace(/</g, "&#60;").
 
 $('#compactMode').attr('src', `../assets/compact-${compact ? "on" : "off"}.png`)
 
-Fetch(target).then(lvl => {
+Fetch(target).then(lvl => buildComments(lvl)).catch(e => buildComments({}))
+
+function buildComments(lvl) {
 
 	if (gdps) {
 		$('#leaveComment').hide()
@@ -187,7 +192,7 @@ Fetch(target).then(lvl => {
 			$('#levelAuthor').addClass("green").addClass("unregistered")
 			$('#authorLink').attr('href', '../search/' + lvl.playerID + "?user")
 		}
-		else $('#authorLink').attr('href', '../u/' + lvl.author)
+		else $('#authorLink').attr('href', `../u/${lvl.accountID}.`)
 		$('#levelName').text(lvl.name || ("Nonexistent level " + lvlID))
 		if (!lvl.name) $('#leaveComment').hide()
 		$('#levelAuthor').text("By " + (lvl.author || "-"))
@@ -204,7 +209,7 @@ Fetch(target).then(lvl => {
 		}
 	}
 
-function appendComments(auto) {
+function appendComments(auto, noCache) {
 
 if (loadingComments) return;
 else loadingComments = true;
@@ -224,13 +229,21 @@ else {
 	}
 }
 
-fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID}?count=${compact && !auto ? 20 : 10}&page=${page}${history ? "&type=commentHistory" : ""}&${mode}`).then(res => res.json()).then(res => {
+if (!noCache && commentCache[page]) addComments(commentCache[page])
+fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID}?count=${compact && !auto ? 20 : 10}&page=${page}${history ? "&type=commentHistory" : ""}&${mode}`).then((res) => {
+	if (res.status === 204) return [];
+	return res.json();
+}).then(addComments)
+
+function addComments(res) {
 	
 	if (history && lvl.commentHistory != "all") $('#pageUp').hide()
 
 	if (res == -1 || (history && lvl.commentHistory != "all")) {
 		loadingComments = false; return $('#loading').hide()
 	}
+
+	commentCache[page] = res
 
 	res.forEach((x, index) => {
 
@@ -244,7 +257,6 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 		if (auto) bgCol = $('.commentBG').first().hasClass('oddComment') ? "evenComment" : "oddComment"
 
 		let userName = !history ? x.username : lvl.username
-		let userLink = encodeURI(userName)
 		let modNumber = x.moderator || lvl.moderator
 
 		if (x.pages) {
@@ -259,11 +271,13 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 		commentHTML = !compact ? `
 			<div class="commentBG ${bgCol}">
 				<div class="comment" commentID="${x.ID}">
-					<img class="inline" src="../icon/icon?form=${x.icon.form}&icon=${x.icon.icon}&col1=${x.icon.col1}&col2=${x.icon.col2}&glow=${x.icon.glow}&size=auto" height=21% style="margin-right: 0.8%">
-					<a href=../${x.accountID == "0" ? `search/${x.playerID}?user` : `../u/${userLink}`}>
-					<h2 class="inline gdButton ${x.accountID == "0" ? "green unregistered" : ""}">${userName}</h2></a>
-					${modNumber > 0 ? `<img class="inline" src="../assets/mod${modNumber > 2 ? "-extra" : modNumber == 2 ? "-elder" : ""}.png" height=18% style="margin-left: 0.6%;">` : ""}
-					<p class="commentPercent inline">${x.percent ? x.percent + "%" : ""}</p>
+					<div class="commentRow">
+						<gdicon class="commentIcon inline" cacheID=${x.playerID} iconID=${x.icon.icon} iconForm="${x.icon.form}" col1="${x.icon.col1}" col2="${x.icon.col2}" glow="${x.icon.glow}"></gdicon>
+						<a href=../${x.accountID == "0" ? `search/${x.playerID}?user` : `../u/${x.accountID}.`}>
+						<h2 class="inline gdButton ${x.accountID == "0" ? "green unregistered" : ""}">${userName}</h2></a>
+						${modNumber > 0 ? `<img class="inline" src="../assets/mod${modNumber > 2 ? "-extra" : modNumber == 2 ? "-elder" : ""}.png" style="margin-left: 1%; width: 3.5%">` : ""}
+						<p class="commentPercent inline">${x.percent ? x.percent + "%" : ""}</p>
+					</div>
 
 					<div class="commentAlign">
 						<p class="pre commentText" style="color: rgb(${!history && x.playerID == lvl.playerID ? "255,255,75" : x.browserColor ? "255,180,255" : x.color})">${clean(x.content)}</p>
@@ -284,11 +298,13 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 			:  `
 			<div class="commentBG compactBG ${bgCol}">
 				<div class="comment compact" commentID="${x.ID}">
-					<img class="inline" src="../icon/icon?form=${x.icon.form}&icon=${x.icon.icon}&col1=${x.icon.col1}&col2=${x.icon.col2}&glow=${x.icon.glow}&size=auto" height=21% style="margin-right: 0.8%">
-					<a href=../${x.accountID == "0" ? `search/${x.playerID}?user` : `../u/${userLink}`}>
-					<h2 class="inline gdButton ${x.accountID == "0" ? "green unregistered" : ""}">${userName}</h2></a>
-					${modNumber > 0 ? `<img class="inline" src="../assets/mod${modNumber > 2 ? "-extra" : modNumber == 2 ? "-elder" : ""}.png" height=18% style="margin-left: 0.6%;">` : ""}
-					<p class="commentPercent inline">${x.percent ? x.percent + "%" : ""}</p>
+					<div class="commentRow">
+						<gdicon class="commentIcon inline" cacheID=${x.playerID} iconID=${x.icon.icon} iconForm="${x.icon.form}" col1="${x.icon.col1}" col2="${x.icon.col2}" glow="${x.icon.glow}"></gdicon>
+						<a href=../${x.accountID == "0" ? `search/${x.playerID}?user` : `../u/${x.accountID}.`}>
+						<h2 class="inline gdButton ${x.accountID == "0" ? "green unregistered" : ""}">${userName}</h2></a>
+						${modNumber > 0 ? `<img class="inline" src="../assets/mod${modNumber > 2 ? "-extra" : modNumber == 2 ? "-elder" : ""}.png" style="margin-left: 1.2%; width: 3.2%">` : ""}
+						<p class="commentPercent inline">${x.percent ? x.percent + "%" : ""}</p>
+					</div>
 
 					<div class="commentAlign">
 						<p class="pre commentText" style="color: rgb(${!history && x.playerID == lvl.playerID ? "255,255,75" : x.browserColor ? "255,180,255" : x.color})">${clean(x.content)}</p>
@@ -317,9 +333,10 @@ fetch(`../api${!history ? window.location.pathname : "/comments/" + lvl.playerID
 
 	});
 
+	renderIcons()
 	 $('#loading').hide()
 	 return loadingComments = false;
-	})
+	}
 }
 
 loadingComments = false
@@ -333,6 +350,7 @@ function resetSort() {
 	page = 0
 	auto = false
 	clearInterval(interval)
+	commentCache = {}
 	$('#liveText').hide()
 	$('#autoMode').attr('src', `../assets/playbutton.png`)
 }
@@ -384,14 +402,14 @@ $('#autoMode').click(function() {
 		$('#autoMode').attr('src', `../assets/playbutton.png`)
 		clearInterval(interval)
 	}
-	appendComments(true)
+	appendComments(true, true)
 })
 
 $(document).on('click', '.refreshBtn', function () {
 	if (loadingComments) return
 	lastPage = 0;
 	page = 0;
-	appendComments()
+	appendComments(false, true)
 })
 
 $('#content').on('input', function() {
@@ -527,7 +545,7 @@ $(document).keydown(function(k) {
     }
 });
 
-});
+};
 
 </script>
 

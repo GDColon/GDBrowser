@@ -3,6 +3,8 @@ function sha1(data) { return crypto.createHash("sha1").update(data, "binary").di
 
 module.exports = async (app, req, res) => {
 
+  if (req.method !== 'POST') return res.status(405).send("Method not allowed.")
+
   if (!req.body.ID) return res.status(400).send("No ID provided!")
   if (!req.body.accountID) return res.status(400).send("No account ID provided!")
   if (!req.body.password) return res.status(400).send("No password provided!")
@@ -30,9 +32,8 @@ module.exports = async (app, req, res) => {
   params.chk = chk
 
   req.gdRequest('likeGJItem211', params, function (err, resp, body) {
-    if (err) return res.status(400).send("The Geometry Dash servers returned an error! Perhaps they're down for maintenance")
-    if (!body || body == -1) return res.status(400).send(`The Geometry Dash servers rejected your vote! Try again later, or make sure your username and password are entered correctly. Last worked: ${app.timeSince(req.id)} ago.`)
+    if (err) return res.status(400).send(`The Geometry Dash servers rejected your vote! Try again later, or make sure your username and password are entered correctly. Last worked: ${app.timeSince(req.id)} ago.`)
     else app.trackSuccess(req.id)
-    res.status(200).send((params.like == 1 ? 'Successfully liked!' : 'Successfully disliked!') + " (this will only take effect if this is your first time doing so)")
+    res.send((params.like == 1 ? 'Successfully liked!' : 'Successfully disliked!') + " (this will only take effect if this is your first time doing so)")
   })
 }

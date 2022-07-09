@@ -5,9 +5,11 @@
     "author": "RobTop",
     "authorLink": "https://www.youtube.com/channel/UCz_yk8mDSAnxJq0ar66L4sw",
     "id": "",
-    "endpoint": "http://boomlings.com/database/",
+    "endpoint": "http://www.boomlings.com/database/",
     "timestampSuffix": " ago",
-    "demonList": "https://pointercrate.com/"
+    "demonList": "https://pointercrate.com/",
+    "downloadsDisabled": true,
+    "pinned": true
   },
   
   {
@@ -17,13 +19,13 @@
     "authorLink": "https://www.youtube.com/channel/UClXb1w9vSL3Z0V-mUbudOnw",
     "id": "22unlocked",
     "endpoint": "http://smjs.eu/gd/unlock/database/",
+    "disabled": ["gauntlets", "mappacks", "daily", "weekly"],
     "substitutions": {
       "levelID": "oereoIE",
       "accountID": "BddpvouKE",
       "targetAccountID": "targetBddpvouKE"
     }
   },
-
   {
     "name": "1.9 GDPS",
     "link": "https://absolllute.com/gdps/",
@@ -38,150 +40,6 @@
       "getGJMapPacks21": "getGJMapPacks",
       "getGJScores20": "getGJScores",
       "getGJComments21": "getGJComments"
-    }
-  },
-
-  {
-    "name": "XGDPS",
-    "link": "http://xcggdpsserver.xyz/",
-    "author": "XcreatorGoal",
-    "authorLink": "https://www.youtube.com/channel/UC33L-Y8asG7gju6f-4-Cl2g",
-    "id": "xgdps",
-    "endpoint": "http://xcggdpsserver.xyz/database/"
-  },
-
-  {
-    "name": "WGDPS",
-    "link": "http://wyliegdps02.7m.pl/",
-    "author": "Wylie",
-    "authorLink": "https://www.youtube.com/channel/UCG5I4-KAW3Kwzam4svLJWBA",
-    "id": "wgdps",
-    "endpoint": "http://wyliegdps02.7m.pl/database/"
-  },
-
-  {
-    "name": "ClarifyGDPS",
-    "link": "https://clarifygdps.com/",
-    "author": "Jouca",
-    "authorLink": "https://www.youtube.com/channel/UCXE8HB-B4tqvI0ibjXSJ52A",
-    "id": "clarify",
-    "endpoint": "http://joucagdpss.clarifygdps.com/",
-    "timestampSuffix": " ago"
-  },
-
-  {
-    "name": "1.6 GDPS",
-    "link": "https://discord.gg/eGWMmyk",
-    "author": "Cylyrii",
-    "authorLink": "https://www.youtube.com/channel/UCY-D_PGmZtR9HTeczwBxbrw",
-    "id": "16gdps",
-    "endpoint": "http://wayveyx.x10.mx/gdps/garlic/",
-    "onePointNine": true,
-    "weeklyLeaderboard": true
-  },
-
-  {
-    "name": "CnekGDPS",
-    "link": "http://cnekgdps.7m.pl/index.html/",
-    "author": "Cnek",
-    "authorLink": "https://www.youtube.com/channel/UCDgrf89BjVyrUYSxFIDxafw",
-    "id": "cnek",
-    "endpoint": "http://cnekgdps.7m.pl/cnekgdpsdtb/"
-  },
-
-  {
-    "name": "Zombie Dash",
-    "link": "http://zombiedashoficial.ddns.net/",
-    "author": "Ghost Power 13",
-    "authorLink": "https://www.youtube.com/channel/UCC_S4bHTIGVJiCfZsKU15Gw",
-    "id": "zombiedash",
-    "endpoint": "http://zombiedashoficial.ddns.net/"
-  },
-
-  {
-    "name": "GD Gravity",
-    "link": "https://discord.gg/qpUJgBC",
-    "author": "Sai",
-    "authorLink": "https://youtube.com/channel/UCvYEPVUVVLDhwfHCzgVdIIg",
-    "id": "gravity",
-    "endpoint": "http://gravity5.000webhostapp.com/"
-  },
-
-  {
-    "name": "RealistikGDPS",
-    "link": "http://rgdps.ussr.pl/",
-    "author": "RealistikDash",
-    "authorLink": "https://www.youtube.com/c/RealistikDash",
-    "id": "rgdps",
-    "endpoint": "http://rgdps.ussr.pl/gdpsdatabase/"
-  },
-
-  {
-    "name": "Supreme GDPS",
-    "link": "https://discord.gg/pAU42pbREb",
-    "author": "Optimal",
-    "authorLink": "https://youtube.com/c/Optimal7",
-    "id": "supreme",
-    "endpoint": "http://gdps.mathieuar.fr/supreme1/"
-  },
-
-  {
-    "name": "Aurora Dash",
-    "link": "http://aurorgdpsgd.7m.pl",
-    "author": "Yayi Kawaii",
-    "authorLink": "https://www.youtube.com/channel/UCBH8Y_3SAYB-f-k7zFXLvtA",
-    "id": "aurora",
-    "endpoint": "http://aurorgdpsgd.7m.pl/database/"
-  },
-
-  {
-    "name": "GD Multiverse",
-    "link": "https://discord.gg/rJtAky72xE",
-    "author": "Nonixgames",
-    "authorLink": "https://youtube.com/c/Nonixgames",
-    "id": "multiverse",
-    "endpoint": "http://gdpsnoni.000webhostapp.com/"
-  },
-
-  {
-    "name": "Resurrection GDPS",
-    "link": "http://gdpsresu.000webhostapp.com/",
-    "author": "Switchstep",
-    "authorLink": "https://www.youtube.com/channel/UCg9HipnGYtfwIax4bLTTzUQ",
-    "id": "resurrection",
-    "endpoint": "http://gdpsresu.000webhostapp.com/"
-  },
-
-  {
-    "name": "SilvrPS",
-    "link": "https://discord.gg/A3a6rka",
-    "author": "silverra",
-    "authorLink": "https://www.youtube.com/channel/UCdKNL3PFoZKBkRTo41Ss_dg",
-    "id": "silvrps",
-    "endpoint": "http://silvrragdps.7m.pl/database/"
-  },
-
-  {
-    "name": "NEON GDPS",
-    "link": "https://discord.gg/zu6Uv95",
-    "author": "PjoseP",
-    "authorLink": "https://www.youtube.com/c/PjoseP",
-    "id": "neon",
-    "endpoint": "http://newgdpsneon.7m.pl/database/"
-  },
-
-  {
-    "name": "Rob's Abandoned Server",
-    "link": "http://robtopgames.com/",
-    "author": "RobTop",
-    "authorLink": "https://www.youtube.com/channel/UCz_yk8mDSAnxJq0ar66L4sw",
-    "id": "robtopgames",
-    "endpoint": "http://robtopgames.com/database/",
-    "onePointNine": true,
-    "timestampSuffix": " ago",
-    "overrides": {
-      "getGJLevels21": "getGJLevels",
-      "downloadGJLevel22": "downloadGJLevel"
     }
   }
 ]

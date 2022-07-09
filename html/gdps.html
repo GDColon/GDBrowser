@@ -1,7 +1,7 @@
 <head>
 	<title>GD Multiverse Navigation Terminal</title>
 	<meta charset="utf-8">
-	<link href="../assets/css/browser.css?v=2" type="text/css" rel="stylesheet">
+	<link href="../assets/css/browser.css?v=1" type="text/css" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
 	<link rel="icon" href="../assets/unlock.png">
 	<meta id="meta-title" property="og:title" content="GD Multiverse Navigation Terminal">
@@ -18,21 +18,19 @@
 		<div class="fancybox bounce center supercenter" style="width: 90vh">
 			<h2 class="smaller center" style="font-size: 5.5vh">Add server</h2>
 			<p class="bigger center" style="line-height: 5vh; margin-top: 1.5vh; margin-bottom: 2.5vh;">
-				Please contact <span style="color: #FF8000">Colon</span></a> on
-				<a target="_blank" href="https://twitter.com/TheRealGDColon"><ca class="underline">Twitter</ca></a> or
-				<span style="color: #7289DA">Discord</span> if you are interested in adding your <cy>private server</cy> to this list.
+				Interested in listing your <cg>private server</cg> on GDBrowser?
+				<a target="_blank" href="https://forms.gle/kncuRqyKykQX42QD7"><ca class="underline">Fill out this form</ca></a>
+				with your <cy>server information</cy> and I'll look into adding it!
 			</p>
 			<p class="bigger center" style="margin-top: 1vh">
-				Please note that I am only adding <cg>relatively popular</cg> servers at this time.
+				Please note that I only add <cg>relatively large</cg> servers to the list.
 				Servers which are <cr>inactive</cr> or have <cr>few levels/members</cr> will not be accepted.
 			</p>
 			<img src="../assets/ok.png" width=15%; class="gdButton center" onclick="$('.popup').hide()">
 		</div>
 	</div>
 
-	<div id="searchBox" class="supercenter dragscroll"; style="width: 127vh">
-		<div style="height: 4.5%"></div>
-	</div>
+	<div id="searchBox" class="supercenter dragscroll"; style="width: 127vh"></div>
 	
 	<div class="epicbox supercenter gs" style="width: 126vh; height: 80%; pointer-events: none"></div>
 
@@ -48,6 +46,14 @@
 		<img class="spin noSelect" src="../assets/loading.png" height="105%">
 	</div>
 
+	<div style="position: absolute; left: 7%; top: 45%; height: 10%;">
+		<img class="gdButton" id="pageDown" src="../assets/arrow-left.png" style="display: none"; height="90%">
+	</div>
+
+	<div style="position: absolute; right: 7%; top: 45%; height: 10%;">
+		<img class="gdButton" id="pageUp" src="../assets/arrow-right.png" style="display: none"; height="90%">
+	</div>
+
 	<div style="position:absolute; top: 3%; right: 2%; text-align: right; width: 20%;">
 		<img id="plusButton" class="inline gdButton" src="../assets/plus.png" width="25%" onclick="$('#infoDiv').show()">
 	</div>
@@ -55,34 +61,60 @@
 </div>
 
 </body>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="../sizecheck.js?"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="../global.js?v=1"></script>
 <script type="text/javascript" src="../dragscroll.js"></script>
 <script>
 
+let pageSize = 20
+let page = 1
 let localhost = window.location.hostname == "localhost"
 let host = window.location.host.split(".").slice(-2).join(".")
+
 Fetch('../api/gdps').then(servers => {
 
-	servers.forEach(x => {
+	let currentServer = servers.find(x => x.id == gdps)
+	servers = [currentServer].concat(servers.filter(x => x.id != gdps)).filter(x => x)
+	let pageCount = Math.floor((servers.length-1)/pageSize) + 1
+
+	function listServers() {
+
+		if (page >= pageCount) $('#pageUp').hide()
+		else $('#pageUp').show()
+		if (page <= 1) $('#pageDown').hide()
+		else $('#pageDown').show()
+
+		let serverPage = servers.slice((page-1)*pageSize, (page-1)*pageSize + pageSize)
+		$('#searchBox').html('<div style="height: 4.5%"></div>').scrollTop(0)
+
+		serverPage.forEach(x => {
+			$('#searchBox').append(`<div class="searchresult" style="height: 19%; padding-top: 1.2%">
+					<h1 class="lessspaced blue" style="color: ${(gdps || "") == x.id ? "#00DDFF" : "white"}">${x.name}</h1>
+					<h2 class="lessSpaced smaller inline gdButton"><a href="${x.authorLink}" target="_blank">By ${x.author}</a></h2>
 		
-	if (!x.id) x.id = null
-	$('#searchBox').append(`<div class="searchresult" style="height: 19%; padding-top: 1.2%">
-			<h1 class="lessspaced blue" style="color: ${gdps == x.id ? "#00DDFF" : "white"}">${x.name}</h1>
-			<h2 class="lessSpaced smaller inline gdButton"><a href="${x.authorLink}" target="_blank">By ${x.author}</a></h2>
+					<div class="center" style="position:absolute; height: 10%; width: 12.5%; left: 3%; transform:translateY(-160%)">
+						<a href="${x.link}" target="_blank"><img class="gdButton spaced gdpslogo" src="../assets/gdps/${x.id || "gd"}_icon.png" height="130%"></a>
+					</div>
+					
+					<div class="center" style="position:absolute; right: 7%; transform:translateY(-150%); height: 10%">
+						<a href="http://${x.id || ""}${x.id && localhost ? ".x" : ""}${x.id ? "." : ""}${host}"><img style="margin-bottom: 4.5%" class="valign gdButton" src="../assets/view.png" height="105%"></a>
+					</div>
+				</div>`)
+		})
+		$('#searchBox').append('<div style="height: 4.5%"></div>')
+	}
 
-			<div class="center" style="position:absolute; height: 10%; width: 12.5%; left: 3%; transform:translateY(-160%)">
-				<a href="${x.link}" target="_blank"><img class="gdButton spaced gdpslogo" src="../assets/gdps/${x.id || "gd"}_icon.png" height="130%"></a>
-			</div>
-			
-			<div class="center" style="position:absolute; right: 7%; transform:translateY(-150%); height: 10%">
-				<a href="http://${x.id || ""}${x.id && localhost ? ".x" : ""}${x.id ? "." : ""}${host}"><img style="margin-bottom: 4.5%" class="valign gdButton" src="../assets/view.png" height="105%"></a>
-			</div>
-		</div>`)
-	})
+	listServers()
 
-	$('#searchBox').append('<div style="height: 4%"></div>')
+	$('#pageUp').click(function() {page++; listServers()})
+	$('#pageDown').click(function() {page--; listServers()})
 	$('#loading').hide();
+
+	$(document).keydown(function(k) {
+		if (k.which == 37 && $('#pageDown').is(":visible")) $('#pageDown').trigger('click')   // left
+		if (k.which == 39 && $('#pageUp').is(":visible")) $('#pageUp').trigger('click')       // right
+	});
+
 })
 
 </script>

@@ -1,6 +1,8 @@
+const colors = require('../../iconkit/sacredtexts/colors.json');
+
 module.exports = async (app, req, res) => {
 
-  if (req.offline) return res.send("-1")
+  if (req.offline) return res.sendError()
 
     let amount = 100;
     let count = req.query.count ? parseInt(req.query.count) : null
@@ -18,9 +20,9 @@ module.exports = async (app, req, res) => {
 
     req.gdRequest('getGJLevelScores211', params, function(err, resp, body) { 
 
-      if (err || body == -1 || !body) return res.send("-1")
+      if (err) return res.status(500).send({error: true, lastWorked: app.timeSince(req.id)})
       scores = body.split('|').map(x => app.parseResponse(x)).filter(x => x[1])
-      if (!scores.length) return res.send("-1")
+      if (!scores.length) return res.status(500).send([])
       else app.trackSuccess(req.id)
 
       scores.forEach(x => {
@@ -37,7 +39,9 @@ module.exports = async (app, req, res) => {
           icon: +x[9],
           col1: +x[10],
           col2: +x[11],
-          glow: +x[15] > 1
+          glow: +x[15] > 1,
+          col1RGB: colors[x[10]] || colors["0"],
+          col2RGB: colors[x[11]] || colors["3"]
         }
         keys.forEach(k => delete x[k])
         app.userCache(req.id, x.accountID, x.playerID, x.username)

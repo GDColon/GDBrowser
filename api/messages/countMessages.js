@@ -1,5 +1,7 @@
 module.exports = async (app, req, res) => {
 
+  if (req.method !== 'POST') return res.status(405).send("Method not allowed.")
+
   if (!req.body.accountID) return res.status(400).send("No account ID provided!")
   if (!req.body.password) return res.status(400).send("No password provided!")
 
@@ -11,11 +13,11 @@ module.exports = async (app, req, res) => {
 
   req.gdRequest('getGJUserInfo20', params, function (err, resp, body) {
 
-    if (err || body == -1 || body == -2 || !body) return res.status(400).send(`Error counting messages! Messages get blocked a lot so try again later, or make sure your username and password are entered correctly. Last worked: ${app.timeSince(req.id)} ago.`)
+    if (err) return res.status(400).send(`Error counting messages! Messages get blocked a lot so try again later, or make sure your username and password are entered correctly. Last worked: ${app.timeSince(req.id)} ago.`)
     else app.trackSuccess(req.id)
     let count = app.parseResponse(body)[38]
     if (!count) return res.status(400).send("Error fetching unread messages!")
-    else res.status(200).send(count)
+    else res.send(count)
   })
 
 }

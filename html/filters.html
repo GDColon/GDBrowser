@@ -1,7 +1,7 @@
 <head>
 	<title>Level Search</title>
 	<meta charset="utf-8">
-	<link href="../assets/css/browser.css?v=2"text/css" rel="stylesheet">
+	<link href="../assets/css/browser.css?v=1" type="text/css" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
 	<link rel="icon" href="../assets/coin.png">
 	<meta id="meta-title" property="og:title" content="Level Search">
@@ -10,7 +10,7 @@
 	<meta name="twitter:card" content="summary">
 </head>
 
-<body class="levelBG" onbeforeunload="saveUrl()">
+<body class="levelBG" onbeforeunload="saveFilters(); saveUrl()">
 
 <div id="everything">
 
@@ -28,7 +28,7 @@
 			<img id="normalSong" class="gdButton inline gray" style="margin-right: 0.5%" src="../assets/song-normal.png" height="8%">
 			<img id="customSong" class="gdButton inline" style="margin-left: 0.5%" src="../assets/song-custom.png" height="8%">
 			<br>
-			<input id="songID" type="number" placeholder="Custom Song ID" style="height: 15%; width: 70%; text-align: center; margin-top: 2%" maxlength="22">
+			<input id="songID" type="number" placeholder="Custom Song ID" style="height: 15%; width: 70%; text-align: center; margin-top: 2%">
 			<div id="songSelect" style="width: 100%; display: none; margin-top: 3%; text-align: center">
 				<img style="width: 4%" id="songDown" class="gdButton inline valign songChange" jump="-1" src="../assets/whitearrow-left.png">
 				<h1 class="inline valign smallerer center" id="songName" style="min-width: 60%"></h1>
@@ -63,7 +63,7 @@
 	</div>
 
 	<div style="position:absolute; bottom: 0%; right: 0%; width: 100%; text-align: right;">
-		<img class="cornerPiece" src="../assets/corner.png" width=7%; style="transform: scaleX(-1)">
+		<img class="cornerPiece" src="../assets/corner.png" width=7%; style="transform: scaleX(-1);  pointer-events: none">
 	</div>
 
 	<div class="transparentBox center" style="width: 115vh; height: 9%; margin: 1.5% auto 1% auto; padding-bottom: 0.2%">
@@ -123,6 +123,7 @@
 	</div>
 
 	<div class="transparentBox center" style="width: 115vh; height: 6%; margin: 0.5% auto 1% auto; padding-top: 1%; padding-bottom: 0.5%;">
+		<!-- <div class="lengthDiv" style="pointer-events: none" len=0><h1 class="gdButton smaller" style="pointer-events: none"><img src="../assets/time.png" height="90%" style="pointer-events: none"></h1></div> -->
 		<div class="lengthDiv" len=0><h1 class="gdButton smaller">Tiny</h1></div>
 		<div class="lengthDiv" len=1><h1 class="gdButton smaller">Short</h1></div>
 		<div class="lengthDiv" len=2><h1 class="gdButton smaller">Medium</h1></div>
@@ -136,19 +137,19 @@
 	</div>
 
 	<div style="position:absolute; top: 2%; right: 1.5%; width: 10%; text-align: right">
-		<img class="gdButton" style="margin-bottom: 15%" src="../assets/plus.png" width="60%" onclick="$('#filters').show()">
+		<img class="gdButton" style="margin-bottom: 12%" src="../assets/close.png" width="60%" onclick="clearFilters()">
+		<img class="gdButton" style="margin-bottom: 12%" id="showFilters" src="../assets/plus.png" width="60%" onclick="$('#filters').show()">
 		<img class="gdButton" src="../assets/listbutton.png" width="60%" onclick="$('#customlist').show()">
 	</div>
 
 </div>
 
 </body>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="../sizecheck.js?"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="../global.js?v=1"></script>
 <script>
 
 let filters = []
-let minusCheck = []
 let demons = []
 let demonMode = false
 let customSong = true
@@ -175,7 +176,7 @@ $('.levelSearch').click(function() {
 	demonFilter = demonMode && difficulties[0] > 0
 	
 	if (!difficulties.length) url += ""
-	else if (!demonFilter) url += "&diff=" + difficulties.join(",")
+	else if (!demonFilter) url += "&diff=" + undupe(difficulties).join(",")
 	else url += "&diff=-2&demonFilter=" + difficulties[0]
 
 	// === LENGTH === //
@@ -191,7 +192,7 @@ $('.levelSearch').click(function() {
 	// === SONG === //
 
 	let selectedOfficial = customSong ? null : officialSong
-	let selectedCustom = customSong && $('#songID').val() ? $('#songID').val() : null
+	let selectedCustom = customSong && $('#songID').val() ? $('#songID').val().slice(0, 16) : null
 	let selectedSong = selectedCustom || selectedOfficial
 
 	if (selectedSong) {
@@ -206,45 +207,63 @@ $('.levelSearch').click(function() {
 
 })
 
+function getDiffFilters() {
+	return $('.diffDiv.selectedFilter').map(function() { return $(this).attr('diff') }).toArray()
+}
+
+function showDemonDiffs() {
+	$('#difficulties').hide();
+	$('#demons').show();
+	demonMode = true;
+}
+
+function hideDemonDiffs() {
+	$('#difficulties').show();
+	$('#demons').hide();
+	demonMode = false;
+}
+
 $('.diffDiv').click(function() {
 
 	if ($(this).hasClass('goBack')) {
-		demonMode = false;
-		$('#difficulties').show();
+
 		$('#demonBtn').removeClass('selectedFilter')
 		$('.demonDiff').removeClass('selectedFilter')
-		return $('#demons').hide();
+		savedFilters.demonDiff = false
+		savedFilters.diff = []
+		return hideDemonDiffs()
 	}
 
-	minusCheck = []
-	filters = []
 	$(this).toggleClass('selectedFilter')
 
-	$('.diffDiv').each(function() {
-	if ($(this).hasClass('selectedFilter')) filters.push($(this).attr('diff'))})
+	filters = getDiffFilters()
 
-	minusCheck = filters.filter(x => x < 0)
+	let minusCheck = filters.filter(x => x < 0)
 	if (minusCheck.length || $(this).hasClass('demonDiff')) {
 		filters = minusCheck
 		$('.diffDiv').removeClass('selectedFilter')
 		$(this).addClass('selectedFilter')
 	}
 
-	if ($(this).attr('diff') == -2) {
-		$('#difficulties').hide();
-		$('#demons').show();
-		demonMode = true;
-	}
+	savedFilters.diff = getDiffFilters()
+	savedFilters.demonDiff = demonMode
+
+	if ($(this).attr('diff') == -2) showDemonDiffs()
+
 })
 
 $('.lengthDiv').click(function() {
 	$(this).toggleClass('selectedFilter')
+	savedFilters.len = $('.lengthDiv.selectedFilter').map(function() { return $(this).attr('len') }).toArray()
+	savedFilters.starred = $('#starCheck').hasClass('selectedFilter')
+	if (!savedFilters.starred) delete savedFilters.starred
 })
 
 $(document).keydown(function(k) {
-	if (k.which == 13) {
+	let searchFocus = $(':focus-visible').length == 1 && $(':focus-visible').first().attr('id') == "levelName"
+	if ((!$(':focus-visible').length || searchFocus) && k.which == 13) { // enter
 		if (!$('#customlist').is(':hidden')) k.preventDefault();
-		else if ($('#filters').is(':hidden')) $('#searchBtn').trigger('click') //enter	
+		else if ($('#filters').is(':hidden')) $('#searchBtn').trigger('click')
 	} 
 });
 
@@ -278,21 +297,84 @@ $('#listLevels, #listName').on('input blur', function (event) {
 
 })
 
+$(document).on('change', 'input[url]', function () {
+	savedFilters.checked = $('input[url]:checked').map(function() { return $(this).attr('id').slice(4) }).toArray()
+	checkExtraFilters()
+})
+
 $('#normalSong').click(function() {
 	customSong = false
+	savedFilters.defaultSong = true
+	savedFilters.song = officialSong
 	$('#customSong').addClass('gray')
 	$('#normalSong').removeClass('gray')
 	$('#songSelect').show()
 	$('#songID').hide()
+	checkExtraFilters()
 })
 
 $('#customSong').click(function() {
 	customSong = true
+	delete savedFilters.defaultSong
+	savedFilters.song = Number($('#songID').val().slice(0, 16)) || 0
 	$('#normalSong').addClass('gray')
 	$('#customSong').removeClass('gray')
 	$('#songID').show()
 	$('#songSelect').hide()
+	checkExtraFilters()
 })
+
+$('#songID').on('input change blur', function() {
+	savedFilters.song = Number($(this).val().slice(0, 16))
+	checkExtraFilters()
+})
+
+function saveFilters() {
+	localStorage.filters = JSON.stringify(savedFilters)
+}
+
+function clearFilters() {
+	$('.selectedFilter').removeClass('selectedFilter')
+	$('input[url]').prop('checked', false)
+	$('#songID').val("")
+	$('#levelName').val("")
+	$('#customSong').click()
+	hideDemonDiffs()
+	officialSong = 1
+	savedFilters = { diff: [], len: [], checked: [] }
+	delete localStorage.saveFilters
+	checkExtraFilters()
+}
+
+function checkExtraFilters() {
+	let hasExtra = savedFilters.checked.length || savedFilters.defaultSong || savedFilters.song > 0
+	$('#showFilters').attr('src', `../assets/plus${hasExtra ? "_blue" : ""}.png`)
+}
+
+let savedFilters = JSON.parse(localStorage.filters || "{}")
+$('input[url]').prop('checked', false)
+
+if (!savedFilters.diff) savedFilters.diff = []
+else if (savedFilters.demonDiff) { showDemonDiffs(); $(`.demonDiff[diff=${savedFilters.diff}]`).trigger('click') }
+else if (savedFilters.diff[0] == -2) { $('.diffDiv[diff=-2]').first().addClass('selectedFilter'); showDemonDiffs() }
+else (savedFilters.diff.forEach(x => $(`.diffDiv:not(.demonDiff)[diff=${x || "-"}]`).addClass('selectedFilter')))
+
+if (!savedFilters.len) savedFilters.len = []
+else (savedFilters.len.forEach(x => $(`.lengthDiv[len=${x}]`).addClass('selectedFilter')))
+
+if (savedFilters.starred) $('#starCheck').addClass('selectedFilter')
+
+if (!savedFilters.checked) savedFilters.checked = []
+else (savedFilters.checked.forEach(x => $(`input[id=box-${x}]`).prop('checked', true)))
+
+let hadDefaultSong = savedFilters.defaultSong
+if (savedFilters.defaultSong) {
+	officialSong = +savedFilters.song || 1
+	$('#normalSong').trigger('click')
+}
+else if (+savedFilters.song && +savedFilters.song > 0) $('#songID').val(savedFilters.song)
+
+checkExtraFilters()
 
 Fetch(`../api/music`).then(music => {
 
@@ -302,7 +384,15 @@ Fetch(`../api/music`).then(music => {
 		officialSong += Number($(this).attr('jump'))
 		if (officialSong < 1) officialSong = 1
 		$('#songName').html(`${officialSong}: ${music[officialSong] ? music[officialSong][0] : officialSong == 69 ? "Nice" : "Unknown"}`)
+		savedFilters.song = officialSong
+		savedFilters.defaultSong = true
+		checkExtraFilters()
 	})
+
+	if (hadDefaultSong) {
+		checkExtraFilters()
+		$('.songChange').trigger('click')
+	}
 
 	$(document).keydown(function(k) {
 		if (customSong) return;
