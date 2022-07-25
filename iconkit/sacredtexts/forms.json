@@ -40,5 +40,10 @@
     "form": "swing",
     "name": "Swing",
     "index": -1
+  },
+  "jetpack": {
+    "form": "jetpack",
+    "name": "Jetpack",
+    "index": -1
   }
 }

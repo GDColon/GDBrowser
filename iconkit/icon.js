@@ -1,12 +1,14 @@
 const WHITE = 0xffffff
 const colorNames = { "1": "Color 1", "2": "Color 2", "g": "Glow", "w": "White", "u": "UFO Dome" }
-const formNames = { "player": "cube", "player_ball": "ball", "bird": "ufo", "dart": "wave" }
+const formNames = { "player": "icon", "player_ball": "ball", "bird": "ufo", "dart": "wave" }
 const loader = PIXI.Loader.shared
 
+const loadedNewIcons = {}
+
 let positionMultiplier = 4
-function positionPart(part, partIndex, layer, formName, isGlow) {
-    layer.position.x += (part.pos[0] * positionMultiplier)
-    layer.position.y -= (part.pos[1] * positionMultiplier)
+function positionPart(part, partIndex, layer, formName, isNew, isGlow) {
+    layer.position.x += (part.pos[0] * positionMultiplier * (isNew ? 0.5 : 1))
+    layer.position.y -= (part.pos[1] * positionMultiplier * (isNew ? 0.5 : 1))
     layer.scale.x = part.scale[0]
     layer.scale.y = part.scale[1]
     if (part.flipped[0]) layer.scale.x *= -1
@@ -38,7 +40,7 @@ function getGlowColor(colors) {
 }
 
 function validateIconID(id, form) {
-    let realID = Math.min(iconData.iconCounts[form], Math.abs(validNum(id, 1)))
+    let realID = Math.min(iconData.newIconCounts[form], Math.abs(validNum(id, 1)))
     if (realID == 0 && !["player", "player_ball"].includes(form)) realID = 1
     return realID
 }
@@ -56,9 +58,79 @@ function parseIconForm(form) {
 }
 
 function loadIconLayers(form, id, cb) {
-    let texturesToLoad = Object.keys(iconData.gameSheet).filter(x => x.startsWith(`${form}_${padZero(validateIconID(id, form))}_`))
+    let iconStr = `${form}_${padZero(validateIconID(id, form))}`
+    let texturesToLoad = Object.keys(iconData.gameSheet).filter(x => x.startsWith(iconStr + "_"))
+
+    if (loadedNewIcons[texturesToLoad[0]]) return cb(loader, loader.resources, true)
+
+    else if (!texturesToLoad.length) {
+        if (iconData.newIcons.includes(iconStr)) return loadNewIcon(iconStr, cb)
+    }
+
     loader.add(texturesToLoad.filter(x => !loader.resources[x]).map(x => ({ name: x, url: `/iconkit/icons/${x}` })))
-    loader.load(cb)
+    loader.load(cb) // no params
+}
+
+// 2.2 icon spritesheets
+function loadNewIcon(iconStr, cb) {
+    fetch(`/iconkit/newicons/${iconStr}-hd.plist`).then(pl => pl.text()).then(plist => {
+
+        let data = parseNewPlist(plist)
+        let sheetName = iconStr + "-sheet"
+        loader.add({ name: sheetName, url: `/iconkit/newicons/${iconStr}-hd.png` })
+        loader.load((l, resources) => {
+            let texture = resources[sheetName].texture
+            Object.keys(data).forEach(x => {
+                let bounds = data[x]
+                let textureRect = new PIXI.Rectangle(bounds.pos[0], bounds.pos[1], bounds.size[0], bounds.size[1])
+                let partTexture = new PIXI.Texture(texture, textureRect)
+                loadedNewIcons[x] = partTexture
+            })
+            cb(l, resources, true)
+        })
+
+    })
+}
+
+let dom_parser = new DOMParser()
+function parseNewPlist(data) {
+    let plist = dom_parser.parseFromString(data, "text/xml")
+    let iconFrames = plist.children[0].children[0].children[1].children
+    let positionData = {}
+    for (let i=0; i < iconFrames.length; i += 2) {
+        let frameName = iconFrames[i].innerHTML
+        let frameData = iconFrames[i + 1].children
+        let isRotated = false
+        iconData.gameSheet[frameName] = {}
+        positionData[frameName] = {}
+
+        for (let n=0; n < frameData.length; n += 2) {
+            let keyName = frameData[n].innerHTML
+            let keyData = frameData[n + 1].innerHTML
+            if (["spriteOffset", "spriteSize", "spriteSourceSize"].includes(keyName)) {
+                iconData.gameSheet[frameName][keyName] = parseWeirdArray(keyData)
+            }
+
+            else if (keyName == "textureRotated") {
+                isRotated = frameData[n + 1].outerHTML.includes("true")
+                iconData.gameSheet[frameName][keyName] = isRotated
+            }
+
+            else if (keyName == "textureRect") {
+                let textureArr = keyData.slice(1, -1).split("},{").map(x => parseWeirdArray(x))
+                positionData[frameName].pos = textureArr[0]
+                positionData[frameName].size = textureArr[1]
+            }  
+        }
+
+        if (isRotated) positionData[frameName].size.reverse()
+
+    }
+    return positionData
+}
+
+function parseWeirdArray(data) {
+    return data.replace(/[^0-9,-]/g, "").split(",").map(x => +x)
 }
 
 function padZero(num) {
@@ -77,6 +149,7 @@ class Icon {
         this.sprite = new PIXI.Container();
         this.form = data.form || "player"
         this.id = validateIconID(data.id, this.form)
+        this.new = !!data.new
         this.colors = {
             "1": validNum(data.col1, 0xafafaf),    // primary
             "2": validNum(data.col2, WHITE),       // secondary
@@ -92,7 +165,7 @@ class Icon {
 
         // most forms
         if (!this.complex) {
-            let extraSettings = {}
+            let extraSettings = { new: this.new }
             if (data.noUFODome) extraSettings.noDome = true
             let basicIcon = new IconPart(this.form, this.id, this.colors, this.glow, extraSettings)
             this.sprite.addChild(basicIcon.sprite)
@@ -105,11 +178,11 @@ class Icon {
             let idlePosition = this.getAnimation(data.animation, data.animationForm).frames[0]
             idlePosition.forEach((x, y) => {
                 x.name = iconData.robotAnimations.info[this.form].names[y]
-                let part = new IconPart(this.form, this.id, this.colors, false, { part: x, skipGlow: true })
-                positionPart(x, y, part.sprite, this.form)
+                let part = new IconPart(this.form, this.id, this.colors, false, { part: x, skipGlow: true, new: this.new })
+                positionPart(x, y, part.sprite, this.form, this.new)
     
-                let glowPart = new IconPart(this.form, this.id, this.colors, true, { part: x, onlyGlow: true })
-                positionPart(x, y, glowPart.sprite, this.form, true)
+                let glowPart = new IconPart(this.form, this.id, this.colors, true, { part: x, onlyGlow: true, new: this.new })
+                positionPart(x, y, glowPart.sprite, this.form, this.new, true)
                 glowPart.sprite.visible = this.glow
                 this.glowLayers.push(glowPart)
     
@@ -124,6 +197,8 @@ class Icon {
             this.animationSpeed = Math.abs(Number(data.animationSpeed) || 1)
             if (data.animation) this.setAnimation(data.animation, data.animationForm)
         }
+
+        if (this.new) this.sprite.scale.set(2)
 
         this.app.stage.removeChildren()
         this.app.stage.addChild(this.sprite)
@@ -183,6 +258,7 @@ class Icon {
         animData.frames[this.animationFrame].forEach((newPart, index) => {
             let section = this.layers[index]
             let glowSection = this.glowLayers[index]
+            let truePosMultiplier = this.new ? positionMultiplier * 0.5 : positionMultiplier
             if (!section) return
 
             // gd is weird with negative rotations
@@ -190,8 +266,8 @@ class Icon {
             if (realRot < -180) realRot += 360
 
             let movementData = {
-                x: newPart.pos[0] * positionMultiplier,
-                y: newPart.pos[1] * positionMultiplier * -1,
+                x: newPart.pos[0] * truePosMultiplier,
+                y: newPart.pos[1] * truePosMultiplier * -1,
                 scaleX: newPart.scale[0],
                 scaleY: newPart.scale[1],
                 rotation: realRot * (Math.PI / 180) // radians
@@ -216,6 +292,7 @@ class Icon {
 
     autocrop() {
         // find actual icon size by reading pixel data (otherwise there's whitespace and shit)
+        if (this.new) this.sprite.scale.set(1)
         let spriteSize = [Math.round(this.sprite.width), Math.round(this.sprite.height)]
         let pixels = this.app.renderer.plugins.extract.pixels(this.sprite);
         let xRange = [spriteSize[0], 0]
@@ -239,12 +316,6 @@ class Icon {
         // this took hours to figure out. i fucking hate my life
         xRange[1]++
         yRange[1]++
-
-        // swing hardcode, will fix this in 2.2
-        if (this.form == "swing" && !this.glowLayers[0].sprite.visible) {
-            xRange[1] += 4
-            yRange[1] += 6
-        }
         
         let realWidth = xRange[1] - xRange[0]
         let realHeight = yRange[1] - yRange[0]
@@ -260,6 +331,7 @@ class Icon {
     revertCrop() {
         this.app.renderer.resize(...this.preCrop.canvas)
         this.sprite.position.set(...this.preCrop.pos)
+        if (this.new) this.sprite.scale.set(2)
     }
 
     toDataURL(dataType="image/png") {
@@ -358,21 +430,21 @@ class IconPart {
 
         if (!misc.skipGlow) {
             let glowCol = getGlowColor(colors)
-            sections.glow = new IconLayer(`${iconPath}${partString}_glow_001.png`, glowCol, "g")
+            sections.glow = new IconLayer(`${iconPath}${partString}_glow_001.png`, glowCol, "g", misc.new)
             if (!glow) sections.glow.sprite.visible = false
         }
 
         if (!misc.onlyGlow) {
             if (form == "bird" && !misc.noDome) { // ufo top
-                sections.ufo = new IconLayer(`${iconPath}_3_001.png`, WHITE, "u")
+                sections.ufo = new IconLayer(`${iconPath}_3_001.png`, WHITE, "u", misc.new)
             }
 
-            sections.col1 = new IconLayer(`${iconPath}${partString}_001.png`, colors["1"], "1")
-            sections.col2 = new IconLayer(`${iconPath}${partString}_2_001.png`, colors["2"], "2")
+            sections.col1 = new IconLayer(`${iconPath}${partString}_001.png`, colors["1"], "1", misc.new)
+            sections.col2 = new IconLayer(`${iconPath}${partString}_2_001.png`, colors["2"], "2", misc.new)
 
             let extraPath = `${iconPath}${partString}_extra_001.png`
             if (iconData.gameSheet[extraPath]) {
-                sections.white = new IconLayer(extraPath, colors["w"], "w")
+                sections.white = new IconLayer(extraPath, colors["w"], "w", misc.new)
             }
         }
 
@@ -385,16 +457,24 @@ class IconPart {
 }
 
 class IconLayer {
-    constructor(path, color, colorType) {
-        let loadedTexture = loader.resources[path]
+    constructor(path, color, colorType, isNew) {
+        let loadedTexture = isNew ? loadedNewIcons[path] : loader.resources[path]
         this.offsets = iconData.gameSheet[path] || { spriteOffset: [0, 0] }
-        this.sprite = new PIXI.Sprite(loadedTexture ? loadedTexture.texture : PIXI.Texture.EMPTY)
+        this.sprite = new PIXI.Sprite(loadedTexture ? isNew ? loadedTexture : loadedTexture.texture : PIXI.Texture.EMPTY)
+
         this.colorType = colorType
         this.colorName = colorNames[colorType]
-
         this.setColor(color)
+
         this.sprite.position.x += this.offsets.spriteOffset[0]
         this.sprite.position.y -= this.offsets.spriteOffset[1]
+
+
+        if (this.offsets.textureRotated) {
+            this.sprite.angle = -90
+        }
+        this.angleOffset = this.sprite.angle
+
         this.sprite.anchor.set(0.5)
     }
 

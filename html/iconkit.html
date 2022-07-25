@@ -1,12 +1,12 @@
 <head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
     <title>Online Icon Kit</title>
-    <link href="../assets/css/iconkit.css?v=2" type="text/css" rel="stylesheet">
+    <link href="../assets/css/iconkit.css?v=3" type="text/css" rel="stylesheet">
     <meta name="viewport" content="width=1024">
     <meta property="og:description" content="Build and save your very own Geometry Dash icons, right from the internet!">
     <meta property="og:title" content="Geometry Dash Online Icon Kit">
     <meta property="og:type" content="website">
-    <meta name="og:image" itemprop="image" content="https://gdbrowser.com/iconkitbuttons/iconkit.png">
+    <meta name="og:image" itemprop="image" content="https://gdbrowser.com/assets/icon.png">
     <meta name="theme-color" content="#CCFF55">
     <meta name="twitter:card" content="summary">
     <link rel="icon" href="../assets/icon.png">
@@ -40,6 +40,17 @@
         </div>
 	</div>
 
+    <div class="popup" id="spoilerwarning">
+        <div id="stealBox" class="brownbox bounce center supercenter" style="height: 440px; width: 800px">
+            <h1 class="center gold" style="margin-top: 12px">Enable 2.2 icons?</h1>
+            <p style="font-size: 26px; color: white; width: 620px; margin: 17px auto">The newest update for Geometry Dash Lite revealed 500 new icons across all forms. Enabling this setting will reveal all these icons, however they will be lower quality since no UHD textures were provided.</p>
+            <p style="font-size: 30px; color: yellow">THIS WILL REVEAL <u>EVERY</u> ICON.<br>PRESS CANCEL IF YOU DON'T WANT TO BE SPOILED!!!</p>
+            <img src="../assets/iconkitbuttons/btn-reveal.png" height=60px; style="margin-right: 33px" class="gdButton center" onclick="clickedSpoilerWarning = true; toggleSpoilers(); $('#spoilerwarning').hide()">
+            <img src="../assets/btn-cancel.png" height=60px; class="gdButton center" onclick="$('#spoilerwarning').hide()">
+            <img class="gdButton xButton" src="../assets/close.png" width="70px" onclick="$('#spoilerwarning').hide()">
+        </div>
+    </div>
+
     <img id="iconkitlogo" src="../assets/iconkit.png" style="margin: 7px 0px; height: 50px"><br>
     <h2 style="margin: 5 auto 0 auto; display: none; height: 45px" id="howto"><span style='color: #aaaaaa'>(hover over an icon for info)</span></h2>
 
@@ -56,7 +67,9 @@
         <button class="blankButton menuButton" id="getUserIcon" title="Get player icon"><img src="../assets/iconkitbuttons/steal.png" width=60px></button>
         <button class="blankButton menuButton" id="randomIcon" title="Random Icon"><img src="../assets/iconkitbuttons/shuffle.png" width=60px></button>
         <button class="blankButton menuButton" id="unlockIcon" title="Unlock details"><img id="lock" src="../assets/iconkitbuttons/unlock.png" width=60px></button>
+        <button class="blankButton menuButton" onclick="clickedSpoilerWarning ? toggleSpoilers() : $('#spoilerwarning').show()" title="2.2 icons (spoilers!!!)"><img id="newIconBtn" src="../assets/iconkitbuttons/spoilers.png" width=60px></button>
     </div>
+
     <div id="iconTabs"></div><br>
     <div id="iconKitParent" class="iconKit noDarken">
         <div id="iconprogressbar">
@@ -138,6 +151,9 @@ let selectedColW = null
 let selectedColU = null
 let enableGlow = 0
 
+let enableSpoilers = false
+let clickedSpoilerWarning = false
+
 let shops = ["the Shop", "Scratch's Shop", "the Community Shop"]
 let achievements = []
 let shopIcons = []
@@ -189,6 +205,13 @@ function checkGlow() {
     checkAnimation()
 }
 
+// check if white col tab should be visible
+function checkWhite() {
+    let hasWhite = icon.layers[0].sections.some(x => x.colorType == "w")
+    if (hasWhite) { $('#colW').show(); $('#ccW').show() }
+    else { $('#colW').hide(); $('#ccW').hide(); $(`#colW-12`).trigger('click'); }
+}
+
 // check if animation selector should be visible
 function checkAnimation() {
     let animationData = iconData.robotAnimations.animations[selectedForm]
@@ -198,9 +221,8 @@ function checkAnimation() {
     else if (!animationData) $('#animationOptions').hide()
 }
 
-let commonAnimations = ["idle", "run", "walk"]
 function animationSort(anim) {
-    return Object.keys(anim).sort((a, b) => (commonAnimations.includes(b)) - (commonAnimations.includes(a)) || a.localeCompare(b))
+    return Object.keys(anim).sort((a, b) => a.localeCompare(b))
 }
 
 function appendAnimations(form, animationData) {
@@ -232,6 +254,10 @@ function setExtras() {
 
     let foundCredit = iconStuff.iconCredits.find(x => x.form == selectedForm && x.id == selectedIcon)
     if (foundCredit) extraInfo["🎨 Artist"] = foundCredit.name
+    else if (icon.new) {
+        extraInfo["2.2 icon"] = "Yes!"
+        extraInfo["🎨 Artist"] = "(uncredited)"
+    }
 
     let extraData = Object.entries(extraInfo).map(x => `<div><p>${x[0]}: ${x[1]}</p></div>`)
     $('#extraInfo').html(extraData)
@@ -262,8 +288,9 @@ fetch('../api/iconkit').then(res => res.json()).then(iconKitData => {
         let forms = Object.keys(iconStuff.forms)
 
         forms.forEach(form => {
-            $("#iconTabs").append(`<button form="${form}" title="${iconStuff.forms[form].name}" class="blankButton iconTabButton"><img src="../assets/iconkitbuttons/${form}_off.png" style="width: 50px"></button>`)
-            $("#copyForms").append(`<button form="${form}" title="${iconStuff.forms[form].name}" class="blankButton copyForm"><img src="../assets/iconkitbuttons/${form}_off.png" style="width: 50px"></button>`)
+            let spoil = ["swing", "jetpack"].includes(form)
+            $("#iconTabs").append(`<button form="${form}"${spoil ? `isnew="true" style="display: none"` : ""} title="${iconStuff.forms[form].name}" class="blankButton iconTabButton"><img src="../assets/iconkitbuttons/${form}_off.png" style="width: 50px"></button>`)
+            $("#copyForms").append(`<button form="${form}"${spoil ? `isnew="true" style="display: none"` : ""}  title="${iconStuff.forms[form].name}" class="blankButton copyForm"><img src="../assets/iconkitbuttons/${form}_off.png" style="width: 50px"></button>`)
         })
         $("#iconTabs").append(`<button title="Glow" class="blankButton glowToggle" id="glowbtn"><img id="glow" src="../assets/iconkitbuttons/streak_off.png" style="width: 50px"></button>`)
 
@@ -279,8 +306,8 @@ fetch('../api/iconkit').then(res => res.json()).then(iconKitData => {
             let noDome = selectedForm == "ufo" && iconSettings.includes("ufo")
             let foundForm = parseIconForm(selectedForm)
 
-            loadIconLayers(foundForm, selectedIcon, function(l, sprites) {
-                let iconArgs = {app, form: foundForm, id: selectedIcon, col1: getCol(selectedCol1), col2: getCol(selectedCol2), glow: enableGlow > 0}
+            loadIconLayers(foundForm, selectedIcon, function(l, sprites, isNew) {
+                let iconArgs = {app, form: foundForm, id: selectedIcon, col1: getCol(selectedCol1), col2: getCol(selectedCol2), glow: enableGlow > 0, new: isNew}
                 if (selectedCol2 != selectedColG) iconArgs.colG = getCol(selectedColG)
                 if (selectedColW) iconArgs.colW = getCol(selectedColW)
                 if (selectedColU) iconArgs.colU = getCol(selectedColU)
@@ -294,12 +321,15 @@ fetch('../api/iconkit').then(res => res.json()).then(iconKitData => {
                 icon = new Icon(iconArgs)
                 icon.sprite.position.set(app.renderer.width / 2, (app.renderer.height / 2) + (yOffsets[selectedForm] || 0))
                 updateDetails()
+                checkWhite()
 
                 if (cb) cb()
             })
         }
 
-        function filterIcon(name) { return iconStuff.previewIcons.filter(x => x.startsWith(name)).sort(function (a,b) {return a.replace(/[^0-9]/g, "") - b.replace(/[^0-9]/g, "");})}
+        function filterIcon(name) { 
+            return iconStuff.previewIcons.concat(iconStuff.newPreviewIcons).filter(x => x.startsWith(name)).sort(function (a,b) {return a.replace(/[^0-9]/g, "") - b.replace(/[^0-9]/g, "");})
+        }
 
         function appendIcon(form, formName) {
 
@@ -311,8 +341,8 @@ fetch('../api/iconkit').then(res => res.json()).then(iconKitData => {
             if (hasMini) form.shift()
 
             form.forEach(function (i, p) {
-                // if (p != 0 && p % 12 == 0) formContainer.append('<br>')
-                formContainer.append(`<button num="${p + 1}" form="${formName}" class="blankButton iconButton" id="${formName}-${p + 1}"><img src="./premade/${i}" title="${capitalize(formName)} ${p + 1}"></button>`)
+                let newOne = iconStuff.newPreviewIcons.includes(i)
+                formContainer.append(`<button num="${p + 1}" form="${formName}"${newOne ? ` isnew="true"${enableSpoilers ? "" : ` style="display: none"`}` : ""} class="blankButton iconButton" id="${formName}-${p + 1}"><img src="./${newOne ? "new" : ""}premade/${i}" title="${capitalize(formName)} ${p + 1}"></button>`)
             })
 
             if (hasMini) formContainer.append(`<button num="0" form="${formName}" class="blankButton iconButton" id="${formName}-0"><img src="./premade/${formName}_0.png" title="Mini ${formName}"></button>`)
@@ -366,7 +396,7 @@ fetch('../api/iconkit').then(res => res.json()).then(iconKitData => {
 
         $(document).on('click', '.iconTabButton', function () {
             let form = $(this).attr('form')
-            let forms = '#' + form + 's'
+            let formElement = '#' + form + 's'
 
             currentForm = form
 
@@ -379,18 +409,22 @@ fetch('../api/iconkit').then(res => res.json()).then(iconKitData => {
 
             $('#iconKitParent').each(function(x, y) { $(this).children().not('#iconprogressbar').hide() })
 
-            if ($(forms).html() == "") appendIcon(filterIcon(form), form)
+            if ($(formElement).html() == "") appendIcon(filterIcon(form), form)
             
-            $(forms).show()
+            $(formElement).show()
         })
 
         $('#iconTabs').find('.iconTabButton').first().children().first().attr('src', $('.iconTabButton').first().children().first().attr('src').replace('_off', '_on'))
 
         $("#randomIcon").click(function() {
 
+            let iconPool = iconStuff.previewIcons.concat(enableSpoilers ? iconStuff.newPreviewIcons : [])
+            let pickedIcon = iconPool[Math.floor(Math.random() * iconPool.length)].split(".")[0].split("_")
+            let [randomForm, randomID] = pickedIcon
+
             let colorCount = Object.keys(iconStuff.colors).length
-            selectedForm = forms[Math.floor(Math.random() * forms.length)]
-            selectedIcon = randInt(1, iconStuff.previewIcons.filter(x => x.startsWith(selectedForm)).length)
+            selectedForm = randomForm
+            selectedIcon = randomID
             selectedCol1 = randInt(0, colorCount - 1)
             selectedCol2 = randInt(0, colorCount - 1)
             selectedColW = null
@@ -411,7 +445,7 @@ fetch('../api/iconkit').then(res => res.json()).then(iconKitData => {
             else $("#glow").attr('src', $("#glow").attr('src').replace('_on', '_off'))
         })
 
-    $(document).on('click', '.glowToggle', function () {
+    $('#glowbtn').click(function () {
 
         if (enableGlow) {
             $("#glow").attr('src', $("#glow").attr('src').replace('_on', '_off'))
@@ -427,7 +461,7 @@ fetch('../api/iconkit').then(res => res.json()).then(iconKitData => {
         updateDetails()
 
     })
-
+    
     $(document).on('click', '.copyForm', function () {
         $('.copyForm').each(function(x, y) {$(this).children().first().attr('src', $(this).children().first().attr('src').replace('_on', '_off'))})
         formCopy = $(this).attr('form')
@@ -441,9 +475,6 @@ fetch('../api/iconkit').then(res => res.json()).then(iconKitData => {
         let oldForm = selectedForm
         selectedIcon = $(this).attr('num');
         selectedForm = $(this).attr('form');
-
-        if (iconStuff.whiteIcons.find(x => x[1] == selectedIcon && x[0] == selectedForm)) { $('#colW').show(); $('#ccW').show() }
-        else { $('#colW').hide(); $('#ccW').hide(); $(`#colW-12`).trigger('click'); }
 
         if (selectedForm == "ufo") { $('#colU').show(); $('#ccU').show() }
         else { $('#colU').hide(); $('#ccU').hide(); $(`#colU-12`).trigger('click'); }
@@ -643,7 +674,7 @@ fetch('../api/iconkit').then(res => res.json()).then(iconKitData => {
 })
 
 function getUnlockMethod(iconNumber, form) {
-    if (form == "swing") return "Coming soon™"
+    if (form == "swing" || form == "jetpack") return "Coming soon™"
     else if (iconNumber == 0 && form == "icon") return "Legacy mini icon, enable in settings"
     else if (iconNumber == 1 || ((form == "icon") && iconNumber <= 4) || ((form.startsWith('color')) && iconNumber <= 3)) return "Always unlocked"
 
@@ -662,6 +693,23 @@ function getUnlockMethod(iconNumber, form) {
 
     if (foundAch) return foundAch.description.replace("Demon difficulty", "Demon")
     else if (foundMerch) return `Purchase in ${shops[foundMerch.shop]} for <ca>${foundMerch.price}</ca> orbs`
+}
+
+function toggleSpoilers() {
+
+    if (enableSpoilers) {
+        $("#newIconBtn").attr('src', $("#newIconBtn").attr('src').replace('_on', ''))
+        enableSpoilers = false;
+    }
+
+    else {
+        $("#newIconBtn").attr('src', $("#newIconBtn").attr('src').replace('.png', '_on.png'))
+        enableSpoilers = true;
+    }
+
+    if (enableSpoilers) $('button[isNew]').show()
+    else $('button[isNew]').hide()
+
 }
 
 function backButton() {
