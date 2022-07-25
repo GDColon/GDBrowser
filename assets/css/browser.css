@@ -558,6 +558,10 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
     border-bottom: 2px solid lime
 }
 
+.unregistered {
+    -webkit-text-fill-color: unset;
+}
+
 .unregistered:hover {
     color: rgb(0, 230, 0);
 }
