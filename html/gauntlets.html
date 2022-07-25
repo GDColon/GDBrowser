@@ -41,7 +41,7 @@ fetch('../api/gauntlets').then(res => res.json()).then(gauntlets => {
 	gauntlets.forEach((x, y) => {
 		$('#gauntletList').append(`
 			<div class="gauntlet">
-			<a href="../search/*?gauntlet=${x.id}">
+			<a href="../gauntlet/${x.id}">
 			<img src="../assets/gauntlets/${x.name.toLowerCase()}.png" height="300%"><br>
 			<h3 class="gauntletText"">${x.name}<br>Gauntlet</h3></div></a>`)
 		})

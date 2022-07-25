@@ -270,6 +270,7 @@ app.get("/mappacks", function(req, res) { res.status(200).sendFile(__dirname + "
 app.get("/messages", function(req, res) { res.status(200).sendFile(__dirname + "/html/messages.html") })
 app.get("/search", function(req, res) { res.status(200).sendFile(__dirname + "/html/filters.html") })
 app.get("/search/:text", function(req, res) { res.status(200).sendFile(__dirname + "/html/search.html") })
+app.get("/gauntlet/:id", function(req, res) { res.status(200).sendFile(__dirname + "/html/gauntlet.html") })
 
 // API
 
