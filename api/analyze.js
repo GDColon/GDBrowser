@@ -33,8 +33,9 @@ module.exports = async (app, req, res, level) => {
 }
 
 function sortObj(obj, sortBy) {
-    var sorted = {}
-    var keys = Object.keys(obj).sort((a,b) => sortBy ? obj[b][sortBy] - obj[a][sortBy] : obj[b] - obj[a])
+    let keys = Object.keys(obj)
+        .sort((a,b) => sortBy ? obj[b][sortBy] - obj[a][sortBy] : obj[b] - obj[a])
+    let sorted = {}
     keys.forEach(x => {sorted[x] = obj[x]})
     return sorted
 }
