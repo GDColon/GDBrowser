@@ -6,7 +6,7 @@ welp, here's the readme. but you've been warned,,,
 
 
 # GDBrowser
-
+![Repo size](https://img.shields.io/github/repo-size/GDColon/GDBrowser)
   
 
 Uh... so I've never actually used GitHub before this. But I'll try to explain everything going on here.
