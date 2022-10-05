@@ -1,3 +1,4 @@
+//@ts-check
 "use strict";
 const zlib = require('zlib')
 const blocks = require('../misc/analysis/blocks.json')
@@ -6,7 +7,12 @@ const init = require('../misc/analysis/initialProperties.json')
 const properties = require('../misc/analysis/objectProperties.json')
 const ids = require('../misc/analysis/objects.json')
 
-module.exports = async (app, req, res, level) => {
+module.exports = async (
+    app,
+    /**@type {{}}*/ req,
+    /**@type {{}}*/ res,
+    /**@type {{}}*/ level
+) => {
 
     level ||= {
         name: (req.body.name || "Unnamed").slice(0, 64),
@@ -32,7 +38,12 @@ module.exports = async (app, req, res, level) => {
     }
 }
 
-function sortObj(obj, sortBy) {
+/**
+ * Sorts any `Object` by its keys
+ * @param {{}} obj
+ * @param {PropertyKey} [sortBy] optional inner key to sort
+ */
+const sortObj = (obj, sortBy) => {
     let keys = Object.keys(obj)
         .sort((a,b) => sortBy ? obj[b][sortBy] - obj[a][sortBy] : obj[b] - obj[a])
     let sorted = {}
@@ -40,7 +51,14 @@ function sortObj(obj, sortBy) {
     return sorted
 }
 
-function parse_obj(obj, splitter, name_arr, valid_only) {
+/**
+ * game-object (**not** JS `Object`) parser
+ * @param {string} obj
+ * @param {string} splitter
+ * @param {string[]} name_arr
+ * @param {boolean} [valid_only]
+ */
+const parse_obj = (obj, splitter, name_arr, valid_only) => {
     const s_obj = obj.split(splitter)
     let robtop_obj = {}
 
@@ -55,17 +73,23 @@ function parse_obj(obj, splitter, name_arr, valid_only) {
     return robtop_obj
 }
 
+/**
+ * @param {{}} level
+ * @param {string} rawData
+ */
 function analyze_level(level, rawData) {
-    let response = {}
+    let response = {};
 
-    let blockCounts = {}
-    let miscCounts = {}
-    let triggerGroups = []
+    let blockCounts = {};
+    let miscCounts = {};
+    /**@type {string[]}*/
+    let triggerGroups = [];
     let highDetail = 0
-    let alphaTriggers = []
+    /**@type {{}[]}*/
+    let alphaTriggers = [];
 
-    let misc_objects = {}
-    let block_ids = {}
+    let misc_objects = {};
+    let block_ids = {};
 
     for (const [name, object_ids] of Object.entries(ids.misc)) {
         const copied_ids = object_ids.slice(1)
@@ -73,27 +97,28 @@ function analyze_level(level, rawData) {
         copied_ids.forEach(object_id => { misc_objects[object_id] = name })
     }
 
-    for (const [name, object_ids] of Object.entries(blocks)) {
-        object_ids.forEach(object_id => { block_ids[object_id] = name })
-    }
+    for (const [name, object_ids] of Object.entries(blocks))
+        object_ids.forEach(object_id => { block_ids[object_id] = name });
 
+    /**@type {(string|{})[]}*/
     const data = rawData.split(";")
     const header = data.shift()
 
-    let level_portals = []
-    let level_coins = []
-    let level_text = []
+    let level_portals = [];
+    let level_coins = [];
+    let level_text = [];
 
-    let orb_array = {}
-    let trigger_array = {}
+    // why are these Objects instead of Arrays?
+    let orb_array = {};
+    let trigger_array = {};
 
     let last = 0
 
     const obj_length = data.length
     for (let i = 0; i < obj_length; ++i) {
-        obj = parse_obj(data[i], ',', properties)
+        let obj = parse_obj(data[i], ',', properties)
 
-        let id = obj.id
+        let {id} = obj
 
         if (id in ids.portals) {
             obj.portal = ids.portals[id]
@@ -104,11 +129,8 @@ function analyze_level(level, rawData) {
         } else if (id in ids.orbs) {
             obj.orb = ids.orbs[id]
 
-            if (obj.orb in orb_array) {
-                orb_array[obj.orb]++
-            } else {
-                orb_array[obj.orb] = 1
-            }
+            const orb = orb_array[obj.orb]
+            orb_array[obj.orb] = orb ? +orb + 1 : 1
         } else if (id in ids.triggers) {
             obj.trigger = ids.triggers[id]
 
@@ -172,17 +194,18 @@ function analyze_level(level, rawData) {
     response.settings = {}
 
     // "I have no idea what to name this lmao" @Rudxain
-    let WTF = x => Math.floor(x.x / (Math.max(last, 529) + 340) * 100)
+    let WTF = (/**@type {{}}*/ x) => Math.floor(x.x / (Math.max(last, 529) + 340) * 100)
     response.portals = level_portals.sort((a, b) => parseInt(a.x) - parseInt(b.x)).map(x => x.portal + " " + WTF(x) + "%").join(", ")
     response.coins = level_coins.sort((a, b) => parseInt(a.x) - parseInt(b.x)).map(WTF)
     response.coinsVerified = level.verifiedCoins
 
-    const add = arr => arr.reduce((a, x) => a + x, 0)
+    /**@param {number[]} arr*/
+    const sum = arr => arr.reduce((a, x) => a + x, 0)
     response.orbs = orb_array
-    response.orbs.total = add(Object.values(orb_array)) // we already have an array of objects, use it
+    response.orbs.total = sum(Object.values(orb_array)) // we already have an array of objects, use it
 
     response.triggers = trigger_array
-    response.triggers.total = add(Object.values(trigger_array))
+    response.triggers.total = sum(Object.values(trigger_array))
 
     response.triggerGroups = {}
     response.blocks = sortObj(blockCounts)
@@ -213,17 +236,18 @@ function analyze_level(level, rawData) {
     return response
 }
 
-function parse_header(header) {
+function parse_header(/**@type {string}*/ header) {
     let response = {}
     response.settings = {}
     response.colors = []
 
     const header_keyed = parse_obj(header, ',', init.values, true)
 
-    Object.keys(header_keyed).forEach(x => {
-        let val = init.values[x]
+    Object.keys(header_keyed).forEach(k => {
+        let val = init.values[k]
+        /**@type {string}*/
         let name = val[0]
-        let property = header_keyed[x]
+        let property = header_keyed[k]
         switch (val[1]) {
             case 'list':
                 val = init[(val[0] + "s")][property];
@@ -251,7 +275,7 @@ function parse_header(header) {
                 // from here we touch the color object
                 let currentChannel = response.colors.find(k => k.channel == channel)
                 if (color == 'blend') currentChannel.blending = true // only one color has blending though lol
-                else if (color == 'pcol' && property != 0) currentChannel.pColor = property
+                if (color == 'pcol' && property != 0) currentChannel.pColor = property
 
                 currentChannel[color] = property
                 break
@@ -272,8 +296,11 @@ function parse_header(header) {
                 // from here stuff can continue as normal, ish
                 if (colorObj.pColor == "-1" || colorObj.pColor == "0") delete colorObj.pColor
                 colorObj.opacity = 1 // 1.9 colors don't have this!
-                if (colorObj.blending && colorObj.blending == '1') colorObj.blending = true // 1.9 colors manage to always think they're blending - they're not
-                else delete colorObj.blending
+
+                if (colorObj?.blending === '1')
+                    colorObj.blending = true // 1.9 colors manage to always think they're blending - they're not
+                else
+                    delete colorObj.blending
 
                 if (colorVal == '3DL') response.colors.splice(4, 0, colorObj) // hardcode the position of 3DL, it typically goes at the end due to how RobTop make the headers
                 else if (colorVal == 'Line') { colorObj.blending = true; response.colors.push(colorObj) } // in line with 2.1 behavior
@@ -282,10 +309,10 @@ function parse_header(header) {
             }
             case 'colors': {
                 let colorList = property.split("|")
-                colorList.forEach((x, y) => {
+                colorList.forEach((/** @type {string} */ x, /** @type {string | number} */ y) => {
                     const color = parse_obj(x, "_", colorStuff.properties)
                     let colorObj = color
-                    if (!color.channel) return colorList = colorList.filter((h, i) => y != i)
+                    if (!color.channel) return colorList = colorList.filter((/** @type {any} */ h, /** @type {any} */ i) => y != i)
 
                     if (colorStuff.channels[colorObj.channel]) colorObj.channel = colorStuff.channels[colorObj.channel]
                     if (colorObj.channel > 1000) return
@@ -296,7 +323,7 @@ function parse_header(header) {
                     if (colorObj.copiedHSV) {
                         let hsv = colorObj.copiedHSV.split("a")
                         colorObj.copiedHSV = {}
-                        hsv.forEach((x, y) => { colorObj.copiedHSV[colorStuff.hsv[y]] = x })
+                        hsv.forEach((/** @type {any} */ x, /** @type {string | number} */ y) => { colorObj.copiedHSV[colorStuff.hsv[y]] = x })
                         colorObj.copiedHSV['s-checked'] = colorObj.copiedHSV['s-checked'] == 1
                         colorObj.copiedHSV['v-checked'] = colorObj.copiedHSV['v-checked'] == 1
                     if (colorObj.copyOpacity == 1) colorObj.copyOpacity = true
@@ -305,12 +332,12 @@ function parse_header(header) {
                     colorList[y] = colorObj
                 })
                 // we assume this is only going to be run once so... some stuff can go here
-                colorList = colorList.filter(x => typeof x == "object")
-                if (!colorList.find(x => x.channel == "Obj")) colorList.push({"r": "255", "g": "255", "b": "255", "channel": "Obj", "opacity": "1"})
+                colorList = colorList.filter((/** @type {any} */ x) => typeof x == "object")
+                if (!colorList.find((/** @type {{ channel: string; }} */ x) => x.channel == "Obj")) colorList.push({"r": "255", "g": "255", "b": "255", "channel": "Obj", "opacity": "1"})
 
                 const specialSort = ["BG", "G", "G2", "Line", "Obj", "3DL"]
-                let specialColors = colorList.filter(x => isNaN(x.channel)).sort((a, b) => specialSort.indexOf(a.channel) > specialSort.indexOf(b.channel))
-                let regularColors = colorList.filter(x => !isNaN(x.channel)).sort((a, b) => +a.channel - +b.channel)
+                let specialColors = colorList.filter((/** @type {{ channel: number; }} */ x) => isNaN(x.channel)).sort((/** @type {{ channel: string; }} */ a, /** @type {{ channel: string; }} */ b) => specialSort.indexOf(a.channel) > specialSort.indexOf(b.channel))
+                let regularColors = colorList.filter((/** @type {{ channel: number; }} */ x) => !isNaN(x.channel)).sort((/** @type {{ channel: string | number; }} */ a, /** @type {{ channel: string | number; }} */ b) => +a.channel - +b.channel)
                 response.colors = specialColors.concat(regularColors)
                 break
             }
