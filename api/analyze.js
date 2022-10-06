@@ -1,4 +1,3 @@
-//@ts-check
 "use strict";
 const zlib = require('zlib')
 const blocks = require('../misc/analysis/blocks.json')
@@ -7,12 +6,7 @@ const init = require('../misc/analysis/initialProperties.json')
 const properties = require('../misc/analysis/objectProperties.json')
 const ids = require('../misc/analysis/objects.json')
 
-module.exports = async (
-    app,
-    /**@type {{}}*/ req,
-    /**@type {{}}*/ res,
-    /**@type {{}}*/ level
-) => {
+module.exports = async (app, req, res, level) => {
 
     level ||= {
         name: (req.body.name || "Unnamed").slice(0, 64),
@@ -108,7 +102,7 @@ function analyze_level(level, rawData) {
     let level_coins = [];
     let level_text = [];
 
-    // why are these Objects instead of Arrays?
+    // "why are these Objects instead of Arrays?" @Rudxain
     let orb_array = {};
     let trigger_array = {};
 
@@ -194,7 +188,7 @@ function analyze_level(level, rawData) {
     response.settings = {}
 
     // "I have no idea what to name this lmao" @Rudxain
-    let WTF = (/**@type {{}}*/ x) => Math.floor(x.x / (Math.max(last, 529) + 340) * 100)
+    let WTF = x => Math.floor(x.x / (Math.max(last, 529) + 340) * 100)
     response.portals = level_portals.sort((a, b) => parseInt(a.x) - parseInt(b.x)).map(x => x.portal + " " + WTF(x) + "%").join(", ")
     response.coins = level_coins.sort((a, b) => parseInt(a.x) - parseInt(b.x)).map(WTF)
     response.coinsVerified = level.verifiedCoins
@@ -266,7 +260,8 @@ function parse_header(/**@type {string}*/ header) {
                 // these literally are keys set the value, and to convert this to the color list we have to do this fun messy thing that shouldn't exist
                 // since i wrote the 1.9 color before this, a lot of explaination will be there instead
                 const colorInfo = name.split('-')
-                const color = colorInfo[2] // r,g,b
+                /** r,g,b */
+                const color = colorInfo[2]
                 const channel = colorInfo[1]
 
                 // first we create the color object
@@ -294,7 +289,8 @@ function parse_header(/**@type {string}*/ header) {
                 colorObj.channel = colorVal
 
                 // from here stuff can continue as normal, ish
-                if (colorObj.pColor == "-1" || colorObj.pColor == "0") delete colorObj.pColor
+                if (colorObj.pColor == "-1" || colorObj.pColor == "0")
+                    delete colorObj.pColor
                 colorObj.opacity = 1 // 1.9 colors don't have this!
 
                 if (colorObj?.blending === '1')
@@ -302,17 +298,28 @@ function parse_header(/**@type {string}*/ header) {
                 else
                     delete colorObj.blending
 
-                if (colorVal == '3DL') response.colors.splice(4, 0, colorObj) // hardcode the position of 3DL, it typically goes at the end due to how RobTop make the headers
-                else if (colorVal == 'Line') { colorObj.blending = true; response.colors.push(colorObj) } // in line with 2.1 behavior
-                else response.colors.push(colorObj) // bruh whatever was done to make the color list originally was long
+                switch (colorVal) {
+                    case '3DL':
+                        response.colors.splice(4, 0, colorObj) // hardcode the position of 3DL, it typically goes at the end due to how RobTop make the headers
+                        break
+
+                    case 'Line': {
+                        colorObj.blending = true; response.colors.push(colorObj) // in line with 2.1 behavior
+                        break
+                    }
+
+                    default:
+                        response.colors.push(colorObj) // bruh whatever was done to make the color list originally was long
+                        break
+                }
                 break
             }
             case 'colors': {
                 let colorList = property.split("|")
-                colorList.forEach((/** @type {string} */ x, /** @type {string | number} */ y) => {
+                colorList.forEach((x, y) => {
                     const color = parse_obj(x, "_", colorStuff.properties)
                     let colorObj = color
-                    if (!color.channel) return colorList = colorList.filter((/** @type {any} */ h, /** @type {any} */ i) => y != i)
+                    if (!color.channel) return colorList = colorList.filter((_, i) => y != i)
 
                     if (colorStuff.channels[colorObj.channel]) colorObj.channel = colorStuff.channels[colorObj.channel]
                     if (colorObj.channel > 1000) return
@@ -323,21 +330,21 @@ function parse_header(/**@type {string}*/ header) {
                     if (colorObj.copiedHSV) {
                         let hsv = colorObj.copiedHSV.split("a")
                         colorObj.copiedHSV = {}
-                        hsv.forEach((/** @type {any} */ x, /** @type {string | number} */ y) => { colorObj.copiedHSV[colorStuff.hsv[y]] = x })
+                        hsv.forEach((x, y) => { colorObj.copiedHSV[colorStuff.hsv[y]] = x })
                         colorObj.copiedHSV['s-checked'] = colorObj.copiedHSV['s-checked'] == 1
                         colorObj.copiedHSV['v-checked'] = colorObj.copiedHSV['v-checked'] == 1
-                    if (colorObj.copyOpacity == 1) colorObj.copyOpacity = true
+                        if (colorObj.copyOpacity == 1) colorObj.copyOpacity = true
                     }
                     colorObj.opacity = +Number(colorObj.opacity).toFixed(2)
                     colorList[y] = colorObj
                 })
                 // we assume this is only going to be run once so... some stuff can go here
-                colorList = colorList.filter((/** @type {any} */ x) => typeof x == "object")
-                if (!colorList.find((/** @type {{ channel: string; }} */ x) => x.channel == "Obj")) colorList.push({"r": "255", "g": "255", "b": "255", "channel": "Obj", "opacity": "1"})
+                colorList = colorList.filter(x => typeof x == "object")
+                if (!colorList.find(x => x.channel == "Obj")) colorList.push({"r": "255", "g": "255", "b": "255", "channel": "Obj", "opacity": "1"})
 
                 const specialSort = ["BG", "G", "G2", "Line", "Obj", "3DL"]
-                let specialColors = colorList.filter((/** @type {{ channel: number; }} */ x) => isNaN(x.channel)).sort((/** @type {{ channel: string; }} */ a, /** @type {{ channel: string; }} */ b) => specialSort.indexOf(a.channel) > specialSort.indexOf(b.channel))
-                let regularColors = colorList.filter((/** @type {{ channel: number; }} */ x) => !isNaN(x.channel)).sort((/** @type {{ channel: string | number; }} */ a, /** @type {{ channel: string | number; }} */ b) => +a.channel - +b.channel)
+                let specialColors = colorList.filter(x => isNaN(x.channel)).sort((a, b) => specialSort.indexOf(a.channel) > specialSort.indexOf(b.channel))
+                let regularColors = colorList.filter(x => !isNaN(x.channel)).sort((a, b) => a.channel - b.channel)
                 response.colors = specialColors.concat(regularColors)
                 break
             }
@@ -345,12 +352,14 @@ function parse_header(/**@type {string}*/ header) {
         response.settings[name] = val
     })
 
-    if (!response.settings.ground || response.settings.ground > 17) response.settings.ground = 1
-    if (!response.settings.background || response.settings.background > 20) response.settings.background = 1
-    if (!response.settings.font) response.settings.font = 1
+    if (!response.settings.ground || response.settings.ground > 17)
+        response.settings.ground = 1
+    if (!response.settings.background || response.settings.background > 20)
+        response.settings.background = 1
+    if (!response.settings.font)
+        response.settings.font = 1
 
-    if (response.settings.alternateLine == 2) response.settings.alternateLine = true
-    else response.settings.alternateLine = false
+    response.settings.alternateLine = response.settings.alternateLine == 2
 
     Object.keys(response.settings).filter(k => {
         // this should be parsed into color list instead
