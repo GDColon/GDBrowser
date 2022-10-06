@@ -1,16 +1,19 @@
-const XOR = require(__dirname + "/../classes/XOR");
-const music = require(__dirname + "/../misc/music.json");
+"use strict";
+const XOR = require("./XOR")
+const music = require("../misc/music.json")
 
 let orbs = [0, 0, 50, 75, 125, 175, 225, 275, 350, 425, 500]
 let length = ['Tiny', 'Short', 'Medium', 'Long', 'XL']
+// this can't be shortened with a loop
 let difficulty = { 0: 'Unrated', 10: 'Easy', 20: 'Normal', 30: 'Hard', 40: 'Harder', 50: 'Insane' }
 let demonTypes = { 3: "Easy", 4: "Medium", 5: "Insane", 6: "Extreme" }
+let dailyLimit = 100000
 
 class Level {
     constructor(levelInfo, server, download, author = []) {
-        this.name = levelInfo[2] || "-";
-        this.id = levelInfo[1] || 0;
-        this.description = Buffer.from((levelInfo[3] || ""), "base64").toString() || "(No description provided)";
+        this.name = levelInfo[2] || "-"
+        this.id = levelInfo[1] || 0
+        this.description = Buffer.from((levelInfo[3] || ""), "base64").toString() || "(No description provided)"
         this.author = author[1] || "-"
         this.playerID = levelInfo[6] || 0
         this.accountID = author[2] || 0
@@ -29,8 +32,8 @@ class Level {
         if (levelInfo[29]) this.updated = levelInfo[29] + (server.timestampSuffix || "")
         if (levelInfo[46]) this.editorTime = +levelInfo[46] || 0
         if (levelInfo[47]) this.totalEditorTime = +levelInfo[47] || 0
-        if (levelInfo[27]) this.password = levelInfo[27];
-        this.version = +levelInfo[5] || 0;
+        if (levelInfo[27]) this.password = levelInfo[27]
+        this.version = +levelInfo[5] || 0
         this.copiedID = levelInfo[30] || "0"
         this.twoPlayer = levelInfo[31] > 0
         this.officialSong = +levelInfo[35] ? 0 : parseInt(levelInfo[12]) + 1
@@ -39,21 +42,24 @@ class Level {
         this.verifiedCoins = levelInfo[38] > 0
         this.starsRequested = +levelInfo[39] || 0
         this.ldm = levelInfo[40] > 0
-        if (+levelInfo[41] > 100000) this.weekly = true
-        if (+levelInfo[41]) { this.dailyNumber = (+levelInfo[41] > 100000 ? +levelInfo[41] - 100000 : +levelInfo[41]); this.nextDaily = null; this.nextDailyTimestamp = null }
+        if (+levelInfo[41] > dailyLimit) this.weekly = true
+        if (+levelInfo[41]) {
+            this.dailyNumber = (+levelInfo[41] > dailyLimit ? +levelInfo[41] - dailyLimit : +levelInfo[41])
+            this.nextDaily = null
+            this.nextDailyTimestamp = null
+        }
         this.objects = +levelInfo[45] || 0
-        this.large = levelInfo[45] > 40000;
+        this.large = levelInfo[45] > 40000
         this.cp = Number((this.stars > 0) + this.featured + this.epic)
 
         if (levelInfo[17] > 0) this.difficulty = (demonTypes[levelInfo[43]] || "Hard") + " Demon"
         if (levelInfo[25] > 0) this.difficulty = 'Auto'
-        this.difficultyFace = `${levelInfo[17] != 1 ? this.difficulty.toLowerCase() : `demon-${this.difficulty.toLowerCase().split(' ')[0]}`}${this.epic ? '-epic' : `${this.featured ? '-featured' : ''}`}`
+        this.difficultyFace = `${levelInfo[17] != 1 ? this.difficulty.toLowerCase() : `demon-${this.difficulty.toLowerCase().split(' ', 1)[0]}`}${this.epic ? '-epic' : `${this.featured ? '-featured' : ''}`}`
 
         if (this.password && this.password != 0) {
-            let xor = new XOR();
-            let pass = xor.decrypt(this.password, 26364);
-            if (pass.length > 1) this.password = pass.slice(1);
-            else this.password = pass;
+            let xor = new XOR()
+            let pass = xor.decrypt(this.password, 26364)
+            this.password = pass.length > 1 ? pass.slice(1) : pass
         }
 
         if (server.onePointNine) {
@@ -83,9 +89,9 @@ class Level {
             this.songSize = "0MB"
             this.songID = "Level " + this.officialSong
         }
-        
+
         return this
     }
 }
 
-module.exports = Level;
+module.exports = Level

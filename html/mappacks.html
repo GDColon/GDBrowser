@@ -1,9 +1,9 @@
 <head>
 	<title>Map Packs</title>
 	<meta charset="utf-8">
-	<link href="../assets/css/browser.css?v=1" type="text/css" rel="stylesheet">
+	<link href="/assets/css/browser.css?v=1" type="text/css" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
-	<link rel="icon" href="../assets/folder.png">
+	<link rel="icon" href="/assets/folder.png">
 	<meta id="meta-title" property="og:title" content="Map Packs">
 	<meta id="meta-desc" property="og:description" content="Collections of terrible Geometry Dash levels that people only play because of the absurd number of icons they unlock.">
 	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/assets/folder.png">
@@ -18,32 +18,32 @@
 		<h1 style="transform:scale(1.2)">Map Packs</h1>
 	</div>
 
-	<img id="loading" style="margin-top: 1%" class="spin noSelect" src="../assets/loading.png" height="12%">
+	<img id="loading" style="margin-top: 1%" class="spin noSelect" src="/assets/loading.png" height="12%">
 
 	<div id="packList">
 		<br>
 	</div>
 
 	<div style="position:absolute; top: 2%; left: -1.95%; width: 10%; height: 25%; pointer-events: none">
-		<img class="gdButton yesClick" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()">
-	</div> 
+		<img class="gdButton yesClick" id="backButton" src="/assets/back.png" height="30%" onclick="backButton()">
+	</div>
 	<br>
 </div>
 </body>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="text/javascript" src="../global.js?v=1"></script>
+<script type="text/javascript" src="/misc/global.js?v=1"></script>
 <script>
 
-fetch('../api/mappacks').then(res => res.json()).then(packs => {
+fetch('/api/mappacks').then(res => res.json()).then(packs => {
 	$('#loading').hide()
 	packs.forEach(x => {
 		$('#packList').append(`
 			<div class="mappack">
 			<a href="../search/${x.levels.join(",")}?list&header=${encodeURIComponent(x.name)}">
-			<img src="../assets/difficulties/${x.difficulty}.png" width="42%"><br>
+			<img src="/assets/difficulties/${x.difficulty}.png" width="42%"><br>
 			<h3 class="gauntletText"">${x.name.replace("Pack", "<br>Pack")}<br>
-			<span style="color: rgb(${x.textColor})">${x.stars}</span><img class="valign" src="../assets/star.png" style="cursor: help; width: 14%; margin-left: 2%; transform: translateY(-10%);" title="Stars">
-			<span style="color: rgb(${x.barColor})">${x.coins}</span><img class="valign" src="../assets/coin.png" style="cursor: help; width: 14%; margin-left: 2%; transform: translateY(-10%);" title="Secret Coins">
+			<span style="color: rgb(${x.textColor})">${x.stars}</span><img class="valign" src="/assets/star.png" style="cursor: help; width: 14%; margin-left: 2%; transform: translateY(-10%);" title="Stars">
+			<span style="color: rgb(${x.barColor})">${x.coins}</span><img class="valign" src="/assets/coin.png" style="cursor: help; width: 14%; margin-left: 2%; transform: translateY(-10%);" title="Secret Coins">
 			</h3></div></a>`)
 	})
 });

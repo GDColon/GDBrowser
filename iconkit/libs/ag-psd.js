@@ -1,4 +1,4 @@
-(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.agPsd = f()}})(function(){var define,module,exports;return (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+(function(f){if(typeof exports=="object"&&typeof module!="undefined"){module.exports=f()}else if(typeof define=="function"&&define.amd){define([],f)}else{var g;if(typeof window!="undefined"){g=window}else if(typeof global!="undefined"){g=global}else if(typeof self!="undefined"){g=self}else{g=this}g.agPsd = f()}})(function(){var define,module,exports;return (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.readAbr = void 0;
@@ -1189,7 +1189,7 @@ addHandler('Anno', function (target) { return target.annotations !== undefined; 
         var sound = annotation.type === 'sound';
         if (sound && !(annotation.data instanceof Uint8Array))
             throw new Error('Sound annotation data should be Uint8Array');
-        if (!sound && typeof annotation.data !== 'string')
+        if (!sound && typeof annotation.data != 'string')
             throw new Error('Text annotation data should be string');
         var lengthOffset = writer.offset;
         psdWriter_1.writeUint32(writer, 0); // length
@@ -3049,16 +3049,16 @@ function getTypeByKey(key, value, root) {
         return ('Wdth' in value) ? 'Objc' : (('units' in value) ? 'UntF' : 'doub');
     }
     else if (key === 'Type') {
-        return typeof value === 'string' ? 'enum' : 'long';
+        return typeof value == 'string' ? 'enum' : 'long';
     }
     else if (key === 'AntA') {
-        return typeof value === 'string' ? 'enum' : 'bool';
+        return typeof value == 'string' ? 'enum' : 'bool';
     }
     else if (key === 'Hrzn' || key === 'Vrtc' || key === 'Top ' || key === 'Left' || key === 'Btom' || key === 'Rght') {
-        return typeof value === 'number' ? 'doub' : 'UntF';
+        return typeof value == 'number' ? 'doub' : 'UntF';
     }
     else if (key === 'Vrsn') {
-        return typeof value === 'number' ? 'long' : 'Objc';
+        return typeof value == 'number' ? 'long' : 'Objc';
     }
     else if (key === 'Rd  ' || key === 'Grn ' || key === 'Bl  ') {
         return root === 'artd' ? 'long' : 'doub';
@@ -3390,7 +3390,7 @@ function writeReferenceStructure(writer, _key, items) {
     for (var i = 0; i < items.length; i++) {
         var value = items[i];
         var type = 'unknown';
-        if (typeof value === 'string') {
+        if (typeof value == 'string') {
             if (/^[a-z]+\.[a-z]+$/i.test(value)) {
                 type = 'Enmr';
             }
@@ -3485,7 +3485,7 @@ function parseUnits(_a) {
 exports.parseUnits = parseUnits;
 function parseUnitsOrNumber(value, units) {
     if (units === void 0) { units = 'Pixels'; }
-    if (typeof value === 'number')
+    if (typeof value == 'number')
         return { value: value, units: units };
     return parseUnits(value);
 }
@@ -3508,10 +3508,10 @@ exports.unitsPercent = unitsPercent;
 function unitsValue(x, key) {
     if (x == null)
         return { units: 'Pixels', value: 0 };
-    if (typeof x !== 'object')
+    if (typeof x != 'object')
         throw new Error("Invalid value: " + JSON.stringify(x) + " (key: " + key + ") (should have value and units)");
     var units = x.units, value = x.value;
-    if (typeof value !== 'number')
+    if (typeof value != 'number')
         throw new Error("Invalid value in " + JSON.stringify(x) + " (key: " + key + ")");
     if (units !== 'Pixels' && units !== 'Millimeters' && units !== 'Points' && units !== 'None' &&
         units !== 'Picas' && units !== 'Inches' && units !== 'Centimeters' && units !== 'Density') {
@@ -4009,7 +4009,7 @@ function parseEngineData(data) {
         if (!stack.length)
             throw new Error('Invalid data');
         var top = stack[stack.length - 1];
-        if (typeof top === 'string') {
+        if (typeof top == 'string') {
             stack[stack.length - 2][top] = value;
             pop();
         }
@@ -4024,7 +4024,7 @@ function parseEngineData(data) {
         if (!stack.length)
             pushContainer({});
         var top = stack[stack.length - 1];
-        if (top && typeof top === 'string') {
+        if (top && typeof top == 'string') {
             if (name === 'nil') {
                 pushValue(null);
             }
@@ -4032,7 +4032,7 @@ function parseEngineData(data) {
                 pushValue("/" + name);
             }
         }
-        else if (top && typeof top === 'object') {
+        else if (top && typeof top == 'object') {
             stack.push(name);
         }
         else {
@@ -4196,15 +4196,15 @@ function serializeEngineData(data, condensed) {
             writePrefix();
             writeString(condensed ? '/nil' : 'null');
         }
-        else if (typeof value === 'number') {
+        else if (typeof value == 'number') {
             writePrefix();
             writeString(serializeNumber(value, key));
         }
-        else if (typeof value === 'boolean') {
+        else if (typeof value == 'boolean') {
             writePrefix();
             writeString(value ? 'true' : 'false');
         }
-        else if (typeof value === 'string') {
+        else if (typeof value == 'string') {
             writePrefix();
             if ((key === '99' || key === '98') && value.charAt(0) === '/') {
                 writeString(value);
@@ -4223,7 +4223,7 @@ function serializeEngineData(data, condensed) {
         }
         else if (Array.isArray(value)) {
             writePrefix();
-            if (value.every(function (x) { return typeof x === 'number'; })) {
+            if (value.every(function (x) { return typeof x == 'number'; })) {
                 writeString('[');
                 var intArray = intArrays.indexOf(key) !== -1;
                 for (var _i = 0, value_1 = value; _i < value_1.length; _i++) {
@@ -4247,7 +4247,7 @@ function serializeEngineData(data, condensed) {
                 writeString(']');
             }
         }
-        else if (typeof value === 'object') {
+        else if (typeof value == 'object') {
             if (inProperty && !condensed)
                 writeString('\n');
             writeIndent();
@@ -4266,7 +4266,7 @@ function serializeEngineData(data, condensed) {
         return undefined;
     }
     if (condensed) {
-        if (typeof data === 'object') {
+        if (typeof data == 'object') {
             for (var _i = 0, _a = getKeys(data); _i < _a.length; _i++) {
                 var key = _a[_i];
                 writeProperty(key, data[key]);
@@ -4560,7 +4560,7 @@ var createImageData = function (width, height) {
     return tempCanvas.getContext('2d').createImageData(width, height);
 };
 exports.createImageData = createImageData;
-if (typeof document !== 'undefined') {
+if (typeof document != 'undefined') {
     exports.createCanvas = function (width, height) {
         var canvas = document.createElement('canvas');
         canvas.width = width;
@@ -5225,7 +5225,7 @@ function writePsdUint8Array(psd, options) {
 }
 exports.writePsdUint8Array = writePsdUint8Array;
 function writePsdBuffer(psd, options) {
-    if (typeof Buffer === 'undefined') {
+    if (typeof Buffer == 'undefined') {
         throw new Error('Buffer not supported on this platform');
     }
     return Buffer.from(writePsdUint8Array(psd, options));
@@ -7050,7 +7050,7 @@ function deduplicateValues(base, runs, keys) {
             if (Array.isArray(value)) {
                 identical = runs.every(function (r) { return arraysEqual(r.style[key], value); });
             }
-            else if (typeof value === 'object') {
+            else if (typeof value == 'object') {
                 identical = runs.every(function (r) { return objectsEqual(r.style[key], value); });
             }
             else {
@@ -7068,7 +7068,7 @@ function deduplicateValues(base, runs, keys) {
                 if (Array.isArray(value)) {
                     same = arraysEqual(r.style[key], value);
                 }
-                else if (typeof value === 'object') {
+                else if (typeof value == 'object') {
                     same = objectsEqual(r.style[key], value);
                 }
                 else {
@@ -7514,7 +7514,7 @@ function decodeString(value) {
                 throw Error("Lone surrogate U+" + code.toString(16).toUpperCase() + " is not a scalar value");
             }
         }
-        else if ((byte1 & 0xf8) === 0xf0) {
+        else if ((byte1 & 0xf8) == 0xf0) {
             var byte2 = continuationByte(value, i++);
             var byte3 = continuationByte(value, i++);
             var byte4 = continuationByte(value, i++);
@@ -7539,7 +7539,7 @@ exports.decodeString = decodeString;
 
 
 },{}],15:[function(require,module,exports){
-'use strict'
+"use strict";
 
 exports.byteLength = byteLength
 exports.toByteArray = toByteArray
@@ -7547,7 +7547,7 @@ exports.fromByteArray = fromByteArray
 
 var lookup = []
 var revLookup = []
-var Arr = typeof Uint8Array !== 'undefined' ? Uint8Array : Array
+var Arr = typeof Uint8Array != 'undefined' ? Uint8Array : Array
 
 var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
 for (var i = 0, len = code.length; i < len; ++i) {
@@ -7700,7 +7700,7 @@ function fromByteArray (uint8) {
  */
 /* eslint-disable no-proto */
 
-'use strict'
+"use strict";
 
 var base64 = require('base64-js')
 var ieee754 = require('ieee754')
@@ -7728,8 +7728,8 @@ exports.kMaxLength = K_MAX_LENGTH
  */
 Buffer.TYPED_ARRAY_SUPPORT = typedArraySupport()
 
-if (!Buffer.TYPED_ARRAY_SUPPORT && typeof console !== 'undefined' &&
-    typeof console.error === 'function') {
+if (!Buffer.TYPED_ARRAY_SUPPORT && typeof console != 'undefined' &&
+    typeof console.error == 'function') {
   console.error(
     'This browser lacks typed array (Uint8Array) support which is required by ' +
     '`buffer` v5.x. Use `buffer` v4.x if you require old browser support.'
@@ -7785,8 +7785,8 @@ function createBuffer (length) {
 
 function Buffer (arg, encodingOrOffset, length) {
   // Common case.
-  if (typeof arg === 'number') {
-    if (typeof encodingOrOffset === 'string') {
+  if (typeof arg == 'number') {
+    if (typeof encodingOrOffset == 'string') {
       throw new TypeError(
         'The "string" argument must be of type string. Received type number'
       )
@@ -7797,7 +7797,7 @@ function Buffer (arg, encodingOrOffset, length) {
 }
 
 // Fix subarray() in ES2016. See: https://github.com/feross/buffer/pull/97
-if (typeof Symbol !== 'undefined' && Symbol.species != null &&
+if (typeof Symbol != 'undefined' && Symbol.species != null &&
     Buffer[Symbol.species] === Buffer) {
   Object.defineProperty(Buffer, Symbol.species, {
     value: null,
@@ -7810,7 +7810,7 @@ if (typeof Symbol !== 'undefined' && Symbol.species != null &&
 Buffer.poolSize = 8192 // not used by this implementation
 
 function from (value, encodingOrOffset, length) {
-  if (typeof value === 'string') {
+  if (typeof value == 'string') {
     return fromString(value, encodingOrOffset)
   }
 
@@ -7830,7 +7830,7 @@ function from (value, encodingOrOffset, length) {
     return fromArrayBuffer(value, encodingOrOffset, length)
   }
 
-  if (typeof value === 'number') {
+  if (typeof value == 'number') {
     throw new TypeError(
       'The "value" argument must not be of type number. Received type number'
     )
@@ -7844,8 +7844,8 @@ function from (value, encodingOrOffset, length) {
   var b = fromObject(value)
   if (b) return b
 
-  if (typeof Symbol !== 'undefined' && Symbol.toPrimitive != null &&
-      typeof value[Symbol.toPrimitive] === 'function') {
+  if (typeof Symbol != 'undefined' && Symbol.toPrimitive != null &&
+      typeof value[Symbol.toPrimitive] == 'function') {
     return Buffer.from(
       value[Symbol.toPrimitive]('string'), encodingOrOffset, length
     )
@@ -7875,7 +7875,7 @@ Buffer.prototype.__proto__ = Uint8Array.prototype
 Buffer.__proto__ = Uint8Array
 
 function assertSize (size) {
-  if (typeof size !== 'number') {
+  if (typeof size != 'number') {
     throw new TypeError('"size" argument must be of type number')
   } else if (size < 0) {
     throw new RangeError('The value "' + size + '" is invalid for option "size"')
@@ -7884,18 +7884,14 @@ function assertSize (size) {
 
 function alloc (size, fill, encoding) {
   assertSize(size)
-  if (size <= 0) {
-    return createBuffer(size)
-  }
-  if (fill !== undefined) {
+  return (size <= 0 || fill === undefined
+    ? createBuffer(size)
+    :
     // Only pay attention to encoding if it's a string. This
     // prevents accidentally sending in a number that would
     // be interpretted as a start offset.
-    return typeof encoding === 'string'
-      ? createBuffer(size).fill(fill, encoding)
-      : createBuffer(size).fill(fill)
-  }
-  return createBuffer(size)
+    createBuffer(size).fill(fill, typeof encoding == 'string' ? encoding : undefined)
+  )
 }
 
 /**
@@ -7925,7 +7921,7 @@ Buffer.allocUnsafeSlow = function (size) {
 }
 
 function fromString (string, encoding) {
-  if (typeof encoding !== 'string' || encoding === '') {
+  if (typeof encoding != 'string' || encoding === '') {
     encoding = 'utf8'
   }
 
@@ -7994,7 +7990,7 @@ function fromObject (obj) {
   }
 
   if (obj.length !== undefined) {
-    if (typeof obj.length !== 'number' || numberIsNaN(obj.length)) {
+    if (typeof obj.length != 'number' || numberIsNaN(obj.length)) {
       return createBuffer(0)
     }
     return fromArrayLike(obj)
@@ -8113,7 +8109,7 @@ function byteLength (string, encoding) {
   if (ArrayBuffer.isView(string) || isInstance(string, ArrayBuffer)) {
     return string.byteLength
   }
-  if (typeof string !== 'string') {
+  if (typeof string != 'string') {
     throw new TypeError(
       'The "string" argument must be one of type string, Buffer, or ArrayBuffer. ' +
       'Received type ' + typeof string
@@ -8378,7 +8374,7 @@ function bidirectionalIndexOf (buffer, val, byteOffset, encoding, dir) {
   if (buffer.length === 0) return -1
 
   // Normalize byteOffset
-  if (typeof byteOffset === 'string') {
+  if (typeof byteOffset == 'string') {
     encoding = byteOffset
     byteOffset = 0
   } else if (byteOffset > 0x7fffffff) {
@@ -8403,7 +8399,7 @@ function bidirectionalIndexOf (buffer, val, byteOffset, encoding, dir) {
   }
 
   // Normalize val
-  if (typeof val === 'string') {
+  if (typeof val == 'string') {
     val = Buffer.from(val, encoding)
   }
 
@@ -8414,9 +8410,9 @@ function bidirectionalIndexOf (buffer, val, byteOffset, encoding, dir) {
       return -1
     }
     return arrayIndexOf(buffer, val, byteOffset, encoding, dir)
-  } else if (typeof val === 'number') {
+  } else if (typeof val == 'number') {
     val = val & 0xFF // Search for a byte value [0-255]
-    if (typeof Uint8Array.prototype.indexOf === 'function') {
+    if (typeof Uint8Array.prototype.indexOf == 'function') {
       if (dir) {
         return Uint8Array.prototype.indexOf.call(buffer, val, byteOffset)
       } else {
@@ -8549,7 +8545,7 @@ Buffer.prototype.write = function write (string, offset, length, encoding) {
     length = this.length
     offset = 0
   // Buffer#write(string, encoding)
-  } else if (length === undefined && typeof offset === 'string') {
+  } else if (length === undefined && typeof offset == 'string') {
     encoding = offset
     length = this.length
     offset = 0
@@ -9228,7 +9224,7 @@ Buffer.prototype.copy = function copy (target, targetStart, start, end) {
 
   var len = end - start
 
-  if (this === target && typeof Uint8Array.prototype.copyWithin === 'function') {
+  if (this === target && typeof Uint8Array.prototype.copyWithin == 'function') {
     // Use built-in when available, missing from IE11
     this.copyWithin(targetStart, start, end)
   } else if (this === target && start < targetStart && targetStart < end) {
@@ -9253,19 +9249,19 @@ Buffer.prototype.copy = function copy (target, targetStart, start, end) {
 //    buffer.fill(string[, offset[, end]][, encoding])
 Buffer.prototype.fill = function fill (val, start, end, encoding) {
   // Handle string cases:
-  if (typeof val === 'string') {
-    if (typeof start === 'string') {
+  if (typeof val == 'string') {
+    if (typeof start == 'string') {
       encoding = start
       start = 0
       end = this.length
-    } else if (typeof end === 'string') {
+    } else if (typeof end == 'string') {
       encoding = end
       end = this.length
     }
-    if (encoding !== undefined && typeof encoding !== 'string') {
+    if (encoding !== undefined && typeof encoding != 'string') {
       throw new TypeError('encoding must be a string')
     }
-    if (typeof encoding === 'string' && !Buffer.isEncoding(encoding)) {
+    if (typeof encoding == 'string' && !Buffer.isEncoding(encoding)) {
       throw new TypeError('Unknown encoding: ' + encoding)
     }
     if (val.length === 1) {
@@ -9276,7 +9272,7 @@ Buffer.prototype.fill = function fill (val, start, end, encoding) {
         val = code
       }
     }
-  } else if (typeof val === 'number') {
+  } else if (typeof val == 'number') {
     val = val & 255
   }
 
@@ -9295,7 +9291,7 @@ Buffer.prototype.fill = function fill (val, start, end, encoding) {
   if (!val) val = 0
 
   var i
-  if (typeof val === 'number') {
+  if (typeof val == 'number') {
     for (i = start; i < end; ++i) {
       this[i] = val
     }
@@ -9319,25 +9315,22 @@ Buffer.prototype.fill = function fill (val, start, end, encoding) {
 // HELPER FUNCTIONS
 // ================
 
-var INVALID_BASE64_RE = /[^+/0-9A-Za-z-_]/g
+var INVALID_BASE64_RE = /[^+/\dA-Z-_]/gi
 
 function base64clean (str) {
   // Node takes equal signs as end of the Base64 encoding
-  str = str.split('=')[0]
+  str = str.split('=', 1)[0]
   // Node strips out invalid characters like \n and \t from the string, base64-js does not
   str = str.trim().replace(INVALID_BASE64_RE, '')
   // Node converts strings with length < 2 to ''
   if (str.length < 2) return ''
   // Node allows for non-padded base64 strings (missing trailing ===), base64-js does not
-  while (str.length % 4 !== 0) {
-    str = str + '='
-  }
+  while (str.length % 4 !== 0) str += '='
   return str
 }
 
 function toHex (n) {
-  if (n < 16) return '0' + n.toString(16)
-  return n.toString(16)
+  return (n < 16 ? '0' : '') + n.toString(16)
 }
 
 function utf8ToBytes (string, units) {

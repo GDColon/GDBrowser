@@ -3,11 +3,12 @@
 	<meta charset="utf-8">
 	<meta property="og:type" content="website">
 	<meta id="meta-title" property="og:title" content="Level Analysis">
-    <meta id="meta-desc" property="og:description" content="Analyze a Geometry Dash level and view it's objects, portals, color channels, code, and more!">
+	<meta id="meta-desc" property="og:description" content="Analyze a Geometry Dash level and view it's objects, portals, color channels, code, and more!">
 	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/assets/cp.png">
 	<meta name="twitter:card" content="summary">
 	<link href="../assets/css/browser.css?v=1" type="text/css" rel="stylesheet">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script>
+	<script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3')</script>
 	<link rel="icon" href="../assets/cp.png">
 </head>
 
@@ -100,25 +101,27 @@
 </div>
 </body>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="text/javascript" src="../global.js"></script>
+<script type="text/javascript" src="/misc/global.js"></script>
 <script>
 
 function clean(text) {return text.toString().replace(/&/g, "&#38;").replace(/</g, "&#60;").replace(/>/g, "&#62;").replace(/=/g, "&#61;").replace(/"/g, "&#34;").replace(/'/g, "&#39;")}
 
 let disabledPortals = []
 let altTriggerSort = false
-let formPortals = ['cube', 'ship', 'ball', 'ufo', 'wave', 'robot', 'spider']
-let speedPortals = ['-1x', '1x', '2x', '3x', '4x']
-let sizePortals = ['mini', 'big']
-let dualPortals = ['dual', 'single']
-let mirrorPortals = ['mirrorOn', 'mirrorOff']
+const PORTALS = {
+	form: ['cube', 'ship', 'ball', 'ufo', 'wave', 'robot', 'spider'],
+	speed: ['-1x', '1x', '2x', '3x', '4x'],
+	size: ['mini', 'big'],
+	dual: ['dual', 'single'],
+	mirror: ['mirrorOn', 'mirrorOff']
+}
 
-fetch(`../api${window.location.pathname}`).then(res => res.json()).then(res => {
-	
+fetch(`/api${window.location.pathname}`).then(res => res.json()).then(res => {
+
 	if (!res.level) {
 		switch(res) {
-			case -1: $('#errorMessage').html("This level could not be be <cr>downloaded</cr>. Either the servers rejected the request, or the level simply <co>doesn't exist at all</co>."); break;
-			case -2: $('#errorMessage').html("This level's data appears to be <cr>corrupt</cr> and cannot be <cy>parsed</cy>. It most likely won't load in GD."); break;
+			case -1: $('#errorMessage').html("This level could not be be <cr>downloaded</cr>. Either the servers rejected the request, or the level simply <co>doesn't exist at all</co>."); break
+			case -2: $('#errorMessage').html("This level's data appears to be <cr>corrupt</cr> and cannot be <cy>parsed</cy>. It most likely won't load in GD."); break
 			case -3: $('#errorMessage').html("This level's data could not be obtained because <ca>RobTop</ca> has disabled <cg>level downloading</cg>."); break;
 		}
 		popupEsc = false
@@ -129,8 +132,8 @@ fetch(`../api${window.location.pathname}`).then(res => res.json()).then(res => {
 	$('#objectCount').text(commafy(res.objects) + " objects")
 	document.title = "Analysis of " + res.level.name
 
-	$('#meta-title').attr('content',  "Analysis of " + res.level.name)
-	$('#meta-desc').attr('content',  `${res.portals.split(",").length}x portals, ${res.orbs.total || 0}x orbs, ${res.triggers.total || 0}x triggers, ${res.misc.glow || 0}x glow...`)
+	$('#meta-title').attr('content', "Analysis of " + res.level.name)
+	$('#meta-desc').attr('content', `${res.portals.split(",").length}x portals, ${res.orbs.total || 0}x orbs, ${res.triggers.total || 0}x triggers, ${res.misc.glow || 0}x glow...`)
 
 
 let hdPercent = (res.highDetail / res.objects) * 100
@@ -216,7 +219,7 @@ function appendTriggerGroups() {
 	})
 
 	miscList.forEach(x => {
-		if (x == "objects") return;
+		if (x == "objects") return
 		else $('#misc').append(`<div class="inline miscDiv"><img height="40%" src='../assets/objects/${x.slice(0, -1)}.png'><h3 style="padding-top: 15%">x${commafy(res.misc[x][0])}<br>${res.misc[x][1]}</h3></div>`)
 	})
 
@@ -259,11 +262,8 @@ function appendTriggerGroups() {
 		else disabledPortals.push($(this).attr('portal'))
 
 		portals = res.portals.split(", ").map(x => x.split(" "))
-		if (disabledPortals.includes('form')) portals = portals.filter(x => !formPortals.includes(x[0]))
-		if (disabledPortals.includes('speed')) portals = portals.filter(x => !speedPortals.includes(x[0]))
-		if (disabledPortals.includes('size')) portals = portals.filter(x => !sizePortals.includes(x[0]))
-		if (disabledPortals.includes('dual')) portals = portals.filter(x => !dualPortals.includes(x[0]))
-		if (disabledPortals.includes('mirror')) portals = portals.filter(x => !mirrorPortals.includes(x[0]))
+		for (let P in PORTALS)
+			if (disabledPortals.includes(P)) portals = portals.filter(x => !PORTALS[P].includes(x[0]))
 
 		if (disabledPortals.includes('dupe')) {
 			portals.reverse().forEach((x, y) => {if (portals[y+1] && portals[y+1][0] == x[0]) portals[y][0] = null;})
@@ -293,7 +293,8 @@ function appendTriggerGroups() {
 			hsv.s = Number(hsv.s).toFixed(2)
 			hsv.v = Number(hsv.v).toFixed(2)
 		}
-		let hex = "#" + ((1 << 24) + (+col.r << 16) + (+col.g << 8) + +col.b).toString(16).slice(1)
+		// padded (fixed-size) RGB hex
+		let hex = "#" + ((1 << 24) | (col.r << 16) | (col.g << 8) | col.b).toString(16).slice(1) // remove sentinel nibble
 		$('#colorStuff').html(`
 		<h2 class="slightlySmaller">${isNaN(col.channel) ? col.channel : "Color " + col.channel}</h2>
 			<div class="colorSection">
@@ -343,6 +344,5 @@ function appendTriggerGroups() {
 	$('#loadingDiv').hide()
 	$('#analysisDiv').show()
 
-});
-
+})
 </script>

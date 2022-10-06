@@ -1,10 +1,10 @@
 <head>
 	<title>Messages</title>
 	<meta charset="utf-8">
-	<link href="../assets/css/browser.css?v=1" type="text/css" rel="stylesheet">
+	<link href="/assets/css/browser.css?v=1" type="text/css" rel="stylesheet">
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script>
 	<script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-135255146-3');</script>
-	<link rel="icon" href="../assets/messages.png">
+	<link rel="icon" href="/assets/messages.png">
 	<meta id="meta-title" property="og:title" content="Messages">
 	<meta id="meta-desc" property="og:description" content="Read, write, and manage your Geometry Dash messages!">
 	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/assets/messages.png">
@@ -29,9 +29,9 @@
 				<div style="margin-bottom: 3%">
 					<p id="message" style="padding: 0% 10%; margin-top: 1.5%"></p>
 				</div>
-				<img src="../assets/btn-cancel.png" height=11%; class="gdButton postbutton center"
+				<img src="/assets/btn-cancel.png" height=11%; class="gdButton postbutton center"
 					style="margin-right: 1%" onclick="backButton()">
-				<img src="../assets/btn-submit.png" type="submit" height=11%; class="gdButton postbutton center"
+				<img src="/assets/btn-submit.png" type="submit" height=11%; class="gdButton postbutton center"
 					style="margin-left: 1%" id="logIn">
 			</div>
 		</div>
@@ -40,7 +40,7 @@
 			<div class="brownbox center supercenter" style="height: 65%; width: 110vh">
 				<div style="position:absolute; top: 25%; width: 100%">
 					<p id="msgCount" style="font-size: 3.5vh; margin-bottom: 5%"></p>
-					<img class="spin noSelect" id="loadingicon" src="../assets/loading.png" width="10%">
+					<img class="spin noSelect" id="loadingicon" src="/assets/loading.png" width="10%">
 				</div>
 			</div>
 		</div>
@@ -52,25 +52,25 @@
 				</div>
 
 				<div style="text-align: left">
-					<img class="gdButton inline" id="purge" src="../assets/trash-square.png" width="7%">
+					<img class="gdButton inline" id="purge" src="/assets/trash-square.png" width="7%">
 					<div id="selectCount" style="display: none; pointer-events: none;">
 						<h3 class="center" style="font-size: 3vh; margin-top: 12%"></h3>
 					</div>
-					<img class="gdButton inline" id="selectAll" src="../assets/select-all.png" width="15%"
+					<img class="gdButton inline" id="selectAll" src="/assets/select-all.png" width="15%"
 						style="margin: 0% 0% 0.5% 2%">
-					<img class="gdButton inline" id="selectNone" src="../assets/select-none.png" width="15%"
+					<img class="gdButton inline" id="selectNone" src="/assets/select-none.png" width="15%"
 						style="display: none; margin: 0% 0% 0.5% 2%">
 				</div>
 
-				<img src="../assets/refresh.png" style="height: 13%;position: absolute;right: 0%;bottom: 0%;" onclick="page = 0; getMessages()" class="gdButton center sideSpaceB">
+				<img src="/assets/refresh.png" style="height: 13%;position: absolute;right: 0%;bottom: 0%;" onclick="page = 0; getMessages()" class="gdButton center sideSpaceB">
 
 				<div style="position: absolute; left: 0.5%; top: 45%; height: 11%;">
-					<img class="gdButton" style="display: none" id="pageDown" src="../assets/arrow-left.png"
+					<img class="gdButton" style="display: none" id="pageDown" src="/assets/arrow-left.png"
 						height="90%">
 				</div>
 
 				<div style="position: absolute; right: 0.5%; top: 45%; height: 11%;">
-					<img class="gdButton" style="display: none" id="pageUp" src="../assets/arrow-right.png"
+					<img class="gdButton" style="display: none" id="pageUp" src="/assets/arrow-right.png"
 						height="90%">
 				</div>
 
@@ -84,19 +84,19 @@
 					<p class="bigger center" style="line-height: 6vh; margin-top: 1.5vh;">
 						Are you sure you want to <cr>delete</cr> this message?
 					</p>
-					<img src="../assets/btn-cancel-green.png" height=29%; class="gdButton center" onclick="$('#confirmDelete').hide()">
-					<img src="../assets/btn-delete.png" height=29%; id="deleteCurrentMessage" class="gdButton center sideSpaceB">
+					<img src="/assets/btn-cancel-green.png" height=29%; class="gdButton center" onclick="$('#confirmDelete').hide()">
+					<img src="/assets/btn-delete.png" height=29%; id="deleteCurrentMessage" class="gdButton center sideSpaceB">
 				</div>
 
 				<div id="deleting" style="display: none">
 					<h2 class="smaller center" style="font-size: 5.5vh">Delete</h2>
 					<p class="bigger center" style="line-height: 6vh; margin-top: 1.5vh;">Deleting message...</p>
-					<img src="../assets/loading.png" class="spin noSelect" style="height: 35%; margin-top: -2%">
+					<img src="/assets/loading.png" class="spin noSelect" style="height: 35%; margin-top: -2%">
 				</div>
 
 				<div id="delete-error" style="display: none;">
-					<img class="gdButton" src="../assets/close.png" style="width: 15%; position: absolute; top: -17.5%; left: -5.5vh" onclick="$('#delete-error').hide(); $('#confirmDelete').hide(); $('#preDelete').show()">
-					<img src="../assets/exclamation.png" style="height: 40%">
+					<img class="gdButton" src="/assets/close.png" style="width: 15%; position: absolute; top: -17.5%; left: -5.5vh" onclick="$('#delete-error').hide(); $('#confirmDelete').hide(); $('#preDelete').show()">
+					<img src="/assets/exclamation.png" style="height: 40%">
 					<p class="bigger" style="margin-bottom: 0%; margin-top: 2.5%">Something went wrong!</p>
 					<p id="delError" style="font-size: 2.4vh; margin-top: 1%"></p>
 				</div>
@@ -111,9 +111,9 @@
 						Are you sure you want to <cr>delete</cr> <span class="selectedAmount"
 							style="color: yelow"></span>?
 					</p>
-					<img src="../assets/btn-cancel-green.png" height=29%; class="gdButton center"
+					<img src="/assets/btn-cancel-green.png" height=29%; class="gdButton center"
 						onclick="$('#bulkDelete').hide()">
-					<img src="../assets/btn-delete.png" height=29%; id="bulkDeleteMessages"
+					<img src="/assets/btn-delete.png" height=29%; id="bulkDeleteMessages"
 						class="gdButton center sideSpaceB">
 				</div>
 
@@ -121,12 +121,12 @@
 					<h2 class="smaller center" style="font-size: 5.5vh">Delete</h2>
 					<p class="bigger center" style="line-height: 6vh; margin-top: 1.5vh;">Deleting <span
 							class="selectedAmount"></span>...</p>
-					<img src="../assets/loading.png" class="spin noSelect" style="height: 35%; margin-top: -2%">
+					<img src="/assets/loading.png" class="spin noSelect" style="height: 35%; margin-top: -2%">
 				</div>
 
 				<div id="bd-error" style="display: none;">
-					<img class="gdButton" src="../assets/close.png" style="width: 15%; position: absolute; top: -17.5%; left: -5.5vh" onclick="$('#bd-error').hide(); $('#bulkDelete').hide(); $('#preBulkDelete').show()">
-					<img src="../assets/exclamation.png" style="height: 40%">
+					<img class="gdButton" src="/assets/close.png" style="width: 15%; position: absolute; top: -17.5%; left: -5.5vh" onclick="$('#bd-error').hide(); $('#bulkDelete').hide(); $('#preBulkDelete').show()">
+					<img src="/assets/exclamation.png" style="height: 40%">
 					<p class="bigger" style="margin-bottom: 0%; margin-top: 2.5%">Something went wrong!</p>
 					<p id="bdError" style="font-size: 2.4vh; margin-top: 1%"></p>
 				</div>
@@ -136,16 +136,16 @@
 		<div id="selectedMessage" class="popup">
 			<div class="bounce center supercenter" style="height: 70%; width: 115vh">
 				<div class="bluebox center supercenter" style="width: 100%; height: 100%">
-					<img class="gdButton" src="../assets/close.png" width="9%" style="position: absolute; top: -7.5%; left: -6.5vh" onclick="$('#selectedMessage').hide()">
+					<img class="gdButton" src="/assets/close.png" width="9%" style="position: absolute; top: -7.5%; left: -6.5vh" onclick="$('#selectedMessage').hide()">
 					<h1 id="messageSubject" class="smaller center" style="font-size: 5.5vh; min-height: 9%; margin-top: 1%"></h1>
 					<h3 id="messageAuthor" class="gold center gauntletText gdButton"></h3>
 					<div class="transparentBox center" id="theMfMessage">
-						<img id="messageLoad" src="../assets/loading.png" class="spin noSelect" style="width: 10%; margin-top: 15%">
+						<img id="messageLoad" src="/assets/loading.png" class="spin noSelect" style="width: 10%; margin-top: 15%">
 						<p id="messageBody"></p>
 					</div>
 					<div id="messageOptions">
-						<img class="gdButton" style="width: 8%" title="Reply" src="../assets/reply.png" id="replyButton">
-						<img class="gdButton" style="width: 8%" title="Delete" src="../assets/trash.png" id="deleteButton" onclick="$('#confirmDelete').show()">
+						<img class="gdButton" style="width: 8%" title="Reply" src="/assets/reply.png" id="replyButton">
+						<img class="gdButton" style="width: 8%" title="Delete" src="/assets/trash.png" id="deleteButton" onclick="$('#confirmDelete').show()">
 					</div>
 				</div>
 			</div>
@@ -163,10 +163,10 @@
 							placeholder="Message"></textarea>
 					</div>
 					<p id="messageStatus" style="margin: 1% 0% 1.5% 0%; min-height: 5%;"></p>
-					<img src="../assets/btn-cancel.png" height=10%; class="gdButton center"
+					<img src="/assets/btn-cancel.png" height=10%; class="gdButton center"
 						onclick="$('textarea').val(''); $('#sendMessage').hide()">
-					<img src="../assets/btn-submit.png" height=10%; id="postMessage" class="gdButton center sideSpaceB">
-					<img src="../assets/trash.png" style="height: 10%; position: absolute; right: 0%"
+					<img src="/assets/btn-submit.png" height=10%; id="postMessage" class="gdButton center sideSpaceB">
+					<img src="/assets/trash.png" style="height: 10%; position: absolute; right: 0%"
 						onclick="$('#postContent').val('');" class="gdButton center sideSpaceB">
 				</div>
 			</div>
@@ -176,19 +176,19 @@
 			<div class="bluebox bounce center supercenter" style="height: 27%; width: 55vh">
 
 				<div id="reply-loading">
-					<img src="../assets/loading.png" class="spin noSelect" style="height: 40%; margin-top: 7.5%">
+					<img src="/assets/loading.png" class="spin noSelect" style="height: 40%; margin-top: 7.5%">
 					<p class="bigger">Sending...</p>
 				</div>
 
 				<div id="reply-sent" style="display: none;">
-					<img class="gdButton" src="../assets/close.png" style="width: 15%; position: absolute; top: -17.5%; left: -5.5vh" onclick="$('.popup').hide()">
-					<img src="../assets/check.png" style="height: 40%; margin-top: 7.5%">
+					<img class="gdButton" src="/assets/close.png" style="width: 15%; position: absolute; top: -17.5%; left: -5.5vh" onclick="$('.popup').hide()">
+					<img src="/assets/check.png" style="height: 40%; margin-top: 7.5%">
 					<p class="bigger">Message sent!</p>
 				</div>
 
 				<div id="reply-error" style="display: none;">
-					<img class="gdButton" src="../assets/close.png" style="width: 15%; position: absolute; top: -17.5%; left: -5.5vh" onclick="$('.popup').hide()">
-					<img src="../assets/exclamation.png" style="height: 40%; margin-top: 7.5%">
+					<img class="gdButton" src="/assets/close.png" style="width: 15%; position: absolute; top: -17.5%; left: -5.5vh" onclick="$('.popup').hide()">
+					<img src="/assets/exclamation.png" style="height: 40%; margin-top: 7.5%">
 					<p class="bigger" style="margin-bottom: 0%;">Something went wrong!</p>
 					<p style="font-size: 2.4vh; margin-top: 1%">Does the recipient have messages enabled?</p>
 				</div>
@@ -197,15 +197,15 @@
 		</div>
 
 		<div style="position:absolute; bottom: 0%; left: 0%; width: 100%; pointer-events: none;">
-			<img class="cornerPiece" src="../assets/corner.png" width=7%;>
+			<img class="cornerPiece" src="/assets/corner.png" width=7%;>
 		</div>
 
 		<div style="position:absolute; bottom: 0%; right: 0%; width: 100%; text-align: right; pointer-events: none;">
-			<img class="cornerPiece" src="../assets/corner.png" width=7%; style="transform: scaleX(-1)">
+			<img class="cornerPiece" src="/assets/corner.png" width=7%; style="transform: scaleX(-1)">
 		</div>
 
 		<div style="position:absolute; top: 2%; left: 1.5%; width: 10%; height: 25%; pointer-events: none">
-			<img class="gdButton yesClick" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()">
+			<img class="gdButton yesClick" id="backButton" src="/assets/back.png" height="30%" onclick="backButton()">
 		</div>
 
 	</div>
@@ -213,18 +213,18 @@
 </body>
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="text/javascript" src="../global.js?v=1"></script>
+<script type="text/javascript" src="/misc/global.js?v=1"></script>
 <script>
 
-	let accountID;
-	let password;
-	let page = 0;
-	let messageID = 0;
-	let playerID = 0;
-	let messages = [];
-	let messageStatus = {};
-	let cache = {};
-	let loading = false;
+	let accountID
+	let password
+	let page = 0
+	let messageID = 0
+	let playerID = 0
+	let messages = []
+	let messageStatus = {}
+	let cache = {}
+	let loading = false
 
 	let messageText = 'Your <cy>Geometry Dash password</cy> will <cg>not be stored</cg> anywhere on the site, both <ca>locally and server-side.</ca> For security, it will be <cy>forgotten</cy> when you exit this page.'
 	$('#message').html(messageText)
@@ -254,7 +254,7 @@
 					<label for="message-${y}" class="gdcheckbox gdButton"></label>
 				</div>${/*
 				<div class="xButton hitbox">
-					<img class="gdButton" style="width: 8%" src="../assets/xbutton.png">
+					<img class="gdButton" style="width: 8%" src="/assets/xbutton.png">
 				</div>*/""}
 			</div>`)
 		})
@@ -272,7 +272,7 @@
 		$('#message').text("Logging in...")
 		$('.postbutton').hide()
 
-		fetch(`../api/profile/${username}`).then(res => res.json()).then(res => {
+		fetch(`/api/profile/${username}`).then(res => res.json()).then(res => {
 			if (!res || res == "-1") { $('.postbutton').show(); return $('#message').text("The username you provided doesn't exist!") }
 			else accountID = res.accountID
 
@@ -292,7 +292,7 @@
 							let targetUser = window.location.search.match(/(\?|&)sendTo=(.+)/)
 							if (targetUser) {
 								targetUser = decodeURIComponent(targetUser[2])
-								fetch(`../api/profile/${targetUser}`).then(res => res.json()).then(res => { 
+								fetch(`/api/profile/${targetUser}`).then(res => res.json()).then(res => {
 									if (res == "-1" || !res) return;
 									$('#replyAuthor').html(`<a href="../u/${res.accountID}." target="_blank">To: ${res.username}</a>`)
 									messageStatus[res.accountID] = [res.messages, res.username]
@@ -321,7 +321,7 @@
 		$('#selectCount').hide()
 		$('#selectAll').show()
 		$('#selectNone').hide()
-		$('#msgList').html('<img src="../assets/loading.png" class="spin noSelect" style="margin-top: 20%; height: 20%;">')
+		$('#msgList').html('<img src="/assets/loading.png" class="spin noSelect" style="margin-top: 20%; height: 20%;">')
 		$.post("../messages", { password, accountID, page })
 			.done(msgs => {
 				messages = msgs
@@ -384,7 +384,7 @@
 				$('#deleteButton').show()
 				}
 
-				if (!messageStatus[msg.accountID]) fetch(`../api/profile/${msg.author}`).then(res => res.json()).then(res => { 
+				if (!messageStatus[msg.accountID]) fetch(`/api/profile/${msg.author}`).then(res => res.json()).then(res => {
 					messageStatus[msg.accountID] = [res.messages, msg.author]
 					loadMsg()
 				})
@@ -392,10 +392,10 @@
 					loadMsg()
 				}
 			})
-			.fail(e => { 
+			.fail(e => {
 				$('#messageAuthor').html('&nbsp;')
 				$('#messageSubject').html('&nbsp;')
-				$('#messageLoad').hide() 
+				$('#messageLoad').hide()
 				$('#messageBody').html(e.responseText).show()
 				$('#theMfMessage').attr('style', 'background-color: rgba(0, 0, 0, 0)')
 			})
@@ -416,7 +416,7 @@
 				$('#preDelete').show()
 				$('#deleting').hide()
 			})
-			.fail(e => { 
+			.fail(e => {
 				$('#deleting').hide()
 				$('#delete-error').show()
 				$('#delError').html(e.responseText)
@@ -450,7 +450,7 @@
 				$('#bulkDeleting').hide()
 				$('#preBulkDelete').show()
 			})
-			.fail(e => { 
+			.fail(e => {
 				$('#bulkDeleting').hide()
 				$('#bd-error').show()
 				$('#bdError').html(e.responseText)
@@ -458,7 +458,7 @@
 	})
 
 	$('#replyButton').click(function() {
-		if (!messageStatus[playerID]) return;
+		if (!messageStatus[playerID]) return
 		let status = messageStatus[playerID][0]
 		let name = messageStatus[playerID][1]
 		$('#postMessage').removeClass('grayscale')
@@ -475,7 +475,7 @@
 	$('#postMessage').click(function () {
 		let subject = $('#postSubject').val()
 		let message = $('#postContent').val()
-		if (!subject || !message || !messageStatus[playerID] || messageStatus[playerID][0] == "off") return;
+		if (!subject || !message || !messageStatus[playerID] || messageStatus[playerID][0] == "off") return
 		allowEsc = false
 		$('#reply-loading').show()
 		$('#reply-sent').hide()
@@ -488,7 +488,7 @@
 				$('#reply-sent').show()
 				allowEsc = true
 			})
-			.fail(e => { 
+			.fail(e => {
 				$('#reply-loading').hide()
 				$('#reply-error').show()
 				allowEsc = true
@@ -518,10 +518,10 @@
 	});
 
 	$(document).keydown(function (k) {
-		if (loading) return;
+		if (loading) return
 
 		if ($('#access').is(':visible')) {
-			if (k.which == 13) $('#logIn').trigger('click') //enter 
+			if (k.which == 13) $('#logIn').trigger('click') //enter
 			else return;
 		}
 

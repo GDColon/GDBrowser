@@ -1,9 +1,9 @@
 <head>
 	<title>Leaderboard</title>
 	<meta charset="utf-8">
-	<link href="../assets/css/browser.css?v=1" type="text/css" rel="stylesheet">
+	<link href="/assets/css/browser.css?v=1" type="text/css" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
-	<link rel="icon" href="../assets/trophy.png">
+	<link rel="icon" href="/assets/trophy.png">
 	<meta id="meta-title" property="og:title" content="Level Leaderboard">
 	<meta id="meta-desc" property="og:description" content="View the leaderboard of a Geometry Dash level!">
 	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/assets/trophy.png">
@@ -15,17 +15,17 @@
 <div id="everything" style="overflow: auto;">
 
 	<div style="position:absolute; bottom: 0%; left: 0%; width: 100%">
-		<img class="cornerPiece" src="../assets/corner.png" width=7%;>
+		<img class="cornerPiece" src="/assets/corner.png" width=7%;>
 	</div>
 
 	<div style="position:absolute; bottom: 0%; right: 0%; width: 100%; text-align: right;">
-		<img class="cornerPiece" src="../assets/corner.png" width=7%; style="transform: scaleX(-1)">
+		<img class="cornerPiece" src="/assets/corner.png" width=7%; style="transform: scaleX(-1)">
 	</div>
 
 	<div id="searchBox" class="supercenter dragscroll"; style="width: 124vh">
 		<div style="height: 4.5%"></div>
 	</div>
-	
+
 	<div class="epicbox supercenter gs" style="width: 126vh; height: 80%; pointer-events: none"></div>
 
 	<div class="center" style="position:absolute; top: 8%; left: 0%; right: 0%">
@@ -33,13 +33,13 @@
 	</div>
 
 	<div style="position:absolute; top: 2%; left: 1.5%; width: 10%; height: 25%; pointer-events: none">
-		<img class="gdButton yesClick" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()">
+		<img class="gdButton yesClick" id="backButton" src="/assets/back.png" height="30%" onclick="backButton()">
 	</div>
 
 	<div class="supercenter" id="loading" style="height: 10%; top: 47%; display: none;">
-		<img class="spin noSelect" src="../assets/loading.png" height="105%">
+		<img class="spin noSelect" src="/assets/loading.png" height="105%">
 	</div>
-	
+
 	<div id="error" class="supercenter" style="height: 20%; top: 47%; display: none;">
 		<h1 class="center">No scores available...</h1>
 		<h3 class="center" style="margin-top: 2%">Either this leaderboard is empty, or the scores weren't able to be obtained from the GD servers.</h3>
@@ -47,11 +47,11 @@
 	</div>
 
 	<div class="supercenter" style="left: 87%; top: 24%; height: 10%">
-		<img class="gdButton darken" id="topMode" src="../assets/leaderboard-top.png" height="90%">
+		<img class="gdButton darken" id="topMode" src="/assets/leaderboard-top.png" height="90%">
 	</div>
 
 	<div class="supercenter" style="left: 87%; top: 35%; height: 10%">
-		<img class="gdButton" id="weekMode" src="../assets/leaderboard-week.png" height="90%">
+		<img class="gdButton" id="weekMode" src="/assets/leaderboard-week.png" height="90%">
 	</div>
 
 </div>
@@ -59,12 +59,12 @@
 </body>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/6.2.2/browser/pixi.js"></script>
-<script type="text/javascript" src="../iconkit/icon.js"></script>
-<script type="text/javascript" src="../global.js?v=1"></script>
-<script type="text/javascript" src="../dragscroll.js"></script>
+<script type="text/javascript" src="/iconkit/icon.js"></script>
+<script type="text/javascript" src="/misc/global.js?v=1"></script>
+<script type="text/javascript" src="/misc/dragscroll.js"></script>
 <script>
 
-let loading = false;
+let loading = false
 let lvlID = Math.round(window.location.pathname.split('/')[2])
 
 if (!lvlID || lvlID > 99999999 || lvlID < -99999999) window.location.href = window.location.href.replace("leaderboard", "search")
@@ -78,7 +78,7 @@ function leaderboard() {
 	loading = true;
 	$('#loading').show()
 
-	fetch(`../api/level/${lvlID}`).then(lvl => lvl.json()).then(lvl => {
+	fetch(`/api/level/${lvlID}`).then(lvl => lvl.json()).then(lvl => {
 		if (lvl == "-1") return $('#header').html("Nonexistent level " + lvlID)
 
 		document.title = "Leaderboards for " + lvl.name
@@ -86,9 +86,9 @@ function leaderboard() {
 		$('#meta-title').attr('content', "Leaderboards for " + lvl.name)
 		$('#meta-desc').attr('content', 'View the leaderboard for ' + lvl.name + ' by ' + lvl.author + '!')
 	})
-	
 
-	fetch(`../api/leaderboardLevel/${lvlID}?count=200${weekly ? "&week" : ""}`).then(res => res.json()).then(res => {
+
+	fetch(`/api/leaderboardLevel/${lvlID}?count=200${weekly ? "&week" : ""}`).then(res => res.json()).then(res => {
 
 		if (!res || res.error || res == "-1") {
 			loading = false;
@@ -101,12 +101,12 @@ function leaderboard() {
 		res.forEach((x, y) => {
 
 		$('#searchBox').append(`<div class="searchresult leaderboardSlot levelboardSlot" style="align-items: center; padding-left: 1vh; height: 15%; width: 100%; position: relative">
-			
+
 			<h2 class="center" style="width: 12%; margin: 0% 0% 0% 0.5%; transform: scale(${1 - (Math.max(0, String(x.rank).length - 1) * 0.2)}">${x.rank}</h2>
 			<gdicon dontload="true" iconID=${x.icon.icon} cacheID=${x.playerID} iconForm="${x.icon.form}" col1="${x.icon.col1}" col2="${x.icon.col2}" glow="${x.icon.glow}" style="width: 7%; margin-bottom: 1%" imgStyle="width: 100%"></gdicon>
 			<h2 class="small gdButton" style="font-size: 6.5vh; margin-right: 3%; margin-left: 3%"><a href="../u/${x.accountID}.">${x.username}</a></h2>
 			<h3 class="lessSpaced" style="margin-top: 1.3%; margin-right: 2%">${x.percent}%</h3>
-			${'<div style="width: 2%"><img class="valign" src="../assets/silvercoin.png" style="height: 33%"></div>'.repeat(x.coins)}
+			${'<div style="width: 2%"><img class="valign" src="/assets/silvercoin.png" style="height: 33%"></div>'.repeat(x.coins)}
 
 			<div class="center" style="text-align: right; position:absolute; right: 1.25%; height: 10%; width: 12.5%; top: 100%;">
 				<p class="commentDate">${x.date}</p>
@@ -117,17 +117,17 @@ function leaderboard() {
 
 		$('#searchBox').append('<div style="height: 4.5%"></div>')
 		loading = false;
-		$('#loading').hide();
+		$('#loading').hide()
 		lazyLoadIcons()
 	})
 
 }
 
-	let weekly = false;
+	let weekly = false
 	leaderboard()
 
 	$('#topMode').click(function() {
-		if (!weekly || loading) return;
+		if (!weekly || loading) return
 		weekly = false
 		leaderboard()
 		$('#weekMode').removeClass('darken')
@@ -135,12 +135,12 @@ function leaderboard() {
 	})
 
 	$('#weekMode').click(function() {
-		if (weekly || loading) return;
+		if (weekly || loading) return
 		weekly = true
 		leaderboard()
 		$('#topMode').removeClass('darken')
 		$('#weekMode').addClass('darken')
-	});
+	})
 
 	function lazyLoadIcons() {
 		let newIconFound = false

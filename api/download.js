@@ -1,3 +1,4 @@
+"use strict";
 const request = require('request')
 const fs = require('fs')
 const Level = require('../classes/Level.js')
@@ -5,27 +6,27 @@ const Level = require('../classes/Level.js')
 module.exports = async (app, req, res, api, ID, analyze) => {
 
   function rejectLevel() {
-    if (!api) return res.redirect('search/' + req.params.id)
-    else return res.sendError()
+    return !api ? res.redirect('search/' + req.params.id) : res.sendError()
   }
 
   if (req.offline) {
-    if (!api && levelID < 0) return res.redirect('/')
-    return rejectLevel()
+    return !api && levelID < 0 ? res.redirect('/') : rejectLevel()
   }
 
   let levelID = ID || req.params.id
-  if (levelID == "daily") levelID = -1
-  else if (levelID == "weekly") levelID = -2
-  else levelID = levelID.replace(/[^0-9]/g, "")
+  levelID = (
+    levelID == "daily" ? -1 :
+    levelID == "weekly" ? -2 :
+    levelID.replace(/\D/g, "")
+  )
 
   req.gdRequest('downloadGJLevel22', { levelID }, function (err, resp, body) {
 
-    if (err) {
-      if (analyze && api && req.server.downloadsDisabled) return res.status(403).send("-3")
-      else if (!api && levelID < 0) return res.redirect(`/?daily=${levelID * -1}`)
-      else return rejectLevel()
-    }
+    if (err) return (
+      analyze && api && req.server.downloadsDisabled ? res.status(403).send("-3")
+      : !api && levelID < 0 ? res.redirect(`/?daily=${levelID * -1}`)
+      : rejectLevel()
+    )
 
     let authorData = body.split("#")[3]  // daily/weekly only, most likely
 
@@ -43,7 +44,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
         if (err2 && (foundID || authorData)) {
           let authorInfo = foundID || authorData.split(":")
           level.author = authorInfo[1] || "-"
-          level.accountID = authorInfo[0] && authorInfo[0].includes(",") ? "0" : authorInfo[0]
+          level.accountID = authorInfo[0]?.includes(",") ? "0" : authorInfo[0]
         }
 
         else if (!err && b2 != '-1') {
@@ -72,7 +73,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
             if (api) return res.send(level)
 
             else return fs.readFile('./html/level.html', 'utf8', function (err, data) {
-              let html = data;
+              let html = data
               let variables = Object.keys(level)
               variables.forEach(x => {
                 let regex = new RegExp(`\\[\\[${x.toUpperCase()}\\]\\]`, "g")
@@ -89,7 +90,7 @@ module.exports = async (app, req, res, api, ID, analyze) => {
               level.nextDaily = +dailyTime
               level.nextDailyTimestamp = Math.round((Date.now() + (+dailyTime * 1000)) / 100000) * 100000
               return sendLevel()
-            })  
+            })
           }
 
           else if (req.server.demonList && level.difficulty == "Extreme Demon") {

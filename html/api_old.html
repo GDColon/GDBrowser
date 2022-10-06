@@ -3,11 +3,11 @@
 <head>
 	<title>GD Level Browser API</title>
 	<meta charset="utf-8">
-	<link rel="icon" href="../assets/difficulties/auto.png">
-	<link href="../assets/css/api.css" type="text/css" rel="stylesheet">
+	<link rel="icon" href="/assets/difficulties/auto.png">
+	<link href="/assets/css/api.css" type="text/css" rel="stylesheet">
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,600,700,800&display=swap" rel="stylesheet">
-	
+
 	<meta id="meta-title" property="og:title" content="GDBrowser API">
     <meta id="meta-desc" property="og:description" content="It's basically the Geometry Dash API, but not terrible!">
 	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/assets/difficulties/auto.png">
@@ -19,7 +19,7 @@
 	<div class="main-header-wrap">
 		<div class="main-header">
 			<div class="header-drawer" id="menu-btn">
-				<img src="../assets/menu-ic.svg" alt="Menu" id="menu-btn-img">
+				<img src="/assets/menu-ic.svg" alt="Menu" id="menu-btn-img">
 			</div>
 			<div class="header-links hid">
 				<a class="header-link" href="#intro">Introduction</a>
@@ -37,24 +37,24 @@
 					<div class="category-content">
 						<a class="header-link" href="#profile">Profiles</a>
 						<a class="header-link" href="#leaderboard">Leaderboards</a>
-						<a class="header-link" href="#comments">Comments & Posts</a> 
+						<a class="header-link" href="#comments">Comments & Posts</a>
 					</div>
 				</div>
 				<div class="header-category">
 					<div class="category-name">Account</div>
 					<div class="category-content">
-						<a class="header-link" href="#commenting">Commenting</a> 
-						<a class="header-link" href="#profileposting">Profile Posting</a> 
-						<a class="header-link" href="#liking">Liking</a> 
-						<a class="header-link" href="#messages">Messages</a> 
+						<a class="header-link" href="#commenting">Commenting</a>
+						<a class="header-link" href="#profileposting">Profile Posting</a>
+						<a class="header-link" href="#liking">Liking</a>
+						<a class="header-link" href="#messages">Messages</a>
 					</div>
 				</div>
 				<div class="header-category">
 					<div class="category-name">Misc</div>
 					<div class="category-content">
-						<a class="header-link" href="#analyze">Level Analysis</a> 
-						<a class="header-link" href="#artist">Song Verification</a> 
-						<a class="header-link" href="#icons">Icons</a> 
+						<a class="header-link" href="#analyze">Level Analysis</a>
+						<a class="header-link" href="#artist">Song Verification</a>
+						<a class="header-link" href="#icons">Icons</a>
 					</div>
 				</div>
 			</div>
@@ -186,7 +186,7 @@
 	<main>
 
 		<div id="profile" class="anchor"></div>
-		
+
 		<div class="main-block">
 			<h1>Profiles</h1>
 			<p>/api/profile/username-or-id</p>
@@ -244,7 +244,7 @@
 	<main>
 
 		<div id="search" class="anchor"></div>
-		
+
 		<div class="main-block">
 			<h1>Searching</h1>
 			<p>/api/search/search-query</p>
@@ -540,10 +540,10 @@
 			<div class="main-block">
 				<h1>Commenting (usually broken)</h1>
 				<p>POST: /postComment</p>
-	
+
 				<p>Leaves a comment on a level. This one is a POST request!</p>
 				<p>*Commenting has a rate limit of 15 seconds</p>
-	
+
 				<br>
 				<p class="reveal" onclick="revealSection('#params-commenting')"><b>Parameters (6)</b></p>
 				<div class="subdiv" id="params-commenting">
@@ -555,7 +555,7 @@
 					<p>percent: The percent shown on the comment (optional)</p>
 					<p>color: If the comment should have a special pink color on GDBrowser (optional)</p>
 				</div>
-	
+
 				<br>
 
 				<p class="reveal" onclick="revealSection('#request-commenting')"><b>Example</b></p>
@@ -571,7 +571,7 @@
 					<br>
 					<p>If a status of 200 is returned, then the comment was successfully posted. Otherwise, a 400 will return with an error message.</p>
 				</div>
-	
+
 			</div>
 			<div class="seperator"></div>
 		</main>
@@ -581,9 +581,9 @@
 			<div class="main-block">
 				<h1>Profile Posting (usually broken)</h1>
 				<p>POST: /postProfileComment</p>
-	
+
 				<p>Leaves a profile post. This one is a POST request!</p>
-	
+
 				<br>
 				<p class="reveal" onclick="revealSection('#params-profileposting')"><b>Parameters (5)</b></p>
 				<div class="subdiv" id="params-profileposting">
@@ -593,7 +593,7 @@
 					<p>password: Your password (as plain text)</p>
 					<p>color: If the comment should have a special pink color on GDBrowser (optional)</p>
 				</div>
-	
+
 				<br>
 
 				<p class="reveal" onclick="revealSection('#request-profileposting')"><b>Example</b></p>
@@ -607,7 +607,7 @@
 					<br>
 					<p>If a status of 200 is returned, then the profile post was successfully posted. Otherwise, a 400 will return with an error message.</p>
 				</div>
-	
+
 			</div>
 			<div class="seperator"></div>
 		</main>
@@ -618,9 +618,9 @@
 			<div class="main-block">
 				<h1>Liking (usually broken)</h1>
 				<p>POST: /like</p>
-	
+
 				<p>Likes/dislikes level, comment, or post. This one is a POST request!</p>
-	
+
 				<br>
 				<p class="reveal" onclick="revealSection('#params-liking')"><b>Parameters (6)</b></p>
 				<div class="subdiv" id="params-liking">
@@ -631,7 +631,7 @@
 					<p>accountID: Your account ID</p>
 					<p>password: Your password (as plain text)</p>
 				</div>
-	
+
 				<br>
 
 				<p class="reveal" onclick="revealSection('#request-liking')"><b>Example</b></p>
@@ -649,7 +649,7 @@
 					<p>A status of 200 will return if everything goes well, otherwise a 400 will return with an error message.<br>
 						Liking a comment multiple times on the same account will return a 200, but not actually increase the in-game like counter.</p>
 				</div>
-	
+
 			</div>
 			<div class="seperator"></div>
 		</main>
@@ -665,7 +665,7 @@
 				<b>/sendMessage</b> (sends a message)</p>
 
 				<p>I decided to put all 4 of these requests in one section because they're fairly similar ¯\_(ツ)_/¯</p>
-	
+
 				<br>
 				<p class="reveal" onclick="revealSection('#params-msg')"><b>Parameters</b></p>
 				<div class="subdiv" id="params-msg">
@@ -687,7 +687,7 @@
 					<p>message: The content of the message, max 300 characters</p>
 					<p>color: If the message should have a special pink color on GDBrowser (optional)</p>
 				</div>
-	
+
 				<br>
 
 				<p class="reveal" onclick="revealSection('#request-msg')"><b>Example</b></p>
@@ -699,7 +699,7 @@
 						&accountID=106255<br>
 						&password=KitsuneColon333<br>
 					<br>
-					
+
 					<p>Read message with ID of 177013:</p>
 					<p>POST /messages/177013<br>
 						?accountID=106255<br>
@@ -712,7 +712,7 @@
 						&id=177013<br>
 						&password=KitsuneColon333<br>
 					<br>
-					
+
 					<p>Send "Hello!" to Tubular9:</p>
 					<p>POST /sendMessage<br>
 						?accountID=106255<br>
@@ -877,22 +877,22 @@
 	// smooth scrolling through anchors
 	document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 		anchor.addEventListener('click', function(e) {
-			e.preventDefault();
+			e.preventDefault()
 			document.querySelector(this.getAttribute('href')).scrollIntoView({
 				behavior: 'smooth'
 			});
 		});
 	});
-	
+
 	// menu button
 	document.getElementById('menu-btn').onclick = function(){
-		document.getElementsByClassName('header-links')[0].classList.toggle('hid');
+		document.getElementsByClassName('header-links')[0].classList.toggle('hid')
 		document.getElementById('menu-btn').classList.toggle('active');
 	}
-	
+
 	for(let i = 0; i < document.getElementsByClassName('header-link').length; i++){
 		document.getElementsByClassName('header-link')[i].onclick = function(){
-			document.getElementsByClassName('header-links')[0].classList.toggle('hid');
+			document.getElementsByClassName('header-links')[0].classList.toggle('hid')
 			document.getElementById('menu-btn').classList.toggle('active');
 		}
 	}

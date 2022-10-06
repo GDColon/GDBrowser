@@ -1,25 +1,26 @@
+"use strict";
 let path = "../extra/"
 
-let files = ["AchievementsDesc", "AchievementsDescMD", null, "AchievementsDescSZ"]
-let gameNames = ["gd", "meltdown", "world", "subzero"]
-let achString = "geometry.ach."
+const files = ["", "MD", null, "SZ"]
+const gameNames = ["gd", "meltdown", "world", "subzero"]
+const achString = "geometry.ach."
 let rewardTypes = { color: "color1", icon: "cube", bird: "ufo", dart: "wave", special: "trail", death: "deathEffect" }
 let games = { "md": "meltdown", "world.": "world", "subzero.": "subzero" }
 
-const plist = require('plist');
-const fs = require('fs');
+const plist = require('plist')
+const fs = require('fs')
 
 let achArray = []
 
 files.forEach((file, fileNum) => {
-  if (!file) return
-  let data = plist.parse(fs.readFileSync(path + file + '.plist', 'utf8'));
-
+  if (file === null) return
+  file = "AchievementsDesc" + file
+  f
   console.log(`Converting ${file}.plist...`)
 
   for (let key in data) {
     if (!achArray.find(x => x.trueID == key)) {
-    let fileData = data[key];
+    let fileData = data[key]
     let reward = fileData.icon ? fileData.icon.split("_") : []
     let achObj = {
       id: key.slice(achString.length),

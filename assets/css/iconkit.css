@@ -14,7 +14,7 @@
 }
 
 body {
-  background-color: 555555;
+  background-color: #555;
 }
 
 p {
@@ -144,9 +144,9 @@ input:focus, select:focus, textarea:focus, button:focus {
 }
 
 .supercenter {
-  position: absolute; 
-  top: 50%; 
-  left: 50%; 
+  position: absolute;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%,-50%);
 }
 
@@ -194,7 +194,7 @@ input:focus, select:focus, textarea:focus, button:focus {
   padding: 10 10 10 10;
   overflow: auto;
   white-space: nowrap;
-  border-radius: 8px; 
+  border-radius: 8px;
 }
 
 #symbols p {
@@ -238,8 +238,8 @@ input:focus, select:focus, textarea:focus, button:focus {
 #generate {
   font-family: "Roboto";
   border: rgba(0, 0, 0, 0);
-  background-color: #88FF33;
-  box-shadow: 2px 2px 3px #66AA22;
+  background-color: #8F3;
+  box-shadow: 2px 2px 3px #6A2;
   border-radius: 10px;
   color: black;
   padding: 10px 15px 10px 15px;
@@ -259,8 +259,8 @@ input:focus, select:focus, textarea:focus, button:focus {
 .miniButton {
   font-family: "Roboto";
   border: rgba(0, 0, 0, 0);
-  background-color: #88FF33;
-  box-shadow: 1.5px 1.5px 2px #66AA22;
+  background-color: #8F3;
+  box-shadow: 1.5px 1.5px 2px #6A2;
   border-radius: 10px;
   color: black;
   padding: 7px 9px 7px 9px;
@@ -375,11 +375,11 @@ input:focus, select:focus, textarea:focus, button:focus {
 #colors::-webkit-scrollbar, #iconKitParent::-webkit-scrollbar {
   width: 9px;
   height: 10px;
-  background: rgba(0, 0, 0, 0.5); 
+  background: rgba(0, 0, 0, 0.5);
 }
 
 #colors::-webkit-scrollbar-thumb, #iconKitParent::-webkit-scrollbar-thumb {
-  background: rgb(185, 185, 185); 
+  background: rgb(185, 185, 185);
 }
 
 #iconKitParent {
@@ -394,7 +394,7 @@ input:focus, select:focus, textarea:focus, button:focus {
 
 .iconColor div {
   width: 50px;
-  height: 50px; 
+  height: 50px;
 }
 
 #gdfloor {
@@ -423,13 +423,13 @@ input:focus, select:focus, textarea:focus, button:focus {
 }
 
 #iconprogressbar {
-  background: rgba(0, 0, 0, 0.5); 
+  background: rgba(0, 0, 0, 0.5);
   height: 7px;
   margin-bottom: 12px;
 }
 
 #iconloading {
-  background: rgba(255, 255, 255, 0.5); 
+  background: rgba(255, 255, 255, 0.5);
   height: 7px;
   width: 0%;
 }
@@ -447,8 +447,8 @@ body::-webkit-scrollbar  {
 }
 
 .popup {
-  position: fixed; 
-  display: none; 
+  position: fixed;
+  display: none;
   width: 100%;
   height: 100%;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -459,7 +459,7 @@ body::-webkit-scrollbar  {
 .brownBox {
   border: 17px solid rgba(0, 0, 0, 0);
   border-radius: 25px;
-  background-color: #995533;
+  background-color: #953;
   border-image: url('../../assets/brownbox.png') 10% round;
 }
 

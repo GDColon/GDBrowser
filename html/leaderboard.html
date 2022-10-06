@@ -1,9 +1,9 @@
 <head>
 	<title>Leaderboard</title>
 	<meta charset="utf-8">
-	<link href="../assets/css/browser.css?v=1" type="text/css" rel="stylesheet">
+	<link href="/assets/css/browser.css?v=1" type="text/css" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135255146-3"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
-	<link rel="icon" href="../assets/trophy.png">
+	<link rel="icon" href="/assets/trophy.png">
 	<meta id="meta-title" property="og:title" content="Leaderboards">
 	<meta id="meta-desc" property="og:description" content="View Geometry Dash's leaderboards, plus an accurate and updated list of the top players.">
 	<meta id="meta-image" name="og:image" itemprop="image" content="https://gdbrowser.com/assets/trophy.png">
@@ -15,74 +15,74 @@
 <div id="everything" style="overflow: auto;">
 
 	<div id="scoreTabs">
-		<img src="../assets/tab-top-on.png" class="leaderboardTab" id="topTabOn" style="display: none">
-		<img src="../assets/tab-top-off.png" class="leaderboardTab leaderboardClick" id="topTabOff">
+		<img src="/assets/tab-top-on.png" class="leaderboardTab" id="topTabOn" style="display: none">
+		<img src="/assets/tab-top-off.png" class="leaderboardTab leaderboardClick" id="topTabOff">
 
 		<!-- for some GDPS'es -->
-		<img src="../assets/tab-weekly-on.png" class="sideSpaceC leaderboardTab" id="weeklyTabOn" style="display: none">
-		<img src="../assets/tab-weekly-off.png" class="sideSpaceC leaderboardTab leaderboardClick" id="weeklyTabOff" style="display: none">
+		<img src="/assets/tab-weekly-on.png" class="sideSpaceC leaderboardTab" id="weeklyTabOn" style="display: none">
+		<img src="/assets/tab-weekly-off.png" class="sideSpaceC leaderboardTab leaderboardClick" id="weeklyTabOff" style="display: none">
 
-		<img src="../assets/tab-accurate-on.png" class="sideSpaceC leaderboardTab" id="accurateTabOn" style="display: none">
-		<img src="../assets/tab-accurate-off.png" class="sideSpaceC leaderboardTab leaderboardClick" id="accurateTabOff">
+		<img src="/assets/tab-accurate-on.png" class="sideSpaceC leaderboardTab" id="accurateTabOn" style="display: none">
+		<img src="/assets/tab-accurate-off.png" class="sideSpaceC leaderboardTab leaderboardClick" id="accurateTabOff">
 
-		<img src="../assets/tab-creators-on.png" class="sideSpaceC leaderboardTab" id="creatorTabOn" style="display: none">
-		<img src="../assets/tab-creators-off.png" class="sideSpaceC leaderboardTab leaderboardClick" id="creatorTabOff">
+		<img src="/assets/tab-creators-on.png" class="sideSpaceC leaderboardTab" id="creatorTabOn" style="display: none">
+		<img src="/assets/tab-creators-off.png" class="sideSpaceC leaderboardTab leaderboardClick" id="creatorTabOff">
 	</div>
 
 	<div class="popup" id="infoDiv">
 		<div class="fancybox bounce center supercenter" style="width: 80vh">
 			<h2 class="smaller center" style="font-size: 5.5vh">Leaderboard Info</h2>
 			<p class="bigger center" id="infoText" style="line-height: 5vh; margin-top: 1.5vh"></p>
-			<img src="../assets/ok.png" width=20%; class="gdButton center" onclick="$('.popup').hide()">
+			<img src="/assets/ok.png" width=20%; class="gdButton center" onclick="$('.popup').hide()">
 		</div>
 	</div>
 
 	<div style="position:absolute; bottom: 0%; left: 0%; width: 100%">
-		<img class="cornerPiece noClick" src="../assets/corner.png" width=7%;>
+		<img class="cornerPiece noClick" src="/assets/corner.png" width=7%;>
 	</div>
 
 	<div style="position:absolute; bottom: 0%; right: 0%; width: 100%; text-align: right;">
 		<a title="Boomlings Leaderboard?????" href="../boomlings"><img id="boomling" style="position: absolute; width: 6%; top: 2%; right: 1%; display: none"></a>
-		<img class="cornerPiece noClick" src="../assets/corner.png" width=7%; style="transform: scaleX(-1)">
+		<img class="cornerPiece noClick" src="/assets/corner.png" width=7%; style="transform: scaleX(-1)">
 	</div>
 
 	<div id="searchBox" class="supercenter dragscroll">
 		<div style="height: 4.5%"></div>
 	</div>
-	
+
 	<div class="leaderboardBox supercenter gs" style="width: 120vh; height: 80%; pointer-events: none">
 		<div id="relativeUser" class="sortDiv" style="position: relative; left: 100%; transform: translateX(4.5vh); top: 12%; width: 0.1%">
-			<img class="gdButton" id="findRelative" style="margin-bottom: 1vh" title="Global Search" src="../assets/magnify.png" height="11%">
-			<img class="gdButton" id="clearRelative" style="margin-bottom: 1vh; display: none" title="Clear Global Search" src="../assets/unmagnify.png" height="11%">
+			<img class="gdButton" id="findRelative" style="margin-bottom: 1vh" title="Global Search" src="/assets/magnify.png" height="11%">
+			<img class="gdButton" id="clearRelative" style="margin-bottom: 1vh; display: none" title="Clear Global Search" src="/assets/unmagnify.png" height="11%">
 		</div>
 		<div class="sortDiv" style="display: none; position: relative; left: 100%; transform: translateX(4.5vh); top: 12%; width: 0.1%">
-			<img class="gdButton" id="modSort" style="margin-bottom: 1vh" title="Moderators" src="../assets/sort-mod.png" height="11%">
-			<img class="gdButton" id="weeklyStats" style="margin-bottom: 1vh" title="Weekly Stats" src="../assets/sort-week.png" height="11%">
+			<img class="gdButton" id="modSort" style="margin-bottom: 1vh" title="Moderators" src="/assets/sort-mod.png" height="11%">
+			<img class="gdButton" id="weeklyStats" style="margin-bottom: 1vh" title="Weekly Stats" src="/assets/sort-week.png" height="11%">
 		</div>
 		<div class="sortDiv" style="display: none; position: relative; right: 10.5%; top: 0%; width: 0.1%; transform: translateY(-33.3%)" id="statSort">
-			<img class="gdButton sortButton" style="margin-bottom: 1vh" sort="stars" title="Most stars" src="../assets/sort-stars-on.png" height="11%" id="starSort">
-			<img class="gdButton sortButton" style="margin-bottom: 1vh" sort="diamonds" title="Most diamonds" src="../assets/sort-diamonds.png" height="11%">
-			<img class="gdButton sortButton" style="margin-bottom: 1vh" sort="coins" title="Most coins" src="../assets/sort-coins.png" height="11%">
-			<img class="gdButton sortButton" style="margin-bottom: 1vh" sort="demons" title="Most demons" src="../assets/sort-demons.png" height="11%">
-			<img class="gdButton sortButton" style="margin-bottom: 1vh; display: none" sort="cp" title="Most creator points" src="../assets/sort-cp.png" height="11%" id="cpSort">
+			<img class="gdButton sortButton" style="margin-bottom: 1vh" sort="stars" title="Most stars" src="/assets/sort-stars-on.png" height="11%" id="starSort">
+			<img class="gdButton sortButton" style="margin-bottom: 1vh" sort="diamonds" title="Most diamonds" src="/assets/sort-diamonds.png" height="11%">
+			<img class="gdButton sortButton" style="margin-bottom: 1vh" sort="coins" title="Most coins" src="/assets/sort-coins.png" height="11%">
+			<img class="gdButton sortButton" style="margin-bottom: 1vh" sort="demons" title="Most demons" src="/assets/sort-demons.png" height="11%">
+			<img class="gdButton sortButton" style="margin-bottom: 1vh; display: none" sort="cp" title="Most creator points" src="/assets/sort-cp.png" height="11%" id="cpSort">
 		</div>
 	</div>
 
 	<div style="position:absolute; top: 2%; left: 1.5%; width: 10%; height: 25%; pointer-events: none">
-		<img class="gdButton yesClick" id="backButton" src="../assets/back.png" height="30%" onclick="backButton()">
+		<img class="gdButton yesClick" id="backButton" src="/assets/back.png" height="30%" onclick="backButton()">
 	</div>
 
 	<div style="position:absolute; top: 2.5%; right: 2%; width: 10%; text-align: right;">
-		<img class="gdButton" src="../assets/smallinfo.png" width="32%" onclick="$('#infoDiv').show()">
+		<img class="gdButton" src="/assets/smallinfo.png" width="32%" onclick="$('#infoDiv').show()">
 	</div>
 
 	<div id="discordLinks" style="display: none; position:absolute; top: 12%; right: 1.5%; width: 21%; text-align: right;">
-		<a id="discord" target="_blank" title="Official leaderboard Discord!" href="https://discord.gg/leaderboard"><img class="gdButton" src="../assets/discord.png" width="20%"></a>
-		<a id="altDiscord" target="_blank" title="Accurate leaderboard Discord!" style="display: none; filter: hue-rotate(300deg)" href="https://discord.gg/Uz7pd4d"><img class="gdButton" src="../assets/discord.png" width="20%"></a>
+		<a id="discord" target="_blank" title="Official leaderboard Discord!" href="https://discord.gg/leaderboard"><img class="gdButton" src="/assets/discord.png" width="20%"></a>
+		<a id="altDiscord" target="_blank" title="Accurate leaderboard Discord!" style="display: none; filter: hue-rotate(300deg)" href="https://discord.gg/Uz7pd4d"><img class="gdButton" src="/assets/discord.png" width="20%"></a>
 	</div>
 
 	<div class="supercenter" id="loading" style="height: 10%; top: 47%; display: none;">
-		<img class="spin noSelect" src="../assets/loading.png" height="105%">
+		<img class="spin noSelect" src="/assets/loading.png" height="105%">
 	</div>
 
 	<div class="popup" id="userSearch">
@@ -90,10 +90,10 @@
 			<h2 class="smaller center" style="font-size: 5.5vh; margin-top: 1%">User Search</h2>
 			<p>Enter the <cy>username</cy> of a player to find their position in the <ca>global leaderboard</ca>.</p>
 			<input type="text" id="relativeName" placeholder="Username" style="height: 8vh; width: 90%; text-align: center; margin-top: 0.5%; margin-bottom: 5%"><br>
-			<img src="../assets/btn-cancel.png" class="postButton gdButton center" style="width: 32%; margin-right: 1%" onclick="$('#userSearch').hide()">
-			<img src="../assets/btn-submit.png" class="postButton gdButton center" style="width: 32%; margin-left: 1%" id="relativeSearch">
+			<img src="/assets/btn-cancel.png" class="postButton gdButton center" style="width: 32%; margin-right: 1%" onclick="$('#userSearch').hide()">
+			<img src="/assets/btn-submit.png" class="postButton gdButton center" style="width: 32%; margin-left: 1%" id="relativeSearch">
 			<p id="relativeStatus" style="display: none"></p>
-			<img class="closeWindow gdButton" src="../assets/close.png" width="13%" style="position: absolute; top: -13.5%; left: -6vh" onclick="$('#userSearch').hide()">
+			<img class="closeWindow gdButton" src="/assets/close.png" width="13%" style="position: absolute; top: -13.5%; left: -6vh" onclick="$('#userSearch').hide()">
 		</div>
 	</div>
 </div>
@@ -101,35 +101,36 @@
 </body>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/6.2.2/browser/pixi.js"></script>
-<script type="text/javascript" src="../iconkit/icon.js"></script>
-<script type="text/javascript" src="../global.js?v=1"></script>
-<script type="text/javascript" src="../dragscroll.js"></script>
+<script type="text/javascript" src="/iconkit/icon.js"></script>
+<script type="text/javascript" src="/misc/global.js?v=1"></script>
+<script type="text/javascript" src="/misc/dragscroll.js"></script>
 <script>
+"use strict";
 
 let type
 let sort = "stars"
 let modMode = false
 let weekly = false
 let showWeek = localStorage.weeklyStats == "1"
-let trophies = [1, 3, 10, 25, 50, 75, 100]
+let trophies = [1, 3, 10, 25, 50, 75, 100] // it seems this can be optimized into a const Uint8Array
 let boomColors = ["red", "orange", "yellow", "green", "teal", "blue", "pink"]
 
-let top250Text = 
+let top250Text =
 `The <cg>Stars</cg> leaderboard contains the <cg>top 100 players</cg>, sorted by <cy>star</cy> value. It was formerly <co>inaccurate</co> but should be much more <cb>reliable</cb> now.`
 
-let topGDPSText = 
+let topGDPSText =
 `The <cg>Stars</cg> leaderboard contains the <cg>top players</cg>, sorted by <cy>star</cy> value.`
 
-let weeklyText = 
+let weeklyText =
 `The <cg>Weekly</cg> leaderboard displays the players who have gained the most <cy>stars</cy> in the <cb>past week</cb>. It was officially <co>removed</co> in update 2.0, but lives on in some GDPS'es.`
 
 let accurateText =
 `The <cg>Accurate Leaderboard</cg> is an <cy>externally managed</cy> leaderboard which aims to provide <ca>detailed</ca> and hacker-proof stats on top players. It also once provided a way to view an <cg>accurate</cg> list of players with the most <cy>stars</cy> when the official leaderboards were <ca>frozen</ca>. It is managed by <cb>XShadowWizardX, Pepper360, Octeract</cb>, and many many other helpers.`
 
-let creatorText = 
+let creatorText =
 `The <cg>Creators Leaderboard</cg> is sorted by <cg>creator points</cg>, rather than stars. A player's <cg>creator points</cg> (CP) is calculated by counting their number of <cy>star rated</cy> levels, plus an extra point for every level that has been <cb>featured</cb>, plus an additional point for <co>epic rated</co> levels.`
 
-if (showWeek) $('#weeklyStats').attr('src', '../assets/sort-week-on.png')
+if (showWeek) $('#weeklyStats').attr('src', '/assets/sort-week-on.png')
 
 function infoText(text, altDiscord) {
 	$('#infoText').html(text)
@@ -147,7 +148,7 @@ function leaderboard(val, leaderboardParams, scrollTo) {
 	$('#clearRelative').hide()
 	$('#loading').show()
 
-	Fetch("../api/leaderboard?" + (leaderboardParams || `count=250&${val}&type=${sort}${modMode ? "&mod=1" : ""}`)).then(res => {
+	Fetch("/api/leaderboard?" + (leaderboardParams || `count=250&${val}&type=${sort}${modMode ? "&mod=1" : ""}`)).then(res => {
 
 		if (gdps && !didGDPSStuff) {
 			didGDPSStuff = true
@@ -155,7 +156,7 @@ function leaderboard(val, leaderboardParams, scrollTo) {
 			$('#accurateTabOn').remove()
 			$('#accurateTabOff').remove()
 
-			Fetch('../api/gdps?current=1').then(ps => {
+			Fetch('/api/gdps?current=1').then(ps => {
 				if (weekly) return
 				else if (ps.weeklyLeaderboard) { $('#weeklyTabOff').show(); weekly = true }
 				else $('#scoreTabs').css('margin-left', '-29vh')
@@ -174,14 +175,14 @@ function leaderboard(val, leaderboardParams, scrollTo) {
 		$('#searchBox').html(`<div style="height: 4.5%"></div>`)
 		$('.ranking').remove()
 
-		if (modMode && sort == "cp") res = res.sort(function(a, b){return b.cp - a.cp});
+		if (modMode && sort == "cp") res = res.sort(function(a, b){return b.cp - a.cp})
 		let wk = type == "weekly"
 
-		if ((leaderboardParams ? true : val == type) && res != -1 && res.length) res.forEach((x, y) => {
+		if ((!!leaderboardParams || val == type) && res != -1 && res.length) res.forEach((x, y) => {
 
 			let wp = x.weeklyProgress || {}
 			let cosmetics = x.cosmetics || {}
-			
+
 			let bgCol = cosmetics.bgColor
 			let bgString = bgCol ? ` style="background-color: rgb(${bgCol.join()})"` : ""
 
@@ -194,32 +195,32 @@ function leaderboard(val, leaderboardParams, scrollTo) {
 			$('#searchBox').append(`<div class="searchresult leaderboardSlot"${bgString}>
 
 				<div class="center ranking">
-					${x.icon.icon == -1 && type == "accurate" ? `<img class="spaced" src="./assets/trophies/${trophies.findIndex(z => y+1 <= z) + 1}.png" height="150%" style="margin-bottom: 0%; transform:scale(1.1)">` : 
+					${x.icon.icon == -1 && type == "accurate" ? `<img class="spaced" src="./assets/trophies/${trophies.findIndex(z => y+1 <= z) + 1}.png" height="150%" style="margin-bottom: 0%; transform:scale(1.1)">` :
 					`<gdicon dontload="true" class="leaderboardIcon" iconID=${x.icon.icon} cacheID=${x.playerID} iconForm="${x.icon.form}" col1="${x.icon.col1}" col2="${x.icon.col2}" glow="${x.icon.glow}"></gdicon>`}
 					<h2 class="slightlySmaller" style="transform: scale(${1 - (Math.max(0, String(x.rank).length - 1) * 0.1)})">${x.rank}</h2>
 				</div>
 
 				<div class="leaderboardSide">
 					<div class="leaderboardStars">
-						${x.moderator ? `<img title="${x.moderator == 2 ? "Elder " : ""}Moderator" src="../assets/mod${x.moderator == 2 ? "-elder" : ""}.png" style="width: 9%; cursor: help; padding-right: 1.6%; transform: translateY(0.7vh)">` : ""}
-						<h2 class="leaderboardName small inline gdButton" style="margin-top: 1.5%${nameString || (x.moderator == 2 ? "; color: #FF9977;" : "")}"><a href="${onePointNine ? `../search/${x.playerID}?user` : `../u/${x.accountID}.`}" accountID="${x.accountID}">${x.username}</a></h2>
-						<h3 class="inline${x.stars >= 100000 ? " yellow" : ""}" style="margin-left: 4%; margin-top: 2%; font-size: 4.5vh${type == "weekly" ? "; display: none" : ""};">${x.stars} <img class="help valign" src="../assets/star.png"style="width: 4vh; transform: translate(-25%, -10%);" title="Stars"></h3>
+						${x.moderator ? `<img title="${x.moderator == 2 ? "Elder " : ""}Moderator" src="/assets/mod${x.moderator == 2 ? "-elder" : ""}.png" style="width: 9%; cursor: help; padding-right: 1.6%; transform: translateY(0.7vh)">` : ""}
+						<h2 class="leaderboardName small inline gdButton" style="margin-top: 1.5%${nameString || (x.moderator == 2 ? "; color: #F97;" : "")}"><a href="${onePointNine ? `../search/${x.playerID}?user` : `../u/${x.accountID}.`}" accountID="${x.accountID}">${x.username}</a></h2>
+						<h3 class="inline${x.stars >= 100000 ? " yellow" : ""}" style="margin-left: 4%; margin-top: 2%; font-size: 4.5vh${type == "weekly" ? "; display: none" : ""};">${x.stars} <img class="help valign" src="/assets/star.png"style="width: 4vh; transform: translate(-25%, -10%);" title="Stars"></h3>
 					</div>
 
 					<h3 class="lessSpaced leaderboardStats">
-						${type != "weekly" ? "" : `<span${x.stars >= 1000 ? " class='yellow'" : ""}>+${x.stars}</span> <img class="help valign" src="../assets/star.png" title="Star Gain">`}
-						${wk || onePointNine ? "" : `<span${x.diamonds >= 65535 ? ` class='blue'>` : ">"}${x.diamonds}</span> <img class="help valign" src="../assets/diamond.png" title="Diamonds">`}
-						${wk ? "&nbsp;" : `<span${x.coins >= 149 ? " class='yellow'" : ""}>${x.coins}</span> <img class="help valign" src="../assets/coin.png" title="Secret Coins">`}
-						${wk || onePointNine ? "" : `<span${x.userCoins >= 10000 ? " class='brightblue'" : ""}>${x.userCoins}</span> <img class="help valign" src="../assets/silvercoin.png" title="User Coins">`}
-						${wk ? "" : `<span${x.demons >= 1000 ? " class='brightred'" : ""}>${x.demons}</span> <img class="help valign" src="../assets/demon.png" title="Demons">`}
-						${x.cp <= 0 ? "" : `<span${x.cp >= 100 ? " class='yellow'" : ""}>${x.cp}</span> <img class="help valign" src="../assets/cp.png" title="Creator Points">`}
+						${type != "weekly" ? "" : `<span${x.stars >= 1000 ? " class='yellow'" : ""}>+${x.stars}</span> <img class="help valign" src="/assets/star.png" title="Star Gain">`}
+						${wk || onePointNine ? "" : `<span${x.diamonds >= 65535 ? ` class='blue'>` : ">"}${x.diamonds}</span> <img class="help valign" src="/assets/diamond.png" title="Diamonds">`}
+						${wk ? "&nbsp;" : `<span${x.coins >= 149 ? " class='yellow'" : ""}>${x.coins}</span> <img class="help valign" src="/assets/coin.png" title="Secret Coins">`}
+						${wk || onePointNine ? "" : `<span${x.userCoins >= 10000 ? " class='brightblue'" : ""}>${x.userCoins}</span> <img class="help valign" src="/assets/silvercoin.png" title="User Coins">`}
+						${wk ? "" : `<span${x.demons >= 1000 ? " class='brightred'" : ""}>${x.demons}</span> <img class="help valign" src="/assets/demon.png" title="Demons">`}
+						${x.cp <= 0 ? "" : `<span${x.cp >= 100 ? " class='yellow'" : ""}>${x.cp}</span> <img class="help valign" src="/assets/cp.png" title="Creator Points">`}
 					</h3>
 
 					<h3 class="lessSpaced leaderboardStats weeklyStuff"}>
-						<span${wp.diamonds >= 250 ? " class='blue'" : ""}>${wp.diamonds >= 0 ? "+" : ""}${wp.diamonds}</span> <img class="help valign" src="../assets/diamond.png" title="Diamond Gain">
-						<span${wp.stars >= 1000 ? " class='yellow'" : ""}>${wp.stars >= 0 ? "+" : ""}${wp.stars}</span> <img class="help valign" src="../assets/star.png" title="Star Gain">
-						<span${wp.userCoins >= 250 ? " class='brightblue'" : ""}>${wp.userCoins >= 0 ? "+" : ""}${wp.userCoins}</span> <img class="help valign" src="../assets/silvercoin.png" title="User Coin Gain">
-						<span${wp.demons >= 25 ? " class='brightred'" : ""}>${wp.demons >= 0 ? "+" : ""}${wp.demons}</span> <img class="help valign" src="../assets/demon.png" title="Demon Gain">
+						<span${wp.diamonds >= 250 ? " class='blue'" : ""}>${wp.diamonds >= 0 ? "+" : ""}${wp.diamonds}</span> <img class="help valign" src="/assets/diamond.png" title="Diamond Gain">
+						<span${wp.stars >= 1000 ? " class='yellow'" : ""}>${wp.stars >= 0 ? "+" : ""}${wp.stars}</span> <img class="help valign" src="/assets/star.png" title="Star Gain">
+						<span${wp.userCoins >= 250 ? " class='brightblue'" : ""}>${wp.userCoins >= 0 ? "+" : ""}${wp.userCoins}</span> <img class="help valign" src="/assets/silvercoin.png" title="User Coin Gain">
+						<span${wp.demons >= 25 ? " class='brightred'" : ""}>${wp.demons >= 0 ? "+" : ""}${wp.demons}</span> <img class="help valign" src="/assets/demon.png" title="Demon Gain">
 					</h3>
 				</div>
 
@@ -249,7 +250,7 @@ function leaderboard(val, leaderboardParams, scrollTo) {
 	}).catch(e => {console.log(e); $('#loading').hide();})
 }
 
-// $('#boomling').attr('src', `../assets/boomlings/${boomColors[Math.floor(Math.random() * boomColors.length)]}.png`)
+// $('#boomling').attr('src', `../assets/boomlings/${boomColors[randInt(0, boomColors.length)]}.png`)
 
 $(document).on('click', '.sortButton', function () {
 	if ($('#loading').is(":visible")) return
@@ -261,7 +262,7 @@ $(document).on('click', '.sortButton', function () {
 })
 
 $('#topTabOff').click(function() {
-	if (type == "top") return;
+	if (type == "top") return
 	type = "top"
 	leaderboard(type)
 	$('.leaderboardTab').hide();
@@ -274,7 +275,7 @@ $('#topTabOff').click(function() {
 })
 
 $('#accurateTabOff').click(function() {
-	if (type == "accurate") return;
+	if (type == "accurate") return
 	type = "accurate"
 	leaderboard(type)
 	$('.leaderboardTab').hide();
@@ -287,7 +288,7 @@ $('#accurateTabOff').click(function() {
 })
 
 $('#weeklyTabOff').click(function() {
-	if (type == "weekly" || !gdps) return;
+	if (type == "weekly" || !gdps) return
 	type = "weekly"
 	leaderboard(type)
 	$('.leaderboardTab').hide();
@@ -299,7 +300,7 @@ $('#weeklyTabOff').click(function() {
 })
 
 $('#creatorTabOff').click(function() {
-	if (type == "creator") return;
+	if (type == "creator") return
 	type = "creator"
 	leaderboard(type)
 	$('.leaderboardTab').hide();
@@ -313,7 +314,7 @@ $('#creatorTabOff').click(function() {
 $('#modSort').click(function() {
 	modMode = !modMode
 	$(this).attr('src', `../assets/sort-mod${modMode ? "-on" : ""}.png`)
-	if (modMode) { 
+	if (modMode) {
 		$('#cpSort').show();
 		$('#statSort').css('transform', 'translateY(-26.7%')
 	}
@@ -348,7 +349,7 @@ $('#relativeSearch').click(function() {
 	let relativeUsername = $('#relativeName').val()
 	if (relativeLoading || !relativeUsername) return
 	relativeLoading = true
-	Fetch("../api/profile/" + relativeUsername).then(foundUser => {
+	Fetch("/api/profile/" + relativeUsername).then(foundUser => {
 		if (foundUser && foundUser.accountID && foundUser.rank) {
 			leaderboard(null, "type=relative&accountID=" + foundUser.accountID, foundUser.accountID)
 			$('#userSearch').hide()

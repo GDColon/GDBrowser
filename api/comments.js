@@ -1,3 +1,4 @@
+"use strict";
 const Player = require('../classes/Player.js')
 
 module.exports = async (app, req, res) => {
@@ -8,8 +9,8 @@ module.exports = async (app, req, res) => {
     if (count > 1000) count = 1000
 
     let params = {
-        userID : req.params.id, 
-        accountID : req.params.id, 
+        userID : req.params.id,
+        accountID : req.params.id,
         levelID: req.params.id,
         page: +req.query.page || 0,
         count,
@@ -20,7 +21,7 @@ module.exports = async (app, req, res) => {
     if (req.query.type == "commentHistory") { path = "getGJCommentHistory"; delete params.levelID }
     else if (req.query.type == "profile") path = "getGJAccountComments20"
 
-    req.gdRequest(path, req.gdParams(params), function(err, resp, body) { 
+    req.gdRequest(path, req.gdParams(params), function(err, resp, body) {
 
       if (err) return res.sendError()
 
@@ -32,7 +33,7 @@ module.exports = async (app, req, res) => {
       if (!comments.length) return res.status(204).send([])
 
       let pages = body.split('#')[1].split(":")
-      let lastPage = +Math.ceil(+pages[0] / +pages[2]);
+      let lastPage = +Math.ceil(+pages[0] / +pages[2])
 
       let commentArray = []
 
@@ -41,7 +42,7 @@ module.exports = async (app, req, res) => {
         var x = c[0] //comment info
         var y = c[1] //account info
 
-        if (!x[2]) return;
+        if (!x[2]) return
 
         let comment = {}
         comment.content = Buffer.from(x[2], 'base64').toString();
@@ -50,9 +51,9 @@ module.exports = async (app, req, res) => {
         comment.date = (x[9] || "?") + req.timestampSuffix
         if (comment.content.endsWith("⍟") || comment.content.endsWith("☆")) {
           comment.content = comment.content.slice(0, -1)
-          comment.browserColor = true 
+          comment.browserColor = true
         }
-        
+
         if (req.query.type != "profile") {
           let commentUser = new Player(y)
           Object.keys(commentUser).forEach(k => {
@@ -74,7 +75,7 @@ module.exports = async (app, req, res) => {
 
         commentArray.push(comment)
 
-      }) 
+      })
 
       return res.send(commentArray)
 
